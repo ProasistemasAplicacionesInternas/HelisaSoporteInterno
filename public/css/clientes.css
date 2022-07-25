@@ -1,0 +1,163 @@
+@font-face {
+    font-family: 'Quicksand-Light';
+    src: url(../../public/fonts/Quicksand-Medium.ttf);
+}
+
+body {
+    font-family: 'Quicksand-Light';
+    /*background-color: #f0f0f0;*/
+    color: #000;
+    background-color: #ffffff;
+    font-size: 12px;
+}
+
+.info {
+    font-size: 13px;
+}
+
+.info[type='date'] {
+    height: 33px;
+}
+
+.info:focus {
+    box-shadow: none;
+}
+
+label {
+    font-weight: bold;
+}
+
+.btn {
+    font-size: 13px !important;
+    width: 100%;
+}
+
+select.form-control {
+    color: #000;
+    font-size: 12px;
+    height: 2.2rem !important;
+}
+
+option {
+    color: #000;
+    text-align: left;
+}
+
+label {
+    padding-bottom: 0px;
+    margin-bottom: 0px;
+    padding-top: 0px;
+    margin-top: 0px;
+}
+
+.check {
+    display: inline;
+}
+
+button {
+    text-decoration: none;
+
+}
+
+.btn {
+    font-size: 11px;
+}
+
+.service {
+    background-color: #EBEBE4;
+    color: #596C87;
+    text-align: left;
+    padding-left: 0;
+    margin-left: 0px;
+}
+
+header {
+    background-color: #D9007F;
+}
+
+
+/*----checkbox-----*/
+
+.programa {
+    position: relative;
+    padding-left: 20px;
+    margin-bottom: 12px;
+    margin-right: 40px;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+.programa input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    height: 0;
+    width: 0;
+}
+
+.selector {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 18px;
+    width: 18px;
+    background-color: #ccc;
+}
+
+.programa:hover input ~ .selector {
+    background-color: #999;
+}
+
+.programa input:checked ~ .selector {
+    background-color: #2196F3;
+}
+
+.selector:after {
+    content: "";
+    position: absolute;
+    display: none;
+}
+
+.programa input:checked ~ .selector:after {
+    display: block;
+}
+
+.programa .selector:after {
+    left: 6px;
+    top: 3px;
+    width: 5px;
+    height: 10px;
+    border: solid white;
+    border-width: 0 3px 3px 0;
+    -webkit-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    transform: rotate(45deg);
+}
+
+
+/*--validaciones --*/
+
+.help-block {
+    left: 15px;
+    color: red;
+
+}
+
+.has-feedback > input {
+    border-color: red;
+}
+
+.has-feedback > input:focus {
+    border-color: red;
+}
+
+.smk-select > select {
+    border-color: red;
+}
+
+.smk-select > select:focus {
+    border-color: red;
+}

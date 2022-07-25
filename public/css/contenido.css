@@ -1,0 +1,154 @@
+@charset "UTF-8";
+@font-face {
+    font-family: 'Quicksand-Light';
+    src: url(../../public/fonts/Quicksand-Medium.ttf);
+}
+
+body {
+    font-family: 'Quicksand-Light';
+    /*background-color: #f0f0f0;*/
+    color: #000;
+    background-color: #ffffff;
+    font-size: 12px;
+}
+
+textarea {
+    height: 80px;
+    width: 100%;
+    padding-right: 0px;
+    margin-right: 0px;
+    padding-bottom: 0px;
+    margin-top: 0px;
+}
+
+.conclusion {
+    padding-top: 19px;
+}
+
+.modal-footer {
+    height: 25px;
+    margin: 5px;
+    padding: 5px;
+}
+
+.crea_data {
+    width: 100%;
+}
+
+input.data {
+    width: 100%;
+    border-bottom: none;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    padding-top: 0px;
+    /*margin-top: 1px;*/
+}
+
+button.btn {
+    font-size: 11px;
+}
+
+select {
+    padding: 0px;
+    margin: 0px;
+    height: 100%;
+    color: #000;
+}
+
+option {
+    color: #000;
+    text-align: left;
+}
+
+label {
+    padding-bottom: 0px;
+    margin-bottom: 0px;
+    padding-top: 0px;
+    margin-top: 0px;
+}
+
+.modal {
+    font-size: 12px;
+}
+
+button {
+    text-decoration: none;
+}
+
+.btn {
+    font-size: 11px;
+}
+
+.service {
+    background-color: #EBEBE4;
+    color: #596C87;
+    text-align: left;
+    padding-left: 0;
+    margin-left: 0px;
+}
+
+div.loadingpage {
+    position: fixed;
+    left: 0px;
+    top: 0px;
+    width: 100%;
+    height: 100%;
+    z-index: 999999999;
+    background: url(../img/cargando.gif) center no-repeat #fff;
+}
+
+#logo {
+    height: 50px;
+}
+
+#ticket {
+    box-shadow: none;
+    border-color: #CCCCCC;
+    font-size: 13px;
+    width: 400px;
+    border-radius: 0px;
+}
+
+#consultar {
+    font-size: 15px;
+    height: 33px;
+    margin-top: -1px;
+    border-radius: 0px;
+}
+
+
+/********login*******/
+
+#importante .modal-content {
+    border-radius: 20px;
+}
+
+#importante .modal-header {
+    padding: 17px 0px 6px 190px;
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+}
+
+#importante .modal-footer {
+    padding: 23px;
+}
+
+#importante input {
+    background: #e6007e !important;
+    border-color: #e6007e !important;
+}
+
+#medidas {
+    float: right;
+    width: 13%;
+    margin: 2% 17% 0% -16%;
+}
+
+#imagenPetFinal {
+    border: 0;
+    font-size: 23px;
+    color: #d9007f;
+    cursor: pointer;
+    background: transparent;
+}
