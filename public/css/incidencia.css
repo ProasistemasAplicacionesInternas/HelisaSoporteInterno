@@ -1,0 +1,118 @@
+@font-face {
+    font-family: 'Roboto';
+    src: url(../../public/fonts/Roboto-Thin.ttf);
+}
+
+body {
+    font-family: 'Roboto';
+    /*background-color: #f0f0f0;*/
+}
+
+img.logo {
+    width: 145px;
+    height: 46px;
+}
+
+img.escala {
+    width: 769px;
+    height: 319px;
+
+}
+
+form {
+    font-size: 18px;
+    padding-left: 20px;
+}
+
+input {
+    /* margin-right: 10px;*/
+    height: 30px;
+}
+
+.nueva {
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    background: #FCBDBD;
+    margin-top: 10px;
+}
+
+.analisis {
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    background: #C2DFFF;
+}
+
+.confirmado {
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    background: #FFCD85;
+}
+
+.resuelto {
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    background: #D2F5B0;
+}
+
+li {
+    list-style: none;
+
+}
+
+label {
+    text-align: right;
+    margin-right: 5px;
+
+}
+
+.btn {
+    background-color: #559680;
+    color: #fff;
+    font-size: 18px;
+    padding-top: 1px;
+    height: 32px;
+    width: 150px;
+}
+
+p {
+    font-weight: bold;
+}
+
+table,
+td {
+    border: 2px solid #fff;
+
+}
+td{
+    font-weight:bold,
+    color: fff;
+}
+
+.titulo {
+    font-weight: bold;
+    text-align: center;
+    font-size: 18px;
+
+}
+
+input[type=number]::-webkit-outer-spin-button,
+
+input[type=number]::-webkit-inner-spin-button {
+
+    -webkit-appearance: none;
+
+    margin: 0;
+
+}
+
+
+
+input[type=number] {
+
+    -moz-appearance: textfield;
+
+}
