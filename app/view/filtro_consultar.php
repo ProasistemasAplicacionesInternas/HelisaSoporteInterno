@@ -9,7 +9,7 @@
                  header('location:../../login.php');
             }
         
-     
+     require ('../controller/control_traerProgramadores.php');
     ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -30,8 +30,16 @@
         <div class="col-3">
             <select class="custom-select" name="area" id="area">
                 <option value="" selected>Seleccione una opción</option>
-                <option value="1">Infraestructura</option>
-                <option value="2">Aplicaciones Internas</option>
+                <?php 
+                if($_SESSION['id_roles']==9){
+                    echo '<option value="1">Infraestructura</option>';
+                }else if($_SESSION['id_roles']==5){
+                    echo '<option value="2">Aplicaciones Internas</option>';
+                }else{
+                    echo '<option value="1">Infraestructura</option>';
+                    echo '<option value="2">Aplicaciones Internas</option>';
+                }
+                ?>
             </select>
         </div>
     
@@ -45,6 +53,10 @@
                 <option value="" selected>Seleccione una opción</option>
                 <option value="1">Consultar por fecha</option>
                 <option value="3">Consultar por Peticion</option>
+                <?php if($_SESSION['id_roles']==5){
+                    echo '<option value="4">Consultar por Programador</option>';
+                }
+                ?>
             </select>
         </div>
         <div class="row mt-3" id="selectorFecha">
@@ -63,9 +75,8 @@
                 </form>
             </div>
         </div>
-    
         <div class="row" id="selectorTicket">
-           <div class="col-12">
+            <div class="col-12">
                 <h6>Digite el número de Peticion</h6>
             </div>
             <div class="col-3">
@@ -78,7 +89,27 @@
                 </form>
             </div>
         </div>
-        
+        <div class="row" id="selectorProgramador">
+            <div class="col-12">
+                <h6>Seleccione el Programador</h6>
+            </div>
+            <div class="col-3">
+                <form action="app/view/peticiones_finalizadas.php" target="_blank" method="post" onsubmit="rango()">
+                    <div class="form-group">
+                        <select class="custom-select"  name="programadorFiltro" id="programadorFiltro">
+                            <option value="" selected>Seleccione el programador</option>
+                            <?php
+                                foreach($programadores as $lista){
+                                    echo "<option value=" . $lista["usuario"] . ">" . $lista["usuario"] . "</option>";
+                                }
+                            ?>
+                        </select>
+                    </div>
+                        <input type="hidden" id="areaF3" name="areaF3" value="2">
+                        <input type="submit" id="btn-consultarProgramador" name="btn-consultarProgramador" class="btn btn-info" value="Consultar">
+                </form>
+            </div>
+        </div>
     </div>
     <script src="public/js/filtro.js?v2"></script>
     <script src="public/js/bloqueoTeclas.js"></script>

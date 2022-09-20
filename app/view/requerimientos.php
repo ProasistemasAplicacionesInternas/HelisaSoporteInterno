@@ -42,7 +42,7 @@
                 <div class="col">
 
                     <table class="table table-striped">
-                        <thead>
+                        <thead style="background-color:#d7007bb3; text-align:center; color:white;">
                             <th>Nro Ticket</th>
                             <th>Usuario</th>
                             <th>Fecha solicitud</th>
@@ -52,7 +52,6 @@
                             <th>Atiende</th>
                             <th>Estado</th>
 			                <th>Tipo de peticion</th>
-                            <th>Conclusiones</th>
                             <th>Tiempo</th>
                             <th>Modificar</th>
                             
@@ -62,7 +61,7 @@
 
                             <?php foreach($consultarRequerimientos as $datos1): ?>
                             
-                            <tr>
+                            <tr style="text-align:center;">
                                 <?php 
                                     date_default_timezone_set('America/Bogota');
                                     $fecha1 = new DateTime($datos1->getFecha_peticionMai());
@@ -72,8 +71,9 @@
 
                                     $varH = $intervalo->format('%H');
                                     $varD = $intervalo->format('%D');
+				    $varM = $intervalo->format('%m');
 
-                                    $color = $crud->coloresR($varD,$varH); 
+                                    $color = $crud->coloresR($varD,$varH,$varM); 
                                 ?>
                                 <td style="background-color:<?=$color ?>;"> 
                                     <?php echo $datos1->getId_peticionMai(); ?>
@@ -99,13 +99,8 @@
                                 <td style="background-color:<?=$color ?>;">
                                     <?php echo $datos1->getEstado_peticionMai(); ?>
                                 </td>
-                                
 				                <td style="background-color:<?=$color ?>;">
                                     <?php echo $datos1->getName(); ?>
-                                </td>
-
-                                <td style="background-color:<?=$color ?>;">
-                                    <?= html_entity_decode($datos1->getConclusiones_peticionMai()); ?>
                                 </td>
                                 <td style="background-color:<?=$color ?>;">
                                     <?php 
@@ -114,10 +109,10 @@
                                         $fecha2 = new DateTime('now');
 
                                         $intervalo = $fecha2->diff($fecha1);
-                                        echo $intervalo->format('%D:%H:%I:%S');
+                                        echo $intervalo->format('%m:%D:%H:%I:%S');
                                     ?>
                                 </td>
-                               
+                            
                                 <td style="background-color:<?=$color ?>;">
                                     <form action="app/view/seleccionar_peticionmai.php" method="post">
                                         <input type="hidden" name="p_nropeticion" id="p_nropeticion" value="<?php echo $datos1->getId_peticionMai();?>">
@@ -146,9 +141,9 @@
 
                                         <input type="hidden" name="p_conclusiones" id="p_conclusiones" value="<?php echo $datos1->getConclusiones_peticionMai(); ?>">
 
-                                        <input type="button"  value = "Seleccionar" class="btn btn-primary" onclick="validarBoton('<?php echo $_SESSION['usuario'];?>',<?php echo $datos1->getId_peticionMai();?>)">
+                                        <input type="button"  value = "Seleccionar" class="btn btn-primary"  onclick="validarBoton('<?php echo $_SESSION['usuario'];?>',<?php echo $datos1->getId_peticionMai();?>)">
 
-                                        <input type="submit" value="Seleccionar" name="seleccionar_peticionmai" id="seleccionar_peticionmai<?php echo $datos1->getId_peticionMai();?>" class="btn btn-info" style="display:none;">
+                                        <input type="submit" value="Seleccionar" name="seleccionar_peticionmai" id="seleccionar_peticionmai<?php echo $datos1->getId_peticionMai();?>" class="btn btn-warning" style="display:none;">
                                     </form>
                                 </td>
                                 <?php

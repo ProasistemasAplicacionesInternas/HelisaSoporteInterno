@@ -174,7 +174,7 @@ class CrudPeticiones{
                           $filtro=$colsultar_usuario->fetch(PDO::FETCH_ASSOC);
                           $id_usuario=$filtro['id_usuario'];
                            $funcion_realizada = "El usuario atiendio con exito el siguiente ticket: ".$update->getP_nropeticion();
-                           $inserta_funcion=$db->prepare("INSERT INTO funciones (codigo, id_usuario, fecha_registro, funcion_realizada,IP) VALUES (0, :id_usuario , curdate() , :funcion_realizada ,:ip )");
+                           $inserta_funcion=$db->prepare("INSERT INTO funciones (id_usuario, fecha_registro, funcion_realizada,IP) VALUES (:id_usuario , curdate() , :funcion_realizada ,:ip )");
                            $inserta_funcion->bindValue('id_usuario',$id_usuario);
                            $inserta_funcion->bindValue('funcion_realizada',$funcion_realizada);
                            $inserta_funcion->bindValue('ip', $_SERVER['REMOTE_ADDR']);                 
@@ -309,7 +309,7 @@ class CrudPeticiones{
                           $filtro=$colsultar_usuario->fetch(PDO::FETCH_ASSOC);
                           $id_usuario=$filtro['id_usuario'];
                            $funcion_realizada = "El usuario cambio el estado del  ticket: ".$state->getP_nropeticion()."a estado: ". $state->getP_estado();
-                           $inserta_funcion=$db->prepare("INSERT INTO funciones (codigo, id_usuario, fecha_registro, funcion_realizada,IP) VALUES (0, :id_usuario , curdate() , :funcion_realizada ,:ip )");
+                           $inserta_funcion=$db->prepare("INSERT INTO funciones (id_usuario, fecha_registro, funcion_realizada,IP) VALUES (:id_usuario , curdate() , :funcion_realizada ,:ip )");
                            $inserta_funcion->bindValue('id_usuario',$id_usuario);
                            $inserta_funcion->bindValue('funcion_realizada',$funcion_realizada);
                            $inserta_funcion->bindValue('ip', $_SERVER['REMOTE_ADDR']);                 
@@ -366,7 +366,7 @@ class CrudPeticiones{
                           $filtro=$colsultar_usuario->fetch(PDO::FETCH_ASSOC);
                           $id_usuario=$filtro['id_usuario'];
                            $funcion_realizada = "El usuario libero el  ticket: ".$liberar->getP_nropeticion();
-                           $inserta_funcion=$db->prepare("INSERT INTO funciones (codigo, id_usuario, fecha_registro, funcion_realizada,IP) VALUES (0, :id_usuario , curdate() , :funcion_realizada ,:ip )");
+                           $inserta_funcion=$db->prepare("INSERT INTO funciones (codigo, id_usuario, fecha_registro, funcion_realizada,IP) VALUES ('0', :id_usuario , curdate() , :funcion_realizada ,:ip )");
                            $inserta_funcion->bindValue('id_usuario',$id_usuario);
                            $inserta_funcion->bindValue('funcion_realizada',$funcion_realizada);
                            $inserta_funcion->bindValue('ip', $_SERVER['REMOTE_ADDR']);                 

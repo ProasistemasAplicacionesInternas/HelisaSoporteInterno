@@ -45,7 +45,7 @@
             $p = 'plataformas' . $x;
             if(isset($_POST[$p])){
                 if($_POST['tipo'] == 2){//Inactivacion
-                    if($crud->trueAcces($_POST[$p]) == 1 && $crud->accesoEnPeticion($_POST[$p],$datos->getUsuario_creacion()) == 0){
+                    if($crud->trueAcces($_POST[$p],$datos->getUsuario_creacion()) == 1 && $crud->accesoEnPeticion($_POST[$p],$datos->getUsuario_creacion()) == 0){
                         $administrador = $crud->administradorxPltaforma($_POST[$p]);
                         $plataformas[$administrador] .= $_POST[$p] . ',';
                         $existAcces = 1;
@@ -389,7 +389,7 @@
 //*****************************************************************************************************//
     else if(isset($consultarAccesosPlataformas) && $consultarAccesosPlataformas == 1){
         
-        if($consultaMai == 1){
+        if($consultaMai == 1 || isset($_SESSION['id_roles'])){
             $consultarAccesosPlataformas = $crud->accesoPlataformasxUsuarioTodas($_POST['f_usuario']);
         }else{
             $consultarAccesosPlataformas = $crud->accesoPlataformasxUsuarioTodas($_SESSION['usuario']);

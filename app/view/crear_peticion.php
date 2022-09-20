@@ -100,11 +100,14 @@
                                 <select class="form-control info" id="soporteMai" name="soporteMai" onchange="imagenRequerida()">
                                     <option value="" selected>Seleccione el tipo de peticion</option>
                                         <?php
-
-                                             foreach($listado_soporte as $tipoSoporte){
-                                                echo "<option value='".$tipoSoporte["id"]."'>".$tipoSoporte["nombre"]. "</option>" ;
-
-                                                  }  
+                                            foreach($listado_soporte as $tipoSoporte){
+                                                if($tipoSoporte['id']==4 && isset($_SESSION['id_roles']) && $_SESSION['id_roles']==5){
+                                                    echo "<option value='".$tipoSoporte["id"]."'>".$tipoSoporte["nombre"]. "</option>" ;
+                                                }else if($tipoSoporte['id']!=4){
+                                                    echo "<option value='".$tipoSoporte["id"]."'>".$tipoSoporte["nombre"]. "</option>" ;
+                                                }
+                                                
+                                            }                                             
                                          ?>
                                 </select>
                             </div>

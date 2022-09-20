@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="es">
 
@@ -23,17 +24,16 @@
         session_cache_limiter('private_no_expire'); 
 
         session_start();
-
+        $_SESSION['id_roles'];
         if(!isset($_SESSION['usuario'])||empty($_SESSION['usuario'])){
 
-             header('location:../../login.php');
+            header('location:../../login.php');
         }
 
         require('../controller/control_peticiones_finalizadas.php');
-      
- 
-      $datos= new Peticion();
-   
+
+    $datos= new Peticion();
+
     ?>
     <header class="container-fluid">
         <div class="row">
@@ -43,36 +43,35 @@
         </div>
     </header>
     <div class="container-fluid">
-        <div class="row mt-2">
-        </div>
         <div class="row" class="dataConsulta">
-            <div class="col-11 mt-4 pl-5 mb-2">
+            <div class="col-10 mt-4 pl-5 mb-2">
                 <h6><a href="../../dashboard.php"><img src="../../public/img/atras.png"></a>Consultas</h6>
             </div>
             <div class="col">
-                <table class="table table-striped" id="tabla">
-                    <thead>
-                        <th style="width:40px;">Nro Solicitud</th>
+                <table class="table table-responsive table-striped" id="tabla" style="text-align:center;">
+                    <thead style="background-color: #96c7e9;">
+                        <th style="width:70px;">Nro Ticket</th>
                         <th style="width:80px;">Fecha Solicitud</th>
                         <th style="width:40px;">Usuario Solicitud</th>
-                        <th style="width:40px;">Categoria</th>
-                        <th style="width:40px;">Descripcion</th>
-                        <th style="width:40px;">Fecha Atendido</th>
+                        <th style="width:20px;">Categoria</th>
+                        <th style="width:290px;">Descripcion</th>
+                        <th style="width:80px;">Fecha Atendido</th>
                         <th style="width:40px;">Usuario Atendio</th>
-                        <th style="width:20px;">Conclusiones</th>
-                        <th style="width:20px;">Calificación</th>
-                        <th style="width:20px;">Comentarios</th>
-                        <th style="width:20px;">Ver</th>
-                        <th style="width:20px;">Imagen</th>                      
-                      
+                        <th style="width:40px;">Calificación</th>
+                        <?php if($_SESSION['id_roles']==5 || $_SESSION['id_roles']==7 ){
+                            echo "<th style='width:100px;'>Ver Conclusiones</th>";
+                        } 
+                        ?>
+                        <th style="width:10px;">Imagen</th>                      
+                    
                     </thead>
                     <tbody>
                         <?php foreach($listaConsulta as $datos): ?>
                         <tr>
                             <td>
-                              <span id="id_peticion<?php echo $datos->getP_nropeticion(); ?>">
+                                <span id="id_peticion<?php echo $datos->getP_nropeticion(); ?>">
                                 <?php echo $datos->getP_nropeticion(); ?>
-                              </span>
+                                </span>
                             </td>
                             <td>
                                 <?php echo $datos->getP_fechapeticion(); ?>
@@ -93,35 +92,31 @@
                                 <?php echo $datos->getP_usuarioatiende(); ?>
                             </td>
                             <td>
-                                <?= html_entity_decode($datos->getP_conclusiones()); ?>
-                            </td>
-                            <td>
                                 <?php 
-                                     $Calificacion = $datos->getCalificacion(); 
-                                     if ( $Calificacion == 1) {
-                                         echo "Pesimo";
-                                     }else if ( $Calificacion == 2) {
-                                         echo "Malo";
-                                     }else if ( $Calificacion == 3) {
-                                         echo "Regular";
-                                     }else if ( $Calificacion == 4) {
-                                         echo "Bueno";
-                                     }else if ( $Calificacion == 5) {
-                                         echo "Ecxelente";
-                                     } else if ( $Calificacion == 0) {
-                                         echo "No calificado";
-                                     }
+                                    $Calificacion = $datos->getCalificacion(); 
+                                    if ( $Calificacion == 1) {
+                                        echo "<a style='color:red;'>Pesimo</a>";
+                                    }else if ( $Calificacion == 2) {
+                                        echo "<a style='color:#ff7600;'>Malo</a>";
+                                    }else if ( $Calificacion == 3) {
+                                        echo "<a style='color:#0014ff;'>Regular</a>";
+                                    }else if ( $Calificacion == 4) {
+                                        echo "<a style='color:#377fc9;'>Bueno</a>";
+                                    }else if ( $Calificacion == 5) {
+                                        echo "<a style='color:#00d337;'>Excelente</a>";
+                                    } else if ( $Calificacion == 0) {
+                                        echo "<a style='font-weight: bold;'>No Calificado</a>";
+                                    }
                                 ?>
                             </td>
-                            <td>
-                                <button type="button" class="btn btn-info crearComentario" data-toggle="modal" data-target="#crearComentario" data-backdrop="static" data-keyboard="false" id="btn-crearComentario" name="btn-crearComentario" value="<?php echo $datos->getP_nropeticion();?>"><span>Crear</span></button>    
-                            </td>
-                             <td>                                 
-                                <form action="ver_comentario.php" method="post">
-                                    <input type="hidden" name="peticion" value="<?php echo $datos->getP_nropeticion(); ?>">
-                                    <input type="submit" class="btn btn-primary btn-sm" value="Coment." name="comentar" id="comentar">
-                                </form>                                                                     
-                            </td>
+                            <?php if($_SESSION['id_roles']==5 || $_SESSION['id_roles']==7 ){ ?>
+                                <td>
+                                <button class="btn btn-outline-primary verConclusion" data-toggle="modal" data-target="#verConclusion" data-backdrop="static" data-keyboard="false" id="btn-verConclusion" name="btn-verConclusion" onclick="verConclusiones(<?= $datos->getP_nropeticion()?>)"><span>Ver Conclusión</span></button>    
+                                </td>
+                            <?php } ?>
+                            <!-- <td>
+                                <button type="button" class="btn btn-info crearComentario" data-toggle="modal" data-target="#crearComentario" data-backdrop="static" data-keyboard="false" id="btn-crearComentario" name="btn-crearComentario" value=" --><!-- "><span>Crear</span></button>    
+                            </td> -->
                             <td>
                                 <?php if ($datos->getP_cargarimagen() != null && $datos->getP_cargarimagen() != '2'): ?>
                                     
@@ -133,7 +128,7 @@
                         </tr>
 
                         <?php endforeach; ?>
-                      
+                    
                     </tbody>
                 </table>
             </div>
@@ -141,6 +136,7 @@
     </div>
 
     <?php require('crear_comentarios.php') ?>
+    <?php require('verConclusiones.php') ?>
     <script src="../../public/js/jquery-3.3.1.min.js"></script>
     <script src="../../public/js/datatables.min.js"></script>
     <script src="../../public/js/dataTables.buttons.min.js"></script>
@@ -159,6 +155,7 @@
     <script src="../../public/js/bootstrap.min.js"></script>
     <script src="../../public/js/comentario.js"></script>
     <script src="../../public/js/crear_comentario.js"></script>
+    <script src="../../public/js/verConclusiones.js"></script>
     <script src="../../public/js/bloqueoTeclas.js"></script>
 </body>
 

@@ -22,18 +22,22 @@ class CrudPeticionesMai{
             $crea_peticionMai->bindValue('imagen3',$create->getImagen_peticionMai3());
             $crea_peticionMai->bindValue('tipo',$create->getName());
 			$crea_peticionMai->execute();
+            $id=$db->lastInsertId();
 
-						  $colsultar_usuario=$db->prepare('SELECT identificacion from funcionarios where usuario =:usuario');
-                          $colsultar_usuario->bindValue('usuario', $create->getUsuario_creacionMai());
-                          $colsultar_usuario->execute();
-                          $filtro=$colsultar_usuario->fetch(PDO::FETCH_ASSOC);
-                          $id_funcionario=$filtro['identificacion'];
-                           $funcion_realizada = "El funcionario Realizo una peticion al area de Mantenimiento de aplicaciones internas para el Producto ".$create->getProducto_peticionMai();
-                           $inserta_funcion=$db->prepare("INSERT INTO funciones_funcionarios (codigo, id_funcionario, fecha_registro, funcion_realizada,IP) VALUES (0, :id_funcionario , curdate() , :funcion_realizada ,:ip )");
-                           $inserta_funcion->bindValue('id_funcionario',$id_funcionario);
-                           $inserta_funcion->bindValue('funcion_realizada',$funcion_realizada);
-                           $inserta_funcion->bindValue('ip', $_SERVER['REMOTE_ADDR']);                 
-                           $inserta_funcion->execute();
+						$colsultar_usuario=$db->prepare('SELECT identificacion from funcionarios where usuario =:usuario');
+                        $colsultar_usuario->bindValue('usuario', $create->getUsuario_creacionMai());
+                        $colsultar_usuario->execute();
+                        $filtro=$colsultar_usuario->fetch(PDO::FETCH_ASSOC);
+                        $id_funcionario=$filtro['identificacion'];
+                        $funcion_realizada = "El funcionario Realizo una peticion al area de Mantenimiento de aplicaciones internas para el Producto ".$create->getProducto_peticionMai();
+                        $inserta_funcion=$db->prepare("INSERT INTO funciones_funcionarios (codigo, id_funcionario, fecha_registro, funcion_realizada,IP) VALUES (0, :id_funcionario , curdate() , :funcion_realizada ,:ip )");
+                        $inserta_funcion->bindValue('id_funcionario',$id_funcionario);
+                        $inserta_funcion->bindValue('funcion_realizada',$funcion_realizada);
+                        $inserta_funcion->bindValue('ip', $_SERVER['REMOTE_ADDR']);                 
+                        $inserta_funcion->execute();
+
+                        $clase = new CrudPeticionesMai();
+                        $insertaObservacion =  $clase->insertaObservacion($id,$create->getDescripcion_peticionMai(),$create->getUsuario_creacionMai(),$create->getFecha_peticionMai(),$create->getEstado_peticionMai());
 	}
     
     
@@ -49,11 +53,12 @@ class CrudPeticionesMai{
             LEFT JOIN productos_mai ON productos_mai.id_producto=peticiones_mai.producto_mai 
             LEFT JOIN estado ON estado.id_estado=peticiones_mai.estado_peticion 
             LEFT JOIN tipo_soportemai ON tipo_soportemai.id=peticiones_mai.tipo_soportemai
-            WHERE (estado_peticion=:estadoU OR estado_peticion=:estadoT) AND (tipo_soportemai=:inconvenientes OR tipo_soportemai=:consultas) ORDER BY id_peticionmai ASC');
+            WHERE (estado_peticion=:estadoU OR estado_peticion=:estadoT) AND (tipo_soportemai=:inconvenientes OR tipo_soportemai=:consultas OR tipo_soportemai=:solicitudes_internas) ORDER BY id_peticionmai ASC');
 				$consultar_peticion->bindValue('estadoU','1');
 				$consultar_peticion->bindValue('estadoT','3');		
                 $consultar_peticion->bindValue('inconvenientes', '1');
                 $consultar_peticion->bindValue('consultas', '3');
+                $consultar_peticion->bindValue('solicitudes_internas', '4');
 				$consultar_peticion->execute();
 			foreach ($consultar_peticion->fetchAll() as $listado) {
 				$consulta = new PeticionMai();
@@ -184,16 +189,24 @@ class CrudPeticionesMai{
         $usuarioCreacion = $update->getUsuario_creacionMai();
         $usuarioAtendido = $update->getUsuario_atencionMai();
         $conclusiones = $update->getConclusiones_peticionMai();
+        $version = $update->getVersion();
+        $numero_version = $update->getNumero_version();
         
         $correo = $update->getEmail_funcionario();
         if ($estado==2) {
-            $finaliza_solicitudmai=$db->prepare('UPDATE peticiones_mai SET fecha_atencion=:fecha_atencion, usuario_atencion=:usuario_atencion, conclusiones=:conclusiones, estado_peticion=:estado_peticion, tipo_soportemai=:tipo_soportemai  WHERE id_peticionmai=:cod_peticion');
+
+            $clase = new CrudPeticionesMai();
+            $insertaObservacion =  $clase->insertaObservacion($update->getId_peticionMai(),$update->getConclusiones_peticionMai(),$update->getUsuario_atencionMai(),$update->getFecha_atendidoMai(),$update->getEstado_peticionMai());   
+
+            $finaliza_solicitudmai=$db->prepare('UPDATE peticiones_mai SET fecha_atencion=:fecha_atencion, usuario_atencion=:usuario_atencion, conclusiones=:conclusiones, estado_peticion=:estado_peticion, tipo_soportemai=:tipo_soportemai, numero_version=:numero_version, version=:version WHERE id_peticionmai=:cod_peticion');
             $finaliza_solicitudmai->bindValue('cod_peticion',$update->getId_peticionMai());
             $finaliza_solicitudmai->bindValue('fecha_atencion',$update->getFecha_atendidoMai());
             $finaliza_solicitudmai->bindValue('usuario_atencion',$update->getUsuario_atencionMai());
             $finaliza_solicitudmai->bindValue('conclusiones',$update->getConclusiones_peticionMai());
             $finaliza_solicitudmai->bindValue('estado_peticion',$update->getEstado_peticionMai());
             $finaliza_solicitudmai->bindValue('tipo_soportemai',$update->getName());
+            $finaliza_solicitudmai->bindValue('version',$update->getVersion());
+            $finaliza_solicitudmai->bindValue('numero_version',$update->getNumero_version());
             $finaliza_solicitudmai->execute();
             if ($finaliza_solicitudmai){
                 $colsultar_usuario=$db->prepare('SELECT id_usuario from usuarios where usuario =:usuario');
@@ -330,8 +343,23 @@ class CrudPeticionesMai{
             $finaliza_solicitudmai->bindValue('conclusiones',$update->getConclusiones_peticionMai());
             $finaliza_solicitudmai->bindValue('estado_peticion',$update->getEstado_peticionMai());
             $finaliza_solicitudmai->bindValue('tipo_soportemai',$update->getName());
-            $finaliza_solicitudmai->execute(); 
+            $finaliza_solicitudmai->execute();
+            
+            $clase = new CrudPeticionesMai();
+            $insertaObservacion =  $clase->insertaObservacion($update->getId_peticionMai(),$update->getConclusiones_peticionMai(),$update->getUsuario_atencionMai(),$update->getFecha_atendidoMai(),$update->getEstado_peticionMai()); 
         }       
+    }
+
+    function insertaObservacion($nroTicket, $descripcion, $usuario, $fechaCreacion, $estado){
+        $db=conectar::acceso();
+        $insercion=$db->prepare('INSERT INTO observaciones_mai(id_ticket,descripcion_observacion,usuario_creacion,fecha_observacion,estado_observacion) VALUES(:id_ticket,:descripcion_observacion,:usuario_creacion,:fecha_observacion,:estado_observacion)');
+        $insercion->bindValue('id_ticket',$nroTicket);
+        $insercion->bindValue('descripcion_observacion',$descripcion);
+        $insercion->bindValue('usuario_creacion',$usuario);
+        $insercion->bindValue('fecha_observacion',$fechaCreacion);
+        $insercion->bindValue('estado_observacion',$estado);
+        $insercion->execute();
+        
     }
 
     public function encuesta($peticion){
@@ -350,7 +378,8 @@ class CrudPeticionesMai{
             $insertar_encuesta->bindValue('nivel',$peticion->getEstado_peticionMai());
             $insertar_encuesta->execute();
 
-        }    }
+        }    
+    }
     
     public function solicitudesEnProceso(){
         $db=conectar::acceso();
@@ -360,7 +389,7 @@ class CrudPeticionesMai{
             FROM peticiones_mai LEFT JOIN estado ON estado.id_estado=peticiones_mai.estado_peticion 
             LEFT JOIN productos_mai ON productos_mai.id_producto=peticiones_mai.producto_mai 
             LEFT JOIN tipo_soportemai ON tipo_soportemai.id=peticiones_mai.tipo_soportemai
-            WHERE(tipo_soportemai=1 OR tipo_soportemai=2 OR tipo_soportemai=3)AND(estado_peticion=:estadoSeleccionado)');
+            WHERE estado_peticion=:estadoSeleccionado');
 				$consultar_peticionMai->bindValue('estadoSeleccionado','8');
 				$consultar_peticionMai->execute();
 
@@ -394,11 +423,13 @@ class CrudPeticionesMai{
         }
     }
     
-    public function coloresR($dias,$hora){
-        if($dias>0 || $hora>=8){
+    public function coloresR($dias,$hora,$mes){
+        if(($dias>0 || $hora>=8) && $mes == 0){
             return '#dd9933';
+        }else if($mes > 0){
+            return '#ed7105';
         }else{
-            return '#ffffff';
+            return '#35c3558c';
         }
     }
     
@@ -485,5 +516,19 @@ class CrudPeticionesMai{
             echo ('error 400');
         }
 
+    }
+    public function traeObservaciones($ticket){
+        $db=conectar::acceso();	
+		$activosResponsable=[];
+		$consultar_obs=$db->prepare('SELECT descripcion_observacion, usuario_creacion, fecha_observacion, estado.descripcion AS estado FROM observaciones_mai 
+        LEFT JOIN estado ON estado.id_estado=observaciones_mai.estado_observacion WHERE id_ticket=:id_ticket AND (estado_observacion=2 OR estado_observacion=3) ORDER BY id_observacion DESC');
+        $consultar_obs->bindValue('id_ticket',$ticket);
+        $consultar_obs->execute();
+        $observaciones=[];
+							
+        while ($listado_obs=$consultar_obs->fetch(PDO::FETCH_ASSOC)) {
+            $observaciones[]=$listado_obs;
+		}
+		return $observaciones;
     }
 }

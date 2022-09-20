@@ -1,5 +1,6 @@
 <?php 
-
+error_reporting(E_ALL);
+ini_set('display_errors', '1');
 
 ini_set("session.cookie_lifetime","18000");
 ini_set("session.gc_maxlifetime","18000");
@@ -88,7 +89,6 @@ if (isset($_POST['btn-enviar_peticion'])) {
                 $peticion->setP_fechapeticion(date('Y-m-d H:i:s'));
                 $crud->crearPeticiones($peticion);
             }
-               
         }elseif($area_peticion==2){
             $peticionMai->setProducto_peticionMai($_POST['productoMai']);
             $peticionMai->setUsuario_creacionMai($_SESSION['usuario']);
@@ -101,8 +101,11 @@ if (isset($_POST['btn-enviar_peticion'])) {
             $peticionMai->setName($_POST['soporteMai']);
             
             $crudMai->crearPeticionesMai($peticionMai);
-        }   
-    
-    header('Location:../../dashboard_funcionarios.php');
+        }
+        if(isset($_SESSION['id_roles']) && $_SESSION['id_roles']==5){
+            header('Location:../../dashboard.php');
+        }else if(isset($_SESSION['rol']) && $_SESSION['rol']==4){
+            header('Location:../../dashboard_funcionarios.php');        
+        }
 }
 ?>

@@ -80,6 +80,15 @@ $('#modificar_plataforma').click(function(){
             if(data == 1){
                 $('.close').click();
                 $("#contenido").load("app/view/plataformas.php");
+            }else if(data == 6000){
+                $.smkAlert({
+                    text: 'Para poder inactivar esta plataforma, dichas peticiones deberan finalizar',
+                    type: 'warning'
+                });
+                $.smkAlert({
+                    text: 'No se puede Inactivar esta plataforma ya que esta asociada a varias peticions de Accesoo',
+                    type: 'warning'
+                });          
             }else{
                 $('.close').click();
                 $.smkAlert({

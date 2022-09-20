@@ -31,8 +31,10 @@
 
         if(isset($_GET['val']) && ($_GET['val'] == 1)){
             $consultarFuncionariosInactivos=$consultar->consultarFuncionariosRetiro();
+	    $titulo = "Retirados";
         }elseif(isset($_GET['val']) && ($_GET['val'] == 2)){
             $consultarFuncionariosInactivos=$consultar->consultarFuncionariosInactivosC();
+	    $titulo = "Inactivos por Intentos";
         }else{
             $consultarFuncionariosInactivos=$consultar->consultarFuncionariosInactivos();/* trae ambos inactivos y retirados */
         }
@@ -43,7 +45,7 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-11 mt-4 pl-5 mb-2">
-                <h6>Consulta Funcionarios Inactivos</h6>
+                <h6>Consulta Funcionarios <?= $titulo?></h6>
             </div>          
             <div class="col">
                     <table class="table table-striped tablesorter" id="tabla">

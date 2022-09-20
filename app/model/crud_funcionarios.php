@@ -141,10 +141,10 @@ public function modificarFuncionario($update){
 				}
 			}
 
-			self::peticionCancelacionAccesos($update->getF_identificacion(),$update->getF_usuario(),'Retiro de funcionario.');
+			//self::peticionCancelacionAccesos($update->getF_identificacion(),$update->getF_usuario(),'Retiro de funcionario.');
 			echo 1;
 		}else if($cargoActual != $update->getF_cargo()){//valida la modificacion de cargo del funcionario
-			self::peticionCancelacionAccesos($update->getF_identificacion(),$update->getF_usuario(),'Remocion de Cargo.');
+			//self::peticionCancelacionAccesos($update->getF_identificacion(),$update->getF_usuario(),'Remocion de Cargo.');
 			echo 1;
 		}else{
 			echo 1;

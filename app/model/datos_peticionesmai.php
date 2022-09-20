@@ -21,6 +21,8 @@ class PeticionMai{
 	private $marca_revisado;
 	private $tipoPeticion;
 	private $archivos;
+	private $version;
+	private $numero_version;
     
 //************************************************
 	public function getId_peticionMai(){
@@ -163,6 +165,19 @@ class PeticionMai{
 		$this->archivos = $archivos;
 		}
 
+	public function getVersion(){
+		return $this->version;
+	}
+		public function setVersion($version){
+		$this->version = $version;
+		}
 
+	public function getNumero_version(){
+		return $this->numero_version;
+	}
+		public function setNumero_version($numero_version){
+		$this->numero_version = $numero_version;
+		
+	}
 }
 ?>

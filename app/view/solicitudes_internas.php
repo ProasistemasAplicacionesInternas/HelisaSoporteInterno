@@ -41,12 +41,21 @@
                 <div class="col-11 mt-4 pl-5">
                     <h6>Solicitudes Internas</h6>
                 </div>
+                
+            <div class="col-1 mt-4 mb-2">
+                <?php
+                if ($_SESSION['id_roles']==5){
+                    echo '<a href="app/view/crear_peticion.php"><img src="public/img/nuevo.png" alt=""></a>';
+                }
+                ?>
+            </div>
+
 
 
                 <div class="col">
 
                     <table class="table table-striped">
-                        <thead>
+                        <thead style="background-color:#d7007bb3; text-align:center; color:white;">
                             <th>Nro Ticket</th>
                             <th>Usuario</th>
                             <th>Fecha solicitud</th>
@@ -56,7 +65,6 @@
                             <th>Atiende</th>
                             <th>Estado</th>
 			                <th>Tipo de Peticion</th>
-                            <th>Conclusiones</th>
                             <th>Tiempo</th>
                             <th>Modificar</th>
                             
@@ -65,7 +73,7 @@
                         <tbody>
 
                             <?php foreach($consultaPeticiones as $datos1): ?>
-                            <tr>
+                            <tr style="text-align:center;">
                                 <?php 
                                     date_default_timezone_set('America/Bogota');
                                     $fecha1 = new DateTime($datos1->getFecha_peticionMai());
@@ -75,8 +83,9 @@
 
                                     $varH = $intervalo->format('%H');
                                     $varD = $intervalo->format('%D');
+				    $varM = $intervalo->format('%m');
 
-                                    $color = $crud->coloresR($varD,$varH); 
+                                    $color = $crud->coloresR($varD,$varH,$varM); 
                                 ?>
                                 <td style="background-color:<?=$color ?>;"> 
                                     <?php echo $datos1->getId_peticionMai(); ?>
@@ -107,11 +116,7 @@
                                     <?php echo $datos1->getName(); ?>
                                 </td>
 
-                            
-
-                                <td style="background-color:<?=$color ?>;">
-                                    <?= html_entity_decode($datos1->getConclusiones_peticionMai()); ?>
-                                </td>
+                        
                                 <td style="background-color:<?=$color ?>;">
                                     <?php 
                                         date_default_timezone_set('America/Bogota');
@@ -119,7 +124,7 @@
                                         $fecha2 = new DateTime('now');
 
                                         $intervalo = $fecha2->diff($fecha1);
-                                        echo $intervalo->format('%D:%H:%I:%S');
+                                        echo $intervalo->format('%m:%D:%H:%I:%S');
                                     ?>
                                 </td>
                                
@@ -151,7 +156,7 @@
 
                                         <input type="hidden" name="soporteMai" id="soporteMai" value="<?php echo $datos1->getName(); ?>">
 
-                                        <input type="hidden" name="usuario_atencion" id="usuario_atencion" value=<?php echo $datos1->getUsuario_atencionMai(); ?>></input>
+                                        <input type="hidden" name="usuario_atencion" id="usuario_atencion" value="<?php echo $datos1->getUsuario_atencionMai(); ?>">
 
                                         <input type="button"  value = "Seleccionar" class="btn btn-primary" onclick="validarBoton('<?php echo $_SESSION['usuario'];?>',<?php echo $datos1->getId_peticionMai();?>)">
 

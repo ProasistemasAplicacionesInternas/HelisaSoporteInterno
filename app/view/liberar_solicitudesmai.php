@@ -39,7 +39,7 @@
             
             <div class="col">
                     <table class="table table-striped tablesorter" style="text-align:center;" id="tabla">
-                    <thead>
+                    <thead style="background-color:#d7007bb3; text-align:center; color:white;">
                             <th style="width:3px;  text-align:center;"># Soporte</th>
                             <th style="width:50px; text-align:center;">Fecha Soporte</th>
                             <th style="width:50px; text-align:center;">Producto</th>
@@ -50,7 +50,7 @@
                             <th style="width:50px; text-align:center;">Liberar</th>
                     </thead>
                     <?php foreach($consultarSolicitudesMai as $datos): ?>
-                    <tr>                        
+                    <tr  style="background-color:#dc35457a;">                        
                         <td>                                
                             <?php echo $datos->getId_peticionMai() ?></td>
                         <td>                                
