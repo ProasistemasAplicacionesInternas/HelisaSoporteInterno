@@ -1,6 +1,7 @@
 <?php 
 
     require_once('vinculo.php');
+    require_once('../model/libEncript.php');
     require __DIR__ . '/vendor/autoload.php';//Correo
 
     class peticionesAccesos{
@@ -412,6 +413,7 @@
 
 
         public function insercionDeAccesos($acceso){
+            $key = new keyCript();
             $db = Conectar::acceso();
 
             if($acceso->getEstado() == 12){
@@ -419,7 +421,7 @@
                 $insertarAcceso->bindValue('plataforma', $acceso->getPlataforma());
                 $insertarAcceso->bindValue('id_usuario',$acceso->getUsuario_Creacion());
                 $insertarAcceso->bindValue('usuario',$acceso->getNombre());
-                $insertarAcceso->bindValue('clave', $acceso->getClave());
+                $insertarAcceso->bindValue('clave', $key->encript($acceso->getClave()));
                 $insertarAcceso->bindValue('estado', 5);
                 $insertarAcceso->execute();
 
@@ -677,6 +679,7 @@
         }
 
         public function consultarClaveAccesoPlataforma($id_accesoPlataforma){
+            $key = new keyCript();
             $db = Conectar::acceso();
             $consulta = $db->prepare("SELECT clave FROM accesos_plataformas WHERE  id_accesoPlataforma = :id_accesoPlataforma LIMIT 1");
             $consulta->bindValue('id_accesoPlataforma',$id_accesoPlataforma);
@@ -684,15 +687,18 @@
         
             $consultaFinalizada = $consulta->fetch(PDO::FETCH_ASSOC);
             $clave = $consultaFinalizada['clave'];
-            return $clave;
+            return $key->decript($clave);
         }
 
         public function modificarClaveAccesosPlataforma($id_accesoPlataforma,$clave){
+            $key = new keyCript();
             $db = Conectar::acceso();
             $consulta = $db->prepare("UPDATE accesos_plataformas SET clave = :clave WHERE id_accesoPlataforma = :id_accesoPlataforma");
             $consulta->bindValue('id_accesoPlataforma', $id_accesoPlataforma);
-            $consulta->bindValue('clave',$clave);
+            $consulta->bindValue('clave',$key->encript($clave));
             $consulta->execute();
+
+        
 
             if($consulta){
                 return 1;
@@ -911,10 +917,17 @@
         /* **** Determina si el funcionario tiene acceso **** */
         /* ******* a una plataforma especifica ************** */
         /* ************************************************** */
-        public function trueAcces($plataforma){
+        public function trueAcces($plataforma,$usuario){
             $db = Conectar::acceso();
-            $consulta = $db->prepare("SELECT id_accesoPlataforma FROM accesos_plataformas WHERE plataforma = :plataforma && estado = 5");
+            $consultaIdent = $db->prepare("SELECT identificacion FROM funcionarios WHERE usuario = :usuario");
+            $consultaIdent->bindValue("usuario",$usuario);
+            $consultaIdent->execute();
+            $resultado = $consultaIdent->fetch(PDO::FETCH_ASSOC);
+            $identificacion = $resultado['identificacion'];
+
+            $consulta = $db->prepare("SELECT id_accesoPlataforma FROM accesos_plataformas WHERE plataforma = :plataforma && estado = 5 && id_usuario = :id_user");
             $consulta->bindValue('plataforma', $plataforma);
+            $consulta->bindValue('id_user',$identificacion);
             $consulta->execute();
             if($consulta->rowCount() > 0){
                 return 1;
@@ -950,15 +963,6 @@
         }
 
 
-	public function correoPendiente(){
-            $db = Conectar::acceso();
-            $consulta = $db->prepare("SELECT id_peticionAcceso FROM hinfraestructura.peticiones_accesos where estado = 2 AND revisado = 1 fecha_atendido > '2022-07-25 00:00:00';");
-            $consulta->execute();
-
-            foreach($consulta->fetchAll() as $lista){
-                $this->correoDeFinalizacion($lista['id_peticionAcceso']);
-            }
-        }
 
     }
 ?>

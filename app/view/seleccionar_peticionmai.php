@@ -20,10 +20,10 @@
 	ini_set("session.gc_maxlifetime",18000);
         
         session_start();
-   
         if(!isset($_SESSION['usuario'])||empty($_SESSION['usuario'])){
-       
         header('location:../../login.php');
+        }else{
+            $user=$_SESSION['usuario'];
         }
 
         include('../controller/controlador_soportemai.php');
@@ -41,11 +41,13 @@
         $estado=$_POST['p_estado'];
         $name=$_POST['soporteMai'];
         $conclusiones=$_POST['p_conclusiones'];
+    
+        require_once("../controller/trae_observaciones.php");
 
     ?>
-	 
-	 
-	     <header class="container-fluid">
+	
+	
+	<header class="container-fluid">
         <div class="row">
             <div class="col-md-10 align-self-center">
                 <img src="../../public/img/Logo_blanco.png" alt="">
@@ -53,64 +55,87 @@
         </div>
     </header>
     <div class="container">
-        <div class="row">
-            <div class="col-12 mt-4 pl-5">
-                <h6>Atendiendo Soporte</h6>
-            </div>
-            <div class="col-12 ml-5">
-                <div class="form-group">
-                    <form action="../controller/controlador_peticionmai.php" class="form-group mt-3" method="post" enctype="multipart/form-data">
-                        <div class="col-12">
-                            <div class="row">
-                                <div class="col-2">
-                                    <label>Cod. Solicitud</label>
-                                    <input type="text" id="p_nropeticion" name="p_nropeticion" class="form-control data" value="<?php echo $codigo; ?>" readonly>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-4">
-                                    <label>Fecha Solicitud</label>
-                                    <input type="text" id="p_fechapeticion" name="p_fechapeticion" class="form-control data" value="<?php echo  $fechapeticion; ?>" readonly>
-                                </div> 
-
-                                <div class="col-4">
-                                    <label>Usuario</label>
-                                    <input type="text" id="p_usuario" name="p_usuario" class="form-control data" value="<?php echo  $usuario; ?>" readonly> 
-                                </div>
-                            </div>
-
-                            <div class="row">
-                                <div class="col-2">
-                                    <label>Extension</label>
-                                    <input type="text" id="p_extension" name="p_extension" class="form-control data" value="<?php echo $extension; ?>"    readonly>
-                                </div> 
-                            </div>
-
-                            <div class="row">
-                                <div class="col-12">
-                                    <label>Correo</label>
-                                    <input type="text" id="p_correo" name="p_correo" class="form-control data" value="<?php echo $correo; ?>"    readonly>
-                                </div>
-                            </div>
-
-                            <div class="row">
-                                <div class="col-12">
-                                    <label>Producto</label>
-                                    <input type="text" id="p_categoria" name="p_categoria" class="form-control data" value="<?php echo $categoria; ?>  " readonly>
-                                </div>
-                            </div>
-                            
-                            <div class="row">
-                                <div class="col-12">
-                                    <label for="">Descripcion</label> 
-                                    <textarea id="p_descripcion" name="p_descripcion" class="form-control col-6 data" readonly><?php echo $descripcion; ?></textarea>
-                                </div>
-                            </div>
-
-                            <div class="mt-3">
-                                <?php if ($imagen != '2'){ ?>
-                                    <input type="hidden" id="imagenC" name="imagenC" class="form-control data" value="<?php echo $imagen; ?>" style='display:none'>
-                                    <a class="text" href="../../cartas/<?=$imagen?>" target="_blanck" id="imagen" name="imagen" style=" ">
+        <div>
+            <div class='box1'>
+                <form action="../controller/controlador_peticionmai.php" method="post" enctype="multipart/form-data">
+                    <div style="display:none">
+                        <input type="text" id="user" name="user" class="form-control" value="<?php echo $user; ?>" readonly>
+                    </div>
+                    <div class="row">
+                        <div class="peq">
+                            <label>Cod</label>
+                            <input type="text" id="p_nropeticion" name="p_nropeticion" class="form-control" value="<?php echo $codigo; ?>" readonly>
+                        </div>
+                        <div class="medium">
+                            <label>Fecha Solicitud</label>
+                            <input type="text" id="p_fechapeticion" name="p_fechapeticion" class="form-control" value="<?php echo  $fechapeticion; ?>" readonly>
+                        </div>
+                        <div class="medium">
+                            <label>Usuario</label>
+                            <input type="text" id="p_usuario" name="p_usuario" class="form-control" value="<?php echo  $usuario; ?>" readonly> 
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="little">
+                            <label>Ext</label>
+                            <input type="text" id="p_extension" name="p_extension" class="form-control" value="<?php echo $extension; ?>"    readonly>
+                        </div>
+                        <div class="normal">
+                            <label>Correo</label>
+                            <input type="text" id="p_correo" name="p_correo" class="form-control" value="<?php echo $correo; ?>"    readonly>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="bigGiant">
+                            <label>Producto</label>
+                            <input type="text" id="p_categoria" name="p_categoria" class="form-control" value="<?php echo $categoria; ?>  " readonly>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="giant">
+                            <label for="">Descripción</label> 
+                            <textarea id="p_descripcion" name="p_descripcion" class="form-control col-12" rows="4" readonly><?php echo $descripcion; ?></textarea>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="littleMedium">
+                            <label id="label" >Estado</label>
+                            <select name="p_estado" id="p_estado" class="selectView" required>
+                                    <option value=""></option>
+                                    <option value="2" >Resuelto</option>
+                                    <option value="3" >Pendiente</option>
+                                    <option value="4" >Redireccionado</option>
+                            </select>
+                        </div>
+                        <div class="littleMedium">
+                            <label id="label" >¿Requiere Versión?</label>
+                            <select name="version" id="version" class="selectView" required>
+                                    <option value="Si" >Si Requiere</option>
+                                    <option value="No" selected >No Requiere</option>
+                            </select>
+                        </div>
+                        <div class="littleMedium">  
+                            <label id="label">Tipo de petición</label>
+                            <select id="soporteMai" name="soporteMai" class="selectView">
+                        <?php
+                            foreach($listado_soporte as $tipoSoporte){
+                                echo "<option value='".$tipoSoporte['id']."'" ; 
+                                if($name == $tipoSoporte['nombre']){
+                                    echo 'selected';}
+                                    echo ">".$tipoSoporte["nombre"]. "</option>" ;
+                                }  
+                        ?>
+                            </select>
+                        </div>
+                        <div class="littleMedium" id="nVersionDiv">
+                            <label>Numero version</label>
+                            <input class="selectView " type="text" name="nVersion" id="nVersion" placeholder= "Número de versión"  />
+                        </div>
+                    </div>
+                    <div class="row giant mt-1 mb-1">
+                        <?php if ($imagen != '2'){ ?>
+                            <input type="hidden" id="imagenC" name="imagenC" class="form-control data" value="<?php echo $imagen; ?>" style='display:none'>
+                            <a class="text" href="../../cartas/<?=$imagen?>" target="_blanck" id="imagen" name="imagen" style=" ">
                                         Imagen
                                     </a>                                                        
                                 <?php }else{ ?>
@@ -133,64 +158,67 @@
                                     </a>                                                        
                                 <?php }else{ ?>
                                         <input type="hidden" id="imagen3" name="imagen3" value="2">
-                                <?php } ?>
-                            </div>
-
-
-                            <div class="row">
-                                <div class="col-4 form-control"  id="divGeneral">
-                                    <label id="label" >Estado</label>
-                                        <select name="p_estado" id="p_estado" class="form-control" required>
-                                                <option value=""></option>
-                                                <option value="2" >Resuelto</option>
-                                                <option value="3" >Pendiente</option>
-                                                <option value="4" >Redireccionado</option>
-                                                
-                                        </select>
-                                </div>
-                                
-                                    <div class="col-4 form-control" id="divGeneral2">  
-                                        <label id="label">Tipo de peticion</label>
-                                            <select id="soporteMai" name="soporteMai" class="form-control">
-                                                    <?php
-
-                                                        foreach($listado_soporte as $tipoSoporte){
-                                                            echo "<option value='".$tipoSoporte['id']."'" ; 
-                                                            if($name == $tipoSoporte['nombre']){
-                                                                echo 'selected';}
-                                                            echo ">".$tipoSoporte["nombre"]. "</option>" ;
-                                                            }  
-                                                    ?>
-                                            </select>
-                                    </div>
-                            </div>
-    
-
-                            <div class="row">
-                                <div class="col-12 mt-2">
-                                    <div>
-                                        <label for="">Observaciones</label>
-                                    </div>
-                                        <textarea class="col-6" style="border-radius:9px; " name="p_conclusiones" id="p_cnclusiones" cols="75" rows="6" required><?=strip_tags($conclusiones,'<br/>')?></textarea>                                        
-                                </div>
-                            </div>
-                            <div class="row">
-                                        <div class="col-6 mt-2" id="imagenDiv">
-                                                <label id="label">Seleccione el documento que quiere enviar</label>
-                                                        </br>
-                                                <input type="file" id="imagen[]" name="imagen[]">
-                                        </div>
-                                        <label class="mt-2" id="textImg" style="min-width:150%"></label>
-                                    </div>
-
-                            <div class="row">
-                                <div class="col-3">
-                                    <input type="submit" value="Guardar" id="aceptar_petmai" name="aceptar_petmai" class="btn btn-primary  mt-3" >
-                                </div>                              
-                           </div>                       
+                            <?php } ?>
+                    </div>
+                    <div class="row">
+                        <div class="giant">
+                            <label for="">Observaciones</label> 
+                            <textarea id="p_conclusiones" name="p_conclusiones" class="form-control col-12" rows="8" required><?=strip_tags('<br/>')?></textarea>
                         </div>
-                    </form>
-                </div> 
+                    </div>
+                    <div class="row mt-2">
+                        <div class="giant">
+                            <div class="col-6 mt-2" id="imagenDiv">
+                                <label id="label">Seleccione el documento que quiere enviar</label>
+                                <input type="file" id="imagen[]" name="imagen[]">
+                            </div>
+                                <label class="mt-2" id="textImg" style="min-width:150%"></label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="giant">
+                            <input type="submit" value="Guardar" id="aceptar_petmai" name="aceptar_petmai" class="btn btn-primary" >
+                        </div>                              
+                    </div>
+                </form>            
+            </div>
+            <div class='col-6 box2'>
+                <?php if(count($observaciones) != 0):
+                    foreach($observaciones as $observacion){
+                ?>
+                <div class="boxObs">
+                    <div class="row">
+                        <div class="medium">
+                            <label>Fecha </label>
+                            <input type="text" id="obsData" name="obsData" class="form-control" value="<?php echo $observacion['fecha_observacion']; ?>  " readonly>
+                        </div>
+                        
+                        <div class="littleMedium">
+                            <label>Usuario </label>
+                            <input type="text" id="obsUser" name="obsUser" class="form-control" value="<?php echo $observacion['usuario_creacion']; ?>  " readonly>
+                        </div>
+                        
+                        <div class="little">
+                            <label>Estado </label>
+                            <input type="text" id="obsStatus" name="obsStatus" class="form-control" value="<?php echo $observacion['estado']; ?>  " readonly>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="giant">
+                            <label for="">Observaciones</label> 
+                            <textarea id="obs" name="obs" class="form-control" rows="4" readonly><?php echo  $observacion['descripcion_observacion']?></textarea>
+                        </div>
+                    </div>
+                    <div class="line row">
+                        <div class="giant">
+                            
+                        </div>
+                    </div>
+                </div>
+                <?php      
+                    }
+                endif;
+                ?>
             </div>
         </div>
     </div>
@@ -199,7 +227,108 @@
     <script src="../../public/js/bootstrap.min.js"></script>
     <script src="../../public/js/correo_archivos.js"></script>
     <script src="../../public/js/smoke.min.js"></script>
+    <script src="../../public/js/despliegueVersion.js"></script>
     <script src="../../public/js/bloqueoTeclas.js"></script>
-    
 </body>
 </html>
+<style>
+    header{
+        position: fixed;
+        z-index: 1;
+    }
+    .col-6 {
+    -ms-flex: 0 0 50%;
+    flex: 0 0 50%;
+    max-width: 49%;
+    }
+    .container{
+            padding-top: 3%;
+    }
+    .box1{
+        width: 50%;
+        height: 90vh;
+        border: solid;
+        border-color: deeppink;
+        float: left;
+        border-radius: 26px;
+        padding: 2% 2% 2% 2%;
+        margin: 40.5px 0%;
+        display: table;
+    }
+    .box2{
+        width: 50%;
+        float: right;
+        border: solid;
+        border-color: deeppink;
+        border-radius: 26px;
+        padding: 2% 2% 2% 2%;
+        margin:  40.2px 0%;
+    }
+    .boxObs{
+        margin: 2% 2%;
+    }
+    .line{
+        border: solid;
+        border-color: #29618f;
+        margin: 5% 0%;
+    }
+    .peq{
+        width: 10%;
+        margin: 0% 1% 0% 1%;
+    }
+    
+    .little{
+        width: 20%;
+        margin: 0% 1% 0% 1%;
+    }
+    
+    .littleMedium{
+        width: 30%;
+        margin: 0% 1% 0% 1%;
+    }
+    
+    .medium{
+        width: 40%;
+        margin: 0% 1% 0% 1%;
+    }
+    
+    .mediumNormal{
+        width: 50%;
+        margin: 0% 1% 0% 1%;
+    }
+    
+    .normal{
+        width: 60%;
+        margin: 0% 1% 0% 1%;
+    }
+    
+    .normalBig{
+        width: 70%;
+        margin: 0% 1% 0% 1%;
+    }
+    
+    .big{
+        width: 80%;
+        margin: 0% 1% 0% 1%;
+    }
+    
+    .bigGiant{
+        width: 90%;
+        margin: 0% 1% 0% 1%;
+    }
+    
+    .giant{
+        width: 100%;
+        margin: 0% 1% 0% 1%;
+    }
+    
+    .selectView{
+        padding: 0.375rem 0.75rem;
+        border: 1px solid #29618f;
+        border-radius: 6.5px;
+    }
+    
+    .btn{
+        width: 100%;
+    }
+</style>

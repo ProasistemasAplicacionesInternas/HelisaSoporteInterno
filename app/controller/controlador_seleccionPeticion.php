@@ -38,7 +38,7 @@ if (isset($_POST['seleccionar_peticionmai'])){
     $peticionMai->setEstado_peticionMai('8');
     date_default_timezone_set('America/Bogota');
     $peticionMai->setFecha_atendidoMai(date('Y-m-d H:i:s'));
-    $peticionMai->setUsuario_atencionMai($_SESSION['usuario']);
+    $peticionMai->setUsuario_atencionMai($_SESSION['usuario']);     
     $crudMai->cambiaEstadoMai($peticionMai);
 
 }

@@ -75,15 +75,15 @@
                                                                             
 
                     <div class="dropdown">
-                        <?php if($_SESSION['id_roles']==1 || $_SESSION['id_roles']==6 || $_SESSION['id_roles']==7 || $_SESSION['id_roles']==8 || $_SESSION['id_roles']==9){ echo '<a class=" dropdown-toggle" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <img src="public/img/consultas.png" alt="" class="ml-3"><span>Consultas</span></a>'; }?>
+                        <?php if($_SESSION['id_roles']==1 || $_SESSION['id_roles']==5 || $_SESSION['id_roles']==6 || $_SESSION['id_roles']==7 || $_SESSION['id_roles']==8 || $_SESSION['id_roles']==9){ echo '<a class=" dropdown-toggle" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <img src="public/img/consultas.png" alt="" class="ml-3"><span>Consultas</span></a>'; }?>
 
                         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                            <?php if ($_SESSION['id_roles']==1 || $_SESSION['id_roles']==6 || $_SESSION['id_roles']==7 || $_SESSION['id_roles']==9) {echo '<a href="#" id="consultarPeticiones"><img src="public/img/consultas.png" alt="" class="ml-3">Consultas-Ticket</a>';}?>
+                            <?php if ($_SESSION['id_roles']==1 || $_SESSION['id_roles']==6 || $_SESSION['id_roles']==7 || $_SESSION['id_roles']==9 || $_SESSION['id_roles']==5) {echo '<a href="#" id="consultarPeticiones"><img src="public/img/consultas.png" alt="" class="ml-3">Consultas-Ticket</a>';}?>
 
-                             <?php if ($_SESSION['id_roles']==1 || $_SESSION['id_roles']==7 || $_SESSION['id_roles']==8) {echo '<a href="#" id="consultarIso"><img src="public/img/consultas.png" alt="" class="ml-3">Consultas-ISO</a>';}?>
+                            <?php if ($_SESSION['id_roles']==1 || $_SESSION['id_roles']==7 || $_SESSION['id_roles']==8 || $_SESSION['id_roles']==5) {echo '<a href="#" id="consultarIso"><img src="public/img/consultas.png" alt="" class="ml-3">Consultas-ISO</a>';}?>
 
-                            <?php if ($_SESSION['id_roles']==1 || $_SESSION['id_roles']==6 || $_SESSION['id_roles']==7 || $_SESSION['id_roles']==9) {echo '<a href="#" id="comentariosPeticiones"><img src="public/img/Comentarios.png" alt="" class="ml-3">Comentarios</a>';}?> 
-                  
+                            <?php if ($_SESSION['id_roles']==1 || $_SESSION['id_roles']==6 || $_SESSION['id_roles']==7 || $_SESSION['id_roles']==9 || $_SESSION['id_roles']==5) {echo '<a href="#" id="comentariosPeticiones"><img src="public/img/Comentarios.png" alt="" class="ml-3">Comentarios</a>';}?> 
+
                         </div>
                     </div>
 

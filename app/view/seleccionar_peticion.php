@@ -29,6 +29,11 @@ error_reporting(E_ALL);
         header('location:../../login.php');
         }
 
+	if(!isset($_POST['p_nropeticion'])){
+		header('location:../../login.php');
+	} 
+
+
            require('../model/crud_peticiones.php');
         require('../model/datos_peticion.php');
 

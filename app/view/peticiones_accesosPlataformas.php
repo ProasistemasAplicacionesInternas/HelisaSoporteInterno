@@ -46,6 +46,7 @@
                             <th style="width:10px;">#</th>
                             <th style="width:30px;">Usuario</th>
                             <th style="width:30px;">Fecha Solicitud</th>
+                            <th style="width:30px;">Tipo</th>
                             <th style="width:30px;">Descripci&oacute;n</th>
                             <th style="width:30px;">Estado Solicitud</th>
                             <th style="width:30px;">Fecha Atendido</th>
@@ -60,6 +61,8 @@
                                 <?php echo $datos->getUsuario_creacion() ?></td>
                             <td>
                                 <?php echo $datos->getFecha_creacion() ?></td>
+                            <td>
+                                <?php switch($datos->getTipo()){case 0:echo "Modificacion";break;case 1:echo "Activacion";break;case 2: echo "Inactivacion";break;Default:echo "Modificacion";} ?></td>
                             <td>
                                 <?php echo $datos->getDescripcion() ?></td> 
                             <td>

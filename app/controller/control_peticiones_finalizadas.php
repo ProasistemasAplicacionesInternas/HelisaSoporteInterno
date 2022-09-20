@@ -44,9 +44,7 @@
                 $db=conectar::acceso();
                 $listaConsulta=[];
 
-                $seleccion=$db->prepare('SELECT  id_peticionmai,  DATE_FORMAT(fecha_peticion,"%d-%m-%Y %H:%i"),DATE_FORMAT(fecha_atencion,"%d-%m-%Y %H:%i"), usuario_creacion, productos_mai.nombre_producto, descripcion_peticion, usuario_atencion, conclusiones,nivel_encuesta,imagen FROM peticiones_mai LEFT JOIN productos_mai ON id_producto = producto_mai WHERE fecha_peticion BETWEEN :fechaInicial AND :fechaFinal AND (estado_peticion=:estadoD OR estado_peticion=:estadoC) ');
-                $seleccion->bindValue('estadoC','4');
-                $seleccion->bindValue('estadoD','2');
+                $seleccion=$db->prepare('SELECT  id_peticionmai,  DATE_FORMAT(fecha_peticion,"%d-%m-%Y %H:%i"),DATE_FORMAT(fecha_atencion,"%d-%m-%Y %H:%i"), usuario_creacion, productos_mai.nombre_producto, descripcion_peticion, usuario_atencion, conclusiones,nivel_encuesta,imagen FROM peticiones_mai LEFT JOIN productos_mai ON id_producto = producto_mai WHERE fecha_peticion BETWEEN :fechaInicial AND :fechaFinal');
                 $seleccion->bindValue('fechaInicial',$inicio);
                 $seleccion->bindValue('fechaFinal',$final);
                 $seleccion->execute();
@@ -99,14 +97,11 @@
                 $listaConsulta[]=$consulta;    
                 
             }
-        
         }else if(isset($_POST['areaF2']) && $_POST['areaF2'] == 2){
             $db=conectar::acceso();
             $listaConsulta=[];
 
-            $seleccion=$db->prepare('SELECT  id_peticionmai,  DATE_FORMAT(fecha_peticion,"%d-%m-%Y %H:%i"),DATE_FORMAT(fecha_atencion,"%d-%m-%Y %H:%i"), usuario_creacion, productos_mai.nombre_producto, descripcion_peticion, usuario_atencion, conclusiones,nivel_encuesta,imagen FROM peticiones_mai LEFT JOIN productos_mai ON id_producto = producto_mai WHERE  id_peticionmai=:numero_peticion AND (estado_peticion=:estadoD OR estado_peticion=:estadoC)');
-            $seleccion->bindValue('estadoC','4');
-            $seleccion->bindValue('estadoD','2');
+            $seleccion=$db->prepare('SELECT  id_peticionmai,  DATE_FORMAT(fecha_peticion,"%d-%m-%Y %H:%i"),DATE_FORMAT(fecha_atencion,"%d-%m-%Y %H:%i"), usuario_creacion, productos_mai.nombre_producto, descripcion_peticion, usuario_atencion, conclusiones,nivel_encuesta,imagen FROM peticiones_mai LEFT JOIN productos_mai ON id_producto = producto_mai WHERE  id_peticionmai=:numero_peticion');
             $seleccion->bindValue('numero_peticion',$_POST['peticionFiltro']);
             $seleccion->execute();
         
@@ -129,14 +124,41 @@
 
         }
                     
-     
+    
+    }else if(isset($_POST['btn-consultarProgramador'])){
+        
+        if(isset($_POST['areaF3']) && $_POST['areaF3'] == 2){
+            $db=conectar::acceso();
+            $listaConsulta=[];
+
+            $seleccion=$db->prepare('SELECT  id_peticionmai,  DATE_FORMAT(fecha_peticion,"%d-%m-%Y %H:%i"),DATE_FORMAT(fecha_atencion,"%d-%m-%Y %H:%i"), usuario_creacion, productos_mai.nombre_producto, descripcion_peticion, usuario_atencion, conclusiones,nivel_encuesta,imagen FROM peticiones_mai LEFT JOIN productos_mai ON id_producto = producto_mai WHERE  usuario_atencion=:usuario');
+            $seleccion->bindValue('usuario',$_POST['programadorFiltro']);
+            $seleccion->execute();
+        
+            foreach($seleccion->fetchAll() as $listado){
+                $consulta= new Peticion();
+                $consulta->setP_nropeticion($listado['id_peticionmai']);       
+                $consulta->setP_fechapeticion($listado['DATE_FORMAT(fecha_peticion,"%d-%m-%Y %H:%i")']);
+                $consulta->setP_usuario($listado['usuario_creacion']);
+                $consulta->setP_categoria($listado['nombre_producto']);
+                $consulta->setP_descripcion($listado['descripcion_peticion']);
+                $consulta->setP_fechaatendido($listado['DATE_FORMAT(fecha_atencion,"%d-%m-%Y %H:%i")']);   
+                $consulta->setP_usuarioatiende($listado['usuario_atencion']);
+                $consulta->setP_conclusiones($listado['conclusiones']);
+                $consulta->setCalificacion($listado['nivel_encuesta']);
+                $consulta->setP_cargarimagen($listado['imagen']);
+
+                $listaConsulta[]=$consulta;    
+                
+            }
+        }                   
     }
 
     if(isset($_POST['btn-consultarFechaI'])){
-     
+    
         $inicio= date('Y-m-d', strtotime($_POST['fechaInicial']));
         $final= date('Y-m-d', strtotime($_POST['fechaFinal']));
- 
+
         $db=conectar::acceso();
         $listaConsulta=[];
 
@@ -164,5 +186,6 @@
             $listaConsulta[]=$consulta;
                 
         }
+        
     }
 ?>

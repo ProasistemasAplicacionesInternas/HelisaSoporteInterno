@@ -53,6 +53,22 @@
         public function modificarPlataforma($id,$administrador,$estado){
             $db = Conectar::acceso();
 
+	    //consulta si la plataforma esta asociada a una peticion de acceso
+            if($estado == 6){
+                $consultaA = $db->prepare("SELECT plataformas FROM peticiones_accesos WHERE (estado = 1 || estado = 3 || estado = 8) && plataformas LIKE :idPlataforma");
+                $consultaA->bindValue('idPlataforma',"%".$id."%");
+                $consultaA->execute();
+
+                foreach($consultaA as $registro){
+                    $arregloPlataformas = explode(',' , $registro['plataformas']);
+                    foreach($arregloPlataformas as $arrPlataforma){
+                        if($arrPlataforma == $id){
+                            return 6000;
+                        }
+                    }   
+                }
+            }
+
             $consulta = $db->prepare("UPDATE plataformas SET administrador = :administrador, estado = :estado WHERE id_plataforma = :id");
             $consulta->bindValue("administrador",$administrador);
             $consulta->bindValue("estado",$estado);
