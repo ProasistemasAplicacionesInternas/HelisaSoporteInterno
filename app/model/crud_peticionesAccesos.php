@@ -472,6 +472,10 @@
             $modificarPeticion->bindValue('conclusiones',$conclusiones);
             $modificarPeticion->execute();
 
+            if($estado == 2){
+                $this->correoDeFinalizacion($peticion);
+            }
+
         }
 
         public function getPlataformasxPeticion($id_peticion){
@@ -821,7 +825,7 @@
             $mail->addAddress("$mail1");
             $mail->addAddress("$mail2");					
             $mail->isHTML(true); // Set email format to HTML
-            $subjects ="Finalizacion de Peticion de Accesos";//asunto
+            $subjects ="Aceptación entrega de accesos a plataformas PROASISTEMAS S.A.";//asunto
             $cuerpo="<style type='text/css'> 
             *{ 
                 font-size: 15px;
@@ -867,12 +871,31 @@
             $cuerpo.="</tbody></table></div>";
             $cuerpo.="<p>En caso que usted no haya realizado el acceso a dicha plataforma ni la aceptación de los accesos mencionados en el párrafo anterior comuníquese de forma inmediata con su jefe directo y con el 
                         departamento de tecnología de lo contrario se dará por aprobada la aceptación realizada.</p>";
+            $cuerpo.="Tenga presente que:";
+            $cuerpo.="<br></br>";
+            $cuerpo.="Las cuentas de Usuario y Password entregadas son de uso SECRETO, UNICO E INSTRASFERIBLE, usted es el único responsable del manejo que dé a las mismas.";
+            $cuerpo.="<br></br>";
+            $cuerpo.="Acostumbrarse a cerrar la sesión de cada plataforma al terminar las actividades.";
+            $cuerpo.="<br></br>";
+            $cuerpo.="No utilice la opción de recordar clave para el ingreso al aplicativo.";
+            $cuerpo.="<br></br>";
+            $cuerpo.="PROASISTEMAS se reserva el derecho de cancelar temporal o definitivamente una cuenta cuando se haga uso inapropiado del sistema";
+            $cuerpo.="<br></br>";
+            $cuerpo.="Es obligatorio asegurar que el equipo desde el cual se conecte tenga instalado y actualizado un software antivirus, así como los últimos parches de seguridad del sistema.";
+            $cuerpo.="<br></br>";
+            $cuerpo.="Recuerde que resguardar y proteger la información es responsabilidad de TODOS.";
+            $cuerpo.="<br></br>";
+            $cuerpo.="Asimismo, en seguimiento a los lineamientos de seguridad vigentes en PROASISTEMAS S.A., es de aclarar que los datos que sean o se encuentren registrados en las diferentes aplicaciones asignadas son de carácter reservado y de acceso restringido, por lo que es necesario que mantenga la seguridad y confidencialidad de la información a la que tiene acceso.";
+            $cuerpo.="<br></br>";
+            $cuerpo.="Toda la información registrada en las aplicaciones, tienen carácter de Declaración Jurada, es decir que cualquier acción efectuada en el Sistema, permitirá determinar la identidad del usuario y/o las acciones realizadas, cuando un Órgano de Control o Entidad de Vigilancia lo requiera.";
+            $cuerpo.="<br></br>";
+            $cuerpo.="Consulte nuestras políticas de seguridad de la información ingresando a nuestra página www.somoshelisa.com";
             $body = utf8_decode($cuerpo);
             $subject = utf8_decode($subjects);
             $mail->Subject = $subject;
             $mail->MsgHTML($body);
             $mail->send();
-            
+
             } 
             catch (Exception $e){ 
                 echo 'Message could not be sent. Mailer Error: ', $mail->ErrorInfo; 

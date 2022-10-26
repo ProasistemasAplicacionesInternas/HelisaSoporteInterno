@@ -58,10 +58,16 @@
                         <th style="width:80px;">Fecha Atendido</th>
                         <th style="width:40px;">Usuario Atendio</th>
                         <th style="width:40px;">Calificación</th>
+                        <?php if($_SESSION['id_roles']==1 || $_SESSION['id_roles']==5 || $_SESSION['id_roles']==9 ){
+                            echo "<th style='width:40px;'>Estado</th>";
+                        }?>
                         <?php if($_SESSION['id_roles']==5 || $_SESSION['id_roles']==7 ){
                             echo "<th style='width:100px;'>Ver Conclusiones</th>";
                         } 
                         ?>
+                        <?php if($_SESSION['id_roles']==1 || $_SESSION['id_roles']==9 ){
+                            echo "<th style='width:40px;'>Conclusiones</th>";
+                        }?>
                         <th style="width:10px;">Imagen</th>                      
                     
                     </thead>
@@ -109,11 +115,21 @@
                                     }
                                 ?>
                             </td>
+                            <td>
+                                <?php if($_SESSION['id_roles']==1 || $_SESSION['id_roles']==5 || $_SESSION['id_roles']==9 ){
+                                    echo $datos->getP_estado();
+                                }?>
+                            </td>
                             <?php if($_SESSION['id_roles']==5 || $_SESSION['id_roles']==7 ){ ?>
-                                <td>
+                            <td>
                                 <button class="btn btn-outline-primary verConclusion" data-toggle="modal" data-target="#verConclusion" data-backdrop="static" data-keyboard="false" id="btn-verConclusion" name="btn-verConclusion" onclick="verConclusiones(<?= $datos->getP_nropeticion()?>)"><span>Ver Conclusión</span></button>    
-                                </td>
+                            </td>
                             <?php } ?>
+                            <td>
+                                <?php if($_SESSION['id_roles']==1 || $_SESSION['id_roles']==9 ){
+                                    echo $datos->getP_conclusiones();
+                                }?>
+                            </td>
                             <!-- <td>
                                 <button type="button" class="btn btn-info crearComentario" data-toggle="modal" data-target="#crearComentario" data-backdrop="static" data-keyboard="false" id="btn-crearComentario" name="btn-crearComentario" value=" --><!-- "><span>Crear</span></button>    
                             </td> -->

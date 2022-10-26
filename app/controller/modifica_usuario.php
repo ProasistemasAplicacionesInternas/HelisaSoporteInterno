@@ -1,10 +1,14 @@
 <?php
 
 require_once("../model/crud_usuarios.php");
+require_once("../model/crud_codigo.php");
 require_once("../model/datos_usuario.php");
+require_once("../model/datos_codigo.php");
 
 $actualiza= new DatosUsuario();
 $modifica= new Usuario();
+$crudC = new datosCodigo();
+$datosC = new codigos();
 $lista_usuarios=$actualiza->get_usuarios();
 $lista_funcionarios=$actualiza->get_funcionarios();
 
@@ -21,9 +25,21 @@ if (isset($_POST['guardar'])) {
 	$modifica->setClave($_POST['contrasena']);
     $modifica->setCorreo($_POST['correo']); 
     $modifica->setIDusuarios($_SESSION['usuario']); 
+    $modifica->setTipoValidacion($_POST['tipoValidacion']);
     $actualiza->actualizar($modifica);
     
    header('Location:../../dashboard.php');
+}
+
+if (isset($_POST['borrarCodigo'])) {
+   /* $modifica->setNombre($_POST['usuario']); */
+   $modifica->setNombre($_POST['usuario']);
+   $usuario=$_POST['usuario'];
+   $datosC->setId_Usuario($usuario);
+   $crudC->eliminarCodigoUsuarios($datosC);
+
+
+  header('Location:../../dashboard.php');
 }
 
 

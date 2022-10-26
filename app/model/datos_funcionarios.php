@@ -29,6 +29,10 @@ class Funcionario{
     private $fecha_registro;
     private $estadosA;
     private $fecha_inactivacion;
+    private $tipoValidacion;
+    private $ticket;
+    private $fecha;
+    private $secret;
         /*Datos Tipos de Acceso*/
     private $descripcion;
         /* descripcion que se da al activar o inactivar un funcionario */
@@ -46,6 +50,21 @@ class Funcionario{
         $this->f_identificacion = $f_identificacion;
     	} 
 
+    public function getF_codigo(){
+        return $this->secret;
+    } 
+
+    public function setF_codigo($secret){
+        $this->secret = $secret;
+    }
+
+    public function getF_fecha(){
+        return $this->fecha;
+    } 
+
+    public function setF_fecha($fecha){
+        $this->fecha = $fecha;
+    }
 
    	public function getF_nombre(){
    		return $this->f_nombre;
@@ -270,7 +289,28 @@ class Funcionario{
         $this->descripcion = $descripcion;
         } 
 
-       
+    
+    public function getF_ticket()
+    {
+        return $this->ticket;
+    }
+    
+    public function setF_ticket($ticket)
+    {
+        $this->ticket = $ticket;
+        return $this;
+    }
+
+    public function getTipoValidacion()
+    {
+        return $this->tipoValidacion;
+    }
+    
+    public function setTipoValidacion($tipoValidacion)
+    {
+        $this->tipoValidacion = $tipoValidacion;
+        return $this;
+    }
         ///////descripcion que se da en la activar o inactivar un funcionarios////
     public function getDescripcionFinal(){ 
         return $this->descripcionFinal;

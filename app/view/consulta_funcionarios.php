@@ -75,7 +75,7 @@
                         
                         <td> 
                             <form action="app/view/modificar_funcionario.php" method="post" target="_blank">
-                                <input type="hidden" name="f_identificacion" id="f_identificacion" value="<?php echo $datos->getF_identificacion();?>">   
+                                <input type="hidden" name="f_identificacion" id="f_identificacion" value="<?php echo $datos->getF_identificacion();?>">  
                                 <input type="hidden" name="f_nombre" id="f_nombre" value="<?php echo $datos->getF_nombre();?>"> 
                                 <input type="hidden" name="f_email" id="f_email" value="<?php echo $datos->getF_email();?>"> 
                                 <input type="hidden" name="f_email2" id="f_email2" value="<?php echo $datos->getF_email2();?>"> 

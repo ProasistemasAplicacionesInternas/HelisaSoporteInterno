@@ -31,7 +31,7 @@ if (isset($_POST['aceptar_petmai'])) {
         date_default_timezone_set('America/Bogota');
         $peticionMai->setFecha_atendidoMai(date("Y-m-d H:i:s"));
         $peticionMai->setEstado_peticionMai($_POST['p_estado']);
-        $peticionMai->setDescripcion_peticionMai($_POST['p_descripcion']);
+        $peticionMai->setDescripcion_peticionMai(htmlspecialchars($_POST['p_descripcion']));
         $peticionMai->setImagen_peticionMai($_POST['imagenC']);
         $peticionMai->setImagen_peticionMai2($_POST['imagen2']);
         $peticionMai->setImagen_peticionMai3($_POST['imagen3']);

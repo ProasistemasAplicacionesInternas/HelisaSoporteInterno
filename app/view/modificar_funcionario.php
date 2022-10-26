@@ -192,7 +192,18 @@
                             </div>
                         </div>
                     </div>
-
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="form-group">
+                                <label>Tipo de autenticaci&oacute;n</label>
+                                </br>
+                                <select name="f_tipoValidacion" id="f_tipoValidacion" style="padding:7px; width:56%; border-radius:5px;">
+                                    <option value="1" >Google Authenticator</option>
+                                    <option value="2" >Token por Correo</option>
+                                </select>  
+                            </div>
+                        </div>
+                    </div>
                       <div class="row">
                         <div class="col-3">
                             <div class="form-group">
@@ -404,15 +415,13 @@
                     </div>
 
                     <div class="row">
-                        <div class="col-3"> <button type="button" class="mt-4 btn btn-success" id="btn-guardarModif" name="btn-guardarModif" >Guardar</button></div>
-                        <div class="col-3" > <a id="cerrar_modificacion" class="mt-4 btn btn-secondary" style="height:30px";>Cancelar</a> </div>
+                        <div class="col-4"> <button type="submit" class="mt-5 btn btn-success" id="btn-guardarModif" name="btn-guardarModif" style="height:33.5px; width=auto;" >Guardar</button></div>
+                        <div class="col-3" > <a id="cerrar_modificacion" class="mt-5 btn btn-secondary" style="height:33.5px; width=auto;">Cancelar</a> </div>
                     </div>
                 </form>
-
-
-
-
-
+                <div class="row">
+                    <div class="col-7" > <button type="submit" id="btn-limpiarCodigo" name="btn-limpiarCodigo" class="mt-5 btn btn-danger" style="text-color=white;height:33.5px; width=auto;">Borrar código QR</button> </div>
+                </div>
             </div>
         </div>
     </div>

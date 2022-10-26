@@ -7,29 +7,20 @@
     <title>Helisa | Soporte Infraestructura</title>
     <link rel="stylesheet" href="public/css/contenido.css" media="screen" type="text/css">
     <link rel="stylesheet" type="text/css" href="public/css/datatables.min.css" />
-
 </head>
-
 <body>
-
     <?php
-       ini_set("session.cookie_lifetime",18000);
-       ini_set("session.gc_maxlifetime",18000);
-
-       session_start();
-   
-       if(!isset($_SESSION['usuario'])){
-       
-       header('location:../../login_peticiones.php');
-       }
-        
+    ini_set("session.cookie_lifetime",18000);
+    ini_set("session.gc_maxlifetime",18000);
+    session_start();
+    if(!isset($_SESSION['usuario'])){
+    header('location:../../login_peticiones.php');
+    }
         require('../model/crud_peticionesmai.php');
         require('../model/datos_peticionesmai.php');
-
         $crud = new CrudPeticionesMai();
         $datos = new PeticionMai();
         $consultaPeticionesMai=$crud->consultarPeticionesMaixFuncionario();//**********
-
     ?>
     <div class="container-fluid" id="infosPeticiones">
         <div class="row">
@@ -37,8 +28,7 @@
                 <h6>Consulta Peticiones</h6>
             </div>
             <div class="col-1 mt-4 mb-2">
-                 <a href="app/view/crear_peticion.php"><h8>Generar Solicitud</h8><img src="public/img/nuevo.png" alt=""></a>
-
+                <a href="app/view/crear_peticion.php"><h8>Generar Solicitud</h8><img src="public/img/nuevo.png" alt=""></a>
             </div>
             <div class="col">
                     <table class="table table-striped tablesorter" id="tabla">
@@ -62,7 +52,7 @@
                             <td>
                                 <?php echo $datos->getFecha_peticionMai() ?></td>
                             <td>
-                                <?php echo $datos->getDescripcion_peticionMai() ?></td> 
+                                <?php $descripcion = $datos->getDescripcion_peticionMai(); echo htmlspecialchars_decode($descripcion, ENT_NOQUOTES); ?></td> 
                             <td>
                                 <?php echo $datos->getEstado_peticionMai() ?></td> 
                             <td>
@@ -78,7 +68,6 @@
                                     if(($estado=="Resuelto"||$estado=="Redireccionado") && $revisado==1){
                                 ?>
                                     <input type="checkbox" class="btn btn-danger btn-sm" onChange="marcarevisado(<?php echo $datos->getId_peticionMai(); ?>)" id="revisar<?php echo $datos->getId_peticionMai(); ?>" name="revisado" value="<?php echo $datos->getId_peticionMai(); ?>">
-
                                 <?php } ?>
                             </td>
                         </tr>
@@ -87,7 +76,6 @@
                         ?>
                 </table>
             </div>
-
         </div>
     </div>
     <script src="public/js/revisar_peticionmai.js"></script>

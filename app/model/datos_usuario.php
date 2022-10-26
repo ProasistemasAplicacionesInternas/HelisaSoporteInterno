@@ -5,6 +5,7 @@
         
             private $id_usuario;
             private $nombre;
+            private $tipoValidacion;
             private $correo;
             private $clave;
             private $id_roles;         
@@ -24,6 +25,8 @@
             private $fallidos;
             private $intentos_total;
             private $ip;
+            private $ticket;
+
 
             /***********Tabla de historial**************/
             private $codigo;
@@ -140,6 +143,17 @@
             return $this;
         }
         
+        public function getTipoValidacion()
+        {
+            return $this->tipoValidacion;
+        }
+        
+        public function setTipoValidacion($tipoValidacion)
+        {
+            $this->tipoValidacion = $tipoValidacion;
+            return $this;
+        }
+        
         /**************************************************************************/        
         /***************************INTENTOS***************************************/    
         /**************************************************************************/
@@ -165,6 +179,19 @@
         public function setExitos($exitos)
         {
             $this->exitos = $exitos;
+            return $this;
+        }
+
+        /**************************************************************************/
+
+        public function getTicket()
+        {
+            return $this->ticket;
+        }
+        
+        public function setTicket($ticket)
+        {
+            $this->ticket = $ticket;
             return $this;
         }
 
