@@ -14,15 +14,21 @@
             $db=conectar::acceso();
             $listaConsulta=[];
 
-            $seleccion=$db->prepare('SELECT  numero_peticion,  DATE_FORMAT(fecha_peticion,"%d-%m-%Y %H:%i"),DATE_FORMAT(fecha_atendido,"%d-%m-%Y %H:%i"), usuario,categorias.nombre_categoria, descripcion, usuario_atiende, conclusiones,nivel_encuesta,imagen FROM peticiones LEFT JOIN categorias ON id_categoria=categoria WHERE fecha_peticion BETWEEN :fechaInicial AND :fechaFinal AND (estado=:estadoD OR estado=:estadoC) ');
-            $seleccion->bindValue('estadoC','4');
+            $seleccion=$db->prepare('SELECT  numero_peticion, estado.descripcion AS estado,  DATE_FORMAT(fecha_peticion,"%d-%m-%Y %H:%i"),DATE_FORMAT(fecha_atendido,"%d-%m-%Y %H:%i"), usuario,categorias.nombre_categoria, peticiones.descripcion, usuario_atiende, conclusiones,nivel_encuesta,imagen FROM peticiones LEFT JOIN categorias ON id_categoria=categoria
+            LEFT JOIN estado ON estado.id_estado=peticiones.estado 
+            WHERE fecha_peticion BETWEEN :fechaInicial AND :fechaFinal AND (estado=:estadoN OR estado=:estadoP OR estado=:estadoD OR estado=:estadoC OR estado=:estadoS)');
+            $seleccion->bindValue('estadoN','1');
             $seleccion->bindValue('estadoD','2');
+            $seleccion->bindValue('estadoP','3');
+            $seleccion->bindValue('estadoC','4');
+            $seleccion->bindValue('estadoS','8');
             $seleccion->bindValue('fechaInicial',$inicio);
             $seleccion->bindValue('fechaFinal',$final);
             $seleccion->execute();
             
             foreach($seleccion->fetchAll() as $listado){
                 $consulta= new Peticion();
+                $consulta->setP_estado($listado['estado']);
                 $consulta->setP_nropeticion($listado['numero_peticion']);       
                 $consulta->setP_fechapeticion($listado['DATE_FORMAT(fecha_peticion,"%d-%m-%Y %H:%i")']);
                 $consulta->setP_usuario($listado['usuario']);
@@ -44,13 +50,22 @@
                 $db=conectar::acceso();
                 $listaConsulta=[];
 
-                $seleccion=$db->prepare('SELECT  id_peticionmai,  DATE_FORMAT(fecha_peticion,"%d-%m-%Y %H:%i"),DATE_FORMAT(fecha_atencion,"%d-%m-%Y %H:%i"), usuario_creacion, productos_mai.nombre_producto, descripcion_peticion, usuario_atencion, conclusiones,nivel_encuesta,imagen FROM peticiones_mai LEFT JOIN productos_mai ON id_producto = producto_mai WHERE fecha_peticion BETWEEN :fechaInicial AND :fechaFinal');
+                $seleccion=$db->prepare('SELECT  id_peticionmai, estado.descripcion AS estado, DATE_FORMAT(fecha_peticion,"%d-%m-%Y %H:%i"),DATE_FORMAT(fecha_atencion,"%d-%m-%Y %H:%i"), usuario_creacion, productos_mai.nombre_producto, peticiones_mai.descripcion_peticion, usuario_atencion, conclusiones,nivel_encuesta,imagen FROM peticiones_mai 
+                LEFT JOIN productos_mai ON id_producto = producto_mai 
+                LEFT JOIN estado ON estado.id_estado=peticiones_mai.estado_peticion
+                WHERE fecha_peticion BETWEEN :fechaInicial AND :fechaFinal  AND (estado_peticion=:estadoN OR estado_peticion=:estadoD OR estado_peticion=:estadoP OR estado_peticion=:estadoC OR estado_peticion=:estadoS)');
+                $seleccion->bindValue('estadoN','1');
+                $seleccion->bindValue('estadoD','2');
+                $seleccion->bindValue('estadoP','3');
+                $seleccion->bindValue('estadoC','4');
+                $seleccion->bindValue('estadoS','8');
                 $seleccion->bindValue('fechaInicial',$inicio);
                 $seleccion->bindValue('fechaFinal',$final);
                 $seleccion->execute();
                 
                 foreach($seleccion->fetchAll() as $listado){
                     $consulta= new Peticion();
+                    $consulta->setP_estado($listado['estado']);
                     $consulta->setP_nropeticion($listado['id_peticionmai']);       
                     $consulta->setP_fechapeticion($listado['DATE_FORMAT(fecha_peticion,"%d-%m-%Y %H:%i")']);
                     $consulta->setP_usuario($listado['usuario_creacion']);
@@ -75,14 +90,21 @@
             $db=conectar::acceso();
             $listaConsulta=[];
 
-            $seleccion=$db->prepare('SELECT  numero_peticion,  DATE_FORMAT(fecha_peticion,"%d-%m-%Y %H:%i"),DATE_FORMAT(fecha_atendido,"%d-%m-%Y %H:%i"), usuario,categorias.nombre_categoria, descripcion, usuario_atiende, conclusiones,nivel_encuesta,imagen  FROM peticiones LEFT JOIN categorias ON id_categoria=categoria  WHERE  numero_peticion=:numero_peticion AND (estado=:estadoD OR estado=:estadoC)');
-            $seleccion->bindValue('estadoC','4');
+            $seleccion=$db->prepare('SELECT  numero_peticion, estado.descripcion AS estado,  DATE_FORMAT(fecha_peticion,"%d-%m-%Y %H:%i"),DATE_FORMAT(fecha_atendido,"%d-%m-%Y %H:%i"), usuario,categorias.nombre_categoria, peticiones.descripcion, usuario_atiende, conclusiones,nivel_encuesta,imagen  FROM peticiones  
+            LEFT JOIN estado ON estado.id_estado=peticiones.estado  
+            LEFT JOIN categorias ON id_categoria=categoria  
+            WHERE  numero_peticion=:numero_peticion AND (estado=:estadoN OR estado=:estadoP OR estado=:estadoD OR estado=:estadoC OR estado=:estadoS)');
+            $seleccion->bindValue('estadoN','1');
             $seleccion->bindValue('estadoD','2');
+            $seleccion->bindValue('estadoP','3');
+            $seleccion->bindValue('estadoC','4');
+            $seleccion->bindValue('estadoS','8');
             $seleccion->bindValue('numero_peticion',$_POST['peticionFiltro']);
             $seleccion->execute();
         
             foreach($seleccion->fetchAll() as $listado){
                 $consulta= new Peticion();
+                $consulta->setP_estado($listado['estado']);
                 $consulta->setP_nropeticion($listado['numero_peticion']);       
                 $consulta->setP_fechapeticion($listado['DATE_FORMAT(fecha_peticion,"%d-%m-%Y %H:%i")']);
                 $consulta->setP_usuario($listado['usuario']);
@@ -101,12 +123,20 @@
             $db=conectar::acceso();
             $listaConsulta=[];
 
-            $seleccion=$db->prepare('SELECT  id_peticionmai,  DATE_FORMAT(fecha_peticion,"%d-%m-%Y %H:%i"),DATE_FORMAT(fecha_atencion,"%d-%m-%Y %H:%i"), usuario_creacion, productos_mai.nombre_producto, descripcion_peticion, usuario_atencion, conclusiones,nivel_encuesta,imagen FROM peticiones_mai LEFT JOIN productos_mai ON id_producto = producto_mai WHERE  id_peticionmai=:numero_peticion');
+            $seleccion=$db->prepare('SELECT  id_peticionmai, estado.descripcion AS estado, DATE_FORMAT(fecha_peticion,"%d-%m-%Y %H:%i"),DATE_FORMAT(fecha_atencion,"%d-%m-%Y %H:%i"), usuario_creacion, productos_mai.nombre_producto, descripcion_peticion, usuario_atencion, conclusiones,nivel_encuesta,imagen FROM peticiones_mai 
+            LEFT JOIN productos_mai ON id_producto = producto_mai 
+            LEFT JOIN estado ON estado.id_estado=peticiones_mai.estado_peticion WHERE  id_peticionmai=:numero_peticion  AND (estado_peticion=:estadoN OR estado_peticion=:estadoD OR estado_peticion=:estadoP OR estado_peticion=:estadoC OR estado_peticion=:estadoN OR estado_peticion=:estadoS)');
+            $seleccion->bindValue('estadoN','1');
+            $seleccion->bindValue('estadoD','2');
+            $seleccion->bindValue('estadoP','3');
+            $seleccion->bindValue('estadoC','4');
+            $seleccion->bindValue('estadoS','8');
             $seleccion->bindValue('numero_peticion',$_POST['peticionFiltro']);
             $seleccion->execute();
         
             foreach($seleccion->fetchAll() as $listado){
                 $consulta= new Peticion();
+                $consulta->setP_estado($listado['estado']);
                 $consulta->setP_nropeticion($listado['id_peticionmai']);       
                 $consulta->setP_fechapeticion($listado['DATE_FORMAT(fecha_peticion,"%d-%m-%Y %H:%i")']);
                 $consulta->setP_usuario($listado['usuario_creacion']);
@@ -131,12 +161,20 @@
             $db=conectar::acceso();
             $listaConsulta=[];
 
-            $seleccion=$db->prepare('SELECT  id_peticionmai,  DATE_FORMAT(fecha_peticion,"%d-%m-%Y %H:%i"),DATE_FORMAT(fecha_atencion,"%d-%m-%Y %H:%i"), usuario_creacion, productos_mai.nombre_producto, descripcion_peticion, usuario_atencion, conclusiones,nivel_encuesta,imagen FROM peticiones_mai LEFT JOIN productos_mai ON id_producto = producto_mai WHERE  usuario_atencion=:usuario');
+            $seleccion=$db->prepare('SELECT  id_peticionmai, estado.descripcion AS estado, DATE_FORMAT(fecha_peticion,"%d-%m-%Y %H:%i"),DATE_FORMAT(fecha_atencion,"%d-%m-%Y %H:%i"), usuario_creacion, productos_mai.nombre_producto, descripcion_peticion, usuario_atencion, conclusiones,nivel_encuesta,imagen FROM peticiones_mai LEFT JOIN productos_mai ON id_producto = producto_mai 
+            LEFT JOIN estado ON estado.id_estado=peticiones_mai.estado_peticion
+            WHERE  usuario_atencion=:usuario AND (estado_peticion=:estadoN OR estado_peticion=:estadoD OR estado_peticion=:estadoP OR estado_peticion=:estadoC OR estado_peticion=:estadoS)');
+            $seleccion->bindValue('estadoN','1');
+            $seleccion->bindValue('estadoD','2');
+            $seleccion->bindValue('estadoP','3');
+            $seleccion->bindValue('estadoC','4');
+            $seleccion->bindValue('estadoS','8');
             $seleccion->bindValue('usuario',$_POST['programadorFiltro']);
             $seleccion->execute();
         
             foreach($seleccion->fetchAll() as $listado){
                 $consulta= new Peticion();
+                $consulta->setP_estado($listado['estado']);
                 $consulta->setP_nropeticion($listado['id_peticionmai']);       
                 $consulta->setP_fechapeticion($listado['DATE_FORMAT(fecha_peticion,"%d-%m-%Y %H:%i")']);
                 $consulta->setP_usuario($listado['usuario_creacion']);

@@ -1,3 +1,19 @@
+
+    $('#btn-limpiarCodigo').click(function(){
+        var limpiarcodigoF =
+        '&f_usuario=' + $('#f_usuario').val() +
+        '&limpiar_codigoF=1';
+        console.log(limpiarcodigoF);
+        $.ajax({
+            type: 'POST' ,
+            url: '../controller/control_codigos.php',
+            data: limpiarcodigoF
+        }).done(function(data){
+            console.log(data);
+        });
+    })
+    
+    
     $('#btn-guardarModif').click(function() { 
         var constrasena = $('#f_contrasena').val();
         $('#f_contrasena').val("1234");
@@ -5,6 +21,7 @@
         if ($('#modificaFuncionario').smkValidate()) {
             var infoCliente =
                 '&f_identificacion=' + $('#f_identificacion').val() +
+                '&f_tipoValidacion=' + $('#f_tipoValidacion').val() +
                 '&f_estado=' + $('#f_estado').val() +
                 '&f_rol=' + $('#f_rol').val() +
                 '&f_fecha_inactivacion=' + $('#f_fecha_inactivacion').val() +

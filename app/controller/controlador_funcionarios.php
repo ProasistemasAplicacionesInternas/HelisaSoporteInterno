@@ -70,7 +70,7 @@ if(isset($_POST['modificaAcceso']) ){
 
 if (isset($_POST['modificar_funcionario'])&&($_POST['modificar_funcionario'] ==1)) {
 
- session_start();
+    session_start();
     $funcionario->setF_identificacion($_POST['f_identificacion']);
     $funcionario->setF_nombre($_POST['f_nombre']);
     $funcionario->setF_email($_POST['f_correo']);
@@ -90,6 +90,7 @@ if (isset($_POST['modificar_funcionario'])&&($_POST['modificar_funcionario'] ==1
     $funcionario->setDescripcionFinal($_POST['descripcion']);
     $funcionario->setCentroCostos($_POST['centroCostos']);
     $funcionario->setDepartamentoInterno($_POST['departamentoInterno']);
+    $funcionario->setTipoValidacion($_POST['f_tipoValidacion']);
 
     $crud->modificarFuncionario($funcionario);
     
@@ -158,6 +159,12 @@ if (isset($_POST['ingresar'])) {
     $funcionario->setF_contrasena(htmlentities(addslashes($_POST['f_password'])));
     $crud->validaLoginFuncionario($funcionario);
 
+}
+
+if ((isset($_POST ['x']))){
+    $funcionario->setF_usuario($_SESSION['usuario']);
+    $crud = $verifica->validacionAlCo($funcionario);
+    echo $respuesta;
 }
 
 //***********************************************************************************//

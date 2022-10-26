@@ -1,3 +1,9 @@
+<?php
+  if(isset($_SESSION['usuario']) || isset($_POST['noQr'])){
+    session_unset($_SESSION['usuario']);
+    session_destroy($_SESSION['usuario']);
+  }
+?>
 <!DOCTYPE html>
 <html lang="es">
 <head>

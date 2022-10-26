@@ -116,13 +116,24 @@
             /*----------------REALIZA LA MODIFICACION DE LOS DATOS EXISTENTES---------------*/
            
             $db=conectar::acceso();
-            $modificar_usuario=$db->prepare('UPDATE hinfraestructura.usuarios SET clave=:clave, correo=:correo WHERE id_usuario=:id_usuario');
+            $validarContrasena=$db->prepare('SELECT clave FROM usuarios WHERE clave=:claveP');
+	          $validarContrasena->bindValue('claveP',$modifica->getClave());
+            $validarContrasena->execute();
+            $conteo = $validarContrasena->rowCount();
 
-            $password=password_hash($modifica->getClave(), PASSWORD_DEFAULT, ["cost" => 15]);
+            if($conteo== 0){
+              $password = password_hash($modifica->getClave(), PASSWORD_DEFAULT, ["cost" => 15]);
+            }else{
+              $password = $modifica->getClave();
+            }
+            $modificar_usuario=$db->prepare('UPDATE hinfraestructura.usuarios SET clave=:clave, correo=:correo, tipo_validacion=:tipo_validacion WHERE id_usuario=:id_usuario');
+
+            /* $password=password_hash($modifica->getClave(), PASSWORD_DEFAULT, ["cost" => 15]); */
 
             $modificar_usuario->bindValue('id_usuario',$modifica->getIDusuario());
             $modificar_usuario->bindValue('clave',$password);
-            $modificar_usuario->bindValue('correo',$modifica->getCorreo());          
+            $modificar_usuario->bindValue('correo',$modifica->getCorreo());
+            $modificar_usuario->bindValue('tipo_validacion',$modifica->getTipoValidacion());          
             $modificar_usuario->execute();
             
                           $colsultar_usuario=$db->prepare('SELECT id_usuario from usuarios where usuario =:usuario');

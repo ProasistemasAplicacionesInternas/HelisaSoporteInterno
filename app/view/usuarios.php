@@ -93,7 +93,7 @@
                             <div class="modal-dialog">
                                 <div class="modal-content">
                                     <div class="modal-header">
-                                        <h6 class="modal-title">Modifica Usuario</h6>
+                                        <h6 class="modal-title">Modifica Usuarios</h6>
                                         <button class="close" data-dismiss="modal" aria-label="Cerrar">
                                         <span aria-hidden="true">&times;</span>
                                     </button>
@@ -107,7 +107,7 @@
                                                         <div style="display: none;"><input type="text" id="id_usuario" name="id_usuario" class="crea_dataS" autofocus ></div>
 
                                                         <label for="">Nombre</label>
-                                                        <div><input type="text" name="usuario" id="usuario" class="crea_data" maxlength="29" autocomplete="off" autofocus  disabled></div>
+                                                        <div><input type="text" name="usuario" id="usuario" class="crea_data" maxlength="29" autocomplete="off" autofocus  readonly></div>
 
                                                         <label for="">Contrasena</label>
                                                         <div><input type="password" name="contrasena" id="contrasena" class="crea_data" maxlength="29" autocomplete="off" autofocus required></div>
@@ -115,6 +115,16 @@
                                                         <label for="">Correo</label>
                                                         <input type="text" id="correo" name="correo" class="crea_data" maxlength="29"  autocomplete="off" required>
 
+                                                        <label for="">Tipo de validación</label>
+                                                        <div>
+                                                            <select name="tipoValidacion" id="tipoValidacion">
+                                                                <option value="1" >Google Authenticator</option>
+                                                                <option value="2" >Token por Correo</option>
+                                                            </select>
+                                                        </div>
+                                                        </br>
+                                                        <label for="">Eliminar Código QR</label></br>
+                                                        <input type=submit value="Borrar Código" id="borrarCodigo" name="borrarCodigo" class="btn btn-danger btn-sm btn-borrarCodigo">                                              
                                                         <div class="modal-footer">
                                                             <input type=submit value="Guardar" id="guardar" name="guardar" class="mt-4 btn btn-primary btn-sm btn-guardar">
                                                         </div>

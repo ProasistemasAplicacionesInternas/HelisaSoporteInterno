@@ -53,8 +53,6 @@ class CrudFuncionarios{
 			}
 
 		}
-	
-
 
 //**********************************************************************************************//
 //******************************* SQL PARA MODIFICAR FUNCIONARIO *******************************//
@@ -82,8 +80,9 @@ public function modificarFuncionario($update){
 	$validacionCargo = $validaCargo->fetch(PDO::FETCH_ASSOC);
 	$cargoActual = $validacionCargo['cargo'];
 
-	$modificar_funcionario=$db->prepare('UPDATE funcionarios SET  nombre= :f_nombre, mail= :f_email, mail2 = :f_email2, area= :f_area, cargo= :f_cargo, extension= :f_extension, rol= :f_rol, usuario= :f_usuario, contrasena= :f_contrasena, validacion= :f_validacion, fecha_sistema= :f_fecha_sistema, centro_de_costos = :centroCostos, intentos=:f_intento WHERE identificacion= :f_identificacion');
+	$modificar_funcionario=$db->prepare('UPDATE funcionarios SET  tipo_validacion=:f_tipoValidacion, nombre= :f_nombre, mail= :f_email, mail2 = :f_email2, area= :f_area, cargo= :f_cargo, extension= :f_extension, rol= :f_rol, usuario= :f_usuario, contrasena= :f_contrasena, validacion= :f_validacion, fecha_sistema= :f_fecha_sistema, centro_de_costos = :centroCostos, intentos=:f_intento WHERE identificacion= :f_identificacion');
 	$modificar_funcionario->bindValue('f_identificacion',$update->getF_identificacion());
+	$modificar_funcionario->bindValue('f_tipoValidacion',$update->getTipoValidacion());
 	$modificar_funcionario->bindValue('f_nombre',$update->getF_nombre());
 	$modificar_funcionario->bindValue('f_email',$update->getF_email());
 	$modificar_funcionario->bindValue('f_email2',$update->getF_email2());
@@ -356,7 +355,7 @@ private function peticionCancelacionAccesos($identificacion,$usuario,$tema){
 		$contrasenaLogin=$_POST['f_password']; 
 
 		$db=conectar::acceso();
-		$validar_funcionario=$db->prepare('SELECT usuario,festado,contrasena,validacion,timestampdiff(day, fecha_sistema , now()) as dias, rol, intentos FROM funcionarios WHERE usuario= :f_usuario');
+		$validar_funcionario=$db->prepare('SELECT usuario,festado,contrasena,validacion,timestampdiff(day, fecha_sistema , now()) as dias, rol, intentos, tipo_validacion, mail FROM funcionarios WHERE usuario= :f_usuario');
 		$validar_funcionario->bindValue('f_usuario',$validate->getF_usuario());
 		$validar_funcionario->execute();
 		$existe_funcionario=$validar_funcionario->rowCount();
@@ -371,21 +370,26 @@ private function peticionCancelacionAccesos($identificacion,$usuario,$tema){
 			$rol = $datosFuncionario['rol'];
 			$intentos = $datosFuncionario['intentos'];
 			$usuario = $datosFuncionario['usuario'];
+			$tipo_validacion = $datosFuncionario['tipo_validacion'];
+			$correo=$datosFuncionario['mail'];
+			$actual = date("Y-m-d H:i:s");
 			$passwordLogin=password_verify($contrasenaLogin, $contrasenaUsuario);
 
 			if($datosFuncionario['festado'] != 16){
 
 				if($validar==0 && ($codigoEstados != 6 && $codigoEstados != 16)){
 					session_start();
-					$_SESSION["usuario"] = $usuario;
+					$_SESSION['usuario'] = $usuario;
 					header("location:../view/view_encriptar_contrasena.php");
 
 				} else {
 
 					if ($dias >= 90) {
 						if ($passwordLogin && (!empty($usuario)) && ($codigoEstados != 6 && $codigoEstados != 16) ) {
-							session_start();
-							$_SESSION["usuario"] = $usuario;
+							if (session_status() !== PHP_SESSION_ACTIVE){
+                                session_start();
+                            }
+							$_SESSION['usuario'] = $usuario;
 							$_SESSION['rol']=$rol; 
 
 							$this->modificarIntentos($usuario,0);
@@ -408,13 +412,25 @@ private function peticionCancelacionAccesos($identificacion,$usuario,$tema){
 
 					}else{ 
 						if ($passwordLogin && (!empty($datosFuncionario['usuario'])) && ($codigoEstados != 6) ) {
-							session_start();
-							$_SESSION["usuario"] = $datosFuncionario['usuario'];
+							if (session_status() !== PHP_SESSION_ACTIVE){
+                                session_start();
+                            }
+							$_SESSION['usuario'] = $datosFuncionario['usuario'];
 							$_SESSION['rol']=$rol; 
 
 							$this->modificarIntentos($usuario,0);
 							$this->registrarIntento($usuario,1);
-							header("location:../../dashboard_funcionarios.php");
+
+							if($tipo_validacion==1){
+                                $clase = new CrudFuncionarios();
+                                $validacionGoogle = $clase->qrBD($usuario);
+                                echo $validacionGoogle;
+                            }else if($tipo_validacion==2){
+                                $validacionCorreo = $this->enviaCorreoToken($usuario,$correo,$actual);
+                                echo $validacionCorreo;
+                            }
+
+							//header("location:../../dashboard_funcionarios.php");
 
 						}else{
 							$intentos++;
@@ -439,6 +455,209 @@ private function peticionCancelacionAccesos($identificacion,$usuario,$tema){
 			header("location:../../login_peticiones.php");
 		}
 	}
+
+	//*********************************************************************************************//
+//*******************************AUTENTICACIÒN DE GOOGLE Y TOKEN*******************************//
+//*********************************************************************************************//
+	public function validacionC($validar){
+
+
+		if(!isset($_SESSION['intentos'])) 
+			$_SESSION['intentos'] = 0; 
+		else {      
+
+			$_SESSION['intentos'] ++ ; 
+
+			if ($_SESSION['intentos'] <= 3 ) { 
+
+				$contrasenaLogin=$_POST['f_password'];
+
+				$db=conectar::acceso();
+
+				$confirma_usuario=$db->prepare('SELECT usuario, contrasena FROM funcionarios WHERE usuario=:usuario');
+
+				$confirma_usuario->bindValue('usuario',$valida->getF_usuario());
+				$confirma_usuario->execute();
+				$existe_usuario=$confirma_usuario->rowCount();
+				$datosFuncionario=$confirma_usuario->fetch(PDO::FETCH_ASSOC);
+				$contrasenaUsuario=$datosFuncionario['contrasena'];
+		
+				$passwordLogin=password_verify($contrasenaLogin, $contrasenaUsuario);
+
+				if ($passwordLogin && (!empty($datosFuncionario['usuario'])) ){
+
+					header("location:../view/validacionGoogleFuncionarios.php");
+
+				} else{
+
+					echo 0;
+				}
+
+			} else {
+				$_SESSION['intentos'] = 0; 
+				header("location:../view/validacionCodigoFuncionarios.php");
+			}
+		}            
+	}
+
+	public function validacionAlCo($funcionario){
+		$db=conectar::acceso();
+		$validarAlCo=$db->prepare('SELECT id_usuario, codigo, fecha FROM codigosqr_funcionarios WHERE id_usuario=:id_usuario ORDER BY fecha desc limit 1');
+		$validarAlCo->bindValue('id_usuario',$funcionario->getF_usuario());
+		$validarAlCo->execute();
+		$usuarioObj=$validarAlCo->fetch(PDO::FETCH_ASSOC);
+
+		if ($usuarioObj['id_usuario']!=NULL && $usuarioObj['codigo']!=NULL){
+			return $usuarioObj;
+		}else{
+			return 'error';
+		}
+	}
+
+	public function validacionFuncionario($datosFun){
+		$db=conectar::acceso();
+		$codigoUsuario = $db ->prepare("SELECT usuario FROM funcionarios WHERE usuario=:usuario");
+			$codigoUsuario->bindValue('usuario',$datosFun->getF_usuario());
+			$codigoUsuario->execute();
+			$codUsuario=$codigoUsuario->fetch(PDO::FETCH_ASSOC);
+			$codigo = $codUsuario['usuario'];
+
+			if($codigoUsuario){
+				$validacion = $db->prepare('SELECT token,fecha_token FROM validacion_token WHERE id_usuario=:id_usuarioX AND token=:token');             
+				$validacion->bindValue('token',$datosFun->getF_ticket());
+				$validacion->bindValue('id_usuarioX',$codigo);
+				$validacion->execute();
+				$row = $validacion->rowCount();
+					if($row!=0){
+						$arraytokenBD = $validacion -> fetch(PDO::FETCH_ASSOC);
+						$tokenBD = $arraytokenBD['token'];
+							
+						date_default_timezone_set('America/Bogota');   
+						$fecha_registro = $arraytokenBD['fecha_token'];
+						$actual = date("Y-m-d H:i:s");
+						$mas = date("Y-m-d H:i:s", strtotime("+1 minutes", strtotime($fecha_registro)));
+						
+						$tokenIngresado = $datosFun->getF_ticket();
+						if($actual < $mas){
+							$borrarToken = $db->prepare('DELETE FROM validacion_token WHERE id_usuario=:usuario');
+							$borrarToken->bindValue('usuario',$codigo);
+							$borrarToken->execute();
+							$_SESSION['status_connect']=$codigo;
+							$_SESSION['code']=$codigo;
+							header("location:../../dashboard_funcionarios.php");
+						}else{
+							if($tokenIngresado==$tokenBD){
+								$borrarToken = $db->prepare('DELETE FROM validacion_token WHERE id_usuario=:usuario');
+								$borrarToken->bindValue('usuario',$codigo);
+								$borrarToken->execute();
+							}
+						}
+					}
+			}
+	}
+
+	public function enviaCorreoToken($usuario,$correo,$actual){
+		$token = bin2hex(random_bytes(5));
+		//CORREO MEDIANTE PHP MAILER
+		$mail = new PHPMailer(true);   
+
+		try {
+			
+		$mail->SMTPDebug = 0;                                 // Enable verbose debug output
+		$mail->isSMTP();                                      // Set mailer to use SMTP
+		$mail->Host = 'smtp.office365.com';  // Specify main and backup SMTP servers
+		$mail->SMTPAuth = true;                               // Enable SMTP authentication
+		$mail->Username = 'no-responder@helisa.com';                 // SMTP username
+		$mail->Password = 'jkO5w6NqsJf7jRCop1X*#';                           // SMTP password
+		$mail->SMTPSecure = 'tls';                            // Enable TLS encryption, `ssl` also accepted
+		$mail->Port = 587;                                    // TCP port to connect to
+		$mail->setFrom('no-responder@helisa.com');
+		$mail->addAddress($correo);
+		$mail->isHTML(true); // Set email format to HTML
+		$subjects = "Código de autenticacion Soporte Interno ";
+		$cuerpo='<style type="text/css">*{font-size: 14px;} #contenedor{text-align: center;padding: 0% 5%;width: 8%;} #contenedor img:hover {opacity:0.5; margin-top:-10%; transition: all 2s ease-out;} #contenedor a {text-decoration: none;color: #fff;}#div_dos,#div_tres,#div_cuatro,#div_cinco,#div_seis{display:flex;} </style>';
+		$cuerpo .="<div>
+		</div>";
+		$cuerpo.= "<p>Señor(a) su código es el siguiente: " .$token. ".</p>";
+		$cuerpo.= "<p>Este código tendrá una duración de 1 minuto, después de este tiempo, se borrara y tendra que ingresar nuevamente a la plataforma.</p>";
+		$cuerpo.= "<p></p>";
+		$cuerpo.= "<p></p>";
+		$cuerpo.= "<p>Cada vez que ingrese mediante Token, se actualizará el código, por lo que si intenta agregar un token antiguo o incorrecto, sera llevado de vuelta al login.</p>";
+		$cuerpo.= "<div id='div_dos'>";
+		$body = utf8_decode($cuerpo);
+		$subject = utf8_decode($subjects);
+		$mail->Subject = $subject;      
+		$mail->MsgHTML($body);
+		$mail->send();
+
+		}catch (Exception $e) {
+		echo 'Message could not be sent. Mailer Error: ', $mail->ErrorInfo;
+		}
+		$db=conectar::acceso();
+		$saveToken=$db->prepare("INSERT INTO validacion_token (id_usuario, fecha_token, token) VALUES (:id_usuario, :fecha, :token)");
+		$saveToken->bindValue('id_usuario',$usuario);
+		$saveToken->bindValue('fecha',$actual);
+		$saveToken->bindValue('token',$token);
+		$saveToken->execute();
+		header("location:../view/validacionToken.php");
+	}
+
+	public function qrBD($usuario){
+		$db=conectar::acceso();
+		$validarAlCo=$db->prepare('SELECT codigo, fecha FROM codigosqr_funcionarios WHERE id_usuario=:id_usuario ORDER BY fecha desc limit 1');
+		$validarAlCo->bindValue('id_usuario',$usuario);
+		$validarAlCo->execute();
+		$conteo=$validarAlCo->rowCount();
+		
+		if($conteo!=0){
+			$usuarioObj=$validarAlCo->fetch(PDO::FETCH_ASSOC);
+			$_SESSION['auth_secretF'] = $usuarioObj["codigo"];
+			$seleccion=("SELECT intentos FROM usuarios WHERE usuario='$usuario'");
+			
+			$resultado=$db->query($seleccion);
+			$data=$resultado->fetch(PDO::FETCH_ASSOC);   
+			$intentos=$data['intentos'];
+			$_SESSION['intentos']=$intentos; 
+
+			$actualizar_intentos = $db->prepare('UPDATE funcionarios SET intentos=:intento WHERE usuario=:usuario');             
+			$actualizar_intentos->bindValue('intento',0);
+			$actualizar_intentos->bindValue('usuario',$usuario);
+			$actualizar_intentos->execute();
+
+			$intentos = $db->prepare('INSERT INTO intentos_funcionarios(usuario,fecha,cantidad_exitos,IP) VALUES(:user,:data,:success,:ip)');
+			$intentos->bindValue('user',$usuario);
+			date_default_timezone_set('America/Bogota');
+			$intentos->bindValue('data',date('Y-m-d H:i:s'));
+			$intentos->bindValue('success',1);
+			$intentos->bindValue('ip', $_SERVER['REMOTE_ADDR']);
+			$intentos->execute();
+						
+			header("location:../view/validacionCodigoFuncionarios.php");
+		}else{
+			$seleccion=("SELECT intentos FROM funcionarios WHERE usuario='$usuario'");
+			
+			$resultado=$db->query($seleccion);
+			$data=$resultado->fetch(PDO::FETCH_ASSOC);   
+			$intentos=$data['intentos'];
+			$_SESSION['intentos']=$intentos; 
+
+			$actualizar_intentos = $db->prepare('UPDATE funcionarios SET intentos=:intento WHERE usuario=:usuario');             
+			$actualizar_intentos->bindValue('intento',0);
+			$actualizar_intentos->bindValue('usuario',$usuario);
+			$actualizar_intentos->execute();
+
+			$intentos = $db->prepare('INSERT INTO intentos_funcionarios(usuario,fecha,cantidad_exitos,IP) VALUES(:user,:data,:success,:ip)');
+			$intentos->bindValue('user',$usuario);
+			date_default_timezone_set('America/Bogota');
+			$intentos->bindValue('data',date('Y-m-d H:i:s'));
+			$intentos->bindValue('success',1);
+			$intentos->bindValue('ip', $_SERVER['REMOTE_ADDR']);
+			$intentos->execute();
+						
+			header("location:../view/validacionGoogleFuncionarios.php");
+		}
+	}
+
 
 	public function modificarIntentos($usuario,$intentos){
 		$db=conectar::acceso();

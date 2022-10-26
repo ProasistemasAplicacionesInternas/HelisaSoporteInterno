@@ -25,14 +25,14 @@ if (isset($_POST['aceptar'])) {
         $peticion->setP_nropeticion($_POST['p_nropeticion']);
         $peticion->setP_estado($_POST['p_estado']);
         $peticion->setP_fechapeticion($_POST['p_fechapeticion']);
-        $peticion->setP_conclusiones(htmlentities(nl2br($_POST['p_conclusiones'])));
+        $peticion->setP_conclusiones($_POST['p_conclusiones']);
         date_default_timezone_set('America/Bogota');
         $peticion->setP_fechaatendido(date("Y-m-d H:i:s"));
         $peticion->setP_usuarioatiende($_SESSION['usuario']);
         $peticion->setP_correo($_POST['p_correo']);
         $peticion->setP_usuario($_POST['p_usuario']);
         $peticion->setP_categoria($_POST['p_categoria']);
-        $peticion->setP_descripcion($_POST['p_descripcion']);
+        $peticion->setP_descripcion(htmlspecialchars($_POST['p_descripcion']));
         $peticion->setP_cargarimagen($_POST['imagenCa']);
         $peticion->setP_cargarimagen2($_POST['imagen2']);
         $peticion->setP_cargarimagen3($_POST['imagen3']);
@@ -42,7 +42,7 @@ if (isset($_POST['aceptar'])) {
     }else{
         $peticion->setP_nropeticion($_POST['p_nropeticion']);
         $peticion->setP_estado($_POST['p_estado']);
-        $peticion->setP_conclusiones(htmlentities(nl2br($_POST['p_conclusiones'])));
+        $peticion->setP_conclusiones($_POST['p_conclusiones']);
         date_default_timezone_set('America/Bogota');
         $peticion->setP_fechaatendido(date("Y-m-d H:i:s"));
         $peticion->setP_usuarioatiende($_SESSION['usuario']);
@@ -60,7 +60,7 @@ if (isset($_POST['aceptar'])) {
 
 if(isset($_POST['crear_comentario']) && ($_POST['crear_comentario'] == 1)){
  $peticion->setP_nropeticion($_POST['id_peticion']);
- $peticion->setComentario(nl2br($_POST['comentario']));
+ $peticion->setComentario($_POST['comentario']);
  date_default_timezone_set('America/Bogota');
  $peticion->setP_fechapeticion(date('Y-m-d H:i:s'));
  $peticion->setP_usuario($_SESSION['usuario']);

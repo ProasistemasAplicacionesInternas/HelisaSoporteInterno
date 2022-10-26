@@ -66,7 +66,7 @@ if (isset($_POST['btn-enviar_peticion'])) {
             $equipos = $_POST['p_categoria'];
             if($equipos==16){
                 $peticion->setP_categoria($_POST['p_categoria']);
-                $peticion->setP_descripcion($_POST['p_descripcion']);
+                $peticion->setP_descripcion(htmlspecialchars($_POST['p_descripcion']));
                 $peticion->setP_cargarimagen($nombre_imagen[0]);
                 $peticion->setP_cargarimagen2($nombre_imagen[1]);
                 $peticion->setP_cargarimagen3($nombre_imagen[2]);
@@ -78,7 +78,7 @@ if (isset($_POST['btn-enviar_peticion'])) {
                 $crud->crearPeticiones($peticion); 
             }else{
                 $peticion->setP_categoria($_POST['p_categoria']);
-                $peticion->setP_descripcion($_POST['p_descripcion']);
+                $peticion->setP_descripcion(htmlspecialchars($_POST['p_descripcion']));
                 $peticion->setP_cargarimagen($nombre_imagen[0]);
                 $peticion->setP_cargarimagen2($nombre_imagen[1]);
                 $peticion->setP_cargarimagen3($nombre_imagen[2]);
@@ -92,7 +92,7 @@ if (isset($_POST['btn-enviar_peticion'])) {
         }elseif($area_peticion==2){
             $peticionMai->setProducto_peticionMai($_POST['productoMai']);
             $peticionMai->setUsuario_creacionMai($_SESSION['usuario']);
-            $peticionMai->setDescripcion_peticionMai($_POST['p_descripcion']);
+            $peticionMai->setDescripcion_peticionMai(htmlspecialchars($_POST['p_descripcion']));
             $peticionMai->setFecha_peticionMai(date('Y-m-d H:i:s'));
             $peticionMai->setEstado_peticionMai(1);
             $peticionMai->setImagen_peticionMai($nombre_imagen[0]);

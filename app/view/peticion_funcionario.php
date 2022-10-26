@@ -36,8 +36,8 @@
                 <h6>Consulta Peticiones</h6>
             </div>
             <div class="col-1 mt-4 mb-2">
-                 <a href="app/view/crear_peticion.php"><h8> Generar Solicitud</h8><img src="public/img/nuevo.png" alt=""></a>
-
+                <a href="app/view/crear_peticion.php"><h8> Generar Solicitud</h8><img src="public/img/nuevo.png" alt=""></a>
+                
             </div>
             <div class="col">
                     <table class="table table-striped tablesorter" id="tabla">
@@ -51,8 +51,6 @@
                             <th style="width:30px;">Usuario Atiende</th>
                             <th style="width:30px;">Conclusiones</th>
                             <th style="width:30px;">Revisado</th>
-                            
-                                              
                     </thead>
                     <?php foreach($consultaPeticiones as $datos): ?>
                     <tr>
@@ -63,8 +61,8 @@
                         <td>
                             <?php echo $datos->getP_fechapeticion() ?></td>
                         <td>
-                            <?php echo $datos->getP_descripcion() ?></td> 
-	                    <td>
+                            <?php $descripcion= $datos->getP_descripcion(); echo htmlspecialchars_decode($descripcion, ENT_NOQUOTES); ?></td> 
+                        <td>
                             <?php echo $datos->getP_estado() ?></td> 
                         <td>
                             <?php echo $datos->getP_fechaatendido() ?></td>
