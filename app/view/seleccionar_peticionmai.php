@@ -40,6 +40,8 @@
         $imagen3=$_POST['p_cargarimagen3'];
         $estado=$_POST['p_estado'];
         $name=$_POST['soporteMai'];
+        $req_nombre=$_POST['req_nombre'];
+        $req_justificacxion=$_POST['req_justificacion'];
         $conclusiones=$_POST['p_conclusiones'];
     
         require_once("../controller/trae_observaciones.php");
@@ -92,14 +94,26 @@
                         </div>
                     </div>
                     <div class="row">
+                        <div class="bigGiant" id="div_nombre">
+                            <label>Nombre del requerimiento</label>
+                            <input type="text" id="req_nombre" name="req_nombre" class="form-control" value="<?php echo $req_nombre; ?>  " readonly>
+                        </div>
+                    </div>
+                    <div class="row">
                         <div class="giant">
                             <label for="">Descripción</label> 
                             <textarea id="p_descripcion" name="p_descripcion" class="form-control col-12" rows="4" readonly><?php echo $descripcion; ?></textarea>
                         </div>
                     </div>
                     <div class="row">
+                        <div class="giant" id="div_justificacion">
+                            <label for="">Justificacion del requerimiento</label> 
+                            <textarea id="req_justificacion" name="req_justificacion" class="form-control col-12" rows="4" readonly><?php echo $req_justificacxion; ?></textarea>
+                        </div>
+                    </div>
+                    <div class="row">
                         <div class="littleMedium">
-                            <label id="label" >Estado</label>
+                            <label id="label">Estado</label>
                             <select name="p_estado" id="p_estado" class="selectView" required>
                                     <option value=""></option>
                                     <option value="2" >Resuelto</option>
@@ -229,6 +243,7 @@
     <script src="../../public/js/smoke.min.js"></script>
     <script src="../../public/js/despliegueVersion.js"></script>
     <script src="../../public/js/bloqueoTeclas.js"></script>
+    <script src="../../public/js/seleccionar_peticionmai.js"></script>
 </body>
 </html>
 <style>

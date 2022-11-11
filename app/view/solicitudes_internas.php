@@ -156,6 +156,10 @@
 
                                         <input type="hidden" name="soporteMai" id="soporteMai" value="<?php echo $datos1->getName(); ?>">
 
+                                        <input type="hidden" name="req_nombre" id="req_nombre" value="<?php echo $datos1->getReq_Name(); ?>">
+
+                                        <input type="hidden" name="req_justificacion" id="req_justificacion" value="<?php echo $datos1->getReq_Justification(); ?>">
+
                                         <input type="hidden" name="usuario_atencion" id="usuario_atencion" value="<?php echo $datos1->getUsuario_atencionMai(); ?>">
 
                                         <input type="button"  value = "Seleccionar" class="btn btn-primary" onclick="validarBoton('<?php echo $_SESSION['usuario'];?>',<?php echo $datos1->getId_peticionMai();?>)">

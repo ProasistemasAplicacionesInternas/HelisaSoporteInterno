@@ -91,6 +91,8 @@ if (isset($_POST['btn-enviar_peticion'])) {
             }
         }elseif($area_peticion==2){
             $peticionMai->setProducto_peticionMai($_POST['productoMai']);
+            $peticionMai->setReq_Justification($_POST['req_Justification']);
+            $peticionMai->setReq_Name($_POST['req_Name']);
             $peticionMai->setUsuario_creacionMai($_SESSION['usuario']);
             $peticionMai->setDescripcion_peticionMai(htmlspecialchars($_POST['p_descripcion']));
             $peticionMai->setFecha_peticionMai(date('Y-m-d H:i:s'));

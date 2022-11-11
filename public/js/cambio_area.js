@@ -7,9 +7,10 @@ function productoCategoria(){
         var productoMai = document.getElementById('productoMai');
         var soporteMai = document.getElementById('soporteMai');
         var campoOculto = document.getElementById('activoSoporte');
+        
        
         
-    console.log(area);
+        if(divNombre==2){console.log("Si sirve");}
     
         if(area==1){
             producto.style.display = "none";
@@ -42,13 +43,14 @@ function productoCategoria(){
                         type: 'warning'
         });
         }
+        
     }
 
     function imagenRequerida(){
         var tipoPeticion = document.getElementById('soporteMai').value;
         var imagen = document.getElementById('imagen[]');
         
-        console.log(tipoPeticion);
+        
         if (tipoPeticion == 2){
             imagen.required = true; 
             
@@ -56,6 +58,20 @@ function productoCategoria(){
             imagen.required = false;
         }
         }
+    function reqData(){
+        var requerimiento = document.getElementById('soporteMai').value;
+        var divNombre = document.getElementById('divNombre');
+        var reqJustification = document.getElementById('reqJustification')
+
+        if(requerimiento==2){
+            divNombre.style.display= "inline";
+            reqJustification.style.display= "inline";
+        }else{
+            divNombre.style.display= "none";
+            reqJustification.style.display= "none";
+        }
+    }
+
     
 
     
