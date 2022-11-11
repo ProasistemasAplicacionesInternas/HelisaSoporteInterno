@@ -151,6 +151,20 @@ class PeticionMai{
 	    $this->marca_revisado = $marca_revisado;
 	    }
 //*************************************************
+	public function getReq_Justification(){
+		return $this->req_Justification;
+	}
+	public function setReq_Justification($req_Justification){
+		$this-> req_Justification = $req_Justification;
+	}
+//*************************************************
+	public function getReq_Name(){
+		return $this->req_Name;
+	}
+	public function setReq_Name($req_Name){
+		$this-> req_Name = $req_Name;
+	}
+//*************************************************
 	public function getName(){
 		return $this->tipoPeticion;
 	}

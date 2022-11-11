@@ -7,15 +7,15 @@ function verConclusiones(id_peticion){
         data: verConclusion
 
     }).done(function(data){
-        console.log(data);
+        
         //ARRAY QUE VIENE DESDE EL CONTROLADOR COMO STRING, ACA LO VAMOS A CONVERTIR EN UN ARRAY
         arrPrin = data.split("/,/");
         arrPrin.pop(); 
-        console.log(arrPrin[1]);
+     
 
         arrPrin.forEach(element => {
             arrSec = element.split("/-/");
-            /* console.log(`id_comentario ${arrSec[0]} <br> ,id_peticion ${arrSec[1]} <br> ,fecha ${arrSec[2]} <br> ,responsable ${arrSec[3]} <br> ,comentario ${arrSec[4]} <br>`);  */
+            
 
             var id_observacion = arrSec[0];
             var id_ticket = arrSec[1];
@@ -23,7 +23,6 @@ function verConclusiones(id_peticion){
             var usuario_creacion = arrSec[3];
             var descripcion_observacion = arrSec[4];
 
-            console.log(id_observacion , id_ticket , fecha , usuario_creacion , descripcion_observacion);
             htmlCadena = 
 
             `<tr style="width:100%"> 

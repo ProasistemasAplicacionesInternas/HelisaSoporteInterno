@@ -10,7 +10,7 @@ class CrudPeticionesMai{
 
 	public function crearPeticionesMai($create){
 		$db=Conectar::acceso();
-		$crea_peticionMai=$db->prepare('INSERT INTO peticiones_mai(descripcion_peticion, usuario_creacion, fecha_peticion, estado_peticion, producto_mai, imagen, imagen2, imagen3, tipo_soportemai)VALUES(:descripcion_peticion, :usuario_creacion, :fecha_peticion, :estado_peticion, :producto_mai, :imagen, :imagen2, :imagen3, :tipo)');
+		$crea_peticionMai=$db->prepare('INSERT INTO peticiones_mai(descripcion_peticion, usuario_creacion, fecha_peticion, estado_peticion, producto_mai, imagen, imagen2, imagen3, tipo_soportemai, req_nombre, req_justificacion)VALUES(:descripcion_peticion, :usuario_creacion, :fecha_peticion, :estado_peticion, :producto_mai, :imagen, :imagen2, :imagen3, :tipo, :req_name, :req_justification)');
 
 			$crea_peticionMai->bindValue('descripcion_peticion',$create->getDescripcion_peticionMai());
 			$crea_peticionMai->bindValue('usuario_creacion',$create->getUsuario_creacionMai());
@@ -21,6 +21,8 @@ class CrudPeticionesMai{
             $crea_peticionMai->bindValue('imagen2',$create->getImagen_peticionMai2());
             $crea_peticionMai->bindValue('imagen3',$create->getImagen_peticionMai3());
             $crea_peticionMai->bindValue('tipo',$create->getName());
+            $crea_peticionMai->bindValue('req_name',$create->getReq_Name());
+            $crea_peticionMai->bindValue('req_justification',$create->getReq_justification());
 			$crea_peticionMai->execute();
             $id=$db->lastInsertId();
 
@@ -46,7 +48,7 @@ class CrudPeticionesMai{
 			$lista_peticiones=[];
 			$consultar_peticion=$db->prepare('SELECT  id_peticionmai, descripcion_peticion, usuario_creacion, fecha_peticion, estado.descripcion AS estado_peticion, 
             productos_mai.nombre_producto AS producto_mai, imagen,  fecha_atencion, usuario_atencion, conclusiones, funcionarios.extension, funcionarios.area,funcionarios.mail, 
-            imagen2, imagen3, tipo_soportemai, tipo_soportemai.nombre, tipo_soportemai.id 
+            imagen2, imagen3, tipo_soportemai, tipo_soportemai.nombre, tipo_soportemai.id ,req_nombre, req_justificacion
             FROM peticiones_mai 
             LEFT JOIN funcionarios ON funcionarios.usuario=peticiones_mai.usuario_creacion 
             LEFT JOIN areas ON areas.id_area=funcionarios.area 
@@ -77,6 +79,8 @@ class CrudPeticionesMai{
 				$consulta->setExtension_funcionario($listado['extension']);
 				$consulta->setArea_funcionario($listado['area']);
 				$consulta->setEmail_funcionario($listado['mail']);
+                $consulta->setReq_Justification($listado['req_justificacion']);
+				$consulta->setReq_Name($listado['req_nombre']);
                 $consulta->setName($listado['nombre']);
 				
 				$lista_peticiones[]=$consulta;	
@@ -89,7 +93,7 @@ class CrudPeticionesMai{
 			$lista_peticiones=[];
 			$consultar_peticion=$db->prepare('SELECT  id_peticionmai, descripcion_peticion, usuario_creacion, fecha_peticion, 
             estado.descripcion AS estado_peticion, productos_mai.nombre_producto AS producto_mai, imagen,  fecha_atencion, 
-            usuario_atencion, conclusiones, funcionarios.extension, funcionarios.area,funcionarios.mail, imagen2, imagen3, tipo_soportemai, tipo_soportemai.nombre, tipo_soportemai.id 
+            usuario_atencion, conclusiones, funcionarios.extension, funcionarios.area,funcionarios.mail, imagen2, imagen3, tipo_soportemai, tipo_soportemai.nombre, tipo_soportemai.id, req_nombre, req_justificacion
             FROM peticiones_mai 
             LEFT JOIN funcionarios ON funcionarios.usuario=peticiones_mai.usuario_creacion 
             LEFT JOIN areas ON areas.id_area=funcionarios.area 
@@ -118,7 +122,10 @@ class CrudPeticionesMai{
 				$consulta->setExtension_funcionario($listado['extension']);
 				$consulta->setArea_funcionario($listado['area']);
 				$consulta->setEmail_funcionario($listado['mail']);
-                $consulta->setName($listado['nombre']);
+				$consulta->setName($listado['nombre']);
+                $consulta->setReq_Name($listado['req_nombre']);
+                $consulta->setReq_Justification($listado['req_justificacion']);
+				
 				
 				$lista_peticiones[]=$consulta;	
 			}

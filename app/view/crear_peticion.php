@@ -97,7 +97,7 @@
                         <div class="col-5">
                             <div class="form-group" id="divPeticion" style="display:none">
                                 <label>Tipo de peticion</label>
-                                <select class="form-control info" id="soporteMai" name="soporteMai" onchange="imagenRequerida()">
+                                <select class="form-control info" id="soporteMai" name="soporteMai" onchange="imagenRequerida(), reqData()">
                                     <option value="" selected>Seleccione el tipo de peticion</option>
                                         <?php
                                             foreach($listado_soporte as $tipoSoporte){
@@ -110,6 +110,14 @@
                                             }                                             
                                          ?>
                                 </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-5">
+                            <div class="form-group" id="divNombre" style="display:none;" >
+                                <label>Nombre del requerimiento</label>
+                                <input class="form-control info" id="req_Name" name="req_Name" />                        
                             </div>
                         </div>
                     </div>
@@ -135,6 +143,15 @@
                             </div>
                         </div>
                     </div>
+                    
+                    <div class="row">
+                        <div class="col-3">
+                            <div class="form-group" id="reqJustification" style="display: none;">
+                                <label>Justificacion</label>
+                                <textarea name="req_Justification" id="req_Justification" cols="86" rows="5" maxlength="6000" ></textarea>
+                            </div>
+                        </div>
+                    </div>
 
                     <div class="row">
                         <div class="col-3">
@@ -144,6 +161,7 @@
                             </div>
                         </div>
                     </div>
+                    
 
                     <div class="row">
                         <div class="col-3">

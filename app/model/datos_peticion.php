@@ -24,6 +24,8 @@ class Peticion{
     private $calificacion;
     private $revisado;
 	private $name;
+	private $req_nombre;
+	private $req_justificacion;
 	private $id;
 
 //************************************************
@@ -206,15 +208,36 @@ class Peticion{
 	public function getName(){
 		return $this->name;
 	}	
-		public function setName(){
+		public function setName($name){
 			$this->name = $name;
 		}
+//***************************************** 
+// 
 
-	
+	public function getReq_nombre(){
+		return $this->req_nombre;
+	}	
+	public function setReq_nombre($req_nombre){
+		$this->req_nombre = $req_nombre;
+	}
+
+//***************************************** 
+// 
+
+	public function getReq_justificacion(){
+		return $this->req_justificacion;
+	}	
+	public function setReq_justificacion($req_justificacion){
+		$this->req_justificacion = $req_justificacion;
+	}
+
+
+//***************************************** 
+//	
 	public function getId(){
 		return $this->id;
 	}
-		public function setId(){
+		public function setId($id){
 			$this->id = $id;
 		}
 	}

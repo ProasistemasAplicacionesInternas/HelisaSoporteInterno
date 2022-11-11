@@ -116,6 +116,10 @@
                                 <td style="background-color:<?=$color ?>;">
                                     <form action="app/view/seleccionar_peticionmai.php" method="post">
                                         <input type="hidden" name="p_nropeticion" id="p_nropeticion" value="<?php echo $datos1->getId_peticionMai();?>">
+                                        
+                                        <input type="hidden" name="req_nombre" id="req_nombre" value="<?php echo $datos1->getReq_Name();?>">
+                                        
+                                        <input type="hidden" name="req_justificacion" id="req_justificacion" value="<?php echo $datos1->getReq_Justification();?>">
 
                                         <input type="hidden" name="p_fechapeticion" id="p_fechapeticion" value="<?php echo $datos1->getFecha_peticionMai();?>">
 
