@@ -233,6 +233,90 @@ error_reporting(E_ALL);
                                 </div>
                             </div>
                             <?php endif;?>
+                            <?php if($tipo == 3):?>
+                            <div class="row">
+                                <div class="col-10">
+                                    <div class="form-group">
+                                        <label>Accesos</label>
+                                        <div class="row">
+                                            <span class="col-4 mt-2"><b>Tipo Acceso</b></span>
+                                            <span class="col-3 mt-2"><b>Nombre Usuario</b></span>
+                                            <span class="col-3 mt-2"><b>Estado</b></span>
+                                        </div>
+
+                                        <div>
+                                            <?php $numeracion =0; foreach($accesosPlataformasxUsuario as $listado):?>
+                                                <?php for($x=0; $x<$numElement; $x++):?>
+                                                <?php if(($listado->getPlataformaAdministrador() == $_SESSION['usuario'] || $consultaMai == 1) && ($platarformasArreglo[$x] == $listado->getPlataforma())):?>
+                                                    <div class="row mt-3">
+                                                    <div class="col-sm-4">
+                                                        <input type="hidden" name="plataforma<?php echo $numeracion;?>" value="<?php echo $listado->getPlataforma();?>"> 
+                                                        <input type="hidden" name="accesoPlataforma<?php echo $numeracion;?>" value="<?php echo $listado->getid_accesoPlataforma();?>">
+                                                        <input type="text" class="form-control" value="<?php echo $listado->getPlataformaDescripcion();?>" readonly>
+                                                    </div>
+                                                    <div class="col-sm-3">
+                                                        <input type="text" class="form-control" name="nombre_usuario<?php echo $numeracion;?>" value="<?php echo $listado->getUsuario();?>" readonly required>
+                                                    </div>
+                                                    <div class="col-sm-3">
+                                                        <select class="form-control" name="estado<?php echo $numeracion;?>" >
+                                                            <option value='12'>Aprobado</option>
+                                                            <option value='13'>No aprobado</option>
+                                                            <option value='3' style='display:none'>Pendiente</option>
+                                                        </select>
+                                                    </div> 
+                                                </div>
+                                                <?php $numeracion++;
+                                                endif;
+                                                endfor;?>
+                                        <?php endforeach; ?>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <?php endif;?>
+                            <?php if($tipo == 4):?> 
+                            <div class="row">
+                                <div class="col-10">
+                                    <div class="form-group">
+                                        <label>Accesos</label>
+                                        <div class="row">
+                                            <span class="col-4 mt-2"><b>Plataforma</b></span>
+                                            <span class="col-2 mt-2"><b>Nombre Usuario</b></span>
+                                            <span class="col-2 mt-2"><b>Estado</b></span>
+                                        </div>
+
+                                        <div>
+                                        <?php $numeracion =0; foreach($accesosPlataformasxUsuarioInactivo as $listado):?>
+                                                <?php for($x=0; $x<$numElement; $x++):?>
+                                                <?php if(($listado->getPlataformaAdministrador() == $_SESSION['usuario'] || $consultaMai == 1) && ($platarformasArreglo[$x] == $listado->getPlataforma())):?>
+                                                    <div class="row mt-3">
+                                                    <div class="col-sm-4">
+                                                        <input type="hidden" name="plataforma<?php echo $numeracion;?>" value="<?php echo $listado->getPlataforma();?>"> 
+                                                        <input type="hidden" name="accesoPlataforma<?php echo $numeracion;?>" value="<?php echo $listado->getid_accesoPlataforma();?>">
+                                                        <input type="text" class="form-control" value="<?php echo $listado->getPlataformaDescripcion();?>" readonly>
+                                                    </div>
+                                                    <div class="col-sm-3">
+                                                        <input type="text" class="form-control" name="nombre_usuario<?php echo $numeracion;?>" value="<?php echo $listado->getUsuario();?>" readonly required>
+                                                    </div>
+                                                    <div class="col-sm-3">
+                                                        <select class="form-control" name="estado<?php echo $numeracion;?>" >
+                                                            <option value='12'>Aprobado</option>
+                                                            <option value='13'>No aprobado</option>
+                                                            <option value='3' style='display:none'>Pendiente</option>
+                                                        </select>
+                                                    </div> 
+                                                </div>
+                                                <?php $numeracion++;
+                                                endif;
+                                                endfor;?>
+                                        <?php endforeach; ?>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <?php endif;?>
+                            
+                            
 
                             <div class="row">
                                 <div class="col-6">

@@ -49,11 +49,29 @@
                         $administrador = $crud->administradorxPltaforma($_POST[$p]);
                         $plataformas[$administrador] .= $_POST[$p] . ',';
                         $existAcces = 1;
+                    }else{
+                        $accion=3;
                     }
-                }else{//activacion
+                }else if($_POST['tipo'] == 1){//activacion
                     $administrador = $crud->administradorxPltaforma($_POST[$p]);
                     $plataformas[$administrador] .= $_POST[$p] . ',';
                     $existAcces = 1;  
+                }else if($_POST['tipo'] == 3){
+                    if($crud->trueAcces($_POST[$p],$datos->getUsuario_creacion()) == 1 && $crud->accesoEnPeticion($_POST[$p],$datos->getUsuario_creacion()) == 0){
+                        $administrador = $crud->administradorxPltaforma($_POST[$p]);
+                        $plataformas[$administrador] .= $_POST[$p] . ',';
+                        $existAcces = 2;
+                    }else{
+                        $accion=3;
+                    }
+                }else if($_POST['tipo'] == 4){
+                    if($crud->inactiveAcces($_POST[$p],$datos->getUsuario_creacion()) == 1 && $crud->accesoReActivacionEnPeticion($_POST[$p],$datos->getUsuario_creacion()) == 0){
+                        $administrador = $crud->administradorxPltaforma($_POST[$p]);
+                        $plataformas[$administrador] .= $_POST[$p] . ',';
+                        $existAcces = 2;
+                    }else{
+                        $accion=3;
+                    }
                 }
             }
         }
@@ -68,16 +86,32 @@
                     $datos->setPlataformas(substr($listado, 0, -1));
                     $accion = $crud->crearPeticion($datos);
                 }
+                
             }
+            
+        }else if ($existAcces == 2){
+            foreach($plataformas as $listado){
+                if($listado != ''){
+                    $datos->setPlataformas(substr($listado, 0, -1));
+                    $accion = $crud->crearPeticion($datos);
+                }
+            }
+            
         }else{
-            $accion = 1;
+            $accion = 2;
         }
+        
         
 
         if($accion == 1){
-            header('Location: ../../dashboard_funcionarios.php');
+         header('Location: ../../dashboard_funcionarios.php');
         }else if($accion == 2){
-            echo 'ERROR ERROR';
+            
+            echo "<script>alert('El usuario ya tiene una peticcion creada'); 
+            history.back();</script>";
+        }else if($accion == 3 ){
+            echo "<script>alert('El usuario ya tiene una peticcion creada'); 
+            history.back();</script>";
         }
         
     }
@@ -141,6 +175,7 @@
             if(isset($_POST['aprobado']) && $_POST['aprobado'] == 12){
                 $plataformasPeticion = $crud->getPlataformasxPeticion($_POST['id_peticion']);
                 $accesosPlataformasxUsuario = $crud->accesoPlataformasxUsuario($_POST['usuario_creacion']);
+                $accesosPlataformasxUsuarioInactivo = $crud->accesoPlataformasxUsuarioInactive($_POST['usuario_creacion']);
             }
         }
 
@@ -356,6 +391,92 @@
             header('Location: ../../dashboard_funcionarios.php');
         }
     }
+    else if(isset($_POST['guardarInserciones']) && $_POST['tipo'] == 3){
+
+        $plataformas = $_POST['plataformasPeticion'];
+        $platarformasArreglo = explode (',', $plataformas);
+
+        $datos->setId_peticion($_POST['id_peticion']);
+        $datos->setUsuario_creacion($_POST['f_identificacion']);
+
+        for($x=0; $x<$_POST['numeracion']; $x++){
+            if($_POST['estado' . $x] != 3){
+                $datos->setPlataforma($_POST['plataforma' . $x]);
+                $datos->setEstado($_POST['estado' . $x]);
+                $datos->setId_acceso($_POST['accesoPlataforma' . $x]);
+                $datos->setNombre($_POST['nombre_usuario' . $x]);
+
+                $crud->inactivacionDeAccesosxNovedades($datos);
+
+                $platarformasArreglo = array_diff($platarformasArreglo,array($_POST['plataforma' . $x]));
+                $platarformasArreglo = array_values($platarformasArreglo);/* ERRO ERRO si tiene mas de una plataforma duplicada no podra dejar en pendiente la solicitud*/
+            }
+            
+        }
+
+        $plataformasf ='';
+        for($x=0; $x<1000; $x++){
+            if(isset($platarformasArreglo[$x])){
+                $plataformasf = $plataformasf . $platarformasArreglo[$x] . ","; 
+            }
+        }
+        if($_POST['conclusionesAdd'] != ''){
+            $conclusiones = $_POST['conclusiones'] . "\n\n" . $_SESSION['usuario'] . ":" . $_POST['conclusionesAdd'];
+        }else{
+            $conclusiones = $_POST['conclusiones'];
+        }
+        
+        $crud->modificarPlataformas(substr($plataformasf, 0, -1),$_POST['id_peticion'],$conclusiones);
+
+        if($consultaMai == 1){
+            header('Location: ../../dashboard.php');
+        }else{
+            header('Location: ../../dashboard_funcionarios.php');
+        }
+    }
+    else if(isset($_POST['guardarInserciones']) && $_POST['tipo'] == 4){
+
+        $plataformas = $_POST['plataformasPeticion'];
+        $platarformasArreglo = explode (',', $plataformas);
+
+        $datos->setId_peticion($_POST['id_peticion']);
+        $datos->setUsuario_creacion($_POST['f_identificacion']);
+
+        for($x=0; $x<$_POST['numeracion']; $x++){
+            if($_POST['estado' . $x] != 3){
+                $datos->setPlataforma($_POST['plataforma' . $x]);
+                $datos->setEstado($_POST['estado' . $x]);
+                $datos->setId_acceso($_POST['accesoPlataforma' . $x]);
+                $datos->setNombre($_POST['nombre_usuario' . $x]);
+
+                $crud->activacionDeAccesosxNovedades($datos);
+
+                $platarformasArreglo = array_diff($platarformasArreglo,array($_POST['plataforma' . $x]));
+                $platarformasArreglo = array_values($platarformasArreglo);/* ERRO ERRO si tiene mas de una plataforma duplicada no podra dejar en pendiente la solicitud*/
+            }
+            
+        }
+
+        $plataformasf ='';
+        for($x=0; $x<1000; $x++){
+            if(isset($platarformasArreglo[$x])){
+                $plataformasf = $plataformasf . $platarformasArreglo[$x] . ","; 
+            }
+        }
+        if($_POST['conclusionesAdd'] != ''){
+            $conclusiones = $_POST['conclusiones'] . "\n\n" . $_SESSION['usuario'] . ":" . $_POST['conclusionesAdd'];
+        }else{
+            $conclusiones = $_POST['conclusiones'];
+        }
+        
+        $crud->modificarPlataformas(substr($plataformasf, 0, -1),$_POST['id_peticion'],$conclusiones);
+
+        if($consultaMai == 1){
+            header('Location: ../../dashboard.php');
+        }else{
+            header('Location: ../../dashboard_funcionarios.php');
+        }
+    }
 
 //*****************************************************************************************************//
 //********************************** CONSULTA DE PETICIONES *******************************************//
@@ -391,7 +512,7 @@
         
         if($consultaMai == 1 || isset($_SESSION['id_roles'])){
             $consultarAccesosPlataformas = $crud->accesoPlataformasxUsuarioTodas($_POST['f_usuario']);
-        }else{
+        }else if ($consultaMai == 2 || isset($_SESSION['id_roles'])){
             $consultarAccesosPlataformas = $crud->accesoPlataformasxUsuarioTodas($_SESSION['usuario']);
         }
     }
@@ -403,6 +524,7 @@
     else if(isset($_POST['consultarAccesosPlataformas']) && $_POST['consultarAccesosPlataformas'] == 2){
         
         $consultarAccesosPlataformas = $crud->accesoPlataformasxUsuario($_POST['usuario']);
+        $consultarAccesosPlataformasInactivas = $crud->accesoPlataformasxUsuarioInactivo($_POST['usuario']);
 
         if($_POST['tipo'] == 1){
             $cadena = '';
@@ -414,6 +536,27 @@
         }else if($_POST['tipo'] == 2){
             $cadena = '';
             foreach($consultarAccesosPlataformas as $listado){
+                $cadena = $cadena . $listado->getPlataforma()  . ",";
+            }
+            $cadena = substr($cadena,0,-1);
+            echo $cadena;
+        }else if($_POST['tipo'] == 4){
+            $cadena = '';
+            foreach($consultarAccesosPlataformasInactivas as $listado){
+                $cadena = $cadena . $listado->getPlataforma()  . ",";
+            }
+            $cadena = substr($cadena,0,-1);
+            echo $cadena;
+        }
+        
+    }
+    else if(isset($_POST['consultarAccesosPlataformas']) && $_POST['consultarAccesosPlataformas'] == 4){
+        
+        $consultarAccesosPlataformasInactivas = $crud->accesoPlataformasxUsuarioInactivo($_POST['usuario']);
+
+        if($_POST['tipo'] == 4){
+            $cadena = '';
+            foreach($consultarAccesosPlataformasInactivas as $listado){
                 $cadena = $cadena . $listado->getPlataforma()  . ",";
             }
             $cadena = substr($cadena,0,-1);

@@ -131,6 +131,7 @@
             $db = null;
             return $resultado;
         }
+        
 
         public function liberarPeticion($id_peticion){
             $db = Conectar::acceso();
@@ -456,6 +457,44 @@
             $insertarSubRegistro->execute();
 
         }
+        public function inactivacionDeAccesosxNovedades($acceso){
+            $db = Conectar::acceso();
+
+            if($acceso->getEstado() == 12){
+                $inactivacionAcceso = $db->prepare("UPDATE accesos_plataformas SET estado = :estado, fecha_inactivacion = curdate() WHERE id_accesoPlataforma = :id_acceso");
+                $inactivacionAcceso->bindValue('estado',18);
+                $inactivacionAcceso->bindValue('id_acceso',$acceso->getId_acceso());
+                $inactivacionAcceso->execute();
+            }
+            
+            $insertarSubRegistro = $db->prepare('UPDATE peticiones_accesos SET registro = CONCAT(registro,"/,,/",:plataforma,"/--/",:usuario,"/--/",:clave,"/--/",:estado) WHERE id_peticionAcceso = :id_peticionAcceso');
+            $insertarSubRegistro->bindValue('plataforma',$acceso->getPlataforma());
+            $insertarSubRegistro->bindValue('usuario', $acceso->getNombre());
+            $insertarSubRegistro->bindValue('clave','No se afecta');
+            $insertarSubRegistro->bindValue('estado', $acceso->getEstado());
+            $insertarSubRegistro->bindValue('id_peticionAcceso',$acceso->getId_peticion());
+            $insertarSubRegistro->execute();
+
+        }
+        public function activacionDeAccesosxNovedades($acceso){
+            $db = Conectar::acceso();
+
+            if($acceso->getEstado() == 12){
+                $inactivacionAcceso = $db->prepare("UPDATE accesos_plataformas SET estado = :estado, fecha_inactivacion = curdate() WHERE id_accesoPlataforma = :id_acceso");
+                $inactivacionAcceso->bindValue('estado',5);
+                $inactivacionAcceso->bindValue('id_acceso',$acceso->getId_acceso());
+                $inactivacionAcceso->execute();
+            }
+            
+            $insertarSubRegistro = $db->prepare('UPDATE peticiones_accesos SET registro = CONCAT(registro,"/,,/",:plataforma,"/--/",:usuario,"/--/",:clave,"/--/",:estado) WHERE id_peticionAcceso = :id_peticionAcceso');
+            $insertarSubRegistro->bindValue('plataforma',$acceso->getPlataforma());
+            $insertarSubRegistro->bindValue('usuario', $acceso->getNombre());
+            $insertarSubRegistro->bindValue('clave','No se afecta');
+            $insertarSubRegistro->bindValue('estado', $acceso->getEstado());
+            $insertarSubRegistro->bindValue('id_peticionAcceso',$acceso->getId_peticion());
+            $insertarSubRegistro->execute();
+
+        }
 
 
         public function modificarPlataformas($plataformas,$peticion,$conclusiones){
@@ -500,6 +539,76 @@
                 WHERE F.usuario = :usuario && AP.estado = :estado");
             $consulta->bindValue('usuario', $usuario);
             $consulta->bindValue('estado', 5);
+            $consulta->execute();
+            $listadoAccesosPlataformas = array();
+
+            if($consulta){
+                foreach($consulta->fetchall() as $listado){
+                    $accesosPlataformas = new datosAccesosPlataformas();
+                    $accesosPlataformas->setId_accesoPlataforma($listado['id_accesoPlataforma']);
+                    $accesosPlataformas->setPlataforma($listado['plataforma']);
+                    $accesosPlataformas->setPlataformaDescripcion($listado['plataforma_descripcion']);
+                    $accesosPlataformas->setPlataformaAdministrador($listado['plataforma_administrador']);
+                    $accesosPlataformas->setId_usuario($listado['identificacion']);
+                    $accesosPlataformas->setUsuario($listado['usuario']);
+                    $accesosPlataformas->setClave($listado['clave']);
+                    $accesosPlataformas->setEstado($listado['estado']);
+                    $accesosPlataformas->setEstadoDescripcion($listado['estadoDescripcion']);
+                    $accesosPlataformas->setFecha_registro($listado['fecha_registro']);
+                    $accesosPlataformas->setFecha_inactivacion($listado['fecha_inactivacion']);
+                    $listadoAccesosPlataformas[] = $accesosPlataformas;
+                }
+            }
+
+            $db = null;
+            return $listadoAccesosPlataformas;
+        }
+        public function accesoPlataformasxUsuarioInactive($usuario){
+            $db = Conectar::acceso();
+            $consulta = $db->prepare("SELECT id_accesoPlataforma, plataforma, F.identificacion, AP.usuario, clave, AP.estado, estado.descripcion AS estadoDescripcion, AP.fecha_registro, AP.fecha_inactivacion, P.descripcion as plataforma_descripcion, FP.usuario as plataforma_administrador 
+                FROM accesos_plataformas AP 
+                LEFT JOIN funcionarios F ON F.identificacion = id_usuario 
+                LEFT JOIN plataformas P ON P.id_plataforma = AP.plataforma 
+                LEFT JOIN funcionarios FP ON P.administrador = FP.identificacion
+                LEFT JOIN estado ON AP.estado = estado.id_estado
+                WHERE F.usuario = :usuario && AP.estado = :estado");
+            $consulta->bindValue('usuario', $usuario);
+            $consulta->bindValue('estado', 18);
+            $consulta->execute();
+            $listadoAccesosPlataformas = array();
+
+            if($consulta){
+                foreach($consulta->fetchall() as $listado){
+                    $accesosPlataformas = new datosAccesosPlataformas();
+                    $accesosPlataformas->setId_accesoPlataforma($listado['id_accesoPlataforma']);
+                    $accesosPlataformas->setPlataforma($listado['plataforma']);
+                    $accesosPlataformas->setPlataformaDescripcion($listado['plataforma_descripcion']);
+                    $accesosPlataformas->setPlataformaAdministrador($listado['plataforma_administrador']);
+                    $accesosPlataformas->setId_usuario($listado['identificacion']);
+                    $accesosPlataformas->setUsuario($listado['usuario']);
+                    $accesosPlataformas->setClave($listado['clave']);
+                    $accesosPlataformas->setEstado($listado['estado']);
+                    $accesosPlataformas->setEstadoDescripcion($listado['estadoDescripcion']);
+                    $accesosPlataformas->setFecha_registro($listado['fecha_registro']);
+                    $accesosPlataformas->setFecha_inactivacion($listado['fecha_inactivacion']);
+                    $listadoAccesosPlataformas[] = $accesosPlataformas;
+                }
+            }
+
+            $db = null;
+            return $listadoAccesosPlataformas;
+        }
+        public function accesoPlataformasxUsuarioInactivo($usuario){
+            $db = Conectar::acceso();
+            $consulta = $db->prepare("SELECT id_accesoPlataforma, plataforma, F.identificacion, AP.usuario, clave, AP.estado, estado.descripcion AS estadoDescripcion, AP.fecha_registro, AP.fecha_inactivacion, P.descripcion as plataforma_descripcion, FP.usuario as plataforma_administrador 
+                FROM accesos_plataformas AP 
+                LEFT JOIN funcionarios F ON F.identificacion = id_usuario 
+                LEFT JOIN plataformas P ON P.id_plataforma = AP.plataforma 
+                LEFT JOIN funcionarios FP ON P.administrador = FP.identificacion
+                LEFT JOIN estado ON AP.estado = estado.id_estado
+                WHERE F.usuario = :usuario && AP.estado = :estado");
+            $consulta->bindValue('usuario', $usuario);
+            $consulta->bindValue('estado', 18);
             $consulta->execute();
             $listadoAccesosPlataformas = array();
 
@@ -959,6 +1068,25 @@
             }
         }
 
+        public function inactiveAcces($plataforma,$usuario){
+            $db = Conectar::acceso();
+            $consultaIdent = $db->prepare("SELECT identificacion FROM funcionarios WHERE usuario = :usuario");
+            $consultaIdent->bindValue("usuario",$usuario);
+            $consultaIdent->execute();
+            $resultado = $consultaIdent->fetch(PDO::FETCH_ASSOC);
+            $identificacion = $resultado['identificacion'];
+
+            $consulta = $db->prepare("SELECT id_accesoPlataforma FROM accesos_plataformas WHERE plataforma = :plataforma && estado = 18 && id_usuario = :id_user");
+            $consulta->bindValue('plataforma', $plataforma);
+            $consulta->bindValue('id_user',$identificacion);
+            $consulta->execute();
+            if($consulta->rowCount() > 0){
+                return 1;
+            }else{
+                return 0;
+            }
+        }
+
         /* ************************************************** */
         /* **** Determina si un acceso se encuentra en ****** */
         /* ******* una peticion de inactivacion ************* */
@@ -966,6 +1094,27 @@
         public function accesoEnPeticion($plataforma,$usuario){
             $db = Conectar::acceso();
             $consulta = $db->prepare("SELECT plataformas FROM peticiones_accesos WHERE usuario_creacion = :usuario && estado != 2 && tipo = 2");
+            $consulta->bindValue('usuario', $usuario);
+            $consulta->execute();
+
+
+            $dato = 0;
+            foreach($consulta->fetchAll() as $listado){
+                $arreglo = explode(',',$listado['plataformas']);
+                foreach($arreglo as $valor){
+                    if($valor == $plataforma){
+                        $dato = 1;
+                        break;break;
+                    }
+                }
+            }
+            
+            $db = null;
+            return $dato;
+        }
+        public function accesoReActivacionEnPeticion($plataforma,$usuario){
+            $db = Conectar::acceso();
+            $consulta = $db->prepare("SELECT plataformas FROM peticiones_accesos WHERE usuario_creacion = :usuario && estado != 1 && tipo = 4");
             $consulta->bindValue('usuario', $usuario);
             $consulta->execute();
 

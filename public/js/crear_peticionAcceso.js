@@ -124,6 +124,72 @@ $('#buscador').on('keyup', function() {
                 })
         
             })
+        }else if($('#tipo').val() == 3){
+
+            if($('#funcionarioAlterno').val() == 0){
+                usuario = $('#funcionario').val();
+            }else{
+                usuario = $('#funcionarioAlterno').val();
+            }
+            var data = 'consultarAccesosPlataformas=2&usuario=' + usuario + "&tipo=2";
+            $.ajax({
+                type:"POST",
+                url:"../controller/controlador_peticionesAccesos.php",
+                data: data
+            }).done(function(respuesta){
+                for(x=0;x<numPlataformas;x++){
+                    $('#td' + x).hide();
+                }
+
+                const removeAccents = (str) => {
+                    return str.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+                }
+
+                var arreglo = respuesta.split(',');
+                arreglo.forEach(function(valor,index){
+                    var texto = $('#td'+valor).text();
+                    texto_f = removeAccents(texto.toUpperCase());
+                    buscador_f = removeAccents(buscador.toUpperCase());
+                    resultado = texto_f.includes(buscador_f);
+                    if(resultado === true){
+                        $('#td' + valor).show();
+                    }
+                })
+        
+            })
+        }else if($('#tipo').val() == 4){
+
+            if($('#funcionarioAlterno').val() == 0){
+                usuario = $('#funcionario').val();
+            }else{
+                usuario = $('#funcionarioAlterno').val();
+            }
+            var data = 'consultarAccesosPlataformas=4&usuario=' + usuario + "&tipo=4";
+            $.ajax({
+                type:"POST",
+                url:"../controller/controlador_peticionesAccesos.php",
+                data: data
+            }).done(function(respuesta){
+                for(x=0;x<numPlataformas;x++){
+                    $('#td' + x).hide();
+                }
+
+                const removeAccents = (str) => {
+                    return str.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+                }
+
+                var arreglo = respuesta.split(',');
+                arreglo.forEach(function(valor,index){
+                    var texto = $('#td'+valor).text();
+                    texto_f = removeAccents(texto.toUpperCase());
+                    buscador_f = removeAccents(buscador.toUpperCase());
+                    resultado = texto_f.includes(buscador_f);
+                    if(resultado === true){
+                        $('#td' + valor).show();
+                    }
+                })
+        
+            })
         }
     }
 });
@@ -152,15 +218,21 @@ function limpiarInputsClave(){
     mostrarTodasPltaformas();
 }
 
-$('#verTodasIcon').click(function(){
+$('#verTodasIcon').click(function (){
     $('#verSeleccionadosIcon').show();
     $('#verTodasIcon').hide();
     $('#resultable').addClass('table-striped');
+    
     if($('#tipo').val() == 1){
-        mostrarTodasPltaformas();
+       mostrarTodasPltaformas();
     }else if($('#tipo').val() == 2){
         plataformasAsignadasChekbox()
+    }else if($('#tipo').val() == 3){
+        plataformasAsignadasChekbox()
     }
+    // else if($('#tipo').val() == 4){
+    //     plataformasInactivasChekbox()
+    // }
     
 })
 
@@ -200,7 +272,7 @@ $('#tipo').on('change',function(){
     if($('#tipo').val() == 1){
         $('#plataformasDesignadas').show();
         mostrarTodasPltaformas();
-    }else{
+    }else if ($('#tipo').val() == 2 || $('#tipo').val() == 3){
         $('#plataformasDesignadas').hide();
         plataformasAsignadasChekbox();
         setTimeout(function(){
@@ -208,6 +280,13 @@ $('#tipo').on('change',function(){
             $('div.checkbox-group.required :checkbox').trigger('change');
         },200);
         
+    }else if ($('#tipo').val() == 4) {
+        $('#plataformasDesignadas').hide();
+        plataformasInactivasChekbox();
+        setTimeout(function(){
+            seleccionarTodas();
+            $('div.checkbox-group.required :checkbox').trigger('change');
+        },200);
     }
 })
 
@@ -225,6 +304,7 @@ function ocultarTodasPlataformas(){
 
 
 function plataformasAsignadasChekbox(){
+    console.log("Consulta plataformas activas")
     if($('#funcionarioAlterno').val() == 0){
         usuario = $('#funcionario').val();
     }else{
@@ -232,6 +312,30 @@ function plataformasAsignadasChekbox(){
     }
 
     var data = 'consultarAccesosPlataformas=2&usuario=' + usuario + "&tipo=2";
+    $.ajax({
+        type:"POST",
+        url:"../controller/controlador_peticionesAccesos.php",
+        data: data
+    }).done(function(respuesta){
+        var arreglo = respuesta.split(',');
+        for(x=0;x<numPlataformas;x++){
+            $('#td' + x).hide();
+        }
+        arreglo.forEach(function(valor,index){
+            $('#td' + valor).show();
+        })
+
+    })
+}
+function plataformasInactivasChekbox(){
+   console.log("Funcion que traer las de novedades ")
+    if($('#funcionarioAlterno').val() == 0){
+        usuario = $('#funcionario').val();
+    }else{
+        usuario = $('#funcionarioAlterno').val();
+    }
+
+    var data = 'consultarAccesosPlataformas=4&usuario=' + usuario + "&tipo=4";
     $.ajax({
         type:"POST",
         url:"../controller/controlador_peticionesAccesos.php",
@@ -262,4 +366,16 @@ function seleccionarTodas(){
 $('#seleccionarTodasIcon').click(function(){
     seleccionarTodas();
 })
+function LimpiarInputsyChecks(){
+    $('#verSeleccionadosIcon').hide();
+    $('#verTodasIcon').show();
+    $('#resultable').removeClass('table-striped');
+    
+    ocultarTodasPlataformas();
 
+    for(x=0;x<numPlataformas;x++){
+        if($('#plataformas' + x).prop('checked')){
+            $('#td' + x).show();
+        }
+    }
+    }
