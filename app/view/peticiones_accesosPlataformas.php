@@ -62,7 +62,13 @@
                             <td>
                                 <?php echo $datos->getFecha_creacion() ?></td>
                             <td>
-                                <?php switch($datos->getTipo()){case 0:echo "Modificacion";break;case 1:echo "Activacion";break;case 2: echo "Inactivacion";break;Default:echo "Modificacion";} ?></td>
+                            <?php switch($datos->getTipo()){
+                                case 0:echo "Modificacion";break;
+                                case 1:echo "Activacion";break;
+                                case 2:echo "Inactivacion";break;
+                                case 3:echo "Novedades";break;
+                                case 4:echo "Reactivacion";break;
+                                Default:echo "Modificacion";} ?></td>
                             <td>
                                 <?php echo $datos->getDescripcion() ?></td> 
                             <td>

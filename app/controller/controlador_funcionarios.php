@@ -154,8 +154,10 @@ if (isset($_POST['eliminar_funcionario'])) {
 //***********************************************************************************//
 
 if (isset($_POST['ingresar'])) {
+    $usuarioLogin = htmlentities(addslashes($_POST['f_user']));
+	$usuarioValidacion = strtolower($usuarioLogin);
 
-    $funcionario->setF_usuario(htmlentities(addslashes($_POST['f_user'])));
+    $funcionario->setF_usuario($usuarioValidacion);
     $funcionario->setF_contrasena(htmlentities(addslashes($_POST['f_password'])));
     $crud->validaLoginFuncionario($funcionario);
 

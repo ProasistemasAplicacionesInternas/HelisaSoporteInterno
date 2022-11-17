@@ -90,7 +90,7 @@
                                         <option value='1'>Activaci&oacute;n</option>
                                         <option value='2'>Inactivaci&oacute;n</option>
                                         <option value='3'>Novedades</option>
-                                        <option value='4'>Re Activaci&oacute;n</option>
+                                        <option value='4'>Reactivaci&oacute;n</option>
                                         <option value='0' style="display:none">Modificacion</option>
                                     </select>
                                     </div>

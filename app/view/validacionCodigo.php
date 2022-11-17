@@ -5,7 +5,7 @@ session_start();
 if (!isset($_SESSION['tiempo'])) {
     $_SESSION['tiempo']=time();
 }
-else if (time() - $_SESSION['tiempo'] > 25) {
+if (time() - $_SESSION['tiempo'] > 25) {
     session_unset();
     session_destroy();
     //Aquí redireccionas a la url especifica

@@ -353,10 +353,13 @@ private function peticionCancelacionAccesos($identificacion,$usuario,$tema){
 	public function validaLoginFuncionario($validate){
 
 		$contrasenaLogin=$_POST['f_password']; 
+		$usuarioLogin = $validate->getF_usuario();
+
+		$usuarioValidacion = strtolower($usuarioLogin);
 
 		$db=conectar::acceso();
 		$validar_funcionario=$db->prepare('SELECT usuario,festado,contrasena,validacion,timestampdiff(day, fecha_sistema , now()) as dias, rol, intentos, tipo_validacion, mail FROM funcionarios WHERE usuario= :f_usuario');
-		$validar_funcionario->bindValue('f_usuario',$validate->getF_usuario());
+		$validar_funcionario->bindValue('f_usuario',$usuarioValidacion);
 		$validar_funcionario->execute();
 		$existe_funcionario=$validar_funcionario->rowCount();
 
@@ -449,7 +452,7 @@ private function peticionCancelacionAccesos($identificacion,$usuario,$tema){
 			}
 		
 			}else{
-				header("location:../../login_peticiones.php");
+				 header("location:../../login_peticiones.php");
 			}
 		}else{
 			header("location:../../login_peticiones.php");
@@ -476,7 +479,7 @@ private function peticionCancelacionAccesos($identificacion,$usuario,$tema){
 
 				$confirma_usuario=$db->prepare('SELECT usuario, contrasena FROM funcionarios WHERE usuario=:usuario');
 
-				$confirma_usuario->bindValue('usuario',$valida->getF_usuario());
+				$confirma_usuario->bindValue('usuario',$validar->getF_usuario());
 				$confirma_usuario->execute();
 				$existe_usuario=$confirma_usuario->rowCount();
 				$datosFuncionario=$confirma_usuario->fetch(PDO::FETCH_ASSOC);

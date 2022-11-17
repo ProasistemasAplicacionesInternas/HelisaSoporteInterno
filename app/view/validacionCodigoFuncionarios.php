@@ -4,14 +4,23 @@ session_start();
 //Se crea sesion tiempo para que a los 30 segundos se dañe esta sesion
 if (!isset($_SESSION['tiempo'])) {
     $_SESSION['tiempo']=time();
-}
-else if (time() - $_SESSION['tiempo'] > 25) {
-    session_unset();
-    session_destroy();
-    //Aquí redireccionas a la url especifica
-    header("Location: ./../../login_peticiones.php");
-    die();  
+    
+// }else if ((time() - $_SESSION['tiempo'] )> 60) {
+//     session_unset();
+//     session_destroy();
+//     //Aquí redireccionas a la url especifica
+//     //header("Location: ./../../login_peticiones.php");
+    
+//     die();  
 } 
+
+if ((time() - $_SESSION['tiempo'] )> 25) {
+         session_unset();
+         session_destroy();
+         //Aquí redireccionas a la url especifica
+         header("Location: ./../../login_peticiones.php");
+         die();  
+     } 
 require "Authenticator.php";
 $Authenticator = new Authenticator();
 
@@ -23,7 +32,7 @@ if (!isset($_SESSION['auth_secret'])) {
 
 if(!isset($_SESSION['usuario'])){
     
-    header('location:./../../login_peticiones.php');
+   header('location:./../../login_peticiones.php');
 }
  //RANDOM
 if (!isset($_SESSION['failed'])) {
@@ -46,7 +55,7 @@ if (!isset($_SESSION['failed'])) {
     <link rel="stylesheet" href="../../public/css/validacionCodigo.css">
 
 </head>
-<body  class="bg">
+<body  class="bg" >
     <div class="container">
         <div class="row">
                 <img class="logo" src="../../public/img/logo.png">
@@ -92,8 +101,11 @@ if (!isset($_SESSION['failed'])) {
     <script src="public/js/smoke.min.js"></script>
     <script>
         
-        document.getElementById('code').value = '';
-        $('#code').val('');
+        // document.getElementById('code').value = '';
+        // $('#code').val('');
+        
+        
+        
     </script>
 </body>
 </html>

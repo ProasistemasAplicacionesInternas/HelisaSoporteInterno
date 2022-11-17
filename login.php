@@ -1,7 +1,7 @@
 <?php
   if(isset($_SESSION['usuario']) || isset($_POST['noQr'])){
-    session_unset($_SESSION['usuario']);
-    session_destroy($_SESSION['usuario']);
+    session_unset();
+    session_destroy();
   }
 ?>
 
