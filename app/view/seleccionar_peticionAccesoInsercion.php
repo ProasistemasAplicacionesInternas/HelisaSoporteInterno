@@ -120,7 +120,14 @@ error_reporting(E_ALL);
                                 <div class="col-12">
                                     <label>Tipo</label>
                                     <input type="hidden" name="tipo" value="<?php echo $tipo ?>">
-                                    <input type="text" class="form-control data" value="<?php switch($tipo){case 0:echo "Modificacion";break;case 1:echo "Activacion";break;case 2: echo "Inactivacion";break;Default:echo "Modificacion";}?>" readonly>
+                                    <input type="text" class="form-control data" value="<?php 
+                                    switch($tipo){
+                                        case 0:echo "Modificacion";break;
+                                        case 1:echo "Activacion";break;
+                                        case 2:echo "Inactivacion";break;
+                                        case 3:echo "Novedades";break;
+                                        case 4:echo "Reactivacion";break;
+                                        Default:echo "Modificacion";}?>" readonly>
                                 </div>
                             </div>
                         

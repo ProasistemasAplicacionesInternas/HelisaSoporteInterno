@@ -94,6 +94,15 @@ require('../controller/controlador_funcionarios.php');
                             </div>
                         </div>
                     </div>
+                    <div class="row">
+                        <div class="col-3">
+                            <div class="form-group">
+                                <label>Documentos</label>
+                             <input type="file" >
+                                
+                            </div>
+                        </div>
+                    </div>
                     
                     <div class="row">
                         <div class="col-5">

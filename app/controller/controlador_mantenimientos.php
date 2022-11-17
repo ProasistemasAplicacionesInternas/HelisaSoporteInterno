@@ -22,6 +22,7 @@ $mantenimiento = new mantenimientos();
 		$mantenimiento->setResponsable_mantenimiento($_SESSION['usuario']);
 		$mantenimiento->setCosto_mantenimiento($_POST['m_costo']);
 		$mantenimiento->setActivo_mantenimiento($_POST['m_idActivo']);
+		$mantenimiento->setActivo_documentos($_POST['m_idActivo']);
 		
 		$crud->crearMantenimiento($mantenimiento);
 

@@ -1,7 +1,7 @@
 <?php
   if(isset($_SESSION['usuario']) || isset($_POST['noQr'])){
-    session_unset($_SESSION['usuario']);
-    session_destroy($_SESSION['usuario']);
+    session_unset();
+    session_destroy();
   }
 ?>
 <!DOCTYPE html>
@@ -51,6 +51,7 @@
            <div class="modal-content">
                 <div class="modal-header">        
                     <h6>¡IMPORTANTE!</h6>
+                    
                 </div>
                 <div class="modal-body">  
                 <p>El ingreso a la plataforma es solo para usuarios autorizados, se solicita no suministrar los datos de acceso a terceros.</p>                
@@ -82,6 +83,7 @@
             <div class="col-md-6 mt-5"  style="top: 34px">
                 <form class="form-group" action="app/controller/controlador_funcionarios.php" method="post">
                     <div class="form-group"><input type="text" class="form-control" placeholder="usuario" id="f_user" name="f_user" required autofocus autocomplete="off"></div>
+                    
                     <div class="form-group"><input type="password" class="form-control" placeholder="contrase&ntilde;a" id="f_password" name="f_password" required></div>
 
                      <div style="margin-bottom: 2%">
@@ -104,11 +106,14 @@
 <script>
    $(document).ready(function()
    {
+    
       $("#importante").modal("show");
 
 
       $("#alerta").on('click',function(){        
       $("#importante").modal("hide");
+
       });
+        
    });   
 </script>

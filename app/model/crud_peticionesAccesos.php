@@ -42,6 +42,7 @@
             }
 
         }
+        
 
 
         public function getPeticionesxUsuario($usuario){
@@ -896,7 +897,7 @@
 
         public function correoDeFinalizacion($peticion){
             $db = Conectar::acceso();
-            $consulta = $db->prepare("SELECT F.nombre ,F.mail, F.mail2,F.identificacion,C.descripcion, PA.id_peticionAcceso, PA.conclusiones, PA.registro 
+            $consulta = $db->prepare("SELECT F.nombre ,F.mail, F.mail2,F.identificacion,C.descripcion, PA.id_peticionAcceso, PA.conclusiones, PA.registro, PA.tipo 
                                         FROM peticiones_accesos PA 
                                         LEFT JOIN funcionarios F ON F.usuario = PA.usuario_creacion 
                                         LEFT JOIN cargos C ON F.cargo = C.id_cargo 
@@ -913,6 +914,7 @@
             $id_peticion = $resultado['id_peticionAcceso'];
             $conclusiones =$resultado['conclusiones'];
             $registro = $resultado['registro'];
+            $tipo = $resultado['tipo'];
 
             $arregloRegistro = explode('/,,/',$registro);
             $numElement = count($arregloRegistro);
@@ -927,14 +929,20 @@
             $mail->Host = 'smtp.office365.com'; // Specify main and backup SMTP servers
             $mail->SMTPAuth = true; // Enable SMTP authentication
             $mail->Username = 'no-responder@helisa.com'; // SMTP username
-            $mail->Password = 'jkO5w6NqsJf7jRCop1X*#'; // SMTP password
+            $mail->Password = 'jkO5w6NqsJf7jRCop1X*#*'; // SMTP password
             $mail->SMTPSecure = 'tls'; // Enable TLS encryption, `ssl` also accepted
             $mail->Port = 587; // TCP port to connect to
             $mail->setFrom('no-responder@helisa.com');
             $mail->addAddress("$mail1");
             $mail->addAddress("$mail2");					
             $mail->isHTML(true); // Set email format to HTML
-            $subjects ="Aceptación entrega de accesos a plataformas PROASISTEMAS S.A.";//asunto
+            switch ($tipo) {
+                case 1:$subjects ="Aceptación entrega de accesos a plataformas PROASISTEMAS S.A.";break;
+                case 2:$subjects ="Inactivacion entrega de accesos a plataformas PROASISTEMAS S.A.";break;
+                case 3:$subjects ="Novedades entrega de accesos a plataformas PROASISTEMAS S.A.";break;
+                case 4:$subjects ="Reactivacion entrega de accesos a plataformas PROASISTEMAS S.A.";break;
+                               
+            }
             $cuerpo="<style type='text/css'> 
             *{ 
                 font-size: 15px;

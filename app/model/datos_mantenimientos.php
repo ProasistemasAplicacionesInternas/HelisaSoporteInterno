@@ -8,6 +8,7 @@
 		private $responsable_mantenimiento;
 		private $costo_mantenimiento;
 		private $activo_mantenimiento;
+		private $activo_documentos;
 
 		public function getId_mantenimiento(){
 		    return $this->id_mantenimiento;
@@ -64,5 +65,13 @@
 		    $this->activo_mantenimiento = $activo_mantenimiento;
 		    }
 
+		
+		public function getActivo_documentos(){
+		    return $this->activo_documentos;
 		}
+			public function setActivo_documentos($activo_documentos){
+		    $this->activo_documentos = $activo_documentos;
+		    }
+
+ 	}
  ?>
