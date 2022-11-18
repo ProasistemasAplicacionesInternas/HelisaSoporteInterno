@@ -74,7 +74,7 @@
                                 $validacionGoogle = $clase->qrBD($usuario);
                                 echo $validacionGoogle;
                             }else if($tipo_validacion == 2){
-                                $validacionCorreo = $this->enviaCorreoToken($id_usuario,$correo,$actual);
+                                $validacionCorreo = $this->enviaCorreoToken($usuario,$correo,$actual);
                                 echo $validacionCorreo;
                             }
                             //header("location:../../dashboard.php");
@@ -154,11 +154,11 @@
             //VALIDACIONES DE GOOGLE Y TOKEN
         public function validacionUsuario($validaT){
             $db=conectar::acceso();
-            $codigoUsuario = $db ->prepare("SELECT id_usuario FROM usuarios WHERE usuario=:usuario");
+            $codigoUsuario = $db ->prepare("SELECT usuario FROM usuarios WHERE usuario=:usuario");
             $codigoUsuario->bindValue('usuario',$validaT->getNombre());
             $codigoUsuario->execute();
             $codUsuario=$codigoUsuario->fetch(PDO::FETCH_ASSOC);
-            $codigo = $codUsuario['id_usuario'];
+            $codigo = $codUsuario['usuario'];
             if($codigoUsuario){
                 $validacion = $db->prepare('SELECT token,fecha_token FROM validacion_token WHERE id_usuario=:id_usuarioX ORDER by id DESC limit 1');             
                 $validacion->bindValue('id_usuarioX',$codigo);
@@ -240,7 +240,7 @@
             }
         }
 
-        public function enviaCorreoToken($id_usuario,$correo,$actual){
+        public function enviaCorreoToken($usuario,$correo,$actual){
             $token = bin2hex(random_bytes(5));
             //CORREO MEDIANTE PHP MAILER
             $mail = new PHPMailer(true);   
@@ -279,7 +279,7 @@
             }
             $db=conectar::acceso();
             $saveToken=$db->prepare("INSERT INTO validacion_token (id_usuario, fecha_token, token) VALUES (:id_usuario, :fecha, :token)");
-            $saveToken->bindValue('id_usuario',$id_usuario);
+            $saveToken->bindValue('id_usuario',$usuario);
             $saveToken->bindValue('fecha',$actual);
             $saveToken->bindValue('token',$token);
             $saveToken->execute();
