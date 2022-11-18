@@ -524,40 +524,31 @@ private function peticionCancelacionAccesos($identificacion,$usuario,$tema){
 			$codigoUsuario->execute();
 			$codUsuario=$codigoUsuario->fetch(PDO::FETCH_ASSOC);
 			$codigo = $codUsuario['usuario'];
-
 			if($codigoUsuario){
-				$validacion = $db->prepare('SELECT token,fecha_token FROM validacion_token WHERE id_usuario=:id_usuarioX AND token=:token');             
-				$validacion->bindValue('token',$datosFun->getF_ticket());
+				$validacion = $db->prepare('SELECT token,fecha_token FROM validacion_token WHERE id_usuario=:id_usuarioX ORDER by id DESC limit 1');         
 				$validacion->bindValue('id_usuarioX',$codigo);
 				$validacion->execute();
-				$row = $validacion->rowCount();
-					if($row!=0){
-						$arraytokenBD = $validacion -> fetch(PDO::FETCH_ASSOC);
-						$tokenBD = $arraytokenBD['token'];
-							
-						date_default_timezone_set('America/Bogota');   
-						$fecha_registro = $arraytokenBD['fecha_token'];
-						$actual = date("Y-m-d H:i:s");
-						$mas = date("Y-m-d H:i:s", strtotime("+1 minutes", strtotime($fecha_registro)));
-						
-						$tokenIngresado = $datosFun->getF_ticket();
-						if($actual < $mas){
-							$borrarToken = $db->prepare('DELETE FROM validacion_token WHERE id_usuario=:usuario');
-							$borrarToken->bindValue('usuario',$codigo);
-							$borrarToken->execute();
-							$_SESSION['status_connect']=$codigo;
-							$_SESSION['code']=$codigo;
-							header("location:../../dashboard_funcionarios.php");
-						}else{
-							if($tokenIngresado==$tokenBD){
-								$borrarToken = $db->prepare('DELETE FROM validacion_token WHERE id_usuario=:usuario');
-								$borrarToken->bindValue('usuario',$codigo);
-								$borrarToken->execute();
-							}
-						}
-					}
+				$arraytokenBD = $validacion -> fetch(PDO::FETCH_ASSOC);
+				$tokenBD = $arraytokenBD['token'];					
+				date_default_timezone_set('America/Bogota');   
+				$fecha_registro = $arraytokenBD['fecha_token'];
+				$actual = date("Y-m-d H:i:s");
+				$mas = date("Y-m-d H:i:s", strtotime("+1 minutes", strtotime($fecha_registro)));			
+				$tokenIngresado = $datosFun->getF_ticket();				
+				if($actual < $mas && $tokenIngresado==$tokenBD){
+					$borrarToken = $db->prepare('DELETE FROM validacion_token WHERE id_usuario=:usuario');
+					$borrarToken->bindValue('usuario',$codigo);
+					$borrarToken->execute();
+					$_SESSION['status_connect']=$codigo;
+					$_SESSION['code']=$codigo;
+					header("location:../../dashboard_funcionarios.php");
+				}else{
+					session_unset();
+					session_destroy();		
+					header("location:../../login_peticiones.php");			
+				}
 			}
-	}
+		}
 
 	public function enviaCorreoToken($usuario,$correo,$actual){
 		$token = bin2hex(random_bytes(5));
@@ -571,7 +562,7 @@ private function peticionCancelacionAccesos($identificacion,$usuario,$tema){
 		$mail->Host = 'smtp.office365.com';  // Specify main and backup SMTP servers
 		$mail->SMTPAuth = true;                               // Enable SMTP authentication
 		$mail->Username = 'no-responder@helisa.com';                 // SMTP username
-		$mail->Password = 'jkO5w6NqsJf7jRCop1X*#';                           // SMTP password
+		$mail->Password = 'jkO5w6NqsJf7jRCop1X*#*';                           // SMTP password
 		$mail->SMTPSecure = 'tls';                            // Enable TLS encryption, `ssl` also accepted
 		$mail->Port = 587;                                    // TCP port to connect to
 		$mail->setFrom('no-responder@helisa.com');
@@ -602,7 +593,7 @@ private function peticionCancelacionAccesos($identificacion,$usuario,$tema){
 		$saveToken->bindValue('fecha',$actual);
 		$saveToken->bindValue('token',$token);
 		$saveToken->execute();
-		header("location:../view/validacionToken.php");
+		header("location:../view/validacionTokenFuncionarios.php");
 	}
 
 	public function qrBD($usuario){
@@ -870,7 +861,7 @@ public function cambioContrasena($update){
 			$mail->Host = 'smtp.office365.com';  // Specify main and backup SMTP servers
 			$mail->SMTPAuth = true;                               // Enable SMTP authentication
 			$mail->Username = 'no-responder@helisa.com';                 // SMTP username
-			$mail->Password = 'jkO5w6NqsJf7jRCop1X*#';                           // SMTP password
+			$mail->Password = 'jkO5w6NqsJf7jRCop1X*#*';                           // SMTP password
 			$mail->SMTPSecure = 'tls';                            // Enable TLS encryption, `ssl` also accepted
 			$mail->Port = 587;                                    // TCP port to connect to
 
