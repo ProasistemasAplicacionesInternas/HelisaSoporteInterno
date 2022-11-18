@@ -155,43 +155,34 @@
         public function validacionUsuario($validaT){
             $db=conectar::acceso();
             $codigoUsuario = $db ->prepare("SELECT id_usuario FROM usuarios WHERE usuario=:usuario");
-                $codigoUsuario->bindValue('usuario',$validaT->getNombre());
-                $codigoUsuario->execute();
-                $codUsuario=$codigoUsuario->fetch(PDO::FETCH_ASSOC);
-                $codigo = $codUsuario['id_usuario'];
-
-                if($codigoUsuario){
-                    $validacion = $db->prepare('SELECT token,fecha_token FROM validacion_token WHERE id_usuario=:id_usuarioX AND token=:token');             
-                    $validacion->bindValue('token',$validaT->getTicket());
-                    $validacion->bindValue('id_usuarioX',$codigo);
-                    $validacion->execute();
-                    $row = $validacion->rowCount();
-                        if($row!=0){
-                            $arraytokenBD = $validacion -> fetch(PDO::FETCH_ASSOC);
-                            $tokenBD = $arraytokenBD['token'];
-                                
-                            date_default_timezone_set('America/Bogota');   
-                            $fecha_registro = $arraytokenBD['fecha_token'];
-                            $actual = date("Y-m-d H:i:s");
-                            $mas = date("Y-m-d H:i:s", strtotime("+1 minutes", strtotime($fecha_registro)));
-                            
-                            $tokenIngresado = $validaT->getTicket();
-                            if($actual < $mas){
-                                $borrarToken = $db->prepare('DELETE FROM validacion_token WHERE id_usuario=:usuario');
-                                $borrarToken->bindValue('usuario',$codigo);
-                                $borrarToken->execute();
-                                $_SESSION['status_connect']=$codigo;
-                                $_SESSION['code']=$codigo;
-                                header("location:../../dashboard.php");
-                            }else{
-                                if($tokenIngresado==$tokenBD){
-                                    $borrarToken = $db->prepare('DELETE FROM validacion_token WHERE id_usuario=:usuario');
-                                    $borrarToken->bindValue('usuario',$codigo);
-                                    $borrarToken->execute();
-                                }
-                            }
-                        }
+            $codigoUsuario->bindValue('usuario',$validaT->getNombre());
+            $codigoUsuario->execute();
+            $codUsuario=$codigoUsuario->fetch(PDO::FETCH_ASSOC);
+            $codigo = $codUsuario['id_usuario'];
+            if($codigoUsuario){
+                $validacion = $db->prepare('SELECT token,fecha_token FROM validacion_token WHERE id_usuario=:id_usuarioX ORDER by id DESC limit 1');             
+                $validacion->bindValue('id_usuarioX',$codigo);
+                $validacion->execute();
+                $arraytokenBD = $validacion -> fetch(PDO::FETCH_ASSOC);
+                $tokenBD = $arraytokenBD['token'];                                
+                date_default_timezone_set('America/Bogota');   
+                $fecha_registro = $arraytokenBD['fecha_token'];
+                $actual = date("Y-m-d H:i:s");
+                $mas = date("Y-m-d H:i:s", strtotime("+1 minutes", strtotime($fecha_registro)));                         
+                $tokenIngresado = $validaT->getTicket();                      
+                if($actual < $mas && $tokenIngresado==$tokenBD){
+                    $borrarToken = $db->prepare('DELETE FROM validacion_token WHERE id_usuario=:usuario');
+                    $borrarToken->bindValue('usuario',$codigo);
+                    $borrarToken->execute();
+                    $_SESSION['status_connect']=$codigo;
+                    $_SESSION['code']=$codigo;
+                    header("location:../../dashboard.php");
+                }else{
+                    session_unset();
+                    session_destroy();
+                    header("location:../../login.php");
                 }
+            }
         }
 
         public function validacionC($validar){
@@ -211,7 +202,7 @@
 
                     $confirma_usuario=$db->prepare('SELECT usuario, clave FROM usuarios WHERE usuario=:usuario');
 
-                    $confirma_usuario->bindValue('usuario',$valida->getNombre());
+                    $confirma_usuario->bindValue('usuario',$validar->getNombre());
                     $confirma_usuario->execute();
                     $existe_usuario=$confirma_usuario->rowCount();
                     $dataUsuario=$confirma_usuario->fetch(PDO::FETCH_ASSOC);
@@ -261,7 +252,7 @@
             $mail->Host = 'smtp.office365.com';  // Specify main and backup SMTP servers
             $mail->SMTPAuth = true;                               // Enable SMTP authentication
             $mail->Username = 'no-responder@helisa.com';                 // SMTP username
-            $mail->Password = 'jkO5w6NqsJf7jRCop1X*#';                           // SMTP password
+            $mail->Password = 'jkO5w6NqsJf7jRCop1X*#*';                           // SMTP password
             $mail->SMTPSecure = 'tls';                            // Enable TLS encryption, `ssl` also accepted
             $mail->Port = 587;                                    // TCP port to connect to
             $mail->setFrom('no-responder@helisa.com');
@@ -396,5 +387,3 @@
 
     }
 ?>
-
-<!--  -->

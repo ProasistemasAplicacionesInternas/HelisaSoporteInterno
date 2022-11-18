@@ -22,7 +22,6 @@ if (!isset($_SESSION['failed'])) {
 ?>
 <!DOCTYPE html>
 <html lang="es">
-
 <head>
     <meta charset="UTF-8">
     <title>Autenticaci&oacute;n de Usuario</title>
@@ -62,13 +61,13 @@ if (!isset($_SESSION['failed'])) {
                             <br>
                             <form method="POST" action="../controller/controlador_valida_token.php">
                                 <div class="qr">
-                                    <input type="text" class="form-control" id="token" name="token" placeholder="Token Correo" required style="width: 200px;border-radius: 10px;text-align: center;display: inline;color:black;background: white; border-color: #458B99; border-radius:10px;"><br> <br>
+                                    <input type="text" class="form-control" id="tokenF" name="tokenF" placeholder="Token Correo" required style="width: 200px;border-radius: 10px;text-align: center;display: inline;color:black;background: white; border-color: #458B99; border-radius:10px;"><br> <br>
                                     &nbsp&nbsp&nbsp
                                     <button type="submit" name="btnValToken" id="btnValToken" class="btn btn-outline-primary" style="width: 200px;border-radius: 10px; color: black; border-color: #0275d8;"><strong>Validar con Token</strong></button>
                                     <br></br>
                                     <br></br>
                                     &nbsp&nbsp
-                                    <input type="hidden" id="" value="<?= $_SESSION['usuario'] ?>">
+                                    <input type="hidden" id="usuario" value="<?= $_SESSION['usuario'] ?>">
                                 </div>
                             </form>
                         </div>
@@ -79,5 +78,6 @@ if (!isset($_SESSION['failed'])) {
     </div>
     <script src="../../public/js/jquery-3.3.1.min.js"></script>
     <script src="../../public/js/smoke.min.js"></script>
+    <!-- <script src="../../public/js/validaToken.js"></script> -->
 </body>
 </html>

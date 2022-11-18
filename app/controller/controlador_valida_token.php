@@ -16,11 +16,11 @@ if(isset($_POST['token'])){
     $validar->setNombre($_SESSION['usuario']);
     $validar->setTicket($_POST['token']);
     $verifica->validacionUsuario($validar);
-}
+} 
 
-if(isset($_POST['token'])){
+if(isset($_POST['tokenF'])){
     $datosFun->setF_usuario($_SESSION['usuario']);
-    $datosFun->setF_ticket($_POST['token']);
+    $datosFun->setF_ticket($_POST['tokenF']);
     $crudF->validacionFuncionario($datosFun);
 }
 ?>
