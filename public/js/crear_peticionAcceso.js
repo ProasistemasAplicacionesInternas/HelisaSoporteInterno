@@ -304,8 +304,7 @@ function ocultarTodasPlataformas(){
 
 
 function plataformasAsignadasChekbox(){
-    console.log("Consulta plataformas activas")
-    if($('#funcionarioAlterno').val() == 0){
+        if($('#funcionarioAlterno').val() == 0){
         usuario = $('#funcionario').val();
     }else{
         usuario = $('#funcionarioAlterno').val();
@@ -328,7 +327,6 @@ function plataformasAsignadasChekbox(){
     })
 }
 function plataformasInactivasChekbox(){
-   console.log("Funcion que traer las de novedades ")
     if($('#funcionarioAlterno').val() == 0){
         usuario = $('#funcionario').val();
     }else{

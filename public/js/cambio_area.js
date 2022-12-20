@@ -71,6 +71,9 @@ function productoCategoria(){
             reqJustification.style.display= "none";
         }
     }
+   function retrocesoPagina(){
+        history.back()
+   }
 
     
 
