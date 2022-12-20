@@ -171,10 +171,9 @@
                                 </div>
                                 <div>
                                     <input type="file" id="imagen[]" name="imagen[]" multiple="" >
-                                    
                                 </div>
                                 <label class="mt-2" id="textImg" style="min-width:150%"></label>
-                            </div>
+                            </div>smo codigo
                         </div>
                     </div>
 
@@ -183,7 +182,7 @@
                             <button type="submit" class="btn btn-success" id="btn-enviar_peticion" name="btn-enviar_peticion">Enviar Solicitud</button>
                         </div>
                         <div class="col-3">
-                            <a href="../../dashboard_funcionarios.php" class="btn btn-danger">Cancelar</a>
+                            <a  class="btn btn-danger" onclick="retrocesoPagina()">Cancelar</a>
                         </div>
                     </div>
                 </form>

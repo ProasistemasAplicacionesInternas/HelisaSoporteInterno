@@ -509,10 +509,10 @@
 //***************** CONSULTA El ACCESOS PLATAFORMAS EN  ASIGNACIONES FUNCIONARIO **********************//
 //*****************************************************************************************************//
     else if(isset($consultarAccesosPlataformas) && $consultarAccesosPlataformas == 1){
-        
+            
         if($consultaMai == 1 || isset($_SESSION['id_roles'])){
             $consultarAccesosPlataformas = $crud->accesoPlataformasxUsuarioTodas($_POST['f_usuario']);
-        }else if ($consultaMai == 2 || isset($_SESSION['id_roles'])){
+        }else{
             $consultarAccesosPlataformas = $crud->accesoPlataformasxUsuarioTodas($_SESSION['usuario']);
         }
     }

@@ -64,8 +64,8 @@
                                     <td><?php echo $listado->getid_accesoPlataforma();?></td>
                                     <td><?php echo $listado->getPlataformaDescripcion() ?></td>
                                     <td><?php echo $listado->getUsuario() ?></td>
-                                    <td>  <?php if($listado->getEstado() == 5):?>
-                                        <button type="buttom" class="btn btm-light" data-toggle="modal" data-target="#verClave" style="padding: 0px;" onclick="verClave('<?php echo $listado->getid_accesoPlataforma();?>','<?php echo $listado->getPlataformaDescripcion();?>')" ><i class="far fa-eye fa-2x"></i></button>
+                                    <td><?php if($listado->getEstado() == 5):?>
+                                    <button type="buttom" class="btn btm-light" data-toggle="modal" data-target="#verClave" style="padding: 0px;" onclick="verClave('<?php echo $listado->getid_accesoPlataforma();?>','<?php echo $listado->getPlataformaDescripcion();?>')" ><i class="far fa-eye fa-2x"></i></button>
                                     </td> <?php endif;?>
                                     <td><?php echo $listado->getEstadoDescripcion() ?> </td> 
                                     <td><?php echo $listado->getFecha_registro() ?> </td>

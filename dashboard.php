@@ -3,15 +3,11 @@
    ini_set("session.gc_maxlifetime", 180000);
 
    session_start();
-    if(!isset($_SESSION['usuario'])||empty($_SESSION['usuario'])){
+   $_SESSION['id_roles'];
+   if(!isset($_SESSION['usuario'])||empty($_SESSION['usuario'])){
+       
        header('location:login.php');
-    }
-   if(!isset($_SESSION['id_roles'])){
-        header('location:login.php');
-    }
-    if(!isset($_SESSION['status_connect'])){
-        header('location:login.php');
-    }
+   }
 ?>
 
 <!DOCTYPE html>
@@ -193,7 +189,7 @@
     <script src="public/js/daterangepicker.js"></script>
     <script src="public/js/popper.js"></script>
     <script src="public/js/bootstrap.min.js"></script>
-    <script src="public/js/navega.js?hdhd"></script>
+    <script src="public/js/navega.js"></script>
     <script src="public/js/bloqueoTeclas.js"></script>
 
     <?php require ('app/view/actualiza_usuario.php');?>

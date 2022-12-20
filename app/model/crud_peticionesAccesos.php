@@ -463,7 +463,7 @@
 
             if($acceso->getEstado() == 12){
                 $inactivacionAcceso = $db->prepare("UPDATE accesos_plataformas SET estado = :estado, fecha_inactivacion = curdate() WHERE id_accesoPlataforma = :id_acceso");
-                $inactivacionAcceso->bindValue('estado',18);
+                $inactivacionAcceso->bindValue('estado',17);
                 $inactivacionAcceso->bindValue('id_acceso',$acceso->getId_acceso());
                 $inactivacionAcceso->execute();
             }
@@ -574,7 +574,7 @@
                 LEFT JOIN estado ON AP.estado = estado.id_estado
                 WHERE F.usuario = :usuario && AP.estado = :estado");
             $consulta->bindValue('usuario', $usuario);
-            $consulta->bindValue('estado', 18);
+            $consulta->bindValue('estado', 17);
             $consulta->execute();
             $listadoAccesosPlataformas = array();
 
@@ -609,7 +609,7 @@
                 LEFT JOIN estado ON AP.estado = estado.id_estado
                 WHERE F.usuario = :usuario && AP.estado = :estado");
             $consulta->bindValue('usuario', $usuario);
-            $consulta->bindValue('estado', 18);
+            $consulta->bindValue('estado', 17);
             $consulta->execute();
             $listadoAccesosPlataformas = array();
 
@@ -1084,7 +1084,7 @@
             $resultado = $consultaIdent->fetch(PDO::FETCH_ASSOC);
             $identificacion = $resultado['identificacion'];
 
-            $consulta = $db->prepare("SELECT id_accesoPlataforma FROM accesos_plataformas WHERE plataforma = :plataforma && estado = 18 && id_usuario = :id_user");
+            $consulta = $db->prepare("SELECT id_accesoPlataforma FROM accesos_plataformas WHERE plataforma = :plataforma && estado = 17 && id_usuario = :id_user");
             $consulta->bindValue('plataforma', $plataforma);
             $consulta->bindValue('id_user',$identificacion);
             $consulta->execute();

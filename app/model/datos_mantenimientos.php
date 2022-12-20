@@ -9,6 +9,13 @@
 		private $costo_mantenimiento;
 		private $activo_mantenimiento;
 		private $activo_documentos;
+		private $ramRepowering;
+		private $diskRepowering;
+		private $coreRepowering;
+		private $soRepowering;
+		private $licenciaRepowering;
+		private $pdfMantenimientos;
+
 
 		public function getId_mantenimiento(){
 		    return $this->id_mantenimiento;
@@ -65,13 +72,61 @@
 		    $this->activo_mantenimiento = $activo_mantenimiento;
 		    }
 
-		
+//*******************************************************************************		
 		public function getActivo_documentos(){
 		    return $this->activo_documentos;
 		}
 			public function setActivo_documentos($activo_documentos){
 		    $this->activo_documentos = $activo_documentos;
 		    }
+//************************************************************************
+
+		public function getRamrepowering(){
+		    return $this->ramRepowering;
+		}
+			public function setRamrepowering($ramRepowering){
+		    $this->ramRepowering = $ramRepowering;
+		    }
+//***********************************************************************
+
+		public function getDiskrepowering(){
+		    return $this->diskRepowering;
+		}
+			public function setDiskrepowering($diskRepowering){
+		    $this->diskRepowering = $diskRepowering;
+		    }
+//**********************************************************************			
+		public function getCorerepowering(){
+		    return $this->coreRepowering;
+		}
+			public function setCorerepowering($coreRepowering){
+		    $this->coreRepowering = $coreRepowering;
+		    }
+//***********************************************************************
+
+		public function getSorepowering(){
+		    return $this->soRepowering;
+		}
+			public function setSorepowering($soRepowering){
+		    $this->soRepowering = $soRepowering;
+			}		
+//***********************************************************************
+
+		    
+		public function getLicenciarepowering(){
+			return $this->licenciaRepowering;
+		}
+			public function setLicenciarepowering($licenciaRepowering){
+			$this->licenciaRepowering = $licenciaRepowering;
+			}
+
+//***********************************************************************
+		public function getPdfmantenimientos(){
+			return $this->pdfMantenimientos;
+		}
+			public function setPdfmantenimientos($pdfMantenimientos){
+			$this->pdfMantenimientos = $pdfMantenimientos;
+			}	
 
  	}
  ?>

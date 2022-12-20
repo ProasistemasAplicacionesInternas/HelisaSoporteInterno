@@ -103,8 +103,7 @@
                                 <input type="hidden" name="af_dominio" id="af_dominio" value="<?php echo $datos->getAf_dominio();?>">  
                                 <input type="hidden" name="af_so" id="af_so" value="<?php echo $datos->getAf_sistemaOperativo();?>">  
                                 <input type="hidden" name="af_areaCreacion" id="af_areaCreacion" value="<?php echo $datos->getAf_areaCreacion();?>"> 
-
-
+                                <input type="hidden" name="af_imagenActivo" id="af_imagenActivo" value="<?php echo $datos->getImagenactivo();?>"> 
                                 <input type="submit" value="Modificar Activo" name="modificar_activo" class="btn btn-info">
                             </form>
                         </td>
@@ -112,8 +111,15 @@
                         <td> 
                             <form action="crear_mantenimientos.php" method="post">
                                 <input type="hidden" name="af_idA" id="af_idA" value="<?php echo $datos->getAf_id();?>">
+                                <input type="hidden" name="af_categoria" id="af_categoria" value="<?php echo $datos->getAf_grupo();?>">   
                                 <input type="hidden" name="af_codigoA" id="af_codigoA" value="<?php echo $datos->getAf_codigo();?>">
                                 <input type="hidden" name="af_serialA" id="af_serialA" value="<?php echo $datos->getAf_serial();?>">    
+                                <input type="hidden" name="af_ram" id="af_ram" value="<?php echo $datos->getAf_ram();?>">  
+                                <input type="hidden" name="af_discoDuro" id="af_discoDuro" value="<?php echo $datos->getAf_disco();?>">  
+                                <input type="hidden" name="af_procesador" id="af_procesador" value="<?php echo $datos->getAf_procesador();?>">
+                                <input type="hidden" name="af_so" id="af_so" value="<?php echo $datos->getAf_sistemaOperativo();?>">  
+                                <input type="hidden" name="af_licenciaSo" id="af_licenciaSo" value="<?php echo $datos->getAf_licenciaSO();?>">
+                                <input type="hidden" name="af_dominio" id="af_dominio" value="<?php echo $datos->getAf_dominio();?>">  
                                 <input type="submit" value="Realizar Mantenimiento" name="mantenimiento" class="btn btn-success">
                             </form>
                         </td>
