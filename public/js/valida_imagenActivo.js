@@ -40,11 +40,11 @@ $(document).on('change', 'input[type="file"]', function() {
                 })
 
                 $('#alert').fadeIn('slow');
-                document.getElementById("btn-enviar_peticion").disabled = true;
+                document.getElementById("crear_activoFijo").disabled = true;
 
                 setTimeout(function() {
 
-                    document.getElementById("btn-enviar_peticion").disabled = false;
+                    document.getElementById("crear_activoFijo").disabled = false;
                     $("#alerta").load(" #alerta");
                     $("#ruta").load(" #ruta");
 

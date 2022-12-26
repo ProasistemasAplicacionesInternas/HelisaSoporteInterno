@@ -20,7 +20,7 @@ $activos_Asignados = $consult->matrizActivosFuncionario();*/
 //********************************************************************************************//
 
         if (isset($_POST['crear']) && ($_POST['crear']==1)) {
-
+            $nombre_imagen = "No aplica";
             if (isset($_FILES['af_imagen1'])) {
                 $imagen = $_FILES['af_imagen1'];
             

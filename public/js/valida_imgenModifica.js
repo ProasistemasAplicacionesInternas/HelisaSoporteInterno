@@ -24,6 +24,12 @@ $(document).on('change', 'input[type="file"]', function() {
 
         var ext = fileName.split('.').pop();
         switch (ext) {
+            case 'jpg':
+            case 'JPG':
+            case 'jpeg':
+            case 'JPEG':
+            case 'png':
+            case 'PNG':
             case 'PDF':
             case 'pdf':
                 break;
@@ -34,11 +40,11 @@ $(document).on('change', 'input[type="file"]', function() {
                 })
 
                 $('#alert').fadeIn('slow');
-                document.getElementById("crear_mantenimiento").disabled = true;
+                document.getElementById("guardar_modificaciones").disabled = true;
 
                 setTimeout(function() {
 
-                    document.getElementById("crear_mantenimiento").disabled = false;
+                    document.getElementById("guardar_modificaciones").disabled = false;
                     $("#alerta").load(" #alerta");
                     $("#ruta").load(" #ruta");
 

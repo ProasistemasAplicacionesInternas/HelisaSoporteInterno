@@ -173,7 +173,7 @@ require('../controller/controlador_funcionarios.php');
             </div>
 
             <div class="row">
-                <div class="col-5">
+                <div class="col-8">
                     <input type="submit" value="Ingresar Mantenimiento" id="crear_mantenimiento" name="crear_mantenimiento" class="mt-4 btn btn-primary btn-sm btn-guardar">
                 </div>
                 <div class="col-4">
@@ -192,6 +192,7 @@ require('../controller/controlador_funcionarios.php');
     <script src="../../public/js/smoke.min.js"></script>
     <script src="../../public/js/es.min.js"></script>
     <script src="../../public/js/bloqueoTeclas.js"></script>
+    <script src="../../public/js/validaPdfManteninmiento.js"></script>
 
 </body>
 
