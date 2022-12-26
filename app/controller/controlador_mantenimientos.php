@@ -40,11 +40,11 @@ $mantenimiento = new mantenimientos();
 		$mantenimiento->setSorepowering($_POST['af_so']);
 		$mantenimiento->setLicenciarepowering($_POST['af_licenciado']);
 		$mantenimiento->setPdfmantenimientos($pdfName);
-		
-		$crud->crearMantenimiento($mantenimiento);
 		$crud->realizaRepotenciacion($mantenimiento);
+		$crud->crearMantenimiento($mantenimiento);
 
-		header('Location: ../../dashboard.php');
+	
+		//header('Location: ../../dashboard.php');
 	}
 
 

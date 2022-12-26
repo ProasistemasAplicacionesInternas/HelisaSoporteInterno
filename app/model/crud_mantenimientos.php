@@ -53,7 +53,7 @@ class CrudMantenimientos{
 				$colsultar_usuario->execute();
 				$filtro=$colsultar_usuario->fetch(PDO::FETCH_ASSOC);
 				$id_usuario=$filtro['id_usuario'];
-				$funcion_realizada = "El usuario Realizo una Actualizacion de un  activo";
+				$funcion_realizada = "El usuario Realizo una la actualizacion del activo fijo ".$create->getActivo_mantenimiento().", Ram: ".$create->getRamrepowering()." , Disco duro: ".$create->getDiskrepowering().",   Procesador: ".$create->getCorerepowering().", Sistema operativo: ".$create->getSorepowering().", Licencia sistema: ".$create->getLicenciarepowering()." " ;
 				$inserta_funcion=$db->prepare("INSERT INTO funciones (codigo, id_usuario, fecha_registro, funcion_realizada,IP) VALUES (0, :id_usuario , curdate() , :funcion_realizada ,:ip )");
 				$inserta_funcion->bindValue('id_usuario',$id_usuario);
 				$inserta_funcion->bindValue('funcion_realizada',$funcion_realizada);

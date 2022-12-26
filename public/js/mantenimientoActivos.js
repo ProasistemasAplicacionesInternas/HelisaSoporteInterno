@@ -6,6 +6,8 @@ $(document).ready(function(){
         $('#repoweringButton').show()
     }else if(group == 13){
         $('#repoweringButton').show()
+    }else if(group == 14){
+        $('#repoweringButton').show()
     }else{
         $('#repoweringButton').hide()
     }

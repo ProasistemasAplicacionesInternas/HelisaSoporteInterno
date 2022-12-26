@@ -210,7 +210,7 @@ require('../controller/controlador_gruposActivos.php');
                         </div>    
                         <div class="col-3">
                             <label>Imagen del Activo</label><br>
-                            <?php if ($af_imagenActivo != ''){ ?>
+                            <?php if ($af_imagenActivo != 'No aplica'){ ?>
                                 
                                 <input type="hidden" id="imagenCa" name="imagenCa" value="<?php echo $af_imagenActivo; ?>">
                                 <a class="badge badge-light text" href="../../img/<?=$af_imagenActivo?>" target="_blanck" id="imagen" name="imagen" style="text-decoration: underline; font-size: 15px;color: #bf1d1d; ">
@@ -349,5 +349,6 @@ require('../controller/controlador_gruposActivos.php');
     <script src="../../public/js/close.js"></script> 
     <script src="../../public/js/bloqueoTeclas.js"></script>   
     <script src="../../public/js/modificarActivo.js"></script>   
+    <script src="../../public/js/valida_imgenModifica.js"></script>   
 </body>
 </html>
