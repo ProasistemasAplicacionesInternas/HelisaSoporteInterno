@@ -9,7 +9,7 @@ class CrudMantenimientos{
 
 		public function crearMantenimiento($create){
 			$db=Conectar::acceso();
-			$crea_mantenimiento=$db->prepare('INSERT INTO mantenimientos(fecha_mantenimiento, descripcion_mantenimiento, responsable_mantenimiento, costo_mantenimiento, activo_mantenimiento, documentos )VALUES(:m_fecha, :m_descripcion, :m_responsable, :m_costo, :m_activo, :m_documento)');
+			$crea_mantenimiento=$db->prepare('INSERT INTO mantenimientos(fecha_mantenimiento, descripcion_mantenimiento, responsable_mantenimiento, costo_mantenimiento, activo_mantenimiento, documentos, repotenciacion )VALUES(:m_fecha, :m_descripcion, :m_responsable, :m_costo, :m_activo, :m_documento, :m_repotenciacion)');
 
 			$crea_mantenimiento->bindValue('m_fecha',$create->getFecha_mantenimiento());
 			$crea_mantenimiento->bindValue('m_descripcion',$create->getDescripcion_mantenimiento());
@@ -17,6 +17,7 @@ class CrudMantenimientos{
             $crea_mantenimiento->bindValue('m_costo',$create->getCosto_mantenimiento());
             $crea_mantenimiento->bindValue('m_activo',$create->getActivo_mantenimiento());
             $crea_mantenimiento->bindValue('m_documento',$create->getPdfmantenimientos());
+            $crea_mantenimiento->bindValue('m_repotenciacion',$create->getRepotenciacion());
 			$crea_mantenimiento->execute();
 
 			 $colsultar_usuario=$db->prepare('SELECT id_usuario from usuarios where usuario =:usuario');

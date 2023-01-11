@@ -37,6 +37,8 @@ class CrudPeticiones{
                            $inserta_funcion->bindValue('funcion_realizada',$funcion_realizada);
                            $inserta_funcion->bindValue('ip', $_SERVER['REMOTE_ADDR']);                 
                            $inserta_funcion->execute();
+
+						   echo 1;
 	}
 
 

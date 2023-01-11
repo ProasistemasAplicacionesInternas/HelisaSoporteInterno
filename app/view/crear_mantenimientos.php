@@ -63,7 +63,7 @@ require('../controller/controlador_funcionarios.php');
 
                         <div class="col-3">
                             <div class="form-group">
-                                <label>Codigo Activo</label>
+                                <label>Código Activo</label>
                                 <input type="text" id="m_codigo" name="m_codigo" class="form-control info" maxlength="10" autocomplete="off" value="<?php echo $af_codigo ?>" readonly>
                             </div>
                         </div>
@@ -90,10 +90,10 @@ require('../controller/controlador_funcionarios.php');
                             </div>
                         </div>
                         <div class="form-group" id="repoweringButton" style="display: none;">
-                            <label for="repotentiationSelect">Repotensiacion</label>
-                            <select class="form-control" id="repotentiationSelect">
-                                <option value="2">Si</option>
-                                <option value="1" selected="selected">No</option>
+                            <label for="repotentiationSelect">Repotenciación</label>
+                            <select class="form-control" id="repotentiationSelect" name="repotentiationSelect" >
+                                <option value="Si">Si</option>
+                                <option value="No" selected="selected">No</option>
                             </select>
                         </div>
                     </div>
