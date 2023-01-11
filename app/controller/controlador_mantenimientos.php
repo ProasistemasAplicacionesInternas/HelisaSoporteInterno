@@ -27,7 +27,7 @@ $mantenimiento = new mantenimientos();
 				move_uploaded_file($imagen['tmp_name'], "../../cartas/$pdfName");	
 			}
 		}	
-
+		
 		$mantenimiento->setFecha_mantenimiento($_POST['m_fecha']);
 		$mantenimiento->setDescripcion_mantenimiento($_POST['m_descripcion']);
 		$mantenimiento->setResponsable_mantenimiento($_SESSION['usuario']);
@@ -39,12 +39,15 @@ $mantenimiento = new mantenimientos();
 		$mantenimiento->setCorerepowering($_POST['af_procesador']);
 		$mantenimiento->setSorepowering($_POST['af_so']);
 		$mantenimiento->setLicenciarepowering($_POST['af_licenciado']);
+		$mantenimiento->setRepotenciacion($_POST['repotentiationSelect']);
 		$mantenimiento->setPdfmantenimientos($pdfName);
+		
 		$crud->realizaRepotenciacion($mantenimiento);
+
 		$crud->crearMantenimiento($mantenimiento);
 
 	
-		//header('Location: ../../dashboard.php');
+		header('Location: ../../dashboard.php');
 	}
 
 

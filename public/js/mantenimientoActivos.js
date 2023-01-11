@@ -17,10 +17,10 @@ $(document).ready(function(){
 
 $('#repotentiationSelect').on('change',function(){
     let status = $('#repotentiationSelect').val();
-    if (status== 1){
+    if (status== "No"){
         console.log("uno")
         $('#datos_adicionales').hide()
-    }else if (status==2){
+    }else if (status=="Si"){
         $('#datos_adicionales').show()
     }
     

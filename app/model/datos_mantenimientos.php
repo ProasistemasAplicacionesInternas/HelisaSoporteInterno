@@ -15,6 +15,7 @@
 		private $soRepowering;
 		private $licenciaRepowering;
 		private $pdfMantenimientos;
+		private $repotenciacion;
 
 
 		public function getId_mantenimiento(){
@@ -126,7 +127,14 @@
 		}
 			public function setPdfmantenimientos($pdfMantenimientos){
 			$this->pdfMantenimientos = $pdfMantenimientos;
-			}	
+			}
+//*************************************************************************			
+		public function getRepotenciacion(){
+			return $this->repotenciacion;
+		}
+		public function setRepotenciacion($repotenciacion){
+			$this->repotenciacion = $repotenciacion;
+		}		
 
  	}
  ?>
