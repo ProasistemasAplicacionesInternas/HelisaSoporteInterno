@@ -34,6 +34,7 @@
             private $fecha_recibe;
             private $numeroServidor;
             private $nombreServidor; 
+            private $estadoM; 
             private $nombre;           
            
         function __construct(){}
@@ -364,6 +365,17 @@
              public function setNumeroServidor($numeroServidor)
              {
                  $this->numeroServidor = $numeroServidor;
+                 return $this;
+             }     
+     /****************************************************************/  
+        public function getEstadoM()
+             {
+                 return $this->estadoM;
+             }
+             
+             public function setEstadoM($estadoM)
+             {
+                 $this->estadoM = $estadoM;
                  return $this;
              }     
      /****************************************************************/  
