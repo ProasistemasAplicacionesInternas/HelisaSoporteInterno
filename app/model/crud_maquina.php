@@ -138,7 +138,8 @@
               persona_recibe=:persona_recibe,
               cargo_recibe=:cargo_recibe,
               fecha_recibe=:fecha_recibe,
-              id_servidor=:nombreServidor 
+              id_servidor=:nombreServidor,
+              m_estado=:estadoM 
               WHERE id_maquina=:id_maquina');
             //echo $modifica->getIDmaquina()." asdasd";
             $modificar_persona->bindValue('id_maquina',$modifica->getIDmaquina());
@@ -171,6 +172,7 @@
             $modificar_persona->bindValue('cargo_recibe',$modifica->getCargo_recibe());
             $modificar_persona->bindValue('fecha_recibe',$modifica->getFecha_recibe());
             $modificar_persona->bindValue('nombreServidor',$modifica->getNombreServidor());  
+            $modificar_persona->bindValue('estadoM',$modifica->getEstadoM());  
             $modificar_persona->execute();
 
              $colsultar_usuario=$db->prepare('SELECT id_usuario from usuarios where usuario =:usuario');
@@ -191,7 +193,7 @@
         public function detalleMaquina(){
             $db=conectar::acceso();
 
-            $detalleMaquina=$db->prepare('SELECT id_maquina, nombre_maquina, maquinas.id_servidor, servidores.nombre_servidor, ubicacion_maquina, IP_maquina, IP_publica_maquina, puerto_maquina, fecha_compra_maquina, tipo_maquina, memoria_maquina, disco_maquina, procesador_maquina, dominio_maquina, responsable_maquina, maquinas.usuario_administrador, maquinas.usuario_estandar, maquinas.sistema_operativo, maquinas.programas_instalados, maquinas.uso, maquinas.tiempo_uso, maquinas.backup, maquinas.ruta_backup, maquinas.frecuencia_backup, maquinas.persona_genera, maquinas.persona_entrega, maquinas.cargo_entrega, maquinas.fecha_entrega, maquinas.persona_recibe, maquinas.cargo_recibe, maquinas.fecha_recibe FROM maquinas LEFT JOIN servidores ON servidores.id_servidor=maquinas.id_servidor WHERE id_maquina=:id_maquina'); 
+            $detalleMaquina=$db->prepare('SELECT id_maquina, nombre_maquina, maquinas.id_servidor, servidores.nombre_servidor, ubicacion_maquina, IP_maquina, IP_publica_maquina, puerto_maquina, fecha_compra_maquina, tipo_maquina, memoria_maquina, disco_maquina, procesador_maquina, dominio_maquina, responsable_maquina, maquinas.usuario_administrador, maquinas.usuario_estandar, maquinas.sistema_operativo, maquinas.programas_instalados, maquinas.uso, maquinas.tiempo_uso, maquinas.backup, maquinas.ruta_backup, maquinas.frecuencia_backup, maquinas.persona_genera, maquinas.persona_entrega, maquinas.cargo_entrega, maquinas.fecha_entrega, maquinas.persona_recibe, maquinas.cargo_recibe, maquinas.fecha_recibe, maquinas.m_estado FROM maquinas LEFT JOIN servidores ON servidores.id_servidor=maquinas.id_servidor WHERE id_maquina=:id_maquina'); 
             $detalleMaquina->bindValue('id_maquina',$_POST['maquinaMod']);
             $detalleMaquina->execute();
 

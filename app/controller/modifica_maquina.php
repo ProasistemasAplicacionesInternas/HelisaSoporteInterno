@@ -38,6 +38,7 @@ if (isset($_POST['guardar_cambios'])) {
     $modifica->setPersona_recibe($_POST['persona_recibe']);
     $modifica->setCargo_recibe($_POST['cargo_recibe']);
     $modifica->setFecha_recibe($_POST['fecha_recibe']);
+    $modifica->setEstadoM($_POST['estado_maquina']);
     $modifica->setnombre($_POST['usu_name']);
     
     $crear->actualizar($modifica);
@@ -78,6 +79,7 @@ if (isset($_POST['seleccionarMaquina'])) {
     	$recibe_maquina            =$datosMaquina['persona_recibe'];
     	$cargoR_maquina            =$datosMaquina['cargo_recibe'];
     	$fechaR_maquina            =$datosMaquina['fecha_recibe'];
+    	$estadoM                   =$datosMaquina['m_estado'];
 
 }
 
