@@ -1,0 +1,41 @@
+.header {
+    background-color: #D9007F;
+    border-radius: 5px;
+    width: 100%;
+    position: fixed;
+    z-index: 1;
+    text-align: center;
+    margin: auto;
+}
+
+
+#titulo{
+    text-align: center;
+    color: #EC008C;
+    margin: 6% 0% 3% -2%;
+}
+
+.cuadro{
+    text-align: center;
+    width : 225px;
+    background-color: rgb(219, 219, 219);
+    page-break-before: always;
+}
+.cuadros{
+    width : 225px;
+    background-color: rgb(219, 219, 219);
+}
+#cuadroservidores{
+    margin: auto;
+}
+#cuadromaquinas{
+    float: left;
+    margin-top: 2px;
+    margin-left: 21px;
+} 
+.pequeña{
+    width: 45px; 
+    height: 45px;
+    float: right;
+    margin: -64px 4px 18px 0px;
+}

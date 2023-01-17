@@ -245,6 +245,27 @@ require_once("../model/vinculo.php");
                 return 2;
             }
         }
+        public function consultaMaquinasActivas(){
+            $db=Conectar::acceso();
+            $arregloservidores=[];
+            $seleccion=$db->query('SELECT id_servidor, IP_servidor, nombre_servidor FROM servidores');
+            $seleccion->execute();
+            $arregloservidores=[];
+
+            
+            foreach($seleccion->fetchAll() as $lista){
+                $maquinas= $db->query('SELECT id_maquina,IP_maquina, nombre_maquina, sistema_operativo FROM maquinas WHERE m_estado=5 && id_servidor='.$lista['id_servidor']);
+                $maquinas->execute();
+                $lista['maquinas']=[];
+                foreach($maquinas->fetchAll() as $items){
+                    array_push($lista['maquinas'],$items);
+                }
+                array_push($arregloservidores,$lista);
+                
+            }
+            return $arregloservidores;
+        }
+
     
 
 }
