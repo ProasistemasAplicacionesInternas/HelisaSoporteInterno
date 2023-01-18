@@ -23,18 +23,14 @@ $html  ='
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
-<header>
-<div class="header">
-    <img class="logo" src="../../public/img/Logo_blanco.png">
-</div>
-</header>
 <body>
+    <div><img id="imagen_reporte" src="../../public/img/reporte_maquinas/computadora.jpg" ></div>
     <div class="mt-5 recuadro" style="text-align:center">
     <br>';       
         foreach($arregloservidores as $item):
     $html .='
         <div class="row" style="margin:50px 15px 15px 15px" >
-            <div class="cuadro" id="cuadroservidores" style="border-radius: 5px; border:solid; border-color: #EC008C ">
+            <div class="cuadro" id="cuadroservidores" style="border-radius: 5px; border:solid; border-color: #EC008C ">                
                 <div>
                     <h6>Nombre: '. $item['nombre_servidor'] .'</h6>
                     <h6>IP: '. $item['IP_servidor'] .'</h6>
@@ -66,9 +62,8 @@ $html  ='
             </div>';
                  endforeach; 
         $html .='</div>
-            <br><br>
-            <hr>
-            <br><br><br><br>';
+                
+                ';
         endforeach;
 $html .='</div>   
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.min.js"></script>
@@ -76,11 +71,12 @@ $html .='</div>
 </html>';
 $mpdf=new \Mpdf\Mpdf(['mode' => 'utf-8','format' => 'A4-L']);
 $stylesheet = file_get_contents('../../public/css/reporte_maquinas.css'); // la ruta a tu css
+$mpdf->SetHTMLHeader('<header><div class="header"><img class="logo" src="../../public/img/reporte_maquinas/Logo-Helisa.png" style="align:left; width:100px; height:50px;"></div></header>');
+$mpdf->SetHTMLFooter('<h6>Este documento es propiedad intelectual de Proasistemas S.A y queda prohibida su reproducción total o parcial en cualquier medio. El otorgamiento de una copia a terceros deberá ser con autorización escrita de la gerencia o en su defecto el responsable de Proasistemas S.A.</h6><hr>{PAGENO}');
 $mpdf->WriteHTML($stylesheet,1);
 $mpdf->WriteHTML($html,2);
-$mpdf->Output();
+$mpdf->Output("reportes_maquinas.pdf", "D");
 ?>
-
     
 
 

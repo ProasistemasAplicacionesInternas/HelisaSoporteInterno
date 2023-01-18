@@ -1,14 +1,10 @@
-.header {
-    background-color: #D9007F;
-    border-radius: 5px;
-    width: 100%;
-    position: fixed;
-    z-index: 1;
-    text-align: center;
-    margin: auto;
+
+#imagen_reporte {
+    width: 69%;
+    height: 57%;
+    text-align:center;
+    padding-left: 150px;
 }
-
-
 #titulo{
     text-align: center;
     color: #EC008C;
