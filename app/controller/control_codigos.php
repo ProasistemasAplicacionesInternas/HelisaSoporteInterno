@@ -33,9 +33,8 @@ if (isset($_SESSION['auth_secretF'])){
 //ELIMINAR CODIGO QR PARA FUNCIONARIOS
 
 if(isset($_POST['limpiar_codigoF'])&&($_POST['limpiar_codigoF']==1)){
-    $datos->setId_Usuario($_POST['f_usuario']);
-/*     $codigo->eliminarCodigoFuncionarios($datos); */
-    echo $codigo->eliminarCodigoFuncionarios($datos);
+    $datosF->setF_usuario($_POST['f_usuario']);
+    echo $codigo->eliminarCodigoFuncionarios($datosF);
 }
 
 ?>
