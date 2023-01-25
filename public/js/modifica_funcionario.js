@@ -3,13 +3,23 @@
         var limpiarcodigoF =
         '&f_usuario=' + $('#f_usuario').val() +
         '&limpiar_codigoF=1';
-        console.log(limpiarcodigoF);
         $.ajax({
             type: 'POST' ,
             url: '../controller/control_codigos.php',
             data: limpiarcodigoF
         }).done(function(data){
             console.log(data);
+            if(data==1){
+                $.smkAlert({
+                    text: 'Se ha eliminado el código QR del funcionario satisfactoriamente',
+                    type: 'success'
+                });
+            }else{
+                $.smkAlert({
+                    text: 'El funcionario no tiene un código QR registrado',
+                    type: 'danger'
+                });
+            }
         });
     })
     
