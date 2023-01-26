@@ -43,12 +43,12 @@ $(document).ready(function () {
       }).done(function (data) {
         if(data==1){
             $.smkAlert({
-                text: 'Se ha eliminado el código QR del funcionario satisfactoriamente',
+                text: 'Se ha eliminado el código QR del usuario satisfactoriamente',
                 type: 'success'
             });
         }else if (data==2){
             $.smkAlert({
-                text: 'El funcionario no tiene un código QR registrado',
+                text: 'El usuario no tiene un código QR registrado',
                 type: 'danger'
             });
         }else {
