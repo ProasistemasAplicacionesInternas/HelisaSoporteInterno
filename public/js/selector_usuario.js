@@ -30,11 +30,9 @@ $(document).ready(function() {
 $(document).ready(function () {
     $(document).on("click", ".borrar-qr", function () {
       var id = $(this).val();
-      console.log(id + "ID");
       var usuario = $("#id_usuario" + id).text();
       $("#id_usuarioX").val(usuario);
       var nombre = $("#usuario" + id).text();
-      console.log(usuario, "  ", nombre);
       $("#usuarioX").val(nombre);
       $("#borrar").val("Borrando...");
       var borrarQr = "&usuario=" + nombre + "&limpiar_codigo=1";
@@ -43,7 +41,6 @@ $(document).ready(function () {
         url: "app/controller/control_codigos.php",
         data: borrarQr,
       }).done(function (data) {
-        console.log(data);
         if(data==1){
             $.smkAlert({
                 text: 'Se ha eliminado el código QR del funcionario satisfactoriamente',
