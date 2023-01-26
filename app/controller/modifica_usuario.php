@@ -31,16 +31,6 @@ if (isset($_POST['guardar'])) {
    header('Location:../../dashboard.php');
 }
 
-if (isset($_POST['borrarCodigo'])) {
-   /* $modifica->setNombre($_POST['usuario']); */
-   $modifica->setNombre($_POST['usuario']);
-   $usuario=$_POST['usuario'];
-   $datosC->setId_Usuario($usuario);
-   $crudC->eliminarCodigoUsuarios($datosC);
-
-
-  header('Location:../../dashboard.php');
-}
 
 
 if (isset($_POST['inactivar'])) {

@@ -37,4 +37,9 @@ if(isset($_POST['limpiar_codigoF'])&&($_POST['limpiar_codigoF']==1)){
     echo $codigo->eliminarCodigoFuncionarios($datosF);
 }
 
+if(isset($_POST['limpiar_codigo'])&&($_POST['limpiar_codigo']==1)){
+    $datos->setId_Usuario($_POST['usuario']);
+    echo $codigo->eliminarCodigoUsuarios($datos);
+}
+
 ?>

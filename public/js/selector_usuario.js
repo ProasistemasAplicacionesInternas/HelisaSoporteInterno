@@ -27,3 +27,16 @@ $(document).ready(function() {
 
     });
 });
+$(document).ready(function () {
+    $(document).on("click", ".borrar-qr", function () {
+      var id = $(this).val();
+      console.log(id + "ID");
+      var usuario = $("#id_usuario" + id).text();
+      $("#id_usuarioX").val(usuario);
+      var nombre = $("#usuario" + id).text();
+      console.log(usuario, "  ", nombre);
+      $("#usuarioX").val(nombre);
+      $("#borrar").val("Borrando...");
+      var borrarQr = "&usuario=" + nombre + "&limpiar_codigo=1";
+    });
+  });
