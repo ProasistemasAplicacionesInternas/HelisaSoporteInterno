@@ -35,11 +35,17 @@ class datosCodigo{
     }  
   }
 
-  public function eliminarCodigoUsuarios($datosC){
+  public function eliminarCodigoUsuarios($datos){
     $db=conectar::acceso();
     $deleteQR=$db->prepare('DELETE FROM codigosqr WHERE id_usuario=:usuario');
-    $deleteQR->bindValue('usuario',$datosC->getId_Usuario());
+    $deleteQR->bindValue('usuario',$datos->getId_Usuario());
     $deleteQR->execute();
+    $row = $deleteQR->rowCount();
+    if(empty($row)){
+      echo 2;
+    }else{
+      echo 1;
+    }
   }
 }
 ?>
