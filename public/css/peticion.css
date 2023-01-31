@@ -2,15 +2,13 @@
     font-family: 'Quicksand-Light';
     src: url(../../public/fonts/Quicksand-Medium.ttf);
 }
-.form-control{
-    font-size: 11px;
-}
+
 body {
     font-family: 'Quicksand-Light';
     /*background-color: #f0f0f0;*/
     color: #000;
     background-color: #ffffff;
-    font-size: 11px;
+    font-size: 12px;
 }
 
 textarea.data{
@@ -19,7 +17,7 @@ textarea.data{
 }
 
 input.data {
-    width: 78%;
+    width: 50%;
     border-bottom: none;
     border-top: none;
     border-left: none;
@@ -38,9 +36,9 @@ select.form-control {
     padding: 0px;
     margin: 0px;
     height: 50%;
-    width: 193%;
+    width: 50%;
     color: #000;
-    font-size: 11px;
+    font-size: 12px;
     text-decoration: none;
 }
 

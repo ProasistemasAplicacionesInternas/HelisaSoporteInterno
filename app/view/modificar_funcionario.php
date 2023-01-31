@@ -415,12 +415,12 @@
                     </div>
 
                     <div class="row">
-                        <div class="col-4"> <button type="submit" class="mt-5 btn btn-success" id="btn-guardarModif" name="btn-guardarModif" >Guardar</button></div>
-                        <div class="col-3" > <a id="cerrar_modificacion" class="mt-5 btn btn-secondary">Cancelar</a> </div>
+                        <div class="col-4"> <button type="submit" class="mt-5 btn btn-success" id="btn-guardarModif" name="btn-guardarModif" style="height:33.5px; width=auto;" >Guardar</button></div>
+                        <div class="col-3" > <a id="cerrar_modificacion" class="mt-5 btn btn-secondary" style="height:33.5px; width=auto;">Cancelar</a> </div>
                     </div>
                 </form>
                 <div class="row">
-                    <div class="col-7" > <button type="submit" id="btn-limpiarCodigo" name="btn-limpiarCodigo" class="mt-5 btn btn-danger" style="text-color:white;">Borrar código QR</button> </div>
+                    <div class="col-7" > <button type="submit" id="btn-limpiarCodigo" name="btn-limpiarCodigo" class="mt-5 btn btn-danger" style="text-color=white;height:33.5px; width=auto;">Borrar código QR</button> </div>
                 </div>
             </div>
         </div>

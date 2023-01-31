@@ -38,15 +38,16 @@
             <div class="col-11 mt-4 pl-5 mb-2">
                 <h6>Lista de M&aacute;quinas Virtuales</h6>
             </div>
-            <div class="col-1 mt-4 mb-2">
-                <a target="_blank" href="app/view/crea_maquina.php"><img src="public/img/nuevo.png" alt=""></a>
-            </div>
-            <div class="col-12 mt-4 mb-2">
+            <div class="col-12 ml-5">
+                <div class="col-6">
+                    <a href="app/view/crea_maquina.php" ><img src="public/img/nuevo.png" alt="" style="margin:0px 0px 0px 971px"></a>
+                </div>
+                <div class="col-6">
                 <form action="app/view/reporte_maquinas.php" method="POST">
-                    <input type="submit" class="btn btn-outline-success btn-sm" name="generar" id="generar" value="Reporte Maquinas" target="_blanck">         
-                </form>
-            </div>
-            <div class="col">
+                        <input type="submit" class="btn btn-outline-success btn-sm" name="generar" id="generar" value="Reporte PDF" target="_blanck" style="margin:-44px 0px 0px 881px">
+                    </form>
+                </div>
+            </div>            <div class="col">
                 <table class="table table-striped" id="tabla">
                     <thead>
                         <th style="display:none;"></th>

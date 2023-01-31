@@ -33,7 +33,7 @@ define('DOCROOT', $_SERVER['DOCUMENT_ROOT'].'/infraestructura'); /* MODIFCAR AL 
 
 
     for($x = 0; $x < $numImagenes; $x++){
-        $random = rand(100,1000);
+        $random= rand(100,1000);
         $nombre_archivo=$_FILES['imagen']['name'];
         $nombre_archivo=preg_replace('/\\.[^.\\s]{3,4}$/', '', $nombre_archivo);
         $tipo_imagen=$_FILES['imagen']['type'][$x];
@@ -45,17 +45,16 @@ define('DOCROOT', $_SERVER['DOCUMENT_ROOT'].'/infraestructura'); /* MODIFCAR AL 
             
             $nombre_imagen[$x]='2';
         } 
-        //echo $tipo_imagen;
+        echo $tipo_imagen;
         if($tamano_imagen<=10000000000){
-            if($tipo_imagen=="image/jpeg" ||$tipo_imagen=="image/jpg" ||$tipo_imagen=="image/png" ||$tipo_imagen=="image/gif" ||$tipo_imagen=="image/jpg" || $tipo_imagen=="application/pdf"  ){    
+            if($tipo_imagen=="image/jpeg" ||$tipo_imagen=="image/jpg" ||$tipo_imagen=="image/png" ||$tipo_imagen=="image/gif" ||$tipo_imagen=="image/jpg" || $tipo_imagen=="application/pdf"  ){
+    
             move_uploaded_file($_FILES['imagen']['tmp_name'][$x],DOCROOT .'/cartas/' .$nombre_imagen[$x]);        
                 
                 }
         }
-        //echo "<br>",$nombre_imagen[0],"<br>",$nombre_imagen[1],"<br>",$nombre_imagen[2],"<br>";
     }
-// echo "<br>",$nombre_imagen[0],"<br>",$nombre_imagen[1],"<br>",$nombre_imagen[2],"<br>";
-
+echo "<br>",$nombre_imagen[0],"<br>",$nombre_imagen[1],"<br>",$nombre_imagen[2],"<br>";
 
 //*******************************************************************************//
 //*********************** CONTROLADOR PARA CREAR PETICION ***********************//
@@ -107,7 +106,7 @@ if (isset($_POST['btn-enviar_peticion'])) {
         }
         if(isset($_SESSION['id_roles']) && $_SESSION['id_roles']==5){
             header('Location:../../dashboard.php');
-        }else if(isset($_SESSION['rol']) && $_SESSION['rol']==4 || $_SESSION['rol']==2){
+        }else if(isset($_SESSION['rol']) && $_SESSION['rol']==4 || $_SESSION['rol']==2 ){
             header('Location:../../dashboard_funcionarios.php');        
         }
 }

@@ -19,7 +19,6 @@
     <title>Helisa | Soporte Interno</title>
     <link rel="stylesheet" href="public/css/bootstrap.min.css">
     <link rel="stylesheet" href="public/css/dashboard.css" media="screen" type="text/css">
-    <link rel="stylesheet" href="public/css/smoke.min.css">
     <link rel="stylesheet" href="public/css/daterangepicker.css" media="screen" type="text/css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/all.css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/v4-shims.css">
@@ -186,7 +185,6 @@
     </main>
 
     <script src="public/js/jquery-3.3.1.min.js"></script>
-    <script src="public/js/smoke.min.js"></script>
     <script src="public/js/moment.min.js"></script>
     <script src="public/js/daterangepicker.js"></script>
     <script src="public/js/popper.js"></script>

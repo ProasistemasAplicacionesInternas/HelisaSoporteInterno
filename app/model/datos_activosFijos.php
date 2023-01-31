@@ -29,7 +29,6 @@
 		private $af_aplicaciones;
 		private $nombre;
 		private $af_areaCreacion;
-		private $imgActivo;
 
 		public function getAf_id(){
 		    				return $this->af_id;
@@ -215,14 +214,6 @@
 								
 		public function getAf_areaCreacion(){return $this->af_areaCreacion;}
 		public function setAf_areaCreacion($af_areaCreacion){$this->af_areaCreacion = $af_areaCreacion;}
-
-		public function getImagenactivo(){
-			return $this->imgActivo;
-		}
-		public function setImagenactivo($imgActivo){
-			$this->imgActivo = $imgActivo ;
-		}
-	
         			
 	}
 

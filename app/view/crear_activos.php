@@ -147,19 +147,7 @@ require('../controller/controlador_gruposActivos.php');
                             </div>
                         </div>
                     </div>
-                    <div class="row">
-                        <div class="col-3">
-                            <div class="form-group">
-                                <div>
-                                    <label>Cargar Imagen del activo</label>
-                                </div>
-                                <div>
-                                    <input type="file" id="af_imagen1" name="af_imagen1">
-                                </div>
-                                <label class="mt-2" id="textImg" style="min-width:150%"></label>
-                            </div>
-                        </div>
-                    </div>
+                    
                     <div id="encargado" class="encargadoActivo">
                         <div class="row">
                             <div class="col-9">
@@ -285,7 +273,6 @@ require('../controller/controlador_gruposActivos.php');
     <script src="../../public/js/popper.js"></script>
     <script src="../../public/js/bootstrap.min.js"></script>
     <script src="../../public/js/smoke.min.js"></script>
-    <script src="../../public/js/valida_imagenActivo.js"></script>
     <script src="../../public/js/es.min.js"></script>
     <script src="../../public/js/filtroActivos.js"></script>
     <script src="../../public/js/funcionario_oculto.js"></script>
