@@ -1,4 +1,10 @@
 <?php
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
+?>
+<?php
+
     ini_set("session.cookie_lifetime","18000");
     ini_set("session.gc_maxlifetime","18000");
     session_start();
@@ -9,7 +15,7 @@
     require_once('../model/crud_servidor.php');
     require_once('../model/datos_servidor.php'); 
 	require('../controller/controlReporteMaquinas.php');
-    require_once('../../public/mpdf/vendor/autoload.php')      
+    require_once('../../public/mpdf/vendor/autoload.php')    
 ?>
 <?php
 $html  ='
@@ -36,42 +42,42 @@ $html  ='
                     <h6>IP: '. $item['IP_servidor'] .'</h6>
                     <br>
                 </div>
-                <img id="servidor" class="pequeña" src="../../public/img/reporte_maquinas/server.png">
+                <img id="servidor" class="pequeña" src="../../public/img/reporte_maquinas/server.jpg">
             </div>
         </div>
-        
         <div class="col-sm maquinas">';
-        foreach($item['maquinas'] as $maquina):
-    $html .='
-            <div class="cuadros" id="cuadromaquinas" style="border-radius: 5px; border:solid; border-color: #59947f ">
+	if(empty($item['maquinas'])){
+	 $html .= '<span id="nomaquina">Este servidor no cuenta con maquinas virtuales asignadas</span>';
+	   }else{
+        	foreach($item['maquinas'] as $maquina):
+    		$html .='
+            	<div class="cuadros" id="cuadromaquinas" style="border-radius: 5px; border:solid; border-color: #59947f ">
                 <div>
                     <br>
                     <h6 >Nombre: '. $maquina['nombre_maquina'] .'</h6> 
                     <h6 >IP: '. $maquina['IP_maquina'] .'</h6> 
                     <br>
                 </div>';
-            if($maquina['sistema_operativo'] == "Linux Centos"):
-                $html .='<img id="linux" class="pequeña" src="../../public/img/reporte_maquinas/linux.png">';
-                elseif($maquina['sistema_operativo'] == "WIndows Server 2019 Standar" || $maquina['sistema_operativo'] == "Windows 2019 Server Data Center (64bit)" 
+            if($maquina['sistema_operativo'] == "Linux" || $maquina['so_maquina'] == "LINUX CENTO"  || $maquina['so_maquina'] == "LINUX" || $maquina['so_maquina'] == "LINUX CENTOS 7" || $maquina['so_maquina'] == "CENTUS"):
+                $html .='<img id="linux" class="pequeña" src="../../public/img/reporte_maquinas/linux.jpg">';
+                elseif($maquina['sistema_operativo'] == "windows"  || $maquina['so_maquina'] == "WIndows Server 2019 Standar" || $maquina['sistema_operativo'] == "Windows 2019 Server Data Center (64bit)" 
                 || $maquina['sistema_operativo'] == "WIndows Server Standard 2019" || $maquina['sistema_operativo'] == "Windows Server 2019 Standar"
                 || $maquina['sistema_operativo'] == "Windows server 2012 R2 Standard" || $maquina['sistema_operativo'] == "WIndows Server Standard 2012" 
                 || $maquina['sistema_operativo'] == "windows server 2012 R2 Standard"):
-                $html .='<img id="windows" class="pequeña" src="../../public/img/reporte_maquinas/windows.png">';
+                $html .='<img id="windows" class="pequeña" src="../../public/img/reporte_maquinas/windows.jpg">';
                 endif;
-        $html .='
-            </div>';
+        $html .='</div>';
                  endforeach; 
-        $html .='</div>
-                
-                ';
+        $html .='</div>';
+		}
         endforeach;
 $html .='</div>   
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.min.js"></script>
 </body>
 </html>';
-$mpdf=new \Mpdf\Mpdf(['mode' => 'utf-8','format' => 'A4-L']);
+$mpdf=new \Mpdf\Mpdf(['tempDir' => '/tmp', 'mode' => 'utf-8','format' => 'A4-L']);
 $stylesheet = file_get_contents('../../public/css/reporte_maquinas.css'); // la ruta a tu css
-$mpdf->SetHTMLHeader('<header><div class="header"><img class="logo" src="../../public/img/reporte_maquinas/Logo-Helisa.png" style="align:left; width:100px; height:50px;"></div></header>');
+$mpdf->SetHTMLHeader('<header><div class="header"><img class="logo" src="../../public/img/reporte_maquinas/Logo-Helisa.jpg" style="align:left; width:100px; height:50px;"></div></header>');
 $mpdf->SetHTMLFooter('<h6>Este documento es propiedad intelectual de Proasistemas S.A y queda prohibida su reproducción total o parcial en cualquier medio. El otorgamiento de una copia a terceros deberá ser con autorización escrita de la gerencia o en su defecto el responsable de Proasistemas S.A.</h6><hr>{PAGENO}');
 $mpdf->WriteHTML($stylesheet,1);
 $mpdf->WriteHTML($html,2);

@@ -37,8 +37,6 @@ class CrudPeticiones{
                            $inserta_funcion->bindValue('funcion_realizada',$funcion_realizada);
                            $inserta_funcion->bindValue('ip', $_SERVER['REMOTE_ADDR']);                 
                            $inserta_funcion->execute();
-
-						   echo 1;
 	}
 
 
@@ -113,7 +111,7 @@ class CrudPeticiones{
 			$db=conectar::acceso();
 			$lista_peticiones=[];
 			$consultar_peticion=$db->prepare('SELECT  numero_peticion, fecha_peticion, peticiones.usuario, fecha_atendido, peticiones.estado, peticiones.categoria, peticiones.descripcion, 
-			imagen, activos_internos.nombre_activo, activos_internos.codigo_activo, funcionarios.extension, funcionarios.area,funcionarios.mail, areas.descripcion 
+			peticiones.imagen, activos_internos.nombre_activo, activos_internos.codigo_activo, funcionarios.extension, funcionarios.area,funcionarios.mail, areas.descripcion 
 			AS descripcion1, categorias.nombre_categoria, estado.descripcion AS nombreestado, conclusiones, imagen2, imagen3 
             FROM peticiones 
             LEFT JOIN funcionarios ON funcionarios.usuario=peticiones.usuario 

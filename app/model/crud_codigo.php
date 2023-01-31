@@ -22,30 +22,18 @@ class datosCodigo{
     $saveQRF->execute();
   }
 
-  public function eliminarCodigoFuncionarios($datosF){
+  public function eliminarCodigoFuncionarios($datos){
     $db=conectar::acceso();
     $deleteQRF=$db->prepare('DELETE FROM codigosqr_funcionarios WHERE id_usuario=:f_usuario');
-    $deleteQRF->bindValue('f_usuario',$datosF->getF_usuario());
+    $deleteQRF->bindValue('f_usuario',$datos->getId_Usuario());
     $deleteQRF->execute();
-    $row = $deleteQRF->rowCount();
-    if(empty($row)){
-      echo 2;
-    }else{
-      echo 1;
-    }  
   }
 
-  public function eliminarCodigoUsuarios($datos){
+  public function eliminarCodigoUsuarios($datosC){
     $db=conectar::acceso();
     $deleteQR=$db->prepare('DELETE FROM codigosqr WHERE id_usuario=:usuario');
-    $deleteQR->bindValue('usuario',$datos->getId_Usuario());
+    $deleteQR->bindValue('usuario',$datosC->getId_Usuario());
     $deleteQR->execute();
-    $row = $deleteQR->rowCount();
-    if(empty($row)){
-      echo 2;
-    }else{
-      echo 1;
-    }
   }
 }
 ?>

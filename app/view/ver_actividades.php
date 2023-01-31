@@ -371,7 +371,6 @@
                             <th>Descripcion Mantenimiento</th>
                             <th>Responsable</th>
                             <th>Costo</th>
-                            <th>Documentos</th>
                         </thead>
 
                         <tbody>
@@ -387,19 +386,6 @@
                                     <?php echo $datos2->getResponsable_mantenimiento(); ?></td>
                                 <td>
                                     <?php echo $datos2->getCosto_mantenimiento(); ?></td> 
-                                <td>
-                                    <?php 
-                                    $documento = $datos2->getPdfmantenimientos();
-                                    ?>
-                                    <?php if ($documento == "No aplica") {?>
-                                        <label>No aplica</label>
-                                        <input type="hidden" id="imagenC" name="imagenC" class="form-control data" value="<?php echo $datos2->getPdfmantenimientos(); ?>" style="display:none">
-                                      <?php }else{ ?>
-                                        <a class="text" href="../../cartas/<?=$documento;?>" target="_blanck" id="imagen" name="imagen" style=" ">
-                                        Documentos
-                                    </a>
-                                     <?php }; ?>                                                      
-                                </td> 
                                 
                                 <?php 
                         endforeach;

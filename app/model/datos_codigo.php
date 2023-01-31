@@ -1,7 +1,7 @@
 <?php
 
     class codigos{
-        private $secret;
+        private $codigoSecreto;
         private $id_usuario;
         private $fecha;
         private $token;

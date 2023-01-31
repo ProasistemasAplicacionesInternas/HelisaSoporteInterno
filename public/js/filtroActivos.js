@@ -26,20 +26,10 @@ $('#af_categoria').on('change', function () {
         document.getElementById("af_aplicaciones").required = true;
         document.getElementById("af_office").required = true;
         document.getElementById("af_antivirus").required = true;
-            
+        
+        
+        
     }else if (this.value == 13 ) {
-        datosActivos.style.display='inline';
-        document.getElementById("af_ram").required = true;
-        document.getElementById("af_discoDuro").required = true;
-        document.getElementById("af_procesador").required = true;
-        document.getElementById("af_so").required = true;
-        document.getElementById("af_licenciaSo").required = true;
-        document.getElementById("af_dominio").required = true;
-        document.getElementById("af_aplicaciones").required = true;
-        document.getElementById("af_office").required = true;
-        document.getElementById("af_antivirus").required = true;
-       
-    }else if (this.value == 14 ) {
         datosActivos.style.display='inline';
         document.getElementById("af_ram").required = true;
         document.getElementById("af_discoDuro").required = true;
