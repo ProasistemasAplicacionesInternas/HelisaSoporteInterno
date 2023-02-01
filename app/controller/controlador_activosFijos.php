@@ -18,9 +18,21 @@ $activos_Asignados = $consult->matrizActivosFuncionario();*/
 //********************************************************************************************//
 //*******************************CONTROLADOR PARA CREAR ACTIVO FIJO***************************//
 //********************************************************************************************//
-                 
+
         if (isset($_POST['crear']) && ($_POST['crear']==1)) {
-            //echo $_POST['af_responsable'];
+            $nombre_imagen = "No aplica";
+            if (isset($_FILES['af_imagen1'])) {
+                $imagen = $_FILES['af_imagen1'];
+            
+                if ($imagen['error'] == UPLOAD_ERR_OK) {
+                    $ext = pathinfo($imagen['name'], PATHINFO_EXTENSION);
+                    $nombre_imagen = uniqid() . "." . $ext;
+                    move_uploaded_file($imagen['tmp_name'], "../../img/$nombre_imagen");
+                    
+                }
+                
+            }
+
             if($_POST['af_fechaAsignacion'] == ""){
                   date_default_timezone_set('America/Bogota');
                   $hoy = date("Y-m-d");
@@ -61,6 +73,7 @@ $activos_Asignados = $consult->matrizActivosFuncionario();*/
                 $activoFijo->setAf_dominio($_POST['af_dominio']);
                 $activoFijo->setAf_sistemaOperativo($_POST['af_so']);
                 $activoFijo->setNombre($_POST['nombre_usu']);
+                $activoFijo->setImagenactivo($nombre_imagen);
                 $crud->crearActivos($activoFijo);    
         }
 
@@ -91,9 +104,24 @@ $activos_Asignados = $consult->matrizActivosFuncionario();*/
 //********************************************************************************************//
 
 
-        if (isset($_POST['guardar_modificaciones'])) {
+        if (isset($_POST['guardar_modificaciones'])&& ($_POST['guardar_modificaciones']==1)) {
 
-    
+            if (isset($_FILES['af_imagen1'])) {
+                $imagen = $_FILES['af_imagen1'];
+                $deleteImg = $_POST['deleteImg'];
+                if ($imagen['error'] == UPLOAD_ERR_OK) {
+                    $ext = pathinfo($imagen['name'], PATHINFO_EXTENSION);
+                    $nombre_imagen = uniqid() . "." . $ext;
+                    move_uploaded_file($imagen['tmp_name'], "../../img/$nombre_imagen");
+                    
+                }
+                if (file_exists('../../img/'.$deleteImg)) {
+                    unlink('../../img/'.$deleteImg);
+                }
+                
+            }else if (isset($_POST['af_imagen1'])){
+                $nombre_imagen = $_POST['af_imagen1'];
+            }
 
             $activoFijo->setAf_codigo($_POST['af_codigo']);
             $activoFijo->setAf_serial($_POST['af_serial']);
@@ -117,10 +145,18 @@ $activos_Asignados = $consult->matrizActivosFuncionario();*/
             $activoFijo->setAf_licenciaOffice($_POST['af_office']);
             $activoFijo->setAf_licenciaAntivirus($_POST['af_antivirus']);
             $activoFijo->setAf_aplicaciones($_POST['af_aplicaciones']);
-            $activoFijo->setNombre($_POST['usu_name']);
-            $crud->modificarActivos($activoFijo);
-
-            echo  "<script type='text/javascript'>window.close();</script>";            
+            $activoFijo->setNombre($_POST['nombre_usu']);
+            $activoFijo->setImagenactivo($nombre_imagen);
+            $crud->modificarActivos($activoFijo);            
             //header('Location: ../../dashboard.php');
         }
-?>
+        if (isset($_POST['creacion'])) {
+            echo "Llega al controlador";
+        }
+
+        function str_random ($path_info) {
+            $string = 'AaBbCcDdEeFfGgHhIiJjKkLlMm0123456789_';
+            return str_shuffle($string) . '.' . $path_info['extension'];
+        }
+
+    
