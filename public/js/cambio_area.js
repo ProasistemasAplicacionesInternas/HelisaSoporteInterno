@@ -66,12 +66,12 @@ function productoCategoria(){
         if(requerimiento==2){
             divNombre.style.display= "inline";
             reqJustification.style.display= "inline";
-	    document.getElementById("req_Justification").required = true;
+            document.getElementById("req_Justification").required = true;
             document.getElementById("req_Name").required = true;
         }else{
             divNombre.style.display= "none";
             reqJustification.style.display= "none";
-	    document.getElementById("req_Justification").required = false;
+            document.getElementById("req_Justification").required = false;
             document.getElementById("req_Name").required = false;
         }
     }

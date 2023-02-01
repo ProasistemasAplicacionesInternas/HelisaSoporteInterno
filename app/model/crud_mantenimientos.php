@@ -9,13 +9,15 @@ class CrudMantenimientos{
 
 		public function crearMantenimiento($create){
 			$db=Conectar::acceso();
-			$crea_mantenimiento=$db->prepare('INSERT INTO mantenimientos(fecha_mantenimiento, descripcion_mantenimiento, responsable_mantenimiento, costo_mantenimiento, activo_mantenimiento )VALUES(:m_fecha, :m_descripcion, :m_responsable, :m_costo, :m_activo)');
+			$crea_mantenimiento=$db->prepare('INSERT INTO mantenimientos(fecha_mantenimiento, descripcion_mantenimiento, responsable_mantenimiento, costo_mantenimiento, activo_mantenimiento, documentos, repotenciacion )VALUES(:m_fecha, :m_descripcion, :m_responsable, :m_costo, :m_activo, :m_documento, :m_repotenciacion)');
 
 			$crea_mantenimiento->bindValue('m_fecha',$create->getFecha_mantenimiento());
 			$crea_mantenimiento->bindValue('m_descripcion',$create->getDescripcion_mantenimiento());
 			$crea_mantenimiento->bindValue('m_responsable',$create->getResponsable_mantenimiento());
             $crea_mantenimiento->bindValue('m_costo',$create->getCosto_mantenimiento());
             $crea_mantenimiento->bindValue('m_activo',$create->getActivo_mantenimiento());
+            $crea_mantenimiento->bindValue('m_documento',$create->getPdfmantenimientos());
+            $crea_mantenimiento->bindValue('m_repotenciacion',$create->getRepotenciacion());
 			$crea_mantenimiento->execute();
 
 			 $colsultar_usuario=$db->prepare('SELECT id_usuario from usuarios where usuario =:usuario');
@@ -29,8 +31,36 @@ class CrudMantenimientos{
                            $inserta_funcion->bindValue('funcion_realizada',$funcion_realizada);
                            $inserta_funcion->bindValue('ip', $_SERVER['REMOTE_ADDR']);                 
                            $inserta_funcion->execute();
+
+			
 		}
 
+//***************************************************************************************//
+//**************************** SQL PARA CREAR repotenciacion*****************************//
+//***************************************************************************************//
+		public function realizaRepotenciacion($create){
+			$db=conectar::acceso();
+			$modificar_activo=$db->prepare("UPDATE activos_internos SET  ram_activo=:ram_activo, disco_activo=:disco_activo, procesador_activo=:procesador_activo,    licencia_sistema=:licencia_sistema, sistema_operativo=:sistema_operativo WHERE id_activo=:codigo_activo");
+			$modificar_activo->bindValue('ram_activo',$create->getRamrepowering());
+			$modificar_activo->bindValue('disco_activo',$create->getDiskrepowering());
+			$modificar_activo->bindValue('procesador_activo',$create->getCorerepowering());
+			$modificar_activo->bindValue('licencia_sistema',$create->getSorepowering());
+			$modificar_activo->bindValue('sistema_operativo',$create->getLicenciarepowering());
+			$modificar_activo->bindValue('codigo_activo',$create->getActivo_mantenimiento());
+			$modificar_activo->execute();
+						   //historial de movimientos 
+			$colsultar_usuario=$db->prepare('SELECT id_usuario from usuarios where usuario =:usuario');
+				$colsultar_usuario->bindValue('usuario', $create->getResponsable_mantenimiento());
+				$colsultar_usuario->execute();
+				$filtro=$colsultar_usuario->fetch(PDO::FETCH_ASSOC);
+				$id_usuario=$filtro['id_usuario'];
+				$funcion_realizada = "El usuario Realizo una la actualizacion del activo fijo ".$create->getActivo_mantenimiento().", Ram: ".$create->getRamrepowering()." , Disco duro: ".$create->getDiskrepowering().",   Procesador: ".$create->getCorerepowering().", Sistema operativo: ".$create->getSorepowering().", Licencia sistema: ".$create->getLicenciarepowering()." " ;
+				$inserta_funcion=$db->prepare("INSERT INTO funciones (codigo, id_usuario, fecha_registro, funcion_realizada,IP) VALUES (0, :id_usuario , curdate() , :funcion_realizada ,:ip )");
+				$inserta_funcion->bindValue('id_usuario',$id_usuario);
+				$inserta_funcion->bindValue('funcion_realizada',$funcion_realizada);
+				$inserta_funcion->bindValue('ip', $_SERVER['REMOTE_ADDR']);                 
+				$inserta_funcion->execute();
+		}
 
 
 //****************************************************************************************//
