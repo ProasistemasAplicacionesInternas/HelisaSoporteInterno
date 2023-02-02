@@ -27,3 +27,36 @@ $(document).ready(function() {
 
     });
 });
+$(document).ready(function () {
+    $(document).on("click", ".borrar-qr", function () {
+      var id = $(this).val();
+      var usuario = $("#id_usuario" + id).text();
+      $("#id_usuarioX").val(usuario);
+      var nombre = $("#usuario" + id).text();
+      $("#usuarioX").val(nombre);
+      $("#borrar").val("Borrando...");
+      var borrarQr = "&usuario=" + nombre + "&limpiar_codigo=1";
+      $.ajax({
+        type: "POST",
+        url: "app/controller/control_codigos.php",
+        data: borrarQr,
+      }).done(function (data) {
+        if(data==1){
+            $.smkAlert({
+                text: 'Se ha eliminado el código QR del funcionario satisfactoriamente',
+                type: 'success'
+            });
+        }else if (data==2){
+            $.smkAlert({
+                text: 'El funcionario no tiene un código QR registrado',
+                type: 'danger'
+            });
+        }else {
+          $.smkAlert({
+            text: "Ocurrio un error.",
+            type: "warning",
+          });
+        }
+      });
+    });
+  });
