@@ -404,23 +404,13 @@
                             </div>
                         </div>
                     </div>
-
                     <div class="row">
-                        <div class="col-7">
-                            <div class="form-group">
-                                <label>Contrase&ntilde;a</label>
-                                <input type="password" id="f_contrasena" name="f_contrasena" class="form-control info" autocomplete="off" value="<?php echo $f_contrasena ?>" >
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="row">
-                        <div class="col-4"> <button type="submit" class="mt-5 btn btn-success" id="btn-guardarModif" name="btn-guardarModif" >Guardar</button></div>
-                        <div class="col-3" > <a id="cerrar_modificacion" class="mt-5 btn btn-secondary">Cancelar</a> </div>
+                        <div class="col-4"> <button type="button" class="mt-2 btn btn-success" id="btn-guardarModif" name="btn-guardarModif" >Guardar</button></div>
+                        <div class="col-3" > <a id="cerrar_modificacion" class="mt-2 btn btn-secondary">Cancelar</a> </div>
                     </div>
                 </form>
                 <div class="row">
-                    <div class="col-7" > <button type="submit" id="btn-limpiarCodigo" name="btn-limpiarCodigo" class="btn btn-danger" style="margin: 20px 0px;">Borrar código QR</button> </div>
+                    <div class="col-7" > <button type="button" id="btn-limpiarCodigo" name="btn-limpiarCodigo" class="btn btn-danger" style="margin:10px 0;">Borrar código QR</button> </div>
                 </div>
             </div>
         </div>

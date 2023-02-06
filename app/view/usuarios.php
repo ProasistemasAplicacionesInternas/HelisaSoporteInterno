@@ -54,6 +54,7 @@ $consultaUsuario = $cartilla->consultaUsuario();
                         <th>Modificar</th>
                         <th>Borrar QR</th>
                         <th>Inactivar</th>
+                        <th>Cambiar Contraseña</th>
                     </thead>
                     <tbody>
                         <?php foreach ($consultaUsuario as $info) : ?>
@@ -68,7 +69,7 @@ $consultaUsuario = $cartilla->consultaUsuario();
                                     <span id="usuario<?php echo $info->getIDusuario(); ?>"><?php echo $info->getNombre() ?></span>
                                 </td>
                                 <td style="display:none;">
-                                    <span id="contrasena<?php echo $info->getIDusuario(); ?>"><?php echo $info->getClave() ?></span>
+                                    <span id="contrasena <?php echo $info->getIDusuario(); ?>"><?php echo $info->getClave() ?></span>
                                 </td>
                                 <td>
                                     <span id="rol<?php echo $info->getIDusuario(); ?>"><?php echo $info->getRoles() ?></span>
@@ -82,10 +83,13 @@ $consultaUsuario = $cartilla->consultaUsuario();
                                     <button type="button" class="btn btn-primary btn-sm modifica-usuario" data-toggle="modal" data-target="#modifica-usuario" id="btn-modificarUsuario" name="btn-modificarUsuario" value="<?php echo $info->getIDusuario(); ?>"><span>Modificar</span></button>
                                 </td>
                                 <td>
-                                    <button type="button" class="btn btn-warning btn-sm borrar-qr" data-toggle="modal" data-target="#borrar-qr" id="btn-borrarQr" name="btn-borrarQr" value="<?php echo $info->getIDusuario(); ?>"><span>BorrarQR</span></button>
+                                    <button type="button" class="btn btn-warning btn-sm borrar-qr" data-toggle="modal" data-target="#borrar-qr" id="btn-borrarQr" name="btn-borrarQr" value="<?php echo $info->getIDusuario(); ?>"><span>Borrar QR</span></button>
                                 </td>
                                 <td>
                                     <button type="button" class="btn btn-danger btn-sm inactiva-usuario" data-toggle="modal" data-target="#inactiva-usuario" id="btn-inactivaUsuario" name="btn-inactivaUsuario" value="<?php echo $info->getIDusuario(); ?>"><span>Inactivar</span></button>
+                                </td>
+                                <td>
+                                    <button type="button" class="btn btn-info btn-sm cambiar-clave" data-toggle="modal" data-target="#cambiar-clave" id="btn-cambiar-clave" name="btn-cambiar-clave" onclick="identidadU(<?php echo $info->getIDusuario(); ?>);" value="<?php echo $info->getIDusuario(); ?>"><span>Cambiar Contraseña</span></button>
                                 </td>
                             </tr>
                         <?php
@@ -96,7 +100,7 @@ $consultaUsuario = $cartilla->consultaUsuario();
                 <?php /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// ////////////////////////////////// VENTANA MODAL DE LA MODIFICACION DEL USUARIO ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// 
                 ?>
 
-                <div class="modal fade mt-4" id="modifica-usuario" tabindex="-1" role="dialog" aria-labelledby="modifica-usuario" aria-hidden="true">
+                <div class="modal mt-4" id="modifica-usuario" tabindex="-1" role="dialog" aria-labelledby="modifica-usuario" aria-hidden="true">
                     <div class="modal-dialog">
                         <div class="modal-content">
                             <div class="modal-header">
@@ -117,11 +121,10 @@ $consultaUsuario = $cartilla->consultaUsuario();
                                                     <label for="">Nombre</label>
                                                     <div><input type="text" name="usuario" id="usuario" class="crea_data form-control info" maxlength="29" autocomplete="off" autofocus readonly></div>
                                                 </div>
-                                                <label for="">Contrasena</label>
-                                                <div><input type="password" name="contrasena" id="contrasena" class="crea_data form-control info" maxlength="29" autocomplete="off" autofocus required></div>
-
-                                                <label for="">Correo</label>
-                                                <input type="text" id="correo" name="correo" class="crea_data form-control info" maxlength="40" autocomplete="off" required>
+                                                <div class="form-group">
+                                                    <label for="">Correo</label>
+                                                    <input type="text" id="correo" name="correo" class="crea_data form-control info" maxlength="40" autocomplete="off" required>
+                                                </div>
                                                 <div class="form-group">
                                                     <label for="">Tipo de validación</label>
                                                     <div>
@@ -170,6 +173,7 @@ $consultaUsuario = $cartilla->consultaUsuario();
                 </div>
                 <?php /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// ////////////////////////////////// VENTANA MODAL DE LA INACTIVACION DEL USUARIO ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// 
                 ?>
+
                 <div class="modal fade mt-4" id="inactiva-usuario" tabindex="-1" role="dialog" aria-labelledby="inactiva-usuario" aria-hidden="true">
                     <div class="modal-dialog">
                         <div class="modal-content">
@@ -185,7 +189,7 @@ $consultaUsuario = $cartilla->consultaUsuario();
                                         <div class="col-12">
                                             <form action="app/controller/modifica_usuario.php" method="post" class="form-group">
 
-                                                <div style="display:none;"><input type="text" id="id_usuarioX" name="id_usuarioX" class="crea_dataS" autofocus></div>
+                                                <div style="display:none;"><input type="text" id="id_usuarioI" name="id_usuarioI" class="crea_dataS" autofocus></div>
 
                                                 <label for="">Fecha Inactivo</label>
                                                 <div><input type="date" name="fechaInactivo" id="fechaInactivo" class="crea_data" required></div>
@@ -204,22 +208,96 @@ $consultaUsuario = $cartilla->consultaUsuario();
                         </div>
                     </div>
                 </div>
+                <?php ///////////////////////////VENTANA MODAL CAMBIO CONTRASEÑA DEL USUARIO ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// 
+                ?>
+                <div class="modal fade mt-4" id="cambiar-clave" role="dialog" aria-labelledby="cambio-clave" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h6 class="modal-title">Modifica Usuarios</h6>
+                                <button class="close" data-dismiss="modal" aria-label="Cerrar">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <div class="container-fluid cotenedor">
+                                    <div class="row fila">
+                                        <div class="col-12">
+                                            <form method="post" class="form-group">
+                                                <div class="form-group">
+                                                    <input type="hidden" id="nombre_u" name="nombre_u" value="<?php echo $_SESSION['usuario']; ?>">
+                                                    <label>Dígite su contraseña: <strong><?php echo $_SESSION['usuario']; ?></strong></label>
+                                                    <input type="password" id="pass_u" name="pass_u" class="form-control" placeholder="Contraseña" required>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <input type=button value="Verificar" id="validarUsuario" name="validarUsuario" class="col-3 mt-4 btn btn-outline-success btn btn-guardar" style= "font-size:11px;" data-dismiss="modal">
+                                                    <button type="button" class="btn btn-outline-secondary col-3 mt-4 " data-dismiss="modal">Cerrar</button>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal fade mt-4" id="cambio-clave-usuario" role="dialog" aria-labelledby="cambio-clave-funcionario" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h6 class="modal-title">Dígite clave nueva:</h6>
+                                <button class="close" data-dismiss="modal" aria-label="Cerrar">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <div class="container-fluid cotenedor">
+                                    <div class="row fila">
+                                        <div class="col-12">
+                                            <form method="post" class="form-group">
+                                                <div class="form-group">
+                                                    <label>Usuario:</label>
+                                                    <input type="text" id="usuarioM" name="usuarioM" class="form-control" readonly>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label>Dígite la contraseña:</label>
+                                                    <input type="password" id="firstPass" name="firstPass" class="form-control">
+                                                </div>
+                                                <div class="form-group">
+                                                    <label>Dígite la contraseña nuevamente:</label>
+                                                    <input type="password" id="secondPass" name="secondPass" class="form-control">
+                                                </div>
+                                                <div class="form-group">
+                                                    <label id="mensaje"></label>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <input type=button value="Guardar" id="passUsuario" name="passUsuario" class="col-3 mt-4 btn btn-outline-primary btn btn-guardar" style= "font-size:11px;">
+                                                    <button type="button" class="btn btn-outline-secondary col-3 mt-4" data-dismiss="modal">Cerrar</button>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
-    </div>
-    <script src="public/js/jquery-3.3.1.min.js"></script>
-    <script src="public/js/popper.js"></script>
-    <script src="public/js/bootstrap.min.js"></script>
-    <script src="public/js/smoke.min.js"></script>
-    <script src="public/js/es.min.js"></script>
-    <script src="public/js/datatables.min.js"></script>
-    <script src="public/js/tablas.js"></script>
-    <script src="public/js/valida_usuario.js"></script>
-    <script src="public/js/selector_usuario.js?b2"></script>
-    <script src="public/js/inactivar_usuario.js"></script>
-    <script src="public/js/bloqueoTeclas.js"></script>
-    <?php require('crear_usuario.php'); ?>
-    <?php require('actualiza_usuario.php'); ?>
+        <script src="public/js/jquery-3.3.1.min.js"></script>
+        <script src="public/js/popper.js"></script>
+        <script src="public/js/bootstrap.min.js"></script>
+        <script src="public/js/smoke.min.js"></script>
+        <script src="public/js/es.min.js"></script>
+        <script src="public/js/datatables.min.js"></script>
+        <script src="public/js/tablas.js"></script>
+        <!-- <script src="public/js/valida_usuario.js"></script> -->
+        <script src="public/js/selector_usuario.js?b2"></script>
+        <script src="public/js/inactivar_usuario.js"></script>
+        <script src="public/js/modalCambioClaveU.js"></script>
+        <script src="public/js/bloqueoTeclas.js"></script>
+        <?php require('crear_usuario.php'); ?>
+        <?php require('actualiza_usuario.php'); ?>
 
 </body>
 

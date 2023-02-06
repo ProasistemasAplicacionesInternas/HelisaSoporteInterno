@@ -5,7 +5,7 @@ $(document).ready(function () {
         
 
         $('#inactiva-usuario').modal('show');
-        $('#id_usuarioX').val(id_usuario);
+        $('#id_usuarioI').val(id_usuario);
         
         
        
