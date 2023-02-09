@@ -9,6 +9,7 @@ class traslados{
 	private $activo_traslado;
 	private $descripcion_traslado;
 	private $nombre;
+	private $estado;
 
 	public function getId_traslado(){
 	    return $this->id_traslado;
@@ -72,6 +73,13 @@ class traslados{
 
         public function setNombre($nombre){
             $this->nombre = $nombre;
+        }
+	     public function getEstado(){
+            return $this->estado;
+        }
+
+        public function setEstado($estado){
+            $this->estado = $estado;
         }
 }
 

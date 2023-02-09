@@ -20,7 +20,7 @@ $traslado = new traslados();
 
 	if (isset($_POST['crear_traslado'])) {
 		
-		echo $_POST['fecha_traslado'];
+		
 		$traslado->setFuncionario_inicial($_POST['funcionario_inicial']);
 		$traslado->setFecha_inicial($_POST['fecha_inicial']);
 		$traslado->setFuncionario_final($_POST['funcionario_final']);
