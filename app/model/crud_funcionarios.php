@@ -119,14 +119,21 @@ public function modificarFuncionario($update){
 				$arreglo=[];
 				$arreglo = $activos->fetchAll(PDO::FETCH_COLUMN);
 				for($i=0; $i<$conteoActivos; $i++){							
-					$crear_traslado=$db->prepare('INSERT INTO traslados(funcionario_inicial, fecha_asignado, funcionario_final, fecha_traslado, activo_traslado, descripcion_traslado )VALUES(:t_funcionarioI, :t_fechaA, :t_funcionarioF, :t_fechaT, :t_activo, :t_descripcion)');
+					$crear_traslado=$db->prepare('INSERT INTO traslados(funcionario_inicial, fecha_asignado, funcionario_final, fecha_traslado, activo_traslado, descripcion_traslado, estado_traslado )VALUES(:t_funcionarioI, :t_fechaA, :t_funcionarioF, :t_fechaT, :t_activo, :t_descripcion, :t_estado_traslado)');
 					$crear_traslado->bindValue('t_funcionarioI',$update->getF_identificacion());
 					$crear_traslado->bindValue('t_fechaA',$update->getF_fecha_inactivacion());
 					$crear_traslado->bindValue('t_funcionarioF',$idproxifun);
 					$crear_traslado->bindValue('t_fechaT',$update->getF_fecha_sistema()); 
 					$crear_traslado->bindValue('t_activo',$arreglo[$i]);
 					$crear_traslado->bindValue('t_descripcion','Retiro Empleado');            
+					$crear_traslado->bindValue('t_estado_traslado',3);            
 					$crear_traslado->execute();
+					
+					$acepta_traslado=$db->prepare('UPDATE traslados SET estado_traslado=6 WHERE funcionario_final =:usuario_inicial AND activo_traslado=:id_activo ORDER BY id_traslado DESC LIMIT 1');
+					$acepta_traslado->bindValue('usuario_inicial', $update->getF_identificacion() );          
+					$acepta_traslado->bindValue('id_activo', $arreglo[$i]);          
+					$acepta_traslado->execute();
+				
 				} 
 	
 				if($crear_traslado){
