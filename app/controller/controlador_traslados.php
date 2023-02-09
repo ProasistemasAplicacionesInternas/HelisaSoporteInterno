@@ -19,8 +19,8 @@ $traslado = new traslados();
 //********************************************************************************************//
 
 	if (isset($_POST['crear_traslado'])) {
-echo $_POST['fecha_traslado'];
 		
+		echo $_POST['fecha_traslado'];
 		$traslado->setFuncionario_inicial($_POST['funcionario_inicial']);
 		$traslado->setFecha_inicial($_POST['fecha_inicial']);
 		$traslado->setFuncionario_final($_POST['funcionario_final']);
@@ -28,9 +28,14 @@ echo $_POST['fecha_traslado'];
 		$traslado->setActivo_traslado($_POST['activo_traslado']);
 		$traslado->setDescripcion_traslado($_POST['descripcion_traslado']);
 		$traslado->setNombre($_POST['usu_name']);
-
 		$crud->crearTraslado($traslado);
+		$crud->anulaTraslado($traslado);
 
 		header('Location: ../../dashboard.php');
+	}
+	if (isset($_POST['aceptaActivo']) &&($_POST['aceptaActivo']) == 1 ) {
+		$traslado->setId_traslado($_POST['activo']);
+		$traslado->setFecha_traslado($_POST['nombre']);
+		$crud->aceptaTraslado($traslado);
 	}
 ?>
