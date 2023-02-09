@@ -20,6 +20,7 @@
         $activosAsignados = new crudActivos();
         $datosActivos = new activosFijos();
         $consultarActivos=$activosAsignados->consultarActivosfuncionario();
+        $consultarActivosPendientes=$activosAsignados->consultarActivosPendientesFuncionario();
         
     ?>
     <div class="container-fluid">
@@ -83,7 +84,69 @@
             </div>
             
         </div>
-
+        <div class="row">
+            <div class="col-10 mt-5">
+                <h6 style="border: 1px solid #d9007f; margin: 0% 0%; padding: 10px; text-align: center">
+                Activos Pendientes
+              </h6>
+            </div>
+            <div class="col-10" >
+                <table class="table table-striped tablesorter" id="data" style="border: 1px solid #d9007f; ">
+                    <thead>
+                        <th style="display:none"></th>
+                         <th COLSPAN="5" style="text-align: center;font-size: 15px;">Infraestructura</th>                                            
+                    </thead>
+                    <thead>
+                        <th style="display:none"></th>
+                         <th>C&oacute;digo Activo</th>
+                        <th>Serial Activo</th>
+                        <th>Nombre</th>
+                        <th>Fecha Asignado</th>
+                        <th>Aceptación</th>
+                                            
+                    </thead>
+                    
+                        <?php foreach($consultarActivosPendientes as $campos): ?>
+                                <?php if($campos->getAf_areaCreacion() == 27): ?>
+                                <tr>
+                                    <td><?php echo $campos->getAf_codigo() ?></td>
+                                    <td><?php echo $campos->getAf_serial() ?></td>
+                                    <td><?php echo $campos->getAf_nombre() ?></td>
+                                    <td><?php echo $campos->getAf_fechaAsignacion() ?></td>
+                                    <td style="padding-left: 32px;"><input type="checkbox" onclick="checkked(this)" id="checkbox-<?php echo $campos->getAf_codigo() ?>"></td>
+                                </tr>
+                                <?php endif ?>
+                                <?php endforeach;?>
+            
+                    <thead>
+                        <th style="display:none"></th>
+                         <th COLSPAN="5" style="text-align: center;font-size: 15px;">Administraci&oacute;n</th>                                            
+                    </thead>
+                    <thead>
+                        <th style="display:none"></th>
+                         <th>C&oacute;digo Activo</th>
+                        <th>Serial Activo</th>
+                        <th>Nombre</th>
+                        <th>Fecha Asignado</th>
+                        <th>Aceptación</th>
+                                            
+                    </thead>
+                    
+                        <?php foreach($consultarActivosPendientes as $campos): ?>
+                                <?php if($campos->getAf_areaCreacion() == 32): ?>
+                                <tr>
+                                    <td><?php echo $campos->getAf_codigo() ?></td>
+                                    <td><?php echo $campos->getAf_serial() ?></td>
+                                    <td><?php echo $campos->getAf_nombre() ?></td>
+                                    <td><?php echo $campos->getAf_fechaAsignacion() ?></td>
+                                    <td style="padding-left: 32px;"><input type="checkbox" onclick="checkked(this)" id="checkbox-<?php echo $campos->getAf_codigo() ?>"></td>
+                                </tr>
+                                <?php endif ?>
+                                <?php endforeach;?>
+                </table>
+            </div>
+            
+        </div>                            
 
 
     
@@ -91,6 +154,7 @@
     <script src="public/js/tablas.js"></script>
     <script src="public/js/smoke.min.js"></script>
     <script src="public/js/bloqueoTeclas.js"></script>
+    <script src="public/js/revisadoActivosFijos.js"></script>
 </body>	
 </body>
 </html>
