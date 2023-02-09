@@ -38,6 +38,7 @@ $("#validarUsuario").on("click", function () {
         text: "Su clave es errónea.",
         type: "danger",
       });
+      $("#pass_a").val("");
     }
   });
 });
@@ -85,7 +86,12 @@ $("#passFuncionario").on("click", function () {
             text: "La clave del funcionario se actualizó.",
             type: "success",
           });
-          $('#cambio-clave-funcionario').modal('hide')
+          $("#funcionario").val("");
+          $("#firstPass").val("");
+          $("#secondPass").val("");
+          $("#mensaje").text("");
+          document.getElementById("passFuncionario").disabled = false;
+          $('#cambio-clave-funcionario').modal('hide');
         } else {
           $.smkAlert({
             text: "La clave no fue modificada.",

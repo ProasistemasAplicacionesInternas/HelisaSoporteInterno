@@ -116,7 +116,7 @@
             /*----------------REALIZA LA MODIFICACION DE LOS DATOS EXISTENTES---------------*/
            
             $db=conectar::acceso();
-            $validarContrasena=$db->prepare('SELECT clave FROM usuarios WHERE clave=:claveP');
+           /*  $validarContrasena=$db->prepare('SELECT clave FROM usuarios WHERE clave=:claveP');
 	          $validarContrasena->bindValue('claveP',$modifica->getClave());
             $validarContrasena->execute();
             $conteo = $validarContrasena->rowCount();
@@ -125,28 +125,33 @@
               $password = password_hash($modifica->getClave(), PASSWORD_DEFAULT, ["cost" => 15]);
             }else{
               $password = $modifica->getClave();
-            }
-            $modificar_usuario=$db->prepare('UPDATE hinfraestructura.usuarios SET clave=:clave, correo=:correo, tipo_validacion=:tipo_validacion WHERE id_usuario=:id_usuario');
+            } */
+            $modificar_usuario=$db->prepare('UPDATE hinfraestructura.usuarios SET correo=:correo, tipo_validacion=:tipo_validacion WHERE id_usuario=:id_usuario');
 
             /* $password=password_hash($modifica->getClave(), PASSWORD_DEFAULT, ["cost" => 15]); */
 
             $modificar_usuario->bindValue('id_usuario',$modifica->getIDusuario());
-            $modificar_usuario->bindValue('clave',$password);
             $modificar_usuario->bindValue('correo',$modifica->getCorreo());
             $modificar_usuario->bindValue('tipo_validacion',$modifica->getTipoValidacion());          
             $modificar_usuario->execute();
-            
-                          $colsultar_usuario=$db->prepare('SELECT id_usuario from usuarios where usuario =:usuario');
-                          $colsultar_usuario->bindValue('usuario',$modifica->getIDusuarios());
-                          $colsultar_usuario->execute();
-                          $filtro=$colsultar_usuario->fetch(PDO::FETCH_ASSOC);
-                          $id_usuario=$filtro['id_usuario'];
-                           $funcion_realizada = "El usuario Realizo una Actualizacion de  usuario";
-                           $inserta_funcion=$db->prepare("INSERT INTO funciones (codigo, id_usuario, fecha_registro, funcion_realizada,IP) VALUES (0, :id_usuario , curdate() , :funcion_realizada ,:ip )");
-                           $inserta_funcion->bindValue('id_usuario',$id_usuario);
-                           $inserta_funcion->bindValue('funcion_realizada',$funcion_realizada);
-                           $inserta_funcion->bindValue('ip', $_SERVER['REMOTE_ADDR']);                 
-                           $inserta_funcion->execute();
+            $row = $modificar_usuario->rowCount();
+            if($row !=0){
+              return 1;
+            }else{
+              return 2;
+            }
+
+            $colsultar_usuario=$db->prepare('SELECT id_usuario from usuarios where usuario =:usuario');
+            $colsultar_usuario->bindValue('usuario',$modifica->getIDusuarios());
+            $colsultar_usuario->execute();
+            $filtro=$colsultar_usuario->fetch(PDO::FETCH_ASSOC);
+            $id_usuario=$filtro['id_usuario'];
+            $funcion_realizada = "El usuario Realizo una Actualizacion de  usuario";
+            $inserta_funcion=$db->prepare("INSERT INTO funciones (codigo, id_usuario, fecha_registro, funcion_realizada,IP) VALUES (0, :id_usuario , curdate() , :funcion_realizada ,:ip )");
+            $inserta_funcion->bindValue('id_usuario',$id_usuario);
+            $inserta_funcion->bindValue('funcion_realizada',$funcion_realizada);
+            $inserta_funcion->bindValue('ip', $_SERVER['REMOTE_ADDR']);                 
+            $inserta_funcion->execute();
         }
         
         public function eliminaUsuario($alias){

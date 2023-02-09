@@ -62,16 +62,18 @@ class CrudFuncionarios{
 public function modificarFuncionario($update){
 	$db=conectar::acceso();
 	//valida contraseña
-	$validarContrasena=$db->prepare('SELECT contrasena FROM funcionarios WHERE contrasena=:contrasenaP');
+	/* $validarContrasena=$db->prepare('SELECT contrasena FROM funcionarios WHERE contrasena=:contrasenaP');
 	$validarContrasena->bindValue('contrasenaP',$update->getF_contrasena());
 	$validarContrasena->execute();
 	$conteo = $validarContrasena->rowCount();
 
-	if($conteo== 0){
-		$contrasena = password_hash($update->getF_contrasena(), PASSWORD_DEFAULT, ["cost" => 15]);
-	}else{
+	if($conteo != 0){
 		$contrasena = $update->getF_contrasena();
-	}
+		echo 1;
+	}else{
+		$contrasena = password_hash($update->getF_contrasena(), PASSWORD_DEFAULT, ["cost" => 15]);
+		echo 2;
+	} */
 
 	//valida Modificacion de cargo
 	$validaCargo = $db->prepare('SELECT cargo FROM funcionarios WHERE identificacion = :identificacion LIMIT 1');
@@ -80,7 +82,7 @@ public function modificarFuncionario($update){
 	$validacionCargo = $validaCargo->fetch(PDO::FETCH_ASSOC);
 	$cargoActual = $validacionCargo['cargo'];
 
-	$modificar_funcionario=$db->prepare('UPDATE funcionarios SET  tipo_validacion=:f_tipoValidacion, nombre= :f_nombre, mail= :f_email, mail2 = :f_email2, area= :f_area, cargo= :f_cargo, extension= :f_extension, rol= :f_rol, usuario= :f_usuario, contrasena= :f_contrasena, validacion= :f_validacion, fecha_sistema= :f_fecha_sistema, centro_de_costos = :centroCostos, intentos=:f_intento WHERE identificacion= :f_identificacion');
+	$modificar_funcionario=$db->prepare('UPDATE funcionarios SET  tipo_validacion=:f_tipoValidacion, nombre= :f_nombre, mail= :f_email, mail2 = :f_email2, area= :f_area, cargo= :f_cargo, extension= :f_extension, rol= :f_rol, usuario= :f_usuario, validacion= :f_validacion, fecha_sistema= :f_fecha_sistema, centro_de_costos = :centroCostos, intentos=:f_intento WHERE identificacion= :f_identificacion');
 	$modificar_funcionario->bindValue('f_identificacion',$update->getF_identificacion());
 	$modificar_funcionario->bindValue('f_tipoValidacion',$update->getTipoValidacion());
 	$modificar_funcionario->bindValue('f_nombre',$update->getF_nombre());
@@ -91,13 +93,17 @@ public function modificarFuncionario($update){
 	$modificar_funcionario->bindValue('f_extension',$update->getF_extension());
 	$modificar_funcionario->bindValue('f_rol',$update->getF_rol());
 	$modificar_funcionario->bindValue('f_usuario',$update->getF_usuario());
-	$modificar_funcionario->bindValue('f_contrasena',$contrasena);
 	$modificar_funcionario->bindValue('f_validacion',$update->getF_validacion());
 	$modificar_funcionario->bindValue('f_fecha_sistema',$update->getF_fecha_sistema());
 	$modificar_funcionario->bindValue('f_intento', 0);
 	$modificar_funcionario->bindValue('centroCostos', $update->getCentroCostos());
 	$modificar_funcionario->execute();
-
+	$row = $modificar_funcionario->rowCount();
+	if($row != 0){
+		echo 3;
+	}else{
+		echo 4;
+	}
 	if($modificar_funcionario){
 
 		if($update->getF_estado() == 16){
@@ -108,6 +114,12 @@ public function modificarFuncionario($update){
 			$inactivacionFuncionario->bindValue('descripcion', $update->getDescripcionFinal());
 			$inactivacionFuncionario->bindValue('f_identificacion',$update->getF_identificacion());
 			$inactivacionFuncionario->execute();
+			$rowInac = $inactivacionFuncionario->rowCount();
+			if($rowInac !=0){
+				echo 5;
+			}else{
+				echo 6;
+			}
  
 			$activos=$db->prepare("SELECT id_activo FROM activos_internos WHERE responsable_activo=:identificacion");
 			$activos->bindValue('identificacion',$update->getF_identificacion());
@@ -146,17 +158,13 @@ public function modificarFuncionario($update){
 					$modificarActivo->execute();
 				}
 			}
-
 			//self::peticionCancelacionAccesos($update->getF_identificacion(),$update->getF_usuario(),'Retiro de funcionario.');
-			echo 1;
 		}else if($cargoActual != $update->getF_cargo()){//valida la modificacion de cargo del funcionario
 			//self::peticionCancelacionAccesos($update->getF_identificacion(),$update->getF_usuario(),'Remocion de Cargo.');
-			echo 1;
-		}else{
-			echo 1;
+			echo 8;
 		}
 	}else{
-		echo 0;
+		echo 9;
 	}
 	$db = null;
 }
@@ -1409,6 +1417,46 @@ public function cambioContrasena($update){
 		return $cadena;
 	}
 
-	
+	public function traerTipoValidacion($funcionario){
+		$db = Conectar::acceso();
+		$consultar_tipoval=$db->prepare("SELECT tipo_validacion FROM funcionarios WHERE usuario=:usuario");
+		$consultar_tipoval->bindValue('usuario', $funcionario->getF_usuario());
+		$consultar_tipoval->execute();
+		$resultado = $consultar_tipoval->fetch(PDO::FETCH_ASSOC);
+		if ($resultado['tipo_validacion'] != 2){
+		echo 1;
+		}else{
+		echo 2;
+		}
+	}
+
+	public function traerFuncionario($documento){
+		$db=Conectar::acceso();
+		$traerFuncionario =$db->prepare("SELECT usuario FROM funcionarios WHERE identificacion=:identificacion");
+		$traerFuncionario->bindValue('identificacion',$documento->getF_identificacion());
+		$traerFuncionario->execute();
+		$funcionarioUser = $traerFuncionario->fetch(PDO::FETCH_ASSOC);
+		if($funcionarioUser['usuario']){
+			echo $funcionarioUser['usuario'];
+		}else{
+			echo 2;
+		}
+	}
+
+	public function cambioContrasenaFuncionario($funcionario){
+		$db=Conectar::acceso();
+		$cambioPass =$db->prepare("UPDATE funcionarios SET contrasena=:clave, validacion=:validacion WHERE usuario=:usuario");
+		$password=password_hash($funcionario->getClave(), PASSWORD_DEFAULT, ["cost" => 15]);
+		$cambioPass->bindValue('clave',$password);
+		$cambioPass->bindValue('validacion','0');
+		$cambioPass->bindValue('usuario',$funcionario->getF_usuario());
+		$cambioPass->execute();
+		$row = $cambioPass->rowCount();
+		if($row !=0){
+			echo 1;
+		}else{
+			echo 2;
+		}
+	}
 }
 ?>

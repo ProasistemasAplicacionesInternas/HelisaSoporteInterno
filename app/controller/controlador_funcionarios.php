@@ -41,6 +41,33 @@ if (isset($_POST['crear']) && ($_POST['crear']==1)) {
     
     
 }
+//********************************************************************************************//
+//*******************************TRAER TIPO DE VALIDACIÓN fUNCIONARIO***************************//
+//********************************************************************************************//
+    
+if (isset($_POST['tipoval']) || (isset($_POST['tipoval'] ) == 1 )){
+    $funcionario->setF_usuario($_POST['usuario']);
+    $crud->traerTipoValidacion($funcionario);
+}
+
+//********************************************************************************************//
+//*******************************TRAER fUNCIONARIO***************************//
+//********************************************************************************************//
+    
+if (isset($_POST['consultaF']) || (isset($_POST['consultaF'] ) == 1 )){
+    $funcionario->setF_identificacion($_POST['f_identificacion']);
+    $crud->traerFuncionario($funcionario);
+}
+//********************************************************************************************//
+//*******************************UPDATE CONTRASEÑA FUNCIONARIO***************************//
+//********************************************************************************************//
+    
+if (isset($_POST['enviarClaveF']) || (isset($_POST['enviarClaveF'] ) == 1 )){
+    $funcionario->setF_usuario($_POST['funcionario']);
+    $funcionario->setClave($_POST['firstPass']);
+    $crud->cambioContrasenaFuncionario($funcionario);
+}
+
 
 //*****************************************************************************************************//
 //**********************************CONTROLADOR PARA MODIFICAR ACCESOS*****************************//
@@ -79,7 +106,6 @@ if (isset($_POST['modificar_funcionario'])&&($_POST['modificar_funcionario'] ==1
     $funcionario->setF_area($_POST['f_area']);
     $funcionario->setF_cargo($_POST['f_cargo']);
     $funcionario->setF_usuario($_POST['f_usuario']);
-    $funcionario->setF_contrasena($_POST['f_contrasena']);
     $funcionario->setF_estado($_POST['f_estado']);
     $funcionario->setF_rol($_POST['f_rol']);
     $funcionario->setF_validacion('1');

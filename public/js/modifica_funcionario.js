@@ -1,69 +1,114 @@
-
-    $('#btn-limpiarCodigo').click(function(){
-        var limpiarcodigoF =
-        '&f_usuario=' + $('#f_usuario').val() +
-        '&limpiar_codigoF=1';
-        console.log(limpiarcodigoF);
-        $.ajax({
-            type: 'POST' ,
-            url: '../controller/control_codigos.php',
-            data: limpiarcodigoF
-        }).done(function(data){
-            console.log(data);
-        });
-    })
-    
-    
-    $('#btn-guardarModif').click(function() { 
-        var constrasena = $('#f_contrasena').val();
-        $('#f_contrasena').val("1234");
-
-        if ($('#modificaFuncionario').smkValidate()) {
-            var infoCliente =
-                '&f_identificacion=' + $('#f_identificacion').val() +
-                '&f_tipoValidacion=' + $('#f_tipoValidacion').val() +
-                '&f_estado=' + $('#f_estado').val() +
-                '&f_rol=' + $('#f_rol').val() +
-                '&f_fecha_inactivacion=' + $('#f_fecha_inactivacion').val() +
-                '&f_nombre=' + ($('#f_nombre').val()) +
-                '&f_correo=' + $('#f_correo').val() +
-                '&f_correo2=' + $('#f_correo2').val() +
-                '&f_extension=' + $('#f_extension').val() +
-                '&f_area=' + $('#f_area').val() +
-                '&f_cargo=' + $('#f_cargo').val() +
-                '&f_usuario=' + $('#f_usuario').val() +
-                '&f_contrasena=' + constrasena +
-                '&funcionario_Transpaso=' + $('#funcionario_translado').val() + 
-                '&descripcion=' + $('#descripcionRetiro').val() +
-                '&centroCostos=' + $('#f_centroCostos').val() +
-                '&departamentoInterno=' + $('#f_departamentosInt').val() +
-                '&modificar_funcionario=1';
-            $.ajax({
-                type: 'POST',
-                url: '../controller/controlador_funcionarios.php',
-                data: infoCliente
-
-            }).done(function(data) {
-                console.log(data);
-                if (data == 1) {
-                    window.close();
-                    
-                } else {
-                    $.smkAlert({
-                        text: 'Se presento un problema intente de nuevo.',
-                        type: 'danger'
-                    });
-                }
-
-            });
-        }
-    });
-
-
-    $('#cerrar_modificacion').click(function() {
+$("#btn-limpiarCodigo").click(function () {
+  var limpiarcodigoF =
+    "&f_usuario=" + $("#f_usuario").val() + "&limpiar_codigoF=1";
+  $.ajax({
+    type: "POST",
+    url: "../controller/control_codigos.php",
+    data: limpiarcodigoF,
+  }).done(function (data) {
+    //console.log(data);
+    if (data == 1) {
+      $.smkAlert({
+        text: "Se ha eliminado el código QR del funcionario satisfactoriamente",
+        type: "success",
+      });
+      setTimeout(function () {
         window.close();
-    })
+      }, 2000);
+    } else {
+      $.smkAlert({
+        text: "El funcionario no tiene un código QR registrado",
+        type: "danger",
+      });
+    }
+    setTimeout(function () {
+      window.close();
+    }, 2000);
+  });
+});
 
+
+$(document).ready(function () {
+  var nombre = $("#f_usuario").val();
+  //console.log(nombre);
+  var consulta = "&usuario=" + nombre + "&tipoval=1";
+  $.ajax({
+    type: "POST",
+    url: "../controller/controlador_funcionarios.php",
+    data: consulta,
+  }).done(function (data) {
+    //console.log(data);
+    var datoVal = data;
+    $("#f_tipoValidacion").val(datoVal);
+  });
+});
+
+$("#btn-guardarModif").click(function () {
+  if ($("#modificaFuncionario").smkValidate()) {
+    var infoCliente =
+      "&f_identificacion=" +
+      $("#f_identificacion").val() +
+      "&f_tipoValidacion=" +
+      $("#f_tipoValidacion").val() +
+      "&f_estado=" +
+      $("#f_estado").val() +
+      "&f_rol=" +
+      $("#f_rol").val() +
+      "&f_fecha_inactivacion=" +
+      $("#f_fecha_inactivacion").val() +
+      "&f_nombre=" +
+      $("#f_nombre").val() +
+      "&f_correo=" +
+      $("#f_correo").val() +
+      "&f_correo2=" +
+      $("#f_correo2").val() +
+      "&f_extension=" +
+      $("#f_extension").val() +
+      "&f_area=" +
+      $("#f_area").val() +
+      "&f_cargo=" +
+      $("#f_cargo").val() +
+      "&f_usuario=" +
+      $("#f_usuario").val() +
+      "&funcionario_Transpaso=" +
+      $("#funcionario_translado").val() +
+      "&descripcion=" +
+      $("#descripcionRetiro").val() +
+      "&centroCostos=" +
+      $("#f_centroCostos").val() +
+      "&departamentoInterno=" +
+      $("#f_departamentosInt").val() +
+      "&modificar_funcionario=1";
+    $.ajax({
+      type: "POST",
+      url: "../controller/controlador_funcionarios.php",
+      data: infoCliente,
+    }).done(function (data) {
+      //console.log(data);
+      if (data != 4) {
+        $.smkAlert({
+          text: "Se realizó el cambio satisfactoriamente.",
+          type: "success",
+        });
+        setTimeout(function () {
+          window.location='../../dashboard.php';
+        }, 1000);
+        document.getElementById("btn-guardarModif").disabled = true;
+      } else {
+        $.smkAlert({
+          text: "No se realizó ningún cambio.",
+          type: "info",
+        });
+      }
+      setTimeout(function () {
+        window.location='../../dashboard.php';
+      }, 1000);
+    });
+  }
+});
+$("#cerrar_modificacion").click(function () {
+  window.location='../../dashboard.php';
+});
 /* 
 var arrayAcceso = [];
         var numeroInput = document.getElementsByClassName('acceso');

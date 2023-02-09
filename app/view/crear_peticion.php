@@ -171,7 +171,6 @@
                                 </div>
                                 <div>
                                     <input type="file" id="imagen[]" name="imagen[]" multiple="" >
-                                    
                                 </div>
                                 <label class="mt-2" id="textImg" style="min-width:150%"></label>
                             </div>

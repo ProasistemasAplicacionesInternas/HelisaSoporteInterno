@@ -21,7 +21,7 @@ class crudActivos{
 		}else if ($resultadoVal==0){
 
 				$db=conectar::acceso();
-				$crear_activo=$db->prepare("INSERT INTO activos_internos(codigo_activo,serial_activo,nombre_activo,estado_activo, marca_activo, modelo_activo, fecha_compra, grupo_activo, area_activo, ubicacion_activo, responsable_activo, fecha_asignacion, observaciones_activo, ram_activo, disco_activo, procesador_activo, licencia_office, licencia_antivirus, aplicaciones_activo, licencia_sistema, dominio, sistema_operativo) VALUES(:codigo_activo, :serial_activo, :nombre_activo, :estado_activo, :marca_activo, :modelo_activo, :fecha_compra, :grupo_activo, :area_activo, :ubicacion_activo,:responsable_activo, :fecha_asignacion, :observaciones_activo, :ram_activo, :disco_activo, :procesador_activo, :licencia_office, :licencia_antivirus, :aplicaciones_activo, :licencia_sistema, :dominio, :sistema_operativo)");
+				$crear_activo=$db->prepare("INSERT INTO activos_internos(codigo_activo,serial_activo,nombre_activo,estado_activo, marca_activo, modelo_activo, fecha_compra, grupo_activo, area_activo, ubicacion_activo, responsable_activo, fecha_asignacion, observaciones_activo, ram_activo, disco_activo, procesador_activo, licencia_office, licencia_antivirus, aplicaciones_activo, licencia_sistema, dominio, sistema_operativo, imagen ) VALUES(:codigo_activo, :serial_activo, :nombre_activo, :estado_activo, :marca_activo, :modelo_activo, :fecha_compra, :grupo_activo, :area_activo, :ubicacion_activo,:responsable_activo, :fecha_asignacion, :observaciones_activo, :ram_activo, :disco_activo, :procesador_activo, :licencia_office, :licencia_antivirus, :aplicaciones_activo, :licencia_sistema, :dominio, :sistema_operativo, :imagen)");
 						$crear_activo->bindValue('codigo_activo',$create->getAf_codigo());
 						$crear_activo->bindValue('serial_activo',$create->getAf_serial());
 						$crear_activo->bindValue('nombre_activo',$create->getAf_nombre());
@@ -33,7 +33,7 @@ class crudActivos{
 						$crear_activo->bindValue('area_activo',$create->getAf_area());
 						$crear_activo->bindValue('ubicacion_activo',$create->getAf_ubicacion());
 						$crear_activo->bindValue('responsable_activo',$create->getAf_funcionario());
-						$crear_activo->bindValue('fecha_asignacion',$create->getAf_fechaAsignacion());
+						$crear_activo->bindValue('fecha_asignacion',$create->getAf_fechaAsignacion()); 
 						$crear_activo->bindValue('observaciones_activo',$create->getAf_observaciones());
 						$crear_activo->bindValue('ram_activo',$create->getAf_ram());
 						$crear_activo->bindValue('disco_activo',$create->getAf_disco());
@@ -44,6 +44,7 @@ class crudActivos{
 						$crear_activo->bindValue('licencia_sistema',$create->getAf_licenciaSO());
 						$crear_activo->bindValue('dominio',$create->getAf_dominio());
 						$crear_activo->bindValue('sistema_operativo',$create->getAf_sistemaOperativo());
+						$crear_activo->bindValue('imagen',$create->getImagenactivo());
 						$crear_activo->execute();
 
 				if ($crear_activo) {
@@ -73,7 +74,7 @@ class crudActivos{
 	public function modificarActivos($update){
 
 					$db=conectar::acceso();
-					$modificar_activo=$db->prepare("UPDATE activos_internos SET serial_activo=:serial_activo, nombre_activo=:nombre_activo, estado_activo=:estado_activo, marca_activo=:marca_activo, modelo_activo=:modelo_activo, fecha_compra=:fecha_compra, grupo_activo=:grupo_activo, area_activo=:area_activo, ubicacion_activo=:ubicacion_activo, observaciones_activo=:observaciones_activo, ram_activo=:ram_activo, disco_activo=:disco_activo, procesador_activo=:procesador_activo, licencia_office=:licencia_office, licencia_antivirus=:licencia_antivirus, aplicaciones_activo=:aplicaciones_activo, licencia_sistema=:licencia_sistema, dominio=:dominio, sistema_operativo=:sistema_operativo WHERE codigo_activo=:codigo_activo");
+					$modificar_activo=$db->prepare("UPDATE activos_internos SET serial_activo=:serial_activo, nombre_activo=:nombre_activo, estado_activo=:estado_activo, marca_activo=:marca_activo, modelo_activo=:modelo_activo, fecha_compra=:fecha_compra, grupo_activo=:grupo_activo, area_activo=:area_activo, ubicacion_activo=:ubicacion_activo, observaciones_activo=:observaciones_activo, ram_activo=:ram_activo, disco_activo=:disco_activo, procesador_activo=:procesador_activo, licencia_office=:licencia_office, licencia_antivirus=:licencia_antivirus, aplicaciones_activo=:aplicaciones_activo, licencia_sistema=:licencia_sistema, dominio=:dominio, sistema_operativo=:sistema_operativo, imagen=:imagen WHERE codigo_activo=:codigo_activo");
 
 					$modificar_activo->bindValue('codigo_activo',$update->getAf_codigo());
 					$modificar_activo->bindValue('serial_activo',$update->getAf_serial());
@@ -97,19 +98,26 @@ class crudActivos{
 					$modificar_activo->bindValue('licencia_sistema',$update->getAf_licenciaSO());
 					$modificar_activo->bindValue('dominio',$update->getAf_dominio());
 					$modificar_activo->bindValue('sistema_operativo',$update->getAf_sistemaOperativo());
+					$modificar_activo->bindValue('imagen',$update->getImagenactivo());
 					$modificar_activo->execute();
 					//historial de movimientos 
-					$colsultar_usuario=$db->prepare('SELECT id_usuario from usuarios where usuario =:usuario');
-                          $colsultar_usuario->bindValue('usuario', $update->getNombre());
-                          $colsultar_usuario->execute();
-                          $filtro=$colsultar_usuario->fetch(PDO::FETCH_ASSOC);
-                          $id_usuario=$filtro['id_usuario'];
-                           $funcion_realizada = "El usuario Realizo una Actualizacion de un  activo";
-                           $inserta_funcion=$db->prepare("INSERT INTO funciones (codigo, id_usuario, fecha_registro, funcion_realizada,IP) VALUES (0, :id_usuario , curdate() , :funcion_realizada ,:ip )");
-                           $inserta_funcion->bindValue('id_usuario',$id_usuario);
-                           $inserta_funcion->bindValue('funcion_realizada',$funcion_realizada);
-                           $inserta_funcion->bindValue('ip', $_SERVER['REMOTE_ADDR']);                 
-                           $inserta_funcion->execute();
+					if ($modificar_activo) {
+							echo 1;
+							$colsultar_usuario=$db->prepare('SELECT id_usuario from usuarios where usuario =:usuario');
+							$colsultar_usuario->bindValue('usuario', $update->getNombre());
+							$colsultar_usuario->execute();
+							$filtro=$colsultar_usuario->fetch(PDO::FETCH_ASSOC);
+							$id_usuario=$filtro['id_usuario'];
+							$funcion_realizada = "El usuario Realizo una Actualizacion de un  activo";
+							$inserta_funcion=$db->prepare("INSERT INTO funciones (codigo, id_usuario, fecha_registro, funcion_realizada,IP) VALUES (0, :id_usuario , curdate() , :funcion_realizada ,:ip )");
+							$inserta_funcion->bindValue('id_usuario',$id_usuario);
+							$inserta_funcion->bindValue('funcion_realizada',$funcion_realizada);
+							$inserta_funcion->bindValue('ip', $_SERVER['REMOTE_ADDR']);                 
+							$inserta_funcion->execute();
+					}else{
+						echo 0;
+					}
+					
 	}
 	
 //**********************************************************************************************//
@@ -119,7 +127,7 @@ class crudActivos{
 	public function consultarActivos(){
 					$db=conectar::acceso();
 					$lista_activos=[];
-					$consultar_activo=$db->query("SELECT id_activo, codigo_activo, serial_activo, nombre_activo, estado_activo, marca_activo, modelo_activo, fecha_compra, grupo_activo, area_activo, ubicacion_activo, responsable_activo, fecha_asignacion, observaciones_activo, ram_activo, disco_activo, procesador_activo, licencia_office, licencia_antivirus, aplicaciones_activo, licencia_sistema, dominio, sistema_operativo, estado.descripcion AS estado, funcionarios.nombre AS responsable  FROM activos_internos LEFT JOIN estado on id_estado=estado_activo LEFT JOIN funcionarios ON identificacion=responsable_activo");
+					$consultar_activo=$db->query("SELECT id_activo, codigo_activo, serial_activo, nombre_activo, estado_activo, marca_activo, modelo_activo, fecha_compra, grupo_activo, area_activo, ubicacion_activo, responsable_activo, fecha_asignacion, observaciones_activo, ram_activo, disco_activo, procesador_activo, licencia_office, licencia_antivirus, aplicaciones_activo, licencia_sistema, dominio, sistema_operativo, estado.descripcion AS estado, funcionarios.nombre AS responsable, imagen  FROM activos_internos LEFT JOIN estado on id_estado=estado_activo LEFT JOIN funcionarios ON identificacion=responsable_activo");
 					//$i = 0;
 					foreach ($consultar_activo->fetchALL() as $listado) {
 						
@@ -149,6 +157,7 @@ class crudActivos{
 						$consulta->setAf_aplicaciones($listado['aplicaciones_activo']);
 						$consulta->setAf_licenciaSO($listado['licencia_sistema']);
 						$consulta->setAf_sistemaOperativo($listado['sistema_operativo']);
+						$consulta->setImagenactivo($listado['imagen']);
 						//$i++;
 						$lista_activos[]=$consulta;
 					}
@@ -299,7 +308,7 @@ public function consultaModificarActivo(){
 
 			$db=conectar::acceso();
 			$lista_peticiones=[];
-			$consultar_peticion=$db->prepare('SELECT  numero_peticion, fecha_peticion, peticiones.usuario, fecha_atendido, peticiones.estado, peticiones.categoria, peticiones.descripcion, imagen, activos_internos.nombre_activo, funcionarios.extension, funcionarios.area,funcionarios.mail, areas.descripcion AS descripcion1, categorias.nombre_categoria, estado.descripcion AS nombreestado, conclusiones, usuario_atiende FROM peticiones LEFT JOIN funcionarios ON funcionarios.usuario=peticiones.usuario LEFT JOIN areas ON id_area=area LEFT JOIN categorias ON id_categoria=categoria LEFT JOIN estado ON id_estado=peticiones.estado LEFT JOIN activos_internos ON id_activo=activo WHERE activo=:idActivo');
+			$consultar_peticion=$db->prepare('SELECT  numero_peticion, fecha_peticion, peticiones.usuario, fecha_atendido, peticiones.estado, peticiones.categoria, peticiones.descripcion, peticiones.imagen, activos_internos.nombre_activo, funcionarios.extension, funcionarios.area,funcionarios.mail, areas.descripcion AS descripcion1, categorias.nombre_categoria, estado.descripcion AS nombreestado, conclusiones, usuario_atiende FROM peticiones LEFT JOIN funcionarios ON funcionarios.usuario=peticiones.usuario LEFT JOIN areas ON id_area=area LEFT JOIN categorias ON id_categoria=categoria LEFT JOIN estado ON id_estado=peticiones.estado LEFT JOIN activos_internos ON id_activo=activo WHERE activo=:idActivo');
 				$consultar_peticion->bindValue('idActivo',$_POST['af_id']);
 				$consultar_peticion->execute();
 
@@ -328,7 +337,7 @@ public function consultaModificarActivo(){
 	public function mantenimientosActivo(){
 					$db=conectar::acceso();
 					$lista_mantenimientos=[];
-					$consultar_mantenimiento=$db->prepare('SELECT codigo_mantenimiento, fecha_mantenimiento, descripcion_mantenimiento, responsable_mantenimiento, costo_mantenimiento, activo_mantenimiento FROM mantenimientos WHERE activo_mantenimiento=:idActivo');
+					$consultar_mantenimiento=$db->prepare('SELECT codigo_mantenimiento, fecha_mantenimiento, descripcion_mantenimiento, responsable_mantenimiento, costo_mantenimiento, activo_mantenimiento, documentos FROM mantenimientos WHERE activo_mantenimiento=:idActivo');
 						$consultar_mantenimiento->bindValue('idActivo',$_POST['af_id']);
 						$consultar_mantenimiento->execute();
 
@@ -340,6 +349,7 @@ public function consultaModificarActivo(){
                 			$consulta->setResponsable_mantenimiento($listadoM['responsable_mantenimiento']);
 							$consulta->setCosto_mantenimiento($listadoM['costo_mantenimiento']);	
 							$consulta->setActivo_mantenimiento($listadoM['activo_mantenimiento']);	
+							$consulta->setPdfmantenimientos($listadoM['documentos']);	
 				
 							$lista_mantenimientos[]=$consulta;	
 						}

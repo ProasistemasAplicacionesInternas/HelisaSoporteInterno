@@ -18,36 +18,33 @@ $lista_usuariosAtienden=$actualiza->get_usuariosAtienden();
 
 
 if (isset($_POST['guardar'])) {
-     session_start();
-
-
+    session_start();
 	$modifica->setIDusuario($_POST['id_usuario']);
-	$modifica->setClave($_POST['contrasena']);
     $modifica->setCorreo($_POST['correo']); 
     $modifica->setIDusuarios($_SESSION['usuario']); 
     $modifica->setTipoValidacion($_POST['tipoValidacion']);
-    $actualiza->actualizar($modifica);
-    
-   header('Location:../../dashboard.php');
+    $resultado = $actualiza->actualizar($modifica);
+    if ($resultado == 1){
+        echo'<script type="text/javascript" charset="utf-8">
+        alert("Se modifico correctamente.");
+        history.back();
+        </script>';
+    }else if($resultado == 2){
+        echo'<script type="text/javascript" charset="utf-8">
+        alert("No realizó ningún cambio.");
+        history.back();
+        </script>';
+    }
+   //header('Location:../../dashboard.php');
 }
 
-if (isset($_POST['borrarCodigo'])) {
-   /* $modifica->setNombre($_POST['usuario']); */
-   $modifica->setNombre($_POST['usuario']);
-   $usuario=$_POST['usuario'];
-   $datosC->setId_Usuario($usuario);
-   $crudC->eliminarCodigoUsuarios($datosC);
-
-
-  header('Location:../../dashboard.php');
-}
 
 
 if (isset($_POST['inactivar'])) {
 
     session_start();
 
-    $modifica->setIDusuario($_POST['id_usuarioX']);
+    $modifica->setIDusuario($_POST['id_usuarioI']);
     $modifica->setUfecha_inactivacion($_POST['fechaInactivo']);
     $modifica->setDescripcion($_POST['descripcion']);   
     $modifica->setUsuario_inactiva($_SESSION['usuario']); 
