@@ -5,7 +5,7 @@ function checkked(checkbox) {
     let infoActivo = 'activo=' + codigo + '&nombre=' + nombre + '&aceptaActivo=1';
     $.ajax({
         type: 'POST',
-        url: 'http://localhost/HelisaSoporteInterno/app/controller/controlador_traslados.php',
+        url: 'app/controller/controlador_traslados.php',
         data: infoActivo
     }).done(function(data) {
         console.log(data)
