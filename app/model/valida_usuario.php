@@ -384,6 +384,78 @@
             header("location:../../login.php?vrTx2e/:fgtyjf45yTsdbbgh=ghtyn%gtSQ34&cty6Dd54=2&val=ghtf43&valrtv675474");
         }
 
+        public function traerTipoValidacion($usuario){
+            $db = Conectar::acceso();
+            $consultar_tipoval=$db->prepare("SELECT tipo_validacion FROM usuarios WHERE usuario=:usuario");
+            $consultar_tipoval->bindValue('usuario', $usuario->getNombre());
+            $consultar_tipoval->execute();
+            $resultado = $consultar_tipoval->fetch(PDO::FETCH_ASSOC);
+            if ($resultado['tipo_validacion'] != 2){
+                echo 1;
+            }else{
+                echo 2;
+            }
+        }
 
+        public function verificarContrasena($validar){
+            $claveIngresada = $validar->getClave();
+            $db=conectar::acceso();
+            $verificar=$db->prepare('SELECT clave FROM usuarios WHERE usuario=:usuario');
+            $verificar->bindValue('usuario',$validar->getNombre());
+            $verificar->execute();
+            $resultado = $verificar->fetch(PDO::FETCH_ASSOC);
+            $claveBase = $resultado['clave'];
+            $passwordLogin = password_verify($claveIngresada,$claveBase);
+            if($passwordLogin == true){
+                echo 1;
+            }else{
+                echo 2;
+            }
+        }
+        public function traerUsuario($validar){
+            $db=conectar::acceso();
+            $verificar=$db->prepare('SELECT usuario FROM usuarios WHERE id_usuario=:id_usuario');
+            $verificar->bindValue('id_usuario',$validar->getIDusuario());
+            $verificar->execute();
+            $resultado = $verificar->fetch(PDO::FETCH_ASSOC);
+            $usuario = $resultado['usuario'];
+            if($resultado['usuario']){
+                echo $resultado['usuario'];
+            }else{
+                echo 2;
+            }
+        }
+
+        public function verificarContrasenaU($validar){
+            $claveIngresada = $validar->getClave();
+            $db=conectar::acceso();
+            $verificar=$db->prepare('SELECT clave FROM usuarios WHERE usuario=:usuario');
+            $verificar->bindValue('usuario',$validar->getNombre());
+            $verificar->execute();
+            $resultado = $verificar->fetch(PDO::FETCH_ASSOC);
+            $claveBase = $resultado['clave'];
+            $passwordLogin = password_verify($claveIngresada,$claveBase);
+            if($passwordLogin == true){
+                echo 1;
+            }else{
+                echo 2;
+            }
+        }
+
+        public function cambioContrasenaUsuario($usuario){
+            $db=Conectar::acceso();
+            $cambioPass =$db->prepare("UPDATE usuarios SET clave=:clave, validacion=:validacion WHERE usuario=:usuario");
+            $password=password_hash($usuario->getClave(), PASSWORD_DEFAULT, ["cost" => 15]);
+            $cambioPass->bindValue('clave',$password);
+            $cambioPass->bindValue('validacion','0');
+            $cambioPass->bindValue('usuario',$usuario->getNombre());
+            $cambioPass->execute();
+            $row = $cambioPass->rowCount();
+            if($row !=0){
+                echo 1;
+            }else{
+                echo 2;
+            }
+        }
     }
-?>
+    

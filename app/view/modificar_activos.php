@@ -38,6 +38,7 @@
         $af_office=$_POST['af_office'];
         $af_antivirus=$_POST['af_antivirus'];
         $af_areaCreacion = $_POST['af_areaCreacion'];
+        $af_imagenActivo = $_POST['af_imagenActivo'];
 
 require_once('../controller/controlador_activosFijos.php');
 require('../controller/controlador_areas.php');
@@ -72,7 +73,7 @@ require('../controller/controlador_gruposActivos.php');
             <h6 class="mt-3">Modificación De Activos Fijos</h6>
             <div class="col-13 ml-5">
 
-                <form action="../controller/controlador_activosFijos.php" method="post" class="form-group">
+                <form  class="form-group" id="formularioModifica">
                     <div class="row"> 
                         <div class="col-3">
                             <div class="form-group">
@@ -206,17 +207,34 @@ require('../controller/controlador_gruposActivos.php');
                                     
                                 </select>
                             </div>
-                        </div>
-
+                        </div>    
                         <div class="col-3">
-                            <div class="form-group">
-                                <label for="">Fecha Asignación</label>
-                                <input type="date" id="af_fechaAsignacion" name="af_fechaAsignacion" class="form-control info" value="<?php echo $af_fechaAsignacion ?>" readonly>
-                            </div>
-                        </div>               
+                            <label>Imagen del Activo</label><br>
+                            <?php if ($af_imagenActivo != 'No aplica'){ ?>
+                                
+                                <input type="hidden" id="imagenCa" name="imagenCa" value="<?php echo $af_imagenActivo; ?>">
+                                <a class="badge badge-light text" href="../../img/<?=$af_imagenActivo?>" target="_blanck" id="imagen" name="imagen" style="text-decoration: underline; font-size: 15px;color: #bf1d1d; ">
+                                    Imagen
+                                </a>                                                        
+                            <?php }else{ ?>
+                            <input type="hidden" id="imagenCa" name="imagenCa" value="2">
+                        <?php } ?>
+                        </div>        
                     </div>
-
-
+                    
+                    <div class="row">
+                        <div class="col-3">
+                            <div>
+                                <div>
+                                    <label>Cargar Imagen del activo</label>
+                                </div>
+                                <div>
+                                    <input type="file" id="af_imagen1" name="af_imagen1">
+                                </div>
+                                <label class="mt-2" id="textImg" style="min-width:150%"></label>
+                            </div>
+                        </div>
+                    </div>
                 <div id="datos_adicionales">  
                     <div class="row">
                         <div class="col-9 mt-4">
@@ -311,7 +329,7 @@ require('../controller/controlador_gruposActivos.php');
                     <div class="row">
                         <div class="col-5">
                             <input type="hidden" id="nombre_usu" name="nombre_usu"  value="<?php echo $_SESSION['usuario'] ?>" >
-                            <input type="submit" value="Modificar Activo" id="guardar_modificaciones" name="guardar_modificaciones" class="mt-4 btn btn-primary btn-sm btn-guardar">
+                            <input type="button" value="Modificar Activo" id="guardar_modificaciones" name="guardar_modificaciones" class="mt-4 btn btn-primary btn-sm btn-guardar">
                         </div>
                         <div class="col-4" > 
                             <a id="cerrar_modActivos" class="mt-4 btn btn-danger" style="height:30px";  >Cancelar</a>
@@ -330,5 +348,7 @@ require('../controller/controlador_gruposActivos.php');
     <script src="../../public/js/filtroActivos.js"></script>
     <script src="../../public/js/close.js"></script> 
     <script src="../../public/js/bloqueoTeclas.js"></script>   
+    <script src="../../public/js/modificarActivo.js"></script>   
+    <script src="../../public/js/valida_imgenModifica.js"></script>   
 </body>
 </html>

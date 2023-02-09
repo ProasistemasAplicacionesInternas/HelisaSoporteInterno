@@ -19,7 +19,7 @@ textarea.data{
 }
 
 input.data {
-    width: 50%;
+    width: 78%;
     border-bottom: none;
     border-top: none;
     border-left: none;
@@ -38,7 +38,7 @@ select.form-control {
     padding: 0px;
     margin: 0px;
     height: 50%;
-    width: 50%;
+    width: 193%;
     color: #000;
     font-size: 11px;
     text-decoration: none;

@@ -1,54 +1,65 @@
-$('#crear_activoFijo').click(function(){
-	if( $('#formulario').smkValidate()) {
-		var datosActivo = 'af_codigo='+$('#af_codigo').val()+
-		'&af_serial='+$('#af_serial').val()+
-		'&af_marca='+$('#af_marca').val()+
-		'&af_modelo='+$('#af_modelo').val()+
-		'&af_nombre='+$('#af_nombre').val()+
-		'&af_areaCreacion='+$('#af_areaCreacion').val()+
-		'&af_fechaCompra='+$('#af_fechaCompra').val()+
-		'&af_categoria='+$('#af_categoria').val()+
-		'&af_estado='+$('#af_estado').val()+
-		'&af_area='+$('#af_area').val()+
-		'&af_ubicacion='+$('#af_ubicacion').val()+
-		'&af_responsable='+$('#af_responsable').val()+
-		'&af_fechaAsignacion='+$('#af_fechaAsignacion').val()+
-		'&af_ram='+$('#af_ram').val()+
-		'&af_discoDuro='+$('#af_discoDuro').val()+
-		'&af_procesador='+$('#af_procesador').val()+
-		'&af_so='+$('#af_so').val()+
-		'&af_licenciaSo='+$('#af_licenciaSo').val()+
-		'&af_dominio='+$('#af_dominio').val()+
-		'&af_aplicaciones='+$('#af_aplicaciones').val()+
-		'&af_office='+$('#af_office').val()+
-		'&af_antivirus='+$('#af_antivirus').val()+
-		'&af_observaciones='+$('#af_observaciones').val()+
-		'&nombre_usu='+$('#nombre_usu').val()+
-		'&crear=1';
+$('#crear_activoFijo').click(function() {
+	if ($('#formulario').smkValidate()) {
+		var formData	= new FormData();
+		formData.append('af_codigo',$.trim($('#af_codigo').val()))
+		formData.append('af_serial',$.trim($('#af_serial').val()))
+		formData.append('af_marca',$.trim($('#af_marca').val()))
+		formData.append('af_modelo',$.trim($('#af_modelo').val()))
+		formData.append('af_nombre',$.trim($('#af_nombre').val()))
+		formData.append('af_areaCreacion',$.trim($('#af_areaCreacion').val()))
+		formData.append('af_fechaCompra',$.trim($('#af_fechaCompra').val()))
+		formData.append('af_categoria',$.trim($('#af_categoria').val()))
+		formData.append('af_estado',$.trim($('#af_estado').val()))
+		formData.append('af_observaciones',$.trim($('#af_observaciones').val()))
+		formData.append('af_area',$.trim($('#af_area').val()))
+		formData.append('af_responsable',$.trim($('#af_responsable').val()))
+		formData.append('af_ubicacion',$.trim($('#af_ubicacion').val()))
+		formData.append('af_fechaAsignacion',$.trim($('#af_fechaAsignacion').val()))
+		formData.append('af_ram',$.trim($('#af_ram').val()))
+		formData.append('af_discoDuro',$.trim($('#af_discoDuro').val()))
+		formData.append('af_procesador',$.trim($('#af_procesador').val()))
+		formData.append('af_so',$.trim($('#af_so').val()))
+		formData.append('af_licenciaSo',$.trim($('#af_licenciaSo').val()))
+		formData.append('af_dominio',$.trim($('#af_dominio').val()))
+		formData.append('af_aplicaciones',$.trim($('#af_aplicaciones').val()))
+		formData.append('af_office',$.trim($('#af_office').val()))
+		formData.append('af_antivirus',$.trim($('#af_antivirus').val()))
+		formData.append('nombre_usu',$.trim($('#nombre_usu').val()))
+		formData.append('crear','1')
+		formData.append('af_imagen1', $('#af_imagen1')[0].files[0]);
 
-		$.ajax({
-			type: 'POST',
-			url: '../controller/controlador_activosFijos.php',
-			data: datosActivo
-		}).done(function(data){
-			if (data==1){
-				$.smkAlert({
-					text: 'Activo Creado Con Exito',
-					type: 'success'
-				});
-				setTimeout(function(){ location.reload();; }, 800);
-			}else if (data == 3) {
-				$.smkAlert({
-					text: 'El codigo o serial ya estan asignados a otro activo',
-					type: 'warning'
-				});
-			}else{
-				$.smkAlert({
-					text: 'error',
-					type: 'danger'
-				});
-			}
-		});
 
+  
+	  $.ajax({
+		type: 'POST',
+		url: '../controller/controlador_activosFijos.php',
+		data: formData,
+		processData: false,
+		contentType: false,
+		success: function(data) {
+			console.log(data)
+		  if (data == 1) {
+			$.smkAlert({
+			  text: 'Activo Creado Con Exito',
+			  type: 'success'
+			});
+			setTimeout(function() { location.reload();; }, 800);
+		  } else if (data == 3) {
+			$.smkAlert({
+			  text: 'El codigo o serial ya estan asignados a otro activo',
+			  type: 'warning'
+			});
+		  } else {
+			$.smkAlert({
+			  text: 'error',
+			  type: 'danger'
+			});
+		  }
+		},
+		error: function(jqXHR, textStatus, errorThrown) {
+		  // Handle any errors that occurred during the AJAX request
+		}
+	  });
 	}
-});
+  });
+  
