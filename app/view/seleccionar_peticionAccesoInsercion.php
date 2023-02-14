@@ -186,7 +186,7 @@ ini_set("session.gc_maxlifetime",18000);
                                                         placeholder="Nombre" required>
                                                 </div>
                                                 <div class="col-3 sm-2">
-                                                    <input type="password" class="form-control"
+                                                    <input type="text" class="form-control"
                                                         id="clave<?php echo $numeracion;?>"
                                                         name="clave<?php echo $numeracion;?>" placeholder="Password"
                                                         required>
