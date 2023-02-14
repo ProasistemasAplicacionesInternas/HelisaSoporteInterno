@@ -134,6 +134,16 @@
         $accion = $crud->modificarRevisado($datos);
         echo $accion;
     }
+//*****************************************************************************************************//
+//*************************************VALIDA ACCESOS DUPLICADOS **************************************//
+//*****************************************************************************************************//   
+    else if(isset($_POST['consultarD'])){
+        
+        $datos->setRevisado(1);
+        $datos->setPlataformas($_POST['plataforma']);
+        $datos->setUsuario_creacion($_POST['usuario']);
+        $accion = $crud->consultaAccesoDuplicado($datos);
+    }
 
 //*****************************************************************************************************//
 //*********************** SELECCION DE PETICION Y CAMBIO DE ESTADO ************************************//
