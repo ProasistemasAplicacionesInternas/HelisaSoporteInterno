@@ -205,6 +205,7 @@ ini_set("session.gc_maxlifetime",18000);
                                             <?php $numeracion++;
                                                 endif;
                                             endfor;
+                                            
                                             endforeach;?>
                                         </div>
                                     </div>
@@ -320,7 +321,6 @@ ini_set("session.gc_maxlifetime",18000);
                                             <span class="col-2 mt-2"><b>Nombre Usuario</b></span>
                                             <span class="col-2 mt-2"><b>Estado</b></span>
                                         </div>
-
                                         <div>
                                             <?php $numeracion =0; foreach($accesosPlataformasxUsuarioInactivo as $listado):?>
                                             <?php for($x=0; $x<$numElement; $x++):?>
@@ -338,8 +338,8 @@ ini_set("session.gc_maxlifetime",18000);
                                                 </div>
                                                 <div class="col-sm-3">
                                                     <input type="text" class="form-control"
-                                                        name="nombre_usuario<?php echo $numeracion;?>"
-                                                        value="<?php echo $listado->getUsuario();?>" readonly required>
+                                                    name="nombre_usuario<?php echo $numeracion;?>"
+                                                    value="<?php echo $listado->getUsuario();?>" readonly required>
                                                 </div>
                                                 <div class="col-sm-3">
                                                     <select class="form-control" name="estado<?php echo $numeracion;?>">

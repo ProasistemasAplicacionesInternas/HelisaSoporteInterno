@@ -86,3 +86,39 @@ function redireccionarxTipoUser(){
         }
     })
 }
+const nombreUsuarios = document.querySelectorAll('[name^="nombre_usuario"]');
+
+nombreUsuarios.forEach(nombreUsuario => {
+  nombreUsuario.addEventListener('input', function() {
+    const row = this.closest('.row');
+    const plataforma = row.querySelector('[name^="plataforma"]').value;
+    const contrasena = row.querySelector('[name^="clave"]');
+    const estado = row.querySelector('[name^="estado"]');
+    let accesoConsulta = 'plataforma='+ plataforma +
+		'&usuario='+ nombreUsuario.value +
+		'&consultarD=1';
+
+    $.ajax({
+	    type: 'POST',
+		url: '../controller/controlador_peticionesAccesos.php',
+		data: accesoConsulta
+	}).done(function(data){
+		console.log(data)
+        if (data == 2) {
+            $.smkAlert({text:'El funcionario ya tiene ese usuario creado en la plataforma', type:'danger', permanent: true});
+            estado.value = 13;
+            if (contrasena) {
+                contrasena.disabled = true;
+                nombreUsuario.value = '';
+                nombreUsuario.disabled = true;
+            }
+            
+        }
+	});
+    
+  });
+});
+
+ 
+
+
