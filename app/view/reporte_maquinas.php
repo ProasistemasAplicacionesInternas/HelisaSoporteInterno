@@ -58,9 +58,9 @@ $html  ='
                     <h6 >IP: '. $maquina['IP_maquina'] .'</h6> 
                     <br>
                 </div>';
-            if($maquina['sistema_operativo'] == "Linux" || $maquina['so_maquina'] == "LINUX CENTO"  || $maquina['so_maquina'] == "LINUX" || $maquina['so_maquina'] == "LINUX CENTOS 7" || $maquina['so_maquina'] == "CENTUS"):
+            if($maquina['sistema_operativo'] == "Linux" || $maquina['sistema_operativo'] == "LINUX CENTO"  || $maquina['sistema_operativo'] == "LINUX" || $maquina['sistema_operativo'] == "LINUX CENTOS 7" || $maquina['sistema_operativo'] == "CENTUS"):
                 $html .='<img id="linux" class="pequeña" src="../../public/img/reporte_maquinas/linux.jpg">';
-                elseif($maquina['sistema_operativo'] == "windows"  || $maquina['so_maquina'] == "WIndows Server 2019 Standar" || $maquina['sistema_operativo'] == "Windows 2019 Server Data Center (64bit)" 
+                elseif($maquina['sistema_operativo'] == "windows"  || $maquina['sistema_operativo'] == "WIndows Server 2019 Standar" || $maquina['sistema_operativo'] == "Windows 2019 Server Data Center (64bit)" 
                 || $maquina['sistema_operativo'] == "WIndows Server Standard 2019" || $maquina['sistema_operativo'] == "Windows Server 2019 Standar"
                 || $maquina['sistema_operativo'] == "Windows server 2012 R2 Standard" || $maquina['sistema_operativo'] == "WIndows Server Standard 2012" 
                 || $maquina['sistema_operativo'] == "windows server 2012 R2 Standard"):
