@@ -1,6 +1,5 @@
-/cartas
-/temporal
-/public/mpdf/
-/public/img/reporte_maquinas/
-/app/model/vinculo.php
-.vscode/
+cartas/
+temporal/
+img/
+app/model/vinculo.php
+
