@@ -1,0 +1,27 @@
+#divGeneral{
+    border: 0px; padding: 0.275rem 0.955rem;
+}
+#divGeneral2{
+    border: 0px; padding: 0.275rem 0.955rem;
+}
+
+#label{
+    font-size: .8rem;
+}
+
+#p_estado,#soporteMai{
+    font-size:.7rem; 
+    border: 1px solid #29618f; 
+    border-radius: 6.5px;
+}
+#p_nropeticion, #p_fechapeticion, #p_usuario, #p_extension, #p_correo, #p_categoria, #p_descripcion, #p_cnclusiones{
+    border: 1px solid #29618f; 
+    border-radius: 6.5px;
+}
+
+#imagen{
+    color: #29618f ;
+    text-decoration: underline;
+    text-decoration: underline; 
+    font-size: 15px;
+}

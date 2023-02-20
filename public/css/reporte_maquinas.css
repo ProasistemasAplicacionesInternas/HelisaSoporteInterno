@@ -1,0 +1,49 @@
+
+
+#imagen_reporte {
+    width: 69%;
+    height: 57%;
+    text-align:center;
+    padding-left: 150px;
+}
+#titulo{
+    text-align: center;
+    color: #EC008C;
+    margin: 6% 0% 3% -2%;
+}
+
+.cuadro{
+    text-align: center;
+    width : 225px;
+    background-color: rgb(219, 219, 219);
+    page-break-before: always;
+}
+.cuadros{
+    width : 225px;
+    height: 138px;
+    background-color: rgb(219, 219, 219);
+}
+#cuadroservidores{
+    margin: auto;
+}
+#cuadromaquinas{
+    float: left;
+    margin-top: 2px;
+    margin-left: 21px;
+} 
+.pequeña{
+    width: 45px; 
+    height: 45px;
+    float: right;
+    margin: -64px 4px 18px 0px;
+}
+#nomaquina{
+    width: 350px;
+	height: 100px;
+    background-color: rgb(219, 219, 219);
+    border-radius: 5px; 
+    border:solid; 
+    border-color: #59947f;
+    page-break-before: always;
+}
+
