@@ -24,7 +24,6 @@ $consultaUsuario = $cartilla->consultaUsuario();
     <title>Helisa | Soporte Infraestructura</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="stylesheet" href="public/css/contenido.css" media="screen" type="text/css">
-    <link rel="stylesheet" href="public/css/bootstrap.min.css">
     <link rel="stylesheet" href="public/css/smoke.min.css">
     <link rel="stylesheet" type="text/css" href="public/css/datatables.min.css" />
 
@@ -54,7 +53,7 @@ $consultaUsuario = $cartilla->consultaUsuario();
                         <th>Modificar</th>
                         <th>Borrar QR</th>
                         <th>Inactivar</th>
-                        <th>Cambiar ContraseÃ±a</th>
+                        <th>Cambiar Contraseña</th>
                     </thead>
                     <tbody>
                         <?php foreach ($consultaUsuario as $info) : ?>
@@ -89,7 +88,7 @@ $consultaUsuario = $cartilla->consultaUsuario();
                                     <button type="button" class="btn btn-danger btn-sm inactiva-usuario" data-toggle="modal" data-target="#inactiva-usuario" id="btn-inactivaUsuario" name="btn-inactivaUsuario" value="<?php echo $info->getIDusuario(); ?>"><span>Inactivar</span></button>
                                 </td>
                                 <td>
-                                    <button type="button" class="btn btn-info btn-sm cambiar-clave" data-toggle="modal" data-target="#cambiar-clave" id="btn-cambiar-clave" name="btn-cambiar-clave" onclick="identidadU(<?php echo $info->getIDusuario(); ?>);" value="<?php echo $info->getIDusuario(); ?>"><span>Cambiar ContraseÃ±a</span></button>
+                                    <button type="button" class="btn btn-info btn-sm cambiar-clave" data-toggle="modal" data-target="#cambiar-clave" id="btn-cambiar-clave" name="btn-cambiar-clave" onclick="identidadU(<?php echo $info->getIDusuario(); ?>);" value="<?php echo $info->getIDusuario(); ?>"><span>Cambiar Contraseña</span></button>
                                 </td>
                             </tr>
                         <?php
@@ -126,7 +125,7 @@ $consultaUsuario = $cartilla->consultaUsuario();
                                                     <input type="text" id="correo" name="correo" class="crea_data form-control info" maxlength="40" autocomplete="off" required>
                                                 </div>
                                                 <div class="form-group">
-                                                    <label for="">Tipo de validaciÃ³n</label>
+                                                    <label for="">Tipo de validación</label>
                                                     <div>
                                                         <select name="tipoValidacion" id="tipoValidacion" class="form-control">
                                                             <option value="1">Google Authenticator</option>
@@ -152,7 +151,7 @@ $consultaUsuario = $cartilla->consultaUsuario();
                     <div class="modal-dialog">
                         <div class="modal-content">
                             <div class="modal-header">
-                                <h6 class="modal-title">Se ha borrado el cÃ³digo del usuario:</h6>
+                                <h6 class="modal-title">Se ha borrado el código del usuario:</h6>
                                 <button class="close" data-dismiss="modal" aria-label="Cerrar">
                                     <span aria-hidden="true">&times;</span>
                                 </button>
@@ -208,7 +207,7 @@ $consultaUsuario = $cartilla->consultaUsuario();
                         </div>
                     </div>
                 </div>
-                <?php ///////////////////////////VENTANA MODAL CAMBIO CONTRASEÃ‘A DEL USUARIO ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// 
+                <?php ///////////////////////////VENTANA MODAL CAMBIO CONTRASEÑA DEL USUARIO ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// 
                 ?>
                 <div class="modal fade mt-4" id="cambiar-clave" role="dialog" aria-labelledby="cambio-clave" aria-hidden="true">
                     <div class="modal-dialog">
@@ -226,8 +225,8 @@ $consultaUsuario = $cartilla->consultaUsuario();
                                             <form method="post" class="form-group">
                                                 <div class="form-group">
                                                     <input type="hidden" id="nombre_u" name="nombre_u" value="<?php echo $_SESSION['usuario']; ?>">
-                                                    <label>DÃ­gite su contraseÃ±a: <strong><?php echo $_SESSION['usuario']; ?></strong></label>
-                                                    <input type="password" id="pass_u" name="pass_u" class="form-control" placeholder="ContraseÃ±a" required>
+                                                    <label>Dígite su contraseña: <strong><?php echo $_SESSION['usuario']; ?></strong></label>
+                                                    <input type="password" id="pass_u" name="pass_u" class="form-control" placeholder="Contraseña" required>
                                                 </div>
                                                 <div class="modal-footer">
                                                     <input type=button value="Verificar" id="validarUsuario" name="validarUsuario" class="col-3 mt-4 btn btn-outline-success btn btn-guardar" style= "font-size:11px;" data-dismiss="modal">
@@ -245,7 +244,7 @@ $consultaUsuario = $cartilla->consultaUsuario();
                     <div class="modal-dialog">
                         <div class="modal-content">
                             <div class="modal-header">
-                                <h6 class="modal-title">DÃ­gite clave nueva:</h6>
+                                <h6 class="modal-title">Dígite clave nueva:</h6>
                                 <button class="close" data-dismiss="modal" aria-label="Cerrar">
                                     <span aria-hidden="true">&times;</span>
                                 </button>
@@ -260,11 +259,11 @@ $consultaUsuario = $cartilla->consultaUsuario();
                                                     <input type="text" id="usuarioM" name="usuarioM" class="form-control" readonly>
                                                 </div>
                                                 <div class="form-group">
-                                                    <label>DÃ­gite la contraseÃ±a:</label>
+                                                    <label>Dígite la contraseña:</label>
                                                     <input type="password" id="firstPass" name="firstPass" class="form-control">
                                                 </div>
                                                 <div class="form-group">
-                                                    <label>DÃ­gite la contraseÃ±a nuevamente:</label>
+                                                    <label>Dígite la contraseña nuevamente:</label>
                                                     <input type="password" id="secondPass" name="secondPass" class="form-control">
                                                 </div>
                                                 <div class="form-group">
@@ -285,13 +284,11 @@ $consultaUsuario = $cartilla->consultaUsuario();
             </div>
         </div>
         <script src="public/js/jquery-3.3.1.min.js"></script>
-        <script src="public/js/popper.js"></script>
         <script src="public/js/bootstrap.min.js"></script>
         <script src="public/js/smoke.min.js"></script>
         <script src="public/js/es.min.js"></script>
         <script src="public/js/datatables.min.js"></script>
         <script src="public/js/tablas.js"></script>
-        <!-- <script src="public/js/valida_usuario.js"></script> -->
         <script src="public/js/selector_usuario.js?b2"></script>
         <script src="public/js/inactivar_usuario.js"></script>
         <script src="public/js/modalCambioClaveU.js"></script>
