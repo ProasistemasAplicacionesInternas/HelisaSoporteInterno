@@ -169,27 +169,6 @@
             $db = null;
             return $resultado;
         } 
-        public function cancelaPeticion($datos){
-            $db = Conectar::acceso();
-            $consulta = $db->prepare("UPDATE peticiones_accesos SET estado = :estado, conclusiones = :conclusiones , aprobacion = :aprobacion, fecha_atendido = :fecha_atendido, usuario_atiende = :usuario_atiende, plataformas =:plataformas, revisado =:revisado WHERE id_peticionAcceso = :id_peticion");
-            $consulta->bindValue('estado',$datos->getEstado_peticion());
-            $consulta->bindValue('conclusiones',$datos->getConclusiones());
-            $consulta->bindValue('aprobacion',$datos->getAprobado());
-            $consulta->bindValue('fecha_atendido', $datos->getFecha_atendido());
-            $consulta->bindValue('usuario_atiende',$datos->getUsuario_atendio());
-            $consulta->bindValue('id_peticion',$datos->getId_peticion());
-            $consulta->bindValue('plataformas',$datos->getPlataformas());
-            $consulta->bindValue('revisado',1);
-            $consulta->execute();
-
-            if($consulta){
-                $resultado = 1;
-            }else{
-                $resultado = 0;
-            }
-            $db = null;
-            return $resultado;
-        } 
 
        
         public function getPeticionesxDelegadoDir($usuario){ /***** Busca las peticiones por los directores del departamento o cargos auxiliares  ******/
@@ -537,22 +516,6 @@
                 $this->correoDeFinalizacion($peticion);
             }
 
-        }
-        public function negacionDePlataformas($plataformas,$peticion,$conclusiones){
-            $db = Conectar::acceso();
-            if($plataformas == ''){
-                $estado = 2;
-            }else{
-                $estado = 3;
-            }
-            $modificarPeticion = $db->prepare("UPDATE peticiones_accesos SET plataformas = :plataformas, estado = :estado, conclusiones = :conclusiones, aprobacion = :aprobacion, revisado = :revisado WHERE id_peticionAcceso = :id_peticion");
-            $modificarPeticion->bindValue('plataformas',$plataformas);
-            $modificarPeticion->bindValue('id_peticion', $peticion);
-            $modificarPeticion->bindValue('estado', $estado);
-            $modificarPeticion->bindValue('aprobacion', 13);
-            $modificarPeticion->bindValue('revisado', 1);
-            $modificarPeticion->bindValue('conclusiones',$conclusiones);
-            $modificarPeticion->execute();
         }
 
         public function getPlataformasxPeticion($id_peticion){

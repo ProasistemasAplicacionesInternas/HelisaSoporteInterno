@@ -40,7 +40,7 @@ $html  ='
                 <div>
                     <h6>Nombre: '. $item['nombre_servidor'] .'</h6>
                     <h6>IP: '. $item['IP_servidor'] .'</h6>
-                    <br>
+                    <br><br>
                 </div>
                 <img id="servidor" class="pequeña" src="../../public/img/reporte_maquinas/server.jpg">
             </div>
@@ -60,9 +60,9 @@ $html  ='
                 </div>';
             if($maquina['sistema_operativo'] == "Linux" || $maquina['sistema_operativo'] == "LINUX CENTO"  || $maquina['sistema_operativo'] == "LINUX" || $maquina['sistema_operativo'] == "LINUX CENTOS 7" || $maquina['sistema_operativo'] == "CENTUS"):
                 $html .='<img id="linux" class="pequeña" src="../../public/img/reporte_maquinas/linux.jpg">';
-                elseif($maquina['sistema_operativo'] == "windows"  || $maquina['sistema_operativo'] == "WIndows Server 2019 Standar" || $maquina['sistema_operativo'] == "Windows 2019 Server Data Center (64bit)" 
-                || $maquina['sistema_operativo'] == "WIndows Server Standard 2019" || $maquina['sistema_operativo'] == "Windows Server 2019 Standar"
-                || $maquina['sistema_operativo'] == "Windows server 2012 R2 Standard" || $maquina['sistema_operativo'] == "WIndows Server Standard 2012" 
+                elseif($maquina['sistema_operativo'] == "windows"  || $maquina['sistema_operativo'] == "WINDOWS SERVER 2019" || $maquina['sistema_operativo'] == "Windows server 2019" 
+                || $maquina['sistema_operativo'] == "WINDOWS SERVER 2012 R2 STANDAR" || $maquina['sistema_operativo'] == "Windows Server 2019 Standar"
+                || $maquina['sistema_operativo'] == "Windows 7" || $maquina['sistema_operativo'] == "WIndows Server Standard 2012" 
                 || $maquina['sistema_operativo'] == "windows server 2012 R2 Standard"):
                 $html .='<img id="windows" class="pequeña" src="../../public/img/reporte_maquinas/windows.jpg">';
                 endif;
@@ -77,7 +77,7 @@ $html .='</div>
 </html>';
 $mpdf=new \Mpdf\Mpdf(['tempDir' => '/tmp', 'mode' => 'utf-8','format' => 'A4-L']);
 $stylesheet = file_get_contents('../../public/css/reporte_maquinas.css'); // la ruta a tu css
-$mpdf->SetHTMLHeader('<header><div class="header"><img class="logo" src="../../public/img/reporte_maquinas/Logo-Helisa.jpg" style="align:left; width:100px; height:50px;"></div></header>');
+$mpdf->SetHTMLHeader('<header><div class="header"><img class="logo" src="../../public/img/reporte_maquinas/Logo-Helisa.jpg" style="align:left; width:100px; height:50px;"></div></header><');
 $mpdf->SetHTMLFooter('<h6>Este documento es propiedad intelectual de Proasistemas S.A y queda prohibida su reproducción total o parcial en cualquier medio. El otorgamiento de una copia a terceros deberá ser con autorización escrita de la gerencia o en su defecto el responsable de Proasistemas S.A.</h6><hr>{PAGENO}');
 $mpdf->WriteHTML($stylesheet,1);
 $mpdf->WriteHTML($html,2);

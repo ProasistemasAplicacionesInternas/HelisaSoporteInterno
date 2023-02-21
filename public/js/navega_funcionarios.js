@@ -65,16 +65,11 @@ $(document).ready(function() {
             url:'app/controller/control_permisos.php',
             data:data
         }).done(function(respuesta){ //obtiene el departamento en caso de ser director o auxiliar de director
-            if(respuesta == 2){
+            if(respuesta == 0){
                 $('#claveBovedaModal').modal('show');
-            }else if (respuesta == 1) {
+            }else{
                 $.smkAlert({
-					text: 'No puedes ingresar a la boveda ya que tienes asignaciones de activos pendientes',
-					type: 'danger'
-				});
-            }else if (respuesta == 0) {
-                $.smkAlert({
-					text: 'No puedes ingresar a la boveda ya que tienes Peticiones de Accesos Finaliazadas sin Aceptar',
+					text: 'No puedes ingresar a la boveda ya que tienes '  + respuesta + ' Peticiones Accesos Finaliazadas sin Aceptar',
 					type: 'danger'
 				});
             }

@@ -405,22 +405,8 @@
                         </div>
                     </div>
                     <div class="row">
-<<<<<<< HEAD
-                        <div class="col-7">
-                            <div class="form-group">
-                                <label>Contrase&ntilde;a</label>
-                                <input type="password" id="f_contrasena" name="f_contrasena" class="form-control info" autocomplete="off" value="<?php echo $f_contrasena ?>" >
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="row">
-                        <div class="col-4"> <button type="button" class="mt-5 btn btn-success" id="btn-guardarModif" name="btn-guardarModif" style="height:33.5px; width=auto;" >Guardar</button></div>
-                        <div class="col-3" > <a id="cerrar_modificacion" class="mt-5 btn btn-secondary" style="height:33.5px; width=auto;">Cancelar</a> </div>
-=======
                         <div class="col-4"> <button type="button" class="mt-2 btn btn-success" id="btn-guardarModif" name="btn-guardarModif" >Guardar</button></div>
                         <div class="col-3" > <a id="cerrar_modificacion" class="mt-2 btn btn-secondary">Cancelar</a> </div>
->>>>>>> 76ad7637c4b77819906f2cc1526841dc745189a0
                     </div>
                 </form>
                 <div class="row">

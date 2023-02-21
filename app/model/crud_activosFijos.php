@@ -196,48 +196,7 @@ public function consultaModificarActivo(){
 				
 					if ($resultado!=0) {
 							$db=conectar::acceso();	
-							$consultar_activo=$db->prepare(
-								"SELECT ai.codigo_activo, ai.serial_activo, ai.nombre_activo, ai.fecha_asignacion, ga.area_grupo 
-								FROM  hinfraestructura.traslados as tr
-								LEFT JOIN hinfraestructura.activos_internos as ai ON tr.activo_traslado = ai.id_activo 
-								LEFT JOIN hinfraestructura.grupos_activos as ga ON ga.id_grupo  = ai.grupo_activo 
-								WHERE tr.funcionario_final=:identidad AND tr.estado_traslado =14 AND ai.responsable_activo=:identidad
-								GROUP BY id_traslado");
-								$consultar_activo->bindValue('identidad',$resultado['identificacion']);
-								$consultar_activo->execute();
-							
-								foreach ($consultar_activo->fetchALL() as $listado) {
-										 $consulta = new activosFijos();
-											
-										 $consulta->setAf_codigo($listado['codigo_activo']);
-										 $consulta->setAf_serial($listado['serial_activo']);
-										 $consulta->setAf_nombre($listado['nombre_activo']);
-										 $consulta->setAf_fechaAsignacion($listado['fecha_asignacion']);
-										 $consulta->setAf_areaCreacion($listado['area_grupo']);
-											
-										 $lista_activos[]=$consulta;
-								}
-								return $lista_activos;
-				}
-	}
-	public function consultarActivosPendientesFuncionario(){
-
-			$db=conectar::acceso();
-			$lista_activos=[];
-			$buscarIdentidad=$db->prepare("SELECT identificacion FROM funcionarios WHERE usuario=:usuarioS");
-				$buscarIdentidad->bindValue('usuarioS',$_SESSION['usuario']);
-				$buscarIdentidad->execute();
-				$resultado=$buscarIdentidad->fetch();
-				
-					if ($resultado!=0) {
-							$db=conectar::acceso();	
-							$consultar_activo=$db->prepare(
-								"SELECT ai.codigo_activo, ai.serial_activo, ai.nombre_activo, ai.fecha_asignacion, ga.area_grupo 
-								FROM  hinfraestructura.traslados as tr
-								LEFT JOIN hinfraestructura.activos_internos as ai ON tr.activo_traslado = ai.id_activo  
-								LEFT JOIN hinfraestructura.grupos_activos as ga ON ga.id_grupo  = ai.grupo_activo 
-								WHERE tr.funcionario_final=:identidad AND tr.estado_traslado =3 and ai.responsable_activo = :identidad 
-								GROUP BY id_traslado");
+							$consultar_activo=$db->prepare("SELECT codigo_activo, serial_activo, nombre_activo, fecha_asignacion, grupos_activos.area_grupo FROM activos_internos LEFT JOIN grupos_activos ON grupo_activo = id_grupo WHERE responsable_activo=:identidad");
 								$consultar_activo->bindValue('identidad',$resultado['identificacion']);
 								$consultar_activo->execute();
 							

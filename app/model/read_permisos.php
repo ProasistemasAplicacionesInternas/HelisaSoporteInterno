@@ -68,28 +68,12 @@
         /* ***************** finalizadas sin aceptar) ***************** */
         /* ************************************************************ */
         public function consultaPeticionesAccesosNoAcep($usuario){
-            $db = Conectar::acceso();
-            $consultaIdentificacion = $this->db->prepare('SELECT identificacion FROM funcionarios WHERE usuario=:usuarioF');
-            $consultaIdentificacion->bindValue('usuarioF', $usuario);
-            $consultaIdentificacion->execute();
-            $identificacion = $consultaIdentificacion->fetch(PDO::FETCH_ASSOC);
-                $consulta = $this->db->prepare('SELECT * FROM peticiones_accesos WHERE usuario_creacion = :usuario && estado = 2 && revisado = 0');
-                $consulta->bindValue('usuario',$usuario);
-                $consulta->execute();
-                $total = $consulta->rowCount();
-                if($total == 0){
-                    $consultaT = $this->db->prepare('SELECT * FROM traslados WHERE funcionario_final = :usuario && estado_traslado = 3');
-                    $consultaT->bindValue('usuario',$identificacion['identificacion']);
-                    $consultaT->execute();
-                    $totalT = $consultaT->rowCount();
-                    if($totalT == 0){
-                        echo 2;
-                    }else{
-                        echo 1;
-                    }
-                }else{
-                    echo 0;
-                }
+            $consulta = $this->db->prepare('SELECT * FROM peticiones_accesos WHERE usuario_creacion = :usuario && estado = 2 && revisado = 0');
+            $consulta->bindValue('usuario',$usuario);
+            $consulta->execute();
+
+            $total = $consulta->rowCount();
+            return $total;
         }
 
 

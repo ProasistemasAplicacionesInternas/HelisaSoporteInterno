@@ -106,6 +106,7 @@
         if($accion == 1){
          header('Location: ../../dashboard_funcionarios.php');
         }else if($accion == 2){
+            
             echo "<script>alert('El usuario ya tiene una peticcion creada'); 
             history.back();</script>";
         }else if($accion == 3 ){
@@ -226,9 +227,8 @@
         $datos->setUsuario_atendio($_POST['usuarioAtiende']);
         
         if($existAcces == 1){
-            $accion = $crud->cancelaPeticion($datos);
-        }else{
             $accion = $crud->modificarPeticion($datos);
+        }else{
             $accion = 1;
         }
         
@@ -310,7 +310,6 @@
                 if($_POST['estado' . $x] == 12){
                     $datos->setNombre($_POST['nombre_usuario' . $x]);
                     $datos->setClave($_POST['clave' . $x]);
-                    $ejecutarModificacion = true;
                 }else if($_POST['estado' . $x] == 13){
                     $datos->setNombre('No aprobado');
                     $datos->setClave('No aprobado');
@@ -337,14 +336,7 @@
         }else{
             $conclusiones = $_POST['conclusiones'];
         }
-        if ($ejecutarModificacion) {
-            $crud->modificarPlataformas(substr($plataformasf, 0, -1),$_POST['id_peticion'],$conclusiones);
-        }else if ($ejecutarModificacion == false) {
-            $crud->negacionDePlataformas(substr($plataformasf, 0, -1),$_POST['id_peticion'],$conclusiones);
-        }
-
-        
-        
+        $crud->modificarPlataformas(substr($plataformasf, 0, -1),$_POST['id_peticion'],$conclusiones);
 
         if($consultaMai == 1){
             header('Location: ../../dashboard.php');
