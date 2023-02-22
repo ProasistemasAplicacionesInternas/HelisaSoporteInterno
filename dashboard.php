@@ -3,11 +3,16 @@
    ini_set("session.gc_maxlifetime", 180000);
 
    session_start();
-   $_SESSION['id_roles'];
-   if(!isset($_SESSION['usuario'])||empty($_SESSION['usuario'])){
-       
-       header('location:login.php');
-   }
+    if(!isset($_SESSION['usuario'])||empty($_SESSION['usuario'])){
+        header('location:login.php');
+    }
+    if(!isset($_SESSION['id_roles'])){ 
+    header('location:login.php');
+    }
+    if(!isset($_SESSION['status_connect'])){
+        header('location:login.php');
+    }
+   
 ?>
 
 <!DOCTYPE html>

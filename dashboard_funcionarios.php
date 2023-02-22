@@ -1,6 +1,7 @@
 <?php
     ini_set("session.cookie_lifetime", 18000);
     ini_set("session.gc_maxlifetime", 18000);
+    
     session_start();
     $_SESSION['rol'];
     if(!isset($_SESSION['usuario'])||empty($_SESSION['usuario'])){       
