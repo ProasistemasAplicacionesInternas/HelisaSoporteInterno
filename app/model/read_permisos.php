@@ -68,7 +68,6 @@
         /* ***************** finalizadas sin aceptar) ***************** */
         /* ************************************************************ */
         public function consultaPeticionesAccesosNoAcep($usuario){
-<<<<<<< HEAD
             $db = Conectar::acceso();
             $consultaIdentificacion = $this->db->prepare('SELECT identificacion FROM funcionarios WHERE usuario=:usuarioF');
             $consultaIdentificacion->bindValue('usuarioF', $usuario);
@@ -91,14 +90,6 @@
                 }else{
                     echo 0;
                 }
-=======
-            $consulta = $this->db->prepare('SELECT * FROM peticiones_accesos WHERE usuario_creacion = :usuario && estado = 2 && revisado = 0');
-            $consulta->bindValue('usuario',$usuario);
-            $consulta->execute();
-
-            $total = $consulta->rowCount();
-            return $total;
->>>>>>> d07a9fb8f4e0c98d70372638cf652c5cce3d289e
         }
 
 

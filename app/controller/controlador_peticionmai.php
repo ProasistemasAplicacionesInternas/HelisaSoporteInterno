@@ -41,11 +41,7 @@ if (isset($_POST['aceptar_petmai'])) {
         $crudMai->redireccionarPeticionesMai($peticionMai);
         header ("location: ../../dashboard.php"); 
     }else if($estado==2){
-<<<<<<< HEAD
-        define('DOCROOT', $_SERVER['DOCUMENT_ROOT'].'/HelisaSoporteInterno'); /* MODIFCAR AL CAMBIAR A PRODUCCION */ /* /carpeta_principal_proyecto */ 
-=======
         define('DOCROOT', $_SERVER['DOCUMENT_ROOT'].'/infraestructura'); /* MODIFCAR AL CAMBIAR A PRODUCCION */ /* /carpeta_principal_proyecto */ 
->>>>>>> d07a9fb8f4e0c98d70372638cf652c5cce3d289e
         $nombre_imagen = array(0=>2,1=>2,2=>2);
         $numImagenes = count($_FILES['imagen']['name']);/* cuenta el numero de elemntos en el array(sino hay ninguno el resultado sera 1) */
         print_r ($_FILES['imagen']['name']);

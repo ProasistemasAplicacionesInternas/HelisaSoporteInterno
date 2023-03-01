@@ -24,10 +24,7 @@ $consultaUsuario = $cartilla->consultaUsuario();
     <title>Helisa | Soporte Infraestructura</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="stylesheet" href="public/css/contenido.css" media="screen" type="text/css">
-<<<<<<< HEAD
     <link rel="stylesheet" href="public/css/bootstrap.min.css">
-=======
->>>>>>> d07a9fb8f4e0c98d70372638cf652c5cce3d289e
     <link rel="stylesheet" href="public/css/smoke.min.css">
     <link rel="stylesheet" type="text/css" href="public/css/datatables.min.css" />
 

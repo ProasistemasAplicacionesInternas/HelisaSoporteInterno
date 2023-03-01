@@ -196,9 +196,7 @@ public function consultaModificarActivo(){
 				
 					if ($resultado!=0) {
 							$db=conectar::acceso();	
-<<<<<<< HEAD
-							$consultar_activo=$db->prepare(
-								"SELECT ai.codigo_activo, ai.serial_activo, ai.nombre_activo, ai.fecha_asignacion, ga.area_grupo 
+							$consultar_activo=$db->prepare("SELECT ai.codigo_activo, ai.serial_activo, ai.nombre_activo, ai.fecha_asignacion, ga.area_grupo 
 								FROM  hinfraestructura.traslados as tr
 								LEFT JOIN hinfraestructura.activos_internos as ai ON tr.activo_traslado = ai.id_activo 
 								LEFT JOIN hinfraestructura.grupos_activos as ga ON ga.id_grupo  = ai.grupo_activo 
@@ -239,9 +237,6 @@ public function consultaModificarActivo(){
 								LEFT JOIN hinfraestructura.grupos_activos as ga ON ga.id_grupo  = ai.grupo_activo 
 								WHERE tr.funcionario_final=:identidad AND tr.estado_traslado =3 and ai.responsable_activo = :identidad 
 								GROUP BY id_traslado");
-=======
-							$consultar_activo=$db->prepare("SELECT codigo_activo, serial_activo, nombre_activo, fecha_asignacion, grupos_activos.area_grupo FROM activos_internos LEFT JOIN grupos_activos ON grupo_activo = id_grupo WHERE responsable_activo=:identidad");
->>>>>>> d07a9fb8f4e0c98d70372638cf652c5cce3d289e
 								$consultar_activo->bindValue('identidad',$resultado['identificacion']);
 								$consultar_activo->execute();
 							

@@ -106,10 +106,6 @@
         if($accion == 1){
          header('Location: ../../dashboard_funcionarios.php');
         }else if($accion == 2){
-<<<<<<< HEAD
-=======
-            
->>>>>>> d07a9fb8f4e0c98d70372638cf652c5cce3d289e
             echo "<script>alert('El usuario ya tiene una peticcion creada'); 
             history.back();</script>";
         }else if($accion == 3 ){
@@ -138,7 +134,6 @@
         $accion = $crud->modificarRevisado($datos);
         echo $accion;
     }
-<<<<<<< HEAD
 //*****************************************************************************************************//
 //*************************************VALIDA ACCESOS DUPLICADOS **************************************//
 //*****************************************************************************************************//   
@@ -149,8 +144,6 @@
         $datos->setUsuario_creacion($_POST['usuario']);
         $accion = $crud->consultaAccesoDuplicado($datos);
     }
-=======
->>>>>>> d07a9fb8f4e0c98d70372638cf652c5cce3d289e
 
 //*****************************************************************************************************//
 //*********************** SELECCION DE PETICION Y CAMBIO DE ESTADO ************************************//
@@ -218,21 +211,14 @@
             $conclusionAprobado = 'Denego';
             $datos->setPlataformas($_POST['plataformasPeticion']);
             $existAcces = 1;
-<<<<<<< HEAD
             $permitido = 1;
-=======
->>>>>>> d07a9fb8f4e0c98d70372638cf652c5cce3d289e
         }else{
             $estado = 1;
             $conclusionAprobado = 'Aprobo';
 
             $existAcces = 0;
             $plataformas = '';
-<<<<<<< HEAD
             $permitido= 0;
-=======
-
->>>>>>> d07a9fb8f4e0c98d70372638cf652c5cce3d289e
             for($x=1;$x<numPlataformas;$x++){
                 $p = 'plataformas' . $x;
                 if(isset($_POST[$p])){
@@ -250,17 +236,11 @@
         $datos->setFecha_atendido(date("Y-m-d H:i:s"));
         $datos->setUsuario_atendio($_POST['usuarioAtiende']);
         
-<<<<<<< HEAD
         if($permitido == 1){
             
             $accion = $crud->cancelaPeticion($datos);
         }else{
             $accion = $crud->modificarPeticion($datos);
-=======
-        if($existAcces == 1){
-            $accion = $crud->modificarPeticion($datos);
-        }else{
->>>>>>> d07a9fb8f4e0c98d70372638cf652c5cce3d289e
             $accion = 1;
         }
         
@@ -342,10 +322,7 @@
                 if($_POST['estado' . $x] == 12){
                     $datos->setNombre($_POST['nombre_usuario' . $x]);
                     $datos->setClave($_POST['clave' . $x]);
-<<<<<<< HEAD
                     $ejecutarModificacion = true;
-=======
->>>>>>> d07a9fb8f4e0c98d70372638cf652c5cce3d289e
                 }else if($_POST['estado' . $x] == 13){
                     $datos->setNombre('No aprobado');
                     $datos->setClave('No aprobado');
@@ -372,7 +349,6 @@
         }else{
             $conclusiones = $_POST['conclusiones'];
         }
-<<<<<<< HEAD
         if ($ejecutarModificacion== true)  {
             $crud->modificarPlataformas(substr($plataformasf, 0, -1),$_POST['id_peticion'],$conclusiones);
         }else if ($ejecutarModificacion == false) {
@@ -381,9 +357,6 @@
 
         
         
-=======
-        $crud->modificarPlataformas(substr($plataformasf, 0, -1),$_POST['id_peticion'],$conclusiones);
->>>>>>> d07a9fb8f4e0c98d70372638cf652c5cce3d289e
 
         if($consultaMai == 1){
             header('Location: ../../dashboard.php');
