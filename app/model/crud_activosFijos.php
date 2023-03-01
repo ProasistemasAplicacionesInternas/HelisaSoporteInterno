@@ -200,7 +200,7 @@ public function consultaModificarActivo(){
 								FROM  hinfraestructura.traslados as tr
 								LEFT JOIN hinfraestructura.activos_internos as ai ON tr.activo_traslado = ai.id_activo 
 								LEFT JOIN hinfraestructura.grupos_activos as ga ON ga.id_grupo  = ai.grupo_activo 
-								WHERE tr.funcionario_final=:identidad AND tr.estado_traslado =14 AND ai.responsable_activo=:identidad
+								WHERE tr.funcionario_final=:identidad AND tr.estado_traslado !=3 AND ai.responsable_activo=:identidad
 								GROUP BY id_traslado");
 								$consultar_activo->bindValue('identidad',$resultado['identificacion']);
 								$consultar_activo->execute();
