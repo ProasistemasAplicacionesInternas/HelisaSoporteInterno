@@ -85,6 +85,7 @@ function redireccionarxTipoUser(){
             window.location="../../dashboard.php";
         }
     })
+<<<<<<< HEAD
 }
 const nombreUsuarios = document.querySelectorAll('[name^="nombre_usuario"]');
 
@@ -122,3 +123,6 @@ nombreUsuarios.forEach(nombreUsuario => {
  
 
 
+=======
+}
+>>>>>>> d07a9fb8f4e0c98d70372638cf652c5cce3d289e

@@ -65,6 +65,7 @@ $(document).ready(function() {
             url:'app/controller/control_permisos.php',
             data:data
         }).done(function(respuesta){ //obtiene el departamento en caso de ser director o auxiliar de director
+<<<<<<< HEAD
             if(respuesta == 2){
                 $('#claveBovedaModal').modal('show');
             }else if (respuesta == 1) {
@@ -75,6 +76,13 @@ $(document).ready(function() {
             }else if (respuesta == 0) {
                 $.smkAlert({
 					text: 'No puedes ingresar a la boveda ya que tienes Peticiones de Accesos Finaliazadas sin Aceptar',
+=======
+            if(respuesta == 0){
+                $('#claveBovedaModal').modal('show');
+            }else{
+                $.smkAlert({
+					text: 'No puedes ingresar a la boveda ya que tienes '  + respuesta + ' Peticiones Accesos Finaliazadas sin Aceptar',
+>>>>>>> d07a9fb8f4e0c98d70372638cf652c5cce3d289e
 					type: 'danger'
 				});
             }

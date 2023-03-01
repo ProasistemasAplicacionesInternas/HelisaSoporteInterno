@@ -24,7 +24,10 @@ $consultaUsuario = $cartilla->consultaUsuario();
     <title>Helisa | Soporte Infraestructura</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="stylesheet" href="public/css/contenido.css" media="screen" type="text/css">
+<<<<<<< HEAD
     <link rel="stylesheet" href="public/css/bootstrap.min.css">
+=======
+>>>>>>> d07a9fb8f4e0c98d70372638cf652c5cce3d289e
     <link rel="stylesheet" href="public/css/smoke.min.css">
     <link rel="stylesheet" type="text/css" href="public/css/datatables.min.css" />
 
@@ -285,13 +288,19 @@ $consultaUsuario = $cartilla->consultaUsuario();
             </div>
         </div>
         <script src="public/js/jquery-3.3.1.min.js"></script>
+<<<<<<< HEAD
         <script src="public/js/popper.js"></script>
+=======
+>>>>>>> d07a9fb8f4e0c98d70372638cf652c5cce3d289e
         <script src="public/js/bootstrap.min.js"></script>
         <script src="public/js/smoke.min.js"></script>
         <script src="public/js/es.min.js"></script>
         <script src="public/js/datatables.min.js"></script>
         <script src="public/js/tablas.js"></script>
+<<<<<<< HEAD
         <!-- <script src="public/js/valida_usuario.js"></script> -->
+=======
+>>>>>>> d07a9fb8f4e0c98d70372638cf652c5cce3d289e
         <script src="public/js/selector_usuario.js?b2"></script>
         <script src="public/js/inactivar_usuario.js"></script>
         <script src="public/js/modalCambioClaveU.js"></script>

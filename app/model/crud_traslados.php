@@ -1,6 +1,9 @@
 <?php 
 require_once('../model/vinculo.php');
+<<<<<<< HEAD
 require __DIR__ . '/vendor/autoload.php';//Correo
+=======
+>>>>>>> d07a9fb8f4e0c98d70372638cf652c5cce3d289e
 
 class CrudTraslados{
 	
@@ -11,19 +14,28 @@ class CrudTraslados{
 		public function crearTraslado($create){
 			$db=Conectar::acceso();
 			$residuo = $create->getFuncionario_final();			
+<<<<<<< HEAD
 			$fechaTraslado = $create->getFecha_traslado();			
 			$activoTraslado = $create->getActivo_traslado();			
 			$descripcionTraslado = $create->getDescripcion_traslado();			
 			$nombre = $create->getNombre();			
 			
 			$crea_traslado=$db->prepare('INSERT INTO traslados(funcionario_inicial, fecha_asignado, funcionario_final, fecha_traslado, activo_traslado, descripcion_traslado, estado_traslado )VALUES(:t_funcionarioI, :t_fechaA, :t_funcionarioF, :t_fechaT, :t_activo, :t_descripcion, :estado)');
+=======
+
+			$crea_traslado=$db->prepare('INSERT INTO traslados(funcionario_inicial, fecha_asignado, funcionario_final, fecha_traslado, activo_traslado, descripcion_traslado )VALUES(:t_funcionarioI, :t_fechaA, :t_funcionarioF, :t_fechaT, :t_activo, :t_descripcion)');
+
+>>>>>>> d07a9fb8f4e0c98d70372638cf652c5cce3d289e
 			$crea_traslado->bindValue('t_funcionarioI',$create->getFuncionario_inicial());
 			$crea_traslado->bindValue('t_fechaA',$create->getFecha_inicial());
 			$crea_traslado->bindValue('t_funcionarioF',$create->getFuncionario_final());
             $crea_traslado->bindValue('t_fechaT',$create->getFecha_traslado());
             $crea_traslado->bindValue('t_activo',$create->getActivo_traslado());
 			$crea_traslado->bindValue('t_descripcion',$create->getDescripcion_traslado());            
+<<<<<<< HEAD
 			$crea_traslado->bindValue('estado',3);            
+=======
+>>>>>>> d07a9fb8f4e0c98d70372638cf652c5cce3d289e
 			$crea_traslado->execute();
 
 			if ($crea_traslado) {
@@ -39,8 +51,11 @@ class CrudTraslados{
 				$modifica_responsable->bindValue('fecha_traslado',$create->getFecha_traslado());
 				$modifica_responsable->bindValue('estadoA',$estados);
 				
+<<<<<<< HEAD
 
 				
+=======
+>>>>>>> d07a9fb8f4e0c98d70372638cf652c5cce3d289e
 				$modifica_responsable->execute();
 
 				$colsultar_usuario=$db->prepare('SELECT id_usuario from usuarios where usuario =:usuario');
@@ -59,6 +74,7 @@ class CrudTraslados{
 
 
 
+<<<<<<< HEAD
 
 
 
@@ -119,6 +135,8 @@ class CrudTraslados{
 
 
 
+=======
+>>>>>>> d07a9fb8f4e0c98d70372638cf652c5cce3d289e
 //****************************************************************************************//
 //**************************** SQL PARA CONSULTAR trasladoS ******************************//
 //****************************************************************************************//
@@ -141,6 +159,7 @@ class CrudTraslados{
 			}
 			return $lista_traslados;
 		}
+<<<<<<< HEAD
 
 
 //****************************************************************************************//
@@ -252,6 +271,8 @@ class CrudTraslados{
             }
 
         }
+=======
+>>>>>>> d07a9fb8f4e0c98d70372638cf652c5cce3d289e
 }
 
  ?>

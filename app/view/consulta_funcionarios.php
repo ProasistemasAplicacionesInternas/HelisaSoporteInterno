@@ -94,7 +94,11 @@
                             <button type="button" class="btn btn-warning btn-sm cambio-clave" data-toggle="modal" data-target="#cambio-clave" id="cambioClavex" name="cambioClavex" onclick="identidadF(<?php echo $datos->getF_identificacion(); ?>);" value="<?php echo $datos->getF_identificacion(); ?>"><span>Cambio De Contraseña</span>
                         </button>
                                 
+<<<<<<< HEAD
                             <td>
+=======
+                    </td>
+>>>>>>> d07a9fb8f4e0c98d70372638cf652c5cce3d289e
 
                         </tr>
                     <?php
@@ -178,11 +182,16 @@
     </div>
 
     
+<<<<<<< HEAD
     <script src="public/js/jquery-3.3.1.min.js"></script>
     <script src="public/js/datatables.min.js"></script>
     <script src="public/js/popper.js"></script>
     <script src="public/js/bootstrap.min.js"></script>
     <script src="public/js/smoke.min.js"></script>
+=======
+    
+    <script src="public/js/datatables.min.js"></script>
+>>>>>>> d07a9fb8f4e0c98d70372638cf652c5cce3d289e
     <script src="public/js/tablas.js"></script>
     <script src="public/js/bloqueoTeclas.js"></script>
     <script src="public/js/modalCambioClave.js"></script>

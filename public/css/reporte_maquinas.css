@@ -20,6 +20,10 @@
 }
 .cuadros{
     width : 225px;
+<<<<<<< HEAD
+=======
+    height: 138px;
+>>>>>>> d07a9fb8f4e0c98d70372638cf652c5cce3d289e
     background-color: rgb(219, 219, 219);
 }
 #cuadroservidores{

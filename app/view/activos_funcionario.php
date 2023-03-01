@@ -20,7 +20,10 @@
         $activosAsignados = new crudActivos();
         $datosActivos = new activosFijos();
         $consultarActivos=$activosAsignados->consultarActivosfuncionario();
+<<<<<<< HEAD
         $consultarActivosPendientes=$activosAsignados->consultarActivosPendientesFuncionario();
+=======
+>>>>>>> d07a9fb8f4e0c98d70372638cf652c5cce3d289e
         
     ?>
     <div class="container-fluid">
@@ -84,6 +87,7 @@
             </div>
             
         </div>
+<<<<<<< HEAD
         <div class="row">
             <div class="col-10 mt-5">
                 <h6 style="border: 1px solid #d9007f; margin: 0% 0%; padding: 10px; text-align: center">
@@ -147,6 +151,9 @@
             </div>
             
         </div>                            
+=======
+
+>>>>>>> d07a9fb8f4e0c98d70372638cf652c5cce3d289e
 
 
     
@@ -154,7 +161,10 @@
     <script src="public/js/tablas.js"></script>
     <script src="public/js/smoke.min.js"></script>
     <script src="public/js/bloqueoTeclas.js"></script>
+<<<<<<< HEAD
     <script src="public/js/revisadoActivosFijos.js"></script>
+=======
+>>>>>>> d07a9fb8f4e0c98d70372638cf652c5cce3d289e
 </body>	
 </body>
 </html>

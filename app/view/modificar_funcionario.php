@@ -406,6 +406,7 @@
                     </div>
                     <div class="row">
 <<<<<<< HEAD
+<<<<<<< HEAD
                         <div class="col-7">
                             <div class="form-group">
                                 <label>Contrase&ntilde;a</label>
@@ -421,6 +422,10 @@
                         <div class="col-4"> <button type="button" class="mt-2 btn btn-success" id="btn-guardarModif" name="btn-guardarModif" >Guardar</button></div>
                         <div class="col-3" > <a id="cerrar_modificacion" class="mt-2 btn btn-secondary">Cancelar</a> </div>
 >>>>>>> 76ad7637c4b77819906f2cc1526841dc745189a0
+=======
+                        <div class="col-4"> <button type="button" class="mt-2 btn btn-success" id="btn-guardarModif" name="btn-guardarModif" >Guardar</button></div>
+                        <div class="col-3" > <a id="cerrar_modificacion" class="mt-2 btn btn-secondary">Cancelar</a> </div>
+>>>>>>> d07a9fb8f4e0c98d70372638cf652c5cce3d289e
                     </div>
                 </form>
                 <div class="row">

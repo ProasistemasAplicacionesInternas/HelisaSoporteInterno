@@ -5,11 +5,19 @@ class consultaAccesosFuncionario{
 
     public function traerDocumento($usuario){
         $db=Conectar::acceso();
+<<<<<<< HEAD
         $consulta = $db->prepare("SELECT identificacion FROM funcionarios WHERE usuario=:id_usuario LIMIT 1");
         $consulta->bindValue('id_usuario', $usuario);
         $consulta->execute();  
         $consultaFinalizada = $consulta->fetch(PDO::FETCH_ASSOC);
         $identificacion = $consultaFinalizada['identificacion'];
+=======
+        $consulta = $db->prepare("SELECT id_usuario FROM accesos_plataformas WHERE usuario=:id_usuario LIMIT 1");
+        $consulta->bindValue('id_usuario', $usuario);
+        $consulta->execute();  
+        $consultaFinalizada = $consulta->fetch(PDO::FETCH_ASSOC);
+        $identificacion = $consultaFinalizada['id_usuario'];
+>>>>>>> d07a9fb8f4e0c98d70372638cf652c5cce3d289e
         return $identificacion;
     }
     public function plataformasActivasxUsuario($identificacion){
