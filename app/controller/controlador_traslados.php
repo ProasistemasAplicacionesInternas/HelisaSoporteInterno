@@ -38,4 +38,8 @@ $traslado = new traslados();
 		$traslado->setFecha_traslado($_POST['nombre']);
 		$crud->aceptaTraslado($traslado);
 	}
+	if (isset($_POST['consulta']) &&($_POST['consulta']) == 1 ) {
+		$traslado->setId_traslado($_POST['activo']);
+		$crud->consultarActivosPendientesFuncionario($traslado);
+	}
 ?>

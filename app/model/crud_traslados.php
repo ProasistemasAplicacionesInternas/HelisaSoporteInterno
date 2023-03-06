@@ -117,6 +117,29 @@ class CrudTraslados{
 					}
 		}
 
+		public function consultarActivosPendientesFuncionario($create) {
+			$db=Conectar::acceso();// se cambia conectar::acceso() a Conexion::acceso() 
+			$lista_activos = [];
+			$buscarIdentidad = $db->prepare("SELECT id_activo FROM activos_internos WHERE codigo_activo=:activo");
+			$buscarIdentidad->bindValue('activo', $create->getId_traslado());
+			$buscarIdentidad->execute();
+		
+			$resultado = $buscarIdentidad->fetchAll(PDO::FETCH_ASSOC);
+			foreach ($resultado as $fila) {
+				// echo $fila['id_activo'];
+				$consultar_activo = $db->prepare("SELECT * FROM traslados where activo_traslado=:activo and estado_traslado=:estado");
+				$consultar_activo->bindValue('activo', $fila['id_activo']); // se agrega ['id_activo'] a $fila
+				$consultar_activo->bindValue('estado', 3);
+				$consultar_activo->execute();
+				if ($consultar_activo->rowCount() > 0) { // se cambia $colsultar_activo a $consultar_activo y se usa rowCount() para verificar si la consulta devuelve filas
+					echo 2;
+				} else {
+					echo 1;
+				}
+			}
+		}
+		
+
 
 
 //****************************************************************************************//
