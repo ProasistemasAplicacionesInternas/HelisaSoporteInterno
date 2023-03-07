@@ -208,22 +208,11 @@ public function consultaModificarActivo(){
 		if ($resultado!=0) {
 			$db=conectar::acceso();	
 			$consultar_activo=$db->prepare("SELECT ai.codigo_activo, ai.serial_activo, ai.nombre_activo, ai.fecha_asignacion, ga.area_grupo 
-			FROM  hinfraestructura.traslados as tr
-			LEFT JOIN hinfraestructura.activos_internos as ai ON tr.activo_traslado = ai.id_activo 
+			FROM  hinfraestructura.activos_internos as ai 
 			LEFT JOIN hinfraestructura.grupos_activos as ga ON ga.id_grupo  = ai.grupo_activo 
-			WHERE tr.funcionario_final=:identidad AND ai.responsable_activo=:identidad
-			GROUP BY id_traslado");
+			WHERE ai.responsable_activo=:identidad GROUP BY serial_activo");
 			$consultar_activo->bindValue('identidad',$resultado['identificacion']);
 			$consultar_activo->execute();
-									
-			if ($consultar_activo->rowCount() == 0) {
-				$consultar_activo=$db->prepare("SELECT ai.codigo_activo, ai.serial_activo, ai.nombre_activo, ai.fecha_asignacion, ga.area_grupo 
-				FROM  hinfraestructura.activos_internos as ai 
-				LEFT JOIN hinfraestructura.grupos_activos as ga ON ga.id_grupo  = ai.grupo_activo 
-				WHERE  ai.responsable_activo=:identidad" );
-				$consultar_activo->bindValue('identidad',$resultado['identificacion']);
-				$consultar_activo->execute();
-			}
 									
 			foreach ($consultar_activo->fetchALL() as $listado) {
 				$consulta = new activosFijos();

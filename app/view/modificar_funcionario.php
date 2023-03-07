@@ -416,10 +416,7 @@
                     <div class="row">
                         <div class="col-4"> <button type="button" class="mt-5 btn btn-success" id="btn-guardarModif" name="btn-guardarModif" style="height:33.5px; width=auto;" >Guardar</button></div>
                         <div class="col-3" > <a id="cerrar_modificacion" class="mt-5 btn btn-secondary" style="height:33.5px; width=auto;">Cancelar</a> </div>
-                        <div class="col-4"> <button type="button" class="mt-2 btn btn-success" id="btn-guardarModif" name="btn-guardarModif" >Guardar</button></div>
-                        <div class="col-3" > <a id="cerrar_modificacion" class="mt-2 btn btn-secondary">Cancelar</a> </div>
-                        <div class="col-4"> <button type="button" class="mt-2 btn btn-success" id="btn-guardarModif" name="btn-guardarModif" >Guardar</button></div>
-                        <div class="col-3" > <a id="cerrar_modificacion" class="mt-2 btn btn-secondary">Cancelar</a> </div>
+                        
                     </div>
                 </form>
                 <div class="row">

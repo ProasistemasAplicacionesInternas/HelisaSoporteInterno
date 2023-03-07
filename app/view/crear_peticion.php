@@ -3,8 +3,8 @@
 //************FORMULARIO PARA LA CREACION DE PETICION A TECNOLOGIA***************//
 //*******************************************************************************//
 
-	ini_set("session.cookie_lifetime",18000);
-  	ini_set("session.gc_maxlifetime",18000);
+	ini_set("session.cookie_lifetime",30000);
+  	ini_set("session.gc_maxlifetime",30000);
    		session_start();
 
    	if(!isset($_SESSION['usuario'])){
