@@ -21,7 +21,8 @@ $(document).ready(function(){
               nueva_celda.classList.add("checkbox-cell");
               nueva_celda.innerHTML = '<input type="checkbox" onclick="checkked(this)" style="vertical-align: middle;"/>';
             }else{
-              
+              var nueva_celda = fila.insertCell(-1);
+              nueva_celda.innerHTML = '<p>Aceptado</p>';
             }
           });
         })(filas[i]);
