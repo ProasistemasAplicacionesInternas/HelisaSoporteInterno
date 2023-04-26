@@ -6,16 +6,13 @@ $(document).ready(function(){
       var primera_celda = filas[i].getElementsByTagName("td")[0];
       if (primera_celda) {
         var valor_primera_celda = primera_celda.textContent || primera_celda.innerText;
-        console.log(valor_primera_celda);
         infoActivo= "activo="+ valor_primera_celda+"&consulta=1";
-        console.log(infoActivo);
         (function(fila) {
           $.ajax({
             type: 'POST',
             url: 'app/controller/controlador_traslados.php',
             data: infoActivo
           }).done(function(data) {
-            console.log(data);
             if (data == 2) { 
               var nueva_celda = fila.insertCell(-1);
               nueva_celda.classList.add("checkbox-cell");
@@ -41,7 +38,6 @@ $(document).ready(function(){
         url: 'app/controller/controlador_traslados.php',
         data: infoActivo
       }).done(function(data) {
-        console.log(data)
         if (data == 1) {
           $.smkAlert({
             text: 'Se acepto el activo fijo',

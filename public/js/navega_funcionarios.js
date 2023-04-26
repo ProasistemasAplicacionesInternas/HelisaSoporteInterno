@@ -80,6 +80,29 @@ $(document).ready(function() {
             }
         })  
     });
+    $('#validationTicket').click(function(){
+        var usuario = $('#usuario').text();
+        var data = 'consultaNumPeticionesNoAcep=1&usuario='+usuario;
+        $.ajax({
+            type:'POST',
+            url:'app/controller/control_permisos.php',
+            data:data
+        }).done(function(respuesta){ //obtiene el departamento en caso de ser director o auxiliar de director
+           if (respuesta == 1) {
+                $('#dropTicket').hide();
+                $.smkAlert({
+					text: 'No puedes ingresar a la boveda ya que tienes asignaciones de activos pendientes',
+					type: 'danger'
+				});
+            }else if (respuesta == 0) {
+                $('#dropTicket').hide();
+                $.smkAlert({
+					text: 'No puedes ingresar a la boveda ya que tienes Peticiones de Accesos Finaliazadas sin Aceptar',
+					type: 'danger'
+				});
+            }
+        })  
+    });
 
 });
 
