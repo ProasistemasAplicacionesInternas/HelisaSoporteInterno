@@ -91,13 +91,13 @@ $(document).ready(function() {
            if (respuesta == 1) {
                 $('#dropTicket').hide();
                 $.smkAlert({
-					text: 'No puedes ingresar a la boveda ya que tienes asignaciones de activos pendientes',
+					text: 'No puedes generar solicitudes ya que tienes asignaciones de activos pendientes',
 					type: 'danger'
 				});
             }else if (respuesta == 0) {
                 $('#dropTicket').hide();
                 $.smkAlert({
-					text: 'No puedes ingresar a la boveda ya que tienes Peticiones de Accesos Finaliazadas sin Aceptar',
+					text: 'No puedes generar solicitudes ya que tienes Peticiones de Accesos Finaliazadas sin Aceptar',
 					type: 'danger'
 				});
             }

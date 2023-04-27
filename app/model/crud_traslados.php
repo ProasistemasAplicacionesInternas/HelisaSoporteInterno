@@ -228,11 +228,8 @@ class CrudTraslados{
 			$cuerpo.='<strong>CLAUSULA DE COMPROMISO</strong> <br><br>
 
 
-			- <strong>DEPARTAMENTO DE TECNOLOGÍA</strong> : <p>Como departamento de tecnología, expreso que los activos,
-			plataformas y permisos solicitados han sido configurados, asignados y probados previamente, como así
-			mismo se encuentran en perfectas condiciones y buen funcionamiento para ser empleados por el
-			trabajador asignado</p><br><br>
-			- <strong>TRABAJADOR</strong>: <p>Como trabajador de Proasistemas, recibo los activos y/o inventarios relacionados en la
+			
+			- <strong>ITEM DE RESPONSABILIDAD</strong>: <p>Como trabajador de Proasistemas, recibo los activos y/o inventarios relacionados en la
 			presenta acta y sus anexos a conformidad, en buen estado y acepto que he revisado que todos se
 			encuentren funcionando los cuales estarán bajo mi responsabilidad, les daré el uso y trato adecuado al
 			desempeño de mis funciones y la destinación prevista para cada uno de ellos. Asumiré el daño o la pérdida
@@ -244,23 +241,24 @@ class CrudTraslados{
 			considera falta grave por el Reglamento Interno de Trabajo que por mal manejo de los activos o bienes
 			de la empresa se dañen o pierdan y en tal evento autorizo a la empresa efectuar el descuento
 			correspondiente al valor de reposición del bien afectado, deduciéndolo de mis salarios, prestaciones
-			sociales o eventuales indemnizaciones a mi favor.</p><br><br>
+			sociales o eventuales indemnizaciones a mi favor.</p>
+			<p>En caso de que usted no haya realizado la aceptación de los activos relacionados en el cuadro anterior comuníquese
+			de forma INMEDIATA con su jefe directo y/o con el departamento de tecnología y/o administración, de lo contrario 
+			se dará por aprobada la aceptación realizada.</p><br><br>
+
 
 			<strong>RECOMENDACIONES PARA EL USO DE LOS ACTIVOS FIJOS:</strong><br><br>
-			Los elementos entregados son frágiles y requieren los siguientes cuidados por parte del empleado con el<br>
-			propósito de alargar su vida útil.<br><br>
+			Los elementos entregados son frágiles y requieren los siguientes cuidados por parte del empleado con el propósito de alargar su vida útil.<br><br>
 			- No halar<br>
 			- No golpear<br>
 			- No mojar<br>
 			- Desconectar si presenta algún daño eléctrico<br>
 			- No comer o beber en su puesto de trabajo o escritorio, para evitar derrames y daños en los equipos o<br>
 			muebles de oficina.<br>
-			- Informar a través de soporte infraestructura cualquier novedad que se pueda presentar en el<br>
-			funcionamiento de los activos asignados.<br><br>
-			<strong><p></p>En caso de alguna novedad referente al activo que ha recibido por favor genere un ticket bajo la categoría
-			"Soporte sobre equipos tecnológicos" seleccionado el número del activo sobre el cual tiene la novedad e
-			indique la observación relacionada con el activo recibido, este registro se debe hacer de forma inmediata
-			al momento de recibir el activo.</p></strong><br><br>
+			- Siéntese de forma correcta en las sillas giratorias, no coloque los pies sobre la base o las rodachinas y mucho menos en el asiento; los zapatos, en especial las suelas alojan compuestos que pueden ensuciar las sillas o en el caso de las mujeres (tacones) pueden dañar el tapizado o la estructura.<br><br>
+			<strong><p></p>En caso de presentar alguna novedad referente al activo que acaba de aceptar por favor genere el reporte de forma INMEDIATA de la siguiente forma:<br>
+			Activos tecnológicos: Genere un ticket bajo la categoría "Soporte sobre equipos tecnológicos" seleccionado el número del activo sobre el cual tiene la novedad e indique la observación relacionada con el activo recibido.
+			Activos Administrativos. Envié correo notificando la novedad sobre el activo asignado a la dirección de correo administracion@helisa.com.</p></strong><br><br>
 			El empleado ha recibido instrucciones precisas para el correcto uso de los activos';
             $body = utf8_decode($cuerpo);
             $subject = "Aceptación entrega de activos tecnológicos y/o de tipo administrativo";
