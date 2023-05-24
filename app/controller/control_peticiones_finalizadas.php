@@ -165,7 +165,7 @@
             $db=conectar::acceso();
             $listaConsulta=[];
 
-            $seleccion=$db->prepare('SELECT  id_peticionmai, estado.descripcion AS estado, DATE_FORMAT(fecha_peticion,"%d-%m-%Y %H:%i"),DATE_FORMAT(fecha_atencion,"%d-%m-%Y %H:%i"), usuario_creacion, productos_mai.nombre_producto, descripcion_peticion, usuario_atencion, conclusiones,nivel_encuesta,imagen, req_nombre , req_justificacion 
+            $seleccion=$db->prepare('SELECT  id_peticionmai, estado.descripcion AS estado, DATE_FORMAT(fecha_peticion,"%d-%m-%Y %H:%i"),DATE_FORMAT(fecha_atencion,"%d-%m-%Y %H:%i"), usuario_creacion, productos_mai.nombre_producto, descripcion_peticion, usuario_atencion, conclusiones,nivel_encuesta,imagen, req_nombre , req_justificacion, sprint, gestion 
             FROM peticiones_mai LEFT JOIN productos_mai ON id_producto = producto_mai 
             LEFT JOIN estado ON estado.id_estado=peticiones_mai.estado_peticion
             WHERE  usuario_atencion=:usuario AND (estado_peticion=:estadoN OR estado_peticion=:estadoD OR estado_peticion=:estadoP OR estado_peticion=:estadoC OR estado_peticion=:estadoS)');
@@ -192,7 +192,8 @@
                 $consulta->setP_cargarimagen($listado['imagen']);
                 $consulta->setReq_nombre($listado['req_nombre']);
                 $consulta->setReq_justificacion($listado['req_justificacion']);
-
+                $consulta->setSprint($listado['sprint']);
+                $consulta->setGestion(($listado['gestion']));
                 $listaConsulta[]=$consulta;    
                 
             }
