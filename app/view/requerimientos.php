@@ -48,10 +48,12 @@
                             <th>Fecha solicitud</th>
                             <th>Area</th>
                             <th>Extension</th>
+                            <th>Tipo de peticion</th>
                             <th>Producto</th>
+                            <th>Gestionado</th>
+                            <th>Sprint</th>
                             <th>Atiende</th>
                             <th>Estado</th>
-			                <th>Tipo de peticion</th>
                             <th>Tiempo</th>
                             <th>Modificar</th>
                             
@@ -91,8 +93,17 @@
                                     <?php echo $datos1->getExtension_funcionario(); ?>
                                 </td>
                                 <td style="background-color:<?=$color ?>;">
+                                    <?php echo $datos1->getName(); ?>
+                                </td>
+                                <td style="background-color:<?=$color ?>;">
                                     <?php echo $datos1->getProducto_peticionMai(); ?>
                                 </td> 
+                                <td style="background-color:<?=$color ?>;">
+                                    <?php echo $datos1->getGestion(); ?>
+                                </td>
+                                <td style="background-color:<?=$color ?>;">
+                                    <?php echo $datos1->getSprint(); ?>
+                                </td>
                                 <td style="background-color:<?=$color ?>;">
                                     <?php echo $datos1->getUsuario_atencionMai(); ?>
                                 </td>                             
@@ -144,6 +155,10 @@
                                         <input type="hidden" name="soporteMai" id="soporteMai" value="<?php echo $datos1->getName(); ?>">
 
                                         <input type="hidden" name="p_conclusiones" id="p_conclusiones" value="<?php echo $datos1->getConclusiones_peticionMai(); ?>">
+
+                                        <input type="hidden" name="p_sprint" id="p_sprint" value="<?php echo $datos1->getSprint(); ?>">
+
+                                        <input type="hidden" name="p_gestion" id="p_gestion" value="<?php echo $datos1->getGestion(); ?>">
 
                                         <input type="button"  value = "Seleccionar" class="btn btn-primary"  onclick="validarBoton('<?php echo $_SESSION['usuario'];?>',<?php echo $datos1->getId_peticionMai();?>)">
 
