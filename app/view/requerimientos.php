@@ -110,9 +110,6 @@
                                 <td style="background-color:<?=$color ?>;">
                                     <?php echo $datos1->getEstado_peticionMai(); ?>
                                 </td>
-				                <td style="background-color:<?=$color ?>;">
-                                    <?php echo $datos1->getName(); ?>
-                                </td>
                                 <td style="background-color:<?=$color ?>;">
                                     <?php 
                                         date_default_timezone_set('America/Bogota');
