@@ -233,5 +233,38 @@
                 
         }
         
+    }else if(isset($_POST['btn-consultarTicketI'])){
+        $db=conectar::acceso();
+        $listaConsulta=[];
+
+        $seleccion=$db->prepare('SELECT  numero_peticion, estado.descripcion AS estado,  DATE_FORMAT(fecha_peticion,"%d-%m-%Y %H:%i"),DATE_FORMAT(fecha_atendido,"%d-%m-%Y %H:%i"), usuario,categorias.nombre_categoria, peticiones.descripcion, usuario_atiende, conclusiones,nivel_encuesta,imagen  FROM peticiones  
+        LEFT JOIN estado ON estado.id_estado=peticiones.estado  
+        LEFT JOIN categorias ON id_categoria=categoria  
+        WHERE  numero_peticion=:numero_peticion AND (estado=:estadoN OR estado=:estadoP OR estado=:estadoD OR estado=:estadoC OR estado=:estadoS) AND categoria=:categoria ');
+        $seleccion->bindValue('estadoN','1');
+        $seleccion->bindValue('estadoD','2');
+        $seleccion->bindValue('estadoP','3');
+        $seleccion->bindValue('estadoC','4');
+        $seleccion->bindValue('estadoS','8');
+        $seleccion->bindValue('categoria','20');
+        $seleccion->bindValue('numero_peticion',$_POST['peticionFiltro']);
+        $seleccion->execute();
+    
+        foreach($seleccion->fetchAll() as $listado){
+            $consulta= new Peticion();
+            $consulta->setP_estado($listado['estado']);
+            $consulta->setP_nropeticion($listado['numero_peticion']);       
+            $consulta->setP_fechapeticion($listado['DATE_FORMAT(fecha_peticion,"%d-%m-%Y %H:%i")']);
+            $consulta->setP_usuario($listado['usuario']);
+            $consulta->setP_categoria($listado['nombre_categoria']);
+            $consulta->setP_descripcion($listado['descripcion']);
+            $consulta->setP_fechaatendido($listado['DATE_FORMAT(fecha_atendido,"%d-%m-%Y %H:%i")']);   
+            $consulta->setP_usuarioatiende($listado['usuario_atiende']);
+            $consulta->setP_conclusiones($listado['conclusiones']);
+            $consulta->setCalificacion($listado['nivel_encuesta']);
+            $consulta->setP_cargarimagen($listado['imagen']);
+
+            $listaConsulta[]=$consulta;    
+        }        
     }
 ?>
