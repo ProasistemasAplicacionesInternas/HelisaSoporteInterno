@@ -54,7 +54,7 @@ if (!isset($_SESSION['usuario']) || empty($_SESSION['usuario'])) {
                 <h6>Número de Peticion</h6>
             </div>
             <div class="col-3">
-                <form action="app/view/peticiones_iso.php" target="_blank" method="post" onsubmit="rango()">
+                <form action="app/view/peticiones_iso.php" target="_blank" method="post">
                     <div class="form-group">
                         <input type="hidden" id="usuario_actual" name="usuario_actual" value="<?php echo $_SESSION['usuario']; ?>">
                         <input type="text" id="peticionFiltro" name="peticionFiltro" class="form-control" placeholder="Numero de Peticion" required autocomplete="off">
