@@ -1,3 +1,22 @@
+var fechaI = document.getElementById('selectorFecha');
+var ticketI = document.getElementById('selectorTicket');
+
+var campos = document.getElementsByClassName('ocultar');
+var casillas = document.getElementsByClassName('requerido');
+$('#criterio').on('change', function() {
+    if (this.value == '' || this.value == undefined) {
+        fechaI.style.display = 'none'
+        ticketI.style.display = 'none'
+    } else if (this.value == 1) {
+        fechaI.style.display = 'inline'
+        ticketI.style.display = 'none'
+    }else if(this.value == 2){
+        ticketI.style.display = 'inline'
+        fechaI.style.display = 'none'
+    }
+});
+
+$('#criterio').trigger('change');
 $(function() {
 
     $('#fechaFiltro').daterangepicker({
