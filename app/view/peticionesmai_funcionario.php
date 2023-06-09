@@ -66,12 +66,12 @@ error_reporting(E_ALL);
                         <th style="width:20px;">Conclusiones</th>
                     </thead>
                     <tbody>
-                        <?php foreach($listaConsulta as $datos): ?>
+                    <?php foreach($listaConsulta as $datos): ?>
                         <tr>
                             <td>
-                              <span id="id_peticion<?php echo $datos->getId_peticionMai(); ?>">
+                            <span id="id_peticion<?php echo $datos->getId_peticionMai(); ?>">
                                 <?php echo $datos->getId_peticionMai(); ?>
-                              </span>
+                            </span>
                             </td>
                             <td>
                                 <?php echo $datos->getFecha_peticionMai(); ?>
@@ -96,11 +96,19 @@ error_reporting(E_ALL);
                             </td>
                             <td>
                                 <?= html_entity_decode($datos->getConclusiones_peticionMai()); ?>
+                                <br>
+                                <a href="#" style="color: red; font-size: smaller;" onclick="toggleConclusiones('<?php echo $datos->getId_peticionMai(); ?>');">Ver todas las conclusiones</a>
                             </td>
                         </tr>
-
-                        <?php endforeach; ?>
-                      
+                        <tr class="conclusiones" id="conclusiones_<?php echo $datos->getId_peticionMai(); ?>" style="display: none;">
+                            <td colspan="9">
+                                <!-- Tabla adicional de conclusiones -->
+                                <table>
+                                    <!-- Contenido de la tabla de conclusiones adicional -->
+                                </table>
+                            </td>
+                        </tr>
+                    <?php endforeach; ?>
                     </tbody>
                 </table>
             </div>

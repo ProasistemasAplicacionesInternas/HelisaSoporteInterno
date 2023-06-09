@@ -100,9 +100,10 @@ class CrudPeticionesMai{
             LEFT JOIN productos_mai ON productos_mai.id_producto=peticiones_mai.producto_mai 
             LEFT JOIN estado ON estado.id_estado=peticiones_mai.estado_peticion 
             LEFT JOIN tipo_soportemai ON tipo_soportemai.id=peticiones_mai.tipo_soportemai
-            WHERE (estado_peticion=:estadoU OR estado_peticion=:estadoT) AND (tipo_soportemai=:requerimientos) ORDER BY id_peticionmai ASC');
+            WHERE (estado_peticion=:estadoU OR estado_peticion=:estadoT OR estado_peticion=:estadoE) AND (tipo_soportemai=:requerimientos) ORDER BY id_peticionmai ASC');
 				$consultar_peticion->bindValue('estadoU','1');
-                $consultar_peticion->bindValue('estadoT','3');	
+                $consultar_peticion->bindValue('estadoT','3');
+                $consultar_peticion->bindValue('estadoE','18');	
                 $consultar_peticion->bindValue('requerimientos', '2');
 				$consultar_peticion->execute();
 			foreach ($consultar_peticion->fetchAll() as $listado) {

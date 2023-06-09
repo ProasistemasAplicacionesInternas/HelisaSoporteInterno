@@ -136,6 +136,9 @@
                                     <option value="2" >Resuelto</option>
                                     <option value="3" >Pendiente</option>
                                     <option value="4" >Redireccionado</option>
+                                    <?php if ($name == "Requerimientos"): ?>
+                                        <option value="18">En Desarrollo</option>
+                                    <?php endif; ?>
                             </select>
                         </div>
                         <?php if($name=="Requerimientos"):?>
