@@ -72,7 +72,7 @@
 
     if(isset($_POST['btn-consultarTodas'])){
      
-        $usuario = $_POST['usuario_actual'];        
+        $usuario = $_POST['usuario_actual'];     
         $db=conectar::acceso();
         $listaConsulta=[];
         $seleccion=$db->prepare('SELECT  id_peticionmai,  DATE_FORMAT(fecha_peticion,"%d-%m-%Y %H:%i"),DATE_FORMAT(fecha_atencion,"%d-%m-%Y %H:%i"), usuario_creacion,productos_mai.nombre_producto, descripcion_peticion, usuario_atencion, conclusiones, imagen, estado.descripcion AS estado 
@@ -99,4 +99,22 @@
                 
         }
     }
+    
+    if (isset($_POST['id_peticionmai'])) {
+        $id_peticionmai = $_POST['id_peticionmai'];
+    
+        $db = conectar::acceso();
+        $conclusionesAnteriores = [];
+        $seleccion = $db->prepare('SELECT descripcion_observacion FROM observaciones_mai WHERE id_ticket=:id_peticionmai');
+        $seleccion->bindValue('id_peticionmai', $id_peticionmai);
+        $seleccion->execute();
+    
+        foreach ($seleccion->fetchAll() as $listado) {
+            $conclusionesAnteriores[] = $listado['descripcion_observacion'];
+        }
+    
+        echo json_encode($conclusionesAnteriores);
+    }
+    
+
 ?>
