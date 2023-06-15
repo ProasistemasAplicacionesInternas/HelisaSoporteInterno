@@ -67,7 +67,7 @@
                         <?php if ($_SESSION['id_roles'] == 1 || $_SESSION['id_roles'] == 9) {
                             echo "<th style='width:40px;'>Conclusiones</th>";
                         } ?>
-                        <th style="width:10px;">Imagen</th>
+                        <th style="width:10px;" colspan="2">Imagen</th>
 
                     </thead>
                     <tbody>
