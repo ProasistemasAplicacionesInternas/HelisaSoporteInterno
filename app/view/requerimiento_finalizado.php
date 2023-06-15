@@ -71,84 +71,86 @@
 
                     </thead>
                     <tbody>
-                        <?php foreach ($listaConsulta as $datos) : ?>
-                            <tr>
-                                <td>
-                                    <span id="id_peticion<?php echo $datos->getP_nropeticion(); ?>">
-                                        <?php echo $datos->getP_nropeticion(); ?>
-                                    </span>
-                                </td>
-                                <td>
-                                    <?php echo $datos->getP_fechapeticion(); ?>
-                                </td>
-                                <td>
-                                    <?php echo $datos->getP_usuario(); ?>
-                                </td>
-                                <td>
-                                    <?php echo $datos->getP_categoria(); ?>
-                                </td>
-                                <td>
-                                    <?php echo $datos->getP_fechaatendido(); ?>
-                                </td>
-                                <td>
-                                    <?php echo $datos->getP_usuarioatiende(); ?>
-                                </td>
-                                <td>
-                                    <?php
-                                    $Calificacion = $datos->getCalificacion();
-                                    if ($Calificacion == 1) {
-                                        echo "<a style='color:red;'>Pesimo</a>";
-                                    } else if ($Calificacion == 2) {
-                                        echo "<a style='color:#ff7600;'>Malo</a>";
-                                    } else if ($Calificacion == 3) {
-                                        echo "<a style='color:#0014ff;'>Regular</a>";
-                                    } else if ($Calificacion == 4) {
-                                        echo "<a style='color:#377fc9;'>Bueno</a>";
-                                    } else if ($Calificacion == 5) {
-                                        echo "<a style='color:#00d337;'>Excelente</a>";
-                                    } else if ($Calificacion == 0) {
-                                        echo "<a style='font-weight: bold;'>No Calificado</a>";
-                                    }
-                                    ?>
-                                </td>
-                                <td>
-                                    <?php if ($_SESSION['id_roles'] == 1 || $_SESSION['id_roles'] == 5 || $_SESSION['id_roles'] == 9) {
-                                        echo $datos->getP_estado();
-                                    } ?>
-                                </td>
-                                <td>
-                                    <span style="display: none;" id="p_descipcion<?php echo $datos->getP_nropeticion(); ?>"><?php echo $datos->getP_descripcion() ?></span>
-                                    <span style="display: none;" id="req_nombre<?php echo $datos->getP_nropeticion(); ?>"><?php echo $datos->getReq_nombre() ?></span>
-                                    <span style="display: none;" id="req_justificacion<?php echo $datos->getP_nropeticion(); ?>"><?php echo $datos->getReq_justificacion() ?></span>
-
-                                    <button class="btn btn-outline-primary verDatosfinalizado" data-toggle="modal" data-target="#verDatosfinalizado" data-backdrop="static" data-keyboard="false" id="btn-verInfo" name="btn-verInfo" value="<?php echo $datos->getP_nropeticion(); ?>"><span>Ver Info</span></button>
-                                </td>
-                                <?php if ($_SESSION['id_roles'] == 5 || $_SESSION['id_roles'] == 7) { ?>
+                    <?php if (isset($listaConsulta) && !empty($listaConsulta)) : ?>
+                             <?php foreach ($listaConsulta as $datos) : ?>
+                                <tr>
                                     <td>
-                                        <button class="btn btn-outline-primary verConclusion" data-toggle="modal" data-target="#verConclusion" data-backdrop="static" data-keyboard="false" id="btn-verConclusion" name="btn-verConclusion" onclick="verConclusiones(<?= $datos->getP_nropeticion() ?>)"><span>Ver Conclusión</span></button>
+                                        <span id="id_peticion<?php echo $datos->getP_nropeticion(); ?>">
+                                            <?php echo $datos->getP_nropeticion(); ?>
+                                        </span>
                                     </td>
-                                <?php } ?>
+                                    <td>
+                                        <?php echo $datos->getP_fechapeticion(); ?>
+                                    </td>
+                                    <td>
+                                        <?php echo $datos->getP_usuario(); ?>
+                                    </td>
+                                    <td>
+                                        <?php echo $datos->getP_categoria(); ?>
+                                    </td>
+                                    <td>
+                                        <?php echo $datos->getP_fechaatendido(); ?>
+                                    </td>
+                                    <td>
+                                        <?php echo $datos->getP_usuarioatiende(); ?>
+                                    </td>
+                                    <td>
+                                        <?php
+                                        $Calificacion = $datos->getCalificacion();
+                                        if ($Calificacion == 1) {
+                                            echo "<a style='color:red;'>Pesimo</a>";
+                                        } else if ($Calificacion == 2) {
+                                            echo "<a style='color:#ff7600;'>Malo</a>";
+                                        } else if ($Calificacion == 3) {
+                                            echo "<a style='color:#0014ff;'>Regular</a>";
+                                        } else if ($Calificacion == 4) {
+                                            echo "<a style='color:#377fc9;'>Bueno</a>";
+                                        } else if ($Calificacion == 5) {
+                                            echo "<a style='color:#00d337;'>Excelente</a>";
+                                        } else if ($Calificacion == 0) {
+                                            echo "<a style='font-weight: bold;'>No Calificado</a>";
+                                        }
+                                        ?>
+                                    </td>
+                                    <td>
+                                        <?php if ($_SESSION['id_roles'] == 1 || $_SESSION['id_roles'] == 5 || $_SESSION['id_roles'] == 9) {
+                                            echo $datos->getP_estado();
+                                        } ?>
+                                    </td>
+                                    <td>
+                                        <span style="display: none;" id="p_descipcion<?php echo $datos->getP_nropeticion(); ?>"><?php echo $datos->getP_descripcion() ?></span>
+                                        <span style="display: none;" id="req_nombre<?php echo $datos->getP_nropeticion(); ?>"><?php echo $datos->getReq_nombre() ?></span>
+                                        <span style="display: none;" id="req_justificacion<?php echo $datos->getP_nropeticion(); ?>"><?php echo $datos->getReq_justificacion() ?></span>
 
-                                <td>
-                                    <?php if ($_SESSION['id_roles'] == 1 || $_SESSION['id_roles'] == 9) {
-                                        echo $datos->getP_conclusiones();
-                                    } ?>
-                                </td>
-                                <!-- <td>
-                                <button type="button" class="btn btn-info crearComentario" data-toggle="modal" data-target="#crearComentario" data-backdrop="static" data-keyboard="false" id="btn-crearComentario" name="btn-crearComentario" value=" -->
-                                <!-- "><span>Crear</span></button>    
-                            </td> -->
-                                <td>
-                                    <?php if ($datos->getP_cargarimagen() != null && $datos->getP_cargarimagen() != '2') : ?>
+                                        <button class="btn btn-outline-primary verDatosfinalizado" data-toggle="modal" data-target="#verDatosfinalizado" data-backdrop="static" data-keyboard="false" id="btn-verInfo" name="btn-verInfo" value="<?php echo $datos->getP_nropeticion(); ?>"><span>Ver Info</span></button>
+                                    </td>
+                                    <?php if ($_SESSION['id_roles'] == 5 || $_SESSION['id_roles'] == 7) { ?>
+                                        <td>
+                                            <button class="btn btn-outline-primary verConclusion" data-toggle="modal" data-target="#verConclusion" data-backdrop="static" data-keyboard="false" id="btn-verConclusion" name="btn-verConclusion" onclick="verConclusiones(<?= $datos->getP_nropeticion() ?>)"><span>Ver Conclusión</span></button>
+                                        </td>
+                                    <?php } ?>
 
-                                        <a href="../../cartas/<?= $datos->getP_cargarimagen() ?>" target="_blank" id="imagen" name="imagen">
-                                            <button class="far fa-images" id="imagenPetFinal"></button>
-                                        </a>
+                                    <td>
+                                        <?php if ($_SESSION['id_roles'] == 1 || $_SESSION['id_roles'] == 9) {
+                                            echo $datos->getP_conclusiones();
+                                        } ?>
+                                    </td>
+                                    <!-- <td>
+                                    <button type="button" class="btn btn-info crearComentario" data-toggle="modal" data-target="#crearComentario" data-backdrop="static" data-keyboard="false" id="btn-crearComentario" name="btn-crearComentario" value=" -->
+                                    <!-- "><span>Crear</span></button>    
+                                </td> -->
+                                    <td>
+                                        <?php if ($datos->getP_cargarimagen() != null && $datos->getP_cargarimagen() != '2') : ?>
+
+                                            <a href="../../cartas/<?= $datos->getP_cargarimagen() ?>" target="_blank" id="imagen" name="imagen">
+                                                <button class="far fa-images" id="imagenPetFinal"></button>
+                                            </a>
                                     <?php endif; ?>
                                 </td>
                             </tr>
 
                         <?php endforeach; ?>
+                    <?php endif; ?>
 
                     </tbody>
                 </table>
