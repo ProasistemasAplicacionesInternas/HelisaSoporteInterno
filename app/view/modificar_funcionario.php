@@ -74,10 +74,10 @@
 <div class="popup" data-popup="popup-1">
   <div class="popup-inner">
        <div class="modal-header">        
-         <h4 class="" style="text-align: left;">Por seguidad, inicia sesi�n de nuevo</h4>
+         <h4 class="" style="text-align: left;">Por seguidad, inicia sesi&oacuten de nuevo</h4>
        </div>
        <div class="modal-body">
-           <form class="mt-3" id="valida" name="valida">
+        <form class="mt-3" id="valida" name="valida">
 
        <input type="text" class="form-control" placeholder="Usuario" id="usuarios" name="usuarios" required autofocus autocomplete="off" required>
        <br/>

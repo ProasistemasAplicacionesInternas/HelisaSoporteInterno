@@ -257,7 +257,7 @@ class CrudTraslados{
 			muebles de oficina.<br>
 			- Siéntese de forma correcta en las sillas giratorias, no coloque los pies sobre la base o las rodachinas y mucho menos en el asiento; los zapatos, en especial las suelas alojan compuestos que pueden ensuciar las sillas o en el caso de las mujeres (tacones) pueden dañar el tapizado o la estructura.<br><br>
 			<strong><p></p>En caso de presentar alguna novedad referente al activo que acaba de aceptar por favor genere el reporte de forma INMEDIATA de la siguiente forma:<br>
-			Activos tecnológicos: Genere un ticket bajo la categoría "Soporte sobre equipos tecnológicos" seleccionado el número del activo sobre el cual tiene la novedad e indique la observación relacionada con el activo recibido.
+			Activos tecnológicos: Genere un ticket bajo la categoría "Soporte sobre equipos tecnológicos" seleccionado el número del activo sobre el cual tiene la novedad e indique la observación relacionada con el activo recibido.<br>
 			Activos Administrativos. Envié correo notificando la novedad sobre el activo asignado a la dirección de correo administracion@helisa.com.</p></strong><br><br>
 			El empleado ha recibido instrucciones precisas para el correcto uso de los activos';
             $body = utf8_decode($cuerpo);

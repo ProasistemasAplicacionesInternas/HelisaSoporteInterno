@@ -20,7 +20,7 @@ $crud = new DatosUsuario();
     if (isset($_POST['modificaAcceso']) && $_POST['modificaAcceso'] == 1) {
         $validar->setNombre(htmlentities(addslashes($_POST['usuarios'])));
         $validar->setClave(htmlentities(addslashes($_POST['claves'])));
-        $verifica->validacionC($validar); 
+        $verifica->validar($validar); 
     }
 
     if(isset($_POST['buscar_rol']) && $_POST['buscar_rol'] == 1){

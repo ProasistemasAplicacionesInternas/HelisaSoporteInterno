@@ -20,18 +20,16 @@ $(function() {
         	var infoAcceso = "usuarios=" + $('#usuarios').val() +       
         '&claves=' + $('#claves').val() +       
         '&modificaAcceso=1' ;
-          console.log(infoAcceso);
             $.ajax({
                 type: 'POST',
                 url: '../../app/controller/control_usuario.php',
                 data: infoAcceso
 
             }).done(function (data) {
-
                 if (data == 1) {
 
                         $.smkAlert({
-                        text: 'Inicio de sesión correcto',
+                        text: 'Inicio de sesi&oacuten correcto',
                         type: 'success'
                     });
 		$('[data-popup').fadeOut(350);
@@ -45,7 +43,7 @@ $(function() {
                 }  else {
                 	
                     $.smkAlert({
-                        text: 'Usuario o contraseña incorrectos',
+                        text: 'Usuario o contrase&ntildea incorrectos',
                         type: 'danger'
                     });
                 }
