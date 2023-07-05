@@ -49,25 +49,23 @@
             <div class="col">
                 <table class="table table-responsive table-striped" id="tabla" style="text-align:center;">
                     <thead style="background-color: #96c7e9;">
-                        <th style="width:70px;">Nro Ticket</th>
-                        <th style="width:80px;">Fecha Solicitud</th>
-                        <th style="width:40px;">Usuario Solicitud</th>
-                        <th style="width:20px;">Categoria</th>
-                        <th style="width:20px;">Gestionado</th>
-                        <th style="width:20px;">Sprint</th>
-                        <th style="width:80px;">Fecha Atendido</th>
-                        <th style="width:40px;">Usuario Atendio</th>
-                        <th style="width:40px;">Calificación</th>
+                        <th style="width:8%;">Nro Ticket</th>
+                        <th style="width:8%;">Fecha Solicitud</th>
+                        <th style="width:8%;">Usuario Solicitud</th>
+                        <th style="width:8%;">Categoria</th>
+                        <th style="width:8%;">Fecha Atendido</th>
+                        <th style="width:8%;">Usuario Atendio</th>
+                        <th style="width:8%;">Calificación</th>
                         <?php if ($_SESSION['id_roles'] == 1 || $_SESSION['id_roles'] == 5 || $_SESSION['id_roles'] == 9) {
-                            echo "<th style='width:40px;'>Estado</th>";
+                            echo "<th style='width:8%;'>Estado</th>";
                         } ?>
                         <th style="width:100px;">Mas</th>
                         <?php if ($_SESSION['id_roles'] == 5 || $_SESSION['id_roles'] == 7) {
-                            echo "<th style='width:100px;'>Ver Conclusiones</th>";
+                            echo "<th style='width:8%;'>Ver Conclusiones</th>";
                         }
                         ?>
                         <?php if ($_SESSION['id_roles'] == 1 || $_SESSION['id_roles'] == 9) {
-                            echo "<th style='width:40px;'>Conclusiones</th>";
+                            echo "<th style='width:8%;'>Conclusiones</th>";
                         } ?>
                         <th style="width:10px;">Imagen</th>
 
@@ -88,12 +86,6 @@
                                 </td>
                                 <td>
                                     <?php echo $datos->getP_categoria(); ?>
-                                </td>
-                                <td>
-                                    <?php echo $datos->getGestion(); ?>
-                                </td>
-                                <td>
-                                    <?php echo $datos->getSprint(); ?>
                                 </td>
                                 <td>
                                     <?php echo $datos->getP_fechaatendido(); ?>
@@ -136,16 +128,11 @@
                                         <button class="btn btn-outline-primary verConclusion" data-toggle="modal" data-target="#verConclusion" data-backdrop="static" data-keyboard="false" id="btn-verConclusion" name="btn-verConclusion" onclick="verConclusiones(<?= $datos->getP_nropeticion() ?>)"><span>Ver Conclusión</span></button>
                                     </td>
                                 <?php } ?>
-
-                                <td>
-                                    <?php if ($_SESSION['id_roles'] == 1 || $_SESSION['id_roles'] == 9) {
-                                        echo $datos->getP_conclusiones();
-                                    } ?>
-                                </td>
-                                <!-- <td>
-                                <button type="button" class="btn btn-info crearComentario" data-toggle="modal" data-target="#crearComentario" data-backdrop="static" data-keyboard="false" id="btn-crearComentario" name="btn-crearComentario" value=" -->
-                                <!-- "><span>Crear</span></button>    
-                            </td> -->
+                                <?php if ($_SESSION['id_roles'] == 1 || $_SESSION['id_roles'] == 9) { ?>
+                                    <td>
+                                        <?php echo $datos->getP_conclusiones(); ?>
+                                    </td>
+                                <?php } ?>
                                 <td>
                                     <?php if ($datos->getP_cargarimagen() != null && $datos->getP_cargarimagen() != '2') : ?>
 

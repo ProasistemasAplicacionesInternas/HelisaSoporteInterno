@@ -53,6 +53,8 @@
                         <th style="width:80px;">Fecha Solicitud</th>
                         <th style="width:40px;">Usuario Solicitud</th>
                         <th style="width:20px;">Categoria</th>
+                        <th style="width:20px;">Gestionado</th>
+                        <th style="width:20px;">Sprint</th>
                         <th style="width:80px;">Fecha Atendido</th>
                         <th style="width:40px;">Usuario Atendio</th>
                         <th style="width:40px;">Calificación</th>
@@ -87,6 +89,12 @@
                                     </td>
                                     <td>
                                         <?php echo $datos->getP_categoria(); ?>
+                                    </td>
+                                    <td>
+                                        <?php echo $datos->getGestion(); ?>
+                                    </td>
+                                    <td>
+                                        <?php echo $datos->getSprint(); ?>
                                     </td>
                                     <td>
                                         <?php echo $datos->getP_fechaatendido(); ?>
