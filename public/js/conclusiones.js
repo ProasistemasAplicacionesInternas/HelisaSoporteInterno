@@ -19,7 +19,7 @@ function toggleConclusiones(id) {
                     var conclusionesDiv = document.getElementById('conclusiones_' + id);
                     conclusionesDiv.innerHTML = ''; // Limpiar el contenido existente
 
-                    for (var i = 0; i < conclusionesAnteriores.length - 1; i++) {
+                    for (var i = 0; i < conclusionesAnteriores.length; i++) {
                         var conclusion = conclusionesAnteriores[i];
                         var paragraph = document.createElement('p');
                         paragraph.textContent = conclusion;

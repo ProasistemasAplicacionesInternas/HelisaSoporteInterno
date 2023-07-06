@@ -452,10 +452,11 @@ class CrudPeticionesMai{
     public function consultarPeticionesMaixFuncionario(){
 			$db=conectar::acceso();
 			$lista_peticiones=[];
-			$consultar_peticion=$db->prepare('SELECT id_peticionmai, productos_mai.nombre_producto AS producto_mai, fecha_peticion, descripcion_peticion, estado.descripcion AS estado_peticion, fecha_atencion, usuario_atencion, conclusiones, revisado 
+			$consultar_peticion=$db->prepare('SELECT id_peticionmai, productos_mai.nombre_producto AS producto_mai, fecha_peticion, descripcion_peticion, estado.descripcion AS estado_peticion, fecha_atencion, usuario_atencion, conclusiones, revisado, tipo_soportemai, tipo_soportemai.nombre, tipo_soportemai.id 
             FROM peticiones_mai 
             LEFT JOIN productos_mai ON productos_mai.id_producto=peticiones_mai.producto_mai 
             LEFT JOIN estado ON estado.id_estado=peticiones_mai.estado_peticion 
+            LEFT JOIN tipo_soportemai ON tipo_soportemai.id=peticiones_mai.tipo_soportemai
             WHERE usuario_creacion=:funcionario AND revisado=:noRevisado');
             $consultar_peticion->bindValue('noRevisado',1);
 			$consultar_peticion->bindValue('funcionario',$_SESSION['usuario']);
@@ -471,6 +472,7 @@ class CrudPeticionesMai{
 				$consulta->setUsuario_atencionMai($listado['usuario_atencion']);	
 				$consulta->setConclusiones_peticionMai($listado['conclusiones']);	
 				$consulta->setMarca_revisado($listado['revisado']);
+                $consulta->setName($listado['nombre']);
 				$lista_peticiones[]=$consulta;	
 			}
 			return $lista_peticiones;

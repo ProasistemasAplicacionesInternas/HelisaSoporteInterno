@@ -101,7 +101,30 @@
         $db=conectar::acceso();
             $areas=[];
             $cadena = "";
-            $seleccion=$db->prepare('SELECT id_observacion,id_ticket, DATE_FORMAT(fecha_observacion,"%d-%m-%Y ") as fecha,usuario_creacion,descripcion_observacion, estado_observacion FROM observaciones_mai WHERE id_ticket=:id_ticket AND (estado_observacion=2 OR estado_observacion=3)');
+            $seleccion=$db->prepare('SELECT id_observacion,id_ticket, DATE_FORMAT(fecha_observacion,"%d-%m-%Y ") as fecha,
+            usuario_creacion,descripcion_observacion, estado_observacion 
+            FROM observaciones_mai 
+            WHERE id_ticket=:id_ticket AND (estado_observacion=2 OR estado_observacion=3)');
+            $seleccion->bindValue('id_ticket',$_POST['peticion1']);
+            $seleccion->execute();
+            
+            while ($listado_areas=$seleccion->fetch(PDO::FETCH_ASSOC)) {
+                $areas[]=$listado_areas;
+                $cadena .=  $listado_areas['id_observacion'] . "/-/" . $listado_areas['id_ticket'] . "/-/" . $listado_areas['fecha'] . "/-/" . 
+                $listado_areas['usuario_creacion'] . "/-/" . $listado_areas["descripcion_observacion"] . "/,/";
+            }
+            echo $cadena;
+    }
+
+    if(isset($_POST['verConclusionFuncionarios'])){
+
+        $db=conectar::acceso();
+            $areas=[];
+            $cadena = "";
+            $seleccion=$db->prepare('SELECT id_observacion,id_ticket, DATE_FORMAT(fecha_observacion,"%d-%m-%Y ") as fecha,
+            usuario_creacion,descripcion_observacion, estado_observacion 
+            FROM observaciones_mai 
+            WHERE id_ticket=:id_ticket ');
             $seleccion->bindValue('id_ticket',$_POST['peticion1']);
             $seleccion->execute();
             

@@ -143,10 +143,6 @@
                                             echo $datos->getP_conclusiones();
                                         } ?>
                                     </td>
-                                    <!-- <td>
-                                    <button type="button" class="btn btn-info crearComentario" data-toggle="modal" data-target="#crearComentario" data-backdrop="static" data-keyboard="false" id="btn-crearComentario" name="btn-crearComentario" value=" -->
-                                    <!-- "><span>Crear</span></button>    
-                                </td> -->
                                     <td>
                                         <?php if ($datos->getP_cargarimagen() != null && $datos->getP_cargarimagen() != '2') : ?>
 

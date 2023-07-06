@@ -60,6 +60,7 @@ error_reporting(E_ALL);
                         <th style="width:40px;">Usuario Solicitud</th>
                         <th style="width:40px;">Categoria</th>
                         <th style="width:40px;">Descripcion</th>
+                        <th style="width:30px;">Tipo de Solicitud</th>                           
                         <th style="width:40px;">Estado</th>
                         <th style="width:40px;">Fecha Atendido</th>
                         <th style="width:40px;">Usuario Atendio</th>
@@ -87,6 +88,9 @@ error_reporting(E_ALL);
                                     <?php echo $datos->getDescripcion_peticionMai(); ?>
                                 </td>
                                 <td>
+                                    <?php echo $datos->getName(); ?>
+                                </td>
+                                <td>
                                     <?php echo $datos->getEstado_peticionMai(); ?>
                                 </td>
                                 <td>
@@ -96,12 +100,7 @@ error_reporting(E_ALL);
                                     <?php echo $datos->getUsuario_atencionMai(); ?>
                                 </td>
                                 <td>
-                                    <?php echo nl2br(htmlspecialchars($datos->getConclusiones_peticionMai())); ?>
-                                    <br>
-                                    <a href="#" style="color: red; font-size: smaller;" onclick="toggleConclusiones('<?php echo $datos->getId_peticionMai(); ?>');">Ver todas las conclusiones</a>
-                                    <div id="conclusiones_<?php echo $datos->getId_peticionMai(); ?>" style="display: none;">
-                                        <!-- Aquí no se mostrará en una tabla, sino en formato de texto -->
-                                    </div>
+                                <button class="btn btn-outline-primary verConclusion" data-toggle="modal" data-target="#verConclusion" data-backdrop="static" data-keyboard="false" id="btn-verConclusion" name="btn-verConclusion" onclick="verConclusiones(<?= $datos->getId_peticionMai() ?>)"><span>Ver Conclusión</span></button>                                    
                                 </td>
                             </tr>
                         <?php endif; ?>
@@ -113,6 +112,8 @@ error_reporting(E_ALL);
     </div>
 
     <?php require('crear_comentarios.php') ?>
+    <?php require('verConclusiones.php') ?>
+
     <script src="../../public/js/jquery-3.3.1.min.js"></script>
     <script src="../../public/js/datatables.min.js"></script>
     <script src="../../public/js/dataTables.buttons.min.js"></script>
@@ -133,5 +134,7 @@ error_reporting(E_ALL);
     <script src="../../public/js/crear_comentario.js"></script>
     <script src="../../public/js/bloqueoTeclas.js"></script>
     <script src="../../public/js/conclusiones.js"></script>
+    <script src="../../public/js/verConclusionFuncionarios.js"></script>
+
 </body>
 </html>
