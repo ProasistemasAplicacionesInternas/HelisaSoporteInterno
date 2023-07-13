@@ -49,25 +49,26 @@
             <div class="col">
                 <table class="table table-responsive table-striped" id="tabla" style="text-align:center;">
                     <thead style="background-color: #96c7e9;">
-                        <th style="width:70px;">Nro Ticket</th>
-                        <th style="width:80px;">Fecha Solicitud</th>
-                        <th style="width:40px;">Usuario Solicitud</th>
-                        <th style="width:20px;">Categoria</th>
-                        <th style="width:20px;">Gestionado</th>
-                        <th style="width:20px;">Sprint</th>
-                        <th style="width:80px;">Fecha Atendido</th>
-                        <th style="width:40px;">Usuario Atendio</th>
-                        <th style="width:40px;">Calificación</th>
+                        <th style="width:60px;">Nro Ticket</th>
+                        <th style="width:75px;">Fecha Solicitud</th>
+                        <th style="width:35px;">Usuario Solicitud</th>
+                        <th style="width:25px;">Tipo de Solicitud</th>                           
+                        <th style="width:15px;">Categoria</th>
+                        <th style="width:15px;">Gestionado</th>
+                        <th style="width:15px;">Sprint</th>
+                        <th style="width:75px;">Fecha Atendido</th>
+                        <th style="width:35px;">Usuario Atendio</th>
+                        <th style="width:35px;">Calificación</th>
                         <?php if ($_SESSION['id_roles'] == 1 || $_SESSION['id_roles'] == 5 || $_SESSION['id_roles'] == 9) {
-                            echo "<th style='width:40px;'>Estado</th>";
+                            echo "<th style='width:35px;'>Estado</th>";
                         } ?>
-                        <th style="width:100px;">Mas</th>
+                        <th style="width:80px;">Mas</th>
                         <?php if ($_SESSION['id_roles'] == 5 || $_SESSION['id_roles'] == 7) {
-                            echo "<th style='width:100px;'>Ver Conclusiones</th>";
+                            echo "<th style='width:80px;'>Ver Conclusiones</th>";
                         }
                         ?>
                         <?php if ($_SESSION['id_roles'] == 1 || $_SESSION['id_roles'] == 9) {
-                            echo "<th style='width:40px;'>Conclusiones</th>";
+                            echo "<th style='width:35px;'>Conclusiones</th>";
                         } ?>
                         <th style="width:10px;" colspan="2">Imagen</th>
 
@@ -86,6 +87,9 @@
                                     </td>
                                     <td>
                                         <?php echo $datos->getP_usuario(); ?>
+                                    </td>
+                                    <td>
+                                        <?php echo $datos->getName(); ?>
                                     </td>
                                     <td>
                                         <?php echo $datos->getP_categoria(); ?>

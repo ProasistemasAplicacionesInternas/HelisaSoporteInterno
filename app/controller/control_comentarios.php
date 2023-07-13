@@ -104,7 +104,7 @@
             $seleccion=$db->prepare('SELECT id_observacion,id_ticket, DATE_FORMAT(fecha_observacion,"%d-%m-%Y ") as fecha,
             usuario_creacion,descripcion_observacion, estado_observacion 
             FROM observaciones_mai 
-            WHERE id_ticket=:id_ticket AND (estado_observacion=2 OR estado_observacion=3)');
+            WHERE id_ticket=:id_ticket ');
             $seleccion->bindValue('id_ticket',$_POST['peticion1']);
             $seleccion->execute();
             

@@ -50,10 +50,13 @@
                 $db=conectar::acceso();
                 $listaConsulta=[];
 
-                $seleccion=$db->prepare('SELECT  id_peticionmai, estado.descripcion AS estado, DATE_FORMAT(fecha_peticion,"%d-%m-%Y %H:%i"),DATE_FORMAT(fecha_atencion,"%d-%m-%Y %H:%i"), usuario_creacion, productos_mai.nombre_producto, peticiones_mai.descripcion_peticion, usuario_atencion, conclusiones,nivel_encuesta,imagen, req_nombre, req_justificacion, sprint, gestion  FROM peticiones_mai 
+                $seleccion=$db->prepare('SELECT id_peticionmai, estado.descripcion AS estado, DATE_FORMAT(fecha_peticion,"%d-%m-%Y %H:%i"),DATE_FORMAT(fecha_atencion,"%d-%m-%Y %H:%i"), usuario_creacion, productos_mai.nombre_producto, peticiones_mai.descripcion_peticion, usuario_atencion, conclusiones,nivel_encuesta,imagen, req_nombre, req_justificacion, sprint, gestion, tipo_soportemai, tipo_soportemai.nombre, tipo_soportemai.id  FROM peticiones_mai 
                 LEFT JOIN productos_mai ON id_producto = producto_mai 
                 LEFT JOIN estado ON estado.id_estado=peticiones_mai.estado_peticion
-                WHERE fecha_peticion BETWEEN :fechaInicial AND :fechaFinal  AND (estado_peticion=:estadoN OR estado_peticion=:estadoD OR estado_peticion=:estadoP OR estado_peticion=:estadoC OR estado_peticion=:estadoS)');
+                LEFT JOIN tipo_soportemai on tipo_soportemai.id = peticiones_mai.tipo_soportemai
+                WHERE fecha_peticion BETWEEN :fechaInicial AND :fechaFinal  
+                AND (estado_peticion=:estadoN OR estado_peticion=:estadoD 
+                OR estado_peticion=:estadoP OR estado_peticion=:estadoC OR estado_peticion=:estadoS)');
                 $seleccion->bindValue('estadoN','1');
                 $seleccion->bindValue('estadoD','2');
                 $seleccion->bindValue('estadoP','3');
@@ -80,6 +83,7 @@
                     $consulta->setReq_justificacion($listado['req_justificacion']);
                     $consulta->setSprint($listado['sprint']);
                     $consulta->setGestion(($listado['gestion']));
+                    $consulta->setName($listado['nombre']); 
                     
                     $listaConsulta[]=$consulta;
                     
@@ -127,9 +131,11 @@
             $db=conectar::acceso();
             $listaConsulta=[];
 
-            $seleccion=$db->prepare('SELECT  id_peticionmai, estado.descripcion AS estado, DATE_FORMAT(fecha_peticion,"%d-%m-%Y %H:%i"),DATE_FORMAT(fecha_atencion,"%d-%m-%Y %H:%i"), usuario_creacion, productos_mai.nombre_producto, descripcion_peticion, usuario_atencion, conclusiones,nivel_encuesta,imagen, req_nombre, req_justificacion, sprint, gestion FROM peticiones_mai 
+            $seleccion=$db->prepare('SELECT  id_peticionmai, estado.descripcion AS estado, DATE_FORMAT(fecha_peticion,"%d-%m-%Y %H:%i"),DATE_FORMAT(fecha_atencion,"%d-%m-%Y %H:%i"), usuario_creacion, productos_mai.nombre_producto, descripcion_peticion, usuario_atencion, conclusiones,nivel_encuesta,imagen, req_nombre, req_justificacion, sprint, gestion, tipo_soportemai, tipo_soportemai.nombre, tipo_soportemai.id  FROM peticiones_mai 
             LEFT JOIN productos_mai ON id_producto = producto_mai 
-            LEFT JOIN estado ON estado.id_estado=peticiones_mai.estado_peticion WHERE  id_peticionmai=:numero_peticion  AND (estado_peticion=:estadoN OR estado_peticion=:estadoD OR estado_peticion=:estadoP OR estado_peticion=:estadoC OR estado_peticion=:estadoN OR estado_peticion=:estadoS)');
+            LEFT JOIN estado ON estado.id_estado=peticiones_mai.estado_peticion
+            LEFT JOIN tipo_soportemai on tipo_soportemai.id = peticiones_mai.tipo_soportemai
+            WHERE  id_peticionmai=:numero_peticion  AND (estado_peticion=:estadoN OR estado_peticion=:estadoD OR estado_peticion=:estadoP OR estado_peticion=:estadoC OR estado_peticion=:estadoN OR estado_peticion=:estadoS)');
             $seleccion->bindValue('estadoN','1');
             $seleccion->bindValue('estadoD','2');
             $seleccion->bindValue('estadoP','3');
@@ -155,6 +161,7 @@
                 $consulta->setReq_justificacion($listado['req_justificacion']);
                 $consulta->setSprint($listado['sprint']);
                 $consulta->setGestion(($listado['gestion']));
+                $consulta->setName($listado['nombre']); 
 
                 $listaConsulta[]=$consulta;    
                 
@@ -169,9 +176,10 @@
             $db=conectar::acceso();
             $listaConsulta=[];
 
-            $seleccion=$db->prepare('SELECT  id_peticionmai, estado.descripcion AS estado, DATE_FORMAT(fecha_peticion,"%d-%m-%Y %H:%i"),DATE_FORMAT(fecha_atencion,"%d-%m-%Y %H:%i"), usuario_creacion, productos_mai.nombre_producto, descripcion_peticion, usuario_atencion, conclusiones,nivel_encuesta,imagen, req_nombre , req_justificacion, sprint, gestion 
+            $seleccion=$db->prepare('SELECT  id_peticionmai, estado.descripcion AS estado, DATE_FORMAT(fecha_peticion,"%d-%m-%Y %H:%i"),DATE_FORMAT(fecha_atencion,"%d-%m-%Y %H:%i"), usuario_creacion, productos_mai.nombre_producto, descripcion_peticion, usuario_atencion, conclusiones,nivel_encuesta,imagen, req_nombre , req_justificacion, sprint, gestion, tipo_soportemai, tipo_soportemai.nombre, tipo_soportemai.id 
             FROM peticiones_mai LEFT JOIN productos_mai ON id_producto = producto_mai 
             LEFT JOIN estado ON estado.id_estado=peticiones_mai.estado_peticion
+            LEFT JOIN tipo_soportemai on tipo_soportemai.id = peticiones_mai.tipo_soportemai
             WHERE  usuario_atencion=:usuario AND (estado_peticion=:estadoN OR estado_peticion=:estadoD OR estado_peticion=:estadoP OR estado_peticion=:estadoC OR estado_peticion=:estadoS)');
             $seleccion->bindValue('estadoN','1');
             $seleccion->bindValue('estadoD','2');
@@ -198,6 +206,7 @@
                 $consulta->setReq_justificacion($listado['req_justificacion']);
                 $consulta->setSprint($listado['sprint']);
                 $consulta->setGestion(($listado['gestion']));
+                $consulta->setName($listado['nombre']); 
                 $listaConsulta[]=$consulta;    
                 
             }

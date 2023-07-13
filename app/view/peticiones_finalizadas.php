@@ -52,6 +52,7 @@
                         <th style="width:8%;">Nro Ticket</th>
                         <th style="width:8%;">Fecha Solicitud</th>
                         <th style="width:8%;">Usuario Solicitud</th>
+                        <th style="width:25px;">Tipo de Solicitud</th>                           
                         <th style="width:8%;">Categoria</th>
                         <th style="width:8%;">Fecha Atendido</th>
                         <th style="width:8%;">Usuario Atendio</th>
@@ -83,6 +84,9 @@
                                 </td>
                                 <td>
                                     <?php echo $datos->getP_usuario(); ?>
+                                </td>
+                                <td>
+                                    <?php echo $datos->getName(); ?>
                                 </td>
                                 <td>
                                     <?php echo $datos->getP_categoria(); ?>
