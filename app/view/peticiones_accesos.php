@@ -40,7 +40,6 @@
                 </div>
                 <div class="col-1 mt-4 mb-2" title="Solicitar accesos.">
                     <a href="app/view/crear_peticion_acceso.php"><img src="public/img/nuevo.png" alt=""></a>
-
                 </div>
                 <div class="col">
                         <table class="table table-striped tablesorter lenguajeTabla display" id="">

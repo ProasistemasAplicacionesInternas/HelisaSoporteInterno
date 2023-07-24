@@ -91,11 +91,9 @@
                                 </form>
                             </td>
                             <td>
-                            <button type="button" class="btn btn-warning btn-sm cambio-clave" data-toggle="modal" data-target="#cambio-clave" id="cambioClavex" name="cambioClavex" onclick="identidadF(<?php echo $datos->getF_identificacion(); ?>);" value="<?php echo $datos->getF_identificacion(); ?>"><span>Cambio De Contraseña</span>
-                        </button>
-                                
-                    </td>
-
+                                <button type="button" class="btn btn-warning btn-sm cambio-clave" data-toggle="modal" data-target="#cambio-clave" id="cambioClavex" name="cambioClavex" onclick="identidadF(<?php echo $datos->getF_identificacion(); ?>);" value="<?php echo $datos->getF_identificacion(); ?>"><span>Cambio De Contraseña</span>
+                                </button>
+                            </td>
                         </tr>
                     <?php
                     endforeach;

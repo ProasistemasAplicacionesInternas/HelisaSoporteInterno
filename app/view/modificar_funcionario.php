@@ -74,10 +74,10 @@
 <div class="popup" data-popup="popup-1">
   <div class="popup-inner">
        <div class="modal-header">        
-         <h4 class="" style="text-align: left;">Por seguidad, inicia sesi�n de nuevo</h4>
+         <h4 class="" style="text-align: left;">Por seguidad, inicia sesi&oacuten de nuevo</h4>
        </div>
        <div class="modal-body">
-           <form class="mt-3" id="valida" name="valida">
+        <form class="mt-3" id="valida" name="valida">
 
        <input type="text" class="form-control" placeholder="Usuario" id="usuarios" name="usuarios" required autofocus autocomplete="off" required>
        <br/>
@@ -404,9 +404,12 @@
                             </div>
                         </div>
                     </div>
+                    
+
                     <div class="row">
-                        <div class="col-4"> <button type="button" class="mt-2 btn btn-success" id="btn-guardarModif" name="btn-guardarModif" >Guardar</button></div>
-                        <div class="col-3" > <a id="cerrar_modificacion" class="mt-2 btn btn-secondary">Cancelar</a> </div>
+                        <div class="col-4"> <button type="button" class="mt-5 btn btn-success" id="btn-guardarModif" name="btn-guardarModif" style="height:33.5px; width=auto;" >Guardar</button></div>
+                        <div class="col-3" > <a id="cerrar_modificacion" class="mt-5 btn btn-secondary" style="height:33.5px; width=auto;">Cancelar</a> </div>
+                        
                     </div>
                 </form>
                 <div class="row">

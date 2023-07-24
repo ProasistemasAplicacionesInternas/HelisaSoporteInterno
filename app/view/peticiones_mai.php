@@ -37,6 +37,7 @@
                             <th style="width:30px;">Producto</th>
                             <th style="width:30px;">Fecha Solicitud</th>
                             <th style="width:30px;">Descripci&oacute;n</th>
+                            <th style="width:30px;">Tipo de Solicitud</th>                           
                             <th style="width:30px;">Estado Solicitud</th>
                             <th style="width:30px;">Fecha Atendido</th>
                             <th style="width:30px;">Usuario Atiende</th>
@@ -53,6 +54,8 @@
                                 <?php echo $datos->getFecha_peticionMai() ?></td>
                             <td>
                                 <?php $descripcion = $datos->getDescripcion_peticionMai(); echo htmlspecialchars_decode($descripcion, ENT_NOQUOTES); ?></td> 
+                            <td>
+                                <?php echo $datos->getName() ?>
                             <td>
                                 <?php echo $datos->getEstado_peticionMai() ?></td> 
                             <td>

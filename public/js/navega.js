@@ -43,6 +43,10 @@ $(document).ready(function() {
         $("#contenido").load("app/view/filtro_iso.php");
     });
 
+    $('#consultarRequerimiento').click(function() {
+        $("#contenido").load("app/view/filtro_requerimientos.php");
+    });
+
     $('#comentariosPeticiones').click(function() {
         $("#contenido").load("app/view/filtro_comentar.php");
     });

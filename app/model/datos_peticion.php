@@ -27,7 +27,8 @@ class Peticion{
 	private $req_nombre;
 	private $req_justificacion;
 	private $id;
-
+	private $sprint;
+	private $gestion;
 //************************************************
 	public function getP_nropeticion(){
 	    return $this->p_nropeticion;
@@ -239,6 +240,22 @@ class Peticion{
 	}
 		public function setId($id){
 			$this->id = $id;
+		}
+
+		public function getSprint(){
+			return $this->sprint;
+		}
+			public function setSprint($sprint){
+			$this->sprint = $sprint;
+			
+		}
+	
+		public function getGestion(){
+			return $this->gestion;
+		}
+			public function setGestion($gestion){
+			$this->gestion = $gestion;
+			
 		}
 	}
 ?>

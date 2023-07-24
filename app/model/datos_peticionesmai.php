@@ -23,6 +23,8 @@ class PeticionMai{
 	private $archivos;
 	private $version;
 	private $numero_version;
+	private $sprint;
+	private $gestion;
     
 //************************************************
 	public function getId_peticionMai(){
@@ -191,6 +193,22 @@ class PeticionMai{
 	}
 		public function setNumero_version($numero_version){
 		$this->numero_version = $numero_version;
+		
+	}
+
+	public function getSprint(){
+		return $this->sprint;
+	}
+		public function setSprint($sprint){
+		$this->sprint = $sprint;
+		
+	}
+
+	public function getGestion(){
+		return $this->gestion;
+	}
+		public function setGestion($gestion){
+		$this->gestion = $gestion;
 		
 	}
 }

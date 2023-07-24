@@ -93,16 +93,17 @@ class CrudPeticionesMai{
 			$lista_peticiones=[];
 			$consultar_peticion=$db->prepare('SELECT  id_peticionmai, descripcion_peticion, usuario_creacion, fecha_peticion, 
             estado.descripcion AS estado_peticion, productos_mai.nombre_producto AS producto_mai, imagen,  fecha_atencion, 
-            usuario_atencion, conclusiones, funcionarios.extension, funcionarios.area,funcionarios.mail, imagen2, imagen3, tipo_soportemai, tipo_soportemai.nombre, tipo_soportemai.id, req_nombre, req_justificacion
+            usuario_atencion, conclusiones, funcionarios.extension, funcionarios.area,funcionarios.mail, imagen2, imagen3, tipo_soportemai, tipo_soportemai.nombre, tipo_soportemai.id, req_nombre, req_justificacion, sprint, gestion
             FROM peticiones_mai 
             LEFT JOIN funcionarios ON funcionarios.usuario=peticiones_mai.usuario_creacion 
             LEFT JOIN areas ON areas.id_area=funcionarios.area 
             LEFT JOIN productos_mai ON productos_mai.id_producto=peticiones_mai.producto_mai 
             LEFT JOIN estado ON estado.id_estado=peticiones_mai.estado_peticion 
             LEFT JOIN tipo_soportemai ON tipo_soportemai.id=peticiones_mai.tipo_soportemai
-            WHERE (estado_peticion=:estadoU OR estado_peticion=:estadoT) AND (tipo_soportemai=:requerimientos) ORDER BY id_peticionmai ASC');
+            WHERE (estado_peticion=:estadoU OR estado_peticion=:estadoT OR estado_peticion=:estadoE) AND (tipo_soportemai=:requerimientos) ORDER BY id_peticionmai ASC');
 				$consultar_peticion->bindValue('estadoU','1');
-                $consultar_peticion->bindValue('estadoT','3');	
+                $consultar_peticion->bindValue('estadoT','3');
+                $consultar_peticion->bindValue('estadoE','18');	
                 $consultar_peticion->bindValue('requerimientos', '2');
 				$consultar_peticion->execute();
 			foreach ($consultar_peticion->fetchAll() as $listado) {
@@ -125,6 +126,8 @@ class CrudPeticionesMai{
 				$consulta->setName($listado['nombre']);
                 $consulta->setReq_Name($listado['req_nombre']);
                 $consulta->setReq_Justification($listado['req_justificacion']);
+                $consulta->setSprint($listado['sprint']);
+				$consulta->setGestion($listado['gestion']);
 				
 				
 				$lista_peticiones[]=$consulta;	
@@ -198,6 +201,8 @@ class CrudPeticionesMai{
         $conclusiones = $update->getConclusiones_peticionMai();
         $version = $update->getVersion();
         $numero_version = $update->getNumero_version();
+        $sprint = $update->getSprint();
+        $gestion = $update->getGestion();
         
         $correo = $update->getEmail_funcionario();
         if ($estado==2) {
@@ -205,7 +210,7 @@ class CrudPeticionesMai{
             $clase = new CrudPeticionesMai();
             $insertaObservacion =  $clase->insertaObservacion($update->getId_peticionMai(),$update->getConclusiones_peticionMai(),$update->getUsuario_atencionMai(),$update->getFecha_atendidoMai(),$update->getEstado_peticionMai());   
 
-            $finaliza_solicitudmai=$db->prepare('UPDATE peticiones_mai SET fecha_atencion=:fecha_atencion, usuario_atencion=:usuario_atencion, conclusiones=:conclusiones, estado_peticion=:estado_peticion, tipo_soportemai=:tipo_soportemai, numero_version=:numero_version, version=:version WHERE id_peticionmai=:cod_peticion');
+            $finaliza_solicitudmai=$db->prepare('UPDATE peticiones_mai SET fecha_atencion=:fecha_atencion, usuario_atencion=:usuario_atencion, conclusiones=:conclusiones, estado_peticion=:estado_peticion, tipo_soportemai=:tipo_soportemai, numero_version=:numero_version, version=:version, sprint=:sprint, gestion=:gestion WHERE id_peticionmai=:cod_peticion');
             $finaliza_solicitudmai->bindValue('cod_peticion',$update->getId_peticionMai());
             $finaliza_solicitudmai->bindValue('fecha_atencion',$update->getFecha_atendidoMai());
             $finaliza_solicitudmai->bindValue('usuario_atencion',$update->getUsuario_atencionMai());
@@ -214,6 +219,8 @@ class CrudPeticionesMai{
             $finaliza_solicitudmai->bindValue('tipo_soportemai',$update->getName());
             $finaliza_solicitudmai->bindValue('version',$update->getVersion());
             $finaliza_solicitudmai->bindValue('numero_version',$update->getNumero_version());
+            $finaliza_solicitudmai->bindValue('sprint',$update->getSprint());
+            $finaliza_solicitudmai->bindValue('gestion',$update->getGestion());
             $finaliza_solicitudmai->execute();
             if ($finaliza_solicitudmai){
                 $colsultar_usuario=$db->prepare('SELECT id_usuario from usuarios where usuario =:usuario');
@@ -343,13 +350,15 @@ class CrudPeticionesMai{
                 echo "No se pudo modificar la peticion Mai";
             }
         }else{
-            $finaliza_solicitudmai=$db->prepare('UPDATE peticiones_mai SET fecha_atencion=:fecha_atencion, usuario_atencion=:usuario_atencion, conclusiones=:conclusiones, estado_peticion=:estado_peticion, tipo_soportemai=:tipo_soportemai WHERE id_peticionmai=:cod_peticion');
+            $finaliza_solicitudmai=$db->prepare('UPDATE peticiones_mai SET fecha_atencion=:fecha_atencion, usuario_atencion=:usuario_atencion, conclusiones=:conclusiones, estado_peticion=:estado_peticion, tipo_soportemai=:tipo_soportemai, sprint=:sprint, gestion=:gestion WHERE id_peticionmai=:cod_peticion');
             $finaliza_solicitudmai->bindValue('cod_peticion',$update->getId_peticionMai());
             $finaliza_solicitudmai->bindValue('fecha_atencion',$update->getFecha_atendidoMai());
             $finaliza_solicitudmai->bindValue('usuario_atencion',$update->getUsuario_atencionMai());
             $finaliza_solicitudmai->bindValue('conclusiones',$update->getConclusiones_peticionMai());
             $finaliza_solicitudmai->bindValue('estado_peticion',$update->getEstado_peticionMai());
             $finaliza_solicitudmai->bindValue('tipo_soportemai',$update->getName());
+            $finaliza_solicitudmai->bindValue('sprint',$update->getSprint());
+            $finaliza_solicitudmai->bindValue('gestion',$update->getGestion());
             $finaliza_solicitudmai->execute();
             
             $clase = new CrudPeticionesMai();
@@ -443,10 +452,11 @@ class CrudPeticionesMai{
     public function consultarPeticionesMaixFuncionario(){
 			$db=conectar::acceso();
 			$lista_peticiones=[];
-			$consultar_peticion=$db->prepare('SELECT id_peticionmai, productos_mai.nombre_producto AS producto_mai, fecha_peticion, descripcion_peticion, estado.descripcion AS estado_peticion, fecha_atencion, usuario_atencion, conclusiones, revisado 
+			$consultar_peticion=$db->prepare('SELECT id_peticionmai, productos_mai.nombre_producto AS producto_mai, fecha_peticion, descripcion_peticion, estado.descripcion AS estado_peticion, fecha_atencion, usuario_atencion, conclusiones, revisado, tipo_soportemai, tipo_soportemai.nombre, tipo_soportemai.id 
             FROM peticiones_mai 
             LEFT JOIN productos_mai ON productos_mai.id_producto=peticiones_mai.producto_mai 
             LEFT JOIN estado ON estado.id_estado=peticiones_mai.estado_peticion 
+            LEFT JOIN tipo_soportemai ON tipo_soportemai.id=peticiones_mai.tipo_soportemai
             WHERE usuario_creacion=:funcionario AND revisado=:noRevisado');
             $consultar_peticion->bindValue('noRevisado',1);
 			$consultar_peticion->bindValue('funcionario',$_SESSION['usuario']);
@@ -462,6 +472,7 @@ class CrudPeticionesMai{
 				$consulta->setUsuario_atencionMai($listado['usuario_atencion']);	
 				$consulta->setConclusiones_peticionMai($listado['conclusiones']);	
 				$consulta->setMarca_revisado($listado['revisado']);
+                $consulta->setName($listado['nombre']);
 				$lista_peticiones[]=$consulta;	
 			}
 			return $lista_peticiones;

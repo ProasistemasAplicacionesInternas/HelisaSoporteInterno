@@ -3,11 +3,16 @@
    ini_set("session.gc_maxlifetime", 180000);
 
    session_start();
-   $_SESSION['id_roles'];
-   if(!isset($_SESSION['usuario'])||empty($_SESSION['usuario'])){
-       
-       header('location:login.php');
-   }
+    if(!isset($_SESSION['usuario'])||empty($_SESSION['usuario'])){
+        header('location:login.php');
+    }
+    if(!isset($_SESSION['id_roles'])){ 
+    header('location:login.php');
+    }
+    if(!isset($_SESSION['status_connect'])){
+        header('location:login.php');
+    }
+   
 ?>
 
 <!DOCTYPE html>
@@ -64,7 +69,7 @@
                     </div>
                     <?php if ($_SESSION['id_roles']==3 || $_SESSION['id_roles']==5) {echo '<a href="#" id="solicitudes_internas"><img src="public/img/soporte.png" alt="" class="ml-3" onclick:>Solicitudes Internas</a>';}?>
                     
-                    <?php if ( $_SESSION['id_roles']==5) {echo '<a href="#" id="requerimientos"><img src="public/img/soporte.png" alt="" class="ml-3" onclick:>Requerimientos</a>';}?>
+                    <?php if ( $_SESSION['id_roles']==1 || $_SESSION['id_roles']==5) {echo '<a href="#" id="requerimientos"><img src="public/img/soporte.png" alt="" class="ml-3" onclick:>Requerimientos</a>';}?>
                     
                     <?php if ($_SESSION['id_roles']==5) {echo '<a href="#" id="liberar_mai"><img src="public/img/atendiendo.png" alt="" class="ml-3" onclick:>Atendiendo</a>';}?>
                     
@@ -73,17 +78,79 @@
 
                     <?php if ($_SESSION['id_roles']==9 || $_SESSION['id_roles']==6) {echo '<a href="#" id="liberar"><img src="public/img/atendiendo.png" alt="" class="ml-3" onclick:>Atendiendo</a>';}?>
                                                                             
-
                     <div class="dropdown">
-                        <?php if($_SESSION['id_roles']==1 || $_SESSION['id_roles']==5 || $_SESSION['id_roles']==6 || $_SESSION['id_roles']==7 || $_SESSION['id_roles']==8 || $_SESSION['id_roles']==9){ echo '<a class=" dropdown-toggle" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <img src="public/img/consultas.png" alt="" class="ml-3"><span>Consultas</span></a>'; }?>
+                        <?php
+                        if (
+                            $_SESSION['id_roles'] == 1 ||
+                            $_SESSION['id_roles'] == 5 ||
+                            $_SESSION['id_roles'] == 6 ||
+                            $_SESSION['id_roles'] == 7 ||
+                            $_SESSION['id_roles'] == 8 ||
+                            $_SESSION['id_roles'] == 9
+                        ) {
+                            echo '<a class="dropdown-toggle" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <img src="public/img/consultas.png" alt="" class="ml-3">
+                                    <span>Consultas</span>
+                                </a>';
+                        }
+                        ?>
 
                         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                            <?php if ($_SESSION['id_roles']==1 || $_SESSION['id_roles']==6 || $_SESSION['id_roles']==7 || $_SESSION['id_roles']==9 || $_SESSION['id_roles']==5) {echo '<a href="#" id="consultarPeticiones"><img src="public/img/consultas.png" alt="" class="ml-3">Consultas-Ticket</a>';}?>
+                            <?php
+                            if (
+                                $_SESSION['id_roles'] == 1 ||
+                                $_SESSION['id_roles'] == 6 ||
+                                $_SESSION['id_roles'] == 7 ||
+                                $_SESSION['id_roles'] == 9 ||
+                                $_SESSION['id_roles'] == 5
+                            ) {
+                                echo '<a href="#" id="consultarPeticiones" class="dropdown-item">
+                                        <img src="public/img/consultas.png" alt="" class="ml-3">
+                                        Consultas-Ticket
+                                    </a>';
+                            }
+                            ?>
 
-                            <?php if ($_SESSION['id_roles']==1 || $_SESSION['id_roles']==7 || $_SESSION['id_roles']==8 || $_SESSION['id_roles']==5) {echo '<a href="#" id="consultarIso"><img src="public/img/consultas.png" alt="" class="ml-3">Consultas-ISO</a>';}?>
+                            <?php
+                            if (
+                                $_SESSION['id_roles'] == 1 ||
+                                $_SESSION['id_roles'] == 7 ||
+                                $_SESSION['id_roles'] == 8 ||
+                                $_SESSION['id_roles'] == 5
+                            ) {
+                                echo '<a href="#" id="consultarIso" class="dropdown-item">
+                                        <img src="public/img/consultas.png" alt="" class="ml-3">
+                                        Consultas-ISO
+                                    </a>';
+                            }
+                            ?>
 
-                            <?php if ($_SESSION['id_roles']==1 || $_SESSION['id_roles']==6 || $_SESSION['id_roles']==7 || $_SESSION['id_roles']==9 || $_SESSION['id_roles']==5) {echo '<a href="#" id="comentariosPeticiones"><img src="public/img/Comentarios.png" alt="" class="ml-3">Comentarios</a>';}?> 
+                            <?php
+                            if (
+                                $_SESSION['id_roles'] == 1 ||
+                                $_SESSION['id_roles'] == 5
+                            ) {
+                                echo '<a href="#" id="consultarRequerimiento" class="dropdown-item">
+                                        <img src="public/img/consultas.png" alt="" class="ml-3">
+                                        Consultas-Requerimientos
+                                    </a>';
+                            }
+                            ?>
 
+                            <?php
+                            if (
+                                $_SESSION['id_roles'] == 1 ||
+                                $_SESSION['id_roles'] == 6 ||
+                                $_SESSION['id_roles'] == 7 ||
+                                $_SESSION['id_roles'] == 9 ||
+                                $_SESSION['id_roles'] == 5
+                            ) {
+                                echo '<a href="#" id="comentariosPeticiones" class="dropdown-item">
+                                        <img src="public/img/Comentarios.png" alt="" class="ml-3">
+                                        Comentarios
+                                    </a>';
+                            }
+                            ?>
                         </div>
                     </div>
 

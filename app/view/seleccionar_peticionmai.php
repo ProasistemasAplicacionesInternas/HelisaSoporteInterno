@@ -43,6 +43,10 @@
         $req_nombre=$_POST['req_nombre'];
         $req_justificacxion=$_POST['req_justificacion'];
         $conclusiones=$_POST['p_conclusiones'];
+        if($name=="Requerimientos"){
+            $sprint=$_POST['p_sprint'];
+            $gestion = $_POST['p_gestion'];
+        }
     
         require_once("../controller/trae_observaciones.php");
 
@@ -112,6 +116,19 @@
                         </div>
                     </div>
                     <div class="row">
+                        <div class="littleMedium">  
+                            <label id="label">Tipo de petición</label>
+                            <select id="soporteMai" name="soporteMai" class="selectView">
+                            <?php
+                            foreach($listado_soporte as $tipoSoporte){
+                                echo "<option value='".$tipoSoporte['id']."'" ; 
+                                if($name == $tipoSoporte['nombre']){
+                                    echo 'selected';}
+                                    echo ">".$tipoSoporte["nombre"]. "</option>" ;
+                                }  
+                            ?>
+                            </select>
+                        </div>
                         <div class="littleMedium">
                             <label id="label">Estado</label>
                             <select name="p_estado" id="p_estado" class="selectView" required>
@@ -119,8 +136,23 @@
                                     <option value="2" >Resuelto</option>
                                     <option value="3" >Pendiente</option>
                                     <option value="4" >Redireccionado</option>
+                                    <?php if ($name == "Requerimientos"): ?>
+                                        <option value="18">En Desarrollo</option>
+                                    <?php endif; ?>
                             </select>
                         </div>
+                        <?php if($name=="Requerimientos"):?>
+                            <div class="littleMedium">
+                                <label id="label">Gestionado</label>
+                                <br>
+                                <?php if($gestion=="SI"):?>
+                                    <input type="checkbox" class="col-4" id="gestionado" name="gestionado" checked>
+                                <?php else:?>
+                                    <input type="checkbox" class="col-4" id="gestionado" name="gestionado">
+                                <?php endif;?>
+                                
+                            </div>
+                        <?php endif;?>
                         <div class="littleMedium">
                             <label id="label" >¿Requiere Versión?</label>
                             <select name="version" id="version" class="selectView" required>
@@ -128,23 +160,18 @@
                                     <option value="No" selected >No Requiere</option>
                             </select>
                         </div>
-                        <div class="littleMedium">  
-                            <label id="label">Tipo de petición</label>
-                            <select id="soporteMai" name="soporteMai" class="selectView">
-                        <?php
-                            foreach($listado_soporte as $tipoSoporte){
-                                echo "<option value='".$tipoSoporte['id']."'" ; 
-                                if($name == $tipoSoporte['nombre']){
-                                    echo 'selected';}
-                                    echo ">".$tipoSoporte["nombre"]. "</option>" ;
-                                }  
-                        ?>
-                            </select>
-                        </div>
                         <div class="littleMedium" id="nVersionDiv">
                             <label>Numero version</label>
                             <input class="selectView " type="text" name="nVersion" id="nVersion" placeholder= "Número de versión"  />
                         </div>
+                        <?php if($name=="Requerimientos"):?>
+                            <div class="littleMedium">
+                                <div class="giant">
+                                    <label for="">Sprint</label> 
+                                    <input id="sprint" name="sprint" placeholder="# de sprint" class="form-control col-9 selectView" required value="<?php echo $sprint;?>"></input>
+                                </div>
+                            </div>
+                        <?php endif;?>
                     </div>
                     <div class="row giant mt-1 mb-1">
                         <?php if ($imagen != '2'){ ?>

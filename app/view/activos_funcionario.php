@@ -20,6 +20,7 @@
         $activosAsignados = new crudActivos();
         $datosActivos = new activosFijos();
         $consultarActivos=$activosAsignados->consultarActivosfuncionario();
+        // $consultarActivosPendientes=$activosAsignados->consultarActivosPendientesFuncionario();
         
     ?>
     <div class="container-fluid">
@@ -34,7 +35,7 @@
                 <table class="table table-striped tablesorter" id="data" style="border: 1px solid #d9007f; ">
                     <thead>
                         <th style="display:none"></th>
-                         <th COLSPAN="4" style="text-align: center;font-size: 15px;">Infraestructura</th>                                            
+                         <th COLSPAN="5" style="text-align: center;font-size: 15px;">Infraestructura</th>                                            
                     </thead>
                     <thead>
                         <th style="display:none"></th>
@@ -42,6 +43,8 @@
                         <th>Serial Activo</th>
                         <th>Nombre</th>
                         <th>Fecha Asignado</th>
+                        <th>Aceptacion pendiente</th>
+
                                             
                     </thead>
                     
@@ -58,7 +61,7 @@
             
                     <thead>
                         <th style="display:none"></th>
-                         <th COLSPAN="4" style="text-align: center;font-size: 15px;">Administraci&oacute;n</th>                                            
+                         <th COLSPAN="5" style="text-align: center;font-size: 15px;">Administraci&oacute;n</th>                                            
                     </thead>
                     <thead>
                         <th style="display:none"></th>
@@ -66,6 +69,7 @@
                         <th>Serial Activo</th>
                         <th>Nombre</th>
                         <th>Fecha Asignado</th>
+                        <th>Aceptacion pendiente</th>
                                             
                     </thead>
                     
@@ -83,7 +87,7 @@
             </div>
             
         </div>
-
+                                
 
 
     
@@ -91,6 +95,7 @@
     <script src="public/js/tablas.js"></script>
     <script src="public/js/smoke.min.js"></script>
     <script src="public/js/bloqueoTeclas.js"></script>
+    <script src="public/js/revisadoActivosFijos.js"></script>
 </body>	
 </body>
 </html>

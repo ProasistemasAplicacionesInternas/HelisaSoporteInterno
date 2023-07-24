@@ -1,6 +1,7 @@
 <?php
     ini_set("session.cookie_lifetime", 18000);
     ini_set("session.gc_maxlifetime", 18000);
+    
     session_start();
     $_SESSION['rol'];
     if(!isset($_SESSION['usuario'])||empty($_SESSION['usuario'])){       
@@ -48,17 +49,16 @@
         
             <div class="col-2 mt-3 navega">
                 <nav>
-                    <div class="dropdown">
-                            <a class=" dropdown-toggle" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <img src="public/img/soporte.png" class="ml-3"><span>Solicitudes</span></a>
-
-                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-
-                            <a href="#" id="generar_solicitud"><img src="public/img/soporte.png" class="ml-3">Infraestructura</a>
-
-                            <a href="#" id="vista_solicitudesmai"><img src="public/img/soporte.png"  class="ml-3">Aplic. Internas</a>
-                  
-                             </div>
-                        </div>
+                    <div class="dropdown" >
+                            <a class=" dropdown-toggle" id="validationTicket" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                 <img src="public/img/soporte.png" class="ml-3">
+                                <span>Solicitudes</span>
+                            </a>
+                                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton" id="dropTicket">
+                                    <a href="#" id="generar_solicitud"><img src="public/img/soporte.png" class="ml-3">Infraestructura</a>
+                                    <a href="#" id="vista_solicitudesmai"><img src="public/img/soporte.png"  class="ml-3">Aplic. Internas</a>
+                                </div>
+                    </div>
                                     
                     <a href="#" id="activos_asignados"><img src="public/img/soporte.png" alt="" class="ml-3" onclick:>
                         <span>Asignaciones</span>

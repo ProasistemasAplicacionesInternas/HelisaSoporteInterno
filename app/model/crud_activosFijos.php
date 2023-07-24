@@ -46,20 +46,31 @@ class crudActivos{
 						$crear_activo->bindValue('sistema_operativo',$create->getAf_sistemaOperativo());
 						$crear_activo->bindValue('imagen',$create->getImagenactivo());
 						$crear_activo->execute();
+						$ultimo_id = $db->lastInsertId();
 
 				if ($crear_activo) {
 					echo 1;
 					$colsultar_usuario=$db->prepare('SELECT id_usuario from usuarios where usuario =:usuario');
-                          $colsultar_usuario->bindValue('usuario', $create->getNombre());
-                          $colsultar_usuario->execute();
-                          $filtro=$colsultar_usuario->fetch(PDO::FETCH_ASSOC);
-                          $id_usuario=$filtro['id_usuario'];
-                           $funcion_realizada = "El usuario Realizo una insercion de un nuevo activo";
-                           $inserta_funcion=$db->prepare("INSERT INTO funciones (codigo, id_usuario, fecha_registro, funcion_realizada,IP) VALUES (0, :id_usuario , curdate() , :funcion_realizada ,:ip )");
-                           $inserta_funcion->bindValue('id_usuario',$id_usuario);
-                           $inserta_funcion->bindValue('funcion_realizada',$funcion_realizada);
-                           $inserta_funcion->bindValue('ip', $_SERVER['REMOTE_ADDR']);                 
-                           $inserta_funcion->execute();
+						$colsultar_usuario->bindValue('usuario', $create->getNombre());
+						$colsultar_usuario->execute();
+						$filtro=$colsultar_usuario->fetch(PDO::FETCH_ASSOC);
+						$id_usuario=$filtro['id_usuario'];
+						$funcion_realizada = "El usuario Realizo una insercion de un nuevo activo";
+						$inserta_funcion=$db->prepare("INSERT INTO funciones (codigo, id_usuario, fecha_registro, funcion_realizada,IP) VALUES (0, :id_usuario , curdate() , :funcion_realizada ,:ip )");
+						$inserta_funcion->bindValue('id_usuario',$id_usuario);
+						$inserta_funcion->bindValue('funcion_realizada',$funcion_realizada);
+						$inserta_funcion->bindValue('ip', $_SERVER['REMOTE_ADDR']);                 
+						$inserta_funcion->execute();
+							$descripcion = "Se realiza asignacion al momento de registrar el activo";	
+							$crea_traslado=$db->prepare('INSERT INTO traslados(funcionario_inicial, fecha_asignado, funcionario_final, fecha_traslado, activo_traslado, descripcion_traslado, estado_traslado )VALUES(:t_funcionarioI, :t_fechaA, :t_funcionarioF, :t_fechaT, :t_activo, :t_descripcion, :estado)');
+							$crea_traslado->bindValue('t_funcionarioI',$create->getAf_funcionario());
+							$crea_traslado->bindValue('t_fechaA',$create->getAf_fechaCompra());
+							$crea_traslado->bindValue('t_funcionarioF',$create->getAf_funcionario());
+							$crea_traslado->bindValue('t_fechaT',$create->getAf_fechaAsignacion());
+							$crea_traslado->bindValue('t_activo',$ultimo_id);
+							$crea_traslado->bindValue('t_descripcion',$descripcion);            
+							$crea_traslado->bindValue('estado',3);            
+							$crea_traslado->execute();
 				}else{
 					echo 0;
 				}
@@ -185,35 +196,32 @@ public function consultaModificarActivo(){
 //***************** SOLO CONSULTA LOS ACTIVOS QUE TIENE EL USUARIO DE LA SESSION ***************//
 //**********************************************************************************************//
 
-	public function consultarActivosfuncionario(){
-
-			$db=conectar::acceso();
-			$lista_activos=[];
-			$buscarIdentidad=$db->prepare("SELECT identificacion FROM funcionarios WHERE usuario=:usuarioS");
-				$buscarIdentidad->bindValue('usuarioS',$_SESSION['usuario']);
-				$buscarIdentidad->execute();
-				$resultado=$buscarIdentidad->fetch();
-				
-					if ($resultado!=0) {
-							$db=conectar::acceso();	
-							$consultar_activo=$db->prepare("SELECT codigo_activo, serial_activo, nombre_activo, fecha_asignacion, grupos_activos.area_grupo FROM activos_internos LEFT JOIN grupos_activos ON grupo_activo = id_grupo WHERE responsable_activo=:identidad");
-								$consultar_activo->bindValue('identidad',$resultado['identificacion']);
-								$consultar_activo->execute();
-							
-								foreach ($consultar_activo->fetchALL() as $listado) {
-										 $consulta = new activosFijos();
-											
-										 $consulta->setAf_codigo($listado['codigo_activo']);
-										 $consulta->setAf_serial($listado['serial_activo']);
-										 $consulta->setAf_nombre($listado['nombre_activo']);
-										 $consulta->setAf_fechaAsignacion($listado['fecha_asignacion']);
-										 $consulta->setAf_areaCreacion($listado['area_grupo']);
-											
-										 $lista_activos[]=$consulta;
-								}
-								return $lista_activos;
-				}
-	}
+public function consultarActivosfuncionario(){
+	$db=conectar::acceso();
+	$lista_activos=[];
+	$buscarIdentidad=$db->prepare("SELECT identificacion FROM funcionarios WHERE usuario=:usuarioS");
+	$buscarIdentidad->bindValue('usuarioS',$_SESSION['usuario']);
+	$buscarIdentidad->execute();
+	$resultado=$buscarIdentidad->fetch();
+		if ($resultado!=0) {
+	 		$db=conectar::acceso();
+	 		$consultar_activo=$db->prepare("SELECT codigo_activo, serial_activo, nombre_activo, fecha_asignacion, grupos_activos.area_grupo FROM activos_internos LEFT JOIN grupos_activos ON grupo_activo = id_grupo WHERE responsable_activo=:identidad");
+	 		$consultar_activo->bindValue('identidad',$resultado['identificacion']);
+	 		$consultar_activo->execute();
+	 	foreach ($consultar_activo->fetchALL() as $listado) {
+	 		$consulta = new activosFijos();
+	 		$consulta->setAf_codigo($listado['codigo_activo']);
+	 		$consulta->setAf_serial($listado['serial_activo']);
+	 		$consulta->setAf_nombre($listado['nombre_activo']);
+	 		$consulta->setAf_fechaAsignacion($listado['fecha_asignacion']);
+	 		$consulta->setAf_areaCreacion($listado['area_grupo']);
+	 		$lista_activos[]=$consulta;
+	 	}
+	 return $lista_activos;
+	 }
+}
+		
+	
 
 //**********************************************************************************************//
 //****************** SQL PARA CONSULTAR ACCESOS DESDE EL LOGIN DEL FUNCIONARIO *****************//

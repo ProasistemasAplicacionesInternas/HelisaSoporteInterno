@@ -48,61 +48,54 @@
                             <th>Fecha solicitud</th>
                             <th>Area</th>
                             <th>Extension</th>
+                            <th>Tipo de peticion</th>
                             <th>Producto</th>
+                            <th>Gestionado</th>
+                            <th>Sprint</th>
                             <th>Atiende</th>
                             <th>Estado</th>
-			                <th>Tipo de peticion</th>
                             <th>Tiempo</th>
                             <th>Modificar</th>
                             
                         </thead>
 
                         <tbody>
-
                             <?php foreach($consultarRequerimientos as $datos1): ?>
-                            
                             <tr style="text-align:center;">
-                                <?php 
-                                    date_default_timezone_set('America/Bogota');
-                                    $fecha1 = new DateTime($datos1->getFecha_peticionMai());
-                                    $fecha2 = new DateTime('now');
-                                    
-                                    $intervalo = $fecha2->diff($fecha1);
-
-                                    $varH = $intervalo->format('%H');
-                                    $varD = $intervalo->format('%D');
-				    $varM = $intervalo->format('%m');
-
-                                    $color = $crud->coloresR($varD,$varH,$varM); 
-                                ?>
-                                <td style="background-color:<?=$color ?>;"> 
+                                <td style="background-color:<?php echo $datos1->getEstado_peticionMai() === 'En Desarrollo' ? '#33C11B' : 'white'; ?>;">
                                     <?php echo $datos1->getId_peticionMai(); ?>
                                 </td>
-                                <td style="background-color:<?=$color ?>;">
+                                <td style="background-color:<?php echo $datos1->getEstado_peticionMai() === 'En Desarrollo' ? '#33C11B' : 'white'; ?>;">
                                     <?php echo $datos1->getUsuario_creacionMai(); ?>
                                 </td>
-                                <td style="background-color:<?=$color ?>;">
+                                <td style="background-color:<?php echo $datos1->getEstado_peticionMai() === 'En Desarrollo' ? '#33C11B' : 'white'; ?>;">
                                     <?php echo $datos1->getFecha_peticionMai(); ?>
                                 </td>
-                                <td style="background-color:<?=$color ?>;">
+                                <td style="background-color:<?php echo $datos1->getEstado_peticionMai() === 'En Desarrollo' ? '#33C11B' : 'white'; ?>;">
                                     <?php echo $datos1->getArea_funcionario(); ?>
                                 </td>
-                                <td style="background-color:<?=$color ?>;">
+                                <td style="background-color:<?php echo $datos1->getEstado_peticionMai() === 'En Desarrollo' ? '#33C11B' : 'white'; ?>;">
                                     <?php echo $datos1->getExtension_funcionario(); ?>
                                 </td>
-                                <td style="background-color:<?=$color ?>;">
-                                    <?php echo $datos1->getProducto_peticionMai(); ?>
-                                </td> 
-                                <td style="background-color:<?=$color ?>;">
-                                    <?php echo $datos1->getUsuario_atencionMai(); ?>
-                                </td>                             
-                                <td style="background-color:<?=$color ?>;">
-                                    <?php echo $datos1->getEstado_peticionMai(); ?>
-                                </td>
-				                <td style="background-color:<?=$color ?>;">
+                                <td style="background-color:<?php echo $datos1->getEstado_peticionMai() === 'En Desarrollo' ? '#33C11B' : 'white'; ?>;">
                                     <?php echo $datos1->getName(); ?>
                                 </td>
-                                <td style="background-color:<?=$color ?>;">
+                                <td style="background-color:<?php echo $datos1->getEstado_peticionMai() === 'En Desarrollo' ? '#33C11B' : 'white'; ?>;">
+                                    <?php echo $datos1->getProducto_peticionMai(); ?>
+                                </td> 
+                                <td style="background-color:<?php echo $datos1->getEstado_peticionMai() === 'En Desarrollo' ? '#33C11B' : 'white'; ?>;">
+                                    <?php echo $datos1->getGestion(); ?>
+                                </td>
+                                <td style="background-color:<?php echo $datos1->getEstado_peticionMai() === 'En Desarrollo' ? '#33C11B' : 'white'; ?>;">
+                                    <?php echo $datos1->getSprint(); ?>
+                                </td>
+                                <td style="background-color:<?php echo $datos1->getEstado_peticionMai() === 'En Desarrollo' ? '#33C11B' : 'white'; ?>;">
+                                    <?php echo $datos1->getUsuario_atencionMai(); ?>
+                                </td>                             
+                                <td style="background-color:<?php echo $datos1->getEstado_peticionMai() === 'En Desarrollo' ? '#33C11B' : 'white'; ?>;">
+                                    <?php echo $datos1->getEstado_peticionMai(); ?>
+                                </td>
+                                <td style="background-color:<?php echo $datos1->getEstado_peticionMai() === 'En Desarrollo' ? '#33C11B' : 'white'; ?>;">
                                     <?php 
                                         date_default_timezone_set('America/Bogota');
                                         $fecha1 = new DateTime($datos1->getFecha_peticionMai());
@@ -112,13 +105,12 @@
                                         echo $intervalo->format('%m:%D:%H:%I:%S');
                                     ?>
                                 </td>
-                            
-                                <td style="background-color:<?=$color ?>;">
+                                <td style="background-color:<?php echo $datos1->getEstado_peticionMai() === 'En Desarrollo' ? '#33C11B' : 'white'; ?>;">
                                     <form action="app/view/seleccionar_peticionmai.php" method="post">
                                         <input type="hidden" name="p_nropeticion" id="p_nropeticion" value="<?php echo $datos1->getId_peticionMai();?>">
-                                        
+                                                                
                                         <input type="hidden" name="req_nombre" id="req_nombre" value="<?php echo $datos1->getReq_Name();?>">
-                                        
+                                                                
                                         <input type="hidden" name="req_justificacion" id="req_justificacion" value="<?php echo $datos1->getReq_Justification();?>">
 
                                         <input type="hidden" name="p_fechapeticion" id="p_fechapeticion" value="<?php echo $datos1->getFecha_peticionMai();?>">
@@ -134,28 +126,30 @@
                                         <input type="hidden" name="p_descripcion" id="p_descripcion" value="<?php echo $datos1->getDescripcion_peticionMai(); ?>" >
 
                                         <input type="hidden" name="p_cargarimagen" id="p_cargarimagen" value="<?php echo $datos1->getImagen_peticionMai(); ?>">
-                                        
+                                                                
                                         <input type="hidden" name="p_cargarimagen2" id="p_cargarimagen2" value="<?php echo $datos1->getImagen_peticionMai2(); ?>">
-                                        
+                                                                
                                         <input type="hidden" name="p_cargarimagen3" id="p_cargarimagen3" value="<?php echo $datos1->getImagen_peticionMai3(); ?>">
 
                                         <input type="hidden" name="p_estado" id="p_estado" value="<?php echo $datos1->getEstado_peticionMai(); ?>">
-                                        
+                                                                
                                         <input type="hidden" name="soporteMai" id="soporteMai" value="<?php echo $datos1->getName(); ?>">
 
                                         <input type="hidden" name="p_conclusiones" id="p_conclusiones" value="<?php echo $datos1->getConclusiones_peticionMai(); ?>">
+
+                                        <input type="hidden" name="p_sprint" id="p_sprint" value="<?php echo $datos1->getSprint(); ?>">
+
+                                        <input type="hidden" name="p_gestion" id="p_gestion" value="<?php echo $datos1->getGestion(); ?>">
 
                                         <input type="button"  value = "Seleccionar" class="btn btn-primary"  onclick="validarBoton('<?php echo $_SESSION['usuario'];?>',<?php echo $datos1->getId_peticionMai();?>)">
 
                                         <input type="submit" value="Seleccionar" name="seleccionar_peticionmai" id="seleccionar_peticionmai<?php echo $datos1->getId_peticionMai();?>" class="btn btn-warning" style="display:none;">
                                     </form>
                                 </td>
-                                <?php
-                        endforeach;
-                        ?>
-
                             </tr>
+                            <?php endforeach; ?>
                         </tbody>
+
                     </table>
                 </div>
             </div>

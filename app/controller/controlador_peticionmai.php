@@ -85,7 +85,12 @@ if (isset($_POST['aceptar_petmai'])) {
         $peticionMai->setVersion($_POST['version']);
         $peticionMai->setNumero_version($_POST['nVersion']);
         $peticionMai->setConclusiones_peticionMai($_POST['p_conclusiones']);
-        
+        $peticionMai->setSprint($_POST['sprint']);
+        if($_POST['gestionado']=="on"){
+            $peticionMai->setGestion('SI');
+        }else{
+            $peticionMai->setGestion('NO');
+        }
         $crudMai->modificarPeticionesMai($peticionMai);
 	header ("location: ../../dashboard.php"); 
     }else{
@@ -99,7 +104,12 @@ if (isset($_POST['aceptar_petmai'])) {
         $peticionMai->setEmail_funcionario($_POST['p_correo']);
         $peticionMai->setDescripcion_peticionMai($_POST['p_descripcion']);
         $peticionMai->SetName($_POST['soporteMai']);
-        
+        $peticionMai->setSprint($_POST['sprint']);
+        if($_POST['gestionado']=="on"){
+            $peticionMai->setGestion('SI');
+        }else{
+            $peticionMai->setGestion('NO');
+        }
         $crudMai->modificarPeticionesMai($peticionMai);
         
         header ("location: ../../dashboard.php"); 
