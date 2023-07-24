@@ -69,7 +69,7 @@
                     </div>
                     <?php if ($_SESSION['id_roles']==3 || $_SESSION['id_roles']==5) {echo '<a href="#" id="solicitudes_internas"><img src="public/img/soporte.png" alt="" class="ml-3" onclick:>Solicitudes Internas</a>';}?>
                     
-                    <?php if ( $_SESSION['id_roles']==5) {echo '<a href="#" id="requerimientos"><img src="public/img/soporte.png" alt="" class="ml-3" onclick:>Requerimientos</a>';}?>
+                    <?php if ( $_SESSION['id_roles']==1 || $_SESSION['id_roles']==5) {echo '<a href="#" id="requerimientos"><img src="public/img/soporte.png" alt="" class="ml-3" onclick:>Requerimientos</a>';}?>
                     
                     <?php if ($_SESSION['id_roles']==5) {echo '<a href="#" id="liberar_mai"><img src="public/img/atendiendo.png" alt="" class="ml-3" onclick:>Atendiendo</a>';}?>
                     
@@ -127,6 +127,7 @@
 
                             <?php
                             if (
+                                $_SESSION['id_roles'] == 1 ||
                                 $_SESSION['id_roles'] == 5
                             ) {
                                 echo '<a href="#" id="consultarRequerimiento" class="dropdown-item">
