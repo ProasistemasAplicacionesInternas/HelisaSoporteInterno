@@ -31,7 +31,7 @@ $("#crear_plataforma").click(function () {
       if (data == 1) {
         $("#modal_descripcionCrear").val("");
         $(".close").click();
-        $("#contenido").load("app/view/plataformas.php");
+        $("#contenido").load("app/view/plataformasInactivas.php");
       } else if (data == 2) {
         $.smkAlert({
           text: "El titulo asignado ya se encuentra resgirtado, se debe designar otro.",
@@ -94,17 +94,17 @@ $("#modificar_plataforma").click(function () {
     }).done(function (data) {
       if (data == 1) {
         $(".close").click();
-        $("#contenido").load("app/view/plataformas.php");
+        $("#contenido").load("app/view/plataformasInactivas.php");
       } else if (data == 6000) {
         $.smkAlert({
-          text: "No se puede inactivar la plataforma (" + plataforma + ") porque cuenta con una petición nueva",
+          text:
+            "No se puede inactivar la plataforma (" +
+            plataforma +
+            ") porque cuenta con una petición nueva",
           type: "warning",
         });
       } else if (data == 7000) {
-        data =
-          "usuariosPeticiones=1" +
-          "&id=" +
-          id;
+        data = "usuariosPeticiones=1" + "&id=" + id;
         $.ajax({
           type: "POST",
           url: "app/controller/controlador_plataformas.php",
@@ -112,11 +112,14 @@ $("#modificar_plataforma").click(function () {
         }).done(function (data) {
           if (data.lenght !== 0) {
             $.smkAlert({
-                text: "No se puede inactivar la plataforma (" + plataforma + ") porque tiene peticiones de acceso activas por: \n" + data,
-                type: "danger",
-              });
-         
-            } else {
+              text:
+                "No se puede inactivar la plataforma (" +
+                plataforma +
+                ") porque tiene peticiones de acceso activas por: \n" +
+                data,
+              type: "danger",
+            });
+          } else {
             $(".close").click();
             $.smkAlert({
               text: "Error al traer los usuarios de las peticiones asociadas.",
@@ -124,9 +127,7 @@ $("#modificar_plataforma").click(function () {
             });
           }
         });
-
-     
-    } else {
+      } else {
         $(".close").click();
         $.smkAlert({
           text: "Error interno, intentelo nuevamente.",

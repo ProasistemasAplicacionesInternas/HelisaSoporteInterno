@@ -281,9 +281,18 @@ if (!isset($_SESSION['status_connect'])) {
                         </div>
                     </div>
 
-                    <?php if ($_SESSION['id_roles'] == 7  || $_SESSION['id_roles'] == 1) {
-                        echo '<a href="#" id="plataformas"><i class="fa fa-desktop" class="ml-3" style="font-size: 14px;margin: 0% 0% 0% 10%;"></i><spam style="font-size: 12px;margin-left: 3%;">Plataformas</spam></a>';
-                    } ?>
+                    <div class="dropdown">
+                        <?php if ($_SESSION['id_roles'] == 1 || $_SESSION['id_roles'] == 7) {
+                            echo '<a class=" dropdown-toggle" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="cursor: pointer;  color: gray;"><i class="fa fa-desktop" class="ml-3" style="font-size: 15px; margin: 0% 0% 0% 10%;"></i><span style="font-size: 12px;margin-left: 3%;">Plataformas</span></a>';
+                        } ?>
+
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+
+                            <a href="#" id="plataformasActivas"><i alt="" class="fa fa-circle ml-3 " onclick:></i><span class="ml-2">Plataformas Activas</span></a>
+
+                            <a href="#" id="plataformasInactivas"><i alt="" class="fa fa-circle-o ml-3 " onclick:></i><span class="ml-2" s>Plataformas Inactivas</span></a>
+                        </div>
+                    </div>
                 </nav>
             </div>
 
