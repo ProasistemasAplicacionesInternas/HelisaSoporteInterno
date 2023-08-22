@@ -10,6 +10,9 @@
     }else if(isset($_POST['modificarPlataforma'])){
         $consulta = $plataforma->modificarPlataforma($_POST['id'],$_POST['administrador'],$_POST['estado']);
         echo $consulta;
+    }else if(isset($_POST['usuariosPeticiones'])){
+        $consulta = $plataforma->usuariosPeticiones($_POST['id']);
+        echo $consulta;
     }else{
         $plataformas = $plataforma->getPlataformas();
     }
