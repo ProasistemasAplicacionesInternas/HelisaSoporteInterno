@@ -55,15 +55,28 @@
 
 	    //consulta si la plataforma esta asociada a una peticion de acceso
             if($estado == 6){
-                $consultaA = $db->prepare("SELECT plataformas FROM peticiones_accesos WHERE (estado = 1 || estado = 3 || estado = 8) && plataformas LIKE :idPlataforma");
-                $consultaA->bindValue('idPlataforma',"%".$id."%");
-                $consultaA->execute();
+                $consultaNuevo = $db->prepare("SELECT plataformas FROM peticiones_accesos WHERE (estado = 1) && plataformas LIKE :idPlataforma");
+                $consultaNuevo->bindValue('idPlataforma',"%".$id."%");
+                $consultaNuevo->execute();
 
-                foreach($consultaA as $registro){
-                    $arregloPlataformas = explode(',' , $registro['plataformas']);
-                    foreach($arregloPlataformas as $arrPlataforma){
-                        if($arrPlataforma == $id){
+                foreach($consultaNuevo as $registroNuevo){
+                    $arregloPlataformasNuevo = explode(',' , $registroNuevo['plataformas']);
+                    foreach($arregloPlataformasNuevo as $arrPlataformaNuevo){
+                        if($arrPlataformaNuevo == $id){
                             return 6000;
+                        }
+                    }   
+                }
+
+                $consultaPendiente = $db->prepare("SELECT plataformas FROM peticiones_accesos WHERE (estado = 3 || estado = 8) && plataformas LIKE :idPlataforma");
+                $consultaPendiente->bindValue('idPlataforma',"%".$id."%");
+                $consultaPendiente->execute();
+
+                foreach($consultaPendiente as $registroPendiente){
+                    $arregloPlataformasPendiente = explode(',' , $registroPendiente['plataformas']);
+                    foreach($arregloPlataformasPendiente as $arrPlataformaPendiente){
+                        if($arrPlataformaPendiente == $id){
+                            return 7000;
                         }
                     }   
                 }
@@ -84,8 +97,20 @@
             return $valor;
         }
 
+        public function usuariosPeticiones($id){
+            $db = Conectar::acceso();
+
+            $consultaPendiente = $db->prepare("SELECT usuario_atiende FROM peticiones_accesos WHERE (estado = 3 || estado = 8) && plataformas LIKE :idPlataforma");
+            $consultaPendiente->bindValue('idPlataforma',"%".$id."%");
+            $consultaPendiente->execute();
+
+                foreach($consultaPendiente as $registroPendiente){
+                    $arregloUsuarioAtiende = implode(" - ", $registroPendiente);
+                }
+
+
+            $db = null;
+            return $arregloUsuarioAtiende;
+        }
+
     }
-
-
-
-?>
