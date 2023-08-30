@@ -52,7 +52,7 @@
                         <th style="width:8%;">Nro Ticket</th>
                         <th style="width:8%;">Fecha Solicitud</th>
                         <th style="width:8%;">Usuario Solicitud</th>
-                        <th style="width:25px;">Tipo de Solicitud</th>                           
+                        <th style="width:25px;">Tipo de Solicitud</th>
                         <th style="width:8%;">Categoria</th>
                         <th style="width:8%;">Fecha Atendido</th>
                         <th style="width:8%;">Usuario Atendio</th>
@@ -157,7 +157,7 @@
 
 
 
-    
+
     <div class="modal fade" id="verDatosfinalizado" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
@@ -183,7 +183,7 @@
                             <label for="exampleFormControlTextarea1">Justificacion del requerimiento</label>
                             <textarea class="form-control" id="req_justificacionModal" rows="3"></textarea>
                         </div>
-                    </div>    
+                    </div>
                 </div>
                 <div class="modal-footer">
                 </div>

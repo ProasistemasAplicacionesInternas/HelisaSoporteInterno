@@ -221,7 +221,9 @@
         $db=conectar::acceso();
         $listaConsulta=[];
 
-        $seleccion=$db->prepare('SELECT  numero_peticion,  DATE_FORMAT(fecha_peticion,"%d-%m-%Y %H:%i"),DATE_FORMAT(fecha_atendido,"%d-%m-%Y %H:%i"), usuario,categorias.nombre_categoria, descripcion, usuario_atiende, conclusiones,nivel_encuesta,imagen FROM peticiones LEFT JOIN categorias ON id_categoria=categoria WHERE fecha_peticion BETWEEN :fechaInicial AND :fechaFinal AND (estado=:estadoD OR estado=:estadoC) AND id_categoria=:categorias');
+        $seleccion=$db->prepare('SELECT  numero_peticion,  DATE_FORMAT(fecha_peticion,"%d-%m-%Y %H:%i"),DATE_FORMAT(fecha_atendido,"%d-%m-%Y %H:%i"), usuario,categorias.nombre_categoria, descripcion, usuario_atiende, conclusiones,nivel_encuesta,imagen FROM peticiones 
+        LEFT JOIN categorias ON id_categoria=categoria 
+        WHERE fecha_peticion BETWEEN :fechaInicial AND :fechaFinal AND (estado=:estadoD OR estado=:estadoC) AND id_categoria=:categorias');
         $seleccion->bindValue('estadoC','4');
         $seleccion->bindValue('estadoD','2');
         $seleccion->bindValue('categorias','20');
