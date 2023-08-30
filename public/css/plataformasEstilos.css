@@ -4,13 +4,6 @@
   margin: auto !important;
 }
 
-tr,
-td {
-  text-align: center !important;
-  padding: 8px !important;
-  max-width: 80px !important;
-}
-
 tbody tr:nth-child(odd) {
   background-color: #f2f2f2 !important;
 }

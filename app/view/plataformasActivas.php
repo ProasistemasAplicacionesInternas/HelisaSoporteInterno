@@ -5,10 +5,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>Helisa | Soporte Infraestructura</title>
-    <link rel="stylesheet" href="public/css/plataformas.css">
     <link rel="stylesheet" href="public/css/contenido.css" media="screen" type="text/css">
     <link rel="stylesheet" type="text/css" href="public/css/datatables.min.css" />
     <link rel="stylesheet" href="public/css/smoke.min.css">
+    <link rel="stylesheet" href="public/css/plataformasEstilos.css">
 
 
 </head>
@@ -41,10 +41,10 @@
             <div class="col" id="padre_tabla"> <!-- Ver archivo Organigrama.js -->
                 <table class="table table-striped tablesorter" id="tabla">
                     <thead>
-                        <th>ID</th>
-                        <th>Titulo</th>
-                        <th>Administrador</th>
-                        <th>Modificar</th>
+                        <th style="width: 15%;">ID</th>
+                        <th style="width: 35%;">Titulo</th>
+                        <th style="width: 35%;">Administrador</th>
+                        <th style="width: 15%;">Modificar</th>
                     </thead>
                     <tbody id="contenido_departamentos">
                         <?php foreach ($plataformas as $listado_plataformas) {
