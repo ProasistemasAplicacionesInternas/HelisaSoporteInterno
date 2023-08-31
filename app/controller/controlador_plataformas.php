@@ -13,6 +13,9 @@
     }else if(isset($_POST['usuariosPeticiones'])){
         $consulta = $plataforma->usuariosPeticiones($_POST['id']);
         echo $consulta;
+    }else if(isset($_POST['usuariosPlataformas'])){
+        $consulta = $plataforma->usuariosPlataformas($_POST['id']);
+        echo $consulta;
     }else{
         $plataformas = $plataforma->getPlataformas();
     }
