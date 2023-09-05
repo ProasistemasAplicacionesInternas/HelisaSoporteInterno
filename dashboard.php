@@ -51,7 +51,7 @@ if (!isset($_SESSION['status_connect'])) {
                 <nav>
                     <div class="dropdown">
                         <?php if ($_SESSION['id_roles'] == 1 || $_SESSION['id_roles'] == 7) {
-                            echo '<a class=" dropdown-toggle" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <img src="public/img/user.png" alt="" class="ml-3"><span>Soportes</span></a>';
+                            echo '<a  style="cursor: pointer;" class=" dropdown-toggle" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <img src="public/img/user.png" alt="" class="ml-3"><span>Soportes</span></a>';
                         } ?>
 
                         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
