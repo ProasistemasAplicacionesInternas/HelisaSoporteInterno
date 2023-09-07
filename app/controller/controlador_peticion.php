@@ -41,7 +41,7 @@ if (isset($_POST['aceptar'])) {
         header("location: ../../dashboard.php");
     }
     if ($estado == 2) {
-        define('DOCROOT', $_SERVER['DOCUMENT_ROOT'] . '/HelisaSoporteInterno'); /* MODIFCAR AL CAMBIAR A PRODUCCION */ /* /carpeta_principal_proyecto */
+        define('DOCROOT', $_SERVER['DOCUMENT_ROOT'] . '/infraestructura'); /* MODIFCAR AL CAMBIAR A PRODUCCION */ /* /carpeta_principal_proyecto */
         $nombre_imagen = array(0 => 2, 1 => 2, 2 => 2);
         $numImagenes = count($_FILES['imagen']['name']);/* cuenta el numero de elemntos en el array(sino hay ninguno el resultado sera 1) */
         for ($x = 0; $x < $numImagenes; $x++) {
@@ -62,7 +62,7 @@ if (isset($_POST['aceptar'])) {
                 $tipo_imagen == "application/octet-stream" || $tipo_imagen == "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
                 || $tipo_imagen == "application/x-gzip" || $tipo_imagen == "text/csv" || $tipo_imagen == "text/xlsx"
             ) {
-                move_uploaded_file($_FILES['imagen']['tmp_name'][$x], DOCROOT . '/cartas/' . $nombre_imagen[$x]);
+                move_uploaded_file($_FILES['imagen']['tmp_name'][$x], DOCROOT . '/temporal/' . $nombre_imagen[$x]);
             }
         }
 
