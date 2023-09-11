@@ -131,6 +131,6 @@ $(document).ready(function () {
   });
 
   $("#gestion_accesos").click(function () {
-    $("#contenido").load("app/view/peticiones_accesosDelegados.php");
+    $("#contenido").load("app/view/peticiones_accesos.php");
   });
 });

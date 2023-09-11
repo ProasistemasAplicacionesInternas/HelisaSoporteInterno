@@ -99,8 +99,8 @@
         }
         public function consultaAccesoDuplicado($datos){
             $db = Conectar::acceso();
-            $consulta = $db->prepare("SELECT * FROM accesos_plataformas WHERE usuario = :usuarioD AND Plataforma = :plataformaD");
-            $consulta->bindValue('usuarioD',$datos->getUsuario_creacion());
+            $consulta = $db->prepare("SELECT * FROM accesos_plataformas WHERE id_usuario = :usuarioD AND Plataforma = :plataformaD AND fecha_inactivacion IS NULL");
+            $consulta->bindValue('usuarioD',$datos->getId_peticion());
             $consulta->bindValue('plataformaD',$datos->getPlataformas());
             $consulta->execute();
             $resultado = $consulta->rowCount();
@@ -1195,4 +1195,3 @@
 
 
     }
-?>
