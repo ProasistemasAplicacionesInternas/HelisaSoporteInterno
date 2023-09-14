@@ -1338,10 +1338,69 @@ public function cambioContrasena($update){
 
 	}
 
-	public function consultaAccesosFuncionario($usuario){
+	public function consultaAccesosFuncionario($usuario, $estadoFuncionario){
 		require_once('datos_accesosPlataformas.php');
 		$db = Conectar::acceso();
-		$consulta = $db->prepare("SELECT id_accesoPlataforma, plataforma, F.identificacion, AP.usuario, clave, AP.estado, estado.descripcion AS estadoDescripcion, AP.fecha_registro, AP.fecha_inactivacion, P.descripcion as plataforma_descripcion, FP.usuario as plataforma_administrador 
+		if($estadoFuncionario == 5){
+			$consulta = $db->prepare("SELECT id_accesoPlataforma, plataforma, F.identificacion, AP.usuario, clave, AP.estado, estado.descripcion AS estadoDescripcion, AP.fecha_registro, AP.fecha_inactivacion, P.descripcion as plataforma_descripcion, FP.usuario as plataforma_administrador 
+			FROM accesos_plataformas AP 
+			LEFT JOIN funcionarios F ON F.identificacion = id_usuario 
+			LEFT JOIN plataformas P ON P.id_plataforma = AP.plataforma 
+			LEFT JOIN funcionarios FP ON P.administrador = FP.identificacion
+			LEFT JOIN estado ON AP.estado = estado.id_estado
+			WHERE F.usuario = :usuario AND estado.id_estado = 5");
+		$consulta->bindValue('usuario', $usuario);
+		$consulta->execute();
+		$listadoAccesosPlataformas = array();
+
+		if($consulta){
+			foreach($consulta->fetchall() as $listado){
+				$accesosPlataformas = new datosAccesosPlataformas();
+				$accesosPlataformas->setId_accesoPlataforma($listado['id_accesoPlataforma']);
+				$accesosPlataformas->setPlataforma($listado['plataforma']);
+				$accesosPlataformas->setPlataformaDescripcion($listado['plataforma_descripcion']);
+				$accesosPlataformas->setPlataformaAdministrador($listado['plataforma_administrador']);
+				$accesosPlataformas->setId_usuario($listado['identificacion']);
+				$accesosPlataformas->setUsuario($listado['usuario']);
+				$accesosPlataformas->setClave($listado['clave']);
+				$accesosPlataformas->setEstado($listado['estado']);
+				$accesosPlataformas->setEstadoDescripcion($listado['estadoDescripcion']);
+				$accesosPlataformas->setFecha_registro($listado['fecha_registro']);
+				$accesosPlataformas->setFecha_inactivacion($listado['fecha_inactivacion']);
+				$listadoAccesosPlataformas[] = $accesosPlataformas;
+			}
+		}
+		}elseif($estadoFuncionario == 6){
+			$consulta = $db->prepare("SELECT id_accesoPlataforma, plataforma, F.identificacion, AP.usuario, clave, AP.estado, estado.descripcion AS estadoDescripcion, AP.fecha_registro, AP.fecha_inactivacion, P.descripcion as plataforma_descripcion, FP.usuario as plataforma_administrador 
+			FROM accesos_plataformas AP 
+			LEFT JOIN funcionarios F ON F.identificacion = id_usuario 
+			LEFT JOIN plataformas P ON P.id_plataforma = AP.plataforma 
+			LEFT JOIN funcionarios FP ON P.administrador = FP.identificacion
+			LEFT JOIN estado ON AP.estado = estado.id_estado
+			WHERE F.usuario = :usuario AND estado.id_estado = 6");
+		$consulta->bindValue('usuario', $usuario);
+		$consulta->execute();
+		$listadoAccesosPlataformas = array();
+
+		if($consulta){
+			foreach($consulta->fetchall() as $listado){
+				$accesosPlataformas = new datosAccesosPlataformas();
+				$accesosPlataformas->setId_accesoPlataforma($listado['id_accesoPlataforma']);
+				$accesosPlataformas->setPlataforma($listado['plataforma']);
+				$accesosPlataformas->setPlataformaDescripcion($listado['plataforma_descripcion']);
+				$accesosPlataformas->setPlataformaAdministrador($listado['plataforma_administrador']);
+				$accesosPlataformas->setId_usuario($listado['identificacion']);
+				$accesosPlataformas->setUsuario($listado['usuario']);
+				$accesosPlataformas->setClave($listado['clave']);
+				$accesosPlataformas->setEstado($listado['estado']);
+				$accesosPlataformas->setEstadoDescripcion($listado['estadoDescripcion']);
+				$accesosPlataformas->setFecha_registro($listado['fecha_registro']);
+				$accesosPlataformas->setFecha_inactivacion($listado['fecha_inactivacion']);
+				$listadoAccesosPlataformas[] = $accesosPlataformas;
+			}
+		}
+		}else{
+			$consulta = $db->prepare("SELECT id_accesoPlataforma, plataforma, F.identificacion, AP.usuario, clave, AP.estado, estado.descripcion AS estadoDescripcion, AP.fecha_registro, AP.fecha_inactivacion, P.descripcion as plataforma_descripcion, FP.usuario as plataforma_administrador 
 			FROM accesos_plataformas AP 
 			LEFT JOIN funcionarios F ON F.identificacion = id_usuario 
 			LEFT JOIN plataformas P ON P.id_plataforma = AP.plataforma 
@@ -1368,6 +1427,7 @@ public function cambioContrasena($update){
 				$accesosPlataformas->setFecha_inactivacion($listado['fecha_inactivacion']);
 				$listadoAccesosPlataformas[] = $accesosPlataformas;
 			}
+		}
 		}
 
 		$db = null;
@@ -1460,4 +1520,3 @@ public function cambioContrasena($update){
 		}
 	}
 }
-?>

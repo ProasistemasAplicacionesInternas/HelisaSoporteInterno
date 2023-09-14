@@ -313,9 +313,6 @@ if(isset($_POST['getPassword'])&&($_POST['getPassword'])==1){
 //*****************************************************************************************************//
 if(isset($globalDataFuncionario) && $globalDataFuncionario = 1){
     $datosFuncionario = $crud->consultarDatosFuncionario($usuario);
-    $accesosFuncionario = $crud->consultaAccesosFuncionario($usuario);
+    $accesosFuncionario = $crud->consultaAccesosFuncionario($usuario, $estadoFuncionario);
     $activosFuncionario = $crud->consultarActivosFuncionario($usuario);
 }
-
-
-?>
