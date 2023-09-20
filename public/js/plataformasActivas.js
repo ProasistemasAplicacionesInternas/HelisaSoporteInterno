@@ -93,8 +93,16 @@ $("#modificar_plataforma").click(function () {
       data: data,
     }).done(function (data) {
       if (data == 1) {
-        $(".close").click();
-        $("#contenido").load("app/view/plataformasActivas.php");
+        try {
+          $(".close").click();
+          $("#contenido").load("app/view/plataformasActivas.php", function(response, status, xhr) {
+              if (status === "error") {
+                  throw new Error("Hubo un error al cargar el contenido.");
+              }
+          });
+      } catch (error) {
+        window.location.href = window.location.href;
+      }
       } else if (data == 6000) {
         $.smkAlert({
           text:
