@@ -93,40 +93,16 @@ $("#modificar_plataforma").click(function () {
       data: data,
     }).done(function (data) {
       if (data == 1) {
-        $(".close").click();
-        $("#contenido").load("app/view/plataformasInactivas.php");
-      } else if (data == 6000) {
-        $.smkAlert({
-          text:
-            "No se puede inactivar la plataforma (" +
-            plataforma +
-            ") porque cuenta con una petición nueva",
-          type: "warning",
-        });
-      } else if (data == 7000) {
-        data = "usuariosPeticiones=1" + "&id=" + id;
-        $.ajax({
-          type: "POST",
-          url: "app/controller/controlador_plataformas.php",
-          data: data,
-        }).done(function (data) {
-          if (data.lenght !== 0) {
-            $.smkAlert({
-              text:
-                "No se puede inactivar la plataforma (" +
-                plataforma +
-                ") porque tiene peticiones de acceso activas por: \n" +
-                data,
-              type: "danger",
-            });
-          } else {
-            $(".close").click();
-            $.smkAlert({
-              text: "Error al traer los usuarios de las peticiones asociadas.",
-              type: "danger",
-            });
-          }
-        });
+        try {
+          $(".close").click();
+          $("#contenido").load("app/view/plataformasActivas.php", function(response, status, xhr) {
+              if (status === "error") {
+                  throw new Error("Hubo un error al cargar el contenido.");
+              }
+          });
+      } catch (error) {
+        window.location.href = window.location.href;
+      }
       } else {
         $(".close").click();
         $.smkAlert({

@@ -1,3 +1,14 @@
+function recortarCadena(data){
+  var cadena = data;
+  var valores = cadena.split(',');
+  if (valores.length > 2) {
+      var primerosTres = valores.slice(0, 2);
+      var resultado = primerosTres.join(',') + ', etc.';
+  } else {
+      var resultado = cadena;
+  }
+  return resultado;
+}
 $("#crear_plataforma").click(function () {
   var plataforma = $("#modal_descripcionCrear").val();
   var administrador = $("#modal_administradorCrear").val();
@@ -106,9 +117,9 @@ $("#modificar_plataforma").click(function () {
       } else if (data == 6000) {
         $.smkAlert({
           text:
-            "No se puede inactivar la plataforma (" +
+            "No se puede inactivar la plataforma ( " +
             plataforma +
-            ") porque cuenta con una petición nueva",
+            " ) porque tiene peticiones nuevas sin asignar.",
           type: "danger",
         });
       } else if (data == 8000) {
@@ -119,12 +130,12 @@ $("#modificar_plataforma").click(function () {
           data: data,
         }).done(function (data) {
           if (data.lenght !== 0) {
+            var resultado = recortarCadena(data);
             $.smkAlert({
               text:
-                "No se puede inactivar la plataforma (" +
-                plataforma +
-                ") porque tiene peticiones de acceso activas por: \n" +
-                data,
+                "No se puede inactivar ya que los funcionarios ( " +
+                resultado +
+                " ) tienen asignada la plataforma. \n",
               type: "danger",
             });
           } else {
@@ -143,12 +154,36 @@ $("#modificar_plataforma").click(function () {
           data: data,
         }).done(function (data) {
           if (data.lenght !== 0) {
+            var resultado = recortarCadena(data);
             $.smkAlert({
               text:
-                "No se puede inactivar la plataforma (" +
-                plataforma +
-                ") porque tiene peticiones de acceso activas por: \n" +
-                data,
+                "No se puede inactivar ya que los funcionarios ( " +
+                resultado +
+                " ) tienen peticiones pendientes sin gestionar. \n",
+              type: "danger",
+            });
+          } else {
+            $(".close").click();
+            $.smkAlert({
+              text: "Error al traer los usuarios de las peticiones asociadas.",
+              type: "danger",
+            });
+          }
+        });
+      } else if (data == 5000) {
+        data = "usuariosPeticiones=1" + "&id=" + id;
+        $.ajax({
+          type: "POST",
+          url: "app/controller/controlador_plataformas.php",
+          data: data,
+        }).done(function (data) {
+          if (data.lenght !== 0) {
+            var resultado = recortarCadena(data);
+            $.smkAlert({
+              text:
+                "No se puede inactivar ya que los funcionarios ( " +
+                resultado +
+                " ) tienen peticiones seleccionadas sin gestionar. \n",
               type: "danger",
             });
           } else {

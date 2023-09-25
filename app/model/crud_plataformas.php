@@ -72,7 +72,7 @@ class plataformas
                 }
             }
 
-            $consultaPendiente = $db->prepare("SELECT plataformas FROM peticiones_accesos WHERE (estado = 3 || estado = 8) && plataformas LIKE :idPlataforma");
+            $consultaPendiente = $db->prepare("SELECT plataformas FROM peticiones_accesos WHERE (estado = 3 ) && plataformas LIKE :idPlataforma");
             $consultaPendiente->bindValue('idPlataforma', "%" . $id . "%");
             $consultaPendiente->execute();
 
@@ -81,6 +81,19 @@ class plataformas
                 foreach ($arregloPlataformasPendiente as $arrPlataformaPendiente) {
                     if ($arrPlataformaPendiente == $id) {
                         return 7000;
+                    }
+                }
+            }
+
+            $consultaSeleccionada = $db->prepare("SELECT plataformas FROM peticiones_accesos WHERE ( estado = 8) && plataformas LIKE :idPlataforma");
+            $consultaSeleccionada->bindValue('idPlataforma', "%" . $id . "%");
+            $consultaSeleccionada->execute();
+
+            foreach ($consultaSeleccionada as $registroSeleccionado) {
+                $arregloPlataformasSeleccionado = explode(',', $registroSeleccionado['plataformas']);
+                foreach ($arregloPlataformasSeleccionado as $arregloPlataformasSeleccionado) {
+                    if ($arregloPlataformasSeleccionado == $id) {
+                        return 5000;
                     }
                 }
             }
