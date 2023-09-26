@@ -281,10 +281,10 @@ class CrudPeticiones
 				$mail->Subject = $subject;
 				$mail->MsgHTML($body);
 
-				$existencia_archivo = "../../temporal/" . $archivo;
+				$existencia_archivo = "../../cartas/" . $archivo;
 
 				if (file_exists($existencia_archivo)) {
-					$mail->addAttachment("../../temporal/" . $archivo);
+					$mail->addAttachment("../../cartas/" . $archivo);
 				} else {
 				}
 

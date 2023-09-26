@@ -62,7 +62,7 @@ if (isset($_POST['aceptar'])) {
                 $tipo_imagen == "application/octet-stream" || $tipo_imagen == "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
                 || $tipo_imagen == "application/x-gzip" || $tipo_imagen == "text/csv" || $tipo_imagen == "text/xlsx"
             ) {
-                move_uploaded_file($_FILES['imagen']['tmp_name'][$x], DOCROOT . '/temporal/' . $nombre_imagen[$x]);
+                move_uploaded_file($_FILES['imagen']['tmp_name'][$x], DOCROOT . '/cartas/' . $nombre_imagen[$x]);
             }
         }
 

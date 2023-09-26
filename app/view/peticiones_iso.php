@@ -61,7 +61,7 @@
                         <th>Fecha Atendido</th>
                         <th>Usuario Atendio</th>
                         <th>Conclusiones</th>
-                        <?php if ($_SESSION['id_roles'] == 8) { ?>
+                        <?php if ($_SESSION['id_roles'] == 8 || $_SESSION['id_roles'] == 1 || $_SESSION['id_roles'] == 7 || $_SESSION['id_roles'] == 5) { ?>
                             <th>Imagen</th>
                             <th>Agregar comentario</th>
                             <th>Ver comentarios</th>
@@ -97,7 +97,7 @@
                                 <td>
                                     <?php echo $datos->getP_conclusiones(); ?>
                                 </td>
-                                <?php if ($_SESSION['id_roles'] == 8) { ?>
+                                <?php if ($_SESSION['id_roles'] == 8 || $_SESSION['id_roles'] == 1 || $_SESSION['id_roles'] == 7 || $_SESSION['id_roles'] == 5) { ?>
                                     <td>
                                         <?php if ($datos->getP_cargarimagen() != null && $datos->getP_cargarimagen() != '2') : ?>
                                             <span style="display: none;"><?php echo $datos->getP_cargarimagen(); ?></span>
