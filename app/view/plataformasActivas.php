@@ -69,7 +69,7 @@
 
     <!-- Modals -->
     <!-- Modal modificar -->
-    <div class="modal fade bd-example-modal-sm" id="modificarModal" tabindex="-1" role="dialog" aria-labelledby="modificarModal" aria-hidden="true">
+    <div class="modal bd-example-modal-sm" id="modificarModal" tabindex="-1" role="dialog" aria-labelledby="modificarModal" aria-hidden="true">
         <div class="modal-dialog modal-sm">
             <div class="modal-content">
                 <div class="modal-header">
@@ -120,7 +120,7 @@
     </div>
 
     <!-- Modal Crear -->
-    <div class="modal fade bd-example-modal-sm" id="crearModal" tabindex="-1" role="dialog" aria-labelledby="crearModal aria-hidden=" true">
+    <div class="modal bd-example-modal-sm" id="crearModal" tabindex="-1" role="dialog" aria-labelledby="crearModal aria-hidden=" true">
         <div class="modal-dialog modal-sm">
             <div class="modal-content">
                 <div class="modal-header">
