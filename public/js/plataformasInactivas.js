@@ -95,7 +95,7 @@ $("#modificar_plataforma").click(function () {
       if (data == 1) {
         try {
           $(".close").click();
-          $("#contenido").load("app/view/plataformasActivas.php", function(response, status, xhr) {
+          $("#contenido").load("app/view/plataformasInactivas.php", function(response, status, xhr) {
               if (status === "error") {
                   throw new Error("Hubo un error al cargar el contenido.");
               }
