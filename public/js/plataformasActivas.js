@@ -24,7 +24,7 @@ $("#crear_plataforma").click(function () {
     administrador == undefined
   ) {
     $.smkAlert({
-      text: "Debe asignarle un Administrador a la plataforma.",
+      text: "Debe asignarle un administrador a la plataforma.",
       type: "warning",
     });
   } else {
@@ -45,7 +45,7 @@ $("#crear_plataforma").click(function () {
         $("#contenido").load("app/view/plataformasActivas.php");
       } else if (data == 2) {
         $.smkAlert({
-          text: "El titulo asignado ya se encuentra resgirtado, se debe designar otro.",
+          text: "El título asignado ya se encuentra registrado, se debe designar otro.",
           type: "warning",
         });
       } else {
@@ -84,7 +84,7 @@ $("#modificar_plataforma").click(function () {
     administrador == undefined
   ) {
     $.smkAlert({
-      text: "Debe asignarle un Administrador a la plataforma.",
+      text: "Debe asignarle un administrador a la plataforma.",
       type: "warning",
     });
   } else {

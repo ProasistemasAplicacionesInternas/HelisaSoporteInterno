@@ -42,7 +42,7 @@
                 <table class="table table-striped tablesorter" id="tabla">
                     <thead>
                         <th style="width: 15%;">ID</th>
-                        <th style="width: 35%;">Titulo</th>
+                        <th style="width: 35%;">Título</th>
                         <th style="width: 35%;">Administrador</th>
                         <th style="width: 15%;">Modificar</th>
                     </thead>
@@ -86,7 +86,7 @@
                                     <label for="">Id Plataforma</label>
                                     <div><input class="form-control" type="text" name="modal_id" id="modal_id" class="crea_data" maxlength="29" autocomplete="off" value="" autofocus disabled></div>
 
-                                    <label for="">Titulo</label>
+                                    <label for="">Título</label>
                                     <div><input class="form-control" type="text" name="modal_descripcion" id="modal_descripcion" class="crea_data" maxlength="90" autocomplete="off" value="" required disabled></div>
 
                                     <label for="">Administrador</label>
@@ -134,7 +134,7 @@
                         <div class="row">
                             <div class="col-12">
                                 <form>
-                                    <label for="">Titulo</label>
+                                    <label for="">Título</label>
                                     <div>
                                         <input class="form-control" type="text" name="modal_descripcionCrear" id="modal_descripcionCrear" class="crea_data" maxlength="90" autocomplete="off" value="" required>
                                     </div>
