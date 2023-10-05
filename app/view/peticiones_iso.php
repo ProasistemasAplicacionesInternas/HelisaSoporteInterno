@@ -56,8 +56,8 @@
                         <th>Nro Petición</th>
                         <th>Fecha Petición</th>
                         <th>Usuario Petición</th>
-                        <th>Categoria</th>
-                        <th>Descripcion</th>
+                        <th>Categoría</th>
+                        <th>Descripción</th>
                         <th>Fecha Atendido</th>
                         <th>Usuario Atendio</th>
                         <th>Conclusiones</th>
