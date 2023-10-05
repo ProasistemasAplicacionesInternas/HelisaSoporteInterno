@@ -255,7 +255,7 @@ if (!isset($_SESSION['status_connect'])) {
                             } ?>
 
                             <?php if ($_SESSION['id_roles'] == 1 || $_SESSION['id_roles'] == 7 || $_SESSION['id_roles'] == 9 || $_SESSION['id_roles'] == 10) {
-                                echo '<a href="#" id="areas"><i class="fa fa-code-fork" class="ml-3" style="font-size: 15px;margin: 2%;"></i><spam style="font-size: 14px;margin-left: 4%;">Areas</spam></a>';
+                                echo '<a href="#" id="areas"><i class="fa fa-code-fork" class="ml-3" style="font-size: 15px;margin: 2%;"></i><spam style="font-size: 14px;margin-left: 4%;">Áreas</spam></a>';
                             } ?>
 
                             <?php if ($_SESSION['id_roles'] == 1 || $_SESSION['id_roles'] == 7 || $_SESSION['id_roles'] == 9 || $_SESSION['id_roles'] == 10) {
@@ -270,13 +270,13 @@ if (!isset($_SESSION['status_connect'])) {
 
                     <div class="dropdown">
                         <?php if ($_SESSION['id_roles'] == 7 || $_SESSION['id_roles'] == 1) {
-                            echo '<a class=" dropdown-toggle" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="margin: 0% 10%;"> <i class="fas fa-sitemap fa-2x mr-2"  class="ml-3" style="font-size: 18px;margin: 0% 2%;color: #6b6b6b;"></i><span>Gestion de Procesos</span></a>';
+                            echo '<a class=" dropdown-toggle" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="margin: 0% 10%;"> <i class="fas fa-sitemap fa-2x mr-2"  class="ml-3" style="font-size: 18px;margin: 0% 2%;color: #6b6b6b;"></i><span>Gestión de Procesos</span></a>';
                         } ?>
 
                         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton" style="max-width:15rem !important; width: 100%">
 
                             <?php if ($_SESSION['id_roles'] == 7 || $_SESSION['id_roles'] == 1) {
-                                echo '<a href="#" id="gestion_accesos"><i class="fas fa-sign-in-alt fa-lg mr-1"></i><spam style="font-size: 14px;margin-left: 4%;">Gestion de Accesos</spam></a>';
+                                echo '<a href="#" id="gestion_accesos"><i class="fas fa-sign-in-alt fa-lg mr-1"></i><spam style="font-size: 14px;margin-left: 4%;">Gestión de Accesos</spam></a>';
                             } ?>
                         </div>
                     </div>

@@ -117,9 +117,9 @@ $("#modificar_plataforma").click(function () {
       } else if (data == 6000) {
         $.smkAlert({
           text:
-            "No se puede inactivar la plataforma ( " +
+            "No se puede inactivar la plataforma (" +
             plataforma +
-            " ) porque tiene peticiones nuevas sin asignar.",
+            ") porque tiene peticiones nuevas sin asignar.",
           type: "danger",
         });
       } else if (data == 8000) {
@@ -131,11 +131,12 @@ $("#modificar_plataforma").click(function () {
         }).done(function (data) {
           if (data.lenght !== 0) {
             var resultado = recortarCadena(data);
+            resultado = resultado.replace(/,/g, ', ');
             $.smkAlert({
               text:
-                "No se puede inactivar ya que los funcionarios ( " +
+                "No se puede inactivar ya que los funcionarios (" +
                 resultado +
-                " ) tienen asignada la plataforma. \n",
+                ") tienen asignada la plataforma. \n",
               type: "danger",
             });
           } else {
@@ -155,11 +156,12 @@ $("#modificar_plataforma").click(function () {
         }).done(function (data) {
           if (data.lenght !== 0) {
             var resultado = recortarCadena(data);
+            resultado = resultado.replace(/,/g, ', ');
             $.smkAlert({
               text:
-                "No se puede inactivar ya que los funcionarios ( " +
+                "No se puede inactivar ya que los funcionarios (" +
                 resultado +
-                " ) tienen peticiones pendientes sin gestionar. \n",
+                ") tienen peticiones pendientes sin gestionar. \n",
               type: "danger",
             });
           } else {
@@ -179,11 +181,12 @@ $("#modificar_plataforma").click(function () {
         }).done(function (data) {
           if (data.lenght !== 0) {
             var resultado = recortarCadena(data);
+            resultado = resultado.replace(/,/g, ', ');
             $.smkAlert({
               text:
-                "No se puede inactivar ya que los funcionarios ( " +
+                "No se puede inactivar ya que los funcionarios (" +
                 resultado +
-                " ) tienen peticiones seleccionadas sin gestionar. \n",
+                ") tienen peticiones seleccionadas sin gestionar. \n",
               type: "danger",
             });
           } else {
