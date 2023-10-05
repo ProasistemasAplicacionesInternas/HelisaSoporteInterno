@@ -90,7 +90,7 @@ error_reporting(E_ALL);
                             </div>
                             <div class="row mt-1">
                                 <div class="col-2">
-                                    <label>Extension</label>
+                                    <label>Extensión</label>
                                     <input type="text" id="p_extension" name="p_extension" class="form-control data" value="<?php echo $extension; ?>" readonly>
                                 </div>
                                 <div class="col-6">
@@ -107,7 +107,7 @@ error_reporting(E_ALL);
 
                             <div class="row mt-1">
                                 <div class="col-10">
-                                    <label>Categoria</label>
+                                    <label>Categoría</label>
                                     <input type="text" id="p_categoria" name="p_categoria" class="form-control data" value="<?php echo $categoria; ?>  " readonly>
                                 </div>
                             </div>
@@ -123,7 +123,7 @@ error_reporting(E_ALL);
                             <?php } ?>
                             <div class="row mt-1">
                                 <div class="col-10">
-                                    <label for="">Descripcion</label>
+                                    <label for="">Descripción</label>
                                     <textarea id="p_descripcion" name="p_descripcion" class="form-control col-6 data" readonly><?php echo $descripcion; ?></textarea>
                                 </div>
                             </div>

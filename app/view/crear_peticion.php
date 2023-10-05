@@ -50,7 +50,7 @@
                     <div class="row">
                         <div class="col-3">
                             <div class="form-group">
-                            <label>Area</label>
+                            <label>Área</label>
                             <select class="form-control info" id="area_peticion" name="area_peticion" onChange="productoCategoria()" required>
                                 <option value="" selected>Seleccione un area</option>
                                 <option value="1">Infraestructura</option>
@@ -62,9 +62,9 @@
                     <div class="row">
                         <div class="col-5">
                             <div class="form-group" id="divCategoria" style="display:none">
-                                <label>Categoria</label>
+                                <label>Categoría</label>
                                 <select class="form-control info" id="p_categoria" name="p_categoria">
-                                    <option value="" selected>Seleccione Una Categoria</option>
+                                    <option value="" selected>Seleccione Una Categoría</option>
                                         <?php
 
                                              foreach($listado_categorias as $categoria){
@@ -96,9 +96,9 @@
                     <div class="row">
                         <div class="col-5">
                             <div class="form-group" id="divPeticion" style="display:none">
-                                <label>Tipo de peticion</label>
+                                <label>Tipo de petición</label>
                                 <select class="form-control info" id="soporteMai" name="soporteMai" onchange="imagenRequerida(), reqData()">
-                                    <option value="" selected>Seleccione el tipo de peticion</option>
+                                    <option value="" selected>Seleccione el tipo de petición</option>
                                         <?php
                                             foreach($listado_soporte as $tipoSoporte){
                                                 if($tipoSoporte['id']==4 && isset($_SESSION['id_roles']) && $_SESSION['id_roles']==5){
@@ -147,7 +147,7 @@
                     <div class="row">
                         <div class="col-3">
                             <div class="form-group" id="reqJustification" style="display: none;">
-                                <label>Justificacion</label>
+                                <label>Justificación</label>
                                 <textarea name="req_Justification" id="req_Justification" cols="86" rows="5" maxlength="6000" ></textarea>
                             </div>
                         </div>
@@ -156,7 +156,7 @@
                     <div class="row">
                         <div class="col-3">
                             <div class="form-group">
-                                <label>Descripcion</label>
+                                <label>Descripción</label>
                                 <textarea name="p_descripcion" id="p_descripcion" cols="86" rows="5" maxlength="6000" required></textarea>
                             </div>
                         </div>
