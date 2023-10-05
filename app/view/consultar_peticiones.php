@@ -48,7 +48,7 @@ error_reporting(E_ALL);
                         <thead>
                             <th>Nro Ticket</th>
                             <th>Usuario</th>
-                            <th>Árearea</th>
+                            <th>Área</th>
                             <th>Extensión</th>
                             <th>categoría</th>
                             <th>Estado</th>
