@@ -84,7 +84,7 @@ if (isset($_SESSION['init'])) {
                     </div>
 
                     <div class="dropdown">
-                        <a class="dropdown-toggle" style="cursor: pointer;" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fas fa-sitemap fa-2x ml-4 mr-2" style="color:#808080;"></i><span>GestiÓn De Procesos</span></a>
+                        <a class="dropdown-toggle" style="cursor: pointer;" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fas fa-sitemap fa-2x ml-4 mr-2" style="color:#808080;"></i><span>Gestión De Procesos</span></a>
 
                         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                             <a href="#" id="datosFuncionarios" hidden><i class="fa fa-user fa-2x ml-4 mr-2"></i><span>Datos Funcionarios</span></a>
