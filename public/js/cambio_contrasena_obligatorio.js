@@ -9,7 +9,7 @@ $('#enviar').click(function(){
 		}).done(function(data){
 			if (data==1){
 			 $.smkAlert({
-					text: 'esta contraseña no puede ser la misma que tiene actualmente',
+					text: 'Esta contraseña no puede ser la misma que tiene actualmente',
 					type: 'warning'
 				});
 			}else if (data == 2) {

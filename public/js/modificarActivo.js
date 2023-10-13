@@ -46,7 +46,6 @@ $('#guardar_modificaciones').click(function() {
 		processData: false,
 		contentType: false,
 		success: function(data) {
-			console.log(data)
 		  if (data == 1) {
 			$.smkAlert({
 			  text: 'Activo modificado con Exito',

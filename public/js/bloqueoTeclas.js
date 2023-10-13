@@ -5,25 +5,19 @@ $(document).keydown(function (event) {
         event.keyCode == 73 && event.keyCode == 80 && event.keyCode == 84);
     //FUNCIONAN
     if (event.keyCode == 123) { // Prevent F12
-        console.log('EVENTO 123');
         return false;
     } if (event.ctrlKey && event.shiftKey && event.keyCode == 73) { // Prevent Ctrl+Shift+I     
-        console.log('EVENTO 1234');   
         return false;
     }  if (event.ctrlKey && event.shiftKey && event.keyCode == 74) { // Prevent Ctrl+Shift+j    
-        console.log('EVENTO 12345');  
         return false;
     } if (event.ctrlKey && event.keyCode === 85){ // Prevent Ctrl+Shift+U
         console.log('EVENTO 123467');
         return false;
     }  if (event.ctrlKey && event.keyCode == 86){ // Prevent Ctrl + v
-        console.log('EVENTO 1234678');
         return false;
     }  if (event.shiftKey && event.keyCode == 226){ // '>' signos para bloquear scripts
-        console.log('EVENTO 12346789');
         return false;
     }  if (event.keyCode == 226){ // '<' signos para bloquear scripts
-        console.log('EVENTO 123467890');
         return false;
     } 
     if(event.keyCode == 91 && event.keyCode == 86 ){ // Windows + V

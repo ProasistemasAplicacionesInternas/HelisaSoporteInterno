@@ -6,7 +6,6 @@ $("#btn-limpiarCodigo").click(function () {
     url: "../controller/control_codigos.php",
     data: limpiarcodigoF,
   }).done(function (data) {
-    //console.log(data);
     if (data == 1) {
       $.smkAlert({
         text: "Se ha eliminado el código QR del funcionario satisfactoriamente",
@@ -30,14 +29,12 @@ $("#btn-limpiarCodigo").click(function () {
 
 $(document).ready(function () {
   var nombre = $("#f_usuario").val();
-  //console.log(nombre);
   var consulta = "&usuario=" + nombre + "&tipoval=1";
   $.ajax({
     type: "POST",
     url: "../controller/controlador_funcionarios.php",
     data: consulta,
   }).done(function (data) {
-    //console.log(data);
     var datoVal = data;
     $("#f_tipoValidacion").val(datoVal);
   });
@@ -84,7 +81,6 @@ $("#btn-guardarModif").click(function () {
       url: "../controller/controlador_funcionarios.php",
       data: infoCliente,
     }).done(function (data) {
-      //console.log(data);
       if (data != 4) {
         $.smkAlert({
           text: "Se realizó el cambio satisfactoriamente.",

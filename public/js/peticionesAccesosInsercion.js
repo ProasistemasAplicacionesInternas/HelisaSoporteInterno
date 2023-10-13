@@ -97,7 +97,7 @@ nombreUsuarios.forEach((nombreUsuario) => {
       "plataforma=" +
       plataforma +
       "&usuario=" +
-      idUuser.value.trim() +
+      nombreUsuarios.value.trim() +
       "&consultarD=1";
 
     $.ajax({
