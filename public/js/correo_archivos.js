@@ -3,7 +3,8 @@ $(document).on("change", 'input[type="file"]', function () {
   console.log(arreglo);
   if (arreglo.length > 1) {
     $.smkAlert({
-      text: "Solo puede subir un archivo, usted esta subiendo: " + arreglo.length,
+      text: 
+      "Solo puede subir un archivo, usted esta subiendo: " + arreglo.length,
       type: "danger",
     });
     this.value = "";

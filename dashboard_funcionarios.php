@@ -55,7 +55,7 @@ if (isset($_SESSION['init'])) {
                             <span>Solicitudes</span>
                         </a>
                         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton" id="dropTicket">
-                            <a href="#" id="generar_solicitud"><img src="public/img/soporte.png" class="ml-3">Infraestructura</a>
+                            <a href="#" id="generar_solicitud"><img src="public/img/soporte.png" class="ml-3">HelisaSoporteInterno</a>
                             <a href="#" id="vista_solicitudesmai"><img src="public/img/soporte.png" class="ml-3">Aplic. Internas</a>
                         </div>
                     </div>

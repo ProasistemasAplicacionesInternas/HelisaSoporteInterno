@@ -152,7 +152,7 @@ public function modificarFuncionario($update){
 				if($crear_traslado){
 					$db=conectar::acceso();
 					$modificarActivo=$db->prepare('UPDATE activos_internos SET responsable_activo=:areaInfraestructura,estado_activo=:estadoAsignado,fecha_asignacion=:fechaAsignacion WHERE responsable_activo= :identidad_funcionario');
-					$modificarActivo->bindValue('areaInfraestructura',$idproxifun);
+					$modificarActivo->bindValue('areaHelisaSoporteInterno',$idproxifun);
 					$modificarActivo->bindValue('estadoAsignado',14); 
 					$modificarActivo->bindValue('identidad_funcionario',$update->getF_identificacion());
 					$modificarActivo->bindValue('fechaAsignacion', $update->getF_fecha_sistema());

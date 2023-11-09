@@ -23,6 +23,6 @@ class consultar_activos{
 										$activosResponsable[]=$listado_activos;
 							}
 							return $activosResponsable;
-				} else {echo "<option value='" . $identificacionResponsable="800042928". "'>". $nombreResponsable="AREA INFRAESTRUCTURA". "    </option>";}
+				} else {echo "<option value='" . $identificacionResponsable="800042928". "'>". $nombreResponsable="AREA HelisaSoporteInterno". "    </option>";}
 	}
 }?>
