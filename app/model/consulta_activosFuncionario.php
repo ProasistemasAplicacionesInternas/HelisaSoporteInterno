@@ -3,7 +3,7 @@
 //************ SQL*PARA*CONSULTAR*ACTIVOS*PARA*PETICIONES*INTERNAS*DEL*FUNCIONARIO *************//
 /* CREAR*MATRIZ*DE*ACTIVOS*ASOCIADOS*AL*FUNCIONARIO*Y*SE*MUESTRA*AL*MOMENTO*DE*GENERAR*LA*PETICION */
 //**********************************************************************************************//
-class consultar_activos{
+class consultarActivos{
 	public function matrizActivosFuncionario(){
 
 			$db=conectar::acceso();
@@ -15,11 +15,11 @@ class consultar_activos{
 				if ($resultado1!=0) {
 						$db=conectar::acceso();	
 						$activosResponsable=[];
-						$consultar_activo=$db->prepare("SELECT id_activo, serial_activo, codigo_activo, nombre_activo, fecha_asignacion FROM activos_internos WHERE responsable_activo=:identidad");
-							$consultar_activo->bindValue('identidad',$resultado1['identificacion']);
-							$consultar_activo->execute();
+						$consultarActivo=$db->prepare("SELECT id_activo, serial_activo, codigo_activo, nombre_activo, fecha_asignacion FROM activos_internos WHERE responsable_activo=:identidad");
+							$consultarActivo->bindValue('identidad',$resultado1['identificacion']);
+							$consultarActivo->execute();
 							
-							while ($listado_activos=$consultar_activo->fetch(PDO::FETCH_ASSOC)) {
+							while ($listado_activos=$consultarActivo->fetch(PDO::FETCH_ASSOC)) {
 										$activosResponsable[]=$listado_activos;
 							}
 							return $activosResponsable;
