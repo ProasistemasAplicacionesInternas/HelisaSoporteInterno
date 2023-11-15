@@ -19,10 +19,10 @@ class consultarActivos{
 							$consultarActivo->bindValue('identidad',$resultado1['identificacion']);
 							$consultarActivo->execute();
 							
-							while ($listado_activos=$consultarActivo->fetch(PDO::FETCH_ASSOC)) {
-										$activosResponsable[]=$listado_activos;
+							while ($listadoActivos=$consultarActivo->fetch(PDO::FETCH_ASSOC)) {
+										$activosResponsable[]=$listadoActivos;
 							}
 							return $activosResponsable;
-				} else {echo "<option value='" . $identificacionResponsable="800042928". "'>". $nombreResponsable="AREA HelisaSoporteInterno". "    </option>";}
+				} 
 	}
 }?>
