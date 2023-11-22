@@ -1,10 +1,8 @@
 $(document).on("change", 'input[type="file"]', function () {
   var arreglo = this.files;
-  console.log(arreglo);
   if (arreglo.length > 1) {
     $.smkAlert({
-      text:
-        "Solo puede subir un archivo, usted esta subiendo: " + arreglo.length,
+      text: "Solo puede subir un archivo, usted esta subiendo: " + arreglo.length,
       type: "danger",
     });
     this.value = "";
@@ -12,7 +10,6 @@ $(document).on("change", 'input[type="file"]', function () {
   } else {
     var fileSize = this.size;
     var y = arreglo[0].size;
-    console.log(y);
     if (arreglo[0].size > 4000000) {
       $.smkAlert({
         text: "El archivo pesa: " + y + "kb y solo se soporta 4000kb (4mb)",

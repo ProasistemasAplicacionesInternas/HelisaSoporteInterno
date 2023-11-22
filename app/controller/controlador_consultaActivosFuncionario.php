@@ -4,7 +4,7 @@
 //*****************************************************************************************************//
 require_once('../model/consulta_activosFuncionario.php');
 
-$consult = new consultar_activos(); 
-$activos_Asignados = $consult->matrizActivosFuncionario();
+$consult = new consultarActivos(); 
+$activosAsignados = $consult->matrizActivosFuncionario();
 
 ?>

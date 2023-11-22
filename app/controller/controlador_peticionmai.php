@@ -23,7 +23,8 @@ if (session_status() == 0 || session_status() == 1) {
 
 if (isset($_POST['aceptar_petmai'])) {
     $estado = $_POST['p_estado'];
-    if ($estado == 4) { //REDIRECCIONADO
+    //REDIRECTED
+    if ($estado == 4) {
         $peticionMai->setId_peticionMai($_POST['p_nropeticion']);
         $peticionMai->setFecha_peticionMai($_POST['p_fechapeticion']);
         $peticionMai->setUsuario_creacionMai($_POST['p_usuario']);
@@ -40,9 +41,11 @@ if (isset($_POST['aceptar_petmai'])) {
         $crudMai->redireccionarPeticionesMai($peticionMai);
         header("location: ../../dashboard.php");
     } else if ($estado == 2) {
-        define('DOCROOT', $_SERVER['DOCUMENT_ROOT'] . '/infraestructura'); /* MODIFCAR AL CAMBIAR A PRODUCCION */ /* /carpeta_principal_proyecto */
+        /* MODIFY WHEN SWITCHING TO PRODUCTION */ /* /main_project_folder */
+        define('DOCROOT', $_SERVER['DOCUMENT_ROOT'] . '/HelisaSoporteInterno');
         $nombre_imagen = array(0 => 2, 1 => 2, 2 => 2);
-        $numImagenes = count($_FILES['imagen']['name']);/* cuenta el numero de elemntos en el array(sino hay ninguno el resultado sera 1) */
+        /* counts the number of elements in the array (if there are none the result will be 1) */
+        $numImagenes = count($_FILES['imagen']['name']);      
         for ($x = 0; $x < $numImagenes; $x++) {
             $random = rand(100, 1000);
             $nombre_archivo = $_FILES['imagen']['name'];
@@ -137,7 +140,7 @@ if (isset($_GET['encuesta']) && isset($_GET['encuesta']) == 'encuesta') {
     $peticionMai->setEstado_peticionMai($_GET['nro']);
     $crudMai->encuesta($peticionMai);
     echo '<script type="text/javascript" charset="utf-8">
-        alert("gracias por calificar nuestra encuestas, para nosotros es muy importante saber lo que piensa de la atención recibida por nuestro equipo de trabajo.");
+        alert("Gracias por calificar nuestra encuesta, para nosotros es muy importante saber lo que piensa de la atención recibida por nuestro equipo de trabajo.");
         window.location.href="https://soporteinfraestructura.helisa.com/infraestructura/login_peticiones.php"
         </script>';
 }

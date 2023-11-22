@@ -1,12 +1,10 @@
 function identidadU(usuario) {
   var consulta = "&id_usuario=" + usuario + "&consultaU=1";
-  //console.log(consulta);
   $.ajax({
     type: "POST",
     url: "app/controller/control_usuario.php",
     data: consulta,
   }).done(function (data) {
-    //console.log(data);
     if (data != null) {
       usuario = data;
       $("#usuarioM").val(usuario);
@@ -76,13 +74,11 @@ $("#validarUsuario").on("click", function () {
           "&firstPass=" +
           firstPass +
           "&enviarClaveU=1";
-          //console.log(cambioClave);
         $.ajax({
           type: "POST",
           url: "app/controller/control_usuario.php",
           data: cambioClave,
         }).done(function (data) {
-            //console.log(data);
           if (data == 1) {
             $.smkAlert({
               text: "La clave del usuario se actualizó.",

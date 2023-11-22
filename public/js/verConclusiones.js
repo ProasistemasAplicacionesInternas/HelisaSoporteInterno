@@ -5,7 +5,6 @@ function verConclusiones(id_peticion) {
     url: "../controller/control_comentarios.php",
     data: verConclusion,
   }).done(function (data) {
-    console.log(data);
 
     //ARRAY QUE VIENE DESDE EL CONTROLADOR COMO STRING, ACA LO VAMOS A CONVERTIR EN UN ARRAY
     arrPrin = data.split("/,/");

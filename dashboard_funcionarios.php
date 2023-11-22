@@ -55,7 +55,7 @@ if (isset($_SESSION['init'])) {
                             <span>Solicitudes</span>
                         </a>
                         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton" id="dropTicket">
-                            <a href="#" id="generar_solicitud"><img src="public/img/soporte.png" class="ml-3">Infraestructura</a>
+                            <a href="#" id="generar_solicitud"><img src="public/img/soporte.png" class="ml-3">HelisaSoporteInterno</a>
                             <a href="#" id="vista_solicitudesmai"><img src="public/img/soporte.png" class="ml-3">Aplic. Internas</a>
                         </div>
                     </div>
@@ -64,7 +64,7 @@ if (isset($_SESSION['init'])) {
                         <span>Asignaciones</span>
                     </a>
                     <a id="validationBoveda" style="cursor: pointer;"><img src="public/img/soporte.png" alt="" class="ml-3" onclick:><!-- data-toggle="modal"  data-target="#claveBovedaModal" target="_blank" id='modalBovedaOpen'  // abre la modal con html-->
-                        <span>BÓveda</span>
+                        <span>Bóveda</span>
                     </a>
 
                     <?php if ($_SESSION['rol'] == 2) {

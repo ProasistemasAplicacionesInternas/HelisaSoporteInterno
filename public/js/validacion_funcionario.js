@@ -27,7 +27,6 @@
                 data: infoCliente
 
             }).done(function(data){
-                console.log(data);
                 if (data == 1) {
                     $('#formularioCrear').smkClear();
                     window.close();

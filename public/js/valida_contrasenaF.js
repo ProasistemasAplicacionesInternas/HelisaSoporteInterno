@@ -10,8 +10,6 @@ $('#restablecer-cuenta').click(function(){
 			data: datosClave
 
 		}).done(function(data){
-			console.log(datosClave);
-			console.log(data);
 			if (data==1){
 			window.location="../../login_peticiones.php";			
 			}else if (data == 2) {
