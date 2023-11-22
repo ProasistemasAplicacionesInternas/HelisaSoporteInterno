@@ -88,6 +88,7 @@ const nombreUsuarios = document.querySelectorAll('[name^="nombre_usuario"]');
 
 nombreUsuarios.forEach((nombreUsuario) => {
   nombreUsuario.addEventListener("input", function () {
+    let review = nombreUsuario.value;
     const row = this.closest(".row");
     const plataforma = row.querySelector('[name^="plataforma"]').value;
     const contrasena = row.querySelector('[name^="clave"]');
@@ -97,8 +98,9 @@ nombreUsuarios.forEach((nombreUsuario) => {
       "plataforma=" +
       plataforma +
       "&usuario=" +
-      nombreUsuarios.value.trim() +
+      review +
       "&consultarD=1";
+      console.log(accesoConsulta);
 
     $.ajax({
       type: "POST",
