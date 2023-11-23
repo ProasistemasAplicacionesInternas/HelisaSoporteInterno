@@ -58,7 +58,7 @@ if (!isset($_SESSION['status_connect'])) {
 
                             <a href="#" id="solicitudes_internasAdmin"><img src="public/img/soporte.png" alt="" class="ml-3" onclick:>Aplicaciones</a>
 
-                            <a href="#" id="solicitudes_infraestructuraAdmin"><img src="public/img/soporte.png" alt="" class="ml-3" onclick:>Infraestructura</a>
+                            <a href="#" id="solicitudes_HelisaSoporteInternoAdmin"><img src="public/img/soporte.png" alt="" class="ml-3" onclick:>Infraestructura</a>
                         </div>
                     </div>
                     <div class="dropdown">
