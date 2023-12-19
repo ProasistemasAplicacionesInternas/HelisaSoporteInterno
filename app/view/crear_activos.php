@@ -118,7 +118,7 @@ require('../controller/controlador_gruposActivos.php');
                                 <select class="form-control info" id="af_estado" name="af_estado" required>
                                     <option value="" selected> seleccione Estado</option>
                                     <option value="15">Disponible</option>
-                                    <option value="14">Asignado</option>
+                                    <!-- <option value="14">Asignado</option> -->
                                 </select>
                             </div>
                         </div>
