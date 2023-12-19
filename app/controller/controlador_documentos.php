@@ -1,6 +1,6 @@
 <?php
     
-    define('DOCROOTD', $_SERVER['DOCUMENT_ROOT'].'/HelisaSoporteInterno/docs/');
+    define('DOCROOTD', $_SERVER['DOCUMENT_ROOT'].'/infraestructura/docs/');
     date_default_timezone_set('America/Bogota');
     if (isset($_POST['descripcion'])) {
         $nameB = $_POST['descripcion'] . date('YmdHis') .'.txt';

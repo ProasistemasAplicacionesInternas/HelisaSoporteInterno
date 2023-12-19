@@ -42,7 +42,7 @@ $activos_Asignados = $consult->matrizActivosFuncionario();*/
             }
              
             if($_POST['af_estado'] == 15){
-                if($_POST['af_areaCreacion'] == 'HelisaSoporteInterno'){
+                if($_POST['af_areaCreacion'] == 'Infraestructura'){
                     $activoFijo->setAf_funcionario("800042928");
                 }else if($_POST['af_areaCreacion'] == 'Administración'){
                     $activoFijo->setAf_funcionario("80008000");
