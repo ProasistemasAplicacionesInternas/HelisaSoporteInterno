@@ -42,7 +42,7 @@ if (isset($_POST['aceptar_petmai'])) {
         header("location: ../../dashboard.php");
     } else if ($estado == 2) {
         /* MODIFY WHEN SWITCHING TO PRODUCTION */ /* /main_project_folder */
-        define('DOCROOT', $_SERVER['DOCUMENT_ROOT'] . '/HelisaSoporteInterno');
+        define('DOCROOT', $_SERVER['DOCUMENT_ROOT'] . '/infraestructura');
         $nombre_imagen = array(0 => 2, 1 => 2, 2 => 2);
         /* counts the number of elements in the array (if there are none the result will be 1) */
         $numImagenes = count($_FILES['imagen']['name']);      
