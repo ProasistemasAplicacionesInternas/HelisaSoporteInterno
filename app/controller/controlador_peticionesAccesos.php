@@ -142,7 +142,8 @@
         $datos->setRevisado(1);
         $datos->setPlataformas($_POST['plataforma']);
         $datos->setNombre($_POST['usuario']);
-        $accion = $crud->consultaAccesoDuplicado($datos);
+        $id = ($_POST['idUuser']);
+        $accion = $crud->consultaAccesoDuplicado($datos, $id);
     }
 
 //*****************************************************************************************************//
