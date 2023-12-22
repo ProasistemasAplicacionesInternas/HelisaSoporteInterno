@@ -1,44 +1,73 @@
-function verConclusiones(id_peticion){
+function verConclusiones(id_peticion) {
+  var verConclusion = "peticion1=" + id_peticion + "&verConclusion=1";
+  $.ajax({
+    type: "POST",
+    url: "../controller/control_comentarios.php",
+    data: verConclusion,
+  }).done(function (data) {
 
-        var verConclusion ='peticion1=' + id_peticion + '&verConclusion=1';
-    $.ajax({
-        type: 'POST',
-        url: '../controller/control_comentarios.php',
-        data: verConclusion
+    //ARRAY QUE VIENE DESDE EL CONTROLADOR COMO STRING, ACA LO VAMOS A CONVERTIR EN UN ARRAY
+    arrPrin = data.split("/,/");
+    arrPrin.pop();
 
-    }).done(function(data){
-        
-        //ARRAY QUE VIENE DESDE EL CONTROLADOR COMO STRING, ACA LO VAMOS A CONVERTIR EN UN ARRAY
-        arrPrin = data.split("/,/");
-        arrPrin.pop(); 
-     
+    arrPrin.forEach((element) => {
+      arrSec = element.split("/-/");
 
-        arrPrin.forEach(element => {
-            arrSec = element.split("/-/");
-            
+      var id_observacion = arrSec[0];
+      var id_ticket = arrSec[1];
+      var fecha = arrSec[2];
+      var usuario_creacion = arrSec[3];
+      var descripcion_observacion = arrSec[4];
 
-            var id_observacion = arrSec[0];
-            var id_ticket = arrSec[1];
-            var fecha = arrSec[2];
-            var usuario_creacion = arrSec[3];
-            var descripcion_observacion = arrSec[4];
-
-            htmlCadena = 
-
-            `<tr style="width:100%"> 
+      htmlCadena = `<tr style="width:100%"> 
             <td>${id_observacion}</td>
             <td>${id_ticket}</td>
             <td>${fecha}</td>
             <td>${usuario_creacion}</td>
             <td style="max-width:200px; padding:20px; height:20px;">${descripcion_observacion}</td>
             </tr>`;
-            $(document).ready(function(){
-                $("button").click(function(){
-                $("#js").empty();
-                });
-            });
-            $('#js').append(htmlCadena);
-            
+      $(document).ready(function () {
+        $("button").click(function () {
+          $("#js").empty();
         });
+      });
+      $("#js").append(htmlCadena);
     });
+  });
+}
+
+function verComentarios(id_peticion) {
+  var verConclusion = "peticion=" + id_peticion + "&verComentarios=1";
+  $.ajax({
+    type: "POST",
+    url: "../controller/control_comentarios.php",
+    data: verConclusion,
+  }).done(function (data) {
+    //ARRAY QUE VIENE DESDE EL CONTROLADOR COMO STRING, ACA LO VAMOS A CONVERTIR EN UN ARRAY
+    arrPrin = data.split("/,/");
+    arrPrin.pop();
+    arrPrin.forEach((element) => {
+      arrSec = element.split("/-/");
+
+      var id_comentario = arrSec[0];
+      var id_peticion = arrSec[1];
+      var fecha = arrSec[2];
+      var responsable = arrSec[3];
+      var comentario = arrSec[4];
+
+      htmlCadena = `<tr style="width:100%"> 
+              <td>${id_comentario}</td>
+              <td>${id_peticion}</td>
+              <td>${fecha}</td>
+              <td>${responsable}</td>
+              <td>${comentario}</td>
+              </tr>`;
+      $(document).ready(function () {
+        $("button").click(function () {
+          $("#js").empty();
+        });
+      });
+      $("#js").append(htmlCadena);
+    });
+  });
 }

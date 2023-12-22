@@ -39,7 +39,7 @@ function productoCategoria(){
             soporteMai.required = false;
            
             $.smkAlert({
-                        text: 'Seleccione el area a la cual va dirigida la petición',
+                        text: 'Seleccione el área a la cual va dirigida la petición',
                         type: 'warning'
         });
         }

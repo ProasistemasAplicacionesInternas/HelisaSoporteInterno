@@ -131,15 +131,15 @@ public function modificarFuncionario($update){
 				$arreglo=[];
 				$arreglo = $activos->fetchAll(PDO::FETCH_COLUMN);
 				for($i=0; $i<$conteoActivos; $i++){							
-					$crear_traslado=$db->prepare('INSERT INTO traslados(funcionario_inicial, fecha_asignado, funcionario_final, fecha_traslado, activo_traslado, descripcion_traslado, estado_traslado )VALUES(:t_funcionarioI, :t_fechaA, :t_funcionarioF, :t_fechaT, :t_activo, :t_descripcion, :t_estado_traslado)');
-					$crear_traslado->bindValue('t_funcionarioI',$update->getF_identificacion());
-					$crear_traslado->bindValue('t_fechaA',$update->getF_fecha_inactivacion());
-					$crear_traslado->bindValue('t_funcionarioF',$idproxifun);
-					$crear_traslado->bindValue('t_fechaT',$update->getF_fecha_sistema()); 
-					$crear_traslado->bindValue('t_activo',$arreglo[$i]);
-					$crear_traslado->bindValue('t_descripcion','Retiro Empleado');            
-					$crear_traslado->bindValue('t_estado_traslado',3);            
-					$crear_traslado->execute();
+					$crearTraslado=$db->prepare('INSERT INTO traslados(funcionario_inicial, fecha_asignado, funcionario_final, fecha_traslado, activo_traslado, descripcion_traslado, estado_traslado )VALUES(:t_funcionarioI, :t_fechaA, :t_funcionarioF, :t_fechaT, :t_activo, :t_descripcion, :t_estado_traslado)');
+					$crearTraslado->bindValue('t_funcionarioI',$update->getF_identificacion());
+					$crearTraslado->bindValue('t_fechaA',$update->getF_fecha_inactivacion());
+					$crearTraslado->bindValue('t_funcionarioF',$idproxifun);
+					$crearTraslado->bindValue('t_fechaT',$update->getF_fecha_sistema()); 
+					$crearTraslado->bindValue('t_activo',$arreglo[$i]);
+					$crearTraslado->bindValue('t_descripcion','Retiro Empleado');            
+					$crearTraslado->bindValue('t_estado_traslado',3);            
+					$crearTraslado->execute();
 					
 					$acepta_traslado=$db->prepare('UPDATE traslados SET estado_traslado=6 WHERE funcionario_final =:usuario_inicial AND activo_traslado=:id_activo ORDER BY id_traslado DESC LIMIT 1');
 					$acepta_traslado->bindValue('usuario_inicial', $update->getF_identificacion() );          
@@ -149,19 +149,20 @@ public function modificarFuncionario($update){
 
 				} 
 	
-				if($crear_traslado){
+				if($crearTraslado){
 					$db=conectar::acceso();
 					$modificarActivo=$db->prepare('UPDATE activos_internos SET responsable_activo=:areaInfraestructura,estado_activo=:estadoAsignado,fecha_asignacion=:fechaAsignacion WHERE responsable_activo= :identidad_funcionario');
-					$modificarActivo->bindValue('areaInfraestructura',$idproxifun);
+					$modificarActivo->bindValue('areaHelisaSoporteInterno',$idproxifun);
 					$modificarActivo->bindValue('estadoAsignado',14); 
 					$modificarActivo->bindValue('identidad_funcionario',$update->getF_identificacion());
 					$modificarActivo->bindValue('fechaAsignacion', $update->getF_fecha_sistema());
 					$modificarActivo->execute();
 				}
 			}
-			//self::peticionCancelacionAccesos($update->getF_identificacion(),$update->getF_usuario(),'Retiro de funcionario.');
-		}else if($cargoActual != $update->getF_cargo()){//valida la modificacion de cargo del funcionario
-			//self::peticionCancelacionAccesos($update->getF_identificacion(),$update->getF_usuario(),'Remocion de Cargo.');
+			
+			//validates the modification of the official's position
+		}else if($cargoActual != $update->getF_cargo()){
+			
 			echo 8;
 		}
 	}else{
@@ -1338,10 +1339,69 @@ public function cambioContrasena($update){
 
 	}
 
-	public function consultaAccesosFuncionario($usuario){
+	public function consultaAccesosFuncionario($usuario, $estadoFuncionario){
 		require_once('datos_accesosPlataformas.php');
 		$db = Conectar::acceso();
-		$consulta = $db->prepare("SELECT id_accesoPlataforma, plataforma, F.identificacion, AP.usuario, clave, AP.estado, estado.descripcion AS estadoDescripcion, AP.fecha_registro, AP.fecha_inactivacion, P.descripcion as plataforma_descripcion, FP.usuario as plataforma_administrador 
+		if($estadoFuncionario == 5){
+			$consulta = $db->prepare("SELECT id_accesoPlataforma, plataforma, F.identificacion, AP.usuario, clave, AP.estado, estado.descripcion AS estadoDescripcion, AP.fecha_registro, AP.fecha_inactivacion, P.descripcion as plataforma_descripcion, FP.usuario as plataforma_administrador 
+			FROM accesos_plataformas AP 
+			LEFT JOIN funcionarios F ON F.identificacion = id_usuario 
+			LEFT JOIN plataformas P ON P.id_plataforma = AP.plataforma 
+			LEFT JOIN funcionarios FP ON P.administrador = FP.identificacion
+			LEFT JOIN estado ON AP.estado = estado.id_estado
+			WHERE F.usuario = :usuario AND estado.id_estado = 5");
+		$consulta->bindValue('usuario', $usuario);
+		$consulta->execute();
+		$listadoAccesosPlataformas = array();
+
+		if($consulta){
+			foreach($consulta->fetchall() as $listado){
+				$accesosPlataformas = new datosAccesosPlataformas();
+				$accesosPlataformas->setId_accesoPlataforma($listado['id_accesoPlataforma']);
+				$accesosPlataformas->setPlataforma($listado['plataforma']);
+				$accesosPlataformas->setPlataformaDescripcion($listado['plataforma_descripcion']);
+				$accesosPlataformas->setPlataformaAdministrador($listado['plataforma_administrador']);
+				$accesosPlataformas->setId_usuario($listado['identificacion']);
+				$accesosPlataformas->setUsuario($listado['usuario']);
+				$accesosPlataformas->setClave($listado['clave']);
+				$accesosPlataformas->setEstado($listado['estado']);
+				$accesosPlataformas->setEstadoDescripcion($listado['estadoDescripcion']);
+				$accesosPlataformas->setFecha_registro($listado['fecha_registro']);
+				$accesosPlataformas->setFecha_inactivacion($listado['fecha_inactivacion']);
+				$listadoAccesosPlataformas[] = $accesosPlataformas;
+			}
+		}
+		}elseif($estadoFuncionario == 6){
+			$consulta = $db->prepare("SELECT id_accesoPlataforma, plataforma, F.identificacion, AP.usuario, clave, AP.estado, estado.descripcion AS estadoDescripcion, AP.fecha_registro, AP.fecha_inactivacion, P.descripcion as plataforma_descripcion, FP.usuario as plataforma_administrador 
+			FROM accesos_plataformas AP 
+			LEFT JOIN funcionarios F ON F.identificacion = id_usuario 
+			LEFT JOIN plataformas P ON P.id_plataforma = AP.plataforma 
+			LEFT JOIN funcionarios FP ON P.administrador = FP.identificacion
+			LEFT JOIN estado ON AP.estado = estado.id_estado
+			WHERE F.usuario = :usuario AND estado.id_estado = 6");
+		$consulta->bindValue('usuario', $usuario);
+		$consulta->execute();
+		$listadoAccesosPlataformas = array();
+
+		if($consulta){
+			foreach($consulta->fetchall() as $listado){
+				$accesosPlataformas = new datosAccesosPlataformas();
+				$accesosPlataformas->setId_accesoPlataforma($listado['id_accesoPlataforma']);
+				$accesosPlataformas->setPlataforma($listado['plataforma']);
+				$accesosPlataformas->setPlataformaDescripcion($listado['plataforma_descripcion']);
+				$accesosPlataformas->setPlataformaAdministrador($listado['plataforma_administrador']);
+				$accesosPlataformas->setId_usuario($listado['identificacion']);
+				$accesosPlataformas->setUsuario($listado['usuario']);
+				$accesosPlataformas->setClave($listado['clave']);
+				$accesosPlataformas->setEstado($listado['estado']);
+				$accesosPlataformas->setEstadoDescripcion($listado['estadoDescripcion']);
+				$accesosPlataformas->setFecha_registro($listado['fecha_registro']);
+				$accesosPlataformas->setFecha_inactivacion($listado['fecha_inactivacion']);
+				$listadoAccesosPlataformas[] = $accesosPlataformas;
+			}
+		}
+		}else{
+			$consulta = $db->prepare("SELECT id_accesoPlataforma, plataforma, F.identificacion, AP.usuario, clave, AP.estado, estado.descripcion AS estadoDescripcion, AP.fecha_registro, AP.fecha_inactivacion, P.descripcion as plataforma_descripcion, FP.usuario as plataforma_administrador 
 			FROM accesos_plataformas AP 
 			LEFT JOIN funcionarios F ON F.identificacion = id_usuario 
 			LEFT JOIN plataformas P ON P.id_plataforma = AP.plataforma 
@@ -1368,6 +1428,7 @@ public function cambioContrasena($update){
 				$accesosPlataformas->setFecha_inactivacion($listado['fecha_inactivacion']);
 				$listadoAccesosPlataformas[] = $accesosPlataformas;
 			}
+		}
 		}
 
 		$db = null;
@@ -1460,4 +1521,3 @@ public function cambioContrasena($update){
 		}
 	}
 }
-?>

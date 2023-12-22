@@ -1,0 +1,19 @@
+#padre_tabla {
+  border-collapse: collapse !important;
+  width: 100% !important;
+  margin: auto !important;
+}
+
+tbody tr:nth-child(odd) {
+  background-color: #f2f2f2 !important;
+}
+
+label {
+  margin: 1px !important;
+  font-weight: bold !important;
+}
+
+#tabla {
+  margin: 1px !important;
+  padding: 1px !important;
+}

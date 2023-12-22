@@ -68,7 +68,6 @@ $("#modal_estado").on('change',function(){
             url: "app/controller/controlador_cargos.php",
             data:parametro,
         }).done(function(data){
-            console.log(data);
             if(data > 0){
                 $('.close').click();
                 $.smkAlert({

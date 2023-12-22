@@ -5,7 +5,6 @@ function identidadF(funcionario) {
     url: "app/controller/controlador_funcionarios.php",
     data: consulta,
   }).done(function (data) {
-    //console.log(data);
     if (data != null) {
       usuario = data;
       $("#funcionario").val(usuario);

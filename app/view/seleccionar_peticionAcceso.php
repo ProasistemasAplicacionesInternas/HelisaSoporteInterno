@@ -198,7 +198,7 @@ error_reporting(E_ALL);
                         }); 
                     }else if(respuesta != 8){
                         $.smkAlert({
-                            text: 'Un usuario a liberado la peticion.',
+                            text: 'Un usuario a liberado la petición.',
                             type: 'warning'
                         }); 
                         setTimeout(function(){ window.location="../../dashboard_funcionarios.php"; }, 800);

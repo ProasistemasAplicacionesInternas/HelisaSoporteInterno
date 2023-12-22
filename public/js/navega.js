@@ -1,131 +1,136 @@
-$(document).ready(function() {
-    /**** Bloque admin ****/
-    $('#solicitudes_internasAdmin').click(function() {
-        $("#contenido").load("app/view/solicitudes_internas.php");
-    });
-    $('#solicitudes_infraestructuraAdmin').click(function() {
-        $("#contenido").load("app/view/consultar_peticiones.php");
-    });
-    
-    $('#liberar_maiAdmin').click(function() {
-        $("#contenido").load("app/view/liberar_solicitudesmai.php");
-    });
-    $('#liberarAdmin').click(function() {
-        $("#contenido").load("app/view/liberar_soportes.php");
-    });
-    /**************************************/
-    
-    $('#solicitudes_internas').click(function() {
-        $("#contenido").load("app/view/solicitudes_internas.php");
-    });
-    
-    $('#requerimientos').click(function() {
-        $("#contenido").load("app/view/requerimientos.php");
-    });
-    
-    $('#liberar_mai').click(function() {
-        $("#contenido").load("app/view/liberar_solicitudesmai.php");
-    });
-    
-    $('#asistencia').click(function() {
-        $("#contenido").load("app/view/consultar_peticiones.php");
-    });
+$(document).ready(function () {
+  /**** Bloque admin ****/
+  $("#solicitudes_internasAdmin").click(function () {
+    $("#contenido").load("app/view/solicitudes_internas.php");
+  });
+  $("#solicitudes_infraestructuraAdmin").click(function () {
+    $("#contenido").load("app/view/consultar_peticiones.php");
+  });
 
-    $('#liberar').click(function() {
-        $("#contenido").load("app/view/liberar_soportes.php");
-    });
+  $("#liberar_maiAdmin").click(function () {
+    $("#contenido").load("app/view/liberar_solicitudesmai.php");
+  });
+  $("#liberarAdmin").click(function () {
+    $("#contenido").load("app/view/liberar_soportes.php");
+  });
+  /**************************************/
 
-    $('#consultarPeticiones').click(function() {
-        $("#contenido").load("app/view/filtro_consultar.php");
-    });
+  $("#solicitudes_internas").click(function () {
+    $("#contenido").load("app/view/solicitudes_internas.php");
+  });
 
-    $('#consultarIso').click(function() {
-        $("#contenido").load("app/view/filtro_iso.php");
-    });
+  $("#requerimientos").click(function () {
+    $("#contenido").load("app/view/requerimientos.php");
+  });
 
-    $('#consultarRequerimiento').click(function() {
-        $("#contenido").load("app/view/filtro_requerimientos.php");
-    });
+  $("#liberar_mai").click(function () {
+    $("#contenido").load("app/view/liberar_solicitudesmai.php");
+  });
 
-    $('#comentariosPeticiones').click(function() {
-        $("#contenido").load("app/view/filtro_comentar.php");
-    });
+  $("#asistencia").click(function () {
+    $("#contenido").load("app/view/consultar_peticiones.php");
+  });
 
-    $('#funcionarios').click(function() {
-        $("#contenido").load("app/view/consulta_funcionarios.php");
-    });
+  $("#liberar").click(function () {
+    $("#contenido").load("app/view/liberar_soportes.php");
+  });
 
-    //$('#funcionarios_Inactivos').click(function() {
-      //  $("#contenido").load("app/view/funcionarios_inactivos.php");
-    //});
-    $('#funcionarios_Inactivos').click(function() {
-        $("#contenido").load("app/view/funcionarios_inactivos.php?val=2");
-    });
+  $("#consultarPeticiones").click(function () {
+    $("#contenido").load("app/view/filtro_consultar.php");
+  });
 
-    $('#funcionarios_Retirados').click(function() {
-        $("#contenido").load("app/view/funcionarios_inactivos.php?val=1");
-    });
+  $("#consultarIso").click(function () {
+    $("#contenido").load("app/view/filtro_iso.php");
+  });
 
-    $('#servidores').click(function() {
-        $("#contenido").load("app/view/servidores.php");
-    });
+  $("#consultarRequerimiento").click(function () {
+    $("#contenido").load("app/view/filtro_requerimientos.php");
+  });
 
-    $('#maquinas').click(function() {
-        $("#contenido").load("app/view/maquinas.php");
-    });
+  $("#comentariosPeticiones").click(function () {
+    $("#contenido").load("app/view/filtro_comentar.php");
+  });
 
-    $('#activos').click(function() {
-        $("#contenido").load("app/view/filtro_activos.php");
-    });
+  $("#funcionarios").click(function () {
+    $("#contenido").load("app/view/consulta_funcionarios.php");
+  });
 
-    $('#control_actividades').click(function() {
-        $("#contenido").load("app/view/filtro_control.php");
-    });
+  //$('#funcionarios_Inactivos').click(function() {
+  //  $("#contenido").load("app/view/funcionarios_inactivos.php");
+  //});
+  $("#funcionarios_Inactivos").click(function () {
+    $("#contenido").load("app/view/funcionarios_inactivos.php?val=2");
+  });
 
-    $('#usuarios').click(function() {
-        $("#contenido").load("app/view/usuarios.php");
-    });
+  $("#funcionarios_Retirados").click(function () {
+    $("#contenido").load("app/view/funcionarios_inactivos.php?val=1");
+  });
 
-    $('#usuarios_inactivos').click(function() {
-        $("#contenido").load("app/view/usuarios_inactivos.php");
-    });
+  $("#servidores").click(function () {
+    $("#contenido").load("app/view/servidores.php");
+  });
 
-    $('#ingresos').click(function() {
-        $("#contenido").load("app/view/filtro_ingresos.php");
-    });
+  $("#maquinas").click(function () {
+    $("#contenido").load("app/view/maquinas.php");
+  });
 
-    $('#ingresos-funcionarios').click(function() {
-        $("#contenido").load("app/view/filtro_ingresos_funcionarios.php");
-    });
+  $("#activos").click(function () {
+    $("#contenido").load("app/view/filtro_activos.php");
+  });
 
-    $('#accesos').click(function() {
-        $("#contenido").load("app/view/filtro_accesos.php");
-    });
+  $("#control_actividades").click(function () {
+    $("#contenido").load("app/view/filtro_control.php");
+  });
 
-    $('#accesos-funcionarios').click(function() {
-        $("#contenido").load("app/view/filtro_accesos_funcionarios.php");
-    });
+  $("#usuarios").click(function () {
+    $("#contenido").load("app/view/usuarios.php");
+  });
 
-    $('#departamentos').click(function() {
-        $("#contenido").load("app/view/organigrama.php");
-    });
+  $("#usuarios_inactivos").click(function () {
+    $("#contenido").load("app/view/usuarios_inactivos.php");
+  });
 
-    $('#areas').click(function() {
-        $("#contenido").load("app/view/organigrama_areas.php");
-    });
+  $("#ingresos").click(function () {
+    $("#contenido").load("app/view/filtro_ingresos.php");
+  });
 
-    $('#cargos').click(function() {
-        $("#contenido").load("app/view/organigrama_cargos.php");
-    });
+  $("#ingresos-funcionarios").click(function () {
+    $("#contenido").load("app/view/filtro_ingresos_funcionarios.php");
+  });
 
-    $('#centroCostos').click(function() {
-        $("#contenido").load("app/view/organigrama_centroCostos.php");
-    });
+  $("#accesos").click(function () {
+    $("#contenido").load("app/view/filtro_accesos.php");
+  });
 
-    $('#plataformas').click(function() {
-        $("#contenido").load("app/view/plataformas.php");
-    });
-    $('#gestion_accesos').click(function() {
-        $("#contenido").load("app/view/peticiones_accesosDelegados.php");
-    });
+  $("#accesos-funcionarios").click(function () {
+    $("#contenido").load("app/view/filtro_accesos_funcionarios.php");
+  });
+
+  $("#departamentos").click(function () {
+    $("#contenido").load("app/view/organigrama.php");
+  });
+
+  $("#areas").click(function () {
+    $("#contenido").load("app/view/organigrama_areas.php");
+  });
+
+  $("#cargos").click(function () {
+    $("#contenido").load("app/view/organigrama_cargos.php");
+  });
+
+  $("#centroCostos").click(function () {
+    $("#contenido").load("app/view/organigrama_centroCostos.php");
+  });
+
+  $("#plataformasActivas").click(function () {
+    $("#contenido").load("app/view/plataformasActivas.php");
+  });
+
+  $("#plataformasInactivas").click(function () {
+    $("#contenido").load("app/view/plataformasInactivas.php");
+  });
+
+  $("#gestion_accesos").click(function () {
+    $("#contenido").load("app/view/peticiones_accesos.php");
+  });
 });

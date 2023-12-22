@@ -14,7 +14,7 @@
             $db=conectar::acceso();
             $listaConsulta=[];
 
-            $seleccion=$db->prepare('SELECT  numero_peticion, estado.descripcion AS estado,  DATE_FORMAT(fecha_peticion,"%d-%m-%Y %H:%i"),DATE_FORMAT(fecha_atendido,"%d-%m-%Y %H:%i"), usuario,categorias.nombre_categoria, peticiones.descripcion, usuario_atiende, conclusiones,nivel_encuesta,imagen FROM peticiones LEFT JOIN categorias ON id_categoria=categoria
+            $seleccion=$db->prepare('SELECT  numero_peticion, estado.descripcion AS estado,  DATE_FORMAT(fecha_peticion,"%d-%m-%Y %H:%i"),DATE_FORMAT(fecha_atendido,"%d-%m-%Y %H:%i"), usuario,categorias.nombre_categoria, peticiones.descripcion, usuario_atiende, conclusiones,nivel_encuesta, imagen, imagen2 FROM peticiones LEFT JOIN categorias ON id_categoria=categoria
             LEFT JOIN estado ON estado.id_estado=peticiones.estado 
             WHERE fecha_peticion BETWEEN :fechaInicial AND :fechaFinal AND (estado=:estadoN OR estado=:estadoP OR estado=:estadoD OR estado=:estadoC OR estado=:estadoS)');
             $seleccion->bindValue('estadoN','1');
@@ -39,6 +39,7 @@
                 $consulta->setP_conclusiones($listado['conclusiones']);
                 $consulta->setCalificacion($listado['nivel_encuesta']);
                 $consulta->setP_cargarimagen($listado['imagen']);
+                $consulta->setP_cargarimagen2($listado['imagen2']);
                 
                 $listaConsulta[]=$consulta;
                 
@@ -50,7 +51,7 @@
                 $db=conectar::acceso();
                 $listaConsulta=[];
 
-                $seleccion=$db->prepare('SELECT id_peticionmai, estado.descripcion AS estado, DATE_FORMAT(fecha_peticion,"%d-%m-%Y %H:%i"),DATE_FORMAT(fecha_atencion,"%d-%m-%Y %H:%i"), usuario_creacion, productos_mai.nombre_producto, peticiones_mai.descripcion_peticion, usuario_atencion, conclusiones,nivel_encuesta,imagen, req_nombre, req_justificacion, sprint, gestion, tipo_soportemai, tipo_soportemai.nombre, tipo_soportemai.id  FROM peticiones_mai 
+                $seleccion=$db->prepare('SELECT id_peticionmai, estado.descripcion AS estado, DATE_FORMAT(fecha_peticion,"%d-%m-%Y %H:%i"),DATE_FORMAT(fecha_atencion,"%d-%m-%Y %H:%i"), usuario_creacion, productos_mai.nombre_producto, peticiones_mai.descripcion_peticion, usuario_atencion, conclusiones,nivel_encuesta,imagen,imagen2, req_nombre, req_justificacion, sprint, gestion, tipo_soportemai, tipo_soportemai.nombre, tipo_soportemai.id  FROM peticiones_mai 
                 LEFT JOIN productos_mai ON id_producto = producto_mai 
                 LEFT JOIN estado ON estado.id_estado=peticiones_mai.estado_peticion
                 LEFT JOIN tipo_soportemai on tipo_soportemai.id = peticiones_mai.tipo_soportemai
@@ -79,6 +80,7 @@
                     $consulta->setP_conclusiones($listado['conclusiones']);
                     $consulta->setCalificacion($listado['nivel_encuesta']);
                     $consulta->setP_cargarimagen($listado['imagen']);
+                    $consulta->setP_cargarimagen2($listado['imagen2']);
                     $consulta->setReq_nombre($listado['req_nombre']);
                     $consulta->setReq_justificacion($listado['req_justificacion']);
                     $consulta->setSprint($listado['sprint']);
@@ -98,7 +100,7 @@
             $db=conectar::acceso();
             $listaConsulta=[];
 
-            $seleccion=$db->prepare('SELECT  numero_peticion, estado.descripcion AS estado,  DATE_FORMAT(fecha_peticion,"%d-%m-%Y %H:%i"),DATE_FORMAT(fecha_atendido,"%d-%m-%Y %H:%i"), usuario,categorias.nombre_categoria, peticiones.descripcion, usuario_atiende, conclusiones,nivel_encuesta,imagen  FROM peticiones  
+            $seleccion=$db->prepare('SELECT  numero_peticion, estado.descripcion AS estado,  DATE_FORMAT(fecha_peticion,"%d-%m-%Y %H:%i"),DATE_FORMAT(fecha_atendido,"%d-%m-%Y %H:%i"), usuario,categorias.nombre_categoria, peticiones.descripcion, usuario_atiende, conclusiones,nivel_encuesta,imagen, imagen2  FROM peticiones  
             LEFT JOIN estado ON estado.id_estado=peticiones.estado  
             LEFT JOIN categorias ON id_categoria=categoria  
             WHERE  numero_peticion=:numero_peticion AND (estado=:estadoN OR estado=:estadoP OR estado=:estadoD OR estado=:estadoC OR estado=:estadoS)');
@@ -123,6 +125,7 @@
                 $consulta->setP_conclusiones($listado['conclusiones']);
                 $consulta->setCalificacion($listado['nivel_encuesta']);
                 $consulta->setP_cargarimagen($listado['imagen']);
+                $consulta->setP_cargarimagen2($listado['imagen2']);
 
                 $listaConsulta[]=$consulta;    
                 
@@ -131,7 +134,7 @@
             $db=conectar::acceso();
             $listaConsulta=[];
 
-            $seleccion=$db->prepare('SELECT  id_peticionmai, estado.descripcion AS estado, DATE_FORMAT(fecha_peticion,"%d-%m-%Y %H:%i"),DATE_FORMAT(fecha_atencion,"%d-%m-%Y %H:%i"), usuario_creacion, productos_mai.nombre_producto, descripcion_peticion, usuario_atencion, conclusiones,nivel_encuesta,imagen, req_nombre, req_justificacion, sprint, gestion, tipo_soportemai, tipo_soportemai.nombre, tipo_soportemai.id  FROM peticiones_mai 
+            $seleccion=$db->prepare('SELECT  id_peticionmai, estado.descripcion AS estado, DATE_FORMAT(fecha_peticion,"%d-%m-%Y %H:%i"),DATE_FORMAT(fecha_atencion,"%d-%m-%Y %H:%i"), usuario_creacion, productos_mai.nombre_producto, descripcion_peticion, usuario_atencion, conclusiones,nivel_encuesta,imagen,imagen2, req_nombre, req_justificacion, sprint, gestion, tipo_soportemai, tipo_soportemai.nombre, tipo_soportemai.id  FROM peticiones_mai 
             LEFT JOIN productos_mai ON id_producto = producto_mai 
             LEFT JOIN estado ON estado.id_estado=peticiones_mai.estado_peticion
             LEFT JOIN tipo_soportemai on tipo_soportemai.id = peticiones_mai.tipo_soportemai
@@ -157,6 +160,7 @@
                 $consulta->setP_conclusiones($listado['conclusiones']);
                 $consulta->setCalificacion($listado['nivel_encuesta']);
                 $consulta->setP_cargarimagen($listado['imagen']);
+                $consulta->setP_cargarimagen2($listado['imagen2']);
                 $consulta->setReq_nombre($listado['req_nombre']);
                 $consulta->setReq_justificacion($listado['req_justificacion']);
                 $consulta->setSprint($listado['sprint']);
@@ -176,7 +180,7 @@
             $db=conectar::acceso();
             $listaConsulta=[];
 
-            $seleccion=$db->prepare('SELECT  id_peticionmai, estado.descripcion AS estado, DATE_FORMAT(fecha_peticion,"%d-%m-%Y %H:%i"),DATE_FORMAT(fecha_atencion,"%d-%m-%Y %H:%i"), usuario_creacion, productos_mai.nombre_producto, descripcion_peticion, usuario_atencion, conclusiones,nivel_encuesta,imagen, req_nombre , req_justificacion, sprint, gestion, tipo_soportemai, tipo_soportemai.nombre, tipo_soportemai.id 
+            $seleccion=$db->prepare('SELECT  id_peticionmai, estado.descripcion AS estado, DATE_FORMAT(fecha_peticion,"%d-%m-%Y %H:%i"),DATE_FORMAT(fecha_atencion,"%d-%m-%Y %H:%i"), usuario_creacion, productos_mai.nombre_producto, descripcion_peticion, usuario_atencion, conclusiones,nivel_encuesta,imagen,imagen2, req_nombre , req_justificacion, sprint, gestion, tipo_soportemai, tipo_soportemai.nombre, tipo_soportemai.id 
             FROM peticiones_mai LEFT JOIN productos_mai ON id_producto = producto_mai 
             LEFT JOIN estado ON estado.id_estado=peticiones_mai.estado_peticion
             LEFT JOIN tipo_soportemai on tipo_soportemai.id = peticiones_mai.tipo_soportemai
@@ -202,6 +206,7 @@
                 $consulta->setP_conclusiones($listado['conclusiones']);
                 $consulta->setCalificacion($listado['nivel_encuesta']);
                 $consulta->setP_cargarimagen($listado['imagen']);
+                $consulta->setP_cargarimagen2($listado['imagen2']);
                 $consulta->setReq_nombre($listado['req_nombre']);
                 $consulta->setReq_justificacion($listado['req_justificacion']);
                 $consulta->setSprint($listado['sprint']);
@@ -221,7 +226,9 @@
         $db=conectar::acceso();
         $listaConsulta=[];
 
-        $seleccion=$db->prepare('SELECT  numero_peticion,  DATE_FORMAT(fecha_peticion,"%d-%m-%Y %H:%i"),DATE_FORMAT(fecha_atendido,"%d-%m-%Y %H:%i"), usuario,categorias.nombre_categoria, descripcion, usuario_atiende, conclusiones,nivel_encuesta,imagen FROM peticiones LEFT JOIN categorias ON id_categoria=categoria WHERE fecha_peticion BETWEEN :fechaInicial AND :fechaFinal AND (estado=:estadoD OR estado=:estadoC) AND id_categoria=:categorias');
+        $seleccion=$db->prepare('SELECT  numero_peticion,  DATE_FORMAT(fecha_peticion,"%d-%m-%Y %H:%i"),DATE_FORMAT(fecha_atendido,"%d-%m-%Y %H:%i"), usuario,categorias.nombre_categoria, descripcion, usuario_atiende, conclusiones,nivel_encuesta,imagen, imagen2 FROM peticiones 
+        LEFT JOIN categorias ON id_categoria=categoria 
+        WHERE fecha_peticion BETWEEN :fechaInicial AND :fechaFinal AND (estado=:estadoD OR estado=:estadoC) AND id_categoria=:categorias');
         $seleccion->bindValue('estadoC','4');
         $seleccion->bindValue('estadoD','2');
         $seleccion->bindValue('categorias','20');
@@ -241,6 +248,7 @@
             $consulta->setP_conclusiones($listado['conclusiones']);
             $consulta->setCalificacion($listado['nivel_encuesta']);
             $consulta->setP_cargarimagen($listado['imagen']);
+            $consulta->setP_cargarimagen2($listado['imagen2']);
             
             $listaConsulta[]=$consulta;
                 
@@ -250,7 +258,7 @@
         $db=conectar::acceso();
         $listaConsulta=[];
 
-        $seleccion=$db->prepare('SELECT  numero_peticion, estado.descripcion AS estado,  DATE_FORMAT(fecha_peticion,"%d-%m-%Y %H:%i"),DATE_FORMAT(fecha_atendido,"%d-%m-%Y %H:%i"), usuario,categorias.nombre_categoria, peticiones.descripcion, usuario_atiende, conclusiones,nivel_encuesta,imagen  FROM peticiones  
+        $seleccion=$db->prepare('SELECT  numero_peticion, estado.descripcion AS estado,  DATE_FORMAT(fecha_peticion,"%d-%m-%Y %H:%i"),DATE_FORMAT(fecha_atendido,"%d-%m-%Y %H:%i"), usuario,categorias.nombre_categoria, peticiones.descripcion, usuario_atiende, conclusiones,nivel_encuesta,imagen,imagen2  FROM peticiones  
         LEFT JOIN estado ON estado.id_estado=peticiones.estado  
         LEFT JOIN categorias ON id_categoria=categoria  
         WHERE  numero_peticion=:numero_peticion AND (estado=:estadoN OR estado=:estadoP OR estado=:estadoD OR estado=:estadoC OR estado=:estadoS) AND categoria=:categoria ');
@@ -276,6 +284,7 @@
             $consulta->setP_conclusiones($listado['conclusiones']);
             $consulta->setCalificacion($listado['nivel_encuesta']);
             $consulta->setP_cargarimagen($listado['imagen']);
+            $consulta->setP_cargarimagen2($listado['imagen2']);
 
             $listaConsulta[]=$consulta;    
         }        

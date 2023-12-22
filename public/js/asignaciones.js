@@ -61,7 +61,6 @@ $('#modal_modificar').click(function(){
         url:"../controller/controlador_peticionesAccesos.php",
         data:data
     }).done(function(respuesta){
-        console.log(respuesta);
         if(respuesta==1){
             $('.close').click();
             $.smkAlert({

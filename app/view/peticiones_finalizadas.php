@@ -52,8 +52,8 @@
                         <th style="width:8%;">Nro Ticket</th>
                         <th style="width:8%;">Fecha Solicitud</th>
                         <th style="width:8%;">Usuario Solicitud</th>
-                        <th style="width:25px;">Tipo de Solicitud</th>                           
-                        <th style="width:8%;">Categoria</th>
+                        <th style="width:25px;">Tipo de Solicitud</th>
+                        <th style="width:8%;">Categoría</th>
                         <th style="width:8%;">Fecha Atendido</th>
                         <th style="width:8%;">Usuario Atendio</th>
                         <th style="width:8%;">Calificación</th>
@@ -68,7 +68,9 @@
                         <?php if ($_SESSION['id_roles'] == 1 || $_SESSION['id_roles'] == 9) {
                             echo "<th style='width:8%;'>Conclusiones</th>";
                         } ?>
-                        <th style="width:10px;">Imagen</th>
+                        <th style="width:8px;">Imagen Solicitante</th>
+                        <th style="width:10px;">Imagen Asesor</th>
+                        
 
                     </thead>
                     <tbody>
@@ -115,11 +117,13 @@
                                     }
                                     ?>
                                 </td>
-                                <td>
-                                    <?php if ($_SESSION['id_roles'] == 1 || $_SESSION['id_roles'] == 5 || $_SESSION['id_roles'] == 9) {
-                                        echo $datos->getP_estado();
-                                    } ?>
-                                </td>
+
+                                <?php if ($_SESSION['id_roles'] == 1 || $_SESSION['id_roles'] == 5 || $_SESSION['id_roles'] == 9) { ?>
+                                    <td>
+                                        <?php $datos->getP_estado(); ?>
+                                    </td>
+
+                                <?php } ?>
                                 <td>
                                     <span style="display: none;" id="p_descipcion<?php echo $datos->getP_nropeticion(); ?>"><?php echo $datos->getP_descripcion() ?></span>
                                     <span style="display: none;" id="req_nombre<?php echo $datos->getP_nropeticion(); ?>"><?php echo $datos->getReq_nombre() ?></span>
@@ -145,6 +149,14 @@
                                         </a>
                                     <?php endif; ?>
                                 </td>
+                                <td>
+                                    <?php if ($datos->getP_cargarimagen2() != null && $datos->getP_cargarimagen2() != '2') : ?>
+
+                                        <a href="../../cartas/<?= $datos->getP_cargarimagen2() ?>" target="_blank" id="imagen2" name="imagen2">
+                                            <button class="far fa-images" id="imagenPetFinal"></button>
+                                        </a>
+                                    <?php endif; ?>
+                                </td>
                             </tr>
 
                         <?php endforeach; ?>
@@ -157,7 +169,7 @@
 
 
 
-    
+
     <div class="modal fade" id="verDatosfinalizado" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
@@ -183,7 +195,7 @@
                             <label for="exampleFormControlTextarea1">Justificacion del requerimiento</label>
                             <textarea class="form-control" id="req_justificacionModal" rows="3"></textarea>
                         </div>
-                    </div>    
+                    </div>
                 </div>
                 <div class="modal-footer">
                 </div>

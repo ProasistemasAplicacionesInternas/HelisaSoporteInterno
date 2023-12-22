@@ -48,9 +48,9 @@ error_reporting(E_ALL);
                         <thead>
                             <th>Nro Ticket</th>
                             <th>Usuario</th>
-                            <th>Area</th>
-                            <th>Extension</th>
-                            <th>categoria</th>
+                            <th>Área</th>
+                            <th>Extensión</th>
+                            <th>categoría</th>
                             <th>Estado</th>
                             <th>Conclusiones</th>                           
                             <th>Modificar</th>
