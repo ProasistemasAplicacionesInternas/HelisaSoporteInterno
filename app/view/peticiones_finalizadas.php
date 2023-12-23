@@ -68,7 +68,9 @@
                         <?php if ($_SESSION['id_roles'] == 1 || $_SESSION['id_roles'] == 9) {
                             echo "<th style='width:8%;'>Conclusiones</th>";
                         } ?>
-                        <th style="width:10px;">Imagen</th>
+                        <th style="width:8px;">Imagen Solicitante</th>
+                        <th style="width:10px;">Imagen Asesor</th>
+                        
 
                     </thead>
                     <tbody>
@@ -143,6 +145,14 @@
                                     <?php if ($datos->getP_cargarimagen() != null && $datos->getP_cargarimagen() != '2') : ?>
 
                                         <a href="../../cartas/<?= $datos->getP_cargarimagen() ?>" target="_blank" id="imagen" name="imagen">
+                                            <button class="far fa-images" id="imagenPetFinal"></button>
+                                        </a>
+                                    <?php endif; ?>
+                                </td>
+                                <td>
+                                    <?php if ($datos->getP_cargarimagen2() != null && $datos->getP_cargarimagen2() != '2') : ?>
+
+                                        <a href="../../cartas/<?= $datos->getP_cargarimagen2() ?>" target="_blank" id="imagen2" name="imagen2">
                                             <button class="far fa-images" id="imagenPetFinal"></button>
                                         </a>
                                     <?php endif; ?>

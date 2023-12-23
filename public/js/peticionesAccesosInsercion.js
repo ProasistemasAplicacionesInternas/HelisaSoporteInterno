@@ -92,15 +92,16 @@ nombreUsuarios.forEach((nombreUsuario) => {
     const row = this.closest(".row");
     const plataforma = row.querySelector('[name^="plataforma"]').value;
     const contrasena = row.querySelector('[name^="clave"]');
-    const idUuser = document.getElementById("p_identificacion");
+    const idUuser = document.getElementById("p_identificacion").value;
     const estado = row.querySelector('[name^="estado"]');
     let accesoConsulta =
       "plataforma=" +
       plataforma +
       "&usuario=" +
       review +
+      "&idUuser=" +
+      idUuser +
       "&consultarD=1";
-      console.log(accesoConsulta);
 
     $.ajax({
       type: "POST",
