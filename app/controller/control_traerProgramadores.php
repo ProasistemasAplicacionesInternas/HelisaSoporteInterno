@@ -7,7 +7,7 @@ $datos= new Peticion();
 
         $db=conectar::acceso();
         
-        $seleccion=$db->prepare('SELECT usuario FROM usuarios WHERE (id_roles=3 OR id_roles=5) AND uestado = 5 ');
+        $seleccion=$db->prepare('SELECT usuario FROM usuarios WHERE (id_roles=3) AND uestado = 5 ');
         $seleccion->execute();
         $programadores = [];
 
