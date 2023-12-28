@@ -9,8 +9,8 @@
         $consultarActivo = consultaCompleta();
     } else if ($rol == 2) {
         $areaCreacion = 32;
-        $consultarActivo = ($areaCreacion);
-    } else {
+        $consultarActivo = consultaPorRol($areaCreacion);
+    } else if ($rol == 1 || $rol == 6 || $rol == 9) {
         $areaCreacion = 27;
         $consultarActivo = consultaPorRol($areaCreacion);
     }    
