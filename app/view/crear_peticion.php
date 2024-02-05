@@ -133,7 +133,7 @@
                                     <option value="" selected>Seleccione un activo</option>
                                         <?php
 
-                                             foreach($activos_Asignados as $activoFijo){
+                                             foreach($activosAsignados as $activoFijo){
                                                 echo "<option value='".$activoFijo["id_activo"]."'>" .$activoFijo["codigo_activo"]. " / " .$activoFijo["nombre_activo"]. "</option>" ;
      
                                                   }

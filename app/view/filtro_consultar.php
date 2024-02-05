@@ -53,7 +53,7 @@
                 <option value="" selected>Seleccione una opción</option>
                 <option value="1">Consultar por fecha</option>
                 <option value="3">Consultar por Peticion</option>
-                <?php if($_SESSION['id_roles']==1){
+                <?php if($_SESSION['id_roles']==1 OR $_SESSION['id_roles']==5){
                     echo '<option value="4">Consultar por Programador</option>';
                 }
                 ?>
