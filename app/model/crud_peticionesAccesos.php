@@ -78,13 +78,13 @@
         public function modificarRevisado($datos){
             $db = Conectar::acceso();
             $consulta = $db->prepare("UPDATE peticiones_accesos SET revisado = :revisado WHERE id_peticionAcceso = :id_peticionAcceso");
-            $consulta->bindValue('id_peticionAcceso',$datos->getNombre());
+            $consulta->bindValue('id_peticionAcceso',$datos->getId_peticion());
             $consulta->bindValue('revisado',$datos->getRevisado());
             $consulta->execute();
 
             if($consulta){
                 $consultaB = $db->prepare('SELECT aprobacion FROM peticiones_accesos WHERE id_peticionAcceso = :id_peticionAcceso');
-                $consultaB->bindValue('id_peticionAcceso',$datos->getNombre());
+                $consultaB->bindValue('id_peticionAcceso',$datos->getId_peticion());
                 $consultaB->execute();
                 $resultado = $consultaB->fetch(PDO::FETCH_ASSOC);
                 if($resultado['aprobacion'] == 12){
@@ -100,7 +100,7 @@
         public function consultaAccesoDuplicado($datos, $id){
             $db = Conectar::acceso();
             $consulta = $db->prepare("SELECT * FROM accesos_plataformas WHERE usuario = :usuarioD AND Plataforma = :plataformaD AND fecha_inactivacion IS NULL AND id_usuario = :id");
-            $consulta->bindValue('usuarioD',$datos->getNombre());
+            $consulta->bindValue('usuarioD',$datos->getUsuario_creacion());
             $consulta->bindValue('plataformaD',$datos->getPlataformas());
             $consulta->bindValue('id',$id);
             $consulta->execute();
@@ -132,7 +132,7 @@
         public function modificarEstado($datos){
             $db = Conectar::acceso();
             $consulta = $db->prepare("UPDATE peticiones_accesos SET estado = :estado, fecha_atendido = :fecha_atendido, usuario_atiende = :usuario_atiende WHERE id_peticionAcceso = :id_peticionAcceso");
-            $consulta->bindValue('id_peticionAcceso',$datos->getNombre());
+            $consulta->bindValue('id_peticionAcceso',$datos->getId_peticion());
             $consulta->bindValue('fecha_atendido',$datos->getFecha_atendido());
             $consulta->bindValue('usuario_atiende',$datos->getUsuario_atendio());
             $consulta->bindValue('estado',8);
@@ -171,7 +171,7 @@
             $consulta->bindValue('aprobacion',$datos->getAprobado());
             $consulta->bindValue('fecha_atendido', $datos->getFecha_atendido());
             $consulta->bindValue('usuario_atiende',$datos->getUsuario_atendio());
-            $consulta->bindValue('id_peticion',$datos->getNombre());
+            $consulta->bindValue('id_peticion',$datos->getId_peticion());
             $consulta->bindValue('plataformas',$datos->getPlataformas());
             $consulta->execute();
 
@@ -191,7 +191,7 @@
             $consulta->bindValue('aprobacion',$datos->getAprobado());
             $consulta->bindValue('fecha_atendido', $datos->getFecha_atendido());
             $consulta->bindValue('usuario_atiende',$datos->getUsuario_atendio());
-            $consulta->bindValue('id_peticion',$datos->getNombre());
+            $consulta->bindValue('id_peticion',$datos->getId_peticion());
             $consulta->bindValue('plataformas',$datos->getPlataformas());
             $consulta->bindValue('revisado',1);
             $consulta->execute();
@@ -469,7 +469,7 @@
             $insertarSubRegistro->bindValue('usuario', $acceso->getNombre());
             $insertarSubRegistro->bindValue('clave', $acceso->getClave());
             $insertarSubRegistro->bindValue('estado', $acceso->getEstado());
-            $insertarSubRegistro->bindValue('id_peticionAcceso',$acceso->getNombre());
+            $insertarSubRegistro->bindValue('id_peticionAcceso',$acceso->getId_peticion());
             $insertarSubRegistro->execute(); 
         }
 
@@ -489,7 +489,7 @@
             $insertarSubRegistro->bindValue('usuario', $acceso->getNombre());
             $insertarSubRegistro->bindValue('clave','No Use');
             $insertarSubRegistro->bindValue('estado', $acceso->getEstado());
-            $insertarSubRegistro->bindValue('id_peticionAcceso',$acceso->getNombre());
+            $insertarSubRegistro->bindValue('id_peticionAcceso',$acceso->getId_peticion());
             $insertarSubRegistro->execute();
 
         }
@@ -508,7 +508,7 @@
             $insertarSubRegistro->bindValue('usuario', $acceso->getNombre());
             $insertarSubRegistro->bindValue('clave','No se afecta');
             $insertarSubRegistro->bindValue('estado', $acceso->getEstado());
-            $insertarSubRegistro->bindValue('id_peticionAcceso',$acceso->getNombre());
+            $insertarSubRegistro->bindValue('id_peticionAcceso',$acceso->getId_peticion());
             $insertarSubRegistro->execute();
 
         }
@@ -527,7 +527,7 @@
             $insertarSubRegistro->bindValue('usuario', $acceso->getNombre());
             $insertarSubRegistro->bindValue('clave','No se afecta');
             $insertarSubRegistro->bindValue('estado', $acceso->getEstado());
-            $insertarSubRegistro->bindValue('id_peticionAcceso',$acceso->getNombre());
+            $insertarSubRegistro->bindValue('id_peticionAcceso',$acceso->getId_peticion());
             $insertarSubRegistro->execute();
 
         }

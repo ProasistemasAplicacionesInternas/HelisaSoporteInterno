@@ -130,7 +130,7 @@
     else if(isset($_POST['modificarRevisado'])){
         
         $datos->setRevisado(1);
-        $datos->setNombre($_POST['id_peticion']);
+        $datos->setId_peticion($_POST['id_peticion']);
         $accion = $crud->modificarRevisado($datos);
         echo $accion;
     }
@@ -158,7 +158,7 @@
     else if(isset($_POST['seleccionar'])){
         date_default_timezone_set('America/Bogota');
 
-        $datos->setNombre($_POST['id_peticion']);
+        $datos->setId_peticion($_POST['id_peticion']);
         $datos->setFecha_atendido(date("Y-m-d H:i:s"));
         $datos->setUsuario_atendio($_SESSION['usuario']);
         $accion = $crud->modificarEstado($datos);
@@ -230,7 +230,7 @@
             $datos->setPlataformas(substr($plataformas, 0, -1));
         }
         $conclusiones = date("Y-m-d H:i:s") . ' / ' . $_SESSION['usuario'] . ' ' . $conclusionAprobado . ' la solicitud' . "\n". $_POST['conclusiones']; 
-        $datos->setNombre($_POST['id_peticion']);
+        $datos->setId_peticion($_POST['id_peticion']);
         $datos->setConclusiones($conclusiones);
         $datos->setEstado_peticion($estado);
         $datos->setAprobado($_POST['aprobado']);
@@ -312,7 +312,7 @@
         $plataformas = $_POST['plataformasPeticion'];
         $platarformasArreglo = explode (',', $plataformas);
 
-        $datos->setNombre($_POST['id_peticion']);
+        $datos->setId_peticion($_POST['id_peticion']);
         $datos->setUsuario_creacion($_POST['f_identificacion']);
 
         for($x=0; $x<$_POST['numeracion']; $x++){
@@ -374,7 +374,7 @@
         $plataformas = $_POST['plataformasPeticion'];
         $platarformasArreglo = explode (',', $plataformas);
 
-        $datos->setNombre($_POST['id_peticion']);
+        $datos->setId_peticion($_POST['id_peticion']);
         $datos->setUsuario_creacion($_POST['f_identificacion']);
 
         for($x=0; $x<$_POST['numeracion']; $x++){
@@ -417,7 +417,7 @@
         $plataformas = $_POST['plataformasPeticion'];
         $platarformasArreglo = explode (',', $plataformas);
 
-        $datos->setNombre($_POST['id_peticion']);
+        $datos->setId_peticion($_POST['id_peticion']);
         $datos->setUsuario_creacion($_POST['f_identificacion']);
 
         for($x=0; $x<$_POST['numeracion']; $x++){
@@ -460,7 +460,7 @@
         $plataformas = $_POST['plataformasPeticion'];
         $platarformasArreglo = explode (',', $plataformas);
 
-        $datos->setNombre($_POST['id_peticion']);
+        $datos->setId_peticion($_POST['id_peticion']);
         $datos->setUsuario_creacion($_POST['f_identificacion']);
 
         for($x=0; $x<$_POST['numeracion']; $x++){
