@@ -88,7 +88,7 @@
                 $consultaB->execute();
                 $resultado = $consultaB->fetch(PDO::FETCH_ASSOC);
                 if($resultado['aprobacion'] == 12){
-                    $this->correoDeFinalizacion($datos->getNombre());
+                    $this->correoDeFinalizacion($datos->getId_peticion());
                 }
                 $resultado = 1;
             }else{
@@ -100,7 +100,7 @@
         public function consultaAccesoDuplicado($datos, $id){
             $db = Conectar::acceso();
             $consulta = $db->prepare("SELECT * FROM accesos_plataformas WHERE usuario = :usuarioD AND Plataforma = :plataformaD AND fecha_inactivacion IS NULL AND id_usuario = :id");
-            $consulta->bindValue('usuarioD',$datos->getUsuario_creacion());
+            $consulta->bindValue('usuarioD',$datos->getId_peticion());
             $consulta->bindValue('plataformaD',$datos->getPlataformas());
             $consulta->bindValue('id',$id);
             $consulta->execute();

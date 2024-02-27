@@ -122,6 +122,7 @@
     <script src="public/js/lenguajeTablas.js"> </script>
     <script src="public/js/peticionesAccesos.js"></script>
     <script src="public/js/bloqueoTeclas.js"></script>
+    <script src="public/js/peticionAccess.js"></script>
 </body>
 
 </html>
