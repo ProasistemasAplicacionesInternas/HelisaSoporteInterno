@@ -82,16 +82,16 @@
             $consulta->bindValue('revisado',$datos->getRevisado());
             $consulta->execute();
 
-            if($consulta){
+            if($consulta) {
                 $consultaB = $db->prepare('SELECT aprobacion FROM peticiones_accesos WHERE id_peticionAcceso = :id_peticionAcceso');
                 $consultaB->bindValue('id_peticionAcceso',$datos->getId_peticion());
                 $consultaB->execute();
                 $resultado = $consultaB->fetch(PDO::FETCH_ASSOC);
-                if($resultado['aprobacion'] == 12){
+                if($resultado['aprobacion'] == 12) {
                     $this->correoDeFinalizacion($datos->getId_peticion());
                 }
                 $resultado = 1;
-            }else{
+            }else {
                 $resultado = 0;
             }
             $db = null;
@@ -1013,9 +1013,9 @@
             }
             </style>";
             $cuerpo.= "<h5><b>Colaborador: " . $nombre . "</b></h5>";
-            $cuerpo.= "<h5><b>identificacion: " . $identificacion . "</b></h5>";
+            $cuerpo.= "<h5><b>identificación: " . $identificacion . "</b></h5>";
             $cuerpo.= "<h5><b>Cargo: " . $cargo . "</b></h5>";
-	    $cuerpo.= "<h5><b>Nro. Peticion Acceso: " . $id_peticion . "</b></h5>";
+	    $cuerpo.= "<h5><b>Nro. Petición Acceso: " . $id_peticion . "</b></h5>";
             $cuerpo.= " <p>Cordial saludo.<br>
                         De acuerdo a la aceptación realizada en la plataforma de Soporte Interno
                         El presente correo tiene como fin reconfirmar la aceptación que usted a realizado para los accesos de las siguientes aplicaciones, que permitirá el desarrollo de sus funciones en la compañía:</p>";
