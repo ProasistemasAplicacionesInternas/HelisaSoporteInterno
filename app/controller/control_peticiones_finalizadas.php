@@ -8,9 +8,10 @@
     if(isset($_POST['btn-consultarFecha'])){
 
         if(isset($_POST['areaF1']) && $_POST['areaF1'] == 1){
-            $inicio= date('Y-m-d', strtotime($_POST['fechaInicial']));
-            $final= date('Y-m-d', strtotime($_POST['fechaFinal']));
-    
+            $inicio = date('Y-m-d 00:00:00', strtotime($_POST['fechaInicial']));
+            $final = date('Y-m-d 23:59:59', strtotime($_POST['fechaFinal']));
+
+
             $db=conectar::acceso();
             $listaConsulta=[];
 
@@ -45,8 +46,8 @@
                 
             }
         }else if(isset($_POST['areaF1']) && $_POST['areaF1'] == 2){
-                $inicio= date('Y-m-d', strtotime($_POST['fechaInicial']));
-                $final= date('Y-m-d', strtotime($_POST['fechaFinal']));
+                $inicio= date('Y-m-d 00:00:00', strtotime($_POST['fechaInicial']));
+                $final= date('Y-m-d 23:59:59', strtotime($_POST['fechaFinal']));
         
                 $db=conectar::acceso();
                 $listaConsulta=[];
@@ -220,8 +221,8 @@
 
     if(isset($_POST['btn-consultarFechaI'])){
     
-        $inicio= date('Y-m-d', strtotime($_POST['fechaInicial']));
-        $final= date('Y-m-d', strtotime($_POST['fechaFinal']));
+        $inicio = date('Y-m-d 00:00:00', strtotime($_POST['fechaInicial']));
+        $final = date('Y-m-d 23:59:59', strtotime($_POST['fechaFinal']));
 
         $db=conectar::acceso();
         $listaConsulta=[];

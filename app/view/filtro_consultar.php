@@ -8,7 +8,7 @@
        
                  header('location:../../login.php');
             }
-        
+            date_default_timezone_set('America/Bogota');
      require ('../controller/control_traerProgramadores.php');
     ?>
 <!DOCTYPE html>
@@ -69,8 +69,8 @@
                         <input type="text" id="fechaFiltro" name="fechaFiltro" class="form-control" placeholder="Seleccione la fecha" required autocomplete="off">
                     </div>
                     <input type="hidden" id="areaF1" name="areaF1">
-                    <input type="hidden" id="fechaInicial" name="fechaInicial">
-                    <input type="hidden" id="fechaFinal" name="fechaFinal">
+                    <input type="hidden" id="fechaInicial" name="fechaInicial" value="<?php echo date('Y-m-d 00:00:00'); ?>">
+                    <input type="hidden" id="fechaFinal" name="fechaFinal" value="<?php echo date('Y-m-d 23:59:59'); ?>">
                     <input type="submit" id="btn-consultarFecha" name="btn-consultarFecha" class="btn btn-info" value="Consultar">
                 </form>
             </div>

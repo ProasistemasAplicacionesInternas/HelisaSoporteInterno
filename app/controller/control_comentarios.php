@@ -7,8 +7,8 @@ $datos = new Peticion();
 
 if (isset($_POST['btn-consultarFecha'])) {
 
-    $inicio = date('Y-m-d', strtotime($_POST['fechaInicial']));
-    $final = date('Y-m-d', strtotime($_POST['fechaFinal']));
+    $inicio = date('Y-m-d 00:00:00', strtotime($_POST['fechaInicial']));
+    $final = date('Y-m-d 23:59:59', strtotime($_POST['fechaFinal']));
 
     $db = conectar::acceso();
     $listaConsultaCom = [];
