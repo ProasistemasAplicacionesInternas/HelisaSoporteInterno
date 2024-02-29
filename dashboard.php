@@ -23,11 +23,13 @@ if (!isset($_SESSION['status_connect'])) {
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>Helisa | Soporte Interno</title>
     <link rel="stylesheet" href="public/css/bootstrap.min.css">
+    <link rel="stylesheet" href="public/css/verCategorias.css">
     <link rel="stylesheet" href="public/css/dashboard.css" media="screen" type="text/css">
     <link rel="stylesheet" href="public/css/daterangepicker.css" media="screen" type="text/css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/all.css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/v4-shims.css">
     <link rel="icon" type="image/png" href="public/img/ico.png" />
+    <script src="https://kit.fontawesome.com/af5bdaf378.js" crossorigin="anonymous"></script>
 </head>
 
 <body>
@@ -293,6 +295,25 @@ if (!isset($_SESSION['status_connect'])) {
                             <a href="#" id="plataformasInactivas"><i alt="" class="fa fa-circle-o ml-3 " onclick:></i><span class="ml-2" s>Plataformas Inactivas</span></a>
                         </div>
                     </div>
+                    <div class="dropdown">
+                        <?php if ($_SESSION['id_roles'] == 1) {
+                            echo '<a href="#" id="Categorias" onclick="abrirCategorias()"  data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="margin: 0% 10%;"> <i class="fa-solid fa-chalkboard-user"  class="ml-3" style="font-size: 18px;margin: 0% 2%;color: #6b6b6b;"></i><span>Categorias</span></a>';
+                        } ?>
+                            <div id="modal" class="modal">
+                                <div class="modal-content">
+                                    <h2 >Modificar categorias</h2>
+                                <hr class="linea">
+                                    <h3>Grupo activo</h3>
+                                    <p>Todas las categorias</p>
+                                    <p>Todas las categorias</p>
+                                <hr class="linea">
+                                    <h3>Categorias</h3>
+                                    <p>Todas las categorias</p>
+                                    <p>Todas las categorias</p>
+                                    <button onclick="cerrarCategorias()">Cerrar</button>
+                                </div>
+                            </div>
+                    </div>
                 </nav>
             </div>
 
@@ -315,6 +336,7 @@ if (!isset($_SESSION['status_connect'])) {
     <script src="public/js/bootstrap.min.js"></script>
     <script src="public/js/navega.js"></script>
     <script src="public/js/bloqueoTeclas.js"></script>
+    <script src="public/js/verCategorias.js"></script>
 
     <?php require('app/view/actualiza_usuario.php'); ?>
 

@@ -96,7 +96,20 @@ require('../controller/controlador_funcionarios.php');
                                 <option value="No" selected="selected">No</option>
                             </select>
                         </div>
+                        <div class="form-group" style="margin-left: 15px;">
+                            <label>Se Genera Mejora</label>
+                            <select class="form-control" id="Mejora" name="Mejora" onchange="mostrarCampo()">
+                                <option value="Sii">Si</option>
+                                <option value="No" selected="selected">No</option>
+                            </select>
+                        </div>                       
+                    </div> 
+
+                    <div class="form-group" id="campoMejora" style="display: none;">
+                            <label>Costo Mejora</label>
+                            <input type="text" class="form-control" id="costoMejora" name="costoMejora" style="width: 250px;">
                     </div>
+
                     <div id="datos_adicionales" style="display: none;">
                         <div class="row">
                             <div class="col-12 mt-4">
@@ -150,9 +163,18 @@ require('../controller/controlador_funcionarios.php');
                             </div>
                         </div>
                     </div>
-
             </div>
-
+                    <div class="form-group">
+                         <label>Condición actual</label>
+                         <select class="form-control info" id="estadoAct" name="estadoAct" required style="width: 118%; margin-left: 2px;">
+                             <option value='' selected>Seleccione estado</option>
+                             <option value='5'> 5 - Nuevo - Activos adquiridos menores a 1 año</option>
+                             <option value='4'> 4 - Bueno - Activos aquiridos mayores a 1 año</option>
+                             <option value='3'> 3 - Regular - Activos en uso que prseentan alguna</option>
+                             <option value='2'> 2 - Malo - activos con una falla sustancial que no permite el correcto funcionamiento</option>
+                             <option value='1'> 1 - Dado de baja - activos retirados por obsolencia o por condiciones que no permiten el correcto funcionamiento</option>
+                         </select>
+                    </div>
             <div class="row">
                 <div class="col-3">
                     <div class="form-group">
@@ -191,6 +213,7 @@ require('../controller/controlador_funcionarios.php');
     <script src="../../public/js/bootstrap.min.js"></script>
     <script src="../../public/js/smoke.min.js"></script>
     <script src="../../public/js/es.min.js"></script>
+    <script src="../../public/js/ocultar.js"></script>
     <script src="../../public/js/bloqueoTeclas.js"></script>
     <script src="../../public/js/validaPdfManteninmiento.js"></script>
 

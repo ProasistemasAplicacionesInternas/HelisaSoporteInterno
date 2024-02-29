@@ -24,6 +24,7 @@ require('../controller/controlador_gruposActivos.php');
     <title>Helisa | Soporte Infraestructura</title>
     <link rel="stylesheet" href="../../public/css/bootstrap.min.css">
     <link rel="stylesheet" href="../../public/css/smoke.min.css">
+    <link rel="stylesheet" href="../../public/css/verObservacionesAnteriores.css">
     <link rel="stylesheet" href="../../public/css/activosFijos.css" media="screen" type="text/css">
     <link rel="icon" type="image/png" href="../../public/img/ico.png" />
 </head>
@@ -146,6 +147,54 @@ require('../controller/controlador_gruposActivos.php');
                                 </select>
                             </div>
                         </div>
+                        <div class="col-3">
+                            <div class="form-group">
+                                <label>Categoria</label>
+                                <select class="form-control info" id="traCategoria" name="traCategoria" required>
+                                    <option value='' selected></option>
+                                    
+                                    <?php foreach($listado_grupos AS  $grupos):?>
+                                        <?php if($grupos['area_grupo'] == 32):?>
+                                            <option value="<?php echo $grupos['id_grupo'];?>" class="administracion"><?php echo $grupos['nombre_grupo'];?></option>
+                                        <?php endif;?>
+                                    <?php endforeach;?>
+
+                                    <?php foreach($listado_grupos AS  $grupos):?>
+                                        <?php if($grupos['area_grupo'] == 27):?>
+                                            <option value="<?php echo $grupos['id_grupo'];?>"  class="infraestructura"><?php echo $grupos['nombre_grupo'];?></option>
+                                        <?php endif;?>
+                                    <?php endforeach;?>
+                                </select>
+                            </div>
+                        </div> 
+                        <div class="col-3">
+                            <div class="form-group">
+                                <label>Costo de compra</label>
+                                <input type="text" id="af_modelo" name="af_modelo" class="form-control info" autocomplete="off" required>
+                            </div>
+                        </div>
+                        <div class="col-3">
+                            <div class="form-group">
+                                <label>tipo de activo</label>
+                                <select class="form-control info" id="tipoAct" name="tipoAct" required>
+                                    <option value='' selected></option>
+                                    <option value='Infraestructura'>Infraestructura</option>
+                                    <option value='Administración'>Administracion</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-3">
+                        <div class="form-group">
+                            <label>Vida útil</label>
+                            <div class="input-group">
+                                <input type="text" id="vidaUtil" name="vidaUtil" class="form-control info" autocomplete="off" required>
+                                <div class="input-group-append">
+                                    <span class="input-group-text">(meses)</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        </div>
                     </div>
                     <div class="row">
                         <div class="col-3">
@@ -160,6 +209,29 @@ require('../controller/controlador_gruposActivos.php');
                             </div>
                         </div>
                     </div>
+                    <div class="col-3">
+                            <div class="form-group">
+                                <label style="margin-left: -14px;">Condición actual</label>
+                                <select class="form-control info" id="estadoAct" name="estadoAct" required>
+                                    <option value='' selected>Seleccione estado</option>
+                                    <option value='5'> 5 - Nuevo - Activos adquiridos menores a 1 año</option>
+                                    <option value='4'> 4 - Bueno - Activos aquiridos mayores a 1 año</option>
+                                    <option value='3'> 3 - Regular - Activos en uso que prseentan alguna</option>
+                                    <option value='2'> 2 - Malo - activos con una falla sustancial que no permite el correcto funcionamiento</option>
+                                    <option value='1'> 1 - Dado de baja - activos retirados por obsolencia o por condiciones que no permiten el correcto funcionamiento</option>
+                                </select>
+                            </div><br>
+
+                            <a href="#" id="verObservaciones" onclick="abrirModal()" style="margin-left: -14px;">Ver Observaciones Anteriores</a>
+
+                            <div id="modal" class="modal">
+                                <div class="modal-content">
+                                    <h2 >Observaciones Anteriores</h2>
+                                    <p>Aquí va el contenido de las observaciones anteriores...</p>
+                                    <button onclick="cerrarModal()">Cerrar</button>
+                                </div>
+                            </div>
+                        </div>
                     <div id="encargado" class="encargadoActivo">
                         <div class="row">
                             <div class="col-9">
@@ -171,7 +243,7 @@ require('../controller/controlador_gruposActivos.php');
                                              foreach($listado_funcionarios as $crud){
                                                 echo "<option value='".$crud["identificacion"]."'>".$crud["nombre"] . "</option>" ;
                                                   }  
-                                         ?>
+                                        ?>
                                     </select>
                                 </div>
                             </div>
@@ -259,7 +331,7 @@ require('../controller/controlador_gruposActivos.php');
                                 </div>
                             </div>                            
                         </div>
-                    </div>
+                    </div><br>
                     <div class="row">
                         <div class="col-3">
                             <div class="form-group">
@@ -283,6 +355,7 @@ require('../controller/controlador_gruposActivos.php');
     </div>
     <script src="../../public/js/jquery-3.3.1.min.js"></script>
     <script src="../../public/js/popper.js"></script>
+    <script src="../../public/js/verObservacionesAnt.js"></script>    
     <script src="../../public/js/bootstrap.min.js"></script>
     <script src="../../public/js/smoke.min.js"></script>
     <script src="../../public/js/valida_imagenActivo.js"></script>
