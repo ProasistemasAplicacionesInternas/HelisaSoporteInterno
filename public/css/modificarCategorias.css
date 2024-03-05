@@ -1,4 +1,4 @@
-.modal {
+.modal2 {
     display: none;
     position: fixed;
     top: 0;
@@ -8,19 +8,24 @@
     background-color: rgba(0,0,0,0.5);
 }
 
-.modal-content {
+.modal-content2 {
     position: absolute;
-    top: 50%;
+    top: 45%;
     left: 50%;
+    width: 50%;
+    height: 80%;
     transform: translate(-50%, -50%);
     background-color: #fff;
     padding: 20px;
     border-radius: 5px;
 }
 
-.lineas{
+.linea {
     border: none;
     height: 1px;
     background-color: #000;
     margin: 10px 0;
+}
+ #cerrarModificaciones{
+    margin-top: 321px;
 } 

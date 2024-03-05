@@ -1,4 +1,3 @@
-//<script>
 function mostrarCampo() {
     var seleccion = document.getElementById("Mejora").value;
     var campoMejora = document.getElementById("campoMejora");
@@ -9,4 +8,3 @@ function mostrarCampo() {
         campoMejora.style.display = "none";
     }
 }
-//</script>

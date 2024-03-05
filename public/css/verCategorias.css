@@ -23,9 +23,31 @@
     border-radius: 5px;
 }
 
-.linea {
-    border: none;
-    height: 1px;
-    background-color: #000;
-    margin: 10px 0;
+.Subtitulo {
+    margin: 0 auto;
+}
+.checkboxGroup {
+    text-align: center;
+}
+
+.checkboxGroup label {
+    display: inline-block;
+    margin-right: 40px; /* para ajustar el espacio entre los checkboxes */
+}
+
+#modificarC {
+   margin-left: 800px;
+   width: 100px;
+   margin-top: -118px;
+}
+
+ #guardarM {
+    width: 100px;
+    margin-left: 916px;
+    margin-top: 50px;
+} 
+
+.tituloBoton{
+    margin-left: 764px;
+    margin-top: -24px;
 }

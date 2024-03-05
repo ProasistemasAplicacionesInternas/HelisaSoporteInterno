@@ -44,7 +44,7 @@ require('../controller/controlador_gruposActivos.php');
                     <div class="row">
                         <div class="col-3">
                             <div class="form-group">
-                                <label>C&oacutedigo De Activo</label>
+                                <label>C&oacutedigo de activo</label>
                                 <input type="text" id="af_codigo" name="af_codigo" class="form-control info" maxlength="25" autocomplete="off" required>
                             </div>
                         </div>
@@ -78,9 +78,9 @@ require('../controller/controlador_gruposActivos.php');
 
                         <div class="col-3">
                             <div class="form-group">
-                                <label>Area de Creacion</label>
+                                <label>Area de creación</label>
                                 <select class="form-control info" id="af_areaCreacion" name="af_areaCreacion" required>
-                                    <option value='' selected>Seleccione el Area de Creacion</option>
+                                    <option value='' selected>Seleccione el area de creación</option>
                                     <option value='Infraestructura'>Infraestructura</option>
                                     <option value='Administración'>Administracion</option>
                                 </select>
@@ -89,15 +89,15 @@ require('../controller/controlador_gruposActivos.php');
 
                         <div class="col-3">
                             <div class="form-group">
-                                <label for="">Fecha Compra</label>
+                                <label for="">Fecha compra</label>
                                 <input type="date" id="af_fechaCompra" name="af_fechaCompra" class="form-control info" required>
                             </div>
                         </div>
                         <div class="col-3">
                             <div class="form-group">
-                                <label>Grupo Del Activo</label>
+                                <label>Grupo del activo</label>
                                 <select class="form-control info" id="af_categoria" name="af_categoria" required>
-                                    <option value='' selected>Seleccione Grupo Del Activo</option>
+                                    <option value='' selected>Seleccione grupo del activo</option>
                                     
                                     <?php foreach($listado_grupos AS  $grupos):?>
                                         <?php if($grupos['area_grupo'] == 32):?>
@@ -138,7 +138,7 @@ require('../controller/controlador_gruposActivos.php');
                         </div>
                         <div class="col-3">
                             <div class="form-group">
-                                <label>Ubicacion Activo</label>
+                                <label>Ubicacion activo</label>
                                 <select class="form-control info" id="af_ubicacion" name="af_ubicacion" required>
                                     <option value="" selected> seleccione Estado</option>
                                     <option value="Oficina">Oficina</option>
@@ -149,7 +149,7 @@ require('../controller/controlador_gruposActivos.php');
                         </div>
                         <div class="col-3">
                             <div class="form-group">
-                                <label>Categoria</label>
+                                <label>Categoría</label>
                                 <select class="form-control info" id="traCategoria" name="traCategoria" required>
                                     <option value='' selected></option>
                                     
@@ -175,12 +175,8 @@ require('../controller/controlador_gruposActivos.php');
                         </div>
                         <div class="col-3">
                             <div class="form-group">
-                                <label>tipo de activo</label>
-                                <select class="form-control info" id="tipoAct" name="tipoAct" required>
-                                    <option value='' selected></option>
-                                    <option value='Infraestructura'>Infraestructura</option>
-                                    <option value='Administración'>Administracion</option>
-                                </select>
+                                <label>Tipo de activo</label>
+                                <input type="text" class="form-control info" id="tipoAct" name="tipoAct" required>
                             </div>
                         </div>
                         <div class="col-3">
@@ -222,13 +218,14 @@ require('../controller/controlador_gruposActivos.php');
                                 </select>
                             </div><br>
 
-                            <a href="#" id="verObservaciones" onclick="abrirModal()" style="margin-left: -14px;">Ver Observaciones Anteriores</a>
+                            <a href="#" id="verObservaciones" onclick="abrirModal()" style="margin-left: -14px;">Ver observaciones anteriores</a>
 
                             <div id="modal" class="modal">
                                 <div class="modal-content">
-                                    <h2 >Observaciones Anteriores</h2>
+                                    <h2 >Observaciones anteriores</h2>
+                                    <hr class="lineas" style="border: 1px solid black;">
                                     <p>Aquí va el contenido de las observaciones anteriores...</p>
-                                    <button onclick="cerrarModal()">Cerrar</button>
+                                    <button onclick="cerrarModal()" class="btn btn-primary">Cerrar</button>
                                 </div>
                             </div>
                         </div>

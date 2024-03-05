@@ -97,7 +97,7 @@ require('../controller/controlador_funcionarios.php');
                             </select>
                         </div>
                         <div class="form-group" style="margin-left: 15px;">
-                            <label>Se Genera Mejora</label>
+                            <label>Se genera mejora</label>
                             <select class="form-control" id="Mejora" name="Mejora" onchange="mostrarCampo()">
                                 <option value="Sii">Si</option>
                                 <option value="No" selected="selected">No</option>
@@ -175,6 +175,7 @@ require('../controller/controlador_funcionarios.php');
                              <option value='1'> 1 - Dado de baja - activos retirados por obsolencia o por condiciones que no permiten el correcto funcionamiento</option>
                          </select>
                     </div>
+                    
             <div class="row">
                 <div class="col-3">
                     <div class="form-group">
