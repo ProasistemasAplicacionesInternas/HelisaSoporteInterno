@@ -363,20 +363,20 @@ if (!isset($_SESSION['status_connect'])) {
                                         </div>
                                         <div class="valorActual">
                                             <label>Valor actual</label><br>
-                                            <input type="text" id="valorActualUvt">
+                                            <input type="text" id="valorActualUvts">
                                         </div><br>
                                         <h4>Valor de años anteriores</h4><br>
                                         <div class="verUvtsAnosanteriores">
-                                            <input type="text" id="valorActualUvt">
-                                            <input type="text" id="valorActualUvt" placeholder="Año">
+                                            <input type="text" id="valorActualUvt1">
+                                            <input type="text" id="valorActualUvt2" placeholder="Año">
                                         </div><br>
                                         <div class="verUvtsAnosanteriores">
-                                            <input type="text" id="valorActualUvt">
-                                            <input type="text" id="valorActualUvt" placeholder="Año">
+                                            <input type="text" id="valorActualUvt3">
+                                            <input type="text" id="valorActualUvt4" placeholder="Año">
                                         </div><br>
                                         <div class="verUvtsAnosanteriores">
-                                            <input type="text" id="valorActualUvt">
-                                            <input type="text" id="valorActualUvt" placeholder="Año">
+                                            <input type="text" id="valorActualUvt5">
+                                            <input type="text" id="valorActualUvt6" placeholder="Año">
                                         </div><br>
                                     </div>
                                     <button onclick="cerrarUvts()" class="btn btn-primary" id="cerrarUvts">Guardar</button>

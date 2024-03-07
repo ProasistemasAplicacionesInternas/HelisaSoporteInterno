@@ -170,13 +170,13 @@ require('../controller/controlador_gruposActivos.php');
                         <div class="col-3">
                             <div class="form-group">
                                 <label>Costo de compra</label>
-                                <input type="text" id="af_modelo" name="af_modelo" class="form-control info" autocomplete="off" required>
+                                <input type="text" id="costoCompra" name="costoCompra" class="form-control info" autocomplete="off" required oninput="calcularTipoActivo()">
                             </div>
                         </div>
                         <div class="col-3">
                             <div class="form-group">
                                 <label>Tipo de activo</label>
-                                <input type="text" class="form-control info" id="tipoAct" name="tipoAct" required>
+                                <input type="text" class="form-control info" id="tipoAct" name="tipoAct" required readonly>
                             </div>
                         </div>
                         <div class="col-3">
