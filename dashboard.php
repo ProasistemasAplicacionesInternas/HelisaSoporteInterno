@@ -333,6 +333,10 @@ if (!isset($_SESSION['status_connect'])) {
                                 </div>
                             </div>
                     </div>
+
+                    <?php if ($_SESSION['id_roles'] == 1) {
+                        echo '<a href=#"" id="uvts"><img src="" alt="" class="ml-3" style="padding-left:5px; padding-right:5px;"><span>Uvts</span></a>';
+                    } ?>
                             <div id="modal2" class="modal2" style="z-index: 150;">
                                 <div class="modal-content2">
                                     <h2 >Modificar categoría</h2>

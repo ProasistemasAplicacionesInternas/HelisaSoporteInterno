@@ -13,6 +13,9 @@ $(document).ready(function () {
   $("#liberarAdmin").click(function () {
     $("#contenido").load("app/view/liberar_soportes.php");
   });
+  $("#uvts").click(function () {
+    $("#contenido").load("app/view/view_uvts.php");
+  });
   /**************************************/
 
   $("#solicitudes_internas").click(function () {
