@@ -170,7 +170,7 @@
                                     <label>Cargar Imagen Evidencia</label>
                                 </div>
                                 <div>
-                                    <input type="file" id="imagen[]" name="imagen[]" multiple="" >
+                                    <input type="file" multiselect id="imagen[]" name="imagen[]" multiple="" >
                                 </div>
                                 <label class="mt-2" id="textImg" style="min-width:150%"></label>
                             </div>

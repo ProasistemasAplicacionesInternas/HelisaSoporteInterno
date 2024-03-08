@@ -26,7 +26,7 @@ $peticionMai= new PeticionMai();
 //************************** PARA EL CARGUE DE LA IMAGEN ************************//
 //*******************************************************************************//
 
-define('DOCROOT', $_SERVER['DOCUMENT_ROOT'].'/infraestructura'); /* MODIFCAR AL CAMBIAR A PRODUCCION */ /* /carpeta_principal_proyecto */ 
+define('DOCROOT', $_SERVER['DOCUMENT_ROOT'].'/HelisaSoporteInterno'); /* MODIFCAR AL CAMBIAR A PRODUCCION */ /* /carpeta_principal_proyecto */ 
     
     $nombre_imagen = array(0=>2,1=>2,2=>2);
     $numImagenes = count($_FILES['imagen']['name']);/* cuenta el numero de elemntos en el array(sino hay ninguno el resultado sera 1) */
@@ -48,9 +48,10 @@ define('DOCROOT', $_SERVER['DOCUMENT_ROOT'].'/infraestructura'); /* MODIFCAR AL 
         echo $tipo_imagen;
         if($tamano_imagen<=10000000000){
             if($tipo_imagen=="image/jpeg" ||$tipo_imagen=="image/jpg" ||$tipo_imagen=="image/png" ||$tipo_imagen=="image/gif" ||$tipo_imagen=="image/jpg" || $tipo_imagen=="application/pdf"  ){
-    
+                // echo(DOCROOT .'/cartas/' .$nombre_imagen[$x]);
+                // exit();
             move_uploaded_file($_FILES['imagen']['tmp_name'][$x],DOCROOT .'/cartas/' .$nombre_imagen[$x]);        
-                
+
                 }
         }
     }
@@ -62,6 +63,10 @@ echo "<br>",$nombre_imagen[0],"<br>",$nombre_imagen[1],"<br>",$nombre_imagen[2],
 if (isset($_POST['btn-enviar_peticion'])) {
     date_default_timezone_set('America/Bogota');
     $area_peticion=$_POST['area_peticion'];
+    // $imagen=$_POST['imagen'];
+    // echo $imagen;
+    // exit();
+
         if($area_peticion==1){
             $equipos = $_POST['p_categoria'];
             if($equipos==16){
