@@ -8,14 +8,14 @@ function consultUvtAll() {
 
   $.ajax({
     type: "POST",
-    url: "app/controller/controllerCategoryAssets.php", // Reemplaza con la ruta correcta a tu archivo PHP
+    url: "app/controller/controllerCategoryAssets.php",
     data: dataUvt,
     success: function (response) {
       var parsedResponse = JSON.parse(response);
 
       var table = '<table class="table table-bordered table-auto">';
       table +=
-        "<thead><tr><th>Año UVT</th><th>Valor UVT</th><th>Acciones</th></tr></thead>";
+        "<thead><tr class='custom-font'><th>Año UVT</th><th>Valor UVT</th><th>Acciones</th></tr></thead>";
       table += "<tbody>";
 
       for (var i = 0; i < parsedResponse.length; i++) {
@@ -60,7 +60,7 @@ function actualizarUvt(yearUvt) {
 
   $.ajax({
     type: "POST",
-    url: "app/controller/controllerCategoryAssets.php", // Reemplaza con la ruta correcta a tu archivo PHP
+    url: "app/controller/controllerCategoryAssets.php",
     data: {
       actionsCategoriesAssets: "update",
       yearUvt: yearUvt,
