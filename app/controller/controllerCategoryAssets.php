@@ -5,13 +5,13 @@ require_once('../model/crud_uvts.php');
 
 $crudUvts = new CrudUvts();
 
-switch (isset($_POST['actionsCategoriesAssets'])) {
+switch ($_POST['actionsCategoriesAssets']) {
     case 'create':
         if (!$crudUvts->existUvtByYear($_POST['yearUvt'])) {
             $data = convertClassUvt($_POST['yearUvt'], $_POST['valueUvt']);
             $crudUvts->insertUvt($data);
-        }else{
-        echo 3;
+        } else {
+            echo 3;
         }
         break;
 
@@ -22,6 +22,9 @@ switch (isset($_POST['actionsCategoriesAssets'])) {
 
     case 'consultAll':
         $crudUvts->consultAllUvts();
+        $resultados = $crudUvts->consultAllUvts();
+
+        echo json_encode($resultados);
         break;
 }
 

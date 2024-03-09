@@ -43,8 +43,11 @@ if (!isset($_SESSION['status_connect'])) {
                 <img src="public/img/logo.png" alt="">
             </div>
             <div class="col-md-2 col d-flex justify-content-end">
-                <span><?= $_SESSION['usuario']; ?></span>
-                <a href="../model/datos_usuario.php" data-toggle="modal" data-target="#datos-usuario" data-backdrop="static"><img src="public/img/configura.png" alt=""></a>
+                <span>
+                    <?= $_SESSION['usuario']; ?>
+                </span>
+                <a href="../model/datos_usuario.php" data-toggle="modal" data-target="#datos-usuario"
+                    data-backdrop="static"><img src="public/img/configura.png" alt=""></a>
                 <a href="app/controller/cerrar.php"><img src="public/img/salir.png" alt=""></a>
             </div>
 
@@ -55,6 +58,9 @@ if (!isset($_SESSION['status_connect'])) {
         <div class="row">
             <div class="col-2 mt-3 navega">
                 <nav>
+                    <?php if ($_SESSION['id_roles'] == 1) {
+                        echo '<a href=#"" id="uvts"><img src="" alt="" class="ml-3" style="padding-left:5px; padding-right:5px;"><i class="fa-solid fa-stamp"  class="ml-3" style="font-size: 18px;margin: 0% 2%;color: #6b6b6b;"></i><span>Uvts</span></a>';
+                    } ?>
                     <div class="dropdown">
                         <?php if ($_SESSION['id_roles'] == 1 || $_SESSION['id_roles'] == 7) {
                             echo '<a  style="cursor: pointer;" class=" dropdown-toggle" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <img src="public/img/user.png" alt="" class="ml-3"><span>Soportes</span></a>';
@@ -62,9 +68,11 @@ if (!isset($_SESSION['status_connect'])) {
 
                         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
 
-                            <a href="#" id="solicitudes_internasAdmin"><img src="public/img/soporte.png" alt="" class="ml-3" onclick:>Aplicaciones</a>
+                            <a href="#" id="solicitudes_internasAdmin"><img src="public/img/soporte.png" alt=""
+                                    class="ml-3" onclick:>Aplicaciones</a>
 
-                            <a href="#" id="solicitudes_infraestructuraAdmin""><img src="public/img/soporte.png" alt="" class="ml-3" onclick:>Infraestructura</a>
+                            <a href="#" id="solicitudes_infraestructuraAdmin""><img src=" public/img/soporte.png" alt=""
+                                class="ml-3" onclick:>Infraestructura</a>
                         </div>
                     </div>
                     <div class="dropdown">
@@ -73,8 +81,10 @@ if (!isset($_SESSION['status_connect'])) {
                         } ?>
 
                         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                            <a href="#" id="liberar_maiAdmin"><img src="public/img/atendiendo.png" alt="" class="ml-3" onclick:>Aplicaciones</a>
-                            <a href="#" id="liberarAdmin"><img src="public/img/atendiendo.png" alt="" class="ml-3" onclick:>HelisaSoporteInterno</a>
+                            <a href="#" id="liberar_maiAdmin"><img src="public/img/atendiendo.png" alt="" class="ml-3"
+                                    onclick:>Aplicaciones</a>
+                            <a href="#" id="liberarAdmin"><img src="public/img/atendiendo.png" alt="" class="ml-3"
+                                    onclick:>HelisaSoporteInterno</a>
                         </div>
                     </div>
                     <?php if ($_SESSION['id_roles'] == 3 || $_SESSION['id_roles'] == 5) {
@@ -235,7 +245,8 @@ if (!isset($_SESSION['status_connect'])) {
                             echo '<a class=" dropdown-toggle" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="margin: 0% 10%;"> <i class="fab fa-readme" class="ml-3" style="font-size: 18px;margin: 0% 2%;color: #6b6b6b;"></i><span style="margin: 0% 0% 0% 4%;">Registros</span></a>';
                         } ?>
 
-                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton" style="max-width:15rem !important; width: 100%">
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton"
+                            style="max-width:15rem !important; width: 100%">
 
                             <?php if ($_SESSION['id_roles'] == 1 || $_SESSION['id_roles'] == 7) {
                                 echo '<a href="#" id="ingresos"><i class="fas fa-user-clock" class="ml-3" style="font-size: 15px;margin: 2%;"></i><spam style="font-size: 14px;margin-left: 4%;">Ingresos-Usuarios</spam></a>';
@@ -254,7 +265,8 @@ if (!isset($_SESSION['status_connect'])) {
                             echo '<a class=" dropdown-toggle" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="margin: 0% 10%;"> <i class="fa fa-code-fork" class="ml-3" style="font-size: 18px;margin: 0% 2%;color: #6b6b6b;"></i><span style="margin: 0% 0% 0% 4%;">Organigrama</span></a>';
                         } ?>
 
-                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton" style="max-width:15rem !important; width: 100%">
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton"
+                            style="max-width:15rem !important; width: 100%">
 
                             <?php if ($_SESSION['id_roles'] == 1 || $_SESSION['id_roles'] == 7 || $_SESSION['id_roles'] == 9 || $_SESSION['id_roles'] == 10) {
                                 echo '<a href="#" id="departamentos"><i class="fa fa-code-fork" class="ml-3" style="font-size: 15px;margin: 2%;"></i><spam style="font-size: 14px;margin-left: 4%;">Departamentos</spam></a>';
@@ -279,7 +291,8 @@ if (!isset($_SESSION['status_connect'])) {
                             echo '<a class=" dropdown-toggle" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="margin: 0% 10%;"> <i class="fas fa-sitemap fa-2x mr-2"  class="ml-3" style="font-size: 18px;margin: 0% 2%;color: #6b6b6b;"></i><span>Gestión de Procesos</span></a>';
                         } ?>
 
-                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton" style="max-width:15rem !important; width: 100%">
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton"
+                            style="max-width:15rem !important; width: 100%">
 
                             <?php if ($_SESSION['id_roles'] == 7 || $_SESSION['id_roles'] == 1) {
                                 echo '<a href="#" id="gestion_accesos"><i class="fas fa-sign-in-alt fa-lg mr-1"></i><spam style="font-size: 14px;margin-left: 4%;">Gestión de Accesos</spam></a>';
@@ -294,98 +307,108 @@ if (!isset($_SESSION['status_connect'])) {
 
                         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
 
-                            <a href="#" id="plataformasActivas"><i alt="" class="fa fa-circle ml-3 " onclick:></i><span class="ml-2">Plataformas Activas</span></a>
+                            <a href="#" id="plataformasActivas"><i alt="" class="fa fa-circle ml-3 " onclick:></i><span
+                                    class="ml-2">Plataformas Activas</span></a>
 
-                            <a href="#" id="plataformasInactivas"><i alt="" class="fa fa-circle-o ml-3 " onclick:></i><span class="ml-2" s>Plataformas Inactivas</span></a>
+                            <a href="#" id="plataformasInactivas"><i alt="" class="fa fa-circle-o ml-3 "
+                                    onclick:></i><span class="ml-2" s>Plataformas Inactivas</span></a>
                         </div>
                     </div>
-                    
+
                     <div class="dropdown">
                         <?php if ($_SESSION['id_roles'] == 1) {
                             echo '<a href="#" id="Categorias" onclick="abrirCategorias()"  data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="margin: 0% 10%;"> <i class="fa-solid fa-chalkboard-user"  class="ml-3" style="font-size: 18px;margin: 0% 2%;color: #6b6b6b;"></i><span>Categorias</span></a>';
                         } ?>
-                            <div id="modal" class="modal">
-                                <div class="modal-content">
-                                    <h2>Modificar categorías</h2>
-                                    <hr class="linea" style="border: 1px solid black;">
-                                    
-                                    <h3>Grupo activo</h3>
-                                    <h4 class="Subtitulo">Crear grupo activo</h4>
-                                    <input type="text" id="crearGrupoAct" name="crearGrupoAct" style="width: 30%; margin: 0 auto;"/>                                  
-                                    <div class="checkboxGroup">
-                                        <label><input type="checkbox" id="selectTecnologia" name="selectTecnologia"/>Tecnologia</label>
-                                        <label><input type="checkbox" id="selectAdm" name="selectAdm"/>Administración</label>
-                                        <h4 class="tituloBoton">Habilitar/Inhabilitar</h4>
-                                        <label class="habilitar" id="activar"><input type="checkbox"><div class="lider round"></div></label>
-                                    </div>                                    
-                                    <hr class="linea" style="border: 1px solid black;">
-                                    
-                                    <h3>Categorías</h3>
-                                    <h4 class="Subtitulo">Crear categoría</h4>
-                                    <input type="text" id="crearCategoria" name="crearCategoria" style="width: 30%; margin: 0 auto;"/>
-                                    <div class="checkboxGroup">
-                                        <label><input type="checkbox" id="selectTecnologiaC" name="selectTecnologiaC"/>Tecnologia</label>
-                                        <label><input type="checkbox" id="selectAdmC" name="selectAdmC"/>Administración</label>
-                                    </div><br>
-                                    <button class="btn btn-primary" id="modificarC" onclick="modificarCategorias()">Modificar</button><br>
-                                    <button onclick="cerrarCategorias()" class="btn btn-primary" id="guardarM">Guardar</button>
-                                    
+                        <div id="modal" class="modal">
+                            <div class="modal-content">
+                                <h2>Modificar categorías</h2>
+                                <hr class="linea" style="border: 1px solid black;">
+
+                                <h3>Grupo activo</h3>
+                                <h4 class="Subtitulo">Crear grupo activo</h4>
+                                <input type="text" id="crearGrupoAct" name="crearGrupoAct"
+                                    style="width: 30%; margin: 0 auto;" />
+                                <div class="checkboxGroup">
+                                    <label><input type="checkbox" id="selectTecnologia"
+                                            name="selectTecnologia" />Tecnologia</label>
+                                    <label><input type="checkbox" id="selectAdm"
+                                            name="selectAdm" />Administración</label>
+                                    <h4 class="tituloBoton">Habilitar/Inhabilitar</h4>
+                                    <label class="habilitar" id="activar"><input type="checkbox">
+                                        <div class="lider round"></div>
+                                    </label>
                                 </div>
+                                <hr class="linea" style="border: 1px solid black;">
+
+                                <h3>Categorías</h3>
+                                <h4 class="Subtitulo">Crear categoría</h4>
+                                <input type="text" id="crearCategoria" name="crearCategoria"
+                                    style="width: 30%; margin: 0 auto;" />
+                                <div class="checkboxGroup">
+                                    <label><input type="checkbox" id="selectTecnologiaC"
+                                            name="selectTecnologiaC" />Tecnologia</label>
+                                    <label><input type="checkbox" id="selectAdmC"
+                                            name="selectAdmC" />Administración</label>
+                                </div><br>
+                                <button class="btn btn-primary" id="modificarC"
+                                    onclick="modificarCategorias()">Modificar</button><br>
+                                <button onclick="cerrarCategorias()" class="btn btn-primary"
+                                    id="guardarM">Guardar</button>
+
                             </div>
+                        </div>
                     </div>
 
-                    <?php if ($_SESSION['id_roles'] == 1) {
-                        echo '<a href=#"" id="uvts"><img src="" alt="" class="ml-3" style="padding-left:5px; padding-right:5px;"><span>Uvts</span></a>';
-                    } ?>
-                            <div id="modal2" class="modal2" style="z-index: 150;">
-                                <div class="modal-content2">
-                                    <h2 >Modificar categoría</h2>
-                                    <hr class="linea" style="border: 1px solid black;">
-                                    <label>Categoría</label>
-                                    <select class="form-control" id="mostrarCategorias" name="mostrarCategorias" style="width: 250px">
-                                    <option value="1">Categoria1</option>
-                                    <option value="2">Categoria2</option>
-                                    <option value="3">Categoria3</option>
-                                    <option value="4">Categoria4</option>
-                                    <option value="5">Categoria5</option>
-                                    </select>
-                                    <button onclick="cerrarModificaciones()" class="btn btn-primary" id="cerrarModificaciones">Cerrar</button>
-                                </div>
-                            </div>
-                            <div class="dropdown">
-                            <?php if ($_SESSION['id_roles'] == 1) {
-                            echo '<a href="#" id="configurarUvts" onclick="abrirUvts()"  data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="margin: 0% 10%;"> <i class="fa-solid fa-stamp"  class="ml-3" style="font-size: 18px;margin: 0% 2%;color: #6b6b6b;"></i><span>Uvts</span></a>';
-                        } ?>
-                            <div id="modal3" class="modal3" style="z-index: 150;">
-                                <div class="modal-content3">
-                                    <h2 >Modificar valor del uvt</h2>
-                                    <hr class="linea" style="border: 1px solid black;">
-                                    <div class="mostrarValoresUvts">
-                                        <div class="nuevoValor">
-                                            <label>Nuevo valor uvt</label><br>
-                                            <input type="text" id="nuevoValorUvt">
-                                        </div>
-                                        <div class="valorActual">
-                                            <label>Valor actual</label><br>
-                                            <input type="text" id="valorActualUvts">
-                                        </div><br>
-                                        <h4>Valor de años anteriores</h4><br>
-                                        <div class="verUvtsAnosanteriores">
-                                            <input type="text" id="valorActualUvt1">
-                                            <input type="text" id="valorActualUvt2" placeholder="Año">
-                                        </div><br>
-                                        <div class="verUvtsAnosanteriores">
-                                            <input type="text" id="valorActualUvt3">
-                                            <input type="text" id="valorActualUvt4" placeholder="Año">
-                                        </div><br>
-                                        <div class="verUvtsAnosanteriores">
-                                            <input type="text" id="valorActualUvt5">
-                                            <input type="text" id="valorActualUvt6" placeholder="Año">
-                                        </div><br>
+
+                    <div id="modal2" class="modal2" style="z-index: 150;">
+                        <div class="modal-content2">
+                            <h2>Modificar categoría</h2>
+                            <hr class="linea" style="border: 1px solid black;">
+                            <label>Categoría</label>
+                            <select class="form-control" id="mostrarCategorias" name="mostrarCategorias"
+                                style="width: 250px">
+                                <option value="1">Categoria1</option>
+                                <option value="2">Categoria2</option>
+                                <option value="3">Categoria3</option>
+                                <option value="4">Categoria4</option>
+                                <option value="5">Categoria5</option>
+                            </select>
+                            <button onclick="cerrarModificaciones()" class="btn btn-primary"
+                                id="cerrarModificaciones">Cerrar</button>
+                        </div>
+                    </div>
+                    <div class="dropdown">
+
+                        <div id="modal3" class="modal3" style="z-index: 150;">
+                            <div class="modal-content3">
+                                <h2>Modificar valor del uvt</h2>
+                                <hr class="linea" style="border: 1px solid black;">
+                                <div class="mostrarValoresUvts">
+                                    <div class="nuevoValor">
+                                        <label>Nuevo valor uvt</label><br>
+                                        <input type="text" id="nuevoValorUvt">
                                     </div>
-                                    <button onclick="cerrarUvts()" class="btn btn-primary" id="cerrarUvts">Guardar</button>
+                                    <div class="valorActual">
+                                        <label>Valor actual</label><br>
+                                        <input type="text" id="valorActualUvts">
+                                    </div><br>
+                                    <h4>Valor de años anteriores</h4><br>
+                                    <div class="verUvtsAnosanteriores">
+                                        <input type="text" id="valorActualUvt1">
+                                        <input type="text" id="valorActualUvt2" placeholder="Año">
+                                    </div><br>
+                                    <div class="verUvtsAnosanteriores">
+                                        <input type="text" id="valorActualUvt3">
+                                        <input type="text" id="valorActualUvt4" placeholder="Año">
+                                    </div><br>
+                                    <div class="verUvtsAnosanteriores">
+                                        <input type="text" id="valorActualUvt5">
+                                        <input type="text" id="valorActualUvt6" placeholder="Año">
+                                    </div><br>
                                 </div>
+                                <button onclick="cerrarUvts()" class="btn btn-primary" id="cerrarUvts">Guardar</button>
                             </div>
+                        </div>
                     </div>
 
                 </nav>
@@ -416,8 +439,8 @@ if (!isset($_SESSION['status_connect'])) {
     <?php require('app/view/actualiza_usuario.php'); ?>
 
     <script>
-        $(document).ready(function() {
-            var refreshId = setInterval(function() {
+        $(document).ready(function () {
+            var refreshId = setInterval(function () {
 
                 $('#infos2').load('app/view/liberar_soportes.php'); //actualizacion constante de la pestaña liberar
                 $('#infos3').load('app/view/consultar_peticiones.php'); //actualizacion constante de la pestaña soportes

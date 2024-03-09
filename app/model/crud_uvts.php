@@ -35,7 +35,7 @@ class CrudUvts
     {
         $db = Conectar::acceso();
 
-        $consulta = $db->prepare('SELECT * FROM uvts');
+        $consulta = $db->prepare('SELECT * FROM uvts ORDER BY year_uvt DESC');
         $consulta->execute();
 
         $resultados = $consulta->fetchAll(PDO::FETCH_ASSOC);
