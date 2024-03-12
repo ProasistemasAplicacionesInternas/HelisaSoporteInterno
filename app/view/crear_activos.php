@@ -96,8 +96,12 @@ require('../controller/controlador_gruposActivos.php');
                         <div class="col-3">
                             <div class="form-group">
                                 <label>Grupo del activo</label>
-                                <select class="form-control info" id="af_categoria" name="af_categoria" required>
-                                    <option value='' selected>Seleccione grupo del activo</option>
+                                <select class="form-control info" id="af_categoria" name="af_categoria" onchange="buscarCategoria();"required>
+                                    <option value='' selected>Seleccione grupo del activox</option>
+
+                                    <?php foreach($listado_grupos AS  $grupos):?>
+                                        <option value="<?php echo $grupos['id_grupo'];?>"><?php echo $grupos['nombre_grupo'];?></option>
+                                    <?php endforeach;?>
                                     
                                     <?php foreach($listado_grupos AS  $grupos):?>
                                         <?php if($grupos['area_grupo'] == 32):?>
@@ -363,5 +367,6 @@ require('../controller/controlador_gruposActivos.php');
     <script src="../../public/js/funcionario_oculto.js"></script>
     <script src="../../public/js/validacion_activo.js"></script>
     <script src="../../public/js/bloqueoTeclas.js"></script>
+    <script src="../../public/js/searhCategoryforGroup.js"></script>
 </body>
 </html>

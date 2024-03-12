@@ -435,7 +435,7 @@ if (!isset($_SESSION['status_connect'])) {
     <script src="public/js/popper.js"></script>
     <script src="public/js/bootstrap.min.js"></script>
     <script src="public/js/navega.js"></script>
-    <!---<script src="public/js/bloqueoTeclas.js"></script>-->
+    <script src="public/js/bloqueoTeclas.js"></script>
     <script src="public/js/verCategorias.js"></script>
     <script src="public/js/modificarCategorias.js"></script>
 

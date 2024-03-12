@@ -61,7 +61,8 @@ class crudGrupos
 		return $resultados;
 	}
 
-	public function findGroup($id){
+	public function findGroup($id)
+	{
 		$db = Conectar::acceso();
 		$consult = $db->prepare('SELECT id_grupo, nombre_grupo, areas.descripcion 	area_grupo, categoria, ca.nombre_categoria 
 		FROM grupos_activos ga
