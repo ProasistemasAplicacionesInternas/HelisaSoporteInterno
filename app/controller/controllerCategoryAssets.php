@@ -1,37 +1,39 @@
 <?php
-require_once('../model/datos_uvts.php');
-require_once('../model/crud_uvts.php');
+require_once('../model/dataCategoryAssets.php');
+require_once('../model/crudCategoryAssets.php');
 
+$crudCategoryAssets = new CrudCategoryAssets();
 
-$crudUvts = new CrudUvts();
+if (isset($_POST['actionsCategoryAssets'])) {
+    switch ($_POST['actionsCategoryAssets']) {
+        case 'create':
+            $data = convertClassCategoryAssets(null, $_POST['nameCategory'], $_POST['areaCategory']);
+            $crudCategoryAssets->createCategory($data);
+            break;
 
-switch ($_POST['actionsCategoriesAssets']) {
-    case 'create':
-        if (!$crudUvts->existUvtByYear($_POST['yearUvt'])) {
-            $data = convertClassUvt($_POST['yearUvt'], $_POST['valueUvt']);
-            $crudUvts->insertUvt($data);
-        } else {
-            echo 3;
-        }
-        break;
+        case 'update':
+            $data = convertClassCategoryAssets($_POST['idCategory'], $_POST['nameCategory'], $_POST['areaCategory']);
+            $crudCategoryAssets->editCategory($data);
+            break;
 
-    case 'update':
-        $data = convertClassUvt($_POST['yearUvt'], $_POST['valueUvt']);
-        $crudUvts->updateUvt($data);
-        break;
-
-    case 'consultAll':
-        $crudUvts->consultAllUvts();
-        $resultados = $crudUvts->consultAllUvts();
-
-        echo json_encode($resultados);
-        break;
+        case 'consultAll':
+            
+            $resultados = $crudCategoryAssets->consultAllCategory();
+            echo json_encode($resultados);
+            break;
+        
+        case 'findById':
+            $resultados = $crudCategoryAssets->findCategory($_POST['idCategory']);
+            echo json_encode($resultados);
+            break;
+    }
 }
 
-function convertClassUvt($year, $value)
+function convertClassCategoryAssets($id, $name, $area)
 {
-    $datosUvts = new Uvts();
-    $datosUvts->setYearUvt($year);
-    $datosUvts->setValueUvt($value);
-    return $datosUvts;
+    $datacategory = new DataCategoryAssets();
+    $datacategory->setId($id);
+    $datacategory->setNameCategory($name);
+    $datacategory->setAreaCategory($area);
+    return $datacategory;
 }

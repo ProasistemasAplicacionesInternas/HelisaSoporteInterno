@@ -16,6 +16,9 @@ $(document).ready(function () {
   $("#uvts").click(function () {
     $("#contenido").load("app/view/view_uvts.php");
   });
+  $("#categories").click(function () {
+    $("#contenido").load("app/view/view_categories.php");
+  });
   /**************************************/
 
   $("#solicitudes_internas").click(function () {

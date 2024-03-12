@@ -69,7 +69,7 @@
     </div>
 
 </body>
-<script src="public/js/categoriesAssets.js"></script>
+<script src="public/js/uvtsAssets.js"></script>
 <script src="public/js/smoke.min.js"></script>
 
 </html>

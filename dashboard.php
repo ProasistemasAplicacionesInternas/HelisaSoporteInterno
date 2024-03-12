@@ -59,7 +59,10 @@ if (!isset($_SESSION['status_connect'])) {
             <div class="col-2 mt-3 navega">
                 <nav>
                     <?php if ($_SESSION['id_roles'] == 1) {
-                        echo '<a href=#"" id="uvts"><img src="" alt="" class="ml-3" style="padding-left:5px; padding-right:5px;"><i class="fa-solid fa-stamp"  class="ml-3" style="font-size: 18px;margin: 0% 2%;color: #6b6b6b;"></i><span>Uvts</span></a>';
+                        echo '<a href=#"" id="uvts"><img class="ml-3" style="padding-left:5px; padding-right:5px;"><i class="fa-solid fa-stamp"  class="ml-3" style="font-size: 18px;margin: 0% 2%;color: #6b6b6b;"></i><span>Uvts</span></a>';
+                    } ?>
+                    <?php if ($_SESSION['id_roles'] == 1) {
+                        echo '<a href=#"" id="categories"><img class="ml-3" style="padding-left:5px; padding-right:5px;"><i class="fa-solid fa-chalkboard-user"  class="ml-3" style="font-size: 18px;margin: 0% 2%;color: #6b6b6b;"></i><span> Categorias</span></a>';
                     } ?>
                     <div class="dropdown">
                         <?php if ($_SESSION['id_roles'] == 1 || $_SESSION['id_roles'] == 7) {
@@ -432,7 +435,7 @@ if (!isset($_SESSION['status_connect'])) {
     <script src="public/js/popper.js"></script>
     <script src="public/js/bootstrap.min.js"></script>
     <script src="public/js/navega.js"></script>
-    <script src="public/js/bloqueoTeclas.js"></script>
+    <!---<script src="public/js/bloqueoTeclas.js"></script>-->
     <script src="public/js/verCategorias.js"></script>
     <script src="public/js/modificarCategorias.js"></script>
 
