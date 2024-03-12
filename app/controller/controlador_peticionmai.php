@@ -32,7 +32,7 @@ if (isset($_POST['aceptar_petmai'])) {
         $peticionMai->setFecha_atendidoMai(date("Y-m-d H:i:s"));
         $peticionMai->setEstado_peticionMai($_POST['p_estado']);
         $peticionMai->setDescripcion_peticionMai(htmlspecialchars($_POST['p_descripcion']));
-        $peticionMai->setImagen_peticionMai($_POST['imagenC']);
+        $peticionMai->setImagen_peticionMai($_POST['imagenCa']);
         $peticionMai->setImagen_peticionMai2($_POST['imagen2']);
         $peticionMai->setImagen_peticionMai3($_POST['imagen3']);
         $peticionMai->setConclusiones_peticionMai(htmlentities(nl2br($_POST['p_conclusiones'])));
@@ -42,7 +42,7 @@ if (isset($_POST['aceptar_petmai'])) {
         header("location: ../../dashboard.php");
     } else if ($estado == 2) {
         /* MODIFY WHEN SWITCHING TO PRODUCTION */ /* /main_project_folder */
-        define('DOCROOT', $_SERVER['DOCUMENT_ROOT'] . '/infraestructura');
+        define('DOCROOT', $_SERVER['DOCUMENT_ROOT'] . '/HelisaSoporteInterno');
         $nombre_imagen = array(0 => 2, 1 => 2, 2 => 2);
         /* counts the number of elements in the array (if there are none the result will be 1) */
         $numImagenes = count($_FILES['imagen']['name']);      
