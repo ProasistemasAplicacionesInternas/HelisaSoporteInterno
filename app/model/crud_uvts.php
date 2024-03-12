@@ -43,15 +43,25 @@ class CrudUvts
         return $resultados;
     }
 
-    public function existUvtByYear($year) {
+    public function existUvtByYear($year)
+    {
         $db = Conectar::acceso();
-    
+
         $consulta = $db->prepare('SELECT COUNT(*) as count FROM uvts WHERE year_uvt = :year_uvt');
         $consulta->bindValue(':year_uvt', $year);
         $consulta->execute();
-    
+
         $resultado = $consulta->fetch(PDO::FETCH_ASSOC);
-    
-        return ($resultado['count'] > 0);
+
+        return($resultado['count'] > 0);
+    }
+
+    public function searchLastYear()
+    {
+        $db = Conectar::acceso();
+        $consult = $db->query('SELECT * FROM uvts WHERE year_uvt = (SELECT MAX(year_uvt) FROM uvts);');
+        $consult->execute();
+        $resultado = $consult->fetch(PDO::FETCH_ASSOC);
+        return $resultado;
     }
 }

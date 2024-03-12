@@ -21,9 +21,12 @@ if (isset($_POST['actionsUvts'])) {
             break;
 
         case 'consultAll':
-    
             $resultados = $crudUvts->consultAllUvts();
+            echo json_encode($resultados);
+            break;
 
+        case 'lastYear':
+            $resultados = $crudUvts->searchLastYear();
             echo json_encode($resultados);
             break;
     }

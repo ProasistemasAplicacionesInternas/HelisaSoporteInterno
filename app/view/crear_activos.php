@@ -177,6 +177,8 @@ require('../controller/controlador_gruposActivos.php');
                             <div class="form-group">
                                 <label>Tipo de activo</label>
                                 <input type="text" class="form-control info" id="tipoAct" name="tipoAct" required readonly>
+                                <input type="hidden" id="yearUvt">
+                                <input type="hidden" id="valueUvt" name="valueUvt">
                             </div>
                         </div>
                         <div class="col-3">
@@ -223,7 +225,7 @@ require('../controller/controlador_gruposActivos.php');
                             <div id="modal" class="modal">
                                 <div class="modal-content">
                                     <h2 >Observaciones anteriores</h2>
-                                    <hr class="lineas" style="border: 1px solid black;">
+                                    <hr class="lineas" style="border: 1px soli  d black;">
                                     <p>Aquí va el contenido de las observaciones anteriores...</p>
                                     <button onclick="cerrarModal()" class="btn btn-primary">Cerrar</button>
                                 </div>
