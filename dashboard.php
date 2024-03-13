@@ -24,10 +24,6 @@ if (!isset($_SESSION['status_connect'])) {
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>Helisa | Soporte Interno</title>
     <link rel="stylesheet" href="public/css/bootstrap.min.css">
-    <link rel="stylesheet" href="public/css/verCategorias.css">
-    <link rel="stylesheet" href="public/css/modificarCategorias.css">
-    <link rel="stylesheet" href="public/css/habilitarInhabilitar.css">
-    <link rel="stylesheet" href="public/css/modalUvts.css">
     <link rel="stylesheet" href="public/css/dashboard.css" media="screen" type="text/css">
     <link rel="stylesheet" href="public/css/daterangepicker.css" media="screen" type="text/css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/all.css">
@@ -317,103 +313,6 @@ if (!isset($_SESSION['status_connect'])) {
                                     onclick:></i><span class="ml-2" s>Plataformas Inactivas</span></a>
                         </div>
                     </div>
-
-                    <div class="dropdown">
-                        <?php if ($_SESSION['id_roles'] == 1) {
-                            echo '<a href="#" id="Categorias" onclick="abrirCategorias()"  data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="margin: 0% 10%;"> <i class="fa-solid fa-chalkboard-user"  class="ml-3" style="font-size: 18px;margin: 0% 2%;color: #6b6b6b;"></i><span>Categorias</span></a>';
-                        } ?>
-                        <div id="modal" class="modal">
-                            <div class="modal-content">
-                                <h2>Modificar categorías</h2>
-                                <hr class="linea" style="border: 1px solid black;">
-
-                                <h3>Grupo activo</h3>
-                                <h4 class="Subtitulo">Crear grupo activo</h4>
-                                <input type="text" id="crearGrupoAct" name="crearGrupoAct"
-                                    style="width: 30%; margin: 0 auto;" />
-                                <div class="checkboxGroup">
-                                    <label><input type="checkbox" id="selectTecnologia"
-                                            name="selectTecnologia" />Tecnologia</label>
-                                    <label><input type="checkbox" id="selectAdm"
-                                            name="selectAdm" />Administración</label>
-                                    <h4 class="tituloBoton">Habilitar/Inhabilitar</h4>
-                                    <label class="habilitar" id="activar"><input type="checkbox">
-                                        <div class="lider round"></div>
-                                    </label>
-                                </div>
-                                <hr class="linea" style="border: 1px solid black;">
-
-                                <h3>Categorías</h3>
-                                <h4 class="Subtitulo">Crear categoría</h4>
-                                <input type="text" id="crearCategoria" name="crearCategoria"
-                                    style="width: 30%; margin: 0 auto;" />
-                                <div class="checkboxGroup">
-                                    <label><input type="checkbox" id="selectTecnologiaC"
-                                            name="selectTecnologiaC" />Tecnologia</label>
-                                    <label><input type="checkbox" id="selectAdmC"
-                                            name="selectAdmC" />Administración</label>
-                                </div><br>
-                                <button class="btn btn-primary" id="modificarC"
-                                    onclick="modificarCategorias()">Modificar</button><br>
-                                <button onclick="cerrarCategorias()" class="btn btn-primary"
-                                    id="guardarM">Guardar</button>
-
-                            </div>
-                        </div>
-                    </div>
-
-
-                    <div id="modal2" class="modal2" style="z-index: 150;">
-                        <div class="modal-content2">
-                            <h2>Modificar categoría</h2>
-                            <hr class="linea" style="border: 1px solid black;">
-                            <label>Categoría</label>
-                            <select class="form-control" id="mostrarCategorias" name="mostrarCategorias"
-                                style="width: 250px">
-                                <option value="1">Categoria1</option>
-                                <option value="2">Categoria2</option>
-                                <option value="3">Categoria3</option>
-                                <option value="4">Categoria4</option>
-                                <option value="5">Categoria5</option>
-                            </select>
-                            <button onclick="cerrarModificaciones()" class="btn btn-primary"
-                                id="cerrarModificaciones">Cerrar</button>
-                        </div>
-                    </div>
-                    <div class="dropdown">
-
-                        <div id="modal3" class="modal3" style="z-index: 150;">
-                            <div class="modal-content3">
-                                <h2>Modificar valor del uvt</h2>
-                                <hr class="linea" style="border: 1px solid black;">
-                                <div class="mostrarValoresUvts">
-                                    <div class="nuevoValor">
-                                        <label>Nuevo valor uvt</label><br>
-                                        <input type="text" id="nuevoValorUvt">
-                                    </div>
-                                    <div class="valorActual">
-                                        <label>Valor actual</label><br>
-                                        <input type="text" id="valorActualUvts">
-                                    </div><br>
-                                    <h4>Valor de años anteriores</h4><br>
-                                    <div class="verUvtsAnosanteriores">
-                                        <input type="text" id="valorActualUvt1">
-                                        <input type="text" id="valorActualUvt2" placeholder="Año">
-                                    </div><br>
-                                    <div class="verUvtsAnosanteriores">
-                                        <input type="text" id="valorActualUvt3">
-                                        <input type="text" id="valorActualUvt4" placeholder="Año">
-                                    </div><br>
-                                    <div class="verUvtsAnosanteriores">
-                                        <input type="text" id="valorActualUvt5">
-                                        <input type="text" id="valorActualUvt6" placeholder="Año">
-                                    </div><br>
-                                </div>
-                                <button onclick="cerrarUvts()" class="btn btn-primary" id="cerrarUvts">Guardar</button>
-                            </div>
-                        </div>
-                    </div>
-
                 </nav>
             </div>
 
@@ -436,9 +335,7 @@ if (!isset($_SESSION['status_connect'])) {
     <script src="public/js/bootstrap.min.js"></script>
     <script src="public/js/navega.js"></script>
     <script src="public/js/bloqueoTeclas.js"></script>
-    <script src="public/js/verCategorias.js"></script>
-    <script src="public/js/modificarCategorias.js"></script>
-
+    
     <?php require('app/view/actualiza_usuario.php'); ?>
 
     <script>
