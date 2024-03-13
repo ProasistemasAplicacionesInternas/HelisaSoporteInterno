@@ -79,12 +79,6 @@ header {
     background-color: #e7dfdf; 
 }
 
-#estadoAct{
-    margin-left: -20px; 
-    width: 400%;
-}
-/*----checkbox-----*/
-
 .programa {
     position: relative;
     padding-left: 20px;
