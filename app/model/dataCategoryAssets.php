@@ -4,6 +4,7 @@ class DataCategoryAssets
     private $id;
     private $nameCategory;
     private $areaCategory;
+    private $status;
 
     public function getId()
     {
@@ -37,6 +38,18 @@ class DataCategoryAssets
     public function setAreaCategory($areaCategory): self
     {
         $this->areaCategory = $areaCategory;
+
+        return $this;
+    }
+
+    public function getStatus()
+    {
+        return $this->status;
+    }
+
+    public function setStatus($status): self
+    {
+        $this->status = $status;
 
         return $this;
     }

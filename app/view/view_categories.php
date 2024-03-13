@@ -11,7 +11,6 @@
 </head>
 
 <body>
-
     <div class="contenedor">
         <div class="section seccionFirst">
             <div class="container mt-4">
@@ -128,13 +127,12 @@
 
         <div class="section seccionSecond">
             <div class="container mt-4">
-            <div class="row">
+                <div class="row">
                     <div class="col-8">
                         <h5>Listado de Grupos</h5>
                     </div>
                     <div class="col-4">
-                        <img src="public/img/nuevo.png" alt="Imagen" id=""
-                            onclick=modalCreateGroups();>
+                        <img src="public/img/nuevo.png" alt="Imagen" id="" onclick=modalCreateGroups();>
                     </div>
                 </div>
                 <table class="table" id="tableGroups">
@@ -213,7 +211,8 @@
                             </div>
                             <div class="form-group col-6">
                                 <label for="createdCategoryGroup">Nueva Categoría</label>
-                                <select class="form-control" id="createdCategoryGroup" name="createdCategoryGroup"></select>
+                                <select class="form-control" id="createdCategoryGroup"
+                                    name="createdCategoryGroup"></select>
                             </div>
                         </div>
                     </form>
@@ -233,6 +232,9 @@
     crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"
     integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF"
+    crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
     crossorigin="anonymous"></script>
 
 </html>

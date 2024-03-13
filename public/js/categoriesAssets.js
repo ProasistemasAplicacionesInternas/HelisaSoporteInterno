@@ -11,15 +11,15 @@ function consultAllCategories() {
     dataType: "json",
     success: function (data) {
       $.each(data, function (index, category) {
+        var icon = iconStatus(category.code_state);
         var row = "<tr>";
         row += "<td>" + category.id + "</td>";
         row += "<td>" + category.nombre_categoria + "</td>";
         row += "<td>" + category.nombre_area + "</td>";
-    
+
         row +=
-          '<td><i class="fas fa-edit text-primary" style="cursor: pointer;" onclick="modalUpdateCategory(' +
-          category.id +
-          ')"></i></td>';
+          '<td><i class="fas fa-edit text-primary" style="cursor: pointer;" title="Modificar" onclick="modalUpdateCategory(' +
+          category.id + ')"></i>'+'  '+ icon + category.id +')"></i> </td>';
         row += "</tr>";
         $("#tableBodyCategory").append(row);
       });
@@ -30,6 +30,42 @@ function consultAllCategories() {
   });
 }
 
+function iconStatus(params) {
+  if (params == 5) {
+    iconInactive = '<i class="fa-regular fa-rectangle-xmark" title="Inactivar" style="color: red; cursor: pointer;" onclick="inactivateCategory(';
+    return iconInactive;
+  }
+      iconActive = '<i class="fa-regular fa-square-check" title="Activar" style="color: green; cursor: pointer;" onclick="activateCategory(';
+  return iconActive;
+}
+/*************** Activar e Inactivar Categoria ****************/
+function activateCategory(id){
+  saveStatusRequest(id,5);
+}
+
+function inactivateCategory(id){
+  saveStatusRequest(id,6)
+}
+
+function saveStatusRequest(id, new_status){
+  $.ajax({
+    url: "app/controller/controllerCategoryAssets.php",
+    type: "POST",
+    data: {
+      actionsCategoryAssets: "updateStatus",
+      idCategory: id,
+      status: new_status,
+    },
+    success: function (response) {
+      clearTable();
+      consultAllCategories();
+      //$("#updateCategory").modal("show");
+    },
+    error: function (error) {
+      console.log("Error en la solicitud AJAX de actualización:", error);
+    },
+  });
+}
 /* ************* Edición de información ************* */
 function modalUpdateCategory(id) {
   $.ajax({
@@ -119,10 +155,10 @@ function saveCategory(name, area) {
 
 /*********** Limpiar Contenido de Tabla ************ */
 function clearTable() {
-    var tabla = document.getElementById("tableCategory");
-    var filas = tabla.getElementsByTagName('tr');
-  
-    for (var i = filas.length - 1; i > 0; i--) {
-      tabla.deleteRow(i);
-    }
+  var tabla = document.getElementById("tableCategory");
+  var filas = tabla.getElementsByTagName("tr");
+
+  for (var i = filas.length - 1; i > 0; i--) {
+    tabla.deleteRow(i);
+  }
 }

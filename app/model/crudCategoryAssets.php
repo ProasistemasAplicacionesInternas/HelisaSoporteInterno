@@ -22,7 +22,7 @@ class CrudCategoryAssets{
     }
     public function consultAllCategory(){
         $db = Conectar::acceso();
-		$consult = $db->prepare('SELECT id, nombre_categoria, area_categoria, a.descripcion nombre_area 
+		$consult = $db->prepare('SELECT id, nombre_categoria, area_categoria, a.descripcion nombre_area, ca.estado as code_state
         FROM categorias_activos ca
 		LEFT JOIN areas a ON a.id_area = ca.area_categoria ORDER BY nombre_categoria ASC');
 		$consult->execute();
@@ -40,5 +40,15 @@ class CrudCategoryAssets{
 		$consult->execute();
 		$resultado = $consult->fetch(PDO::FETCH_ASSOC);
 		return $resultado;
+	}
+
+	public function updateStatus($category){
+		$db = conectar::acceso();
+		$edit = $db->prepare('UPDATE categorias_activos 
+		SET estado=:new_status
+         WHERE id=:id');
+		$edit->bindValue("new_status", $category->getStatus());
+		$edit->bindValue("id", $category->getId());
+		$edit->execute();
 	}
 }
