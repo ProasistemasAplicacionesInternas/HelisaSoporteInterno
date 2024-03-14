@@ -24,7 +24,6 @@ require('../controller/controlador_gruposActivos.php');
     <title>Helisa | Soporte Infraestructura</title>
     <link rel="stylesheet" href="../../public/css/bootstrap.min.css">
     <link rel="stylesheet" href="../../public/css/smoke.min.css">
-    <link rel="stylesheet" href="../../public/css/verObservacionesAnteriores.css">
     <link rel="stylesheet" href="../../public/css/activosFijos.css" media="screen" type="text/css">
     <link rel="icon" type="image/png" href="../../public/img/ico.png" />
 </head>
@@ -214,7 +213,7 @@ require('../controller/controlador_gruposActivos.php');
                     <div class="col-3">
                             <div class="form-group">
                                 <label style="margin-left: -14px;">Condición actual</label>
-                                <select class="form-control info" id="estadoAct" name="estadoAct" required>
+                                <select class="form-control info" id="estadoAct" name="estadoAct" required style="width: 830px; margin-left: -17px;">
                                     <option value='' selected>Seleccione estado</option>
                                     <option value='5'> 5 - Nuevo - Activos adquiridos menores a 1 año</option>
                                     <option value='4'> 4 - Bueno - Activos aquiridos mayores a 1 año</option>
@@ -222,17 +221,6 @@ require('../controller/controlador_gruposActivos.php');
                                     <option value='2'> 2 - Malo - activos con una falla sustancial que no permite el correcto funcionamiento</option>
                                     <option value='1'> 1 - Dado de baja - activos retirados por obsolencia o por condiciones que no permiten el correcto funcionamiento</option>
                                 </select>
-                            </div><br>
-
-                            <a href="#" id="verObservaciones" onclick="abrirModal()" style="margin-left: -14px;">Ver observaciones anteriores</a>
-
-                            <div id="modal" class="modal">
-                                <div class="modal-content">
-                                    <h2 >Observaciones anteriores</h2>
-                                    <hr class="lineas" style="border: 1px soli  d black;">
-                                    <p>Aquí va el contenido de las observaciones anteriores...</p>
-                                    <button onclick="cerrarModal()" class="btn btn-primary">Cerrar</button>
-                                </div>
                             </div>
                         </div>
                     <div id="encargado" class="encargadoActivo">
@@ -357,8 +345,7 @@ require('../controller/controlador_gruposActivos.php');
         </div>
     </div>
     <script src="../../public/js/jquery-3.3.1.min.js"></script>
-    <script src="../../public/js/popper.js"></script>
-    <script src="../../public/js/verObservacionesAnt.js"></script>    
+    <script src="../../public/js/popper.js"></script>    
     <script src="../../public/js/bootstrap.min.js"></script>
     <script src="../../public/js/smoke.min.js"></script>
     <script src="../../public/js/valida_imagenActivo.js"></script>

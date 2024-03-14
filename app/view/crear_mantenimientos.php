@@ -33,6 +33,7 @@ require('../controller/controlador_funcionarios.php');
     <title>Helisa | Soporte Infraestructura</title>
     <link rel="stylesheet" href="../../public/css/bootstrap.min.css">
     <link rel="stylesheet" href="../../public/css/smoke.min.css">
+    <link rel="stylesheet" href="../../public/css/verObservacionesAnteriores.css">
     <link rel="stylesheet" href="../../public/css/activosFijos.css" media="screen" type="text/css">
     <link rel="icon" type="image/png" href="../../public/img/ico.png" />
 </head>
@@ -189,8 +190,17 @@ require('../controller/controlador_funcionarios.php');
                                         value="<?php echo $af_licenciado ?>">
                                 </div>
                             </div>
-                        </div>
+                        </div><br>
                     </div>
+                    <a href="#" id="verObservaciones" onclick="abrirModal()" style="margin-left: -1px;">Ver observaciones anteriores</a><br>
+                    <div id="modal" class="modal">
+                        <div class="modal-content">
+                            <h2 >Observaciones anteriores</h2>
+                            <hr class="lineas" style="border: 1px soli  d black;">
+                            <p>Aquí va el contenido de las observaciones anteriores...</p>
+                            <button onclick="cerrarModal()" class="btn btn-primary">Cerrar</button>
+                        </div>
+                    </div><br>
 
                     <div class="row">
                         <div class="col-3">
@@ -227,6 +237,7 @@ require('../controller/controlador_funcionarios.php');
         <script src="../../public/js/jquery-3.3.1.min.js"></script>
         <script src="../../public/js/mantenimientoActivos.js"></script>
         <script src="../../public/js/popper.js"></script>
+        <script src="../../public/js/verObservacionesAnt.js"></script>
         <script src="../../public/js/bootstrap.min.js"></script>
         <script src="../../public/js/smoke.min.js"></script>
         <script src="../../public/js/es.min.js"></script>
