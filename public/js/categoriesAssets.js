@@ -4,6 +4,7 @@ $(document).ready(function () {
 });
 
 function consultAllCategories() {
+  
   $.ajax({
     url: "app/controller/controllerCategoryAssets.php",
     type: "POST",
@@ -84,6 +85,7 @@ function saveStatusRequestCategory(id, new_status) {
 }
 /* ************* Edición de información ************* */
 function modalUpdateCategory(id) {
+  
   $.ajax({
     url: "app/controller/controllerCategoryAssets.php",
     type: "POST",
@@ -92,7 +94,7 @@ function modalUpdateCategory(id) {
       idCategory: id,
     },
     success: function (response) {
-      showResult(response);
+      showResultCategory(response);
 
       $("#updateCategory").modal("show");
     },
@@ -102,7 +104,8 @@ function modalUpdateCategory(id) {
   });
 }
 
-function showResult(data) {
+function showResultCategory(data) {
+
   var jsonObject = JSON.parse(data);
   document.querySelector("#id_category").value = jsonObject.id;
   document.querySelector("#actual_name").value = jsonObject.nombre_categoria;

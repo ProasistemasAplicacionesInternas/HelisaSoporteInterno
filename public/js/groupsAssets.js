@@ -100,7 +100,7 @@ function modalUpdateGroup(id) {
     },
     success: function (response) {
       consultAllCategoriesGroups("categoryGroup");
-      showResult(response);
+      showResultGroup(response);
 
       $("#updateGroup").modal("show");
     },
@@ -110,7 +110,7 @@ function modalUpdateGroup(id) {
   });
 }
 
-function showResult(data) {
+function showResultGroup(data) {
   var jsonObject = JSON.parse(data);
   document.querySelector("#groupId").value = jsonObject.id_grupo;
   document.querySelector("#actualNameGroup").value = jsonObject.nombre_grupo;
