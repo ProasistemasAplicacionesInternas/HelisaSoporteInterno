@@ -50,5 +50,10 @@ class CrudCategoryAssets{
 		$edit->bindValue("new_status", $category->getStatus());
 		$edit->bindValue("id", $category->getId());
 		$edit->execute();
+
+		if (!$edit) {
+			echo 500;
+		}
+		echo 200;
 	}
 }

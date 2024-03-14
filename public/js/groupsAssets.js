@@ -20,6 +20,7 @@ function consultAllGroups() {
 
 function drawResults(data) {
   $.each(data, function (index, grupo) {
+    var icon = iconStatus(grupo.status);
     var row = "<tr>";
     row += "<td>" + grupo.id_grupo + "</td>";
     row += "<td>" + grupo.nombre_grupo + "</td>";
@@ -28,15 +29,68 @@ function drawResults(data) {
     row +=
       '<td><i class="fas fa-edit text-primary" style="cursor: pointer;" onclick="modalUpdateGroup(' +
       grupo.id_grupo +
-      ')"></i></td>';
+      ')"></i>' +
+      "  " +
+      icon +
+      grupo.id_grupo +
+      ')"></i> </td>';
     row += "</tr>";
     $("#tableBody").append(row);
   });
 }
 
+function iconStatus(params) {
+  if (params == 5) {
+    iconInactive =
+      '<i class="fa-regular fa-rectangle-xmark" title="Inactivar" style="color: red; cursor: pointer;" onclick="inactivateGroup(';
+    return iconInactive;
+  }
+  iconActive =
+    '<i class="fa-regular fa-square-check" title="Activar" style="color: green; cursor: pointer;" onclick="activateGroup(';
+  return iconActive;
+}
+
+/*************** Activar e Inactivar Grupo ***************/
+function activateGroup(id) {
+  saveStatusRequestGroup(id, 5);
+}
+
+function inactivateGroup(id) {
+  saveStatusRequestGroup(id, 6);
+}
+
+function saveStatusRequestGroup(id, new_status) {
+  $.ajax({
+    url: "app/controller/controlador_gruposActivos.php",
+    type: "POST",
+    data: {
+      actionsGroups: "updateStatus",
+      idGroup: id,
+      statusGroup: new_status,
+    },
+    success: function (response) {
+      if (response == 200) {
+        $.smkAlert({
+          text: "Modificación de grupo Exitosa!",
+          type: "success",
+        });
+        clearTableGroups();
+        consultAllGroups();
+      }else{
+        $.smkAlert({
+          text: "Error en la Modificación!",
+          type: "Danger",
+        });
+      }
+    },
+    error: function (error) {
+      console.log("Error en la solicitud AJAX de actualización:", error);
+    },
+  });
+}
+
 /* ************* Edición de información ************* */
 function modalUpdateGroup(id) {
-  
   $.ajax({
     url: "app/controller/controlador_gruposActivos.php",
     type: "POST",
@@ -45,7 +99,6 @@ function modalUpdateGroup(id) {
       idGroup: id,
     },
     success: function (response) {
-      
       consultAllCategoriesGroups("categoryGroup");
       showResult(response);
 
@@ -131,12 +184,11 @@ function modalCreateGroups() {
 function saveCreatedGroups() {
   var nameGroup = $("#createdNameGroup").val();
   var categoryGroup = $("#createdCategoryGroup").val();
-  
+
   saveGroup(nameGroup, categoryGroup);
 }
 
 function saveGroup(name, category) {
-  
   $.ajax({
     url: "app/controller/controlador_gruposActivos.php",
     type: "POST",
@@ -159,7 +211,7 @@ function saveGroup(name, category) {
 /*********** Limpiar Contenido de Tabla ************ */
 function clearTableGroups() {
   var tabla = document.getElementById("tableGroups");
-  var filas = tabla.getElementsByTagName('tr');
+  var filas = tabla.getElementsByTagName("tr");
 
   for (var i = filas.length - 1; i > 0; i--) {
     tabla.deleteRow(i);

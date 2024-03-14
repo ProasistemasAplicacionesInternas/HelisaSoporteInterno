@@ -7,6 +7,7 @@ class gruposActivos
 	private $nombre_grupo;
 	private $area_grupo;
 	private $categoria;
+	private $status;
 
 	public function getId_grupo()
 	{
@@ -46,6 +47,18 @@ class gruposActivos
 	public function setCategoria($categoria): self
 	{
 		$this->categoria = $categoria;
+
+		return $this;
+	}
+
+	public function getStatus()
+	{
+		return $this->status;
+	}
+
+	public function setStatus($status): self
+	{
+		$this->status = $status;
 
 		return $this;
 	}

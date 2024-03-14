@@ -11,15 +11,19 @@ function consultAllCategories() {
     dataType: "json",
     success: function (data) {
       $.each(data, function (index, category) {
-        var icon = iconStatus(category.code_state);
+        var icon = iconStatusCategory(category.code_state);
         var row = "<tr>";
         row += "<td>" + category.id + "</td>";
         row += "<td>" + category.nombre_categoria + "</td>";
         row += "<td>" + category.nombre_area + "</td>";
-
         row +=
           '<td><i class="fas fa-edit text-primary" style="cursor: pointer;" title="Modificar" onclick="modalUpdateCategory(' +
-          category.id + ')"></i>'+'  '+ icon + category.id +')"></i> </td>';
+          category.id +
+          ')"></i>' +
+          "  " +
+          icon +
+          category.id +
+          ')"></i> </td>';
         row += "</tr>";
         $("#tableBodyCategory").append(row);
       });
@@ -30,24 +34,26 @@ function consultAllCategories() {
   });
 }
 
-function iconStatus(params) {
+function iconStatusCategory(params) {
   if (params == 5) {
-    iconInactive = '<i class="fa-regular fa-rectangle-xmark" title="Inactivar" style="color: red; cursor: pointer;" onclick="inactivateCategory(';
+    iconInactive =
+      '<i class="fa-regular fa-rectangle-xmark" title="Inactivar" style="color: red; cursor: pointer;" onclick="inactivateCategory(';
     return iconInactive;
   }
-      iconActive = '<i class="fa-regular fa-square-check" title="Activar" style="color: green; cursor: pointer;" onclick="activateCategory(';
+  iconActive =
+    '<i class="fa-regular fa-square-check" title="Activar" style="color: green; cursor: pointer;" onclick="activateCategory(';
   return iconActive;
 }
 /*************** Activar e Inactivar Categoria ****************/
-function activateCategory(id){
-  saveStatusRequest(id,5);
+function activateCategory(id) {
+  saveStatusRequestCategory(id, 5);
 }
 
-function inactivateCategory(id){
-  saveStatusRequest(id,6)
+function inactivateCategory(id) {
+  saveStatusRequestCategory(id, 6);
 }
 
-function saveStatusRequest(id, new_status){
+function saveStatusRequestCategory(id, new_status) {
   $.ajax({
     url: "app/controller/controllerCategoryAssets.php",
     type: "POST",
@@ -57,9 +63,19 @@ function saveStatusRequest(id, new_status){
       status: new_status,
     },
     success: function (response) {
-      clearTable();
-      consultAllCategories();
-      //$("#updateCategory").modal("show");
+      if (response == 200) {
+        $.smkAlert({
+          text: "Modificación de categoria Exitosa!",
+          type: "success",
+        });
+        clearTable();
+        consultAllCategories();
+      } else {
+        $.smkAlert({
+          text: "Error en la Modificación!",
+          type: "Danger",
+        });
+      }
     },
     error: function (error) {
       console.log("Error en la solicitud AJAX de actualización:", error);

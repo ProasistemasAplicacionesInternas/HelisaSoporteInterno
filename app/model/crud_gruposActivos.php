@@ -49,7 +49,7 @@ class crudGrupos
 	public function consultAllGroup()
 	{
 		$db = Conectar::acceso();
-		$consulta = $db->prepare('SELECT id_grupo, nombre_grupo, areas.descripcion 	area_grupo, categoria, ca.nombre_categoria 
+		$consulta = $db->prepare('SELECT id_grupo, nombre_grupo, areas.descripcion 	area_grupo, categoria, ca.nombre_categoria, ga.estado as status 
 		FROM grupos_activos ga
 		LEFT JOIN categorias_activos ca ON ca.id = ga.categoria 
 		LEFT JOIN areas ON id_area = ga.id_grupo 
@@ -74,6 +74,22 @@ class crudGrupos
 
 		$resultado = $consult->fetch(PDO::FETCH_ASSOC);
 		return $resultado;
+	}
+
+	public function updateStatus($group)
+	{
+		$db = conectar::acceso();
+		$edit = $db->prepare('UPDATE grupos_activos 
+		SET estado=:new_status
+        WHERE id_grupo=:id');
+		$edit->bindValue("new_status", $group->getStatus());
+		$edit->bindValue("id", $group->getId_grupo());
+		$edit->execute();
+
+		if (!$edit) {
+			echo 500;
+		}
+		echo 200;
 	}
 }
 ?>
