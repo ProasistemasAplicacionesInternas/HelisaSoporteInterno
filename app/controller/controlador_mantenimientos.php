@@ -71,20 +71,11 @@ if (isset($_POST['guardar_cambios'])) {
 
 
 //********************************************************************************************//
-//*************************** CONTROLADOR PARA MODIFICAR MANTENIMIENTO ***********************//
+//************************ Consultar todos los mantenimientos segun activo *******************//
 //********************************************************************************************//
-/*if (isset($_POST['guardar_cambios'])){
-
-	   $mantenimiento->setId_mantenimiento($_POST['m_id']);
-	   $mantenimiento->setFecha_mantenimiento($_POST['m_fecha']);
-	   $mantenimiento->setDescripcion_mantenimiento($_POST['m_descripcion']);
-	   $mantenimiento->setResponsable_mantenimiento($_POST['m_responsable']);
-	   $mantenimiento->setCosto_mantenimiento($_POST['m_costo']);
-	   $mantenimiento->setActivo_mantenimiento($_POST['m_activo']);
-	   
-	   $crud->modificarMantenimiento($mantenimiento);
-
-	   header('Location: ../../dashboard.php');
-   }*/
+if (isset($_POST['actionsMaintenance'])){
+	$result = $crud->consultAllMaintenance($_POST['asset']);
+	echo json_encode($result);
+   }
 
 ?>

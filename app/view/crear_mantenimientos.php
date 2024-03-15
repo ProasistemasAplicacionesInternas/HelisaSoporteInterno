@@ -192,12 +192,15 @@ require('../controller/controlador_funcionarios.php');
                             </div>
                         </div><br>
                     </div>
-                    <a href="#" id="verObservaciones" onclick="abrirModal()" style="margin-left: -1px;">Ver observaciones anteriores</a><br>
+                    <a href="#" id="verObservaciones" onclick="abrirModal(<?php echo $af_id ?>)"
+                        style="margin-left: -1px;">Ver observaciones anteriores</a><br>
                     <div id="modal" class="modal">
                         <div class="modal-content">
-                            <h2 >Observaciones anteriores</h2>
-                            <hr class="lineas" style="border: 1px soli  d black;">
-                            <p>Aquí va el contenido de las observaciones anteriores...</p>
+                            <h2>Mantenimientos anteriores</h2>
+                            <hr class="lineas">
+                            <div id="content-obsertations">
+                                
+                            </div>
                             <button onclick="cerrarModal()" class="btn btn-primary">Cerrar</button>
                         </div>
                     </div><br>
@@ -246,4 +249,5 @@ require('../controller/controlador_funcionarios.php');
         <script src="../../public/js/validaPdfManteninmiento.js"></script>
 
 </body>
+
 </html>

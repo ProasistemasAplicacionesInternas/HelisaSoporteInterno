@@ -141,8 +141,8 @@ class CrudMantenimientos
 	{
 
 		$db = conectar::acceso();
-		$consultaModificar = $db->prepare('SELECT fecha_mantenimiento, descripcion_mantenimiento, responsable_mantenimiento, costo_mantenimiento, activo_mantenimiento WHERE codigo_mantenimiento=:cod_mantenimiento');
-
+		$consultaModificar = $db->prepare('SELECT fecha_mantenimiento, descripcion_mantenimiento, responsable_mantenimiento, 
+		costo_mantenimiento, activo_mantenimiento WHERE codigo_mantenimiento=:cod_mantenimiento');
 		$consultaModificar->bindValue('cod_mantenimiento', $_POST['cod_mantenimiento']);
 		$consultaModificar->execute();
 		$datosConsulta = $consultaModificar->fetch(PDO::FETCH_ASSOC);
@@ -150,7 +150,20 @@ class CrudMantenimientos
 
 	}
 
+	public function consultAllMaintenance($asset)
+    {
+        $db = Conectar::acceso();
+
+        $consulta = $db->prepare('SELECT fecha_mantenimiento, descripcion_mantenimiento, responsable_mantenimiento,
+		costo_mantenimiento, repotenciacion, mejora
+		FROM mantenimientos 
+		WHERE activo_mantenimiento=:id ORDER BY fecha_mantenimiento DESC');
+		$consulta->bindValue("id",$asset);
+        $consulta->execute();
+
+        $resultados = $consulta->fetchAll(PDO::FETCH_ASSOC);
+
+        return $resultados;
+    }
 }
-
-
 ?>
