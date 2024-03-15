@@ -20,7 +20,8 @@ function lastUvtYear() {
 }
 
 function abrirModal(id) {
-  document.getElementById("modal").style.display = "block";
+  $("#obsModal").modal("show");
+  //document.getElementById("modal").style.display = "block";
   peticionAjaxMaintenance(id);
 }
 
@@ -56,7 +57,7 @@ function drawInfoMaintenances(data) {
     var html =
       '<div id="block_maintenance">' +
       '<div class="row">' +
-      '<div class="col-2">' +
+      '<div class="col-3">' +
       '<div class="form-group">' +
       '<label for="fecha_mantenimiento">Fecha</label>' +
       '<span class="form-control">' + maintenance.fecha_mantenimiento + '</span>' +
@@ -74,13 +75,15 @@ function drawInfoMaintenances(data) {
       '<span class="form-control">' + maintenance.costo_mantenimiento + '</span>' +
       "</div>" +
       "</div>" +
-      '<div class="col-1">' +
+      "</div>" +
+      "<div class='row'>" +
+      '<div class="col-2">' +
       '<div class="form-group">' +
       '<label for="mejora_mantenimiento">Mejora?</label>' +
       '<span class="form-control">' + maintenance.mejora + '</span>' +
       "</div>" +
       "</div>" +
-      '<div class="col-1">' +
+      '<div class="col-2">' +
       '<div class="form-group">' +
       '<label for="repotenciacion_mantenimiento">Repotenciación?</label>' +
       '<span class="form-control">' + maintenance.repotenciacion + '</span>' +

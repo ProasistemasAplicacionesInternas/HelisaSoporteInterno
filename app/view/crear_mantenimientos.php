@@ -7,7 +7,7 @@ ini_set("session.cookie_lifetime", 18000);
 ini_set("session.gc_maxlifetime", 18000);
 session_start();
 
-if (!isset($_SESSION['usuario'])) {
+if (!isset ($_SESSION['usuario'])) {
 
     header('location:../../login.php');
 }
@@ -21,7 +21,7 @@ $af_so = $_POST['af_so'];
 $af_licenciado = $_POST['af_licenciaSo'];
 $af_categoria = $_POST['af_categoria'];
 
-require('../controller/controlador_funcionarios.php');
+require ('../controller/controlador_funcionarios.php');
 
 ?>
 <!DOCTYPE html>
@@ -195,7 +195,7 @@ require('../controller/controlador_funcionarios.php');
 
                     <a href="#" id="verObservaciones" onclick="abrirModal(<?php echo $af_id ?>)"
                         style="margin-left: -1px;">Ver observaciones anteriores</a><br>
-                    <div id="modal" class="modal">
+                    <!---<div id="modal" class="modal">
                         <div class="modal-content">
                             <h2>Mantenimientos anteriores</h2>
                             <hr class="lineas">
@@ -205,7 +205,26 @@ require('../controller/controlador_funcionarios.php');
                             <button onclick="cerrarModal()" class="btn btn-primary">Cerrar</button>
 
                         </div>
-                    </div><br>
+                    </div><br>---->
+
+                    <div id="obsModal" class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog"
+                        aria-labelledby="myLargeModalLabel" aria-hidden="true">
+                        <div class="modal-dialog modal-lg">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h2>Mantenimientos anteriores</h2>
+                                </div>
+                                <div class="modal-body">
+                                    <div id="content-obsertations">
+
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
 
                     <div class="row">
                         <div class="col-3">

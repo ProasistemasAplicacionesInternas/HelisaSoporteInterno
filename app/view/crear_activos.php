@@ -349,6 +349,7 @@ require('../controller/controlador_gruposActivos.php');
     <script src="../../public/js/bootstrap.min.js"></script>
     <script src="../../public/js/smoke.min.js"></script>
     <script src="../../public/js/valida_imagenActivo.js"></script>
+    <script src="../../public/js/verObservacionesAnt.js"></script>
     <script src="../../public/js/es.min.js"></script>
     <script src="../../public/js/filtroActivos.js"></script>
     <script src="../../public/js/funcionario_oculto.js"></script>
