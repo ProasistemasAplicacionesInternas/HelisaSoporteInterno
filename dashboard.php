@@ -42,14 +42,27 @@ if (!isset($_SESSION['status_connect'])) {
                 <span>
                     <?= $_SESSION['usuario']; ?>
                 </span>
-                <a href="../model/datos_usuario.php" data-toggle="modal" data-target="#datos-usuario"
-                    data-backdrop="static"><img src="public/img/configura.png" alt=""></a>
+                <a href="../model/datos_usuario.php" data-toggle="modal" data-target="#datos-usuario" data-backdrop="static"><img src="public/img/configura.png" alt=""></a>
+                <a href="#" onclick="showBox(); closeBoxOnOutsideClick();"><img class="icon" src="public/img/iconoVersiones.png"></a>
                 <a href="app/controller/cerrar.php"><img src="public/img/salir.png" alt=""></a>
             </div>
 
         </div>
     </header>
-
+    <div id="caja" style="display:none;">
+        <div class="fila">
+            <img class="icons" id="datoPlataforma" src="public/img/datoPlataforma.png"><span id="plataforma"></span>
+        </div>
+        <div class="fila">
+            <img class="icons" id="datoAdmin" src="public/img/datoAdmin.png"><span id="administrador"></span>
+        </div>
+        <div class="fila">
+            <img class="icons" id="datoVersion" src="public/img/datoVersion.png" alt=""><span id="version"></span>
+        </div>
+        <div class="fila">
+            <img class="icons" id="datoFecha" src="public/img/datoFecha.png" alt=""><span id="fechaVersion"></span>
+        </div>
+    </div>
     <main class="container-fluid">
         <div class="row">
             <div class="col-2 mt-3 navega">
@@ -61,11 +74,9 @@ if (!isset($_SESSION['status_connect'])) {
 
                         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
 
-                            <a href="#" id="solicitudes_internasAdmin"><img src="public/img/soporte.png" alt=""
-                                    class="ml-3" onclick:>Aplicaciones</a>
+                            <a href="#" id="solicitudes_internasAdmin"><img src="public/img/soporte.png" alt="" class="ml-3" onclick:>Aplicaciones</a>
 
-                            <a href="#" id="solicitudes_infraestructuraAdmin""><img src=" public/img/soporte.png" alt=""
-                                class="ml-3" onclick:>Infraestructura</a>
+                            <a href="#" id="solicitudes_infraestructuraAdmin""><img src=" public/img/soporte.png" alt="" class="ml-3" onclick:>Infraestructura</a>
                         </div>
                     </div>
                     <div class="dropdown">
@@ -74,10 +85,8 @@ if (!isset($_SESSION['status_connect'])) {
                         } ?>
 
                         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                            <a href="#" id="liberar_maiAdmin"><img src="public/img/atendiendo.png" alt="" class="ml-3"
-                                    onclick:>Aplicaciones</a>
-                            <a href="#" id="liberarAdmin"><img src="public/img/atendiendo.png" alt="" class="ml-3"
-                                    onclick:>HelisaSoporteInterno</a>
+                            <a href="#" id="liberar_maiAdmin"><img src="public/img/atendiendo.png" alt="" class="ml-3" onclick:>Aplicaciones</a>
+                            <a href="#" id="liberarAdmin"><img src="public/img/atendiendo.png" alt="" class="ml-3" onclick:>HelisaSoporteInterno</a>
                         </div>
                     </div>
                     <?php if ($_SESSION['id_roles'] == 3 || $_SESSION['id_roles'] == 5) {
@@ -238,8 +247,7 @@ if (!isset($_SESSION['status_connect'])) {
                             echo '<a class=" dropdown-toggle" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="margin: 0% 10%;"> <i class="fab fa-readme" class="ml-3" style="font-size: 18px;margin: 0% 2%;color: #6b6b6b;"></i><span style="margin: 0% 0% 0% 4%;">Registros</span></a>';
                         } ?>
 
-                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton"
-                            style="max-width:15rem !important; width: 100%">
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton" style="max-width:15rem !important; width: 100%">
 
                             <?php if ($_SESSION['id_roles'] == 1 || $_SESSION['id_roles'] == 7) {
                                 echo '<a href="#" id="ingresos"><i class="fas fa-user-clock" class="ml-3" style="font-size: 15px;margin: 2%;"></i><spam style="font-size: 14px;margin-left: 4%;">Ingresos-Usuarios</spam></a>';
@@ -258,8 +266,7 @@ if (!isset($_SESSION['status_connect'])) {
                             echo '<a class=" dropdown-toggle" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="margin: 0% 10%;"> <i class="fa fa-code-fork" class="ml-3" style="font-size: 18px;margin: 0% 2%;color: #6b6b6b;"></i><span style="margin: 0% 0% 0% 4%;">Organigrama</span></a>';
                         } ?>
 
-                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton"
-                            style="max-width:15rem !important; width: 100%">
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton" style="max-width:15rem !important; width: 100%">
 
                             <?php if ($_SESSION['id_roles'] == 1 || $_SESSION['id_roles'] == 7 || $_SESSION['id_roles'] == 9 || $_SESSION['id_roles'] == 10) {
                                 echo '<a href="#" id="departamentos"><i class="fa fa-code-fork" class="ml-3" style="font-size: 15px;margin: 2%;"></i><spam style="font-size: 14px;margin-left: 4%;">Departamentos</spam></a>';
@@ -284,8 +291,7 @@ if (!isset($_SESSION['status_connect'])) {
                             echo '<a class=" dropdown-toggle" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="margin: 0% 10%;"> <i class="fas fa-sitemap fa-2x mr-2"  class="ml-3" style="font-size: 18px;margin: 0% 2%;color: #6b6b6b;"></i><span>Gestión de Procesos</span></a>';
                         } ?>
 
-                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton"
-                            style="max-width:15rem !important; width: 100%">
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton" style="max-width:15rem !important; width: 100%">
 
                             <?php if ($_SESSION['id_roles'] == 7 || $_SESSION['id_roles'] == 1) {
                                 echo '<a href="#" id="gestion_accesos"><i class="fas fa-sign-in-alt fa-lg mr-1"></i><spam style="font-size: 14px;margin-left: 4%;">Gestión de Accesos</spam></a>';
@@ -297,20 +303,18 @@ if (!isset($_SESSION['status_connect'])) {
                         <?php if ($_SESSION['id_roles'] == 1 || $_SESSION['id_roles'] == 7) {
                             echo '<a class=" dropdown-toggle" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="cursor: pointer;  color: gray;"><i class="fa fa-desktop" class="ml-3" style="font-size: 15px; margin: 0% 0% 0% 10%;"></i><span style="font-size: 12px;margin-left: 3%;">Plataformas</span></a>';
                         } ?>
-                    <?php if ($_SESSION['id_roles'] == 1) {
-                        echo '<a href=#"" id="uvts"><img class="ml-3" style="padding-left:5px; padding-right:5px;"><i class="fa-solid fa-stamp"  class="ml-3" style="font-size: 18px;margin: 0% 2%;color: #6b6b6b;"></i><span>Uvts</span></a>';
-                    } ?>
-                    <?php if ($_SESSION['id_roles'] == 1) {
-                        echo '<a href=#"" id="categories"><img class="ml-3" style="padding-left:5px; padding-right:5px;"><i class="fa-solid fa-chalkboard-user"  class="ml-3" style="font-size: 18px;margin: 0% 2%;color: #6b6b6b;"></i><span> Categorias</span></a>';
-                    } ?>
+                        <?php if ($_SESSION['id_roles'] == 1) {
+                            echo '<a href=#"" id="uvts"><img class="ml-3" style="padding-left:5px; padding-right:5px;"><i class="fa-solid fa-stamp"  class="ml-3" style="font-size: 18px;margin: 0% 2%;color: #6b6b6b;"></i><span>Uvts</span></a>';
+                        } ?>
+                        <?php if ($_SESSION['id_roles'] == 1) {
+                            echo '<a href=#"" id="categories"><img class="ml-3" style="padding-left:5px; padding-right:5px;"><i class="fa-solid fa-chalkboard-user"  class="ml-3" style="font-size: 18px;margin: 0% 2%;color: #6b6b6b;"></i><span> Categorias</span></a>';
+                        } ?>
 
                         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
 
-                            <a href="#" id="plataformasActivas"><i alt="" class="fa fa-circle ml-3 " onclick:></i><span
-                                    class="ml-2">Plataformas Activas</span></a>
+                            <a href="#" id="plataformasActivas"><i alt="" class="fa fa-circle ml-3 " onclick:></i><span class="ml-2">Plataformas Activas</span></a>
 
-                            <a href="#" id="plataformasInactivas"><i alt="" class="fa fa-circle-o ml-3 "
-                                    onclick:></i><span class="ml-2" s>Plataformas Inactivas</span></a>
+                            <a href="#" id="plataformasInactivas"><i alt="" class="fa fa-circle-o ml-3 " onclick:></i><span class="ml-2" s>Plataformas Inactivas</span></a>
                         </div>
                     </div>
                 </nav>
@@ -335,12 +339,12 @@ if (!isset($_SESSION['status_connect'])) {
     <script src="public/js/bootstrap.min.js"></script>
     <script src="public/js/navega.js"></script>
     <script src="public/js/bloqueoTeclas.js"></script>
-    
+
     <?php require('app/view/actualiza_usuario.php'); ?>
 
     <script>
-        $(document).ready(function () {
-            var refreshId = setInterval(function () {
+        $(document).ready(function() {
+            var refreshId = setInterval(function() {
 
                 $('#infos2').load('app/view/liberar_soportes.php'); //actualizacion constante de la pestaña liberar
                 $('#infos3').load('app/view/consultar_peticiones.php'); //actualizacion constante de la pestaña soportes
@@ -352,6 +356,7 @@ if (!isset($_SESSION['status_connect'])) {
         });
     </script>
     <script src="public/js/valida_usuario.js?jk"></script>
+    <script src="public/js/version.js"></script>
 </body>
 
 </html>
