@@ -192,6 +192,7 @@ require('../controller/controlador_funcionarios.php');
                             </div>
                         </div><br>
                     </div>
+<<<<<<< HEAD
                     <a href="#" id="verObservaciones" onclick="abrirModal(<?php echo $af_id ?>)"
                         style="margin-left: -1px;">Ver observaciones anteriores</a><br>
                     <div id="modal" class="modal">
@@ -202,6 +203,15 @@ require('../controller/controlador_funcionarios.php');
                                 
                             </div>
                             <button onclick="cerrarModal()" class="btn btn-primary">Cerrar</button>
+=======
+                    <a href="#" id="verObservaciones" onclick="abrirObservaciones()" style="margin-left: -1px;">Ver observaciones anteriores</a><br>
+                    <div id="observacionesAnt" class="observacionesAnt" style="position: absolute; z-index: 150;">
+                        <div class="modal-contentt">
+                            <h2 >Observaciones anteriores</h2>
+                            <hr class="lineas" style="border: 1px soli  d black;">
+                            <p>Aquí va el contenido de las observaciones anteriores...</p>
+                            <button onclick="cerrarObservaciones()" class="btn btn-primary">Cerrar</button>
+>>>>>>> 68320084f2440267dbe11fbeebb9a92ca147ebdf
                         </div>
                     </div><br>
 

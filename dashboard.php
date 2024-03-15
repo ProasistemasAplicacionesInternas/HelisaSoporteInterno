@@ -54,12 +54,6 @@ if (!isset($_SESSION['status_connect'])) {
         <div class="row">
             <div class="col-2 mt-3 navega">
                 <nav>
-                    <?php if ($_SESSION['id_roles'] == 1) {
-                        echo '<a href=#"" id="uvts"><img class="ml-3" style="padding-left:5px; padding-right:5px;"><i class="fa-solid fa-stamp"  class="ml-3" style="font-size: 18px;margin: 0% 2%;color: #6b6b6b;"></i><span>Uvts</span></a>';
-                    } ?>
-                    <?php if ($_SESSION['id_roles'] == 1) {
-                        echo '<a href=#"" id="categories"><img class="ml-3" style="padding-left:5px; padding-right:5px;"><i class="fa-solid fa-chalkboard-user"  class="ml-3" style="font-size: 18px;margin: 0% 2%;color: #6b6b6b;"></i><span> Categorias</span></a>';
-                    } ?>
                     <div class="dropdown">
                         <?php if ($_SESSION['id_roles'] == 1 || $_SESSION['id_roles'] == 7) {
                             echo '<a  style="cursor: pointer;" class=" dropdown-toggle" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <img src="public/img/user.png" alt="" class="ml-3"><span>Soportes</span></a>';
@@ -303,6 +297,12 @@ if (!isset($_SESSION['status_connect'])) {
                         <?php if ($_SESSION['id_roles'] == 1 || $_SESSION['id_roles'] == 7) {
                             echo '<a class=" dropdown-toggle" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="cursor: pointer;  color: gray;"><i class="fa fa-desktop" class="ml-3" style="font-size: 15px; margin: 0% 0% 0% 10%;"></i><span style="font-size: 12px;margin-left: 3%;">Plataformas</span></a>';
                         } ?>
+                    <?php if ($_SESSION['id_roles'] == 1) {
+                        echo '<a href=#"" id="uvts"><img class="ml-3" style="padding-left:5px; padding-right:5px;"><i class="fa-solid fa-stamp"  class="ml-3" style="font-size: 18px;margin: 0% 2%;color: #6b6b6b;"></i><span>Uvts</span></a>';
+                    } ?>
+                    <?php if ($_SESSION['id_roles'] == 1) {
+                        echo '<a href=#"" id="categories"><img class="ml-3" style="padding-left:5px; padding-right:5px;"><i class="fa-solid fa-chalkboard-user"  class="ml-3" style="font-size: 18px;margin: 0% 2%;color: #6b6b6b;"></i><span> Categorias</span></a>';
+                    } ?>
 
                         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
 

@@ -19,6 +19,7 @@ function lastUvtYear() {
   });
 }
 
+<<<<<<< HEAD
 function abrirModal(id) {
   document.getElementById("modal").style.display = "block";
   peticionAjaxMaintenance(id);
@@ -108,10 +109,15 @@ function drawInfoMaintenances(data) {
       "<hr class='lineas'>";
     resultadosContainer.innerHTML += html;
   });
+=======
+
+function abrirObservaciones() {
+  document.getElementById("observacionesAnt").style.display = "block";
+>>>>>>> 68320084f2440267dbe11fbeebb9a92ca147ebdf
 }
 
-function cerrarModal() {
-  document.getElementById("modal").style.display = "none";
+function cerrarObservaciones() {
+  document.getElementById("observacionesAnt").style.display = "none";
 }
 
 function calcularTipoActivo() {
