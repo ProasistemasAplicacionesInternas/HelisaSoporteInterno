@@ -19,12 +19,12 @@ function lastUvtYear() {
 }
 
 
-function abrirModal() {
-  document.getElementById("modal").style.display = "block";
+function abrirObservaciones() {
+  document.getElementById("observacionesAnt").style.display = "block";
 }
 
-function cerrarModal() {
-  document.getElementById("modal").style.display = "none";
+function cerrarObservaciones() {
+  document.getElementById("observacionesAnt").style.display = "none";
 }
 
 function calcularTipoActivo() {

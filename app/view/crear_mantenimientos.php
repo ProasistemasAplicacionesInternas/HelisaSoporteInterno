@@ -192,13 +192,13 @@ require('../controller/controlador_funcionarios.php');
                             </div>
                         </div><br>
                     </div>
-                    <a href="#" id="verObservaciones" onclick="abrirModal()" style="margin-left: -1px;">Ver observaciones anteriores</a><br>
-                    <div id="modal" class="modal">
-                        <div class="modal-content">
+                    <a href="#" id="verObservaciones" onclick="abrirObservaciones()" style="margin-left: -1px;">Ver observaciones anteriores</a><br>
+                    <div id="observacionesAnt" class="observacionesAnt" style="position: absolute; z-index: 150;">
+                        <div class="modal-contentt">
                             <h2 >Observaciones anteriores</h2>
                             <hr class="lineas" style="border: 1px soli  d black;">
                             <p>Aquí va el contenido de las observaciones anteriores...</p>
-                            <button onclick="cerrarModal()" class="btn btn-primary">Cerrar</button>
+                            <button onclick="cerrarObservaciones()" class="btn btn-primary">Cerrar</button>
                         </div>
                     </div><br>
 
