@@ -21,7 +21,6 @@ function lastUvtYear() {
 
 function abrirModal(id) {
   $("#obsModal").modal("show");
-  //document.getElementById("modal").style.display = "block";
   peticionAjaxMaintenance(id);
 }
 
@@ -44,7 +43,7 @@ function peticionAjaxMaintenance(id) {
 }
 
 function drawInfoMaintenances(data) {
-  var resultadosContainer = document.getElementById("content-obsertations");
+  var resultadosContainer = document.getElementById("contentObsertations");
   resultadosContainer.innerHTML = "";
   $.each(data, function (index, maintenance) {
     var textarea = $("<textarea>", {
@@ -93,7 +92,7 @@ function drawInfoMaintenances(data) {
       '<div class="row">' +
       '<div class="col-12">' +
       '<div class="form-group">' +
-      '<label for="exampleFormControlTextarea1">Example textarea</label>' +
+      '<label for="exampleFormControlTextarea1">Descripción</label>' +
       textarea.prop("outerHTML") +
       "</div>" +
       "</div>" +

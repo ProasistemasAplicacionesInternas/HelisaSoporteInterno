@@ -1,6 +1,5 @@
 function buscarCategoria() {
   var id_grupo = $("#af_categoria").val();
-  console.log("PR");
   consultCategory(id_grupo);
 }
 

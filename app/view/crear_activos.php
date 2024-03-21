@@ -96,7 +96,7 @@ require('../controller/controlador_gruposActivos.php');
                             <div class="form-group">
                                 <label>Grupo del activo</label>
                                 <select class="form-control info" id="af_categoria" name="af_categoria" onchange="buscarCategoria();"required>
-                                    <option value='' selected>Seleccione grupo del activox</option>
+                                    <option value='' selected>Seleccione grupo del activo</option>
 
                                     <?php foreach($listado_grupos AS  $grupos):?>
                                         <option value="<?php echo $grupos['id_grupo'];?>"><?php echo $grupos['nombre_grupo'];?></option>
@@ -122,7 +122,6 @@ require('../controller/controlador_gruposActivos.php');
                                 <select class="form-control info" id="af_estado" name="af_estado" required>
                                     <option value="" selected> seleccione Estado</option>
                                     <option value="15">Disponible</option>
-                                    <!-- <option value="14">Asignado</option> -->
                                 </select>
                             </div>
                         </div>

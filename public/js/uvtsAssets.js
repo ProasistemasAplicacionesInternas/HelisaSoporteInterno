@@ -15,15 +15,15 @@ function consultUvtAll() {
 
       var table = '<table class="table table-bordered table-auto">';
       table +=
-        "<thead><tr class='custom-font'><th>Año UVT</th><th>Valor UVT</th><th>Acciones</th></tr></thead>";
+        "<thead><tr class='customFont'><th>Año UVT</th><th>Valor UVT</th><th>Acciones</th></tr></thead>";
       table += "<tbody>";
 
       for (var i = 0; i < parsedResponse.length; i++) {
         table += "<tr>";
         table +=
-          "<td class='custom-font'>" + parsedResponse[i].year_uvt + "</td>";
+          "<td class='customFont'>" + parsedResponse[i].year_uvt + "</td>";
         table +=
-          "<td class='custom-font editable' contenteditable='true' data-id='" +
+          "<td class='customFont editable' contenteditable='true' data-id='" +
           parsedResponse[i].year_uvt +
           "'>" +
           parsedResponse[i].value_uvt +

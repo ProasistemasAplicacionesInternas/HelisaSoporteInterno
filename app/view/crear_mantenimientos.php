@@ -195,17 +195,6 @@ require ('../controller/controlador_funcionarios.php');
 
                     <a href="#" id="verObservaciones" onclick="abrirModal(<?php echo $af_id ?>)"
                         style="margin-left: -1px;">Ver observaciones anteriores</a><br>
-                    <!---<div id="modal" class="modal">
-                        <div class="modal-content">
-                            <h2>Mantenimientos anteriores</h2>
-                            <hr class="lineas">
-                            <div id="content-obsertations">
-
-                            </div>
-                            <button onclick="cerrarModal()" class="btn btn-primary">Cerrar</button>
-
-                        </div>
-                    </div><br>---->
 
                     <div id="obsModal" class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog"
                         aria-labelledby="myLargeModalLabel" aria-hidden="true">
@@ -215,7 +204,7 @@ require ('../controller/controlador_funcionarios.php');
                                     <h2>Mantenimientos anteriores</h2>
                                 </div>
                                 <div class="modal-body">
-                                    <div id="content-obsertations">
+                                    <div id="contentObsertations">
 
                                     </div>
                                 </div>
