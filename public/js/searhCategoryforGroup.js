@@ -4,7 +4,6 @@ function buscarCategoria() {
 }
 
 function consultCategory(id) {
-  
   $.ajax({
     url: "../controller/controlador_gruposActivos.php",
     type: "POST",
@@ -13,13 +12,14 @@ function consultCategory(id) {
       idGroup: id,
     },
     success: function (response) {
-      
       var select = document.getElementById("traCategoria");
       select.innerHTML = "";
       var jsonObject = JSON.parse(response);
       var option = document.createElement("option");
-      option.value = jsonObject.categoria;
-      option.text = jsonObject.nombre_categoria;
+      if (jsonObject.categoria !== undefined) {
+        option.value = jsonObject.categoria;
+      }
+      option.text = jsonObject.nombre_categoria || ""; 
       option.selected;
       select.add(option);
     },
