@@ -660,7 +660,7 @@
                 LEFT JOIN estado ON AP.estado = estado.id_estado
                 WHERE F.usuario = :usuario && AP.estado = :estado");
             $consulta->bindValue('usuario', $usuario);
-            $consulta->bindValue('estado', 17);
+            $consulta->bindValue('estado', 6);
             $consulta->execute();
             $listadoAccesosPlataformas = array();
 
