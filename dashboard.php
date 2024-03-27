@@ -307,7 +307,7 @@ if (!isset($_SESSION['status_connect'])) {
                             echo '<a href=#"" id="uvts"><img class="ml-3" style="padding-left:5px; padding-right:5px;"><i class="fa-solid fa-stamp"  class="ml-3" style="font-size: 18px;margin: 0% 2%;color: #6b6b6b;"></i><span>Uvts</span></a>';
                         } ?>
                         <?php if ($_SESSION['id_roles'] == 1) {
-                            echo '<a href=#"" id="categories"><img class="ml-3" style="padding-left:5px; padding-right:5px;"><i class="fa-solid fa-chalkboard-user"  class="ml-3" style="font-size: 18px;margin: 0% 2%;color: #6b6b6b;"></i><span> Categorias</span></a>';
+                            echo '<a href=#"" id="categories"><img class="ml-3" style="padding-left:5px; padding-right:5px;"><i class="fa-solid fa-chalkboard-user"  class="ml-3" style="font-size: 18px;margin: 0% 2%;color: #6b6b6b;"></i><span> Categorías</span></a>';
                         } ?>
 
                         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">

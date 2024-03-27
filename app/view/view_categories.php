@@ -17,7 +17,7 @@
 
                 <div class="row">
                     <div class="col-8">
-                        <h5>Listado de Categorias</h5>
+                        <h5>Listado de Categorías</h5>
                     </div>
                     <div class="col-4">
                         <img src="public/img/nuevo.png" alt="Imagen" id="abrirModalImagen"
@@ -44,7 +44,7 @@
                 <div class="modal-dialog" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title" id="updateCategoryLabel">Modificar Categoria</h5>
+                            <h5 class="modal-title" id="updateCategoryLabel">Modificar Categoría</h5>
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">X</button>
                         </div>
                         <div class="modal-body">
@@ -57,7 +57,7 @@
                                             disabled>
                                     </div>
                                     <div class="form-group col-6">
-                                        <label for="actual_area">Area Actual</label>
+                                        <label for="actual_area">Área Actual</label>
                                         <input type="text" class="form-control" id="actual_area" name="actual_area"
                                             disabled>
                                     </div>
@@ -69,7 +69,7 @@
                                         <input type="text" class="form-control" id="new_name" name="new_name" required>
                                     </div>
                                     <div class="form-group col-6">
-                                        <label for="new_area">Nueva Area</label>
+                                        <label for="new_area">Nueva Área</label>
                                         <select class="form-control" name="new_area" id="new_area" required>
                                             <option value=""></option>
                                             <option value="32">Administración</option>
@@ -92,7 +92,7 @@
                 <div class="modal-dialog" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title" id="createCategoryLabel">Crear Categoria</h5>
+                            <h5 class="modal-title" id="createCategoryLabel">Crear Categoría</h5>
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">X</button>
                         </div>
                         <div class="modal-body">
@@ -100,12 +100,12 @@
                                 <div class="row">
                                     <input type="hidden" id="id_category">
                                     <div class="form-group col-6">
-                                        <label for="created_name">Nombre Categoria</label>
+                                        <label for="created_name">Nombre Categoría</label>
                                         <input type="text" class="form-control" id="created_name" name="created_name"
                                             required>
                                     </div>
                                     <div class="form-group col-6">
-                                        <label for="created_area">Area</label>
+                                        <label for="created_area">Área</label>
                                         <select class="form-control" name="created_area" id="created_area" required>
                                             <option value=""></option>
                                             <option value="32">Administración</option>
