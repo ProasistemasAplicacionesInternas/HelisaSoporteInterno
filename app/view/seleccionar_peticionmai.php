@@ -181,7 +181,7 @@
                             <input type="hidden" id="imagenCa" name="imagenCa" value="<?php echo $imagen; ?>">
                             <label for=""><h3>Imagen</h3></label>
                             <a class="text" href="../../cartas/<?= $imagen ?>" target="_blanck" id="imagen" name="imagen" style="text-decoration: underline; font-size: 15px;color: #bf1d1d; ">                                
-                                <img src="http://localhost/HelisaSoporteInterno/cartas/<?php echo ($imagen) ?>" alt="">
+                                <img src="../../cartas/<?php echo ($imagen) ?>" alt="">
                             </a>
                         <?php } else { ?>
                             <input type="hidden" id="imagenCa" name="imagenCa" value="2">
