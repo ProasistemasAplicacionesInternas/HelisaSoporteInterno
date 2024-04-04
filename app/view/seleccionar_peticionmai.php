@@ -179,10 +179,12 @@
                     <div class="mt-3">
                         <?php if ($imagen != '2') { ?>
                             <input type="hidden" id="imagenCa" name="imagenCa" value="<?php echo $imagen; ?>">
-                            <label for="">Imagen</label>
+                            <div class="contenedorImagenes"> 
+                            <label for="">Imagen</label><br>
                             <a class="text" href="../../cartas/<?= $imagen ?>" target="_blanck" id="imagen" name="imagen" style="text-decoration: underline; font-size: 15px;color: #bf1d1d; ">                                
-                                <img src="../../cartas/<?php echo ($imagen) ?>" alt="">
+                                <img src="../../cartas/<?php echo ($imagen) ?>" alt="" width="413" height="250">
                             </a>
+                            </div>
                         <?php } else { ?>
                             <input type="hidden" id="imagenCa" name="imagenCa" value="2">
                         <?php } ?>
@@ -190,24 +192,28 @@
                         <?php if ($imagen2 != '2') {
                             echo ' '; ?>
                             <input type="hidden" id="imagen2" name="imagen2" value="<?php echo $imagen2; ?>">
-                            <label for="">Imagen 2</label>
+                            <div class="contenedorImagenes2">
+                            <label for="">Imagen 2</label><br>
                             <a class="text" href="../../cartas/<?= $imagen2 ?>" target="_blanck" id="imagen2x" name="imagen2x" style="text-decoration: underline; font-size: 15px;color: #bf1d1d; ">
-                            <img src="../../cartas/<?php echo ($imagen2) ?>" alt="">
+                            <img src="../../cartas/<?php echo ($imagen2) ?>" alt="" width="413" height="250">
                             </a>
+                            </div>
                         <?php } else { ?>
                             <input type="hidden" id="imagen2" name="imagen2" value="2">
                         <?php } ?>
                         <?php if ($imagen3 != '2') {
                             echo ' '; ?>
                             <input type="hidden" id="imagen3" name="imagen3" value="<?php echo $imagen3; ?>">
-                            <label for="">Imagen 3</label>
+                            <div class="contenedorImagenes3">
+                            <label for="">Imagen 3</label><br>
                             <a class="text" href="../../cartas/<?= $imagen3 ?>" target="_blanck" id="imagen3x" name="imagen3x" style="text-decoration: underline; font-size: 15px;color: #bf1d1d; ">
-                            <img src="../../cartas/<?php echo ($imagen3) ?>" alt="">
+                            <img src="../../cartas/<?php echo ($imagen3) ?>" alt="" width="413" height="250">
                             </a>
+                            </div>
                         <?php } else { ?>
                             <input type="hidden" id="imagen3" name="imagen3" value="2">
                         <?php } ?>
-                    </div>
+                    </div><br>
                     <div class="row">
                         <div class="giant">
                             <label for="">Observaciones</label>
