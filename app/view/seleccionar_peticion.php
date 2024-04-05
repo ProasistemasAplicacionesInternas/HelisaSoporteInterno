@@ -132,9 +132,15 @@ error_reporting(E_ALL);
                                     <input type="hidden" id="imagenCa" name="imagenCa" value="<?php echo $imagen; ?>">
                                     <div class="contenedorImagenes">
                                     <label for="">Imagen</label><br><br>
+<<<<<<< HEAD
+                                    <a href="../../cartas/<?= $imagen ?>" target="_blanck">                                
+                                <img src="../../cartas/<?php echo ($imagen) ?>" alt="" width="413" height="250">
+                            </a>
+=======
                                     <a href="../../cartas/<?= $imagen ?>" target="_blanck" id="imagen" name="imagen" style="text-decoration: underline; font-size: 15px;color: #bf1d1d; ">                                
                                         <img src="../../cartas/<?php echo ($imagen) ?>" alt="" width="413" height="250">
                                     </a>
+>>>>>>> 741c8e7618dece4d02814072bab2e79bb421e38e
                                     </div>
                                 <?php } else { ?>
                                     <input type="hidden" id="imagenCa" name="imagenCa" value="2">
@@ -145,9 +151,15 @@ error_reporting(E_ALL);
                                     <input type="hidden" id="imagen2" name="imagen2" value="<?php echo $imagen2; ?>">
                                     <div class="contenedorImagenes2">
                                     <label for="">Imagen 2</label><br><br>
+<<<<<<< HEAD
+                                    <a href="../../cartas/<?= $imagen2 ?>" target="_blanck">                                
+                                <img src="../../cartas/<?php echo ($imagen2) ?>" alt="" width="413" height="250">
+                            </a>
+=======
                                     <a href="../../cartas/<?= $imagen2 ?>" target="_blanck" id="imagen2x" name="imagen2x" style="text-decoration: underline; font-size: 15px;color: #bf1d1d; ">
                                         <img src="../../cartas/<?php echo ($imagen2) ?>" alt="" width="413" height="250">  
                                     </a>
+>>>>>>> 741c8e7618dece4d02814072bab2e79bb421e38e
                                     </div>
                                 <?php } else { ?>
                                     <input type="hidden" id="imagen2" name="imagen2" value="2">
@@ -157,9 +169,15 @@ error_reporting(E_ALL);
                                     <input type="hidden" id="imagen3" name="imagen3" value="<?php echo $imagen3; ?>">
                                     <div class="contenedorImagenes3">
                                     <label for="">Imagen 3</label><br><br>
+<<<<<<< HEAD
+                                    <a href="../../cartas/<?= $imagen3 ?>" target="_blanck">                                
+                                <img src="../../cartas/<?php echo ($imagen3) ?>" alt="" width="413" height="250">
+                            </a>
+=======
                                     <a href="../../cartas/<?= $imagen3 ?>" target="_blanck" id="imagen3x" name="imagen3x" style="text-decoration: underline; font-size: 15px;color: #bf1d1d; ">
                                         <img src="../../cartas/<?php echo ($imagen3) ?>" alt="" width="413" height="250">  
                                     </a>
+>>>>>>> 741c8e7618dece4d02814072bab2e79bb421e38e
                                     </div>
                                 <?php } else { ?>
                                     <input type="hidden" id="imagen3" name="imagen3" value="2">
