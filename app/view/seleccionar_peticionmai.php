@@ -209,7 +209,7 @@
 =======
                             <label for="">Imagen 2</label><br>
                             <a class="text" href="../../cartas/<?= $imagen2 ?>" target="_blanck" id="imagen2x" name="imagen2x" style="text-decoration: underline; font-size: 15px;color: #bf1d1d; ">
-                            <img src="../../cartas/<?php echo ($imagen2) ?>" alt="" width="413" height="250">
+                            <img src="../../cartas/<?php echo ($imagen2) ?>" alt="" width="313" height="150">
                             </a>
 >>>>>>> 741c8e7618dece4d02814072bab2e79bb421e38e
                             </div>
@@ -223,12 +223,12 @@
 <<<<<<< HEAD
                                 <label for="">Imagen 3</label><br>
                                 <a href="../../cartas/<?= $imagen3 ?>" target="_blanck">
-                                    <img src="../../cartas/<?php echo ($imagen3) ?>" alt="" width="413" height="250">
+                                    <img src="../../cartas/<?php echo ($imagen3) ?>" alt="" width="313" height="150">
                                 </a>
 =======
                             <label for="">Imagen 3</label><br>
                             <a class="text" href="../../cartas/<?= $imagen3 ?>" target="_blanck" id="imagen3x" name="imagen3x" style="text-decoration: underline; font-size: 15px;color: #bf1d1d; ">
-                            <img src="../../cartas/<?php echo ($imagen3) ?>" alt="" width="413" height="250">
+                            <img src="../../cartas/<?php echo ($imagen3) ?>" alt="" width="313" height="150">
                             </a>
 >>>>>>> 741c8e7618dece4d02814072bab2e79bb421e38e
                             </div>
