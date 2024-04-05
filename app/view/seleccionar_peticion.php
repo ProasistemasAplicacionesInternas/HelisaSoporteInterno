@@ -131,7 +131,7 @@ error_reporting(E_ALL);
                                 <?php if ($imagen != '2') { ?>
                                     <input type="hidden" id="imagenCa" name="imagenCa" value="<?php echo $imagen; ?>">
                                     <div class="contenedorImagenes">
-                                    <label for="">Imagen</label><br><br>
+                                    <label for="" style="text-decoration: underline;">Imagen</label><br><br>
 <<<<<<< HEAD
                                     <a href="../../cartas/<?= $imagen ?>" target="_blanck">                                
                                 <img src="../../cartas/<?php echo ($imagen) ?>" alt="" width="413" height="250">
@@ -150,7 +150,7 @@ error_reporting(E_ALL);
                                     echo ' '; ?>
                                     <input type="hidden" id="imagen2" name="imagen2" value="<?php echo $imagen2; ?>">
                                     <div class="contenedorImagenes2">
-                                    <label for="">Imagen 2</label><br><br>
+                                    <label for="" style="text-decoration: underline;">Imagen 2</label><br><br>
 <<<<<<< HEAD
                                     <a href="../../cartas/<?= $imagen2 ?>" target="_blanck">                                
                                 <img src="../../cartas/<?php echo ($imagen2) ?>" alt="" width="413" height="250">
@@ -168,7 +168,7 @@ error_reporting(E_ALL);
                                     echo ' '; ?>
                                     <input type="hidden" id="imagen3" name="imagen3" value="<?php echo $imagen3; ?>">
                                     <div class="contenedorImagenes3">
-                                    <label for="">Imagen 3</label><br><br>
+                                    <label for="" style="text-decoration: underline;">Imagen 3</label><br><br>
 <<<<<<< HEAD
                                     <a href="../../cartas/<?= $imagen3 ?>" target="_blanck">                                
                                 <img src="../../cartas/<?php echo ($imagen3) ?>" alt="" width="413" height="250">
