@@ -181,13 +181,13 @@
                             <input type="hidden" id="imagenCa" name="imagenCa" value="<?php echo $imagen; ?>">
 <<<<<<< HEAD
                             <div class="contenedorImagenes">
-                                <label for="">Imagen</label><br>
+                                <label for="">Imagen</label><br><br>
                                 <a href="../../cartas/<?= $imagen ?>" target="_blanck">
                                     <img src="../../cartas/<?php echo ($imagen) ?>" alt="" width="413" height="250">
                                 </a>
 =======
                             <div class="contenedorImagenes"> 
-                            <label for="">Imagen</label><br>
+                            <label for="">Imagen</label><br><br>
                             <a class="text" href="../../cartas/<?= $imagen ?>" target="_blanck" id="imagen" name="imagen" style="text-decoration: underline; font-size: 15px;color: #bf1d1d; ">                                
                                 <img src="../../cartas/<?php echo ($imagen) ?>" alt="" width="413" height="250">
                             </a>
@@ -202,7 +202,7 @@
                             <input type="hidden" id="imagen2" name="imagen2" value="<?php echo $imagen2; ?>">
                             <div class="contenedorImagenes2">
 <<<<<<< HEAD
-                                <label for="">Imagen 2</label><br>
+                                <label for="">Imagen 2</label><br><br>
                                 <a href="../../cartas/<?= $imagen2 ?>" target="_blanck">
                                     <img src="../../cartas/<?php echo ($imagen2) ?>" alt="" width="413" height="250">
                                 </a>
