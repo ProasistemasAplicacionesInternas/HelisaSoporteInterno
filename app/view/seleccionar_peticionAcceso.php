@@ -111,10 +111,10 @@ error_reporting(E_ALL);
                                     <input type="text" class="form-control data" value="<?php switch($tipo){
                                         case 0:echo "Modificacion";break;
                                         case 1:echo "Activación";break;
-                                        case 2: echo "Inactivacion";
-                                        case 3: echo "Novedades";
-                                        case 4: echo "Reactivacion";
-                                        break;Default:echo "Modificacion";}?>" readonly>
+                                        case 2: echo "Inactivacion";break;
+                                        case 3: echo "Novedades";break;
+                                        case 4: echo "Reactivacion";break;
+                                        Default:echo "Modificacion";}?>" readonly>
                                 </div>
                             </div>
 
