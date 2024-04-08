@@ -31,7 +31,7 @@ $('#crear_activoFijo').click(function() {
 		formData.append('tipoAct',$.trim($('#tipoAct').val()))
 		formData.append('vidaUtil',$.trim($('#vidaUtil').val()))
 		formData.append('estadoAct',$.trim($('#estadoAct').val()))
-
+		formData.append('traCategoria',$.trim($('#traCategoria').val()))
 
   
 	  $.ajax({

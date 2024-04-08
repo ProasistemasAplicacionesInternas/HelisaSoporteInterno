@@ -21,7 +21,7 @@ class crudActivos{
 		}else if ($resultadoVal==0){
 
 				$db=conectar::acceso();
-				$crear_activo=$db->prepare("INSERT INTO activos_internos(codigo_activo,serial_activo,nombre_activo,estado_activo, marca_activo, modelo_activo, fecha_compra, grupo_activo, area_activo, ubicacion_activo, responsable_activo, fecha_asignacion, observaciones_activo, ram_activo, disco_activo, procesador_activo, licencia_office, licencia_antivirus, aplicaciones_activo, licencia_sistema, dominio, sistema_operativo, imagen, valor, tipo_activo, vida_util, condicion ) VALUES(:codigo_activo, :serial_activo, :nombre_activo, :estado_activo, :marca_activo, :modelo_activo, :fecha_compra, :grupo_activo, :area_activo, :ubicacion_activo,:responsable_activo, :fecha_asignacion, :observaciones_activo, :ram_activo, :disco_activo, :procesador_activo, :licencia_office, :licencia_antivirus, :aplicaciones_activo, :licencia_sistema, :dominio, :sistema_operativo, :imagen, :valor, :tipo_activo, :vida_util, :condicion)");
+				$crear_activo=$db->prepare("INSERT INTO activos_internos(codigo_activo,serial_activo,nombre_activo,estado_activo, marca_activo, modelo_activo, fecha_compra, grupo_activo, area_activo, ubicacion_activo, responsable_activo, fecha_asignacion, observaciones_activo, ram_activo, disco_activo, procesador_activo, licencia_office, licencia_antivirus, aplicaciones_activo, licencia_sistema, dominio, sistema_operativo, imagen, valor, tipo_activo, vida_util, condicion, Id_categoria ) VALUES(:codigo_activo, :serial_activo, :nombre_activo, :estado_activo, :marca_activo, :modelo_activo, :fecha_compra, :grupo_activo, :area_activo, :ubicacion_activo,:responsable_activo, :fecha_asignacion, :observaciones_activo, :ram_activo, :disco_activo, :procesador_activo, :licencia_office, :licencia_antivirus, :aplicaciones_activo, :licencia_sistema, :dominio, :sistema_operativo, :imagen, :valor, :tipo_activo, :vida_util, :condicion, :Id_categoria)");
 						$crear_activo->bindValue('codigo_activo',$create->getAf_codigo());
 						$crear_activo->bindValue('serial_activo',$create->getAf_serial());
 						$crear_activo->bindValue('nombre_activo',$create->getAf_nombre());
@@ -49,6 +49,7 @@ class crudActivos{
 						$crear_activo->bindValue('tipo_activo',$create->gettipoAct());
 						$crear_activo->bindValue('vida_util',$create->getvidaUtil());
 						$crear_activo->bindValue('condicion',$create->getestadoAct());
+						$crear_activo->bindValue('Id_categoria',$create->gettraCategoria());
 						$crear_activo->execute();
 						$ultimo_id = $db->lastInsertId();
 

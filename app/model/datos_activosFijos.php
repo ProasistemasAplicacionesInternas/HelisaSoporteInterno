@@ -34,6 +34,7 @@
 		private $tipoAct;
 		private $vidaUtil;
 		private $estadoAct;
+		private $traCategoria;
 
 		public function getAf_id(){
 		    				return $this->af_id;
@@ -258,7 +259,14 @@
 		public function setestadoAct($estadoAct) {
 			$this->estadoAct = $estadoAct;
 		}
-        			
+        	
+		public function gettraCategoria() {
+			return $this->traCategoria;
+		}
+	
+		public function settraCategoria($traCategoria) {
+			$this->traCategoria = $traCategoria;
+		}
 	}
 
  ?>

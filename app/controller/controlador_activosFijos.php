@@ -78,6 +78,7 @@ $activos_Asignados = $consult->matrizActivosFuncionario();*/
                 $activoFijo->settipoAct($_POST['tipoAct']);
                 $activoFijo->setvidaUtil($_POST['vidaUtil']);
                 $activoFijo->setestadoAct($_POST['estadoAct']);
+                $activoFijo->settraCategoria($_POST['traCategoria']);
                 $crud->crearActivos($activoFijo);    
         }
 
