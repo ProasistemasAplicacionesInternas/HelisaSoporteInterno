@@ -74,6 +74,10 @@ $activos_Asignados = $consult->matrizActivosFuncionario();*/
                 $activoFijo->setAf_sistemaOperativo($_POST['af_so']);
                 $activoFijo->setNombre($_POST['nombre_usu']);
                 $activoFijo->setImagenactivo($nombre_imagen);
+                $activoFijo->setcostoCompra($_POST['costoCompra']);
+                $activoFijo->settipoAct($_POST['tipoAct']);
+                $activoFijo->setvidaUtil($_POST['vidaUtil']);
+                $activoFijo->setestadoAct($_POST['estadoAct']);
                 $crud->crearActivos($activoFijo);    
         }
 

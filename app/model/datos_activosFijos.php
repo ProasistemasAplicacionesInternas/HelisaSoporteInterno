@@ -30,6 +30,10 @@
 		private $nombre;
 		private $af_areaCreacion;
 		private $imgActivo;
+		private $costoCompra;
+		private $tipoAct;
+		private $vidaUtil;
+		private $estadoAct;
 
 		public function getAf_id(){
 		    				return $this->af_id;
@@ -222,7 +226,38 @@
 		public function setImagenactivo($imgActivo){
 			$this->imgActivo = $imgActivo ;
 		}
+		
+		public function getcostoCompra() {
+			return $this->costoCompra;
+		}
 	
+		public function setcostoCompra($costoCompra) {
+			$this->costoCompra = $costoCompra;
+		}
+	
+		public function gettipoAct() {
+			return $this->tipoAct;
+		}
+	
+		public function settipoAct($tipoAct) {
+			$this->tipoAct = $tipoAct;
+		}
+	
+		public function getvidaUtil() {
+			return $this->vidaUtil;
+		}
+	
+		public function setvidaUtil($vidaUtil) {
+			$this->vidaUtil = $vidaUtil;
+		}
+	
+		public function getestadoAct() {
+			return $this->estadoAct;
+		}
+	
+		public function setestadoAct($estadoAct) {
+			$this->estadoAct = $estadoAct;
+		}
         			
 	}
 

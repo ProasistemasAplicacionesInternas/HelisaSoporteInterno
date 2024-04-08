@@ -27,6 +27,10 @@ $('#crear_activoFijo').click(function() {
 		formData.append('nombre_usu',$.trim($('#nombre_usu').val()))
 		formData.append('crear','1')
 		formData.append('af_imagen1', $('#af_imagen1')[0].files[0]);
+		formData.append('costoCompra',$.trim($('#costoCompra').val()))
+		formData.append('tipoAct',$.trim($('#tipoAct').val()))
+		formData.append('vidaUtil',$.trim($('#vidaUtil').val()))
+		formData.append('estadoAct',$.trim($('#estadoAct').val()))
 
 
   
