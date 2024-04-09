@@ -70,7 +70,7 @@
                 <div class="row">
                         <div class="col-5" <?php if($usuarioDir != 1){echo "style='display:none'";}?>>
                             <div class="form-group">
-                                <label>Peticion Dirigida</label>
+                                <label>Petición Dirigida</label>
                                 <div>   
                                     <select class="form-control" id="funcionarioAlterno" name="funcionarioAlterno" required>
                                         <option value='0'>Para Mi</option>
@@ -134,7 +134,7 @@
                     <div class="row">
                         <div class="col-10">
                             <div class="form-group">
-                                <label>Descripcion</label>
+                                <label>Descripción</label>
                                 <textarea class="form-control" name="descripcion" id="descripcion"  rows="5" maxlength="6000" required></textarea>
                             </div>
                         </div>

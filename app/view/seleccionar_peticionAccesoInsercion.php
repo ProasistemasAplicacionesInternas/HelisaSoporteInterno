@@ -99,7 +99,7 @@ ini_set("session.gc_maxlifetime",18000);
                                 </div>
 
                                 <div class="col-4">
-                                    <label>Identificacion</label>
+                                    <label>Identificación</label>
                                     <input type="text" id="p_identificacion" name="p_identificacion" class="form-control"
                                         value="<?php echo $f_identificacion;?>" readonly>
                                 </div>
@@ -115,7 +115,7 @@ ini_set("session.gc_maxlifetime",18000);
 
                             <div class="row mb-3">
                                 <div class="col-12">
-                                    <label for="">Descripcion</label>
+                                    <label for="">Descripción</label>
                                     <textarea id="descripcion" name="descripcion" class="form-control col-11 data"
                                         readonly><?php echo $descripcion;?></textarea>
                                 </div>
@@ -133,12 +133,12 @@ ini_set("session.gc_maxlifetime",18000);
                                     <input type="hidden" name="tipo" value="<?php echo $tipo ?>">
                                     <input type="text" class="form-control col-11 data" value="<?php 
                                 switch($tipo){
-                                    case 0:echo "Modificacion";break;
-                                    case 1:echo "Activacion";break;
-                                    case 2:echo "Inactivacion";break;
+                                    case 0:echo "Modificación";break;
+                                    case 1:echo "Activación";break;
+                                    case 2:echo "Inactivación";break;
                                     case 3:echo "Novedades";break;
-                                    case 4:echo "Reactivacion";break;
-                                    Default:echo "Modificacion";}?>" readonly>
+                                    case 4:echo "Reactivación";break;
+                                    Default:echo "Modificación";}?>" readonly>
                                 </div>
                             </div>
                             <div class="row">
