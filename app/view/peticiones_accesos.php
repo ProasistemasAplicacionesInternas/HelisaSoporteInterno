@@ -69,12 +69,12 @@
                                     <?php echo $datosU->getDescripcion() ?></td>
                                 <td>
                                     <?php switch($datosU->getTipo()){
-                                        case 0:echo "Modificacion";break;
-                                        case 1:echo "Activacion";break;
-                                        case 2: echo "Inactivacion";break;
+                                        case 0:echo "Modificación";break;
+                                        case 1:echo "Activación";break;
+                                        case 2: echo "Inactivación";break;
                                         case 3: echo "Novedades";break;
-                                        case 4: echo "Reactivacion";break;
-                                        Default:echo "Modificacion";} ?></td> 
+                                        case 4: echo "Reactivación";break;
+                                        Default:echo "Modificación";} ?></td> 
                                 <td>
                                     <?php echo $datosU->getEstado_descripcion() ?></td> 
                                 <td>

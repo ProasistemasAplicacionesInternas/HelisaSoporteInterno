@@ -86,7 +86,7 @@ if (!isset($_SESSION['status_connect'])) {
 
                         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                             <a href="#" id="liberar_maiAdmin"><img src="public/img/atendiendo.png" alt="" class="ml-3" onclick:>Aplicaciones</a>
-                            <a href="#" id="liberarAdmin"><img src="public/img/atendiendo.png" alt="" class="ml-3" onclick:>HelisaSoporteInterno</a>
+                            <a href="#" id="liberarAdmin"><img src="public/img/atendiendo.png" alt="" class="ml-3" onclick:>Infraestructura</a>
                         </div>
                     </div>
                     <?php if ($_SESSION['id_roles'] == 3 || $_SESSION['id_roles'] == 5) {

@@ -100,7 +100,7 @@
         public function consultaAccesoDuplicado($datos, $id){
             $db = Conectar::acceso();
             $consulta = $db->prepare("SELECT * FROM accesos_plataformas WHERE usuario = :usuarioD AND Plataforma = :plataformaD AND fecha_inactivacion IS NULL AND id_usuario = :id");
-            $consulta->bindValue('usuarioD',$datos->getNombre());
+            $consulta->bindValue('usuarioD',$datos->getUsuario_creacion());
             $consulta->bindValue('plataformaD',$datos->getPlataformas());
             $consulta->bindValue('id',$id);
             $consulta->execute();
@@ -533,19 +533,24 @@
         }
 
 
-        public function modificarPlataformas($plataformas, $peticion, $conclusiones) {
+        public function modificarPlataformas($plataformas,$peticion,$conclusiones){
             $db = Conectar::acceso();
-            if ($plataformas == '') {
+            if($plataformas == ''){
                 $estado = 2;
-            } else {
+            }else{
                 $estado = 3;
             }
             $modificarPeticion = $db->prepare("UPDATE peticiones_accesos SET plataformas = :plataformas, estado = :estado, conclusiones = :conclusiones WHERE id_peticionAcceso = :id_peticion");
-            $modificarPeticion->bindValue('plataformas', $plataformas);
+            $modificarPeticion->bindValue('plataformas',$plataformas);
             $modificarPeticion->bindValue('id_peticion', $peticion);
             $modificarPeticion->bindValue('estado', $estado);
-            $modificarPeticion->bindValue('conclusiones', $conclusiones);
+            $modificarPeticion->bindValue('conclusiones',$conclusiones);
             $modificarPeticion->execute();
+
+            if($estado == 2){
+                $this->correoDeFinalizacion($peticion);
+            }
+
         }
         public function negacionDePlataformas($plataformas,$peticion,$conclusiones){
             $db = Conectar::acceso();
@@ -984,9 +989,9 @@
             $mail->isHTML(true); // Set email format to HTML
             switch ($tipo) {
                 case 1:$subjects ="Aceptación entrega de accesos a plataformas PROASISTEMAS S.A.";break;
-                case 2:$subjects ="Inactivacion entrega de accesos a plataformas PROASISTEMAS S.A.";break;
+                case 2:$subjects ="Inactivación entrega de accesos a plataformas PROASISTEMAS S.A.";break;
                 case 3:$subjects ="Novedades entrega de accesos a plataformas PROASISTEMAS S.A.";break;
-                case 4:$subjects ="Reactivacion entrega de accesos a plataformas PROASISTEMAS S.A.";break;
+                case 4:$subjects ="Reactivación entrega de accesos a plataformas PROASISTEMAS S.A.";break;
                                
             }
             $cuerpo="<style type='text/css'> 
