@@ -67,22 +67,22 @@
                             <td>
                                 <?php switch ($datos->getTipo()) {
                                     case 0:
-                                        echo "Modificacion";
+                                        echo "Modificación";
                                         break;
                                     case 1:
-                                        echo "Activacion";
+                                        echo "Activación";
                                         break;
                                     case 2:
-                                        echo "Inactivacion";
+                                        echo "Inactivación";
                                         break;
                                     case 3:
                                         echo "Novedades";
                                         break;
                                     case 4:
-                                        echo "Reactivacion";
+                                        echo "Reactivación";
                                         break;
                                     default:
-                                        echo "Modificacion";
+                                        echo "Modificación";
                                 } ?></td>
                             <td>
                                 <?php echo $datos->getDescripcion() ?></td>
