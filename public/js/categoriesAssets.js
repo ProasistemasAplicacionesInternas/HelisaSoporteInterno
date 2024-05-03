@@ -66,14 +66,14 @@ function saveStatusRequestCategory(id, new_status) {
     success: function (response) {
       if (response == 200) {
         $.smkAlert({
-          text: "Modificación de categoria Exitosa!",
+          text: "¡Modificación de categoría Exitosa!",
           type: "success",
         });
         clearTable();
         consultAllCategories();
       } else {
         $.smkAlert({
-          text: "Error en la Modificación!",
+          text: "¡Error en la Modificación!",
           type: "Danger",
         });
       }

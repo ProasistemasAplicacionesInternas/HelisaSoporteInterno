@@ -71,14 +71,14 @@ function saveStatusRequestGroup(id, new_status) {
     success: function (response) {
       if (response == 200) {
         $.smkAlert({
-          text: "Modificación de grupo Exitosa!",
+          text: "¡Modificación de grupo Exitosa!",
           type: "success",
         });
         clearTableGroups();
         consultAllGroups();
       }else{
         $.smkAlert({
-          text: "Error en la Modificación!",
+          text: "¡Error en la Modificación!",
           type: "Danger",
         });
       }

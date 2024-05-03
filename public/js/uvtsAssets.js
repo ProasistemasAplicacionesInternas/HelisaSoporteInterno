@@ -69,7 +69,7 @@ function actualizarUvt(yearUvt) {
     success: function (response) {
       consultUvtAll();
       $.smkAlert({
-        text: "Modificación Exitosa!",
+        text: "¡Modificación Exitosa!",
         type: "success",
       });
     },
@@ -101,7 +101,7 @@ $("#saveYear").click(function () {
           limpiarFormulario();
           consultUvtAll();
           $.smkAlert({
-            text: "Almacenado de Manera Exitosa!",
+            text: "¡Almacenado de Manera Exitosa!",
             type: "success",
           });
           break;
@@ -113,7 +113,7 @@ $("#saveYear").click(function () {
           break;
         case "3":
           $.smkAlert({
-            text: "El año ya se encuentra Definido!",
+            text: "¡El año ya se encuentra Definido!",
             type: "warning",
           });
           break;
