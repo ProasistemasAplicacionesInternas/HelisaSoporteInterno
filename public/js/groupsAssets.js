@@ -99,7 +99,7 @@ function modalUpdateGroup(id) {
       idGroup: id,
     },
     success: function (response) {
-      consultAllCategoriesGroups("categoryGroup");
+      consultAllCategoriesGroups("newCategoryGroup");
       showResultGroup(response);
 
       $("#updateGroup").modal("show");
@@ -136,6 +136,7 @@ function consultAllCategoriesGroups(field) {
 
 function drawOptionSelect(params, field) {
   var select = document.getElementById(field);
+  select.innerHTML="";
   var emptyOption = document.createElement("option");
   emptyOption.value = "";
   emptyOption.text = "";
@@ -153,7 +154,7 @@ function drawOptionSelect(params, field) {
 function saveEditGroup() {
   var id = $("#groupId").val();
   var name = $("#nameGroup").val();
-  var category = $("#categoryGroup").val();
+  var category = $("#newCategoryGroup").val();
 
   $.ajax({
     url: "app/controller/controlador_gruposActivos.php",
@@ -175,7 +176,7 @@ function saveEditGroup() {
   });
 }
 
-/* ************* Crear Categorias ************* */
+/* ************* Crear Grupo ************* */
 function modalCreateGroups() {
   $("#createGroup").modal("show");
   consultAllCategoriesGroups("createdCategoryGroup");

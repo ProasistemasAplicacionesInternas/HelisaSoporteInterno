@@ -181,8 +181,8 @@
                                 <input type="text" class="form-control" id="nameGroup" name="nameGroup">
                             </div>
                             <div class="form-group col-6">
-                                <label for="categoryGroup">Nueva Categoría</label>
-                                <select class="form-control" id="categoryGroup" name="categoryGroup"></select>
+                                <label for="newCategoryGroup">Nueva Categoría</label>
+                                <select class="form-control" id="newCategoryGroup" name="newCategoryGroup"></select>
                             </div>
                         </div>
                     </form>
