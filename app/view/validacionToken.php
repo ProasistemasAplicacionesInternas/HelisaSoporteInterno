@@ -39,7 +39,7 @@ if (!isset($_SESSION['failed'])) {
 <body class="bg">
     <div class="container">
         <div class="row">
-            <img class="logo" src="../../public/img/logo.png">
+            <img class="logo" src="../../public/img/logo2.png">
             <h1>Autenticación por Token</h1>
         </div>
     </div>
@@ -48,8 +48,8 @@ if (!isset($_SESSION['failed'])) {
             <div class="col">
                 </br>
                 <p style="font-family: Constantia;">1. Ingrese a su correo corporativo.</p>
-                <p style="font-family: Constantia;">2. Por favor ingrese el codigo que le indica el correo que recibió". </p>
-                <p style="font-family: Constantia;">3. Click en el botón "Validar con Token". </p>
+                <p style="font-family: Constantia;">2. Por favor ingrese el código que le indica el correo que recibió". </p>
+                <p style="font-family: Constantia;">3. Clic en el botón "Validar con Token". </p>
 
                 <br></br>
             </div>

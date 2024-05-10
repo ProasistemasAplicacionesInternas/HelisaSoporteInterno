@@ -49,8 +49,8 @@
                 <div class="modal-body">  
                 <p>El ingreso a la plataforma es solo para usuarios autorizados, se solicita no suministrar los datos de acceso a terceros.</p>                
                 </div>   
-                <div class="modal-footer" style="">
-                    <input type="button" style=" " value="Continuar" id="alerta" name="alerta" class=" btn btn-primary alerta" >       
+                <div class="modal-footer" >
+                    <input type="button" value="Continuar" id="alerta" name="alerta" class=" btn btn-primary alerta" >       
                  </div>                
             </div>
         </div>
@@ -75,11 +75,11 @@
             </div>
             <div class="col-md-6 mt-5"  style="top: 34px">
                 <form class="form-group" action="app/controller/controlador_funcionarios.php" method="post">
-                    <div class="form-group"><input type="text" class="form-control" placeholder="usuario" id="f_user" name="f_user" required autofocus autocomplete="off"></div>
-                    <div class="form-group"><input type="password" class="form-control" placeholder="contrase&ntilde;a" id="f_password" name="f_password" required></div>
+                    <div class="form-group"><input type="text" class="form-control" placeholder="Usuario" id="f_user" name="f_user" required autofocus autocomplete="off"></div>
+                    <div class="form-group"><input type="password" class="form-control" placeholder="Contrase&ntilde;a" id="f_password" name="f_password" required></div>
 
                      <div style="margin-bottom: 2%">
-                        <a href="app/view/funcionario_correo.php">¿Olvido su contrase&ntilde;a?</a>
+                        <a href="app/view/funcionario_correo.php">¿Olvidó su contrase&ntilde;a?</a>
                     </div>     
 
                     <input type="submit" class="btn btn-info" value="Ingresar" id="ingresar" name="ingresar">

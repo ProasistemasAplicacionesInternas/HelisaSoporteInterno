@@ -14,7 +14,7 @@ else if (time() - $_SESSION['tiempo'] > 25) {
 /* Atrás redireccionas a la url especifica */
 
 
-require "Authenticator.php";
+require "authenticator.php";
 
 $Authenticator = new Authenticator();
 
@@ -52,7 +52,7 @@ if (!isset($_SESSION['failed'])) {
 <body  class="bg">
     <div class="container">
         <div class="row">
-                <img class="logo" src="./../../public/img/logo.png">
+                <img class="logo" src="./../../public/img/logo2.png">
                 <h1>Autenticación de QR</h1>
         </div>   
     </div>
@@ -62,11 +62,11 @@ if (!isset($_SESSION['failed'])) {
     </br>
                 <p style="font-family: Constantia;">1. Por favor descargue la app "Google Authenticator".</p>
                 <p style="font-family: Constantia;">2. Ingrese a la App. </p>
-                <p style="font-family: Constantia;">3. En la parte inferior derecha, dele click al "+". </p>
-                <p style="font-family: Constantia;">4. Luego de ello, de click a la primera opción "Escanear un código QR".</p>
+                <p style="font-family: Constantia;">3. En la parte inferior derecha, dele clic al "+". </p>
+                <p style="font-family: Constantia;">4. Luego de ello, de clic a la primera opción "Escanear un código QR".</p>
                 <p style="font-family: Constantia;">5. Escaneé el código QR. </p>
                 <p style="font-family: Constantia;">6. Ingrese el código que le da la app. </p>
-                <p style="font-family: Constantia;">7. Click en el botón "Validar con Google". </p>
+                <p style="font-family: Constantia;">7. Clic en el botón "Validar con Google". </p>
                 </br>
             </div>
         
@@ -85,7 +85,7 @@ if (!isset($_SESSION['failed'])) {
                             <img style="text-align: center;" class="img-fluida" src="<?php   echo $qrCodeUrl ?>" alt="Verify this Google Authenticator">       
                             &nbsp&nbsp&nbsp
                         <br></br>
-                            <input type="text" class="form-control" id="code" name="code" placeholder="Dígite su código" style="width: 200px;border-radius: 10px;text-align: center;display: inline;color:white;background: black; border-color: white; border-radius:10px;"><br> <br>
+                            <input type="text" class="form-control" id="code" name="code" placeholder="Digite su código" style="width: 200px;border-radius: 10px;text-align: center;display: inline;color:white;background: black; border-color: white; border-radius:10px;"><br> <br>
                             &nbsp&nbsp&nbsp    
                             <button type="submit" name="btnCode" id="btnCode" class="btn btn-outline-primary" style="width: 200px;border-radius: 10px; color: black; border-color: #0275d8;"><strong>Validar con Google</strong></button>
                         </div>                          

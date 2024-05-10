@@ -52,8 +52,8 @@
                 <div class="modal-body">  
                 <p>El ingreso a la plataforma es solo para usuarios autorizados, se solicita no suministrar los datos de acceso a terceros.</p>                
                 </div>   
-                <div class="modal-footer" style="">
-                    <input type="button" style=" " value="Continuar" id="alerta" name="alerta" class=" btn btn-primary alerta" >       
+                <div class="modal-footer" >
+                    <input type="button" value="Continuar" id="alerta" name="alerta" class=" btn btn-primary alerta" >       
                  </div>                
             </div>
         </div>
@@ -71,7 +71,7 @@
                     <div class="form-group"><input type="text" class="form-control" placeholder="Usuario" id="usuario" name="usuario" required autofocus autocomplete="off"></div>
                     <div class="form-group"><input type="password" class="form-control" placeholder="Contrase&ntilde;a" id="clave" name="clave" required></div>                                      
                     <div style="margin-bottom: 2%">
-                        <a href="app/view/correo_contraseña.php">¿Olvido su contrase&ntilde;a?</a>
+                        <a href="app/view/correo_contraseña.php">¿Olvidó su contrase&ntilde;a?</a>
                     </div>            
                     <input type="submit" class="btn btn-info" value="Ingresar" id="ingresar" name="ingresar">
                 </form>

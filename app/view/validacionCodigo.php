@@ -12,7 +12,7 @@ if (time() - $_SESSION['tiempo'] > 25) {
     header("Location: ../../login.php");
     die();  
 } 
-require "Authenticator.php";
+require "authenticator.php";
 $Authenticator = new Authenticator();
 
 if (!isset($_SESSION['auth_secret'])) {
@@ -49,8 +49,8 @@ if (!isset($_SESSION['failed'])) {
 <body  class="bg">
     <div class="container">
         <div class="row">
-                <img class="logo" src="../../public/img/logo.png">
-                <h1>Autenticación de Codigo de Google</h1>
+                <img class="logo" src="../../public/img/logo2.png">
+                <h1>Autenticación de Código de Google</h1>
         </div>   
     </div>
     <div class="container1 center">
@@ -58,8 +58,8 @@ if (!isset($_SESSION['failed'])) {
             <div class="col">
     </br>
                 <p style="font-family: Constantia;">1. Ingrese a la App.</p>
-                <p style="font-family: Constantia;">2. Por favor ingrese el codigo que le indica el aplicativo de "Google Authenticator". </p>
-                <p style="font-family: Constantia;">3. Click en el botón "Validar con Google". </p>
+                <p style="font-family: Constantia;">2. Por favor ingrese el código que le indica el aplicativo de "Google Authenticator". </p>
+                <p style="font-family: Constantia;">3. Clic en el botón "Validar con Google". </p>
                 <p style="font-family: Constantia;">4. Este código se actualiza cada 30 segundos. </p>
                                                
             </div>
