@@ -73,7 +73,7 @@
                                         <select class="form-control" name="new_area" id="new_area" required>
                                             <option value=""></option>
                                             <option value="32">Administración</option>
-                                            <option value="27">Tecnología/Infraestructura</option>
+                                            <option value="27">Infraestructura</option>
                                         </select>
                                     </div>
                                 </div>
@@ -109,7 +109,7 @@
                                         <select class="form-control" name="created_area" id="created_area" required>
                                             <option value=""></option>
                                             <option value="32">Administración</option>
-                                            <option value="27">Tecnología/Infraestructura</option>
+                                            <option value="27">Infraestructura</option>
                                         </select>
                                     </div>
                                 </div>

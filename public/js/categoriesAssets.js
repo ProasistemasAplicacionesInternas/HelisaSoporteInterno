@@ -142,6 +142,9 @@ function saveEditCategory() {
 /* ************* Crear Categorias ************* */
 
 function modalCreateCategory() {
+  $("#createCategory").modal("hide");
+  $("#created_name").val("");
+  $("#created_area").val("");
   $("#createCategory").modal("show");
 }
 

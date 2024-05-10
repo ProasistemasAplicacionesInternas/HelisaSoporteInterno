@@ -1,5 +1,5 @@
 <?php
-require_once('../model/vinculo.php');
+require_once ('../model/vinculo.php');
 
 class CrudMantenimientos
 {
@@ -23,9 +23,25 @@ class CrudMantenimientos
 		$crea_mantenimiento->bindValue('m_documento', $create->getPdfmantenimientos());
 		$crea_mantenimiento->bindValue('m_repotenciacion', $create->getRepotenciacion());
 		$crea_mantenimiento->bindValue('mejora', $create->getMejora());
-		$crea_mantenimiento->bindValue('costo_mejora', $create->getCostoMejora());
+		$crea_mantenimiento->bindValue('costo_mejora', empty($create->getCostoMejora()) ? 0 : $create->getCostoMejora());
 		$crea_mantenimiento->bindValue('condicion', $create->getCondicionActual());
 		$crea_mantenimiento->execute();
+
+		// Obtener la condición registrada en el mantenimiento
+		$condicion_mantenimiento = $create->getCondicionActual();
+
+		// Obtener el código del activo seleccionado
+		$codigo_activo = $create->getActivo_mantenimiento();
+
+		// Actualizar el campo de condición en la tabla activos_internos
+		$actualizar_condicion = $db->prepare('UPDATE activos_internos SET condicion =:nueva_condicion WHERE id_activo =:codigo');
+		$actualizar_condicion->bindValue('nueva_condicion', $condicion_mantenimiento);
+		$actualizar_condicion->bindValue('codigo', $codigo_activo);
+		$actualizar_condicion->execute();
+
+		echo $condicion_mantenimiento;
+		echo $codigo_activo;
+		echo 123;
 
 		$colsultar_usuario = $db->prepare('SELECT id_usuario from usuarios where usuario =:usuario');
 		$colsultar_usuario->bindValue('usuario', $create->getResponsable_mantenimiento());
@@ -151,19 +167,19 @@ class CrudMantenimientos
 	}
 
 	public function consultAllMaintenance($asset)
-    {
-        $db = Conectar::acceso();
+	{
+		$db = Conectar::acceso();
 
-        $consulta = $db->prepare('SELECT fecha_mantenimiento, descripcion_mantenimiento, responsable_mantenimiento,
+		$consulta = $db->prepare('SELECT fecha_mantenimiento, descripcion_mantenimiento, responsable_mantenimiento,
 		costo_mantenimiento, repotenciacion, mejora
 		FROM mantenimientos 
 		WHERE activo_mantenimiento=:id ORDER BY fecha_mantenimiento DESC');
-		$consulta->bindValue("id",$asset);
-        $consulta->execute();
+		$consulta->bindValue("id", $asset);
+		$consulta->execute();
 
-        $resultados = $consulta->fetchAll(PDO::FETCH_ASSOC);
+		$resultados = $consulta->fetchAll(PDO::FETCH_ASSOC);
 
-        return $resultados;
-    }
+		return $resultados;
+	}
 }
 ?>
