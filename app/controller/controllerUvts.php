@@ -1,6 +1,6 @@
 <?php
-require_once('../model/datos_uvts.php');
-require_once('../model/crud_uvts.php');
+require_once('../model/datosUvts.php');
+require_once('../model/crudUvts.php');
 
 
 $crudUvts = new CrudUvts();

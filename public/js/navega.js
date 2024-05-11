@@ -14,10 +14,10 @@ $(document).ready(function () {
     $("#contenido").load("app/view/liberar_soportes.php");
   });
   $("#uvts").click(function () {
-    $("#contenido").load("app/view/view_uvts.php");
+    $("#contenido").load("app/view/viewUvts.php");
   });
   $("#categories").click(function () {
-    $("#contenido").load("app/view/view_categories.php");
+    $("#contenido").load("app/view/viewCategories.php");
   });
   /**************************************/
 

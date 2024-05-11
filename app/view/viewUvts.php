@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="public/css/bootstrap.min.css">
     <link rel="stylesheet" href="public/css/smoke.min.css">
     <link rel="stylesheet" href="public/css/peticion.css" media="screen" type="text/css">
-    <link rel="stylesheet" href="public/css/view_uvts.css" media="screen" type="text/css">
+    <link rel="stylesheet" href="public/css/viewUvts.css" media="screen" type="text/css">
 </head>
 
 <body>

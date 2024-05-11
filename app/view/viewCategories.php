@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" href="public/css/view_categories.css" media="screen" type="text/css">
+    <link rel="stylesheet" href="public/css/viewCategories.css" media="screen" type="text/css">
     <link rel="stylesheet" href="public/css/bootstrap.min.css">
     <link rel="stylesheet" href="public/css/smoke.min.css">
 </head>
