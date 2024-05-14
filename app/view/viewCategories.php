@@ -17,7 +17,7 @@
 
                 <div class="row">
                     <div class="col-8">
-                        <h5>Listado de Categorías</h5>
+                        <h5>Listado de categorías</h5>
                     </div>
                     <div class="col-4">
                         <img src="public/img/nuevo.png" alt="Imagen" id="abrirModalImagen"
@@ -44,7 +44,7 @@
                 <div class="modal-dialog" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title" id="updateCategoryLabel">Modificar Categoría</h5>
+                            <h5 class="modal-title" id="updateCategoryLabel">Modificar categoría</h5>
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">X</button>
                         </div>
                         <div class="modal-body">
@@ -52,12 +52,12 @@
                                 <div class="row">
                                     <input type="hidden" id="id_category">
                                     <div class="form-group col-6">
-                                        <label for="actual_name">Nombre Actual</label>
+                                        <label for="actual_name">Nombre actual</label>
                                         <input type="text" class="form-control" id="actual_name" name="actual_name"
                                             disabled>
                                     </div>
                                     <div class="form-group col-6">
-                                        <label for="actual_area">Área Actual</label>
+                                        <label for="actual_area">Área actual</label>
                                         <input type="text" class="form-control" id="actual_area" name="actual_area"
                                             disabled>
                                     </div>
@@ -65,11 +65,11 @@
                                 <div class="row">
                                     <input type="hidden" id="id_category">
                                     <div class="form-group col-6">
-                                        <label for="new_name">Nuevo Nombre</label>
+                                        <label for="new_name">Nuevo nombre</label>
                                         <input type="text" class="form-control" id="new_name" name="new_name" required>
                                     </div>
                                     <div class="form-group col-6">
-                                        <label for="new_area">Nueva Área</label>
+                                        <label for="new_area">Nueva área</label>
                                         <select class="form-control" name="new_area" id="new_area" required>
                                             <option value=""></option>
                                             <option value="32">Administración</option>
@@ -80,9 +80,9 @@
                             </form>
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
                             <button type="button" class="btn btn-primary" onclick="saveEditCategory()">Guardar
-                                Cambios</button>
+                                cambios</button>
                         </div>
                     </div>
                 </div>
@@ -92,7 +92,7 @@
                 <div class="modal-dialog" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title" id="createCategoryLabel">Crear Categoría</h5>
+                            <h5 class="modal-title" id="createCategoryLabel">Crear categoría</h5>
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">X</button>
                         </div>
                         <div class="modal-body">
@@ -100,7 +100,7 @@
                                 <div class="row">
                                     <input type="hidden" id="id_category">
                                     <div class="form-group col-6">
-                                        <label for="created_name">Nombre Categoría</label>
+                                        <label for="created_name">Nombre categoría</label>
                                         <input type="text" class="form-control" id="created_name" name="created_name"
                                             required>
                                     </div>
@@ -116,9 +116,9 @@
                             </form>
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
                             <button type="button" class="btn btn-primary" onclick="saveCreatedCategory()">Guardar
-                                Cambios</button>
+                                cambios</button>
                         </div>
                     </div>
                 </div>
@@ -129,7 +129,7 @@
             <div class="container mt-4">
                 <div class="row">
                     <div class="col-8">
-                        <h5>Listado de Grupos</h5>
+                        <h5>Listado de grupos</h5>
                     </div>
                     <div class="col-4">
                         <img src="public/img/nuevo.png" alt="Imagen" id="" onclick=modalCreateGroups();>
@@ -157,19 +157,19 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="updateGroupLabel">Modificar Grupos</h5>
+                    <h5 class="modal-title" id="updateGroupLabel">Modificar grupos</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">X</button>
                 </div>
                 <div class="modal-body">
                     <form id="modificarForm">
                         <div class="row">
                             <div class="form-group col-6">
-                                <label for="actualNameGroup">Nombre Actual</label>
+                                <label for="actualNameGroup">Nombre actual</label>
                                 <input type="text" class="form-control" id="actualNameGroup" name="actualNameGroup"
                                     disabled>
                             </div>
                             <div class="form-group col-6">
-                                <label for="actualCategoryGroup">Categoría Actual</label>
+                                <label for="actualCategoryGroup">Categoría actual</label>
                                 <input type="text" class="form-control" id="actualCategoryGroup"
                                     name="actualCategoryGroup" disabled>
                             </div>
@@ -177,19 +177,19 @@
                         </div>
                         <div class="row">
                             <div class="form-group col-6">
-                                <label for="nameGroup">Nuevo Nombre</label>
+                                <label for="nameGroup">Nuevo nombre</label>
                                 <input type="text" class="form-control" id="nameGroup" name="nameGroup">
                             </div>
                             <div class="form-group col-6">
-                                <label for="newCategoryGroup">Nueva Categoría</label>
+                                <label for="newCategoryGroup">Nueva categoría</label>
                                 <select class="form-control" id="newCategoryGroup" name="newCategoryGroup"></select>
                             </div>
                         </div>
                     </form>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary" onclick="saveEditGroup()">Guardar Cambios</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                    <button type="button" class="btn btn-primary" onclick="saveEditGroup()">Guardar cambios</button>
                 </div>
             </div>
         </div>
@@ -199,7 +199,7 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="createGroupLabel">Crear Grupos</h5>
+                    <h5 class="modal-title" id="createGroupLabel">Crear grupos</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">X</button>
                 </div>
                 <div class="modal-body">
@@ -210,7 +210,7 @@
                                 <input type="text" class="form-control" id="createdNameGroup" name="createdNameGroup">
                             </div>
                             <div class="form-group col-6">
-                                <label for="createdCategoryGroup">Nueva Categoría</label>
+                                <label for="createdCategoryGroup">Nueva categoría</label>
                                 <select class="form-control" id="createdCategoryGroup"
                                     name="createdCategoryGroup"></select>
                             </div>
@@ -218,8 +218,8 @@
                     </form>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary" onclick="saveCreatedGroups()">Guardar Cambios</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                    <button type="button" class="btn btn-primary" onclick="saveCreatedGroups()">Guardar cambios</button>
                 </div>
             </div>
         </div>

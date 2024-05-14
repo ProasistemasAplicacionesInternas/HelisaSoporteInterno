@@ -49,7 +49,7 @@ require ('../controller/controlador_funcionarios.php');
     </header>
     <div class="container">
         <div class="row">
-            <h6 class="mt-3">Generar Mantenimiento</h6>
+            <h6 class="mt-3">Generar mantenimiento</h6>
             <div class="col-12 ml-5">
                 <input type="text" id="m_grupoActivo" name="m_grupoActivo" class="form-control info" autocomplete="off"
                     value="<?php echo $af_categoria ?>" style="display:none ;" readonly>
@@ -58,7 +58,7 @@ require ('../controller/controlador_funcionarios.php');
                     <div class="row">
                         <div class="col-1">
                             <div class="form-group">
-                                <label>Id Activo</label>
+                                <label>Id activo</label>
                                 <input type="text" id="m_idActivo" name="m_idActivo" class="form-control info"
                                     autocomplete="off" value="<?php echo $af_id ?>" readonly>
                             </div>
@@ -66,7 +66,7 @@ require ('../controller/controlador_funcionarios.php');
 
                         <div class="col-3">
                             <div class="form-group">
-                                <label>Código Activo</label>
+                                <label>Código activo</label>
                                 <input type="text" id="m_codigo" name="m_codigo" class="form-control info"
                                     maxlength="10" autocomplete="off" value="<?php echo $af_codigo ?>" readonly>
                             </div>
@@ -74,7 +74,7 @@ require ('../controller/controlador_funcionarios.php');
 
                         <div class="col-3">
                             <div class="form-group">
-                                <label>Serial Activo</label>
+                                <label>Serial activo</label>
                                 <input type="text" id="m_serial" name="m_serial" class="form-control info"
                                     maxlength="10" autocomplete="off" value="<?php echo $af_serial ?>" readonly>
                             </div>
@@ -83,7 +83,7 @@ require ('../controller/controlador_funcionarios.php');
                     <div class="row">
                         <div class="col-3">
                             <div class="form-group">
-                                <label>Fecha Mantenimiento</label>
+                                <label>Fecha mantenimiento</label>
                                 <input type="date" id="m_fecha" name="m_fecha" class="form-control info" value=""
                                     required>
                             </div>
@@ -91,7 +91,7 @@ require ('../controller/controlador_funcionarios.php');
 
                         <div class="col-2">
                             <div class="form-group">
-                                <label>Costo Mantenimiento</label>
+                                <label>Costo mantenimiento</label>
                                 <input type="text" id="m_costo" name="m_costo" class="form-control info" maxlength="10"
                                     autocomplete="off" required>
                             </div>
@@ -114,7 +114,7 @@ require ('../controller/controlador_funcionarios.php');
 
                     <div class="row col-3">
                         <div class="form-group" id="campoMejora" style="display: none;">
-                            <label>Costo Mejora</label>
+                            <label>Costo mejora</label>
                             <input type="text" class="form-control" id="costoMejora" name="costoMejora">
                         </div>
                     </div>
@@ -125,8 +125,8 @@ require ('../controller/controlador_funcionarios.php');
                             <select class="form-control " id="estadoAct" name="estadoAct" required>
                                 <option value='' selected>Seleccione estado</option>
                                 <option value='5'> 5 - Nuevo - Activos adquiridos menores a 1 año</option>
-                                <option value='4'> 4 - Bueno - Activos aquiridos mayores a 1 año</option>
-                                <option value='3'> 3 - Regular - Activos en uso que prseentan alguna</option>
+                                <option value='4'> 4 - Bueno - Activos adquiridos mayores a 1 año</option>
+                                <option value='3'> 3 - Regular - Activos en uso que presentan algúna falla</option>
                                 <option value='2'> 2 - Malo - activos con una falla sustancial que no permite el
                                     correcto funcionamiento</option>
                                 <option value='1'> 1 - Dado de baja - activos retirados por obsolencia o por condiciones

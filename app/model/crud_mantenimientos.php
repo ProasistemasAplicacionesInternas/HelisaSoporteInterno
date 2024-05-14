@@ -39,10 +39,6 @@ class CrudMantenimientos
 		$actualizar_condicion->bindValue('codigo', $codigo_activo);
 		$actualizar_condicion->execute();
 
-		echo $condicion_mantenimiento;
-		echo $codigo_activo;
-		echo 123;
-
 		$colsultar_usuario = $db->prepare('SELECT id_usuario from usuarios where usuario =:usuario');
 		$colsultar_usuario->bindValue('usuario', $create->getResponsable_mantenimiento());
 		$colsultar_usuario->execute();

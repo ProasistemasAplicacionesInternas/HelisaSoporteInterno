@@ -215,8 +215,8 @@ require('../controller/controlador_gruposActivos.php');
                                 <select class="form-control info" id="estadoAct" name="estadoAct" required style="width: 830px; margin-left: -17px;">
                                     <option value='' selected>Seleccione estado</option>
                                     <option value='5'> 5 - Nuevo - Activos adquiridos menores a 1 año</option>
-                                    <option value='4'> 4 - Bueno - Activos aquiridos mayores a 1 año</option>
-                                    <option value='3'> 3 - Regular - Activos en uso que prseentan alguna</option>
+                                    <option value='4'> 4 - Bueno - Activos adquiridos mayores a 1 año</option>
+                                    <option value='3'> 3 - Regular - Activos en uso que presentan algúna falla</option>
                                     <option value='2'> 2 - Malo - activos con una falla sustancial que no permite el correcto funcionamiento</option>
                                     <option value='1'> 1 - Dado de baja - activos retirados por obsolencia o por condiciones que no permiten el correcto funcionamiento</option>
                                 </select>
