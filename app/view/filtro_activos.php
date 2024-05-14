@@ -51,7 +51,7 @@
                     <h6>Digite el codigo del activo</h6>
                 </div>
                 <div class="col-3">
-                    <form action="app/view/consultar_activos.php" method="post">
+                    <form action="app/view/consultar_activos.php" target="_blank" method="post">
                         <div class="form-group">
                             <input type="text" id="codigoActivo" name="codigoActivo" class="form-control" placeholder="Codigo de Activo" required autocomplete="off">
                         </div>
@@ -65,7 +65,7 @@
                     <h6>Digite el nombre del activo</h6>
                 </div>
                 <div class="col-4">
-                    <form action="app/view/consultar_activos.php" method="post">
+                    <form action="app/view/consultar_activos.php" target="_blank" method="post">
                         <div class="form-group">
                             <input type="text" id="nombreActivo" name="nombreActivo" class="form-control" placeholder="Nombre de Activo" required autocomplete="off">
                         </div>
