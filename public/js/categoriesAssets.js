@@ -109,7 +109,7 @@ function showResultCategory(data) {
   var jsonObject = JSON.parse(data);
   console.log("Datos recibidos del servidor:", jsonObject);
 
-  // document.querySelector("#id_category").value = jsonObject.id;
+  document.querySelector("#id_category").value = jsonObject.id;
   // document.querySelector("#actual_name").value = jsonObject.nombre_categoria;
   // document.querySelector("#actual_area").value = jsonObject.nombre_area;
   document.querySelector("#new_name").value = jsonObject.nombre_categoria;
