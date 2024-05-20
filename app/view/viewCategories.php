@@ -49,7 +49,7 @@
                         </div>
                         <div class="modal-body">
                             <form id="modificarForm">
-                                <div class="row">
+                                <!-- <div class="row">
                                     <input type="hidden" id="id_category">
                                     <div class="form-group col-6">
                                         <label for="actual_name">Nombre actual</label>
@@ -61,7 +61,7 @@
                                         <input type="text" class="form-control" id="actual_area" name="actual_area"
                                             disabled>
                                     </div>
-                                </div>
+                                </div> -->
                                 <div class="row">
                                     <input type="hidden" id="id_category">
                                     <div class="form-group col-6">

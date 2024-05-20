@@ -36,7 +36,7 @@ if (!isset($_SESSION['status_connect'])) {
     <header class="container-fluid">
         <div class="row">
             <div class="col-md-10 align-self-center">
-                <img src="public/img/logo.png" alt="">
+                <img src="public/img/logoHelisa.png" alt="">
             </div>
             <div class="col-md-2 col d-flex justify-content-end">
                 <span>

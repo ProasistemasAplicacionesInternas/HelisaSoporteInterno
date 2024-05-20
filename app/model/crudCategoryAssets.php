@@ -32,13 +32,15 @@ class CrudCategoryAssets{
     
 	public function findCategory($id){
 		$db = Conectar::acceso();
-		$consult = $db->prepare('SELECT id, nombre_categoria, area_categoria, a.descripcion nombre_area 
+		$consult = $db->prepare('SELECT id, nombre_categoria, area_categoria as id_area, a.descripcion nombre_area 
 			FROM categorias_activos ca
 			LEFT JOIN areas a ON a.id_area = ca.area_categoria 
 			WHERE ca.id = :id');
 		$consult->bindValue("id", $id);
 		$consult->execute();
 		$resultado = $consult->fetch(PDO::FETCH_ASSOC);
+		 // Depuración
+		 error_log(print_r($resultado, true));
 		return $resultado;
 	}
 
