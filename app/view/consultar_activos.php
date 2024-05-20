@@ -104,6 +104,11 @@
                                 <input type="hidden" name="af_so" id="af_so" value="<?php echo $datos->getAf_sistemaOperativo();?>">  
                                 <input type="hidden" name="af_areaCreacion" id="af_areaCreacion" value="<?php echo $datos->getAf_areaCreacion();?>"> 
                                 <input type="hidden" name="af_imagenActivo" id="af_imagenActivo" value="<?php echo $datos->getImagenactivo();?>"> 
+                                <input type="hidden" name="costoCompra" id="costoCompra" value="<?php echo $datos->getcostoCompra();?>"> 
+                                <input type="hidden" name="tipoAct" id="tipoAct" value="<?php echo $datos->gettipoAct();?>"> 
+                                <input type="hidden" name="vidaUtil" id="vidaUtil" value="<?php echo $datos->getvidaUtil();?>"> 
+                                <input type="hidden" name="estadoAct" id="estadoAct" value="<?php echo $datos->getestadoAct();?>"> 
+                                <input type="hidden" name="traCategoria" id="traCategoria" value="<?php echo $datos->gettraCategoria();?>"> 
                                 <input type="submit" value="Modificar Activo" name="modificar_activo" class="btn btn-info">
                             </form>
                         </td>

@@ -49,18 +49,17 @@ class crudGrupos
 	public function consultAllGroup()
 	{
 		$db = Conectar::acceso();
-		$consulta = $db->prepare('SELECT ga.id_grupo, ga.nombre_grupo, areas.descripcion AS area_grupo, ga.categoria, ca.nombre_categoria, ga.estado AS status
+		$consulta = $db->prepare('SELECT id_grupo, nombre_grupo, areas.descripcion 	area_grupo, categoria, ca.nombre_categoria, ga.estado as status 
 		FROM grupos_activos ga
 		LEFT JOIN categorias_activos ca ON ca.id = ga.categoria 
-		LEFT JOIN areas ON areas.id_area = ca.area_categoria
-		ORDER BY ga.nombre_grupo ASC');
+		LEFT JOIN areas ON id_area = ga.id_grupo 
+		ORDER BY nombre_grupo ASC');
 		$consulta->execute();
-	
+
 		$resultados = $consulta->fetchAll(PDO::FETCH_ASSOC);
-	
+
 		return $resultados;
 	}
-	
 
 	public function findGroup($id)
 	{

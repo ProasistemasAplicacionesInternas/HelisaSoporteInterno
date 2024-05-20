@@ -107,54 +107,10 @@ function modalUpdateCategory(id) {
 function showResultCategory(data) {
 
   var jsonObject = JSON.parse(data);
-  console.log("Datos recibidos del servidor:", jsonObject);
-
   document.querySelector("#id_category").value = jsonObject.id;
-  // document.querySelector("#actual_name").value = jsonObject.nombre_categoria;
-  // document.querySelector("#actual_area").value = jsonObject.nombre_area;
+  document.querySelector("#actual_name").value = jsonObject.nombre_categoria;
+  document.querySelector("#actual_area").value = jsonObject.nombre_area;
   document.querySelector("#new_name").value = jsonObject.nombre_categoria;
-
-
-  var newAreaElement = document.querySelector("#new_area");
-
-  // Depuración de los valores de las opciones del select
-  console.log("Opciones disponibles en new_area:");
-  Array.from(newAreaElement.options).forEach(option => {
-    console.log("Valor:", option.value, "Texto:", option.text);
-  });
-
-  newAreaElement.value = jsonObject.id_area;
-
-  // Si el valor no se selecciona correctamente, forzar la selección
-  if (newAreaElement.value !== jsonObject.id_area) {
-    var options = newAreaElement.options;
-    for (var i = 0; i < options.length; i++) {
-      if (options[i].value == jsonObject.id_area) {
-        options[i].selected = true;
-        break;
-      }
-    }
-  }
-
-  // Verificar el valor del select después de la asignación
-  console.log("Valor del campo new_area después de la asignación:", newAreaElement.value);
-}
-
-function getCategoryById(id) {
-  $.ajax({
-    url: "app/controller/controllerCategoryAssets.php",
-    type: "POST",
-    data: {
-      actionsCategoryAssets: "findById",
-      idCategory: id,
-    },
-    success: function (response) {
-      showResultCategory(response); // Asegúrate de que response sea un JSON válido
-    },
-    error: function (error) {
-      console.log("Error en la solicitud AJAX:", error);
-    },
-  });
 }
 
 /* ************* Guardar Cambios Editados ************* */
@@ -186,9 +142,6 @@ function saveEditCategory() {
 /* ************* Crear Categorias ************* */
 
 function modalCreateCategory() {
-  $("#createCategory").modal("hide");
-  $("#created_name").val("");
-  $("#created_area").val("");
   $("#createCategory").modal("show");
 }
 

@@ -178,9 +178,6 @@ function saveEditGroup() {
 
 /* ************* Crear Grupo ************* */
 function modalCreateGroups() {
-  $("#createGroup").modal("hide");
-  $("#createdNameGroup").val("");
-  $("#createdCategoryGroup").val("");
   $("#createGroup").modal("show");
   consultAllCategoriesGroups("createdCategoryGroup");
 }
