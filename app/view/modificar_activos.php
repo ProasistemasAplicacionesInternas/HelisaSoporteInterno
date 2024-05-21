@@ -9,6 +9,10 @@ $estados = array(
     '5' => 'Nuevo - Activos adquiridos menores a 1 año'
 );
 
+echo "<pre>";
+print_r($_POST);
+echo "</pre>";
+
 //*****************************************************************************************************//
 //******************************* FORMULARIO PARA LA CREACION DE FUNCIONARIOS *************************//
 //*****************************************************************************************************//
@@ -40,6 +44,7 @@ $af_observaciones = $_POST['af_observaciones'];
 $af_ram = $_POST['af_ram'];
 $af_discoDuro = $_POST['af_discoDuro'];
 $af_procesador = $_POST['af_procesador'];
+$hostName = $_POST['hostName'];
 $af_so = $_POST['af_so'];
 $af_licenciaSo = $_POST['af_licenciaSo'];
 $af_dominio = $_POST['af_dominio'];
@@ -53,6 +58,7 @@ $tipoAct = $_POST['tipoAct'];
 $vidaUtil = $_POST['vidaUtil'];
 $estadoAct = $_POST['estadoAct'];
 $traCategoria = $_POST['traCategoria'];
+$sede = $_POST['sede'];
 
 
 require_once ('../controller/controlador_activosFijos.php');
@@ -290,6 +296,26 @@ require ('../controller/controlador_gruposActivos.php');
                                 </div>
                             </div>
                         </div>
+                        <div class="col-3">
+                            <div class="form-group">
+                                <label>Sede del activo</label>
+                                <select class="form-control info" id="sede" name="sede" required>
+                                    <?php if ($sede == null): ?>
+                                        <option value="" selected>Seleccione Estado</option>
+                                        <option value="Bogota">Bogotá</option>
+                                        <option value="Tunja">Tunja</option>
+                                        <option value="Cali">Cali</option>
+                                        <option value="Medellin">Medellin</option>
+                                    <?php else: ?>
+                                        <option value='<?= $sede ?>'><?= $sede ?></option>
+                                        <option value="Bogota">Bogotá</option>
+                                        <option value="Tunja">Tunja</option>
+                                        <option value="Cali">Cali</option>
+                                        <option value="Medellin">Medellin</option>";
+                                    <?php endif; ?>
+                                </select>
+                            </div>
+                        </div>
                     </div> 
                         <div class="row">
                             <div class="col-12">
@@ -379,8 +405,8 @@ require ('../controller/controlador_gruposActivos.php');
                                 <div class="col-3">
                                     <div class="form-group">
                                         <label>Hostname</label>
-                                        <input type="text" id="" name="af_procesador"
-                                            class="form-control info" value="<?php echo $af_procesador ?>">
+                                        <input type="text" id="hostName" name="hostName"
+                                            class="form-control info" value="<?php echo $hostName ?>">
                                     </div>
                                 </div>
                             </div>

@@ -95,7 +95,8 @@
                                 <input type="hidden" name="af_ubicacion" id="af_ubicacion" value="<?php echo $datos->getAf_ubicacion();?>">
                                 <input type="hidden" name="af_ram" id="af_ram" value="<?php echo $datos->getAf_ram();?>">  
                                 <input type="hidden" name="af_discoDuro" id="af_discoDuro" value="<?php echo $datos->getAf_disco();?>">  
-                                <input type="hidden" name="af_procesador" id="af_procesador" value="<?php echo $datos->getAf_procesador();?>">  
+                                <input type="hidden" name="af_procesador" id="af_procesador" value="<?php echo $datos->getAf_procesador();?>">
+                                <input type="hidden" name="hostName" id="hostName" value="<?php echo $datos->gethostName();?>">  
                                 <input type="hidden" name="af_office" id="af_office" value="<?php echo $datos->getAf_licenciaOffice();?>">  
                                 <input type="hidden" name="af_antivirus" id="af_antivirus" value="<?php echo $datos->getAf_licenciaAntivirus();?>">  
                                 <input type="hidden" name="af_aplicaciones" id="af_aplicaciones" value="<?php echo $datos->getAf_aplicaciones();?>">  
@@ -109,6 +110,7 @@
                                 <input type="hidden" name="vidaUtil" id="vidaUtil" value="<?php echo $datos->getvidaUtil();?>"> 
                                 <input type="hidden" name="estadoAct" id="estadoAct" value="<?php echo $datos->getestadoAct();?>"> 
                                 <input type="hidden" name="traCategoria" id="traCategoria" value="<?php echo $datos->gettraCategoria();?>"> 
+                                <input type="hidden" name="sede" id="sede" value="<?php echo $datos->getsede();?>"> 
                                 <input type="submit" value="Modificar Activo" name="modificar_activo" class="btn btn-info">
                             </form>
                         </td>
