@@ -49,19 +49,6 @@
                         </div>
                         <div class="modal-body">
                             <form id="modificarForm">
-                                <!-- <div class="row">
-                                    <input type="hidden" id="id_category">
-                                    <div class="form-group col-6">
-                                        <label for="actual_name">Nombre actual</label>
-                                        <input type="text" class="form-control" id="actual_name" name="actual_name"
-                                            disabled>
-                                    </div>
-                                    <div class="form-group col-6">
-                                        <label for="actual_area">Área actual</label>
-                                        <input type="text" class="form-control" id="actual_area" name="actual_area"
-                                            disabled>
-                                    </div>
-                                </div> -->
                                 <div class="row">
                                     <input type="hidden" id="id_category">
                                     <div class="form-group col-6">
@@ -164,19 +151,6 @@
                     <form id="modificarForm">
                         <div class="row">
                             <div class="form-group col-6">
-                                <label for="actualNameGroup">Nombre actual</label>
-                                <input type="text" class="form-control" id="actualNameGroup" name="actualNameGroup"
-                                    disabled>
-                            </div>
-                            <div class="form-group col-6">
-                                <label for="actualCategoryGroup">Categoría actual</label>
-                                <input type="text" class="form-control" id="actualCategoryGroup"
-                                    name="actualCategoryGroup" disabled>
-                            </div>
-                            <input type="hidden" id="groupId">
-                        </div>
-                        <div class="row">
-                            <div class="form-group col-6">
                                 <label for="nameGroup">Nuevo nombre</label>
                                 <input type="text" class="form-control" id="nameGroup" name="nameGroup">
                             </div>
@@ -184,6 +158,7 @@
                                 <label for="newCategoryGroup">Nueva categoría</label>
                                 <select class="form-control" id="newCategoryGroup" name="newCategoryGroup"></select>
                             </div>
+                            <input type="hidden" id="groupId">
                         </div>
                     </form>
                 </div>

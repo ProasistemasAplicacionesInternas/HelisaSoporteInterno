@@ -19,6 +19,7 @@ function consultAllGroups() {
 }
 
 function drawResults(data) {
+  $("#tableBody").empty();
   $.each(data, function (index, grupo) {
     var icon = iconStatus(grupo.status);
     var row = "<tr>";
@@ -99,9 +100,10 @@ function modalUpdateGroup(id) {
       idGroup: id,
     },
     success: function (response) {
-      consultAllCategoriesGroups("newCategoryGroup");
-      showResultGroup(response);
-
+      var group = JSON.parse(response);
+      consultAllCategoriesGroups("newCategoryGroup", function () {
+        showResultGroup(group);
+      });
       $("#updateGroup").modal("show");
     },
     error: function (error) {
@@ -110,16 +112,15 @@ function modalUpdateGroup(id) {
   });
 }
 
-function showResultGroup(data) {
-  var jsonObject = JSON.parse(data);
-  document.querySelector("#groupId").value = jsonObject.id_grupo;
-  document.querySelector("#actualNameGroup").value = jsonObject.nombre_grupo;
-  document.querySelector("#actualCategoryGroup").value =
-    jsonObject.nombre_categoria;
-  document.querySelector("#nameGroup").value = jsonObject.nombre_grupo;
+function showResultGroup(group) {
+  document.querySelector("#groupId").value = group.id_grupo;
+  // document.querySelector("#actualNameGroup").value = group.nombre_grupo;
+  // document.querySelector("#actualCategoryGroup").value = group.nombre_categoria;
+  document.querySelector("#nameGroup").value = group.nombre_grupo;
+  document.querySelector("#newCategoryGroup").value = group.categoria;
 }
 
-function consultAllCategoriesGroups(field) {
+function consultAllCategoriesGroups(field, callback) {
   $.ajax({
     url: "app/controller/controllerCategoryAssets.php",
     type: "POST",
@@ -127,6 +128,7 @@ function consultAllCategoriesGroups(field) {
     dataType: "json",
     success: function (data) {
       drawOptionSelect(data, field);
+      if (callback) callback();
     },
     error: function (error) {
       console.log("Error en la solicitud AJAX:", error);
@@ -134,14 +136,14 @@ function consultAllCategoriesGroups(field) {
   });
 }
 
-function drawOptionSelect(params, field) {
+function drawOptionSelect(categories, field) {
   var select = document.getElementById(field);
   select.innerHTML="";
   var emptyOption = document.createElement("option");
   emptyOption.value = "";
   emptyOption.text = "";
   select.add(emptyOption);
-  $.each(params, function (index, category) {
+  categories.forEach(function (category) {
     var option = document.createElement("option");
     option.value = category.id;
     option.text = category.nombre_categoria;

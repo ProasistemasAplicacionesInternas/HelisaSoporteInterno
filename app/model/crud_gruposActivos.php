@@ -31,6 +31,7 @@ class crudGrupos
 		$grupos->bindValue("area_grupo", $group->getAreaGrupo());
 		$grupos->bindValue("categoria", $group->getCategoria());
 		$grupos->execute();
+		return $grupos->rowCount();
 	}
 
 	public function updateGroup($group)
@@ -44,6 +45,7 @@ class crudGrupos
 		$grupos->bindValue("categoria", $group->getCategoria());
 		$grupos->bindValue("id", $group->getId_grupo());
 		$grupos->execute();
+		return $grupos->rowCount();
 	}
 
 	public function consultAllGroup()
@@ -65,10 +67,10 @@ class crudGrupos
 	public function findGroup($id)
 	{
 		$db = Conectar::acceso();
-		$consult = $db->prepare('SELECT id_grupo, nombre_grupo, areas.descripcion 	area_grupo, categoria, ca.nombre_categoria 
+		$consult = $db->prepare('SELECT id_grupo, nombre_grupo, areas.descripcion AS area_grupo, categoria, ca.nombre_categoria 
 		FROM grupos_activos ga
 		LEFT JOIN categorias_activos ca ON ca.id = ga.categoria 
-		LEFT JOIN areas ON id_area = ga.id_grupo 
+		LEFT JOIN areas ON areas.id_area = ca.area_categoria
 		WHERE ga.id_grupo = :id');
 		$consult->bindValue("id", $id);
 		$consult->execute();
