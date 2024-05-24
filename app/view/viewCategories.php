@@ -68,7 +68,7 @@
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-                            <button type="button" class="btn btn-primary" onclick="saveEditCategory()">Guardar
+                            <button type="button" class="btn btn-primary" onclick="return saveEditCategory();">Guardar
                                 cambios</button>
                         </div>
                     </div>
@@ -152,11 +152,11 @@
                         <div class="row">
                             <div class="form-group col-6">
                                 <label for="nameGroup">Nuevo nombre</label>
-                                <input type="text" class="form-control" id="nameGroup" name="nameGroup">
+                                <input type="text" class="form-control" id="nameGroup" name="nameGroup" required>
                             </div>
                             <div class="form-group col-6">
                                 <label for="newCategoryGroup">Nueva categoría</label>
-                                <select class="form-control" id="newCategoryGroup" name="newCategoryGroup"></select>
+                                <select class="form-control" id="newCategoryGroup" name="newCategoryGroup" required></select>
                             </div>
                             <input type="hidden" id="groupId">
                         </div>
@@ -164,7 +164,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-                    <button type="button" class="btn btn-primary" onclick="saveEditGroup()">Guardar cambios</button>
+                    <button type="button" class="btn btn-primary" onclick="return saveEditGroup();">Guardar cambios</button>
                 </div>
             </div>
         </div>

@@ -99,8 +99,9 @@ function modalUpdateGroup(id) {
       actionsGroups: "findById",
       idGroup: id,
     },
+    dataType: "json",
     success: function (response) {
-      var group = JSON.parse(response);
+      var group = response;
       consultAllCategoriesGroups("newCategoryGroup", function () {
         showResultGroup(group);
       });
@@ -114,8 +115,6 @@ function modalUpdateGroup(id) {
 
 function showResultGroup(group) {
   document.querySelector("#groupId").value = group.id_grupo;
-  // document.querySelector("#actualNameGroup").value = group.nombre_grupo;
-  // document.querySelector("#actualCategoryGroup").value = group.nombre_categoria;
   document.querySelector("#nameGroup").value = group.nombre_grupo;
   document.querySelector("#newCategoryGroup").value = group.categoria;
 }
@@ -157,6 +156,23 @@ function saveEditGroup() {
   var id = $("#groupId").val();
   var name = $("#nameGroup").val();
   var category = $("#newCategoryGroup").val();
+
+  if (!name) {
+    $.smkAlert({
+      text: "¡El campo 'Nuevo nombre' no puede estar vacío!",
+      type: "danger",
+    });
+    return false;
+  }
+
+  if (!category) {
+    $.smkAlert({
+      text: "¡El campo 'Nueva categoría' no puede estar vacío!",
+      type: "danger",
+    });
+    return false; 
+  }
+
 
   $.ajax({
     url: "app/controller/controlador_gruposActivos.php",

@@ -66,6 +66,7 @@ $activos_Asignados = $consult->matrizActivosFuncionario();*/
                 $activoFijo->setAf_ram($_POST['af_ram']);
                 $activoFijo->setAf_disco($_POST['af_discoDuro']);
                 $activoFijo->setAf_procesador($_POST['af_procesador']);
+                $activoFijo->sethostName($_POST['hostName']);
                 $activoFijo->setAf_licenciaOffice($_POST['af_office']);
                 $activoFijo->setAf_licenciaAntivirus($_POST['af_antivirus']);
                 $activoFijo->setAf_aplicaciones($_POST['af_aplicaciones']);
@@ -79,6 +80,7 @@ $activos_Asignados = $consult->matrizActivosFuncionario();*/
                 $activoFijo->setvidaUtil($_POST['vidaUtil']);
                 $activoFijo->setestadoAct($_POST['estadoAct']);
                 $activoFijo->settraCategoria($_POST['traCategoria']);
+                $activoFijo->setsede($_POST['sede']);
                 $crud->crearActivos($activoFijo);    
         }
 

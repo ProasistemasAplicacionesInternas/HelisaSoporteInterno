@@ -35,6 +35,8 @@
 		private $vidaUtil;
 		private $estadoAct;
 		private $traCategoria;
+		private $hostName;
+		private $sede;
 
 		public function getAf_id(){
 		    				return $this->af_id;
@@ -267,6 +269,19 @@
 		public function settraCategoria($traCategoria) {
 			$this->traCategoria = $traCategoria;
 		}
-	}
+		public function gethostName() {
+			return $this->hostName;
+		}
 
+		public function sethostName($hostName) {
+			$this->hostName = $hostName;
+		}
+		public function getsede() {
+			return $this->sede;
+		}
+
+		public function setsede($sede) {
+			$this->sede = $sede;
+		}
+	}
  ?>
