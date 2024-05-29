@@ -39,10 +39,11 @@ class crudGrupos
 		$db = conectar::acceso();
 		$grupos = $db->prepare('UPDATE grupos_activos 
 		SET nombre_grupo=:nombre_grupo, 
-		categoria=:categoria 
+		categoria=:categoria, area_grupo=:area_grupo 
 		WHERE id_grupo=:id');
 		$grupos->bindValue("nombre_grupo", $group->getNombre_grupo());
 		$grupos->bindValue("categoria", $group->getCategoria());
+		$grupos->bindValue("area_grupo", $group->getAreaGrupo());
 		$grupos->bindValue("id", $group->getId_grupo());
 		$grupos->execute();
 		return $grupos->rowCount();
@@ -51,7 +52,7 @@ class crudGrupos
 	public function consultAllGroup()
 	{
 		$db = Conectar::acceso();
-		$consulta = $db->prepare('SELECT ga.id_grupo, ga.nombre_grupo, areas.descripcion AS area_grupo, ga.categoria, ca.nombre_categoria, ga.estado AS status
+		$consulta = $db->prepare('SELECT id_grupo, nombre_grupo, areas.descripcion area_grupo, categoria, ca.nombre_categoria, ga.estado as status
 		FROM grupos_activos ga
 		LEFT JOIN categorias_activos ca ON ca.id = ga.categoria 
 		LEFT JOIN areas ON areas.id_area = ca.area_categoria
