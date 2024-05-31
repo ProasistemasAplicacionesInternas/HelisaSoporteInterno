@@ -30,7 +30,7 @@ if (isset($_POST["actionsGroups"])) {
             break;
 
         case 'updateStatus':
-            $data = convertClassGroups($_POST['idGroup'], null, null, $_POST['statusGroup']);
+            $data = convertClassGroups($_POST['idGroup'], null, null, null, $_POST['statusGroup']);
             $crudGroup->updateStatus($data);
             break;
     }
