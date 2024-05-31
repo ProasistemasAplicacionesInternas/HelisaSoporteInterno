@@ -23,16 +23,16 @@ class crudGrupos
 	}
 
 	public function createGroup($group)
-	{
-		$db = conectar::acceso();
-		$grupos = $db->prepare('INSERT INTO grupos_activos(nombre_grupo, area_grupo, categoria) 
-		VALUES (:nombre_grupo, :area_grupo, :categoria)');
-		$grupos->bindValue("nombre_grupo", $group->getNombre_grupo());
-		$grupos->bindValue("area_grupo", $group->getAreaGrupo());
-		$grupos->bindValue("categoria", $group->getCategoria());
-		$grupos->execute();
-		return $grupos->rowCount();
-	}
+    {
+        $db = conectar::acceso();
+        $grupos = $db->prepare('INSERT INTO grupos_activos(nombre_grupo, area_grupo, categoria) 
+        VALUES (:nombre_grupo, :area_grupo, :categoria)');
+        $grupos->bindValue("nombre_grupo", $group->getNombre_grupo());
+        $grupos->bindValue("area_grupo", $group->getAreaGrupo());
+        $grupos->bindValue("categoria", $group->getCategoria());
+        $grupos->execute();
+        return $grupos->rowCount();
+    }
 
 	public function updateGroup($group)
 	{

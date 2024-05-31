@@ -146,7 +146,7 @@ function drawOptionSelect(categories, field) {
     var option = document.createElement("option");
     option.value = category.id;
     option.text = category.nombre_categoria;
-
+    option.setAttribute("data-area", category.area_categoria);
     select.add(option);
   });
 }
@@ -207,16 +207,26 @@ function saveCreatedGroups() {
   var nameGroup = $("#createdNameGroup").val();
   var categoryGroup = $("#createdCategoryGroup").val();
 
-  saveGroup(nameGroup, categoryGroup);
+  if (!nameGroup || !categoryGroup) {
+      $.smkAlert({
+          text: "¡Todos los campos son obligatorios!",
+          type: "danger",
+      });
+      return false;
+  }
+  var areaGroup = $("#createdCategoryGroup option:selected").data("area");
+
+  saveGroup(nameGroup, areaGroup, categoryGroup);
 }
 
-function saveGroup(name, category) {
+function saveGroup(name, areaGroup, category) {
   $.ajax({
     url: "app/controller/controlador_gruposActivos.php",
     type: "POST",
     data: {
       actionsGroups: "create",
       nameGroup: name,
+      areaGroup: areaGroup,
       categoryGroup: category,
     },
     success: function (response) {

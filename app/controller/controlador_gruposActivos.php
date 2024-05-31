@@ -10,12 +10,12 @@ $listado_grupos = $crudGroup->mostrarGrupos();
 if (isset($_POST["actionsGroups"])) {
     switch ($_POST["actionsGroups"]) {
         case 'create':
-            $data = convertClassGroups(null, $_POST['nameGroup'], $_POST['categoryGroup'],5);
+            $data = convertClassGroups(null, $_POST['nameGroup'], $_POST['areaGroup'], $_POST['categoryGroup'], 5);
             $crudGroup->createGroup($data);
             break;
 
         case 'update':
-            $data = convertClassGroups($_POST['idGroup'], $_POST['nameGroup'], $_POST['categoryGroup'], null);
+            $data = convertClassGroups($_POST['idGroup'], $_POST['nameGroup'], $_POST['areaGroup'], $_POST['categoryGroup'], null);
             $crudGroup->updateGroup($data);
             break;
 
@@ -36,12 +36,12 @@ if (isset($_POST["actionsGroups"])) {
     }
 }
 
-function convertClassGroups($id, $name, $categoria, $status)
+function convertClassGroups($id, $name, $areaGrupo, $categoria, $status)
 {
     $datosGroups = new gruposActivos();
     $datosGroups->setId_grupo($id);
     $datosGroups->setNombre_grupos($name);
-    $datosGroups->setAreaGrupo(32);
+    $datosGroups->setAreaGrupo($areaGrupo);
     $datosGroups->setCategoria($categoria);
     $datosGroups->setStatus($status);
     return $datosGroups;
