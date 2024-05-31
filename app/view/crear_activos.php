@@ -99,10 +99,6 @@ require('../controller/controlador_gruposActivos.php');
                                     <option value='' selected>Seleccione grupo del activo</option>
 
                                     <?php foreach($listado_grupos AS  $grupos):?>
-                                        <option value="<?php echo $grupos['id_grupo'];?>"><?php echo $grupos['nombre_grupo'];?></option>
-                                    <?php endforeach;?>
-                                    
-                                    <?php foreach($listado_grupos AS  $grupos):?>
                                         <?php if($grupos['area_grupo'] == 32):?>
                                             <option value="<?php echo $grupos['id_grupo'];?>" class="administracion"><?php echo $grupos['nombre_grupo'];?></option>
                                         <?php endif;?>
