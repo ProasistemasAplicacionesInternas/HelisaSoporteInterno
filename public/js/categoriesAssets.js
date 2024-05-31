@@ -199,8 +199,17 @@ function modalCreateCategory() {
 }
 
 function saveCreatedCategory() {
-  var nameCategory = $("#created_name").val();
-  var areaCategory = $("#created_area").val();
+  var nameCategory = $("#created_name").val().trim();
+  var areaCategory = $("#created_area").val().trim();
+
+  if (!nameCategory || !areaCategory) {
+    $.smkAlert({
+      text: "¡Todos los campos son obligatorios!",
+      type: "danger",
+    });
+    return false;
+  }
+
   saveCategory(nameCategory, areaCategory);
 }
 
