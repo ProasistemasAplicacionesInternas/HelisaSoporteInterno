@@ -196,13 +196,7 @@ require('../controller/controlador_gruposActivos.php');
                         <div class="col-3">
                             <div class="form-group">
                                 <label>Sede del activo</label>
-                                <select class="form-control info" id="sede" name="sede" required>
-                                        <option value="" selected>Seleccione sede del activo</option>
-                                        <option value="Bogota">Bogotá</option>
-                                        <option value="Tunja">Tunja</option>
-                                        <option value="Cali">Cali</option>
-                                        <option value="Medellin">Medellin</option>
-                                </select>
+                                <input type="text" class="form-control info" id="sede" name="sede" required>
                             </div>
                         </div>
                     </div>
