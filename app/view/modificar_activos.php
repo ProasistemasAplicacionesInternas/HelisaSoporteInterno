@@ -294,22 +294,8 @@ require ('../controller/controlador_gruposActivos.php');
                         </div>
                         <div class="col-3">
                             <div class="form-group">
-                                <label>Sede del activo</label>
-                                <select class="form-control info" id="sede" name="sede" required>
-                                    <?php if ($sede == null): ?>
-                                        <option value="" selected>Seleccione Estado</option>
-                                        <option value="Bogota">Bogotá</option>
-                                        <option value="Tunja">Tunja</option>
-                                        <option value="Cali">Cali</option>
-                                        <option value="Medellin">Medellin</option>
-                                    <?php else: ?>
-                                        <option value='<?= $sede ?>'><?= $sede ?></option>
-                                        <option value="Bogota">Bogotá</option>
-                                        <option value="Tunja">Tunja</option>
-                                        <option value="Cali">Cali</option>
-                                        <option value="Medellin">Medellin</option>";
-                                    <?php endif; ?>
-                                </select>
+                              <label>Sede del activo</label>
+                               <input type="text" id="sede" name="sede" class="form-control info" maxlength="100" autocomplete="off" value="<?php echo $sede?>"required>                                
                             </div>
                         </div>
                     </div> 
