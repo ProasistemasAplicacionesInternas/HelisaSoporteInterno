@@ -275,7 +275,7 @@ require ('../controller/controlador_gruposActivos.php');
                             <div class="form-group">
                                 <label>Tipo de activo</label>
                                 <input type="text" class="form-control info" id="tipoAct" name="tipoAct"
-                                    autocomplete="off" value="<?php echo $tipoAct ?>" required>
+                                    autocomplete="off" value="<?php echo $tipoAct ?>" required readonly>
                                 <input type="hidden" id="yearUvt">
                                 <input type="hidden" id="valueUvt" name="valueUvt">
                             </div>
@@ -303,7 +303,7 @@ require ('../controller/controlador_gruposActivos.php');
                             <div class="col-12">
                                 <div class="form-group">
                                     <label>Condición actual</label>
-                                    <select class="form-control info" id="estadoAct" name="estadoAct" readonly>
+                                    <select class="form-control info" id="estadoAct" name="estadoAct">
                                         <option value="<?php echo $estadoAct; ?>" selected>
                                             <?php echo $estadoAct . " - " . $estados[$estadoAct]; ?></option>
 
