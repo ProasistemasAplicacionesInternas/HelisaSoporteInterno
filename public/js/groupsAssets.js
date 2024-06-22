@@ -117,6 +117,7 @@ function showResultGroup(group) {
   document.querySelector("#groupId").value = group.id_grupo;
   document.querySelector("#nameGroup").value = group.nombre_grupo;
   document.querySelector("#newCategoryGroup").value = group.categoria;
+  document.querySelector("#areaGroup").value = areaGroup; // Establecer el valor de areaGroup
 }
 
 function consultAllCategoriesGroups(field, callback) {
@@ -124,6 +125,22 @@ function consultAllCategoriesGroups(field, callback) {
     url: "app/controller/controllerCategoryAssets.php",
     type: "POST",
     data: { actionsCategoryAssets: "consultAll" },
+    dataType: "json",
+    success: function (data) {
+      drawOptionSelect(data, field);
+      if (callback) callback();
+    },
+    error: function (error) {
+      console.log("Error en la solicitud AJAX:", error);
+    },
+  });
+}
+
+function consultAllCategoriesGroups(field, callback) {
+  $.ajax({
+    url: "app/controller/controllerCategoryAssets.php",
+    type: "POST",
+    data: { actionsCategoryAssets: "consultAll1" },
     dataType: "json",
     success: function (data) {
       drawOptionSelect(data, field);
@@ -154,7 +171,7 @@ function drawOptionSelect(categories, field) {
 /* ************* Guardar Cambios Editados ************* */
 function saveEditGroup() {
   var id = $("#groupId").val();
-  var name = $("#nameGroup").val();
+  var name = $("#nameGroup").val().trim();
   var category = $("#newCategoryGroup").val();
 
   if (!name) {
@@ -204,7 +221,7 @@ function modalCreateGroups() {
 }
 
 function saveCreatedGroups() {
-  var nameGroup = $("#createdNameGroup").val();
+  var nameGroup = $("#createdNameGroup").val().trim();
   var categoryGroup = $("#createdCategoryGroup").val();
 
   if (!nameGroup || !categoryGroup) {
