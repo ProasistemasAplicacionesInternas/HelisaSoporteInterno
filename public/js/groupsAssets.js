@@ -97,7 +97,6 @@ function modalUpdateGroup(id, areaGroup) {
     dataType: "json",
     success: function (response) {
       var group = response;
-      console.log("Datos del grupo:", group); // Para depuración
       consultAllCategoriesGroups("newCategoryGroup", function () {
         showResultGroup(group, areaGroup);
       });
@@ -169,19 +168,13 @@ $("#newCategoryGroup").on("change", function () {
   var selectedCategory = $(this).find("option:selected");
   var areaGroup = selectedCategory.data("area");
   $("#areaGroup").val(areaGroup);
-  console.log("Nueva área seleccionada:", areaGroup);
 });
 
 function saveEditGroup() {
   var id = $("#groupId").val();
   var name = $("#nameGroup").val().trim();
   var category = $("#newCategoryGroup").val();
-  var areaGroup = $("#areaGroup").val(); // Capturar el valor del campo oculto
-
-  console.log("id:", id); // Verificar el valor capturado
-  console.log("name:", name); // Verificar el valor capturado
-  console.log("category:", category); // Verificar el valor capturado
-  console.log("areaGroup:", areaGroup); // Verificar el valor capturado
+  var areaGroup = $("#areaGroup").val();
 
   if (!name) {
     $.smkAlert({
@@ -208,7 +201,7 @@ function saveEditGroup() {
       idGroup: id,
       nameGroup: name,
       categoryGroup: category,
-      areaGroup: areaGroup, // Incluir areaGroup en los datos
+      areaGroup: areaGroup,
     },
     success: function (response) {
       clearTableGroups();
