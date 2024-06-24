@@ -28,13 +28,8 @@ function drawResults(data) {
     row += "<td>" + grupo.area_grupo + "</td>";
     row += "<td>" + grupo.nombre_categoria + "</td>";
     row +=
-      '<td><i class="fas fa-edit text-primary" style="cursor: pointer;" onclick="modalUpdateGroup(' +
-      grupo.id_grupo +
-      ')"></i>' +
-      "  " +
-      icon +
-      grupo.id_grupo +
-      ')"></i> </td>';
+     '<td><i class="fas fa-edit text-primary" style="cursor: pointer;" onclick="modalUpdateGroup(' + grupo.id_grupo + ', \'' + grupo.area_grupo + '\')"></i>' +
+           "  " + icon + grupo.id_grupo + ')"></i></td>';
     row += "</tr>";
     $("#tableBody").append(row);
   });
@@ -91,7 +86,7 @@ function saveStatusRequestGroup(id, new_status) {
 }
 
 /* ************* Edición de información ************* */
-function modalUpdateGroup(id) {
+function modalUpdateGroup(id, areaGroup) {
   $.ajax({
     url: "app/controller/controlador_gruposActivos.php",
     type: "POST",
@@ -102,8 +97,9 @@ function modalUpdateGroup(id) {
     dataType: "json",
     success: function (response) {
       var group = response;
+      console.log("Datos del grupo:", group); // Para depuración
       consultAllCategoriesGroups("newCategoryGroup", function () {
-        showResultGroup(group);
+        showResultGroup(group, areaGroup);
       });
       $("#updateGroup").modal("show");
     },
@@ -113,7 +109,7 @@ function modalUpdateGroup(id) {
   });
 }
 
-function showResultGroup(group) {
+function showResultGroup(group, areaGroup) {
   document.querySelector("#groupId").value = group.id_grupo;
   document.querySelector("#nameGroup").value = group.nombre_grupo;
   document.querySelector("#newCategoryGroup").value = group.categoria;
@@ -169,10 +165,23 @@ function drawOptionSelect(categories, field) {
 }
 
 /* ************* Guardar Cambios Editados ************* */
+$("#newCategoryGroup").on("change", function () {
+  var selectedCategory = $(this).find("option:selected");
+  var areaGroup = selectedCategory.data("area");
+  $("#areaGroup").val(areaGroup);
+  console.log("Nueva área seleccionada:", areaGroup);
+});
+
 function saveEditGroup() {
   var id = $("#groupId").val();
   var name = $("#nameGroup").val().trim();
   var category = $("#newCategoryGroup").val();
+  var areaGroup = $("#areaGroup").val(); // Capturar el valor del campo oculto
+
+  console.log("id:", id); // Verificar el valor capturado
+  console.log("name:", name); // Verificar el valor capturado
+  console.log("category:", category); // Verificar el valor capturado
+  console.log("areaGroup:", areaGroup); // Verificar el valor capturado
 
   if (!name) {
     $.smkAlert({
@@ -187,7 +196,7 @@ function saveEditGroup() {
       text: "¡El campo 'Nueva categoría' no puede estar vacío!",
       type: "danger",
     });
-    return false; 
+    return false;
   }
 
 
@@ -199,6 +208,7 @@ function saveEditGroup() {
       idGroup: id,
       nameGroup: name,
       categoryGroup: category,
+      areaGroup: areaGroup, // Incluir areaGroup en los datos
     },
     success: function (response) {
       clearTableGroups();
