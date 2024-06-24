@@ -1,16 +1,14 @@
 $('#crear_activoFijo').click(function() {
 	if ($('#formulario').smkValidate()) {
 
-		// Verificar el campo traCategoria
         var traCategoria = $.trim($('#traCategoria').val());
 
         if (traCategoria === '' || traCategoria === '0') {
-            // Mostrar un smkAlert indicando que el grupo no tiene categoría asignada
             $.smkAlert({
                 text: 'El grupo no tiene categoría asignada.',
                 type: 'warning'
             });
-            return; // Detener el proceso de envío del formulario
+            return; 
         }
 
 		var formData	= new FormData();
