@@ -2,8 +2,9 @@ $('#crear_activoFijo').click(function() {
 	if ($('#formulario').smkValidate()) {
 
         var traCategoria = $.trim($('#traCategoria').val());
+		console.log(traCategoria)
 
-        if (traCategoria === '' || traCategoria === '0') {
+        if (traCategoria === '' || traCategoria === '0'  ||  traCategoria === null || traCategoria === undefined ) {
             $.smkAlert({
                 text: 'El grupo no tiene categoría asignada.',
                 type: 'warning'
@@ -54,6 +55,7 @@ $('#crear_activoFijo').click(function() {
 		processData: false,
 		contentType: false,
 		success: function(data) {
+			console.log(data)
 		  if (data == 1) {
 			$.smkAlert({
 			  text: 'Activo Creado Con Exito',
