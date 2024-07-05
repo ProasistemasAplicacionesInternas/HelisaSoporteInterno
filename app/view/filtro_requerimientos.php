@@ -76,6 +76,10 @@ require('../controller/controlador_usuariofuncionario.php');
                     <select class="custom-select" name="estadoFiltro" id="estadoFiltro">
                         <option value="" selected>Seleccione un estado</option>
                         <option value="3">Pendiente</option>
+                        <option value="19">Gestión de cambios</option>
+                        <option value="18">En Desarrollo</option>
+                        <option value="20">En Pruebas</option>
+                        <option value="21">Cargue de Versión</option>
                         <option value="2">Resuelto</option>
                         <option value="4">Redireccionado</option>
                         <option value="18">En Desarrollo</option>

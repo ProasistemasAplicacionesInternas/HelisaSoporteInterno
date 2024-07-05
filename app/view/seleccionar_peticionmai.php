@@ -136,11 +136,14 @@
                             <label id="label">Estado</label>
                             <select name="p_estado" id="p_estado" class="selectView" required>
                                 <option value=""></option>
-                                <option value="2">Resuelto</option>
-                                <option value="3">Pendiente</option>
-                                <option value="4">Redireccionado</option>
                                 <?php if ($name == "Requerimientos") : ?>
+                                    <option value="3">Pendiente</option>
+                                    <option value="19">Gestión de Cambios</option>
                                     <option value="18">En Desarrollo</option>
+                                    <option value="20">En Pruebas</option>
+                                    <option value="21">Cargue de Versión</option>
+                                    <option value="2">Resuelto</option>
+                                    <option value="4">Redireccionado</option>
                                 <?php endif; ?>
                             </select>
                         </div>
