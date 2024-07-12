@@ -349,12 +349,19 @@ if (!isset($_SESSION['status_connect'])) {
                 $('#infos2').load('app/view/liberar_soportes.php'); //actualizacion constante de la pestaña liberar
                 $('#infos3').load('app/view/consultar_peticiones.php'); //actualizacion constante de la pestaña soportes
                 $('#infoServicios').load('app/view/contenido_board.php'); //actualizacion constante de la pantalla principal informativa
-                $('#infoRequerimientos').load('app/view/requerimientos.php');
                 $('#infosSolicitudesInternas').load('app/view/solicitudes_internas.php');
                 $('#infosMai').load('app/view/liberar_solicitudesmai.php');
             }, 1000);
         });
     </script>
+    <script>
+    $(document).ready(function(){
+        $('#actualizar').click(function(){
+            $('#tabla-body').load('app/view/requerimientos.php #tabla-body');
+        });
+    });
+</script>
+
     <script src="public/js/valida_usuario.js?jk"></script>
     <script src="public/js/version.js"></script>
 </body>

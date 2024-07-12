@@ -28,6 +28,21 @@ class PeticionMai
 	private $gestion;
 	private $req_Justification;
 	private $req_Name;
+	private $Helisacloud;
+	private $Helisapremium;
+	private $HelisaReco;
+	private $Soporteinterno;
+	private $Helisadymai;
+	private $Centrosoporte;
+	private $CRMregistro;
+	private $Helisatalento;
+	private $Helisaconekta;
+	private $Helisacomplementos;
+	private $HelisaAtento;
+	private $Aivochatbot;
+	private $Helisacemex;
+	private $Helisatablero;
+	private $Reinfraestructura;
 
 	//************************************************
 	public function getId_peticionMai()
@@ -264,4 +279,156 @@ class PeticionMai
 	{
 		$this->gestion = $gestion;
 	}
+	
+	public function getHelisacloud()
+	{
+		return $this->Helisacloud;
+	}
+	public function setHelisacloud($Helisacloud)
+	{
+		$this->Helisacloud=$Helisacloud;
+		return $this;
+	}
+
+	public function getHelisapremium()
+	{
+		return $this->Helisapremium;
+	}
+	public function setHelisapremium($Helisapremium)
+	{
+		$this->Helisapremium=$Helisapremium;
+		return $this;
+	}
+
+	public function getHelisaReco()
+	{
+		return $this->HelisaReco;
+	}
+	public function setHelisaReco($HelisaReco)
+	{
+		$this->HelisaReco=$HelisaReco;
+		return $this;
+	}
+
+	public function getHelisadymai()
+	{
+		return $this->Helisadymai;
+	}
+	public function setHelisadymai($Helisadymai)
+	{
+		$this->Helisadymai=$Helisadymai;
+		return $this;
+	}
+
+	public function getCentrosoporte()
+	{
+		return $this->Centrosoporte;
+	}
+	public function setCentrosoporte($Centrosoporte)
+	{
+		$this->Centrosoporte=$Centrosoporte;
+		return $this;
+	}
+
+	public function getSoporteinterno()
+	{
+		return $this->Soporteinterno;
+	}
+	public function setSoporteinterno($Soporteinterno)
+	{
+		$this->Soporteinterno=$Soporteinterno;
+		return $this;
+	}
+
+	public function getCRMregistro()
+	{
+		return $this->CRMregistro;
+	}
+	public function setCRMregistro($CRMregistro)
+	{
+		$this->CRMregistro=$CRMregistro;
+		return $this;
+	}
+
+
+	public function getHelisatalento()
+	{
+		return $this->Helisatalento;
+	}
+	public function setHelisatalento($Helisatalento)
+	{
+		$this->Helisatalento=$Helisatalento;
+		return $this;
+	}
+
+	public function getHelisaconekta()
+	{
+		return $this->Helisaconekta;
+	}
+	public function setHelisaconekta($Helisaconekta)
+	{
+		$this->Helisaconekta=$Helisaconekta;
+		return $this;
+	}
+
+	public function getHelisacomplementos()
+	{
+		return $this->Helisacomplementos;
+	}
+	public function setHelisacomplementos($Helisacomplementos)
+	{
+		$this->Helisacomplementos=$Helisacomplementos;
+		return $this;
+	}
+
+	public function getHelisaAtento()
+	{
+		return $this->HelisaAtento;
+	}
+	public function setHelisaAtento($HelisaAtento)
+	{
+		$this->HelisaAtento=$HelisaAtento;
+		return $this;
+	}
+
+	public function getAivochatbot()
+	{
+		return $this->Aivochatbot;
+	}
+	public function setAivochatbot($Aivochatbot)
+	{
+		$this->Aivochatbot=$Aivochatbot;
+		return $this;
+	}
+
+	public function getHelisacemex()
+	{
+		return $this->Helisacemex;
+	}
+	public function setHelisacemex($Helisacemex)
+	{
+		$this->Helisacemex=$Helisacemex;
+		return $this;
+	}
+
+	public function getHelisatablero()
+	{
+		return $this->Helisatablero;
+	}
+	public function setHelisatablero($Helisatablero)
+	{
+		$this->Helisatablero=$Helisatablero;
+		return $this;
+	}
+
+	public function getReinfraestructura()
+	{
+		return $this->Reinfraestructura;
+	}
+	public function setReinfraestructura($Reinfraestructura)
+	{
+		$this->Reinfraestructura=$Reinfraestructura;
+		return $this;
+	}
+	
 }

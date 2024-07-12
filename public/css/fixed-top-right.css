@@ -1,0 +1,44 @@
+.fixed-top-right {
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+        top: auto; 
+        right: 30px; 
+    }
+    
+    .boton-imagen {
+        background-color: transparent;
+        border: none;
+        cursor: pointer;
+        padding: 0;
+    }
+    
+    .boton-imagen img {
+        width: 30px;
+        height: auto; 
+    }
+
+     .modal-dialog{
+        max-width: 18.2%;
+        width: auto;
+        margin: 0 auto;
+        flex: 1;
+     }
+
+
+    .tablaT{
+        text-align: center;
+        border-collapse: separate;
+        border-spacing: 5px;
+    }
+    
+    .tablaT{
+        position: sticky;
+        top: 0;
+        background-color: #fff;
+        flex: 1;
+    }
+
+    .tablaT th.text-left {
+        text-align: left;
+    }
