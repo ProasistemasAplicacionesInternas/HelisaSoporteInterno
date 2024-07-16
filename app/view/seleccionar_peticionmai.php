@@ -144,6 +144,10 @@
                                     <option value="21">Cargue de Versión</option>
                                     <option value="2">Resuelto</option>
                                     <option value="4">Redireccionado</option>
+                                <?php elseif (true) : ?>
+                                    <option value= "2">Resuelto</option>
+                                    <option value= "3">Pendiente</option>
+                                    <option value= "4">Redireccionado</option>
                                 <?php endif; ?>
                             </select>
                         </div>
