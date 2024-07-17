@@ -20,6 +20,7 @@ $('#guardar_modificaciones').click(function() {
 	 	formData.append('af_ram',$.trim($('#af_ram').val()))
 	 	formData.append('af_discoDuro',$.trim($('#af_discoDuro').val()))
 	 	formData.append('af_procesador',$.trim($('#af_procesador').val()))
+		 formData.append('hostName',$.trim($('#hostName').val()))
 	 	formData.append('af_so',$.trim($('#af_so').val()))
 	 	formData.append('af_licenciaSo',$.trim($('#af_licenciaSo').val()))
 	 	formData.append('af_dominio',$.trim($('#af_dominio').val()))
@@ -27,6 +28,12 @@ $('#guardar_modificaciones').click(function() {
 	 	formData.append('af_office',$.trim($('#af_office').val()))
 	 	formData.append('af_antivirus',$.trim($('#af_antivirus').val()))
 	 	formData.append('nombre_usu',$.trim($('#nombre_usu').val()))
+		formData.append('costoCompra',$.trim($('#costoCompra').val()))
+		formData.append('tipoAct',$.trim($('#tipoAct').val()))
+		formData.append('vidaUtil',$.trim($('#vidaUtil').val()))
+		formData.append('estadoAct',$.trim($('#estadoAct').val()))
+		formData.append('traCategoria',$.trim($('#traCategoria').val()))
+		formData.append('sede',$.trim($('#sede').val()))
 	 	formData.append('guardar_modificaciones','1')
 		if (newImagenes.value == ""){
 			formData.append('af_imagen1', imagen.value);
@@ -54,7 +61,7 @@ $('#guardar_modificaciones').click(function() {
 			setTimeout(function() {  window.close() }, 800);
 		  } else if (data == 3) {
 			$.smkAlert({
-			  text: 'El codigo o serial ya estan asignados a otro activo',
+			  text: 'El código o serial ya estan asignados a otro activo',
 			  type: 'warning'
 			});
 		  } else if (data == 0) {
@@ -63,6 +70,7 @@ $('#guardar_modificaciones').click(function() {
 			  type: 'danger'
 			});
 		  } else {
+			console.log(data+"578");
 			$.smkAlert({
 			  text: 'Comprueba que todos los campos esten completos',
 			  type: 'danger'

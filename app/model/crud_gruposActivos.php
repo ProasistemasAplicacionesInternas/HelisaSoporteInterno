@@ -58,12 +58,11 @@ class crudGrupos
 		LEFT JOIN areas ON areas.id_area = ca.area_categoria
 		ORDER BY ga.nombre_grupo ASC');
 		$consulta->execute();
-	
+
 		$resultados = $consulta->fetchAll(PDO::FETCH_ASSOC);
-	
+
 		return $resultados;
 	}
-	
 
 	public function findGroup($id)
 	{
