@@ -10,6 +10,7 @@ function consultAllGroups() {
     data: { actionsGroups: "consultAll" },
     dataType: "json",
     success: function (data) {
+      console.log(data); // Añade esta línea para revisar los datos en la consola
       drawResults(data);
     },
     error: function (error) {
@@ -17,7 +18,6 @@ function consultAllGroups() {
     },
   });
 }
-
 function drawResults(data) {
   $("#tableBody").empty();
   $.each(data, function (index, grupo) {
@@ -27,9 +27,7 @@ function drawResults(data) {
     row += "<td>" + grupo.nombre_grupo + "</td>";
     row += "<td>" + grupo.area_grupo + "</td>";
     row += "<td>" + grupo.nombre_categoria + "</td>";
-    row +=
-     '<td><i class="fas fa-edit text-primary" style="cursor: pointer;" onclick="modalUpdateGroup(' + grupo.id_grupo + ', \'' + grupo.area_grupo + '\')"></i>' +
-           "  " + icon + grupo.id_grupo + ')"></i></td>';
+    row += '<td><i class="fas fa-edit text-primary" style="cursor: pointer;" onclick="modalUpdateGroup(' + grupo.id_grupo + ', \'' + grupo.area_grupo + '\')"></i>' + "  " + icon + grupo.id_grupo + ')"></i></td>';
     row += "</tr>";
     $("#tableBody").append(row);
   });
@@ -37,12 +35,10 @@ function drawResults(data) {
 
 function iconStatus(params) {
   if (params == 5) {
-    iconInactive =
-      '<i class="fa-regular fa-rectangle-xmark" title="Inactivar" style="color: red; cursor: pointer;" onclick="inactivateGroup(';
+    iconInactive = '<i class="fa-regular fa-rectangle-xmark" title="Inactivar" style="color: red; cursor: pointer;" onclick="inactivateGroup(';
     return iconInactive;
   }
-  iconActive =
-    '<i class="fa-regular fa-square-check" title="Activar" style="color: green; cursor: pointer;" onclick="activateGroup(';
+  iconActive = '<i class="fa-regular fa-square-check" title="Activar" style="color: green; cursor: pointer;" onclick="activateGroup(';
   return iconActive;
 }
 

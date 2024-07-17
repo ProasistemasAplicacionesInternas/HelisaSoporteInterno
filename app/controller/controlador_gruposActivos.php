@@ -46,4 +46,3 @@ function convertClassGroups($id, $name, $areaGrupo, $categoria, $status)
     $datosGroups->setStatus($status);
     return $datosGroups;
 }
-?>
