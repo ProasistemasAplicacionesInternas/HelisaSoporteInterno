@@ -49,19 +49,6 @@
                         </div>
                         <div class="modal-body">
                             <form id="modificarForm">
-                                <!-- <div class="row">
-                                    <input type="hidden" id="id_category">
-                                    <div class="form-group col-6">
-                                        <label for="actual_name">Nombre actual</label>
-                                        <input type="text" class="form-control" id="actual_name" name="actual_name"
-                                            disabled>
-                                    </div>
-                                    <div class="form-group col-6">
-                                        <label for="actual_area">Área actual</label>
-                                        <input type="text" class="form-control" id="actual_area" name="actual_area"
-                                            disabled>
-                                    </div>
-                                </div> -->
                                 <div class="row">
                                     <input type="hidden" id="id_category">
                                     <div class="form-group col-6">
@@ -81,7 +68,7 @@
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-                            <button type="button" class="btn btn-primary" onclick="saveEditCategory()">Guardar
+                            <button type="button" class="btn btn-primary" onclick="return saveEditCategory();">Guardar
                                 cambios</button>
                         </div>
                     </div>
@@ -154,46 +141,36 @@
     </div>
 
     <div class="modal" tabindex="-1" id="updateGroup">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="updateGroupLabel">Modificar grupos</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">X</button>
-                </div>
-                <div class="modal-body">
-                    <form id="modificarForm">
-                        <div class="row">
-                            <div class="form-group col-6">
-                                <label for="actualNameGroup">Nombre actual</label>
-                                <input type="text" class="form-control" id="actualNameGroup" name="actualNameGroup"
-                                    disabled>
-                            </div>
-                            <div class="form-group col-6">
-                                <label for="actualCategoryGroup">Categoría actual</label>
-                                <input type="text" class="form-control" id="actualCategoryGroup"
-                                    name="actualCategoryGroup" disabled>
-                            </div>
-                            <input type="hidden" id="groupId">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="updateGroupLabel">Modificar grupos</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">X</button>
+            </div>
+            <div class="modal-body">
+                <form id="modificarForm">
+                    <div class="row">
+                        <div class="form-group col-6">
+                            <label for="nameGroup">Nuevo nombre</label>
+                            <input type="text" class="form-control" id="nameGroup" name="nameGroup" required>
                         </div>
-                        <div class="row">
-                            <div class="form-group col-6">
-                                <label for="nameGroup">Nuevo nombre</label>
-                                <input type="text" class="form-control" id="nameGroup" name="nameGroup">
-                            </div>
-                            <div class="form-group col-6">
-                                <label for="newCategoryGroup">Nueva categoría</label>
-                                <select class="form-control" id="newCategoryGroup" name="newCategoryGroup"></select>
-                            </div>
+                        <div class="form-group col-6">
+                            <label for="newCategoryGroup">Nueva categoría</label>
+                            <select class="form-control" id="newCategoryGroup" name="newCategoryGroup" required></select>
                         </div>
-                    </form>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-                    <button type="button" class="btn btn-primary" onclick="saveEditGroup()">Guardar cambios</button>
-                </div>
+                        <input type="hidden" id="groupId">
+                        <input type="hidden" id="areaGroup" name="areaGroup">
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                <button type="button" class="btn btn-primary" onclick="return saveEditGroup();">Guardar cambios</button>
             </div>
         </div>
     </div>
+</div>
+
 
     <div class="modal" tabindex="-1" id="createGroup">
         <div class="modal-dialog" role="document">

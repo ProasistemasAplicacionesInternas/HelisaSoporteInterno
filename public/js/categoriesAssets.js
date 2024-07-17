@@ -108,16 +108,64 @@ function showResultCategory(data) {
 
   var jsonObject = JSON.parse(data);
   document.querySelector("#id_category").value = jsonObject.id;
-  document.querySelector("#actual_name").value = jsonObject.nombre_categoria;
-  document.querySelector("#actual_area").value = jsonObject.nombre_area;
   document.querySelector("#new_name").value = jsonObject.nombre_categoria;
+
+  var newAreaElement = document.querySelector("#new_area");
+
+  Array.from(newAreaElement.options).forEach(option => {
+  });
+
+  newAreaElement.value = jsonObject.id_area;
+
+  if (newAreaElement.value !== jsonObject.id_area) {
+    var options = newAreaElement.options;
+    for (var i = 0; i < options.length; i++) {
+      if (options[i].value == jsonObject.id_area) {
+        options[i].selected = true;
+        break;
+      }
+    }
+  }
+}
+
+function getCategoryById(id) {
+  $.ajax({
+    url: "app/controller/controllerCategoryAssets.php",
+    type: "POST",
+    data: {
+      actionsCategoryAssets: "findById",
+      idCategory: id,
+    },
+    success: function (response) {
+      showResultCategory(response); 
+    },
+    error: function (error) {
+      console.log("Error en la solicitud AJAX:", error);
+    },
+  });
 }
 
 /* ************* Guardar Cambios Editados ************* */
 function saveEditCategory() {
   var id = $("#id_category").val();
-  var newName = $("#new_name").val();
+  var newName = $("#new_name").val().trim();
   var newArea = $("#new_area").val();
+
+  if (!newName) {
+    $.smkAlert({
+      text: "¡El campo 'Nuevo nombre' no puede estar vacío ni contener solo espacios!",
+      type: "danger",
+    });
+    return false;
+  }
+
+  if (!newArea) {
+    $.smkAlert({
+      text: "¡El campo 'Nueva área' no puede estar vacío!",
+      type: "danger",
+    });
+    return false;
+  }
 
   $.ajax({
     url: "app/controller/controllerCategoryAssets.php",
@@ -146,8 +194,17 @@ function modalCreateCategory() {
 }
 
 function saveCreatedCategory() {
-  var nameCategory = $("#created_name").val();
-  var areaCategory = $("#created_area").val();
+  var nameCategory = $("#created_name").val().trim();
+  var areaCategory = $("#created_area").val().trim();
+
+  if (!nameCategory || !areaCategory) {
+    $.smkAlert({
+      text: "¡Todos los campos son obligatorios!",
+      type: "danger",
+    });
+    return false;
+  }
+
   saveCategory(nameCategory, areaCategory);
 }
 

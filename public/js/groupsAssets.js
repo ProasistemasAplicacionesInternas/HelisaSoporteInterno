@@ -19,6 +19,7 @@ function consultAllGroups() {
 }
 
 function drawResults(data) {
+  $("#tableBody").empty();
   $.each(data, function (index, grupo) {
     var icon = iconStatus(grupo.status);
     var row = "<tr>";
@@ -27,13 +28,8 @@ function drawResults(data) {
     row += "<td>" + grupo.area_grupo + "</td>";
     row += "<td>" + grupo.nombre_categoria + "</td>";
     row +=
-      '<td><i class="fas fa-edit text-primary" style="cursor: pointer;" onclick="modalUpdateGroup(' +
-      grupo.id_grupo +
-      ')"></i>' +
-      "  " +
-      icon +
-      grupo.id_grupo +
-      ')"></i> </td>';
+     '<td><i class="fas fa-edit text-primary" style="cursor: pointer;" onclick="modalUpdateGroup(' + grupo.id_grupo + ', \'' + grupo.area_grupo + '\')"></i>' +
+           "  " + icon + grupo.id_grupo + ')"></i></td>';
     row += "</tr>";
     $("#tableBody").append(row);
   });
@@ -90,7 +86,7 @@ function saveStatusRequestGroup(id, new_status) {
 }
 
 /* ************* Edición de información ************* */
-function modalUpdateGroup(id) {
+function modalUpdateGroup(id, areaGroup) {
   $.ajax({
     url: "app/controller/controlador_gruposActivos.php",
     type: "POST",
@@ -98,10 +94,12 @@ function modalUpdateGroup(id) {
       actionsGroups: "findById",
       idGroup: id,
     },
+    dataType: "json",
     success: function (response) {
-      consultAllCategoriesGroups("newCategoryGroup");
-      showResultGroup(response);
-
+      var group = response;
+      consultAllCategoriesGroups("newCategoryGroup", function () {
+        showResultGroup(group, areaGroup);
+      });
       $("#updateGroup").modal("show");
     },
     error: function (error) {
@@ -110,16 +108,14 @@ function modalUpdateGroup(id) {
   });
 }
 
-function showResultGroup(data) {
-  var jsonObject = JSON.parse(data);
-  document.querySelector("#groupId").value = jsonObject.id_grupo;
-  document.querySelector("#actualNameGroup").value = jsonObject.nombre_grupo;
-  document.querySelector("#actualCategoryGroup").value =
-    jsonObject.nombre_categoria;
-  document.querySelector("#nameGroup").value = jsonObject.nombre_grupo;
+function showResultGroup(group, areaGroup) {
+  document.querySelector("#groupId").value = group.id_grupo;
+  document.querySelector("#nameGroup").value = group.nombre_grupo;
+  document.querySelector("#newCategoryGroup").value = group.categoria;
+  document.querySelector("#areaGroup").value = areaGroup; // Establecer el valor de areaGroup
 }
 
-function consultAllCategoriesGroups(field) {
+function consultAllCategoriesGroups(field, callback) {
   $.ajax({
     url: "app/controller/controllerCategoryAssets.php",
     type: "POST",
@@ -127,6 +123,7 @@ function consultAllCategoriesGroups(field) {
     dataType: "json",
     success: function (data) {
       drawOptionSelect(data, field);
+      if (callback) callback();
     },
     error: function (error) {
       console.log("Error en la solicitud AJAX:", error);
@@ -134,27 +131,67 @@ function consultAllCategoriesGroups(field) {
   });
 }
 
-function drawOptionSelect(params, field) {
+function consultAllCategoriesGroups(field, callback) {
+  $.ajax({
+    url: "app/controller/controllerCategoryAssets.php",
+    type: "POST",
+    data: { actionsCategoryAssets: "consultAll1" },
+    dataType: "json",
+    success: function (data) {
+      drawOptionSelect(data, field);
+      if (callback) callback();
+    },
+    error: function (error) {
+      console.log("Error en la solicitud AJAX:", error);
+    },
+  });
+}
+
+function drawOptionSelect(categories, field) {
   var select = document.getElementById(field);
   select.innerHTML="";
   var emptyOption = document.createElement("option");
   emptyOption.value = "";
   emptyOption.text = "";
   select.add(emptyOption);
-  $.each(params, function (index, category) {
+  categories.forEach(function (category) {
     var option = document.createElement("option");
     option.value = category.id;
     option.text = category.nombre_categoria;
-
+    option.setAttribute("data-area", category.area_categoria);
     select.add(option);
   });
 }
 
 /* ************* Guardar Cambios Editados ************* */
+$("#newCategoryGroup").on("change", function () {
+  var selectedCategory = $(this).find("option:selected");
+  var areaGroup = selectedCategory.data("area");
+  $("#areaGroup").val(areaGroup);
+});
+
 function saveEditGroup() {
   var id = $("#groupId").val();
-  var name = $("#nameGroup").val();
+  var name = $("#nameGroup").val().trim();
   var category = $("#newCategoryGroup").val();
+  var areaGroup = $("#areaGroup").val();
+
+  if (!name) {
+    $.smkAlert({
+      text: "¡El campo 'Nuevo nombre' no puede estar vacío!",
+      type: "danger",
+    });
+    return false;
+  }
+
+  if (!category) {
+    $.smkAlert({
+      text: "¡El campo 'Nueva categoría' no puede estar vacío!",
+      type: "danger",
+    });
+    return false;
+  }
+
 
   $.ajax({
     url: "app/controller/controlador_gruposActivos.php",
@@ -164,6 +201,7 @@ function saveEditGroup() {
       idGroup: id,
       nameGroup: name,
       categoryGroup: category,
+      areaGroup: areaGroup,
     },
     success: function (response) {
       clearTableGroups();
@@ -183,19 +221,29 @@ function modalCreateGroups() {
 }
 
 function saveCreatedGroups() {
-  var nameGroup = $("#createdNameGroup").val();
+  var nameGroup = $("#createdNameGroup").val().trim();
   var categoryGroup = $("#createdCategoryGroup").val();
 
-  saveGroup(nameGroup, categoryGroup);
+  if (!nameGroup || !categoryGroup) {
+      $.smkAlert({
+          text: "¡Todos los campos son obligatorios!",
+          type: "danger",
+      });
+      return false;
+  }
+  var areaGroup = $("#createdCategoryGroup option:selected").data("area");
+
+  saveGroup(nameGroup, areaGroup, categoryGroup);
 }
 
-function saveGroup(name, category) {
+function saveGroup(name, areaGroup, category) {
   $.ajax({
     url: "app/controller/controlador_gruposActivos.php",
     type: "POST",
     data: {
       actionsGroups: "create",
       nameGroup: name,
+      areaGroup: areaGroup,
       categoryGroup: category,
     },
     success: function (response) {

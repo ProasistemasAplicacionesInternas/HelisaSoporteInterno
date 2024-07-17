@@ -1,5 +1,17 @@
 $('#crear_activoFijo').click(function() {
 	if ($('#formulario').smkValidate()) {
+
+        var traCategoria = $.trim($('#traCategoria').val());
+		console.log(traCategoria)
+
+        if (traCategoria === '' || traCategoria === '0'  ||  traCategoria === null || traCategoria === undefined ) {
+            $.smkAlert({
+                text: 'El grupo no tiene categoría asignada.',
+                type: 'warning'
+            });
+            return; 
+        }
+
 		var formData	= new FormData();
 		formData.append('af_codigo',$.trim($('#af_codigo').val()))
 		formData.append('af_serial',$.trim($('#af_serial').val()))
@@ -18,6 +30,7 @@ $('#crear_activoFijo').click(function() {
 		formData.append('af_ram',$.trim($('#af_ram').val()))
 		formData.append('af_discoDuro',$.trim($('#af_discoDuro').val()))
 		formData.append('af_procesador',$.trim($('#af_procesador').val()))
+		formData.append('hostName',$.trim($('#hostName').val()))
 		formData.append('af_so',$.trim($('#af_so').val()))
 		formData.append('af_licenciaSo',$.trim($('#af_licenciaSo').val()))
 		formData.append('af_dominio',$.trim($('#af_dominio').val()))
@@ -32,6 +45,7 @@ $('#crear_activoFijo').click(function() {
 		formData.append('vidaUtil',$.trim($('#vidaUtil').val()))
 		formData.append('estadoAct',$.trim($('#estadoAct').val()))
 		formData.append('traCategoria',$.trim($('#traCategoria').val()))
+		formData.append('sede',$.trim($('#sede').val()))
 
   
 	  $.ajax({
@@ -41,6 +55,7 @@ $('#crear_activoFijo').click(function() {
 		processData: false,
 		contentType: false,
 		success: function(data) {
+			console.log(data)
 		  if (data == 1) {
 			$.smkAlert({
 			  text: 'Activo Creado Con Exito',

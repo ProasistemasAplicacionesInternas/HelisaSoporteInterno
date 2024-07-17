@@ -37,7 +37,7 @@ require('../controller/controlador_gruposActivos.php');
     </header>
     <div class="container">
         <div class="row">
-            <h6 class="mt-3" style="color:#5BB94B"><b>Creación De Activos Fijos</b></h6>
+            <h6 class="mt-3" style="color:#5BB94B"><b>Creación de activos fijos</b></h6>
             <div class="col-12 ml-5">
                 <form class="form-group" id="formulario">
                     <div class="row">
@@ -77,7 +77,7 @@ require('../controller/controlador_gruposActivos.php');
 
                         <div class="col-3">
                             <div class="form-group">
-                                <label>Area de creación</label>
+                                <label>Área de creación</label>
                                 <select class="form-control info" id="af_areaCreacion" name="af_areaCreacion" required>
                                     <option value='' selected>Seleccione el area de creación</option>
                                     <option value='Infraestructura'>Infraestructura</option>
@@ -98,10 +98,6 @@ require('../controller/controlador_gruposActivos.php');
                                 <select class="form-control info" id="af_categoria" name="af_categoria" onchange="buscarCategoria();"required>
                                     <option value='' selected>Seleccione grupo del activo</option>
 
-                                    <?php foreach($listado_grupos AS  $grupos):?>
-                                        <option value="<?php echo $grupos['id_grupo'];?>"><?php echo $grupos['nombre_grupo'];?></option>
-                                    <?php endforeach;?>
-                                    
                                     <?php foreach($listado_grupos AS  $grupos):?>
                                         <?php if($grupos['area_grupo'] == 32):?>
                                             <option value="<?php echo $grupos['id_grupo'];?>" class="administracion"><?php echo $grupos['nombre_grupo'];?></option>
@@ -127,7 +123,7 @@ require('../controller/controlador_gruposActivos.php');
                         </div>
                         <div class="col-3">
                             <div class="form-group">
-                                <label>Ubicación/Area</label>
+                                <label>Ubicación/Área</label>
                                 <select class="form-control info" id="af_area" name="af_area" required>
                                     <option value='' selected>Seleccione Area</option>
                                     <?php  
@@ -140,7 +136,7 @@ require('../controller/controlador_gruposActivos.php');
                         </div>
                         <div class="col-3">
                             <div class="form-group">
-                                <label>Ubicacion activo</label>
+                                <label>Ubicación activo</label>
                                 <select class="form-control info" id="af_ubicacion" name="af_ubicacion" required>
                                     <option value="" selected> seleccione Estado</option>
                                     <option value="Oficina">Oficina</option>
@@ -199,6 +195,14 @@ require('../controller/controlador_gruposActivos.php');
                     <div class="row">
                         <div class="col-3">
                             <div class="form-group">
+                                <label>Sede del activo</label>
+                                <input type="text" class="form-control info" id="sede" name="sede" required>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-3">
+                            <div class="form-group">
                                 <div>
                                     <label>Cargar Imagen del activo</label>
                                 </div>
@@ -218,7 +222,7 @@ require('../controller/controlador_gruposActivos.php');
                                     <option value='4'> 4 - Bueno - Activos adquiridos mayores a 1 año</option>
                                     <option value='3'> 3 - Regular - Activos en uso que presentan algúna falla</option>
                                     <option value='2'> 2 - Malo - activos con una falla sustancial que no permite el correcto funcionamiento</option>
-                                    <option value='1'> 1 - Dado de baja - activos retirados por obsolencia o por condiciones que no permiten el correcto funcionamiento</option>
+                                    <option value='1'> 1 - Dado de baja - activos retirados por obsolescencia o por condiciones que no permiten el correcto funcionamiento</option>
                                 </select>
                             </div>
                         </div>
@@ -226,9 +230,9 @@ require('../controller/controlador_gruposActivos.php');
                         <div class="row">
                             <div class="col-9">
                                 <div class="form-group">
-                                    <label>Funcionario Responsable</label>
+                                    <label>Funcionario responsable</label>
                                     <select class="form-control info" id="af_responsable" name="af_responsable">
-                                        <option value='' selected>Seleccione Un Funcionario</option>
+                                        <option value='' selected>Seleccione Un funcionario</option>
                                         <?php
                                              foreach($listado_funcionarios as $crud){
                                                 echo "<option value='".$crud["identificacion"]."'>".$crud["nombre"] . "</option>" ;
@@ -239,7 +243,7 @@ require('../controller/controlador_gruposActivos.php');
                             </div>
                             <div class="col-3">
                                 <div class="form-group">
-                                    <label>Fecha Asignación</label>
+                                    <label>Fecha asignación</label>
                                     <input type="date" id="af_fechaAsignacion" name="af_fechaAsignacion" class="form-control info">
                                 </div>
                             </div>
@@ -249,20 +253,20 @@ require('../controller/controlador_gruposActivos.php');
                         <div class="row">
                             <div class="col-9 mt-4">
                                 <div class="form-group">
-                                    <label><h5 style="color:#5BB94B"><b>Datos Hardware</b></h5></label>
+                                    <label><h5 style="color:#5BB94B"><b>Datos hardware</b></h5></label>
                                 </div>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-3">
                                 <div class="form-group">
-                                    <label>Ram</label>
+                                    <label>RAM</label>
                                     <input type="text" id="af_ram" name="af_ram" class="form-control info">
                                 </div>
                             </div>
                             <div class="col-3">
                                 <div class="form-group">
-                                    <label>Disco Duro</label>
+                                    <label>Disco duro</label>
                                     <input type="text" id="af_discoDuro" name="af_discoDuro" class="form-control info">
                                 </div>
                             </div>
@@ -272,24 +276,30 @@ require('../controller/controlador_gruposActivos.php');
                                     <input type="text" id="af_procesador" name="af_procesador" class="form-control info">
                                 </div>
                             </div>
+                            <div class="col-3">
+                                <div class="form-group">
+                                    <label>Hostname</label>
+                                    <input type="text" id="hostName" name="hostName" class="form-control info">
+                                </div>
+                            </div>
                         </div>
                         <div class="row">
                             <div class="col-9 mt-4">
                                 <div class="form-group">
-                                    <label><h5 style="color:#5BB94B"><b>Datos Software</b></h5></label>
+                                    <label><h5 style="color:#5BB94B"><b>Datos software</b></h5></label>
                                 </div>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-3">
                                 <div class="form-group">
-                                    <label>Sistema Operativo</label>
+                                    <label>Sistema operativo</label>
                                     <input type="text" id="af_so" name="af_so" class="form-control info">
                                 </div>
                             </div>
                             <div class="col-3">
                                 <div class="form-group">
-                                    <label>Licencia Sistema Operativo</label>
+                                    <label>Licencia sistema operativo</label>
                                     <input type="text" id="af_licenciaSo" name="af_licenciaSo" class="form-control info">
                                 </div>
                             </div>
@@ -302,7 +312,7 @@ require('../controller/controlador_gruposActivos.php');
                             
                             <div class="col-9">
                                 <div class="form-group">
-                                    <label>Aplicaciones Instaladas</label>
+                                    <label>Aplicaciones instaladas</label>
                                     <input type="text" id="af_aplicaciones" value="7-Zip - Google Chrome - BitDefender - LibreOffice - Adobe Reader" name="af_aplicaciones" class="form-control info">
                                 </div>
                             </div>
@@ -310,13 +320,13 @@ require('../controller/controlador_gruposActivos.php');
                         <div class="row">
                             <div class="col-3">
                                 <div class="form-group">
-                                    <label>Licencia Office</label>
+                                    <label>Licencia office</label>
                                     <input type="text" id="af_office" name="af_office" class="form-control info">
                                 </div>
                             </div>
                             <div class="col-3">
                                 <div class="form-group">
-                                    <label>Licencia Antivirus</label>
+                                    <label>Licencia antivirus</label>
                                     <input type="text" id="af_antivirus" name="af_antivirus" class="form-control info">
                                 </div>
                             </div>                            
