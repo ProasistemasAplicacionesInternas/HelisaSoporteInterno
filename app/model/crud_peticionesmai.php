@@ -554,7 +554,7 @@ class CrudPeticionesMai
         $db = conectar::acceso();
         $activosResponsable = [];
         $consultar_obs = $db->prepare('SELECT descripcion_observacion, usuario_creacion, fecha_observacion, estado.descripcion AS estado FROM observaciones_mai 
-        LEFT JOIN estado ON estado.id_estado=observaciones_mai.estado_observacion WHERE id_ticket=:id_ticket AND (estado_observacion=2 OR estado_observacion=3) ORDER BY id_observacion DESC');
+        LEFT JOIN estado ON estado.id_estado=observaciones_mai.estado_observacion WHERE id_ticket=:id_ticket AND (estado_observacion=2 OR estado_observacion=3 OR estado_observacion=18 OR estado_observacion=19 OR estado_observacion=20 OR estado_observacion=21) ORDER BY id_observacion DESC');
         $consultar_obs->bindValue('id_ticket', $ticket);
         $consultar_obs->execute();
         $observaciones = [];

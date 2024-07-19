@@ -254,12 +254,12 @@
                                     <input type="text" id="obsData" name="obsData" class="form-control" value="<?php echo $observacion['fecha_observacion']; ?>  " readonly>
                                 </div>
 
-                                <div class="littleMedium">
+                                <div class="little">
                                     <label>Usuario </label>
                                     <input type="text" id="obsUser" name="obsUser" class="form-control" value="<?php echo $observacion['usuario_creacion']; ?>  " readonly>
                                 </div>
 
-                                <div class="little">
+                                <div class="littleMedium">
                                     <label>Estado </label>
                                     <input type="text" id="obsStatus" name="obsStatus" class="form-control" value="<?php echo $observacion['estado']; ?>  " readonly>
                                 </div>

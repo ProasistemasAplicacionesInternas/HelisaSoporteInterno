@@ -61,7 +61,7 @@
  
             <div class="fixed-top-right" id="total">
                 <button class="boton-imagen" type="button" data-toggle="modal" data-target="#infoModal">
-                    <img src="public/img/nuevo.png" alt="total">
+                    <img src="public/img/Grafico-64px.png" alt="total">
                 </button>
             </div>
 
@@ -86,27 +86,15 @@
                                     </thead>
                                     <tbody>
                                         <tr>
-                                            <th class="text-left">HelisaCloud</th>
+                                            <th class="text-left">Helisa Cloud</th>
                                             <?php foreach ($ticketsHelisaCloud as $datosH) : ?>
                                                 <td><?= $datosH->getHelisacloud() ?></td>
                                             <?php endforeach; ?>
                                         </tr>
                                         <tr>
-                                            <th class="text-left">HelisaPremium</th>
+                                            <th class="text-left">Helisa Premium</th>
                                             <?php foreach ($ticketsHelisaPremium as $datosP) : ?>
                                                 <td><?= $datosP->getHelisapremium() ?></td>
-                                            <?php endforeach; ?>
-                                        </tr>
-                                        <tr>
-                                            <th class="text-left">HelisaCemex</th>
-                                            <?php foreach ($ticketsCemex as $datosCx) : ?>
-                                                <td><?= $datosCx->getHelisacemex() ?></td>
-                                            <?php endforeach; ?>
-                                        </tr>
-                                        <tr>
-                                            <th class="text-left">Helisa Complementos</th>
-                                            <?php foreach ($ticketsHelisaInstaladorComplementos as $datosIc) : ?>
-                                                <td><?= $datosIc->getHelisacomplementos() ?></td>
                                             <?php endforeach; ?>
                                         </tr>
                                         <tr>
@@ -116,19 +104,13 @@
                                             <?php endforeach; ?>
                                         </tr>
                                         <tr>
-                                            <th class="text-left">SoporteInterno</th>
+                                            <th class="text-left">Soporte Interno</th>
                                             <?php foreach ($ticketsHelisaSoporteInterno as $datosS) : ?>
                                                 <td><?= $datosS->getSoporteinterno() ?></td>
                                             <?php endforeach; ?>
                                         </tr>
                                         <tr>
-                                            <th class="text-left">Helisa Tablero</th>
-                                            <?php foreach ($ticketsHelisaTablero as $datosTab) : ?>
-                                                <td><?= $datosTab->getHelisatablero() ?></td>
-                                            <?php endforeach; ?>
-                                        </tr>
-                                        <tr>
-                                            <th class="text-left">HelisaDymai</th>
+                                            <th class="text-left">Helisa Dymai</th>
                                             <?php foreach ($ticketsHelisaDyMAI as $datosD) : ?>
                                                 <td><?= $datosD->getHelisadymai() ?></td>
                                             <?php endforeach; ?>
@@ -137,6 +119,54 @@
                                             <th class="text-left">Centro de Soporte</th>
                                             <?php foreach ($ticketsHelisaCentroSoporte as $datosCs) : ?>
                                                 <td><?= $datosCs->getCentrosoporte() ?></td>
+                                            <?php endforeach; ?>
+                                        </tr>
+                                        <tr>
+                                            <th class="text-left">CRM Registro</th>
+                                            <?php foreach ($ticketsHelisaCrmRegistro as $datosCR) : ?>
+                                                <td><?= $datosCR->getCRMregistro() ?></td>
+                                            <?php endforeach; ?>
+                                        </tr>
+                                        <tr>
+                                            <th class="text-left">Helisa Talento</th>
+                                            <?php foreach ($ticketsHelisaTalento as $datosTal) : ?>
+                                                <td><?= $datosTal->getHelisatalento() ?></td>
+                                            <?php endforeach; ?>
+                                        </tr>
+                                        <tr>
+                                            <th class="text-left">Helisa Conekta</th>
+                                            <?php foreach ($ticketsHelisaConekta as $datosCok) : ?>
+                                                <td><?= $datosCok->getHelisaconekta() ?></td>
+                                            <?php endforeach; ?>
+                                        </tr>
+                                        <tr>
+                                            <th class="text-left">Helisa Complementos</th>
+                                            <?php foreach ($ticketsHelisaInstaladorComplementos as $datosIc) : ?>
+                                                <td><?= $datosIc->getHelisacomplementos() ?></td>
+                                            <?php endforeach; ?>
+                                        </tr>
+                                        <tr>
+                                            <th class="text-left">Helisa Atento</th>
+                                            <?php foreach ($ticketsHelisaAtento as $datosAte) : ?>
+                                                <td><?= $datosAte->getHelisaAtento() ?></td>
+                                            <?php endforeach; ?>
+                                        </tr>
+                                        <tr>
+                                            <th class="text-left">Aivo ChatBot</th>
+                                            <?php foreach ($ticketsAvivoChatbot as $datosAiv) : ?>
+                                                <td><?= $datosAiv->getAivochatbot() ?></td>
+                                            <?php endforeach; ?>
+                                        </tr>
+                                        <tr>
+                                            <th class="text-left">HelisaCemex</th>
+                                            <?php foreach ($ticketsCemex as $datosCx) : ?>
+                                                <td><?= $datosCx->getHelisacemex() ?></td>
+                                            <?php endforeach; ?>
+                                        </tr>
+                                        <tr>
+                                            <th class="text-left">Helisa Tablero</th>
+                                            <?php foreach ($ticketsHelisaTablero as $datosTab) : ?>
+                                                <td><?= $datosTab->getHelisatablero() ?></td>
                                             <?php endforeach; ?>
                                         </tr>
                                     </tbody>

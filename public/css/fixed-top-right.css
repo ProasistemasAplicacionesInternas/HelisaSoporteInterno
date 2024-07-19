@@ -11,6 +11,7 @@
         border: none;
         cursor: pointer;
         padding: 0;
+        margin-right: 7px;
     }
     
     .boton-imagen img {
@@ -19,14 +20,16 @@
     }
 
      .modal-dialog{
-        max-width: 18.2%;
-        width: auto;
+        max-width: 23%;
+        width: 100%;
         margin: 0 auto;
         flex: 1;
      }
 
 
     .tablaT{
+        max-width: 100%;
+        width: 100%;
         text-align: center;
         border-collapse: separate;
         border-spacing: 5px;
