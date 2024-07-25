@@ -2,7 +2,6 @@ $('#crear_activoFijo').click(function() {
 	if ($('#formulario').smkValidate()) {
 
         var traCategoria = $.trim($('#traCategoria').val());
-		console.log(traCategoria)
 
         if (traCategoria === '' || traCategoria === '0'  ||  traCategoria === null || traCategoria === undefined ) {
             $.smkAlert({
@@ -55,21 +54,20 @@ $('#crear_activoFijo').click(function() {
 		processData: false,
 		contentType: false,
 		success: function(data) {
-			console.log(data)
 		  if (data == 1) {
 			$.smkAlert({
-			  text: 'Activo Creado Con Exito',
+			  text: 'Activo Creado Con Éxito',
 			  type: 'success'
 			});
-			setTimeout(function() { location.reload();; }, 800);
+			setTimeout(function() { location.reload();; }, 600);
 		  } else if (data == 3) {
 			$.smkAlert({
-			  text: 'El codigo o serial ya estan asignados a otro activo',
+			  text: 'El código o serial ya estan asignados a otro activo',
 			  type: 'warning'
 			});
 		  } else {
 			$.smkAlert({
-			  text: 'error',
+			  text: 'El activo seleccionado no se encuentra categorizado.',
 			  type: 'danger'
 			});
 		  }
@@ -80,4 +78,3 @@ $('#crear_activoFijo').click(function() {
 	  });
 	}
   });
-  

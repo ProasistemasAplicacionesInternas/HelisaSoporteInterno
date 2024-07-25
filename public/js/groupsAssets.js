@@ -212,6 +212,7 @@ function saveEditGroup() {
 
 /* ************* Crear Grupo ************* */
 function modalCreateGroups() {
+  $("#createGroup").find("form")[0].reset();
   $("#createGroup").modal("show");
   consultAllCategoriesGroups("createdCategoryGroup");
 }
