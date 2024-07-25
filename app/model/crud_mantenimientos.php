@@ -27,6 +27,11 @@ class CrudMantenimientos
 		$crea_mantenimiento->bindValue('condicion', $create->getCondicionActual());
 		$crea_mantenimiento->execute();
 
+		$updateActivosInternos  = $db->prepare("UPDATE activos_internos SET condicion=:condicion WHERE id_activo=:m_activo");
+		$updateActivosInternos->bindValue('condicion', $create->getCondicionActual());
+		$updateActivosInternos->bindValue('m_activo', $create->getActivo_mantenimiento());
+		$updateActivosInternos->execute();
+
 		$colsultar_usuario = $db->prepare('SELECT id_usuario from usuarios where usuario =:usuario');
 		$colsultar_usuario->bindValue('usuario', $create->getResponsable_mantenimiento());
 		$colsultar_usuario->execute();
@@ -38,6 +43,8 @@ class CrudMantenimientos
 		$inserta_funcion->bindValue('funcion_realizada', $funcion_realizada);
 		$inserta_funcion->bindValue('ip', $_SERVER['REMOTE_ADDR']);
 		$inserta_funcion->execute();
+
+
 
 
 	}

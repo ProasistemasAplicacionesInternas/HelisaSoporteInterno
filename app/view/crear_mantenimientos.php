@@ -8,6 +8,7 @@ ini_set("session.gc_maxlifetime", 18000);
 session_start();
 
 $estados = array(
+    '0' => 'Sin asignación de condición',
     '1' => 'Dado de baja - activos retirados por obsolencia o por condiciones que no permiten el correcto funcionamiento',
     '2' => 'Malo - activos con una falla sustancial que no permite el correcto funcionamiento',
     '3' => 'Regular - Activos en uso que presentan alguna',
@@ -124,7 +125,7 @@ require('../controller/controlador_activosFijos.php');
 
                     <div class="row col-8">
                         <div class="form-group ">
-                            <label>Condición <?php echo $estadoAct?></label>
+                            <label>Condición</label>
                             <select class="form-control info" id="estadoAct" name="estadoAct">
                                 <option value="<?php echo $estadoAct; ?>" selected>
                                     <?php echo $estadoAct . " - " . $estados[$estadoAct]; ?></option>

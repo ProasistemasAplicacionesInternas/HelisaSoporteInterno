@@ -127,6 +127,7 @@
                                 <input type="hidden" name="af_so" id="af_so" value="<?php echo $datos->getAf_sistemaOperativo();?>">  
                                 <input type="hidden" name="af_licenciaSo" id="af_licenciaSo" value="<?php echo $datos->getAf_licenciaSO();?>">
                                 <input type="hidden" name="af_dominio" id="af_dominio" value="<?php echo $datos->getAf_dominio();?>">  
+                                <input type="hidden" name="estadoAct" id="estadoAct" value="<?php echo $datos->getestadoAct();?>"> 
                                 <input type="submit" value="Realizar Mantenimiento" name="mantenimiento" class="btn btn-success">
                             </form>
                         </td>
