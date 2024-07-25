@@ -57,10 +57,10 @@ $traCategoria = $_POST['traCategoria'];
 $sede = $_POST['sede'];
 
 
-require_once ('../controller/controlador_activosFijos.php');
-require ('../controller/controlador_areas.php');
-require ('../controller/controlador_funcionarios.php');
-require ('../controller/controlador_gruposActivos.php');
+require_once('../controller/controlador_activosFijos.php');
+require('../controller/controlador_areas.php');
+require('../controller/controlador_funcionarios.php');
+require('../controller/controlador_gruposActivos.php');
 
 ?>
 <!DOCTYPE html>
@@ -95,30 +95,26 @@ require ('../controller/controlador_gruposActivos.php');
                         <div class="col-3">
                             <div class="form-group">
                                 <label>Código De Activo</label>
-                                <input type="text" id="af_codigo" name="af_codigo" class="form-control info"
-                                    maxlength="25" autocomplete="off" value="<?php echo $af_codigo ?>" readonly>
+                                <input type="text" id="af_codigo" name="af_codigo" class="form-control info" maxlength="25" autocomplete="off" value="<?php echo $af_codigo ?>" readonly>
                             </div>
                         </div>
                         <div class="col-3">
                             <div class="form-group">
                                 <label>Serial</label>
-                                <input type="text" id="af_serial" name="af_serial" class="form-control info"
-                                    maxlength="260" autocomplete="off" value="<?php echo $af_serial ?>" required>
+                                <input type="text" id="af_serial" name="af_serial" class="form-control info" maxlength="260" autocomplete="off" value="<?php echo $af_serial ?>" required>
                             </div>
                         </div>
                         <div class="col-3">
                             <div class="form-group">
                                 <label>Marca</label>
-                                <input type="text" id="af_marca" name="af_marca" class="form-control info"
-                                    autocomplete="off" value="<?php echo $af_marca ?>" required>
+                                <input type="text" id="af_marca" name="af_marca" class="form-control info" autocomplete="off" value="<?php echo $af_marca ?>" required>
                             </div>
                         </div>
 
                         <div class="col-3">
                             <div class="form-group">
                                 <label>Modelo</label>
-                                <input type="text" id="af_modelo" name="af_modelo" class="form-control info"
-                                    autocomplete="off" value="<?php echo $af_modelo ?>" required>
+                                <input type="text" id="af_modelo" name="af_modelo" class="form-control info" autocomplete="off" value="<?php echo $af_modelo ?>" required>
                             </div>
                         </div>
                     </div>
@@ -126,16 +122,14 @@ require ('../controller/controlador_gruposActivos.php');
                         <div class="col-9">
                             <div class="form-group">
                                 <label>Nombre</label>
-                                <input type="text" id="af_nombre" name="af_nombre" class="form-control info"
-                                    maxlength="100" autocomplete="off" value="<?php echo $af_nombre ?>" required>
+                                <input type="text" id="af_nombre" name="af_nombre" class="form-control info" maxlength="100" autocomplete="off" value="<?php echo $af_nombre ?>" required>
                             </div>
                         </div>
 
                         <div class="col-3">
                             <div class="form-group">
                                 <label for="">Fecha Compra</label>
-                                <input type="date" id="af_fechaCompra" name="af_fechaCompra" class="form-control info"
-                                    value="<?php echo $af_fechaCompra ?>" required>
+                                <input type="date" id="af_fechaCompra" name="af_fechaCompra" class="form-control info" value="<?php echo $af_fechaCompra ?>" required>
                             </div>
                         </div>
                     </div>
@@ -143,21 +137,19 @@ require ('../controller/controlador_gruposActivos.php');
                         <div class="col-3">
                             <div class="form-group">
                                 <label>Grupo Del Activo</label>
-                                <input type="hidden" id="auxiliarCategoriaMod" name="auxiliarCategoriaMod"
-                                    value="<?php echo $af_grupo ?>">
-                                <select class="form-control info" id="af_categoria" name="af_categoria"
-                                    value="<?php echo $af_grupo ?>" onchange="buscarCategoria2();" required>
+                                <input type="hidden" id="auxiliarCategoriaMod" name="auxiliarCategoriaMod" value="<?php echo $af_grupo ?>">
+                                <select class="form-control info" id="af_categoria" name="af_categoria" value="<?php echo $af_grupo ?>" onchange="buscarCategoria2();" required>
                                     <option value=''>Seleccione Grupo Del Activo</option>
 
-                                    <?php foreach ($listado_grupos as $grupos): ?>
-                                        <?php if ($grupos['area_grupo'] == 32): ?>
+                                    <?php foreach ($listado_grupos as $grupos) : ?>
+                                        <?php if ($grupos['area_grupo'] == 32) : ?>
                                             <option value="<?php echo $grupos['id_grupo']; ?>" class="administracion">
                                                 <?php echo $grupos['nombre_grupo']; ?></option>
                                         <?php endif; ?>
                                     <?php endforeach; ?>
 
-                                    <?php foreach ($listado_grupos as $grupos): ?>
-                                        <?php if ($grupos['area_grupo'] == 27): ?>
+                                    <?php foreach ($listado_grupos as $grupos) : ?>
+                                        <?php if ($grupos['area_grupo'] == 27) : ?>
                                             <option value="<?php echo $grupos['id_grupo']; ?>" class="infraestructura">
                                                 <?php echo $grupos['nombre_grupo']; ?></option>
                                         <?php endif; ?>
@@ -181,12 +173,11 @@ require ('../controller/controlador_gruposActivos.php');
                         <div class="col-3">
                             <div class="form-group">
                                 <label>Ubicación/Area</label>
-                                <select class="form-control info" id="af_area" name="af_area"
-                                    value="<?php echo $codigoArea ?>" readonly>
+                                <select class="form-control info" id="af_area" name="af_area" value="<?php echo $codigoArea ?>" readonly>
 
                                     <?php if ($codigoArea == 0) {
                                         echo
-                                            "<option value='" . $codigoArea = "27" . "'>" . $nombreArea = "Infraestructura" . "</option>";
+                                        "<option value='" . $codigoArea = "27" . "'>" . $nombreArea = "Infraestructura" . "</option>";
                                     } else {
                                         echo "<option value='" . $codigoArea . "'>" . $nombreArea . "    </option>";
                                     } ?>
@@ -198,13 +189,13 @@ require ('../controller/controlador_gruposActivos.php');
                             <div class="form-group">
                                 <label>Ubicacion Activo</label>
                                 <select class="form-control info" id="af_ubicacion" name="af_ubicacion" required>
-                                    <?php if ($af_ubicacion == null): ?>
+                                    <?php if ($af_ubicacion == null) : ?>
                                         <option value="" selected>Seleccione Estado</option>
                                         <option value="Trabajo en casa">Trabajo en casa</option>
                                         <option value="Activo de uso interno y externo">Activo de uso interno y externo
                                         </option>
                                         <option value="Oficina">otros</option>
-                                    <?php else: ?>
+                                    <?php else : ?>
                                         <option value='<?= $af_ubicacion ?>'><?= $af_ubicacion ?></option>
                                         <option value="Oficina">Oficina</option>
                                         <option value="Trabajo en casa">Trabajo en casa</option>
@@ -229,11 +220,10 @@ require ('../controller/controlador_gruposActivos.php');
                         <div class="col-5">
                             <div class="form-group">
                                 <label>Funcionario Responsable</label>
-                                <select class="form-control info" id="af_responsable" name="af_responsable"
-                                    value="<?php echo $af_responsable ?>" readonly>
+                                <select class="form-control info" id="af_responsable" name="af_responsable" value="<?php echo $af_responsable ?>" readonly>
                                     <?php if ($identificacionResponsable == 0) {
                                         echo
-                                            "<option value='" . $identificacionResponsable = "800042928" . "'>" . $nombreResponsable = "AREA INFRAESTRUCTURA" . "    </option>";
+                                        "<option value='" . $identificacionResponsable = "800042928" . "'>" . $nombreResponsable = "AREA INFRAESTRUCTURA" . "    </option>";
                                     } else {
                                         echo "<option value='" . $identificacionResponsable . "'>" . $nombreResponsable . "    </option>";
                                     } ?>
@@ -244,18 +234,17 @@ require ('../controller/controlador_gruposActivos.php');
                         <div class="col-3">
                             <div class="form-group">
                                 <label>Categoría</label>
-                                <select class="form-control info" id="traCategoria" name="traCategoria"
-                                    value="<?php echo $traCategoria ?>" required>
+                                <select class="form-control info" id="traCategoria" name="traCategoria" value="<?php echo $traCategoria ?>" required>
                                     <option value='' selected></option>
-                                    <?php foreach ($listado_grupos as $grupos): ?>
-                                        <?php if ($grupos['area_grupo'] == 32): ?>
+                                    <?php foreach ($listado_grupos as $grupos) : ?>
+                                        <?php if ($grupos['area_grupo'] == 32) : ?>
                                             <option value="<?php echo $grupos['id_grupo']; ?>" class="administracion">
                                                 <?php echo $grupos['nombre_grupo']; ?></option>
                                         <?php endif; ?>
                                     <?php endforeach; ?>
 
-                                    <?php foreach ($listado_grupos as $grupos): ?>
-                                        <?php if ($grupos['area_grupo'] == 27): ?>
+                                    <?php foreach ($listado_grupos as $grupos) : ?>
+                                        <?php if ($grupos['area_grupo'] == 27) : ?>
                                             <option value="<?php echo $grupos['id_grupo']; ?>" class="infraestructura">
                                                 <?php echo $grupos['nombre_grupo']; ?></option>
                                         <?php endif; ?>
@@ -265,17 +254,16 @@ require ('../controller/controlador_gruposActivos.php');
                         </div>
                     </div>
                     <div class="row">
-                    <div class="col-3">
-                        <div class="form-group">
-                            <label>Costo de compra</label>
-                            <input type="text" id="costoCompra" name="costoCompra" class="form-control info" autocomplete="off" value="<?php echo $costoCompra ?>" readonly>
+                        <div class="col-3">
+                            <div class="form-group">
+                                <label>Costo de compra</label>
+                                <input type="text" id="costoCompra" name="costoCompra" class="form-control info" autocomplete="off" value="<?php echo $costoCompra ?>" readonly>
+                            </div>
                         </div>
-                    </div>
                         <div class="col-3">
                             <div class="form-group">
                                 <label>Tipo de activo</label>
-                                <input type="text" class="form-control info" id="tipoAct" name="tipoAct"
-                                    autocomplete="off" value="<?php echo $tipoAct ?>" required readonly>
+                                <input type="text" class="form-control info" id="tipoAct" name="tipoAct" autocomplete="off" value="<?php echo $tipoAct ?>" required readonly>
                                 <input type="hidden" id="yearUvt">
                                 <input type="hidden" id="valueUvt" name="valueUvt">
                             </div>
@@ -284,8 +272,7 @@ require ('../controller/controlador_gruposActivos.php');
                             <div class="form-group">
                                 <label>Vida útil</label>
                                 <div class="input-group">
-                                    <input type="text" id="vidaUtil" name="vidaUtil" class="form-control info"
-                                        autocomplete="off" value="<?php echo $vidaUtil ?>" required>
+                                    <input type="text" id="vidaUtil" name="vidaUtil" class="form-control info" autocomplete="off" value="<?php echo $vidaUtil ?>" required>
                                     <div class="input-group-append">
                                         <span class="input-group-text">(meses)</span>
                                     </div>
@@ -294,162 +281,67 @@ require ('../controller/controlador_gruposActivos.php');
                         </div>
                         <div class="col-3">
                             <div class="form-group">
-                              <label>Sede del activo</label>
-                               <input type="text" id="sede" name="sede" class="form-control info" maxlength="100" autocomplete="off" value="<?php echo $sede?>"required>                                
+                                <label>Sede del activo</label>
+                                <input type="text" id="sede" name="sede" class="form-control info" maxlength="100" autocomplete="off" value="<?php echo $sede ?>" required>
                             </div>
                         </div>
-                    </div> 
-                        <div class="row">
-                            <div class="col-12">
-                                <div class="form-group">
-                                    <label>Condición actual</label>
-                                    <select class="form-control info" id="estadoAct" name="estadoAct">
-                                        <option value="<?php echo $estadoAct; ?>" selected>
-                                            <?php echo $estadoAct . " - " . $estados[$estadoAct]; ?></option>
+                    </div>
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="form-group">
+                                <label>Condición actual</label>
+                                <select class="form-control info" id="estadoAct" name="estadoAct">
+                                    <option value="<?php echo $estadoAct; ?>" selected>
+                                        <?php echo $estadoAct . " - " . $estados[$estadoAct]; ?></option>
 
-                                        <?php
-                                        foreach ($estados as $id => $texto) {
-                                            if ($id != $estadoAct) {
-                                                echo "<option value='$id'>$id - $texto</option>";
-                                            }
+                                    <?php
+                                    foreach ($estados as $id => $texto) {
+                                        if ($id != $estadoAct) {
+                                            echo "<option value='$id'>$id - $texto</option>";
                                         }
-                                        ?>
-                                    </select>
-                                </div>
+                                    }
+                                    ?>
+                                </select>
                             </div>
                         </div>
-                        <div class="row">
-                            <div class="col-8">
-                                <div class="form-group">
+                    </div>
+                    <div class="row">
+                        <div class="col-8">
+                            <div class="form-group">
                                 <label>Imagen del Activo</label><br>
                                 <?php if ($af_imagenActivo != 'No aplica') { ?>
 
-                                    <input type="hidden" id="imagenCa" name="imagenCa"
-                                        value="<?php echo $af_imagenActivo; ?>">
-                                    <a class="badge badge-light text" href="../../img/<?= $af_imagenActivo ?>"
-                                        target="_blanck" id="imagen" name="imagen"
-                                        style="text-decoration: underline; font-size: 15px;color: #bf1d1d;">
+                                    <input type="hidden" id="imagenCa" name="imagenCa" value="<?php echo $af_imagenActivo; ?>">
+                                    <a class="badge badge-light text" href="../../img/<?= $af_imagenActivo ?>" target="_blanck" id="imagen" name="imagen" style="text-decoration: underline; font-size: 15px;color: #bf1d1d;">
                                         Imagen
                                     </a>
                                 <?php } else { ?>
                                     <input type="hidden" id="imagenCa" name="imagenCa" value="2">
                                 <?php } ?>
-                                </div>    
                             </div>
                         </div>
+                    </div>
 
-                        <div class="row">
-                            <div class="col-12">
+                    <div class="row">
+                        <div class="col-12">
+                            <div>
                                 <div>
-                                    <div>
-                                        <label>Cargar Imagen del activo</label>
-                                    </div>
-                                    <div>
-                                        <input type="file" id="af_imagen1" name="af_imagen1">
-                                    </div>
-                                    <label class="mt-2" id="textImg" style="min-width:150%"></label>
+                                    <label>Cargar Imagen del activo</label>
                                 </div>
+                                <div>
+                                    <input type="file" id="af_imagen1" name="af_imagen1">
+                                </div>
+                                <label class="mt-2" id="textImg" style="min-width:150%"></label>
                             </div>
                         </div>
-                        <div id="datos_adicionales">
-                            <div class="row">
-                                <div class="col-9 mt-4">
-                                    <div class="form-group">
-                                        <label>
-                                            <h5> Datos Hardware </h5>
-                                        </label>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="row">
-                                <div class="col-3">
-                                    <div class="form-group">
-                                        <label>Ram</label>
-                                        <input type="text" id="af_ram" name="af_ram" class="form-control info"
-                                            value="<?php echo $af_ram ?>">
-                                    </div>
-                                </div>
-                                <div class="col-3">
-                                    <div class="form-group">
-                                        <label>Disco Duro</label>
-                                        <input type="text" id="af_discoDuro" name="af_discoDuro"
-                                            class="form-control info" value="<?php echo $af_discoDuro ?>">
-                                    </div>
-                                </div>
-                                <div class="col-3">
-                                    <div class="form-group">
-                                        <label>Procesador</label>
-                                        <input type="text" id="af_procesador" name="af_procesador"
-                                            class="form-control info" value="<?php echo $af_procesador ?>">
-                                    </div>
-                                </div>
-                                <div class="col-3">
-                                    <div class="form-group">
-                                        <label>Hostname</label>
-                                        <input type="text" id="hostName" name="hostName"
-                                            class="form-control info" value="<?php echo $hostName ?>">
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="row">
-                                <div class="col-9 mt-4">
-                                    <div class="form-group">
-                                        <label>
-                                            <h5>Datos Software</h5>
-                                        </label>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="row">
-                                <div class="col-3">
-                                    <div class="form-group">
-                                        <label>Sistema Operativo</label>
-                                        <input type="text" id="af_so" name="af_so" class="form-control info"
-                                            value="<?php echo $af_so ?>">
-                                    </div>
-                                </div>
-                                <div class="col-3">
-                                    <div class="form-group">
-                                        <label>Licencia Sistema Operativo</label>
-                                        <input type="text" id="af_licenciaSo" name="af_licenciaSo"
-                                            class="form-control info" value="<?php echo $af_licenciaSo ?>">
-                                    </div>
-                                </div>
-                                <div class="col-3">
-                                    <div class="form-group">
-                                        <label>Dominio</label>
-                                        <input type="text" id="af_dominio" name="af_dominio" class="form-control info"
-                                            value="<?php echo $af_dominio ?>">
-                                    </div>
-                                </div>
-
-                                <div class="col-9">
-                                    <div class="form-group">
-                                        <label>Aplicaciones Instaladas</label>
-                                        <input type="text" id="af_aplicaciones" name="af_aplicaciones"
-                                            class="form-control info" value="<?php echo $af_aplicaciones ?>"
-                                            name="af_aplicaciones">
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="row">
-                                <div class="col-3">
-                                    <div class="form-group">
-                                        <label>Licencia Office</label>
-                                        <input type="text" id="af_office" name="af_office" class="form-control info"
-                                            value="<?php echo $af_office ?>">
-                                    </div>
-                                </div>
-                                <div class="col-3">
-                                    <div class="form-group">
-                                        <label>Licencia Antivirus</label>
-                                        <input type="text" id="af_antivirus" name="af_antivirus"
-                                            class="form-control info" value="<?php echo $af_antivirus ?>">
-                                    </div>
+                    </div>
+                    <div id="datos_adicionales">
+                        <div class="row">
+                            <div class="col-9 mt-4">
+                                <div class="form-group">
+                                    <label>
+                                        <h5> Datos Hardware </h5>
+                                    </label>
                                 </div>
                             </div>
                         </div>
@@ -457,24 +349,102 @@ require ('../controller/controlador_gruposActivos.php');
                         <div class="row">
                             <div class="col-3">
                                 <div class="form-group">
-                                    <label>Observaciones</label>
-                                    <textarea name="af_observaciones" id="af_observaciones" cols="134" rows="5"
-                                        required><?php echo $af_observaciones ?></textarea>
+                                    <label>Ram</label>
+                                    <input type="text" id="af_ram" name="af_ram" class="form-control info" value="<?php echo $af_ram ?>">
+                                </div>
+                            </div>
+                            <div class="col-3">
+                                <div class="form-group">
+                                    <label>Disco Duro</label>
+                                    <input type="text" id="af_discoDuro" name="af_discoDuro" class="form-control info" value="<?php echo $af_discoDuro ?>">
+                                </div>
+                            </div>
+                            <div class="col-3">
+                                <div class="form-group">
+                                    <label>Procesador</label>
+                                    <input type="text" id="af_procesador" name="af_procesador" class="form-control info" value="<?php echo $af_procesador ?>">
+                                </div>
+                            </div>
+                            <div class="col-3">
+                                <div class="form-group">
+                                    <label>Hostname</label>
+                                    <input type="text" id="hostName" name="hostName" class="form-control info" value="<?php echo $hostName ?>">
                                 </div>
                             </div>
                         </div>
 
                         <div class="row">
-                            <div class="col-5">
-                                <input type="hidden" id="nombre_usu" name="nombre_usu"
-                                    value="<?php echo $_SESSION['usuario'] ?>">
-                                <input type="button" value="Modificar Activo" id="guardar_modificaciones"
-                                    name="guardar_modificaciones" class="mt-4 btn btn-primary btn-sm btn-guardar">
-                            </div>
-                            <div class="col-4">
-                                <a id="cerrar_modActivos" class="mt-4 btn btn-danger" style="height:30px;">Cancelar</a>
+                            <div class="col-9 mt-4">
+                                <div class="form-group">
+                                    <label>
+                                        <h5>Datos Software</h5>
+                                    </label>
+                                </div>
                             </div>
                         </div>
+
+                        <div class="row">
+                            <div class="col-3">
+                                <div class="form-group">
+                                    <label>Sistema Operativo</label>
+                                    <input type="text" id="af_so" name="af_so" class="form-control info" value="<?php echo $af_so ?>">
+                                </div>
+                            </div>
+                            <div class="col-3">
+                                <div class="form-group">
+                                    <label>Licencia Sistema Operativo</label>
+                                    <input type="text" id="af_licenciaSo" name="af_licenciaSo" class="form-control info" value="<?php echo $af_licenciaSo ?>">
+                                </div>
+                            </div>
+                            <div class="col-3">
+                                <div class="form-group">
+                                    <label>Dominio</label>
+                                    <input type="text" id="af_dominio" name="af_dominio" class="form-control info" value="<?php echo $af_dominio ?>">
+                                </div>
+                            </div>
+
+                            <div class="col-9">
+                                <div class="form-group">
+                                    <label>Aplicaciones Instaladas</label>
+                                    <input type="text" id="af_aplicaciones" name="af_aplicaciones" class="form-control info" value="<?php echo $af_aplicaciones ?>" name="af_aplicaciones">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-3">
+                                <div class="form-group">
+                                    <label>Licencia Office</label>
+                                    <input type="text" id="af_office" name="af_office" class="form-control info" value="<?php echo $af_office ?>">
+                                </div>
+                            </div>
+                            <div class="col-3">
+                                <div class="form-group">
+                                    <label>Licencia Antivirus</label>
+                                    <input type="text" id="af_antivirus" name="af_antivirus" class="form-control info" value="<?php echo $af_antivirus ?>">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-3">
+                            <div class="form-group">
+                                <label>Observaciones</label>
+                                <textarea name="af_observaciones" id="af_observaciones" cols="134" rows="5" required><?php echo $af_observaciones ?></textarea>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-5">
+                            <input type="hidden" id="nombre_usu" name="nombre_usu" value="<?php echo $_SESSION['usuario'] ?>">
+                            <input type="button" value="Modificar Activo" id="guardar_modificaciones" name="guardar_modificaciones" class="mt-4 btn btn-primary btn-sm btn-guardar">
+                        </div>
+                        <div class="col-4">
+                            <a id="cerrar_modActivos" class="mt-4 btn btn-danger" style="height:30px;">Cancelar</a>
+                        </div>
+                    </div>
                 </form>
             </div>
         </div>
