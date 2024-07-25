@@ -55,10 +55,10 @@ $('#guardar_modificaciones').click(function() {
 		success: function(data) {
 		  if (data == 1) {
 			$.smkAlert({
-			  text: 'Activo modificado con Exito',
+			  text: 'Activo modificado con Éxito',
 			  type: 'success'
 			});
-			setTimeout(function() {  window.close() }, 800);
+			setTimeout(function() {  window.close() }, 600);
 		  } else if (data == 3) {
 			$.smkAlert({
 			  text: 'El código o serial ya estan asignados a otro activo',
