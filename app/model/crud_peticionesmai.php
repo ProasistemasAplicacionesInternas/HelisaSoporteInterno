@@ -256,7 +256,7 @@ class CrudPeticionesMai
                             $mail->Host = 'smtp.office365.com';  // Specify main and backup SMTP servers
                             $mail->SMTPAuth = true;                               // Enable SMTP authentication
                             $mail->Username = 'no-responder@helisa.com';                 // SMTP username
-                            $mail->Password = 'jkO5w6NqsJf7jRCop1X*#*';                           // SMTP password C3cwrsl6k1DN8am*2021Ftwv2*
+                            $mail->Password = 'pdqMG3@5FYV2PRP@Teh@Y@aoKEufrV';                           // SMTP password C3cwrsl6k1DN8am*2021Ftwv2*
                             $mail->SMTPSecure = 'tls';                            // Enable TLS encryption, `ssl` also accepted
                             $mail->Port = 587;                                    // TCP port to connect to
                             $mail->setFrom('no-responder@helisa.com');
