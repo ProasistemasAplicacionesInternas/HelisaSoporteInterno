@@ -37,10 +37,7 @@ class crudGrupos
 	public function updateGroup($group)
 	{
 		$db = conectar::acceso();
-		$grupos = $db->prepare('UPDATE grupos_activos 
-		SET nombre_grupo=:nombre_grupo, 
-		categoria=:categoria, area_grupo=:area_grupo 
-		WHERE id_grupo=:id');
+		$grupos = $db->prepare('UPDATE grupos_activos SET nombre_grupo=:nombre_grupo, categoria=:categoria, area_grupo=:area_grupo WHERE id_grupo=:id');
 		$grupos->bindValue("nombre_grupo", $group->getNombre_grupo());
 		$grupos->bindValue("categoria", $group->getCategoria());
 		$grupos->bindValue("area_grupo", $group->getAreaGrupo());

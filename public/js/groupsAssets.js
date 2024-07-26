@@ -188,7 +188,6 @@ function saveEditGroup() {
     return false;
   }
 
-
   $.ajax({
     url: "app/controller/controlador_gruposActivos.php",
     type: "POST",
