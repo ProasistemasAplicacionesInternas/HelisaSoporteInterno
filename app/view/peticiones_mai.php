@@ -25,10 +25,10 @@
     <div class="container-fluid" id="infosPeticiones">
         <div class="row">
             <div class="col-11 mt-4 pl-5 mb-2">
-                <h6>Consulta Peticiones</h6>
+                <h6>Consulta Solicitudes Apps Internas</h6>
             </div>
             <div class="col-1 mt-4 mb-2">
-                <a href="app/view/crear_peticion.php"><h8>Generar Solicitud</h8><img src="public/img/nuevo.png" alt=""></a>
+                <a id="cacheData" href="app/view/crear_peticionMai.php"><h8>Generar Solicitud</h8><img src="public/img/nuevo.png" alt=""></a>
             </div>
             <div class="col">
                     <table class="table table-striped tablesorter" id="tabla">
@@ -86,6 +86,22 @@
     <script src="public/js/datatables.min.js"></script>
     <script src="public/js/tablas.js"></script>
     <script src="public/js/bloqueoTeclas.js"></script>
+
 </body>
+
+<script>
+
+document.addEventListener('DOMContentLoaded', function() {
+            const button = document.getElementById('cacheData');
+
+            button.addEventListener('click', function() {
+                console.log('Button clicked!');
+                localStorage.setItem('opcionPeticion', 2);
+            });
+
+
+        });
+
+    </script>
 
 </html>

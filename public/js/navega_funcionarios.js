@@ -6,6 +6,10 @@ $(document).ready(function() {
     $('#vista_solicitudesmai').click(function() {
         $("#contenido").load("app/view/peticiones_mai.php");
     });
+    
+    $('#vista_solicitudsg').click(function() {
+        $("#contenido").load("app/view/peticiones_sg.php");
+    });
 
     $('#activos_asignados').click(function() {
         $("#contenido").load("app/view/activos_funcionario.php");

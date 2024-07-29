@@ -6,7 +6,9 @@ $(document).ready(function () {
   $("#solicitudes_infraestructuraAdmin").click(function () {
     $("#contenido").load("app/view/consultar_peticiones.php");
   });
-
+  $("#solicitudesSeguridad").click(function () {
+    $("#contenido").load("app/view/solicitudesSeguridad.php");
+  });
   $("#liberar_maiAdmin").click(function () {
     $("#contenido").load("app/view/liberar_solicitudesmai.php");
   });

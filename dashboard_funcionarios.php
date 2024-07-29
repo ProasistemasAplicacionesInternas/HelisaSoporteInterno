@@ -72,6 +72,7 @@ if (isset($_SESSION['init'])) {
                         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton" id="dropTicket">
                             <a href="#" id="generar_solicitud"><img src="public/img/soporte.png" class="ml-3">Infraestructura</a>
                             <a href="#" id="vista_solicitudesmai"><img src="public/img/soporte.png" class="ml-3">Aplic. Internas</a>
+                            <a href='#' id="vista_solicitudsg" ><img src="public/img/soporte.png" class="ml-3">Seguridad</a>
                         </div>
                     </div>
 

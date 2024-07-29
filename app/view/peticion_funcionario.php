@@ -33,10 +33,10 @@
     <div class="container-fluid" id="infoPeticionFuncionario">
         <div class="row">
             <div class="col-11 mt-4 pl-5 mb-2">
-                <h6>Consulta Peticiones</h6>
+                <h6>Consulta Peticiones Infraestructura</h6>
             </div>
             <div class="col-1 mt-4 mb-2">
-                <a href="app/view/crear_peticion.php"><h8> Generar Solicitud</h8><img src="public/img/nuevo.png" alt=""></a>
+                <a href="app/view/crear_peticionInfra.php"><h8> Generar Solicitud</h8><img src="public/img/nuevo.png" alt=""></a>
                 
             </div>
             <div class="col">

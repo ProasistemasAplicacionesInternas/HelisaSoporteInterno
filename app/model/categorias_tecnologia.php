@@ -16,7 +16,8 @@
         
         public function getCategoria(){
             
-            $consulta_categorias=$this->db->query("SELECT id_categoria, nombre_categoria FROM categorias WHERE id_categoria!=3 AND id_categoria!=10 AND id_categoria!=11 AND id_categoria!=14 AND uso=1 ORDER BY nombre_categoria");
+            $consulta_categorias = $this->db->query("SELECT id_categoria, nombre_categoria FROM categorias WHERE id_categoria NOT IN (3, 10, 11, 14, 23, 24, 25, 26, 27, 28, 29, 30, 31) AND uso=1 ORDER BY nombre_categoria");
+
             
         while($listado_categorias=$consulta_categorias->fetch(PDO::FETCH_ASSOC)){
 

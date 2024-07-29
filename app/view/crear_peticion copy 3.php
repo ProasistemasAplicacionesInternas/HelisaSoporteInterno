@@ -1,29 +1,29 @@
-<?php 
+<?php
 //*******************************************************************************//
 //************FORMULARIO PARA LA CREACION DE PETICION A TECNOLOGIA***************//
 //*******************************************************************************//
 
-	ini_set("session.cookie_lifetime",30000);
-  	ini_set("session.gc_maxlifetime",30000);
-   		session_start();
+ini_set("session.cookie_lifetime", 30000);
+ini_set("session.gc_maxlifetime", 30000);
+session_start();
 
-   	if(!isset($_SESSION['usuario'])){
-       
-       header('location:../../login_peticiones.php');
-     }
+if (!isset($_SESSION['usuario'])) {
 
-    require('../controller/controlador_categorias.php');
-    require('../controller/controlador_productosmai.php');//1
-    require('../controller/controlador_consultaActivosFuncionario.php');
-    require('../controller/controlador_soportemai.php');
-    require('../controller/controlador_peticionmai.php');
-    
+    header('location:../../login_peticiones.php');
+}
+
+require('../controller/controlador_categorias.php');
+require('../controller/controlador_productosmai.php'); //1
+require('../controller/controlador_consultaActivosFuncionario.php');
+require('../controller/controlador_soportemai.php');
+require('../controller/controlador_peticionmai.php');
+
 ?>
 <!DOCTYPE html>
 <html lang="es">
 
 <head>
-	<meta charset="UTF-8">
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>Helisa | Soporte Infraestructura</title>
     <link rel="stylesheet" href="../../public/css/bootstrap.min.css">
@@ -34,7 +34,7 @@
 
 <body>
 
-	<header class="container-fluid">
+    <header class="container-fluid">
         <div class="row">
             <div class="col-md-10 align-self-center">
                 <img src="../../public/img/Logo_blanco.png" alt="">
@@ -50,12 +50,12 @@
                     <div class="row">
                         <div class="col-3">
                             <div class="form-group">
-                            <label>Área</label>
-                            <select class="form-control info" id="area_peticion" name="area_peticion" onChange="productoCategoria()" required>
-                                <option value="" selected>Seleccione un area</option>
-                                <option value="1">Infraestructura</option>
-                                <option value="2">Mantenimiento De Aplicaciones</option>
-                            </select>
+                                <label>Área</label>
+                                <select class="form-control info" id="area_peticion" name="area_peticion" onChange="productoCategoria()" required>
+                                    <option value="" selected>Seleccione un area</option>
+                                    <option value="1" >Infraestructura</option>
+                                    <option value="2" >Mantenimiento De Aplicaciones</option>
+                                </select>
                             </div>
                         </div>
                     </div>
@@ -65,13 +65,12 @@
                                 <label>Categoría</label>
                                 <select class="form-control info" id="p_categoria" name="p_categoria">
                                     <option value="" selected>Seleccione Una Categoría</option>
-                                        <?php
+                                    <?php
 
-                                             foreach($listado_categorias as $categoria){
-                                                echo "<option value='".$categoria["id_categoria"]."'>".$categoria["nombre_categoria"]. "</option>" ;
-
-                                                  }  
-                                         ?>
+                                    foreach ($listado_categorias as $categoria) {
+                                        echo "<option value='" . $categoria["id_categoria"] . "'>" . $categoria["nombre_categoria"] . "</option>";
+                                    }
+                                    ?>
                                 </select>
                             </div>
                         </div>
@@ -83,72 +82,70 @@
                                 <select class="form-control info" id="productoMai" name="productoMai">
                                     <option value="" selected>Seleccione Un Programa</option>
                                     <?php
-                                        foreach($listado_productos as $producto){
-                                            echo "<option value='".$producto["id_producto"]."'>".$producto["nombre_producto"]. "</option>" ;
-                                        }  
+                                    foreach ($listado_productos as $producto) {
+                                        echo "<option value='" . $producto["id_producto"] . "'>" . $producto["nombre_producto"] . "</option>";
+                                    }
                                     ?>
                                 </select>
                             </div>
                         </div>
                     </div>
                     <div>
-                 </div>
+                    </div>
                     <div class="row">
                         <div class="col-5">
                             <div class="form-group" id="divPeticion" style="display:none">
                                 <label>Tipo de petición</label>
                                 <select class="form-control info" id="soporteMai" name="soporteMai" onchange="imagenRequerida(), reqData()">
                                     <option value="" selected>Seleccione el tipo de petición</option>
-                                        <?php
-                                            foreach($listado_soporte as $tipoSoporte){
-                                                if($tipoSoporte['id']==4 && isset($_SESSION['id_roles']) && $_SESSION['id_roles']==5){
-                                                    echo "<option value='".$tipoSoporte["id"]."'>".$tipoSoporte["nombre"]. "</option>" ;
-                                                }else if($tipoSoporte['id']!=4){
-                                                    echo "<option value='".$tipoSoporte["id"]."'>".$tipoSoporte["nombre"]. "</option>" ;
-                                                }
-                                                
-                                            }                                             
-                                         ?>
+                                    <?php
+                                    foreach ($listado_soporte as $tipoSoporte) {
+                                        if ($tipoSoporte['id'] == 4 && isset($_SESSION['id_roles']) && $_SESSION['id_roles'] == 5) {
+                                            echo "<option value='" . $tipoSoporte["id"] . "'>" . $tipoSoporte["nombre"] . "</option>";
+                                        } else if ($tipoSoporte['id'] != 4) {
+                                            echo "<option value='" . $tipoSoporte["id"] . "'>" . $tipoSoporte["nombre"] . "</option>";
+                                        }
+                                    }
+                                    ?>
                                 </select>
                             </div>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-5">
-                            <div class="form-group" id="divNombre" style="display:none;" >
+                            <div class="form-group" id="divNombre" style="display:none;">
                                 <label>Nombre del requerimiento</label>
-                                <input class="form-control info" id="req_Name" name="req_Name" />                        
+                                <input class="form-control info" id="req_Name" name="req_Name" />
                             </div>
                         </div>
                     </div>
-                        
-                    
+
+
 
                     <div id="activoSoporte" class="activoFijo">
                         <div class="row">
                             <div class="col-6">
                                 <div class="form-group">
-                                <label>Activos Asignados</label>
-                                <select class="form-control info" id="p_activo" name="p_activo">
-                                    <option value="" selected>Seleccione un activo</option>
+                                    <label>Activos Asignados</label>
+                                    <select class="form-control info" id="p_activo" name="p_activo">
+                                        <option value="" selected>Seleccione un activo</option>
                                         <?php
 
-                                             foreach($activos_Asignados as $activoFijo){
-                                                echo "<option value='".$activoFijo["id_activo"]."'>" .$activoFijo["codigo_activo"]. " / " .$activoFijo["nombre_activo"]. "</option>" ;
-     
-                                                  }
-                                         ?>
-                                </select>
+                                        foreach ($activos_Asignados as $activoFijo) {
+                                            echo "<option value='" . $activoFijo["id_activo"] . "'>" . $activoFijo["codigo_activo"] . " / " . $activoFijo["nombre_activo"] . "</option>";
+                                        }
+                                        ?>
+                                    </select>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    
+
                     <div class="row">
                         <div class="col-3">
                             <div class="form-group" id="reqJustification" style="display: none;">
                                 <label>Justificación</label>
-                                <textarea name="req_Justification" id="req_Justification" cols="86" rows="5" maxlength="6000" ></textarea>
+                                <textarea name="req_Justification" id="req_Justification" cols="86" rows="5" maxlength="6000"></textarea>
                             </div>
                         </div>
                     </div>
@@ -161,7 +158,7 @@
                             </div>
                         </div>
                     </div>
-                    
+
 
                     <div class="row">
                         <div class="col-3">
@@ -170,7 +167,7 @@
                                     <label>Cargar Imagen Evidencia</label>
                                 </div>
                                 <div>
-                                    <input type="file" id="imagen[]" name="imagen[]" multiple="" >
+                                    <input type="file" id="imagen[]" name="imagen[]" multiple="">
                                 </div>
                                 <label class="mt-2" id="textImg" style="min-width:150%"></label>
                             </div>
@@ -182,7 +179,7 @@
                             <button type="submit" class="btn btn-success" id="btn-enviar_peticion" name="btn-enviar_peticion">Enviar Solicitud</button>
                         </div>
                         <div class="col-3">
-                            <a  class="btn btn-danger" onclick="retrocesoPagina()">Cancelar</a>
+                            <a class="btn btn-danger" onclick="retrocesoPagina()">Cancelar</a>
                         </div>
                     </div>
                 </form>
@@ -198,6 +195,27 @@
     <script src="../../public/js/es.min.js"></script>
     <script src="../../public/js/activo_oculto.js"></script>
     <script src="../../public/js/bloqueoTeclas.js"></script>
-       
+
 </body>
+
+<!-- <script>
+    document.addEventListener('DOMContentLoaded',
+        function() {
+            const selectElement = document.getElementById('area_peticion');
+            const defaultValue = selectElement.value;
+            productoCategoria(defaultValue);
+
+            function productoCategoria(selectedValue) {
+                console.log('La categoría seleccionada al cargar la página es:', selectedValue);
+            }
+            if (selectedValue === 'Infraestructura') {
+                alert('¡La opción "Infraestructura" está seleccionada por defecto!');
+            } else if (selectedValue === 'Mantenimiento De Aplicaciones') {
+                alert('¡La opción "Mantenimiento De Aplicaciones" está seleccionada por defecto!');
+            } else if (selectedValue === 'Seguridad') {
+                alert('¡La opción "Seguridad" está seleccionada por defecto!');
+            }
+        });
+</script> -->
+
 </html>
