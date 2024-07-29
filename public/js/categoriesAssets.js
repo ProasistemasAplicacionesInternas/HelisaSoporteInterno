@@ -113,7 +113,7 @@ function showResultCategory(data) {
   var newAreaElement = document.querySelector("#new_area");
 
   Array.from(newAreaElement.options).forEach(option => {
-  });
+  });  
 
   newAreaElement.value = jsonObject.id_area;
 
@@ -190,6 +190,9 @@ function saveEditCategory() {
 /* ************* Crear Categorias ************* */
 
 function modalCreateCategory() {
+  $("#createCategory").modal("hide");
+  $("#created_name").val("");
+  $("#created_area").val("");
   $("#createCategory").modal("show");
 }
 

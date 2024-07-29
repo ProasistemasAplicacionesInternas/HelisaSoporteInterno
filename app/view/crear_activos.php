@@ -10,10 +10,10 @@ require('../controller/controlador_gruposActivos.php');
     ini_set("session.gc_maxlifetime",18000);
     session_start(); */
 
-    if(!isset($_SESSION['usuario'])){
+    // if(!isset($_SESSION['usuario'])){
 
-        header('location:../../login.php');
-    } 
+    //     header('location:../../login.php');
+    // } 
 ?>
 <!DOCTYPE html>
 <html lang="es">
