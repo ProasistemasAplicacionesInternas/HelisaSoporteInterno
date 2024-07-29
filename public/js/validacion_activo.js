@@ -2,10 +2,11 @@ $('#crear_activoFijo').click(function() {
 	if ($('#formulario').smkValidate()) {
 
         var traCategoria = $.trim($('#traCategoria').val());
+		console.log("valor de cageroia: " + traCategoria)
 
-        if (traCategoria === '' || traCategoria === '0'  ||  traCategoria === null || traCategoria === undefined ) {
+        if (traCategoria == "null" || traCategoria === '0'  ||  traCategoria == null || traCategoria === undefined ) {
             $.smkAlert({
-                text: 'El grupo no tiene categoría asignada.',
+                text: 'El Grupo del activo no se encuentra categoriazado.',
                 type: 'warning'
             });
             return; 
@@ -60,15 +61,10 @@ $('#crear_activoFijo').click(function() {
 			  type: 'success'
 			});
 			setTimeout(function() { location.reload();; }, 600);
-		  } else if (data == 3) {
+		  } else {
 			$.smkAlert({
 			  text: 'El código o serial ya estan asignados a otro activo',
 			  type: 'warning'
-			});
-		  } else {
-			$.smkAlert({
-			  text: 'El activo seleccionado no se encuentra categorizado.',
-			  type: 'danger'
 			});
 		  }
 		},
