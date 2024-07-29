@@ -119,7 +119,7 @@ require('../controller/controlador_activosFijos.php');
                     <div class="row col-3">
                         <div class="form-group" id="campoMejora" style="display: none;">
                             <label>Costo mejora</label>
-                            <input type="text" class="form-control" id="costoMejora" name="costoMejora">
+                            <input type="text" class="form-control" value=0 id="costoMejora" name="costoMejora">
                         </div>
                     </div>
 
