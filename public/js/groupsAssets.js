@@ -108,7 +108,7 @@ function showResultGroup(group, areaGroup) {
   document.querySelector("#groupId").value = group.id_grupo;
   document.querySelector("#nameGroup").value = group.nombre_grupo;
   document.querySelector("#newCategoryGroup").value = group.categoria;
-  document.querySelector("#areaGroup").value = areaGroup; // Establecer el valor de areaGroup
+  document.querySelector("#areaGroup").value = group.idgrupo; // Establecer el valor de areaGroup
 }
 
 function consultAllCategoriesGroups(field, callback) {

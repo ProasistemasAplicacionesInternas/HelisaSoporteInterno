@@ -58,7 +58,6 @@
                                     <div class="form-group col-6">
                                         <label for="new_area">Nueva área</label>
                                         <select class="form-control" name="new_area" id="new_area" required>
-                                            <option value=""></option>
                                             <option value="32">Administración</option>
                                             <option value="27">Infraestructura</option>
                                         </select>
@@ -68,8 +67,7 @@
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-                            <button type="button" class="btn btn-primary" onclick="return saveEditCategory();">Guardar
-                                cambios</button>
+                            <button type="button" class="btn btn-primary" onclick="return saveEditCategory();">Guardar cambios</button>
                         </div>
                     </div>
                 </div>

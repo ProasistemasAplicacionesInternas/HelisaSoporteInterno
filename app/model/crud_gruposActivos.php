@@ -5,8 +5,8 @@ class crudGrupos
 {
 
 	//*********************************************************************************************************//
-//*********** Crud para crear la matriz que muestra las grupos al crear un activo *********************//
-//*********************************************************************************************************//	
+	//*********** Crud para crear la matriz que muestra las grupos al crear un activo *********************//
+	//*********************************************************************************************************//	
 
 	public function mostrarGrupos()
 	{
@@ -23,16 +23,16 @@ class crudGrupos
 	}
 
 	public function createGroup($group)
-    {
-        $db = conectar::acceso();
-        $grupos = $db->prepare('INSERT INTO grupos_activos(nombre_grupo, area_grupo, categoria) 
+	{
+		$db = conectar::acceso();
+		$grupos = $db->prepare('INSERT INTO grupos_activos(nombre_grupo, area_grupo, categoria) 
         VALUES (:nombre_grupo, :area_grupo, :categoria)');
-        $grupos->bindValue("nombre_grupo", $group->getNombre_grupo());
-        $grupos->bindValue("area_grupo", $group->getAreaGrupo());
-        $grupos->bindValue("categoria", $group->getCategoria());
-        $grupos->execute();
-        return $grupos->rowCount();
-    }
+		$grupos->bindValue("nombre_grupo", $group->getNombre_grupo());
+		$grupos->bindValue("area_grupo", $group->getAreaGrupo());
+		$grupos->bindValue("categoria", $group->getCategoria());
+		$grupos->execute();
+		return $grupos->rowCount();
+	}
 
 	public function updateGroup($group)
 	{
@@ -64,17 +64,18 @@ class crudGrupos
 	public function findGroup($id)
 	{
 		$db = Conectar::acceso();
-		$consult = $db->prepare('SELECT id_grupo, nombre_grupo, areas.descripcion AS area_grupo, categoria, ca.nombre_categoria 
-		FROM grupos_activos ga
-		LEFT JOIN categorias_activos ca ON ca.id = ga.categoria 
-		LEFT JOIN areas ON areas.id_area = ca.area_categoria
-		WHERE ga.id_grupo = :id');
+		$consult = $db->prepare('SELECT id_grupo, nombre_grupo, areas.descripcion AS area_grupo, categoria, ca.nombre_categoria, ga.area_grupo as idgrupo
+    FROM grupos_activos ga
+    LEFT JOIN categorias_activos ca ON ca.id = ga.categoria 
+    LEFT JOIN areas ON areas.id_area = ca.area_categoria
+    WHERE ga.id_grupo = :id');
 		$consult->bindValue("id", $id);
 		$consult->execute();
 
 		$resultado = $consult->fetch(PDO::FETCH_ASSOC);
 		return $resultado;
 	}
+
 
 	public function updateStatus($group)
 	{
@@ -92,4 +93,3 @@ class crudGrupos
 		echo 200;
 	}
 }
-?>
