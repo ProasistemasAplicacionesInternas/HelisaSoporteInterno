@@ -6,7 +6,7 @@ $('#crear_activoFijo').click(function() {
 
         if (traCategoria == "null" || traCategoria === '0'  ||  traCategoria == null || traCategoria === undefined ) {
             $.smkAlert({
-                text: 'El Grupo del activo no se encuentra categoriazado.',
+                text: 'El Grupo del activo no se encuentra categorizado.',
                 type: 'warning'
             });
             return; 
