@@ -46,7 +46,6 @@ $("#btn-guardarModif").click(function () {
     var infoCliente =
       "&f_identificacion=" +
       identificacion +
-      $("#f_identificacion").val() +
       "&f_tipoValidacion=" +
       $("#f_tipoValidacion").val() +
       "&f_estado=" +
@@ -78,35 +77,74 @@ $("#btn-guardarModif").click(function () {
       "&departamentoInterno=" +
       $("#f_departamentosInt").val() +
       "&modificar_funcionario=1";
-    $.ajax({
-      type: "POST",
-      url: "../controller/controlador_funcionarios.php",
-      data: infoCliente,
-    }).done(function (data) {
-      if (data != 4) {
-        $.smkAlert({
-          text: "Se realizó el cambio satisfactoriamente.",
-          type: "success",
+      if ($("#f_estado").val() == 16) {
+        validarSolicitudes(identificacion)
+          .then(function (resultado) {
+            resultado == 1 ? alertDanger() : modifierFuncionary(infoCliente);
+          })
+          .catch(function (error) {
+            console.log("Error:", error);
         });
-        setTimeout(function () {
-          window.location='../../dashboard.php';
-        }, 1000);
-        document.getElementById("btn-guardarModif").disabled = true;
       } else {
-        $.smkAlert({
-          text: "No se realizó ningún cambio.",
-          type: "info",
-        });
+        modifierFuncionary(infoCliente);
       }
-      setTimeout(function () {
-        window.location='../../dashboard.php';
-      }, 1000);
-    });
   }
 });
+function alertDanger(){
+  $.smkAlert({
+        text: "El funcionario tiene solicitudes pendientes por aceptar",
+        type: "danger",
+      });
+}
+function modifierFuncionary(infoCliente) {
+  $.ajax({
+    type: "POST",
+    url: "../controller/controlador_funcionarios.php",
+    data: infoCliente,
+  }).done(function (data) {
+    if (data != 4) {
+      $.smkAlert({
+        text: "Se realizó el cambio satisfactoriamente.",
+        type: "success",
+      });
+      setTimeout(function () {
+        window.location = "../../dashboard.php";
+      }, 1000);
+      document.getElementById("btn-guardarModif").disabled = true;
+    } else {
+      $.smkAlert({
+        text: "No se realizó ningún cambio.",
+        type: "info",
+      });
+    }
+    setTimeout(function () {
+      window.location = "../../dashboard.php";
+    }, 1000);
+  });
+}
+
 $("#cerrar_modificacion").click(function () {
   window.location='../../dashboard.php';
 });
+
+function validarSolicitudes(identificacion) {
+  return new Promise(function (resolve, reject) {
+    var info =
+      "&identificacion=" + identificacion + "&consultarsolicitudesPendientes=1";
+    $.ajax({
+      type: "POST",
+      url: "../controller/controlador_funcionarios.php",
+      data: info,
+    })
+      .done(function (data) {
+        resolve(data)
+      })
+      .fail(function (error) {
+        reject(error);
+      });
+  });
+}
+
 /* 
 var arrayAcceso = [];
         var numeroInput = document.getElementsByClassName('acceso');

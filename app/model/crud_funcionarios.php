@@ -140,7 +140,7 @@ class CrudFuncionarios
 				$conteoActivos = $activos->rowCount();
 
 				if ($conteoActivos != 0) {
-					$idproxifun = $_POST['funcionario_translado'];
+					$idproxifun = $_POST['funcionario_traslado'];
 					$arreglo = [];
 					$arreglo = $activos->fetchAll(PDO::FETCH_COLUMN);
 					for ($i = 0; $i < $conteoActivos; $i++) {
