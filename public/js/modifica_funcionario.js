@@ -42,8 +42,10 @@ $(document).ready(function () {
 
 $("#btn-guardarModif").click(function () {
   if ($("#modificaFuncionario").smkValidate()) {
+    var identificacion = $("#f_identificacion").val();
     var infoCliente =
       "&f_identificacion=" +
+      identificacion +
       $("#f_identificacion").val() +
       "&f_tipoValidacion=" +
       $("#f_tipoValidacion").val() +
