@@ -69,7 +69,7 @@ $("#btn-guardarModif").click(function () {
       $("#f_cargo").val() +
       "&f_usuario=" +
       $("#f_usuario").val() +
-      "&funcionario_Transpaso=" +
+      "&funcionario_translado=" +
       $("#funcionario_translado").val() +
       "&descripcion=" +
       $("#descripcionRetiro").val() +

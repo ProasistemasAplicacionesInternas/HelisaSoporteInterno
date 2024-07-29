@@ -140,7 +140,7 @@ class CrudFuncionarios
 				$conteoActivos = $activos->rowCount();
 
 				if ($conteoActivos != 0) {
-					$idproxifun = $_POST['funcionario_Transpaso'];
+					$idproxifun = $_POST['funcionario_translado'];
 					$arreglo = [];
 					$arreglo = $activos->fetchAll(PDO::FETCH_COLUMN);
 					for ($i = 0; $i < $conteoActivos; $i++) {
@@ -162,7 +162,7 @@ class CrudFuncionarios
 
 					if ($crearTraslado) {
 						$db = conectar::acceso();
-						$modificarActivo = $db->prepare('UPDATE activos_internos SET responsable_activo=:areaInfraestructura,estado_activo=:estadoAsignado,fecha_asignacion=:fechaAsignacion WHERE responsable_activo= :identidad_funcionario');
+						$modificarActivo=$db->prepare('UPDATE activos_internos SET responsable_activo=:areaHelisaSoporteInterno,estado_activo=:estadoAsignado,fecha_asignacion=:fechaAsignacion WHERE responsable_activo= :identidad_funcionario');
 						$modificarActivo->bindValue('areaHelisaSoporteInterno', $idproxifun);
 						$modificarActivo->bindValue('estadoAsignado', 14);
 						$modificarActivo->bindValue('identidad_funcionario', $update->getF_identificacion());
@@ -597,7 +597,7 @@ class CrudFuncionarios
 			$mail->setFrom('no-responder@helisa.com');
 			$mail->addAddress($correo);
 			$mail->isHTML(true); // Set email format to HTML
-			$subjects = "Código de autenticacion Soporte Interno ";
+			$subjects = "Código de autenticación Soporte Interno";
 			$cuerpo = '<style type="text/css">*{font-size: 14px;} #contenedor{text-align: center;padding: 0% 5%;width: 8%;} #contenedor img:hover {opacity:0.5; margin-top:-10%; transition: all 2s ease-out;} #contenedor a {text-decoration: none;color: #fff;}#div_dos,#div_tres,#div_cuatro,#div_cinco,#div_seis{display:flex;} </style>';
 			$cuerpo .= "<div>
 		</div>";
@@ -900,7 +900,7 @@ class CrudFuncionarios
 				$mail->setFrom('no-responder@helisa.com');
 				$mail->addAddress("$correo");
 				$mail->isHTML(true);
-				$subject = "Cambio de contraseña - Proasistemas ";
+				$subject = "Cambio de contraseña - Soporte Interno";
 				$body = "<div class='container' style='background: rgb(243,243,243);text-align: center;width: 60%;margin: 0% 14% 11%;border-bottom: 15px solid #ca0c7f;'>";
 				$body .= "<div style='width: 100%;background: rgb(210, 6, 124);'>";
 				$body .= "<h1 style='color:rgb(210, 6, 124);'>.</h1>";
