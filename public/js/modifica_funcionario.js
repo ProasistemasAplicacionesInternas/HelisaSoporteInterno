@@ -68,8 +68,8 @@ $("#btn-guardarModif").click(function () {
       $("#f_cargo").val() +
       "&f_usuario=" +
       $("#f_usuario").val() +
-      "&funcionario_translado=" +
-      $("#funcionario_translado").val() +
+      "&funcionario_traslado=" +
+      $("#funcionario_traslado").val() +
       "&descripcion=" +
       $("#descripcionRetiro").val() +
       "&centroCostos=" +
