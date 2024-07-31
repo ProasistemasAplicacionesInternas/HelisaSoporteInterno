@@ -26,8 +26,8 @@ $(document).ready(function () {
       {
         extend: "excel",
         text: "Exportar a Excel",
-        messageTop: "REPORTE DE INCIDENTES ISO",
-        filename: "Reportes ISO ",
+        messageTop: "REPORTE",
+        filename: "Reportes",
         exportOptions: {
           columns: [0, 1, 2, 4, 5, 6, 7, 11],
         },
