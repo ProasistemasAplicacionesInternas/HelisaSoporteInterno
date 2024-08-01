@@ -53,7 +53,7 @@ class CrudUvts
 
         $resultado = $consulta->fetch(PDO::FETCH_ASSOC);
 
-        return($resultado['count'] > 0);
+        return ($resultado['count'] > 0);
     }
 
     public function searchLastYear()
@@ -63,5 +63,18 @@ class CrudUvts
         $consult->execute();
         $resultado = $consult->fetch(PDO::FETCH_ASSOC);
         return $resultado;
+    }
+    public function searchCurrentYear()
+    {
+        $db = Conectar::acceso();
+        $year = date('Y');
+
+        $consulta = $db->prepare('SELECT * FROM uvts WHERE year_uvt = :year');
+        $consulta->bindParam(':year', $year, PDO::PARAM_INT);
+        $consulta->execute();
+
+        $resultados = $consulta->fetch(PDO::FETCH_ASSOC);
+
+        return $resultados;
     }
 }
