@@ -45,33 +45,69 @@
             <div class="col">
                 <table class="table table-striped tablesorter" id="tabla">
                     <thead>
-                        <th style="width:10px;">Nro. Ticket</th>
-                        <th style="width:30px;">Usuario Solicitante</th>
-                        <th style="width:30px;">Fecha Solicitud</th>
-                        <th style="width:30px;">Área</th>
-                        <th style="width:30px;">Categoria</th>
-                        <th style="width:30px;">Estado</th>
-                        <th style="width:30px;">Atiende</th>
-                        <th style="width:30px;">Modificar</th>
+                        <th style="width:10px; text-align: center;">Nro. Ticket</th>
+                        <th style="width:30px; text-align: center;">Categoria</th>
+                        <th style="width:30px; text-align: center;">Fecha Solicitud</th>
+                        <th style="width:30px; text-align: center;">Descripcion</th>
+                        <th style="width:30px; text-align: center;">Estado Solicitud</th>
+                        <th style="width:30px; text-align: center;">Fecha Atiende</th>
+                        <th style="width:30px; text-align: center;">Usuario Atiende</th>
+                        <th style="width:30px; text-align: center;">conclusiones</th>
+                        <th style="width:30px; text-align: center;">Revisar</th>
                     </thead>
                     <?php foreach ($consultaPeticionesSg as $datos) : ?>
                         <tr>
-                            <td>
+                            <td style="text-align:center">
                                 <?php echo $datos->getid_peticionSg() ?></td>
                             <td>
-                                <?php echo $datos->getusuario_creacionSg() ?></td>
-                            <td>
+                                <?php echo $datos->getcategoriaSg() ?></td>
+                            <td style="text-align:center">
                                 <?php echo $datos->getfecha_peticionSg() ?></td>
                             <td>
-                                <?php echo $datos->getarea_funcionario() ?></td>
-                            <td>
-                                <?php echo $datos->getcategoriaSg() ?></td>
-                            <td>
+                                <?php echo $datos->getdescripcion_peticionSg() ?></td>
+                            <td style="text-align:center">
                                 <?php echo $datos->getestado_peticionSg() ?></td>
-                            <td>
+                            <td style="text-align:center">
+                                <?php echo $datos->getfecha_atendidoSg() ?></td>
+                            <td style="text-align:center">
                                 <?php echo $datos->getusuario_atencionSg() ?></td>
-                            <td>
+                            <td style="text-align:center">
                                 <?php echo $datos->getconclusiones_PeticionSg() ?></td>
+                            <td style="text-align:center">
+                                <?php
+                                $estado = $datos->getestado_peticionSg();
+                                $revisado = $datos->getmarcaRevisadoSg();
+
+                                if (($estado == "Resuelto") && $revisado == 1) {
+                                ?>
+                                    <input type="checkbox" class="btn btn-danger btn-sm" onChange="marcarevisado(<?php echo $datos->getid_peticionSg(); ?>)" id="revisar<?php echo $datos->getid_peticionSg(); ?>" name="revisado" value="<?php echo $datos->getid_peticionSg(); ?>">
+                                <?php
+                                } elseif ($estado == "En Proceso") {
+                                ?>
+                                    <form action="app/view/SeguridadSolicitudProceso.php" method="post">
+                                        <input type="hidden" name="p_nropeticion" id="p_nropeticion" value="<?php echo $datos->getId_peticionSg(); ?>">
+                                        <input type="hidden" name="p_fechapeticion" id="p_fechapeticion" value="<?php echo $datos->getFecha_peticionSg(); ?>">
+                                        <input type="hidden" name="p_usuario" id="p_usuario" value="<?php echo $datos->getUsuario_creacionSg(); ?>">
+                                        <input type="hidden" name="p_correo" id="p_correo" value="<?php echo $datos->getEmail_funcionario(); ?>">
+                                        <input type="hidden" name="p_categoria" id="p_categoria" value="<?php echo $datos->getcategoriaSg(); ?>">
+                                        <input type="hidden" name="p_descripcion" id="p_descripcion" value="<?php echo $datos->getDescripcion_peticionSg(); ?>">
+                                        <input type="hidden" name="p_cargarimagen" id="p_cargarimagen" value="<?php echo $datos->getimagenPeticionSeguridad1(); ?>">
+                                        <input type="hidden" name="p_cargarimagen2" id="p_cargarimagen2" value="<?php echo $datos->getimagenPeticionSeguridad2(); ?>">
+                                        <input type="hidden" name="p_cargarimagen3" id="p_cargarimagen3" value="<?php echo $datos->getimagenPeticionSeguridad3(); ?>">
+                                        <input type="hidden" name="p_cargarimagen4" id="p_cargarimagen4" value="<?php echo $datos->getimagenPeticionSeguridad4(); ?>">
+                                        <input type="hidden" name="p_cargarimagen5" id="p_cargarimagen5" value="<?php echo $datos->getimagenPeticionSeguridad5(); ?>">
+                                        <input type="hidden" name="p_estado" id="p_estado" value="<?php echo $datos->getEstado_peticionSg(); ?>">
+                                        <input type="hidden" name="p_conclusiones" id="p_conclusiones" value="<?php echo $datos->getConclusiones_peticionSg(); ?>">
+                                        <button type="submit" class="btn btn-primary">Seleccionar</button>
+                                    </form>
+                                <?php
+                                } else {
+                                ?>
+                                    <p> en validacion </p>
+                                <?php
+                                }
+                                ?>
+                            </td>
                         </tr>
                     <?php
                     endforeach;
@@ -81,7 +117,7 @@
 
         </div>
     </div>
-    <script src="public/js/marcar_revisado.js"></script>
+    <script src="public/js/marcarRevisadoSg.js"></script>
     <script src="public/js/smoke.min.js"></script>
     <script src="public/js/datatables.min.js"></script>
     <script src="public/js/tablas.js"></script>

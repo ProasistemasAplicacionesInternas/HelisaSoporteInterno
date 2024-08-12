@@ -83,7 +83,7 @@ require('../controller/controlador_peticionmai.php');
                                         <option value="" selected>Seleccione un activo</option>
                                         <?php
 
-                                        foreach ($activos_Asignados as $activoFijo) {
+                                        foreach ($activosAsignados as $activoFijo) {
                                             echo "<option value='" . $activoFijo["id_activo"] . "'>" . $activoFijo["codigo_activo"] . " / " . $activoFijo["nombre_activo"] . "</option>";
                                         }
                                         ?>
@@ -138,6 +138,7 @@ require('../controller/controlador_peticionmai.php');
     <script src="../../public/js/es.min.js"></script>
     <script src="../../public/js/activo_oculto.js"></script>
     <script src="../../public/js/bloqueoTeclas.js"></script>
+    <script src="../../public/js/navega_funcionarios.js"></script>
 
 </body>
 

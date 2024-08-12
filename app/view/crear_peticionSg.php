@@ -13,10 +13,6 @@ if (!isset($_SESSION['usuario'])) {
 }
 
 require('../controller/controlador_categorias.php');
-require('../controller/controlador_productosmai.php'); //1
-require('../controller/controlador_consultaActivosFuncionario.php');
-require('../controller/controlador_soportemai.php');
-require('../controller/controlador_peticionmai.php');
 require('../controller/controladorCategoriasSg.php');
 
 ?>
@@ -49,13 +45,14 @@ require('../controller/controladorCategoriasSg.php');
             <h6 class="mt-3">Generar Solicitud</h6>
             <div class="col-12 ml-5">
 
-                <form action="../controller/controlador_crearPeticion.php" method="post" class="form-group" enctype="multipart/form-data">
+                <form action="../controller/controladorCrearpeticionSg.php" method="post" class="form-group" enctype="multipart/form-data">
                     <div class="row">
                         <div class="col-3">
                             <div class="form-group">
                                 <label>Área</label>
                                 <select class="form-control info" id="area_peticion" name="area_peticion" required disabled>
                                     <option value="3" selected>Seguridad</option>
+                                    <input type="hidden" name="area_peticion" value="3">
                                 </select>
                             </div>
                         </div>
@@ -88,14 +85,12 @@ require('../controller/controladorCategoriasSg.php');
 
                     <div class="row">
                         <div class="col-3">
-                            <div class="form-group" id="imageUploadGroup">
+                            <div class="file-input" id="imageUploadGroup">
                                 <div>
-                                    <label>Seleccionar Archivo</label>
-                                </div>
-                                <div>
-                                    <input type="file" id="imagen[]" name="imagen[]" multiple="">
+                                    <input type="file" id="imagen" name="imagen[]" multiple accept=".pdf,.doc,.docx,.xls,.xlsx" onchange="validateFiles(this)">
                                 </div>
                                 <label class="mt-2" id="textImg" style="min-width:150%"></label>
+                                <ul id="fileList" class="mt-2 list-unstyled"></ul>
                             </div>
                         </div>
                     </div>
@@ -121,6 +116,7 @@ require('../controller/controladorCategoriasSg.php');
     <script src="../../public/js/es.min.js"></script>
     <script src="../../public/js/bloqueoTeclas.js"></script>
     <script src="../../public/js/btnSubirArchivos.js"></script>
+    <script src="../../public/js/validateFiles.js"></script>
 
 </body>
 

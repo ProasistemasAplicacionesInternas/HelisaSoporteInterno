@@ -23,6 +23,7 @@ class PeticionSg
 	private $tipoPeticion;
 	private $req_Name;
 	private $name;
+	private $marcaRevisadoSg;
 
 	//************************************************
 	public function getId_peticionSg()
@@ -59,6 +60,15 @@ class PeticionSg
 	public function setFecha_atendidoSg($fecha_atendidoSg)
 	{
 		$this->fecha_atendidoSg = $fecha_atendidoSg;
+	}
+	//*************************************************
+	public function getmarcaRevisadoSg()
+	{
+		return $this->marcaRevisadoSg;
+	}
+	public function setmarcaRevisadoSg($marcaRevisadoSg)
+	{
+		$this->marcaRevisadoSg = $marcaRevisadoSg;
 	}
 	//*************************************************
 	public function getEstado_peticionSg()
@@ -115,6 +125,24 @@ class PeticionSg
 		$this->imagenPeticionSeguridad3 = $imagenPeticionSeguridad3;
 	}
 	//*************************************************
+	public function getimagenPeticionSeguridad4()
+	{
+		return $this->imagenPeticionSeguridad4;
+	}
+	public function setimagenPeticionSeguridad4($imagenPeticionSeguridad4)
+	{
+		$this->imagenPeticionSeguridad4 = $imagenPeticionSeguridad4;
+	}
+	//*************************************************
+	public function getimagenPeticionSeguridad5()
+	{
+		return $this->imagenPeticionSeguridad5;
+	}
+	public function setimagenPeticionSeguridad5($imagenPeticionSeguridad5)
+	{
+		$this->imagenPeticionSeguridad5 = $imagenPeticionSeguridad5;
+	}
+	//*************************************************
 	public function getconclusiones_PeticionSg()
 	{
 		return $this->conclusiones_PeticionSg;
@@ -168,16 +196,7 @@ class PeticionSg
 	{
 		$this->req_Name = $req_Name;
 	}
-	
-/* 	public function getname()
-	{
-		return $this->tipoPeticion;
-	}
-	public function setname($tipoPeticion)
-	{
-		$this->tipoPeticion = $tipoPeticion;
-	} */
-	//*************************************************
+
 	public function getArchivos()
 	{
 		return $this->archivos;

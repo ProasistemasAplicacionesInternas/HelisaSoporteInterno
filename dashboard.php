@@ -68,7 +68,7 @@ if (!isset($_SESSION['status_connect'])) {
             <div class="col-2 mt-3 navega">
                 <nav>
                     <div class="dropdown">
-                        <?php if ($_SESSION['id_roles'] == 1 || $_SESSION['id_roles'] == 7) {
+                        <?php if ($_SESSION['id_roles'] == 1 || $_SESSION['id_roles'] == 7 || $_SESSION['id_roles'] == 11) {
                             echo '<a  style="cursor: pointer;" class=" dropdown-toggle" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <img src="public/img/user.png" alt="" class="ml-3"><span>Soportes</span></a>';
                         } ?>
 
@@ -78,8 +78,13 @@ if (!isset($_SESSION['status_connect'])) {
 
                             <a href="#" id="solicitudes_infraestructuraAdmin""><img src=" public/img/soporte.png" alt="" class="ml-3" onclick:>Infraestructura</a>
 
-                            <a href="#" id="solicitudesSeguridad"><img src=" public/img/soporte.png" alt="" class="ml-3" onclick:>Seguridad</a>
+                            <?php if ($_SESSION['id_roles'] == 11 || $_SESSION['id_roles'] == 7) {
+
+                                echo '<a href="#" id="solicitudesSeguridad"><img src=" public/img/soporte.png" alt="" class="ml-3" onclick:>Seguridad</a>';
+                            } ?>
+
                         </div>
+
                     </div>
                     <div class="dropdown">
                         <?php if ($_SESSION['id_roles'] == 1 || $_SESSION['id_roles'] == 7) {
@@ -120,7 +125,8 @@ if (!isset($_SESSION['status_connect'])) {
                             $_SESSION['id_roles'] == 6 ||
                             $_SESSION['id_roles'] == 7 ||
                             $_SESSION['id_roles'] == 8 ||
-                            $_SESSION['id_roles'] == 9
+                            $_SESSION['id_roles'] == 9 ||
+                            $_SESSION['id_roles'] == 11
                         ) {
                             echo '<a class="dropdown-toggle" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     <img src="public/img/consultas.png" alt="" class="ml-3">
@@ -171,6 +177,17 @@ if (!isset($_SESSION['status_connect'])) {
                             }
                             ?>
 
+                            <?php
+                            if (
+                                $_SESSION['id_roles'] == 11 ||
+                                $_SESSION['id_roles'] == 7
+                            ) {
+                                echo '<a href="#" id="ConsultarSeguridad" class="dropdown-item">
+                                <img src="public/img/consultas.png" alt="" class="ml-3">
+                                Consultas-Seguridad
+                            </a>';
+                            }
+                            ?>
                             <?php
                             if (
                                 $_SESSION['id_roles'] == 1 ||

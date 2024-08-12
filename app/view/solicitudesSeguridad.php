@@ -107,7 +107,7 @@
 
                                         <input type="hidden" name="p_usuario" id="p_usuario" value="<?php echo $datos1->getUsuario_creacionSg(); ?>">
 
-                                        <input type="hidden" name="p_extension" id="p_extension" value="<?php echo $datos1->getExtension_funcionario(); ?>">
+                                        <input type="hidden" name="areaSg" id="areaSg" value="<?php echo $datos1->getarea_funcionario(); ?>">
 
                                         <input type="hidden" name="p_correo" id="p_correo" value="<?php echo $datos1->getEmail_funcionario(); ?>">
 
@@ -121,27 +121,26 @@
 
                                         <input type="hidden" name="p_cargarimagen3" id="p_cargarimagen3" value="<?php echo $datos1->getimagenPeticionSeguridad3(); ?>">
 
+                                        <input type="hidden" name="p_cargarimagen4" id="p_cargarimagen4" value="<?php echo $datos1->getimagenPeticionSeguridad4(); ?>">
+
+                                        <input type="hidden" name="p_cargarimagen5" id="p_cargarimagen5" value="<?php echo $datos1->getimagenPeticionSeguridad5(); ?>">
+
                                         <input type="hidden" name="p_estado" id="p_estado" value="<?php echo $datos1->getEstado_peticionSg(); ?>">
 
                                         <input type="hidden" name="p_conclusiones" id="p_conclusiones" value="<?php echo $datos1->getConclusiones_peticionSg(); ?>">
 
-                                        <input type="button" value="Seleccionar" class="btn btn-primary" onclick="validarBoton('<?php echo $_SESSION['usuario']; ?>',<?php echo $datos1->getId_peticionSg(); ?>)">
-
-                                        <input type="submit" value="Seleccionar" name="seleccionar_peticionmai" id="seleccionar_peticionmai<?php echo $datos1->getId_peticionSg(); ?>" class="btn btn-info" style="display:none;">
+                                        <input type="submit" value="Seleccionar" name="seleccionar" id="seleccionar" class="btn btn-info">
                                     </form>
                                 </td>
                             <?php
                         endforeach;
                             ?>
-
                             </tr>
-
                     </tbody>
                 </table>
             </div>
         </div>
     </div>
-    <script src="public/js/validacion_seleccionar.js"></script>
     <script src="public/js/smoke.min.js"></script>
     <script src="public/js/bloqueoTeclas.js"></script>
 </body>

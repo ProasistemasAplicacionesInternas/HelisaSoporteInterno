@@ -15,11 +15,6 @@ require_once('../model/datos_soportemai.php');
 require_once('../model/crud_peticionesmai.php');
 require_once('../model/datos_peticionesmai.php');
 
-require_once('../model/crud_peticionesSg.php');
-require_once('../model/datosPeticionesSeguridad.php');
-
-
-
 $crud = new CrudPeticiones();
 $peticion = new Peticion();
 
@@ -27,9 +22,6 @@ $peticion = new Peticion();
 $crudMai = new CrudPeticionesMai();
 $peticionMai = new PeticionMai();
 
-
-$crudSg = new CrudPeticionesSg();
-$peticionesSg = new PeticionSg();
 
 //*******************************************************************************//
 //************************** PARA EL CARGUE DE LA IMAGEN ************************//
@@ -63,6 +55,7 @@ for ($x = 0; $x < $numImagenes; $x++) {
 }
 echo "<br>", $nombre_imagen[0], "<br>", $nombre_imagen[1], "<br>", $nombre_imagen[2], "<br>";
 
+
 //*******************************************************************************//
 //*********************** CONTROLADOR PARA CREAR PETICION ***********************//
 //*******************************************************************************//
@@ -74,7 +67,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $equipos = $_POST['p_categoria'];
         $area_peticion = 1;
 
-        /* echo "Boton infra funciona"; */
         if ($equipos == 16) {
 
             $peticion->setP_categoria($_POST['p_categoria']);
@@ -101,34 +93,23 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $peticion->setP_estado(1);
             $peticion->setP_fechapeticion(date('Y-m-d H:i:s'));
             $crud->crearPeticiones($peticion);
+            
+        }    } elseif (isset($_POST['btn-enviar_peticionMai'])) {
+            $area_peticion = 2;
+            $peticionMai->setProducto_peticionMai($_POST['productoMai']);
+            $peticionMai->setReq_Justification($_POST['req_Justification']);
+            $peticionMai->setReq_Name($_POST['req_Name']);
+            $peticionMai->setUsuario_creacionMai($_SESSION['usuario']);
+            $peticionMai->setDescripcion_peticionMai(htmlspecialchars($_POST['p_descripcion']));
+            $peticionMai->setFecha_peticionMai(date('Y-m-d H:i:s'));
+            $peticionMai->setEstado_peticionMai(1);
+            $peticionMai->setImagen_peticionMai($nombre_imagen[0]);
+            $peticionMai->setImagen_peticionMai2($nombre_imagen[1]);
+            $peticionMai->setImagen_peticionMai3($nombre_imagen[2]);
+            $peticionMai->setName($_POST['soporteMai']);
+            $crudMai->crearPeticionesMai($peticionMai);
+    
         }
-    } elseif (isset($_POST['btn-enviar_peticionMai'])) {
-        $area_peticion = 2;
-        $peticionMai->setProducto_peticionMai($_POST['productoMai']);
-        $peticionMai->setReq_Justification($_POST['req_Justification']);
-        $peticionMai->setReq_Name($_POST['req_Name']);
-        $peticionMai->setUsuario_creacionMai($_SESSION['usuario']);
-        $peticionMai->setDescripcion_peticionMai(htmlspecialchars($_POST['p_descripcion']));
-        $peticionMai->setFecha_peticionMai(date('Y-m-d H:i:s'));
-        $peticionMai->setEstado_peticionMai(1);
-        $peticionMai->setImagen_peticionMai($nombre_imagen[0]);
-        $peticionMai->setImagen_peticionMai2($nombre_imagen[1]);
-        $peticionMai->setImagen_peticionMai3($nombre_imagen[2]);
-        $peticionMai->setName($_POST['soporteMai']);
-        $crudMai->crearPeticionesMai($peticionMai);
-
-    }elseif (isset($_POST['btn-enviar_peticionSg'])){
-
-        $peticionesSg->setcategoriaSg($_POST['caSeguridad']);
-        $peticionesSg->setdescripcion_peticionSg(htmlspecialchars($_POST['p_descripcion']));
-        $peticionesSg->setimagenPeticionSeguridad1($nombre_imagen[0]);
-        $peticionesSg->setimagenPeticionSeguridad2($nombre_imagen[1]);
-        $peticionesSg->setimagenPeticionSeguridad3($nombre_imagen[2]);
-        $peticionesSg->setusuario_creacionSg($_SESSION['usuario']);
-        $peticionesSg->setestado_peticionSg(1);
-        $peticionesSg->setfecha_peticionSg(date('Y-m-d H:i:s'));
-        $crudSg->crearPeticionesSg($peticionesSg);
-    }
 
     if (isset($_SESSION['id_roles']) && $_SESSION['id_roles'] == 5) {
         header('Location:../../dashboard.php');

@@ -15,11 +15,9 @@ function productoCategoria() {
     const selectedValue = selectElement.value;
     console.log('Valor seleccionado al cargar la página:', selectedValue);
 
-    /* if (divNombre == 2) { console.log("Si sirve"); } */
+/* if (divNombre == 2) { console.log("Si sirve"); } */
 
     if (area == 1) {
-/*         producto.style.display = "none"; */
-/*         productoMai.required = false; */
         categoria.style.display = "inline";
         p_categoria.required = true;
         consultar_soporte.style.display = "none";

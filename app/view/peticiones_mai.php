@@ -88,20 +88,4 @@
     <script src="public/js/bloqueoTeclas.js"></script>
 
 </body>
-
-<script>
-
-document.addEventListener('DOMContentLoaded', function() {
-            const button = document.getElementById('cacheData');
-
-            button.addEventListener('click', function() {
-                console.log('Button clicked!');
-                localStorage.setItem('opcionPeticion', 2);
-            });
-
-
-        });
-
-    </script>
-
 </html>

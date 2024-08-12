@@ -7,3 +7,62 @@
 .hidden {
     display: none;
 }
+
+.btn-ver-documentos {
+    background-color: #4CAF50; /* Cambia el color de fondo */
+    color: white; /* Cambia el color del texto */
+    border-color: #4CAF50; /* Cambia el color del borde */
+}
+
+.btn-ver-documentos:hover {
+    background-color: #45a049; /* Color de fondo al pasar el mouse */
+    border-color: #45a049; /* Color del borde al pasar el mouse */
+}
+
+
+.btn-reemplazar-personalizado {
+    padding: 0.2rem 0.5rem;
+    font-size: 0.75rem;
+    line-height: 1.2;
+    height: auto;
+    width: auto;
+    min-width: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.button-container {
+    display: flex;
+    justify-content: right;
+    width: 100%;
+}
+
+
+.text-container {
+    text-align: center;
+}
+
+.text-above-button {
+    margin-bottom: 0.5rem;
+    font-size: 1rem;
+}
+
+.modal-dialog {
+    max-width: 50%;
+    width: auto;
+    margin: 1.75rem auto; 
+}
+
+.modal-body {
+    max-height: 80vh;
+    overflow-y: auto;
+}
+
+.modal-body .list-group {
+    margin-bottom: 0;
+}
+
+
+
+

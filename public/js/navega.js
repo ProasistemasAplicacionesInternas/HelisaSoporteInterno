@@ -55,6 +55,10 @@ $(document).ready(function () {
     $("#contenido").load("app/view/filtro_requerimientos.php");
   });
 
+  $("#ConsultarSeguridad").click(function () {
+    $("#contenido").load("app/view/filtro_seguridad.php");
+  });
+
   $("#comentariosPeticiones").click(function () {
     $("#contenido").load("app/view/filtro_comentar.php");
   });
@@ -62,6 +66,8 @@ $(document).ready(function () {
   $("#funcionarios").click(function () {
     $("#contenido").load("app/view/consulta_funcionarios.php");
   });
+
+
 
   //$('#funcionarios_Inactivos').click(function() {
   //  $("#contenido").load("app/view/funcionarios_inactivos.php");
