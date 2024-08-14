@@ -36,29 +36,35 @@ if (!isset($_SESSION['usuario']) || empty($_SESSION['usuario'])) {
                 <option value="3">consultar por Nro de ticket</option>
             </select>
         </div>
-            <form action="app/view/solicitudFinalizadoSg.php" method="POST">
-                <div class="row mt-3" id="selectorCategoriaSg">
-                    <div class="col-12">
-                        <h6>Seleccione una categoria para realizar la consulta</h6>
-                    </div>
-                    <div class="col-3">
-                        <select class="custom-select" name="estadoFiltroCategoria" id="estadoFiltroCategoria">
-                            <option value="" selected>Seleccione un estado</option>
-                            <option value="23">Cambios sustanciales (cambio de finalidad en las BD)</option>
-                            <option value="24">Encargado del tratamientos de las BD</option>
-                            <option value="25">Clasificación o tipos de datos personales</option>
-                        </select>
-                    </div>
-                    <div class="col-3 mt-2">
-                        <input type="submit" id="btn-consultarCategoria" name="btn-consultarCategoria" class="btn btn-info" value="Consultar">
-                    </div>
+        <form action="app/view/solicitudFinalizadoSg.php" method="POST">
+            <div class="row mt-3" id="selectorCategoriaSg">
+                <div class="col-12">
+                    <h6>Seleccione una categoria para realizar la consulta</h6>
                 </div>
+                <div class="col-3 ml-3">
+                    <select class="custom-select" name="estadoFiltroCategoria" id="estadoFiltroCategoria">
+                        <option value="" selected>Seleccione un estado</option>
+                        <option value="23">Cambios sustanciales (cambio de finalidad en las BD)</option>
+                        <option value="24">Encargado del tratamientos de las BD</option>
+                        <option value="25">Clasificación o tipos de datos personales</option>
+                        <option value="26">Incidentes de seguridad con las BD o información personal</option>
+                        <option value="27">Eliminacion de BD reportadas</option>
+                        <option value="28">Formato TI-F045 cronograma de revisión de roles y usuarios activos en plataforma</option>
+                        <option value="29">Formato TI-F023 Formato de informe de incidente</option>
+                        <option value="30">Formato SGSI-F045 Formato pruebas del plan de contingencia</option>
+                        <option value="31">Formato HD-F003 Registro de eliminación de base de datos</option>
+                    </select>
+                </div>
+                <div class="col-3 mt-2 ml-3">
+                    <input type="submit" id="btn-consultarCategoria" name="btn-consultarCategoria" class="btn btn-info" value="Consultar">
+                </div>
+            </div>
             <form action="app/view/solicitudFinalizadoSg.php" method="POST">
                 <div class="row mt-3" id="selectorEstadoSg">
                     <div class="col-12">
                         <h6>Seleccione un estado para realizar la consulta</h6>
                     </div>
-                    <div class="col-3">
+                    <div class="col-3 ml-3">
                         <select class="custom-select" name="estadoFiltroEs" id="estadoFiltroEs">
                             <option value="" selected>Seleccione un estado</option>
                             <option value="3">Pendiente</option>
@@ -66,26 +72,29 @@ if (!isset($_SESSION['usuario']) || empty($_SESSION['usuario'])) {
                             <option value="22">En Proceso</option>
                         </select>
                     </div>
-                    <div class="col-3 mt-2">
+                    <div class="col-3 mt-2 ml-3">
                         <input type="submit" id="btn-consultarEstado" name="btn-consultarEstado" class="btn btn-info" value="Consultar">
                     </div>
                 </div>
             </form>
 
-        <div class="row mt-3" id="selectorTicketSg">
-            <div class="col-12">
-                <h6>Número de Ticket</h6>
-            </div>
-            <div class="col-3">
-                <form action="app/view/solicitudFinalizadoSg.php" target="_blank" method="post">
-                    <div class="form-group">
-                        <input type="hidden" id="usuario_actual" name="usuario_actual" value="<?php echo $_SESSION['usuario']; ?>">
-                        <input type="text" id="peticionFiltro" name="peticionFiltro" class="form-control" placeholder="numero_peticion" required autocomplete="off">
-                    </div>
-                    <input type="submit" id="btn-consultarTicketI" name="btn-consultarTicketI" class="btn btn-info" value="Consultar">
-                </form>
-            </div>
-        </div>
+            <div class="row mt-3" id="selectorTicketSg">
+                <div class="col-12">
+                    <h6>Número de Ticket</h6>
+                </div>
+                <div class="col-3 ml-3">
+                    <form action="app/view/solicitudFinalizadoSg.php" target="_blank" method="post">
+                        <div class="form-group">
+                            <input type="hidden" id="usuario_actual" name="usuario_actual" value="<?php echo $_SESSION['usuario']; ?>">
+                            <input type="text" id="peticionFiltro" name="peticionFiltro" class="form-control" placeholder="numero_peticion" required autocomplete="off">
+                        </div class="mt-2">
+                        <div>
+                            <input type="submit" id="btn-consultarTicketI" name="btn-consultarTicketI" class="btn btn-info" value="Consultar">
+                        </div>
+                </div>
+        </form>
+    </div>
+    </div>
     </div>
     <script src="public/js/filtroSeguridad.js"></script>
     <script src="public/js/bloqueoTeclas.js"></script>

@@ -68,7 +68,7 @@ if (!isset($_SESSION['status_connect'])) {
             <div class="col-2 mt-3 navega">
                 <nav>
                     <div class="dropdown">
-                        <?php if ($_SESSION['id_roles'] == 1 || $_SESSION['id_roles'] == 7 || $_SESSION['id_roles'] == 11) {
+                        <?php if ($_SESSION['id_roles'] == 1 || $_SESSION['id_roles'] == 7) {
                             echo '<a  style="cursor: pointer;" class=" dropdown-toggle" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <img src="public/img/user.png" alt="" class="ml-3"><span>Soportes</span></a>';
                         } ?>
 
@@ -76,16 +76,28 @@ if (!isset($_SESSION['status_connect'])) {
 
                             <a href="#" id="solicitudes_internasAdmin"><img src="public/img/soporte.png" alt="" class="ml-3" onclick:>Aplicaciones</a>
 
-                            <a href="#" id="solicitudes_infraestructuraAdmin""><img src=" public/img/soporte.png" alt="" class="ml-3" onclick:>Infraestructura</a>
+                            <a href="#" id="solicitudes_infraestructuraAdmin"><img src=" public/img/soporte.png" alt="" class="ml-3" onclick:>Infraestructura</a>
 
-                            <?php if ($_SESSION['id_roles'] == 11 || $_SESSION['id_roles'] == 7) {
-
-                                echo '<a href="#" id="solicitudesSeguridad"><img src=" public/img/soporte.png" alt="" class="ml-3" onclick:>Seguridad</a>';
+                            <?php if ($_SESSION['id_roles'] == 11) {
+                                echo '<a  style="cursor: pointer;" class=" dropdown-toggle" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <img src="public/img/user.png" alt="" class="ml-3"><span>Soportes</span></a>';
                             } ?>
 
                         </div>
-
                     </div>
+                    <div class="dropdown">
+                        <?php if ($_SESSION['id_roles'] == 11) {
+                            echo '<a  style="cursor: pointer;" class=" dropdown-toggle" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <img src="public/img/user.png" alt="" class="ml-3"><span>Soportes</span></a>';
+                        } ?>
+
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                            <a href="#" id="solicitudesSeguridad"><img src=" public/img/soporte.png" alt="" class="ml-3" onclick:>Seguridad</a>
+                        </div>
+                    </div>
+
+
+
+
+
                     <div class="dropdown">
                         <?php if ($_SESSION['id_roles'] == 1 || $_SESSION['id_roles'] == 7) {
                             echo '<a class=" dropdown-toggle" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <img src="public/img/atendiendo.png" alt="" class="ml-3"><span>Liberar Soporte</span></a>';
@@ -367,7 +379,7 @@ if (!isset($_SESSION['status_connect'])) {
 
                 $('#infos2').load('app/view/liberar_soportes.php'); //actualizacion constante de la pestaña liberar
                 $('#infos3').load('app/view/consultar_peticiones.php'); //actualizacion constante de la pestaña soportes
-                $('#infoServicios').load('app/view/contenido_board.php'); //actualizacion constante de la pantalla principal informativa
+                /* $('#infoServicios').load('app/view/contenido_board.php'); */ //actualizacion constante de la pantalla principal informativa
                 $('#infoRequerimientos').load('app/view/requerimientos.php');
                 $('#infosSolicitudesInternas').load('app/view/solicitudes_internas.php');
                 $('#infosMai').load('app/view/liberar_solicitudesmai.php');

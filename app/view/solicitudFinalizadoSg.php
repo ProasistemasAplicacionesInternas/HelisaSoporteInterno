@@ -29,6 +29,7 @@
         header('location:../../login.php');
     }
 
+    require_once("../model/crud_peticionesSg.php");
     require('../controller/controllerFinalizadaSg.php');
 
     $datos3 = new PeticionSg();
@@ -50,26 +51,24 @@
                 <table class="table table-responsive table-striped" id="tabla" style="text-align:center;">
                     <thead style="background-color: #96c7e9;">
                         <th style="width:60px;">Nro Ticket</th>
-                        <th style="width:75px;">Fecha Solicitud</th>
                         <th style="width:35px;">Usuario Solicitud</th>
-                        <th style="width:25px;">Tipo de Solicitud</th>
-                        <th style="width:15px;">Categoria</th>
-                        <th style="width:15px;">Gestionado</th>
-                        <th style="width:15px;">Sprint</th>
-                        <th style="width:75px;">Fecha Atendido</th>
-                        <th style="width:35px;">Usuario Atendio</th>
-                        <?php if ($_SESSION['id_roles'] == 1 || $_SESSION['id_roles'] == 5 || $_SESSION['id_roles'] == 9) {
+                        <th style="width:75px;">Fecha Solicitud</th>
+                        <th style="width:75px;">Area</th>
+                        <th style="width:150px;">Categoria</th>
+                        <?php if ($_SESSION['id_roles'] == 7 || $_SESSION['id_roles'] == 11) {
                             echo "<th style='width:35px;'>Estado</th>";
                         } ?>
-                        <th style="width:80px;">Mas</th>
-                        <?php if ($_SESSION['id_roles'] == 5 || $_SESSION['id_roles'] == 7) {
+                        <th style="width:35px;">Usuario Atendido</th>
+                        <th style="width:75px;">Fecha Atendido</th>
+                        <th style="width:80px;">Descripcion Solicitud</th>
+                        <?php if ($_SESSION['id_roles'] == 7 || $_SESSION['id_roles'] == 11) {
                             echo "<th style='width:80px;'>Ver Conclusiones</th>";
                         }
                         ?>
-                        <?php if ($_SESSION['id_roles'] == 1 || $_SESSION['id_roles'] == 9) {
+                        <?php if ($_SESSION['id_roles'] == 11) {
                             echo "<th style='width:35px;'>Conclusiones</th>";
                         } ?>
-                        <th style="width:10px;" colspan="2">Imagen</th>
+                        <th style="width:10px;" colspan="2">Documentos</th>
 
                     </thead>
                     <tbody>
@@ -77,65 +76,54 @@
                             <?php foreach ($listaConsulta as $datos) : ?>
                                 <tr>
                                     <td>
-                                        <span id="id_peticion<?php echo $datos->getP_nropeticion(); ?>">
-                                            <?php echo $datos->getP_nropeticion(); ?>
+                                        <span id="id_peticion<?php echo $datos->getid_peticionSg(); ?>">
+                                            <?php echo $datos->getid_peticionSg(); ?>
                                         </span>
                                     </td>
                                     <td>
-                                        <?php echo $datos->getP_fechapeticion(); ?>
+                                        <?php echo $datos->getUsuario_creacionSg(); ?>
                                     </td>
                                     <td>
-                                        <?php echo $datos->getP_usuario(); ?>
+                                        <?php echo $datos->getfecha_peticionSg(); ?>
                                     </td>
                                     <td>
-                                        <?php echo $datos->getName(); ?>
+                                        <?php echo $datos->getArea_funcionario(); ?>
                                     </td>
                                     <td>
-                                        <?php echo $datos->getP_categoria(); ?>
+                                        <?php echo $datos->getcategoriaSg(); ?>
                                     </td>
                                     <td>
-                                        <?php echo $datos->getGestion(); ?>
+                                        <?php echo $datos->getEstado_peticionSg(); ?>
                                     </td>
                                     <td>
-                                        <?php echo $datos->getSprint(); ?>
+                                        <?php echo $datos->getUsuario_atencionSg(); ?>
                                     </td>
                                     <td>
-                                        <?php echo $datos->getP_fechaatendido(); ?>
+                                        <?php echo $datos->getFecha_atendidoSg(); ?>
                                     </td>
                                     <td>
-                                        <?php echo $datos->getP_usuarioatiende(); ?>
+                                        <?php echo $datos->getdescripcion_peticionSg(); ?>
                                     </td>
-                                    <td>
-                                        <?php if ($_SESSION['id_roles'] == 1 || $_SESSION['id_roles'] == 5 || $_SESSION['id_roles'] == 9) {
-                                            echo $datos->getP_estado();
-                                        } ?>
-                                    </td>
-                                    <td>
-                                        <span style="display: none;" id="p_descipcion<?php echo $datos->getP_nropeticion(); ?>"><?php echo $datos->getP_descripcion() ?></span>
-                                        <span style="display: none;" id="req_nombre<?php echo $datos->getP_nropeticion(); ?>"><?php echo $datos->getReq_nombre() ?></span>
-                                        <span style="display: none;" id="req_justificacion<?php echo $datos->getP_nropeticion(); ?>"><?php echo $datos->getReq_justificacion() ?></span>
 
-                                        <button class="btn btn-outline-primary verDatosfinalizado" data-toggle="modal" data-target="#verDatosfinalizado" data-backdrop="static" data-keyboard="false" id="btn-verInfo" name="btn-verInfo" value="<?php echo $datos->getP_nropeticion(); ?>"><span>Ver Info</span></button>
-                                    </td>
-                                    <?php if ($_SESSION['id_roles'] == 5 || $_SESSION['id_roles'] == 7) { ?>
+
+                                    <?php if ($_SESSION['id_roles'] == 11 || $_SESSION['id_roles'] == 7) { ?>
                                         <td>
-                                            <button class="btn btn-outline-primary verConclusion" data-toggle="modal" data-target="#verConclusion" data-backdrop="static" data-keyboard="false" id="btn-verConclusion" name="btn-verConclusion" onclick="verConclusiones(<?= $datos->getP_nropeticion() ?>)"><span>Ver Conclusión</span></button>
+                                            <button class="btn btn-outline-primary verConclusion" data-toggle="modal" data-target="#verConclusionSg" data-backdrop="static" data-keyboard="false" id="btn-verConclusion" name="btn-verConclusion" onclick="verConclusionesSg(<?= $datos->getid_peticionSg() ?>)"><span>Ver Conclusión</span></button>
                                         </td>
                                     <?php } ?>
 
                                     <td>
-                                        <?php if ($_SESSION['id_roles'] == 1 || $_SESSION['id_roles'] == 9) {
-                                            echo $datos->getP_conclusiones();
+                                        <?php if ($_SESSION['id_roles'] == 11 || $_SESSION['id_roles'] == 7) {
+                                            echo $datos->getconclusiones_PeticionSg();
                                         } ?>
                                     </td>
                                     <td>
-                                        <?php if ($datos->getP_cargarimagen() != null && $datos->getP_cargarimagen() != '2') : ?>
-
-                                            <a href="../../cartas/<?= $datos->getP_cargarimagen() ?>" target="_blank" id="imagen" name="imagen">
-                                                <button class="far fa-images" id="imagenPetFinal"></button>
-                                            </a>
-                                        <?php endif; ?>
+                                    <td>
+                                        <button class="btn btn-outline-primary Documentos" data-toggle="modal" data-target="#documentModal" data-backdrop="static" id="btn-traerImagenes" name="btn-traerImagenes" onclick="mostrarDocumentos(<?= $datos->getid_peticionSg() ?>)">Documentos</button>
                                     </td>
+
+                                    </td>
+
                                 </tr>
                             <?php endforeach; ?>
                         <?php endif; ?>
@@ -144,31 +132,10 @@
             </div>
         </div>
     </div>
-
-    <div class="modal fade" id="verDatosfinalizado" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLongTitle">Informacion del ticket</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <div class="form-group">
-                        <label for="exampleFormControlTextarea1">Descripcion</label>
-                        <textarea class="form-control" id="p_descipcionModal" rows="3"></textarea>
-                    </div>
-                </div>
-            </div>
-            <div class="modal-footer">
-            </div>
-        </div>
-    </div>
     </div>
 
-    <?php require('crear_comentarios.php') ?>
-    <?php require('verConclusiones.php') ?>
+    <?php require('verComentariosSg.php') ?>
+    <?php require('verDocumentosSg.php') ?>
 
     <script src="../../public/js/jquery-3.3.1.min.js"></script>
     <script src="../../public/js/datatables.min.js"></script>
@@ -186,11 +153,8 @@
     <script src="../../public/js/es.min.js"></script>
     <script src="../../public/js/popper.js"></script>
     <script src="../../public/js/bootstrap.min.js"></script>
-    <script src="../../public/js/comentario.js"></script>
-    <script src="../../public/js/crear_comentario.js"></script>
-    <script src="../../public/js/verConclusiones.js"></script>
+    <script src="../../public/js/verComentariosSg.js"></script>
     <script src="../../public/js/bloqueoTeclas.js"></script>
-    <script src="../../public/js/Ver_Info.js"></script>
 </body>
 
 </html>

@@ -41,10 +41,9 @@ class CrudPeticionesSg
     {
         $db = conectar::acceso();
         $lista_peticiones = [];
-        $consultar_peticionSg = $db->prepare('SELECT id_peticionessg, fecha_peticion, fecha_atencion, usuario_creacionsg, peticiones_sg.descripcion_peticionsg, funcionarios.area, funcionarios.mail, estado.descripcion AS estado_peticion, categorias.nombre_categoria AS categoria, usuario_atencion, conclusiones, funcionarios.area FROM peticiones_sg LEFT JOIN funcionarios ON funcionarios.usuario=peticiones_sg.usuario_creacionsg LEFT JOIN areas ON areas.id_area=funcionarios.area LEFT JOIN categorias ON categorias.id_categoria=peticiones_sg.categoria LEFT JOIN estado ON estado.id_estado=peticiones_sg.estado_peticion WHERE usuario_creacionsg =:funcionario AND (estado_peticion =:estadoN OR estado_peticion = :estadoR OR estado_peticion =:estadoP OR estado_peticion=:estadoPrc) ORDER BY id_peticionessg DESC;');
+        $consultar_peticionSg = $db->prepare('SELECT id_peticionessg, fecha_peticion, fecha_atencion, usuario_creacionsg, peticiones_sg.descripcion_peticionsg, funcionarios.area, funcionarios.mail, estado.descripcion AS estado_peticion, categorias.nombre_categoria AS categoria, usuario_atencion, conclusiones, funcionarios.area FROM peticiones_sg LEFT JOIN funcionarios ON funcionarios.usuario=peticiones_sg.usuario_creacionsg LEFT JOIN areas ON areas.id_area=funcionarios.area LEFT JOIN categorias ON categorias.id_categoria=peticiones_sg.categoria LEFT JOIN estado ON estado.id_estado=peticiones_sg.estado_peticion WHERE usuario_creacionsg =:funcionario AND (estado_peticion = :estadoN OR estado_peticion =:estadoP OR estado_peticion=:estadoPrc) ORDER BY id_peticionessg DESC;');
         $consultar_peticionSg->bindValue('funcionario', $_SESSION['usuario']);
         $consultar_peticionSg->bindValue('estadoN', '1');
-        $consultar_peticionSg->bindValue('estadoR', '2');
         $consultar_peticionSg->bindValue('estadoP', '3');
         $consultar_peticionSg->bindValue('estadoPrc', '22');
         $consultar_peticionSg->execute();
@@ -379,31 +378,6 @@ class CrudPeticionesSg
         }
         return $archivos;
     }
-
-    function actualizarArchivoEnBaseDeDatos($ticketId, $archivoActual, $nuevoNombreArchivo)
-    {
-        $db = Conectar::acceso();
-        $query = 'UPDATE peticiones_sg SET ';
-
-        // Construir la consulta SQL dependiendo del archivo que se reemplaza
-        if (strpos($archivoActual, 'imagen') !== false) {
-            $campo = $archivoActual; // Si el nombre del archivo coincide con uno de los campos
-        } else {
-            // Determinar el campo adecuado en función del archivo actual
-            $query .= 'imagen = :nuevo_nombre WHERE id_peticionessg = :ticket_id';
-            $stmt = $db->prepare($query);
-            $stmt->bindValue(':nuevo_nombre', $nuevoNombreArchivo, PDO::PARAM_STR);
-            $stmt->bindValue(':ticket_id', $ticketId, PDO::PARAM_INT);
-        }
-
-        // Ejecutar la consulta
-        if ($stmt->execute()) {
-            return true;
-        } else {
-            return false;
-        }
-    }
-
     
     public function marcarRevisado($marcar)
     {
