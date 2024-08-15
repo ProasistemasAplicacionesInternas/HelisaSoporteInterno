@@ -24,9 +24,9 @@ if (isset($_POST['btn-consultarCategoria'])) {
             LEFT JOIN categorias ON categorias.id_categoria=peticiones_sg.categoria
             LEFT JOIN funcionarios ON funcionarios.usuario=peticiones_sg.usuario_creacionsg 
             LEFT JOIN areas ON areas.id_area=funcionarios.area 
-            WHERE peticiones_sg.categoria = :categoriaSg'); // Asegúrate de usar el marcador correcto ":categoriaSg"
+            WHERE peticiones_sg.categoria = :categoriaSg');
 
-    $seleccion->bindValue(':categoriaSg', $_POST['estadoFiltroCategoria'], PDO::PARAM_INT); // Usa el marcador correcto ":categoriaSg"
+    $seleccion->bindValue(':categoriaSg', $_POST['estadoFiltroCategoria'], PDO::PARAM_INT);
     $seleccion->execute();
 
     foreach ($seleccion->fetchAll() as $listado) {
@@ -36,7 +36,7 @@ if (isset($_POST['btn-consultarCategoria'])) {
         $consulta->setdescripcion_peticionSg($listado['descripcion_peticionsg']);
         $consulta->setfecha_atendidoSg($listado['fecha_atencion']);
         $consulta->setestado_peticionSg($listado['estado_peticion']);
-        $consulta->setcategoriaSg($listado['categoria']); // Usa la columna correcta aquí
+        $consulta->setcategoriaSg($listado['categoria']);
         $consulta->setconclusiones_PeticionSg($listado['conclusiones']);
         $consulta->setusuario_atencionSg($listado['usuario_atencion']);
         $consulta->setArea_funcionario($listado['area']);

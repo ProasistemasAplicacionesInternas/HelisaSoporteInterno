@@ -4,7 +4,7 @@ if (isset($_GET['imagen'])) {
     $filePath = $_SERVER['DOCUMENT_ROOT'] . '../../pruebasubir/' . $imagen;
 
     if (file_exists($filePath)) {
-        // Dependiendo del tipo de archivo, ajusta el encabezado para mostrar correctamente
+
         $fileExtension = pathinfo($filePath, PATHINFO_EXTENSION);
         switch (strtolower($fileExtension)) {
             case 'pdf':
