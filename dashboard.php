@@ -303,12 +303,6 @@ if (!isset($_SESSION['status_connect'])) {
                         <?php if ($_SESSION['id_roles'] == 1 || $_SESSION['id_roles'] == 7) {
                             echo '<a class=" dropdown-toggle" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="cursor: pointer;  color: gray;"><i class="fa fa-desktop" class="ml-3" style="font-size: 15px; margin: 0% 0% 0% 10%;"></i><span style="font-size: 12px;margin-left: 3%;">Plataformas</span></a>';
                         } ?>
-                        <?php if ($_SESSION['id_roles'] == 1) {
-                            echo '<a href=#"" id="uvts"><img class="ml-3" style="padding-left:5px; padding-right:5px;"><i class="fa-solid fa-stamp"  class="ml-3" style="font-size: 18px;margin: 0% 2%;color: #6b6b6b;"></i><span>Uvts</span></a>';
-                        } ?>
-                        <?php if ($_SESSION['id_roles'] == 1) {
-                            echo '<a href=#"" id="categories"><img class="ml-3" style="padding-left:5px; padding-right:5px;"><i class="fa-solid fa-chalkboard-user"  class="ml-3" style="font-size: 18px;margin: 0% 2%;color: #6b6b6b;"></i><span> Categorías</span></a>';
-                        } ?>
 
                         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
 
@@ -316,6 +310,14 @@ if (!isset($_SESSION['status_connect'])) {
 
                             <a href="#" id="plataformasInactivas"><i alt="" class="fa fa-circle-o ml-3 " onclick:></i><span class="ml-2" s>Plataformas Inactivas</span></a>
                         </div>
+                    </div>
+                    <div class="dropdown">
+                        <?php if ($_SESSION['id_roles'] == 1) {
+                            echo '<a href=#"" id="uvts"><img class="ml-3" style="padding-left:5px; padding-right:5px;"><i class="fa-solid fa-stamp"  class="ml-3" style="font-size: 18px;margin: 0% 2%;color: #6b6b6b;"></i><span>Uvts</span></a>';
+                        } ?>
+                        <?php if ($_SESSION['id_roles'] == 1) {
+                            echo '<a href=#"" id="categories"><img class="ml-3" style="padding-left:5px; padding-right:5px;"><i class="fa-solid fa-chalkboard-user"  class="ml-3" style="font-size: 18px;margin: 0% 2%;color: #6b6b6b;"></i><span> Categorías</span></a>';
+                        } ?>
                     </div>
                 </nav>
             </div>
