@@ -70,10 +70,11 @@ class CrudPeticionesSg
     {
         $db = conectar::acceso();
         $lista_peticiones = [];
-        $consultar_peticion = $db->prepare('SELECT id_peticionessg, categorias.nombre_categoria AS categoria, fecha_peticion, descripcion_peticionsg, estado.descripcion AS estado_peticion, fecha_atencion, usuario_atencion, conclusiones, revisado 
+        $consultar_peticion = $db->prepare('SELECT id_peticionessg, categorias.nombre_categoria AS categoria, fecha_peticion, descripcion_peticionsg, estado.descripcion AS estado_peticion, fecha_atencion, usuario_atencion, usuario_creacionsg, funcionarios.mail, conclusiones, revisado 
     FROM peticiones_sg 
     LEFT JOIN categorias ON categorias.id_categoria=peticiones_sg.categoria
-    LEFT JOIN estado ON estado.id_estado=peticiones_sg.estado_peticion 
+    LEFT JOIN estado ON estado.id_estado=peticiones_sg.estado_peticion
+    LEFT JOIN funcionarios ON funcionarios.usuario=peticiones_sg.usuario_creacionsg
     WHERE usuario_creacionsg=:funcionario AND revisado=:noRevisado');
         $consultar_peticion->bindValue('noRevisado', 1);
         $consultar_peticion->bindValue('funcionario', $_SESSION['usuario']);
@@ -87,7 +88,9 @@ class CrudPeticionesSg
             $consulta->setestado_peticionSg($listado['estado_peticion']);
             $consulta->setfecha_atendidoSg($listado['fecha_atencion']);
             $consulta->setusuario_atencionSg($listado['usuario_atencion']);
+            $consulta->setUsuario_creacionSg($listado['usuario_creacionsg']);
             $consulta->setconclusiones_PeticionSg($listado['conclusiones']);
+            $consulta->setEmail_funcionario($listado['mail']);
             $consulta->setmarcaRevisadoSg($listado['revisado']);
             $lista_peticiones[] = $consulta;
         }

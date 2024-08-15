@@ -94,5 +94,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $crudSg->crearPeticionesSg($peticionesSg);
         $_SESSION['ticket_codigo'] = $codigo;
     }
+    
+    if (isset($_SESSION['id_roles']) && $_SESSION['id_roles'] == 5) {
+        header('Location:../../dashboard.php');
+    } else if (isset($_SESSION['rol']) && $_SESSION['rol'] == 4 || $_SESSION['rol'] == 2) {
+        header('Location:../../dashboard_funcionarios.php');
+    }
 
 }

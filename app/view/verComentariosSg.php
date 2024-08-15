@@ -1,4 +1,4 @@
-<div class="modal fade bd-example-modal-lg"  id="verConclusionSg" tabindex="-1" aria-labelledby="verConclusionSg" aria-hidden="true">
+<div class="modal fade bd-example-modal-lg" id="verConclusionSg" tabindex="-1" aria-labelledby="verConclusionSg" aria-hidden="true">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
@@ -17,14 +17,14 @@
                 <table class="table" class="table-responsive">
                     <thead>
                         <tr>
-                        <th scope="col">ID Conclusion</th>
-                        <th scope="col"># Petición</th>
-                        <th scope="col">Fecha</th>
-                        <th scope="col">Responsable</th>
-                        <th scope="col">Comentario</th>
+                            <th scope="col" style="text-align: center;">ID Conclusión</th>
+                            <th scope="col" style="text-align: center;"># Petición</th>
+                            <th scope="col" style="text-align: center;">Fecha</th>
+                            <th scope="col" style="text-align: center;">Responsable</th>
+                            <th scope="col" style="text-align: center;">Comentario</th>
                         </tr>
                     </thead>
-                    <tbody id="js">      
+                    <tbody id="js">
 
                     </tbody>
                 </table>
