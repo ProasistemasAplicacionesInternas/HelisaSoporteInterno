@@ -2,7 +2,6 @@
 require_once('../model/datosUvts.php');
 require_once('../model/crudUvts.php');
 
-
 $crudUvts = new CrudUvts();
 if (isset($_POST['actionsUvts'])) {
     switch ($_POST['actionsUvts']) {
@@ -27,6 +26,11 @@ if (isset($_POST['actionsUvts'])) {
 
         case 'lastYear':
             $resultados = $crudUvts->searchLastYear();
+            echo json_encode($resultados);
+            break;
+
+        case 'currentYear':
+            $resultados = $crudUvts->searchCurrentYear();
             echo json_encode($resultados);
             break;
     }

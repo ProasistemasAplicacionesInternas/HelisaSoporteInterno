@@ -101,6 +101,7 @@ $(document).ready(function(){
             $("#af_categoria").val(auxiliarGrupo);
             $('#af_categoria').trigger('change');
         }
+        
     });
 })
 

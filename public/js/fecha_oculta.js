@@ -11,7 +11,7 @@ $('#f_estado').on('change', function () {
         document.getElementById("f_fecha_inactivacion").required = true;
         
         campoOcultoFuniconarios.style.display='block';   
-        document.getElementById("funcionario_translado").required = true;
+        document.getElementById("funcionario_traslado").required = true;
         
         campoOcultoDescripcion.style.display='block';
         document.getElementById("descripcionRetiro").required = true;

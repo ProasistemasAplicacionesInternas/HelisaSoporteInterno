@@ -42,4 +42,7 @@ $traslado = new traslados();
 		$traslado->setId_traslado($_POST['activo']);
 		$crud->consultarActivosPendientesFuncionario($traslado);
 	}
+	if(isset($_POST['consultarPendientes']) && ($_POST['consultarPendientes']) == 1){
+		$crud->existenTrasladosPorEstado($_POST['af_idB']);
+	}
 ?>

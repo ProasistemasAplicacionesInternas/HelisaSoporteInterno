@@ -66,6 +66,7 @@ $activos_Asignados = $consult->matrizActivosFuncionario();*/
                 $activoFijo->setAf_ram($_POST['af_ram']);
                 $activoFijo->setAf_disco($_POST['af_discoDuro']);
                 $activoFijo->setAf_procesador($_POST['af_procesador']);
+                $activoFijo->sethostName($_POST['hostName']);
                 $activoFijo->setAf_licenciaOffice($_POST['af_office']);
                 $activoFijo->setAf_licenciaAntivirus($_POST['af_antivirus']);
                 $activoFijo->setAf_aplicaciones($_POST['af_aplicaciones']);
@@ -79,6 +80,7 @@ $activos_Asignados = $consult->matrizActivosFuncionario();*/
                 $activoFijo->setvidaUtil($_POST['vidaUtil']);
                 $activoFijo->setestadoAct($_POST['estadoAct']);
                 $activoFijo->settraCategoria($_POST['traCategoria']);
+                $activoFijo->setsede($_POST['sede']);
                 $crud->crearActivos($activoFijo);    
         }
 
@@ -138,12 +140,11 @@ $activos_Asignados = $consult->matrizActivosFuncionario();*/
             $activoFijo->setAf_grupo($_POST['af_categoria']);
             $activoFijo->setAf_area($_POST['af_area']);
             $activoFijo->setAf_ubicacion($_POST['af_ubicacion']);
-            //$activoFijo->setAf_funcionario($_POST['af_responsable']);
-            //$activoFijo->setAf_fechaAsignacion($_POST['af_fechaAsignacion']);
             $activoFijo->setAf_observaciones($_POST['af_observaciones']);
             $activoFijo->setAf_ram($_POST['af_ram']);
             $activoFijo->setAf_disco($_POST['af_discoDuro']);
             $activoFijo->setAf_procesador($_POST['af_procesador']);
+            $activoFijo->sethostName($_POST['hostName']);
             $activoFijo->setAf_sistemaOperativo($_POST['af_so']);
             $activoFijo->setAf_licenciaSO($_POST['af_licenciaSo']);
             $activoFijo->setAf_dominio($_POST['af_dominio']);
@@ -152,8 +153,13 @@ $activos_Asignados = $consult->matrizActivosFuncionario();*/
             $activoFijo->setAf_aplicaciones($_POST['af_aplicaciones']);
             $activoFijo->setNombre($_POST['nombre_usu']);
             $activoFijo->setImagenactivo($nombre_imagen);
+            $activoFijo->setcostoCompra($_POST['costoCompra']);
+            $activoFijo->settipoAct($_POST['tipoAct']);
+            $activoFijo->setvidaUtil($_POST['vidaUtil']);
+            $activoFijo->setestadoAct($_POST['estadoAct']);
+            $activoFijo->settraCategoria($_POST['traCategoria']);
+            $activoFijo->setsede($_POST['sede']);
             $crud->modificarActivos($activoFijo);            
-            //header('Location: ../../dashboard.php');
         }
         if (isset($_POST['creacion'])) {
             echo "Llega al controlador";

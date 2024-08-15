@@ -107,25 +107,16 @@ function modalUpdateCategory(id) {
 function showResultCategory(data) {
 
   var jsonObject = JSON.parse(data);
-  console.log("Datos recibidos del servidor:", jsonObject);
-
   document.querySelector("#id_category").value = jsonObject.id;
-  // document.querySelector("#actual_name").value = jsonObject.nombre_categoria;
-  // document.querySelector("#actual_area").value = jsonObject.nombre_area;
   document.querySelector("#new_name").value = jsonObject.nombre_categoria;
-
 
   var newAreaElement = document.querySelector("#new_area");
 
-  // Depuración de los valores de las opciones del select
-  console.log("Opciones disponibles en new_area:");
   Array.from(newAreaElement.options).forEach(option => {
-    console.log("Valor:", option.value, "Texto:", option.text);
-  });
+  });  
 
   newAreaElement.value = jsonObject.id_area;
 
-  // Si el valor no se selecciona correctamente, forzar la selección
   if (newAreaElement.value !== jsonObject.id_area) {
     var options = newAreaElement.options;
     for (var i = 0; i < options.length; i++) {
@@ -135,9 +126,6 @@ function showResultCategory(data) {
       }
     }
   }
-
-  // Verificar el valor del select después de la asignación
-  console.log("Valor del campo new_area después de la asignación:", newAreaElement.value);
 }
 
 function getCategoryById(id) {
@@ -149,7 +137,7 @@ function getCategoryById(id) {
       idCategory: id,
     },
     success: function (response) {
-      showResultCategory(response); // Asegúrate de que response sea un JSON válido
+      showResultCategory(response); 
     },
     error: function (error) {
       console.log("Error en la solicitud AJAX:", error);
@@ -160,8 +148,24 @@ function getCategoryById(id) {
 /* ************* Guardar Cambios Editados ************* */
 function saveEditCategory() {
   var id = $("#id_category").val();
-  var newName = $("#new_name").val();
+  var newName = $("#new_name").val().trim();
   var newArea = $("#new_area").val();
+
+  if (!newName) {
+    $.smkAlert({
+      text: "¡El campo 'Nuevo nombre' no puede estar vacío ni contener solo espacios!",
+      type: "danger",
+    });
+    return false;
+  }
+
+  if (!newArea) {
+    $.smkAlert({
+      text: "¡El campo 'Nueva área' no puede estar vacío!",
+      type: "danger",
+    });
+    return false;
+  }
 
   $.ajax({
     url: "app/controller/controllerCategoryAssets.php",
@@ -193,8 +197,17 @@ function modalCreateCategory() {
 }
 
 function saveCreatedCategory() {
-  var nameCategory = $("#created_name").val();
-  var areaCategory = $("#created_area").val();
+  var nameCategory = $("#created_name").val().trim();
+  var areaCategory = $("#created_area").val().trim();
+
+  if (!nameCategory || !areaCategory) {
+    $.smkAlert({
+      text: "¡Todos los campos son obligatorios!",
+      type: "danger",
+    });
+    return false;
+  }
+
   saveCategory(nameCategory, areaCategory);
 }
 

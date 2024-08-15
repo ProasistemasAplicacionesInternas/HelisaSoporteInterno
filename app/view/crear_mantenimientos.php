@@ -7,7 +7,16 @@ ini_set("session.cookie_lifetime", 18000);
 ini_set("session.gc_maxlifetime", 18000);
 session_start();
 
-if (!isset ($_SESSION['usuario'])) {
+$estados = array(
+    '0' => 'Sin asignación de condición',
+    '1' => 'Dado de baja - activos retirados por obsolencia o por condiciones que no permiten el correcto funcionamiento',
+    '2' => 'Malo - activos con una falla sustancial que no permite el correcto funcionamiento',
+    '3' => 'Regular - Activos en uso que presentan alguna',
+    '4' => 'Bueno - Activos adquiridos mayores a 1 año',
+    '5' => 'Nuevo - Activos adquiridos menores a 1 año'
+);
+
+if (!isset($_SESSION['usuario'])) {
 
     header('location:../../login.php');
 }
@@ -20,8 +29,10 @@ $af_procesador = $_POST['af_procesador'];
 $af_so = $_POST['af_so'];
 $af_licenciado = $_POST['af_licenciaSo'];
 $af_categoria = $_POST['af_categoria'];
+$estadoAct = $_POST['estadoAct'];
 
-require ('../controller/controlador_funcionarios.php');
+require('../controller/controlador_funcionarios.php');
+require('../controller/controlador_activosFijos.php');
 
 ?>
 <!DOCTYPE html>
@@ -51,32 +62,27 @@ require ('../controller/controlador_funcionarios.php');
         <div class="row">
             <h6 class="mt-3">Generar mantenimiento</h6>
             <div class="col-12 ml-5">
-                <input type="text" id="m_grupoActivo" name="m_grupoActivo" class="form-control info" autocomplete="off"
-                    value="<?php echo $af_categoria ?>" style="display:none ;" readonly>
-                <form action="../controller/controlador_mantenimientos.php" method="post" enctype="multipart/form-data"
-                    class="form-group">
+                <input type="text" id="m_grupoActivo" name="m_grupoActivo" class="form-control info" autocomplete="off" value="<?php echo $af_categoria ?>" style="display:none ;" readonly>
+                <form action="../controller/controlador_mantenimientos.php" method="post" enctype="multipart/form-data" class="form-group">
                     <div class="row">
                         <div class="col-1">
                             <div class="form-group">
                                 <label>Id activo</label>
-                                <input type="text" id="m_idActivo" name="m_idActivo" class="form-control info"
-                                    autocomplete="off" value="<?php echo $af_id ?>" readonly>
+                                <input type="text" id="m_idActivo" name="m_idActivo" class="form-control info" autocomplete="off" value="<?php echo $af_id ?>" readonly>
                             </div>
                         </div>
 
                         <div class="col-3">
                             <div class="form-group">
                                 <label>Código activo</label>
-                                <input type="text" id="m_codigo" name="m_codigo" class="form-control info"
-                                    maxlength="10" autocomplete="off" value="<?php echo $af_codigo ?>" readonly>
+                                <input type="text" id="m_codigo" name="m_codigo" class="form-control info" maxlength="10" autocomplete="off" value="<?php echo $af_codigo ?>" readonly>
                             </div>
                         </div>
 
                         <div class="col-3">
                             <div class="form-group">
                                 <label>Serial activo</label>
-                                <input type="text" id="m_serial" name="m_serial" class="form-control info"
-                                    maxlength="10" autocomplete="off" value="<?php echo $af_serial ?>" readonly>
+                                <input type="text" id="m_serial" name="m_serial" class="form-control info" maxlength="10" autocomplete="off" value="<?php echo $af_serial ?>" readonly>
                             </div>
                         </div>
                     </div>
@@ -84,16 +90,14 @@ require ('../controller/controlador_funcionarios.php');
                         <div class="col-3">
                             <div class="form-group">
                                 <label>Fecha mantenimiento</label>
-                                <input type="date" id="m_fecha" name="m_fecha" class="form-control info" value=""
-                                    required>
+                                <input type="date" id="m_fecha" name="m_fecha" class="form-control info" value="" required>
                             </div>
                         </div>
 
                         <div class="col-2">
                             <div class="form-group">
                                 <label>Costo mantenimiento</label>
-                                <input type="text" id="m_costo" name="m_costo" class="form-control info" maxlength="10"
-                                    autocomplete="off" required>
+                                <input type="text" id="m_costo" name="m_costo" class="form-control info" maxlength="10" autocomplete="off" required>
                             </div>
                         </div>
                         <div class="form-group" id="repoweringButton" style="display: none;">
@@ -115,22 +119,23 @@ require ('../controller/controlador_funcionarios.php');
                     <div class="row col-3">
                         <div class="form-group" id="campoMejora" style="display: none;">
                             <label>Costo mejora</label>
-                            <input type="text" class="form-control" id="costoMejora" name="costoMejora">
+                            <input type="text" class="form-control" value=0 id="costoMejora" name="costoMejora">
                         </div>
                     </div>
 
                     <div class="row col-8">
                         <div class="form-group ">
-                            <label>Condición actual</label>
-                            <select class="form-control " id="estadoAct" name="estadoAct" required>
-                                <option value='' selected>Seleccione estado</option>
-                                <option value='5'> 5 - Nuevo - Activos adquiridos menores a 1 año</option>
-                                <option value='4'> 4 - Bueno - Activos adquiridos mayores a 1 año</option>
-                                <option value='3'> 3 - Regular - Activos en uso que presentan algúna falla</option>
-                                <option value='2'> 2 - Malo - activos con una falla sustancial que no permite el
-                                    correcto funcionamiento</option>
-                                <option value='1'> 1 - Dado de baja - activos retirados por obsolencia o por condiciones
-                                    que no permiten el correcto funcionamiento</option>
+                            <label>Condición</label>
+                            <select class="form-control info" id="estadoAct" name="estadoAct">
+                                <option value="<?php echo $estadoAct; ?>" selected>
+                                    <?php echo $estadoAct . " - " . $estados[$estadoAct]; ?></option>
+                                <?php
+                                foreach ($estados as $id => $texto) {
+                                    if ($id != $estadoAct) {
+                                        echo "<option value='$id'>$id - $texto</option>";
+                                    }
+                                }
+                                ?>
                             </select>
                         </div>
                     </div>
@@ -148,22 +153,19 @@ require ('../controller/controlador_funcionarios.php');
                             <div class="col-3">
                                 <div class="form-group">
                                     <label>Ram</label>
-                                    <input type="text" id="af_ram" name="af_ram" class="form-control info"
-                                        value="<?php echo $af_ram ?>">
+                                    <input type="text" id="af_ram" name="af_ram" class="form-control info" value="<?php echo $af_ram ?>">
                                 </div>
                             </div>
                             <div class="col-3">
                                 <div class="form-group">
                                     <label>Disco Duro</label>
-                                    <input type="text" id="af_discoDuro" name="af_discoDuro" class="form-control info"
-                                        value="<?php echo $af_discoDuro ?>">
+                                    <input type="text" id="af_discoDuro" name="af_discoDuro" class="form-control info" value="<?php echo $af_discoDuro ?>">
                                 </div>
                             </div>
                             <div class="col-3">
                                 <div class="form-group">
                                     <label>Procesador</label>
-                                    <input type="text" id="af_procesador" name="af_procesador" class="form-control info"
-                                        value="<?php echo $af_procesador ?>">
+                                    <input type="text" id="af_procesador" name="af_procesador" class="form-control info" value="<?php echo $af_procesador ?>">
                                 </div>
                             </div>
                         </div>
@@ -179,25 +181,21 @@ require ('../controller/controlador_funcionarios.php');
                             <div class="col-3">
                                 <div class="form-group">
                                     <label>Sistema Operativo</label>
-                                    <input type="text" id="af_so" name="af_so" class="form-control info"
-                                        value="<?php echo $af_so ?>">
+                                    <input type="text" id="af_so" name="af_so" class="form-control info" value="<?php echo $af_so ?>">
                                 </div>
                             </div>
                             <div class="col-3">
                                 <div class="form-group">
                                     <label>Licencia sistema opertaivo</label>
-                                    <input type="text" id="af_licenciado" name="af_licenciado" class="form-control info"
-                                        value="<?php echo $af_licenciado ?>">
+                                    <input type="text" id="af_licenciado" name="af_licenciado" class="form-control info" value="<?php echo $af_licenciado ?>">
                                 </div>
                             </div>
                         </div><br>
                     </div>
 
-                    <a href="#" id="verObservaciones" onclick="abrirModal(<?php echo $af_id ?>)"
-                        style="margin-left: -1px;">Ver observaciones anteriores</a><br>
+                    <a href="#" id="verObservaciones" onclick="abrirModal(<?php echo $af_id ?>)" style="margin-left: -1px;">Ver observaciones anteriores</a><br>
 
-                    <div id="obsModal" class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog"
-                        aria-labelledby="myLargeModalLabel" aria-hidden="true">
+                    <div id="obsModal" class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
                         <div class="modal-dialog modal-lg">
                             <div class="modal-content">
                                 <div class="modal-header">
@@ -219,8 +217,7 @@ require ('../controller/controlador_funcionarios.php');
                         <div class="col-3">
                             <div class="form-group">
                                 <label>Descripción</label>
-                                <textarea name="m_descripcion" id="m_descripcion" cols="133" rows="5"
-                                    required></textarea>
+                                <textarea name="m_descripcion" id="m_descripcion" cols="133" rows="5" required></textarea>
                             </div>
                         </div>
                     </div>
@@ -236,8 +233,7 @@ require ('../controller/controlador_funcionarios.php');
 
                     <div class="row">
                         <div class="col-4">
-                            <input type="submit" value="Ingresar Mantenimiento" id="crear_mantenimiento"
-                                name="crear_mantenimiento" class="mt-4 btn btn-primary btn-sm btn-guardar">
+                            <input type="submit" value="Ingresar Mantenimiento" id="crear_mantenimiento" name="crear_mantenimiento" class="mt-4 btn btn-primary btn-sm btn-guardar">
                         </div>
                         <div class="col-4">
                             <a href="../../dashboard.php" class="mt-4 btn btn-danger" style="height:30px" ;>Cancelar</a>

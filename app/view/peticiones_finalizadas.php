@@ -70,7 +70,7 @@
                         } ?>
                         <th style="width:8px;">Imagen Solicitante</th>
                         <th style="width:10px;">Imagen Asesor</th>
-                        
+
 
                     </thead>
                     <tbody>
@@ -120,7 +120,7 @@
 
                                 <?php if ($_SESSION['id_roles'] == 1 || $_SESSION['id_roles'] == 5 || $_SESSION['id_roles'] == 9) { ?>
                                     <td>
-                                        <?php $datos->getP_estado(); ?>
+                                        <?php echo $datos->getP_estado(); ?>
                                     </td>
 
                                 <?php } ?>

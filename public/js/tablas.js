@@ -26,10 +26,10 @@ $(document).ready(function () {
       {
         extend: "excel",
         text: "Exportar a Excel",
-        messageTop: "REPORTE DE INCIDENTES ISO",
-        filename: "Reportes ISO ",
+        messageTop: "REPORTE TECNOLOGÍA",
+        filename: "Reporte Tecnología",
         exportOptions: {
-          columns: [0, 1, 2, 4, 5, 6, 7, 11],
+          columns: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
         },
       },
     ],

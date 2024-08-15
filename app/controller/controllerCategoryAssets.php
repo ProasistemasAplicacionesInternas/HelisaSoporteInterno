@@ -22,6 +22,12 @@ if (isset($_POST['actionsCategoryAssets'])) {
             echo json_encode($resultados);
             break;
 
+        case 'consultAll1':
+
+            $resultados = $crudCategoryAssets->consultAllCategory1();
+            echo json_encode($resultados);
+            break;    
+
         case 'findById':
             $resultados = $crudCategoryAssets->findCategory($_POST['idCategory']);
             echo json_encode($resultados);

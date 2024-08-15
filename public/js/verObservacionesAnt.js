@@ -51,7 +51,7 @@ function drawInfoMaintenances(data) {
       id: "exampleFormControlTextarea1",
       rows: 3,
       text: maintenance.descripcion_mantenimiento,
-      disabled: true
+      disabled: true,
     });
     var html =
       '<div id="block_maintenance">' +
@@ -59,19 +59,25 @@ function drawInfoMaintenances(data) {
       '<div class="col-3">' +
       '<div class="form-group">' +
       '<label for="fecha_mantenimiento">Fecha</label>' +
-      '<span class="form-control">' + maintenance.fecha_mantenimiento + '</span>' +
+      '<span class="form-control">' +
+      maintenance.fecha_mantenimiento +
+      "</span>" +
       "</div>" +
       "</div>" +
       '<div class="col-5">' +
       '<div class="form-group">' +
       '<label for="responsable_mantenimiento">Responsable</label>' +
-      '<span class="form-control">' + maintenance.responsable_mantenimiento + '</span>' +
+      '<span class="form-control">' +
+      maintenance.responsable_mantenimiento +
+      "</span>" +
       "</div>" +
       "</div>" +
       '<div class="col-3">' +
       '<div class="form-group">' +
       '<label for="costo_mantenimiento">Costo</label>' +
-      '<span class="form-control">' + maintenance.costo_mantenimiento + '</span>' +
+      '<span class="form-control">' +
+      maintenance.costo_mantenimiento +
+      "</span>" +
       "</div>" +
       "</div>" +
       "</div>" +
@@ -79,13 +85,17 @@ function drawInfoMaintenances(data) {
       '<div class="col-2">' +
       '<div class="form-group">' +
       '<label for="mejora_mantenimiento">Mejora?</label>' +
-      '<span class="form-control">' + maintenance.mejora + '</span>' +
+      '<span class="form-control">' +
+      maintenance.mejora +
+      "</span>" +
       "</div>" +
       "</div>" +
       '<div class="col-2">' +
       '<div class="form-group">' +
       '<label for="repotenciacion_mantenimiento">Repotenciación?</label>' +
-      '<span class="form-control">' + maintenance.repotenciacion + '</span>' +
+      '<span class="form-control">' +
+      maintenance.repotenciacion +
+      "</span>" +
       "</div>" +
       "</div>" +
       "</div>" +
@@ -115,25 +125,41 @@ function calcularTipoActivo() {
 
   // Verificar si es un número válido
   if (!isNaN(costoCompra)) {
-    // Realizo la division por el uvt, en este caso 47065
-    var valorUvt = $("#valueUvt").val();
-    console.log(valorUvt);
-    var resultado = costoCompra / valorUvt;
+      // Hacer una solicitud AJAX para obtener el UVT del año actual
+      $.ajax({
+          type: 'POST',
+          url: '../controller/controllerUvts.php', // Asegúrate de que esta ruta es correcta
+          data: { actionsUvts: 'currentYear' },
+          success: function(response) {
+              var uvtData = JSON.parse(response);
+              if (uvtData && uvtData.value_uvt) {
+                  var valorUvt = uvtData.value_uvt;
+                  console.log('Valor UVT obtenido:', valorUvt);
+                  // Realizar el cálculo con el UVT obtenido
+                  var resultado = costoCompra / valorUvt;
 
-    // aquí determino el rango de los uvts
-    var descripcion = "";
-    if (resultado >= 0 && resultado <= 10.5) {
-      descripcion = "Activos controlados de menor valor";
-    } else if (resultado >= 10.6 && resultado <= 50) {
-      descripcion = "Activos fijos controlados de menor cuantía";
-    } else if (resultado > 50) {
-      descripcion = "Activos fijos de mayor cuantía";
-    }
+                  // Determinar el rango de los UVTs
+                  var descripcion = "";
+                  if (resultado >= 0 && resultado <= 10.5) {
+                      descripcion = "Activos controlados de menor valor";
+                  } else if (resultado >= 10.6 && resultado <= 50) {
+                      descripcion = "Activos fijos controlados de menor cuantía";
+                  } else if (resultado > 50) {
+                      descripcion = "Activos fijos de mayor cuantía";
+                  }
 
-    // Muestro el resultado en el campo "tipoAct" que es el tipo de activo
-    document.getElementById("tipoAct").value = descripcion;
+                  // Mostrar el resultado en el campo "tipoAct"
+                  document.getElementById("tipoAct").value = descripcion;
+              } else {
+                  console.error('No se pudo obtener el UVT del año actual.');
+              }
+          },
+          error: function() {
+              console.error('Error al obtener el UVT del año actual.');
+          }
+      });
   } else {
-    // Se mostrara este mensaje de error si no digitan números si no palabras
-    document.getElementById("tipoAct").value = "Solo se aceptan numeros";
+      // Mostrar mensaje de error si no se digitan números
+      document.getElementById("tipoAct").value = "Solo se aceptan números";
   }
 }
