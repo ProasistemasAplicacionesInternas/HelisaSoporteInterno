@@ -126,13 +126,14 @@
             }else{
               $password = $modifica->getClave();
             } */
-            $modificar_usuario=$db->prepare('UPDATE hinfraestructura.usuarios SET correo=:correo, tipo_validacion=:tipo_validacion WHERE id_usuario=:id_usuario');
+            $modificar_usuario=$db->prepare('UPDATE hinfraestructura.usuarios SET correo=:correo, tipo_validacion=:tipo_validacion, id_roles=:id_roles WHERE id_usuario=:id_usuario');
 
             /* $password=password_hash($modifica->getClave(), PASSWORD_DEFAULT, ["cost" => 15]); */
 
             $modificar_usuario->bindValue('id_usuario',$modifica->getIDusuario());
             $modificar_usuario->bindValue('correo',$modifica->getCorreo());
-            $modificar_usuario->bindValue('tipo_validacion',$modifica->getTipoValidacion());          
+            $modificar_usuario->bindValue('tipo_validacion',$modifica->getTipoValidacion());   
+            $modificar_usuario->bindValue('id_roles',$modifica->getRoles());       
             $modificar_usuario->execute();
             $row = $modificar_usuario->rowCount();
             if($row !=0){
