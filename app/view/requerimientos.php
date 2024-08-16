@@ -98,7 +98,7 @@
                                             <?php endforeach; ?>
                                         </tr>
                                         <tr>
-                                            <th class="text-left">Helisareco</th>
+                                            <th class="text-left">Helisa Reco</th>
                                             <?php foreach ($ticketsHelisaReco as $datosR) : ?>
                                                 <td><?= $datosR->getHelisaReco() ?></td>
                                             <?php endforeach; ?>
@@ -122,7 +122,7 @@
                                             <?php endforeach; ?>
                                         </tr>
                                         <tr>
-                                            <th class="text-left">CRM Registro</th>
+                                            <th class="text-left">CRM-Registro</th>
                                             <?php foreach ($ticketsHelisaCrmRegistro as $datosCR) : ?>
                                                 <td><?= $datosCR->getCRMregistro() ?></td>
                                             <?php endforeach; ?>
@@ -158,7 +158,7 @@
                                             <?php endforeach; ?>
                                         </tr>
                                         <tr>
-                                            <th class="text-left">HelisaCemex</th>
+                                            <th class="text-left">Helisa Cemex</th>
                                             <?php foreach ($ticketsCemex as $datosCx) : ?>
                                                 <td><?= $datosCx->getHelisacemex() ?></td>
                                             <?php endforeach; ?>

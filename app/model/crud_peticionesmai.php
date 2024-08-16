@@ -568,7 +568,8 @@ class CrudPeticionesMai
     public function clientesHelisaPlus(){
         $db=conectar::acceso();
         $conteo=[];
-        $totales=$db->prepare('SELECT COUNT(producto_mai) AS helisaCloud FROM peticiones_mai LEFT JOIN productos_mai ON peticiones_mai.producto_mai=productos_mai.id_producto RIGHT JOIN estado ON peticiones_mai.estado_peticion=estado.id_estado where peticiones_mai.producto_mai=:productomai AND peticiones_mai.estado_peticion != :resuelto');
+        $totales=$db->prepare('SELECT COUNT(producto_mai) AS helisaCloud FROM peticiones_mai LEFT JOIN productos_mai ON peticiones_mai.producto_mai=productos_mai.id_producto RIGHT JOIN estado ON peticiones_mai.estado_peticion=estado.id_estado where peticiones_mai.producto_mai=:productomai AND peticiones_mai.tipo_soportemai=:tiposoporte AND peticiones_mai.estado_peticion != :resuelto');
+        $totales->bindvalue('tiposoporte',2);
         $totales->bindvalue('productomai',1);
         $totales->bindvalue('resuelto', 2);
         $totales->execute();
@@ -583,7 +584,8 @@ class CrudPeticionesMai
     public function clientesHelisaPremium(){
         $db=conectar::acceso();
         $conteo=[];
-        $totales=$db->prepare('SELECT COUNT(producto_mai) AS helisaPremium FROM peticiones_mai LEFT JOIN productos_mai ON peticiones_mai.producto_mai=productos_mai.id_producto RIGHT JOIN estado ON peticiones_mai.estado_peticion=estado.id_estado where peticiones_mai.producto_mai=:productomai AND peticiones_mai.estado_peticion != :resuelto');
+        $totales=$db->prepare('SELECT COUNT(producto_mai) AS helisaPremium FROM peticiones_mai LEFT JOIN productos_mai ON peticiones_mai.producto_mai=productos_mai.id_producto RIGHT JOIN estado ON peticiones_mai.estado_peticion=estado.id_estado where peticiones_mai.producto_mai=:productomai AND peticiones_mai.tipo_soportemai=:tiposoporte AND peticiones_mai.estado_peticion != :resuelto');
+        $totales->bindvalue('tiposoporte',2);
         $totales->bindvalue('productomai',2);
         $totales->bindvalue('resuelto', 2);
         $totales->execute();
@@ -598,7 +600,8 @@ class CrudPeticionesMai
     public function clientesHelisaReco(){
         $db=conectar::acceso();
         $conteo=[];
-        $totales=$db->prepare('SELECT COUNT(producto_mai) AS helisaReco FROM peticiones_mai LEFT JOIN productos_mai ON peticiones_mai.producto_mai=productos_mai.id_producto RIGHT JOIN estado ON peticiones_mai.estado_peticion=estado.id_estado where peticiones_mai.producto_mai=:productomai AND peticiones_mai.estado_peticion != :resuelto');
+        $totales=$db->prepare('SELECT COUNT(producto_mai) AS helisaReco FROM peticiones_mai LEFT JOIN productos_mai ON peticiones_mai.producto_mai=productos_mai.id_producto RIGHT JOIN estado ON peticiones_mai.estado_peticion=estado.id_estado where peticiones_mai.producto_mai=:productomai AND peticiones_mai.tipo_soportemai=:tiposoporte AND peticiones_mai.estado_peticion != :resuelto');
+        $totales->bindvalue('tiposoporte',2);
         $totales->bindvalue('productomai',3);
         $totales->bindvalue('resuelto', 2);
         $totales->execute();
@@ -613,7 +616,8 @@ class CrudPeticionesMai
     public function clientesSoporteInterno(){
         $db=conectar::acceso();
         $conteo=[];
-        $totales=$db->prepare('SELECT COUNT(producto_mai) AS soporteInterno FROM peticiones_mai LEFT JOIN productos_mai ON peticiones_mai.producto_mai=productos_mai.id_producto RIGHT JOIN estado ON peticiones_mai.estado_peticion=estado.id_estado where peticiones_mai.producto_mai=:productomai AND peticiones_mai.estado_peticion != :resuelto');
+        $totales=$db->prepare('SELECT COUNT(producto_mai) AS soporteInterno FROM peticiones_mai LEFT JOIN productos_mai ON peticiones_mai.producto_mai=productos_mai.id_producto RIGHT JOIN estado ON peticiones_mai.estado_peticion=estado.id_estado where peticiones_mai.producto_mai=:productomai AND peticiones_mai.tipo_soportemai=:tiposoporte AND peticiones_mai.estado_peticion != :resuelto');
+        $totales->bindvalue('tiposoporte',2);
         $totales->bindvalue('productomai',4);
         $totales->bindvalue('resuelto', 2);
         $totales->execute();
@@ -628,7 +632,8 @@ class CrudPeticionesMai
     public function clientesHelisaDymai(){
         $db=conectar::acceso();
         $conteo=[];
-        $totales=$db->prepare('SELECT COUNT(producto_mai) AS helisaDymai FROM peticiones_mai LEFT JOIN productos_mai ON peticiones_mai.producto_mai=productos_mai.id_producto RIGHT JOIN estado ON peticiones_mai.estado_peticion=estado.id_estado where peticiones_mai.producto_mai=:productomai AND peticiones_mai.estado_peticion != :resuelto');
+        $totales=$db->prepare('SELECT COUNT(producto_mai) AS helisaDymai FROM peticiones_mai LEFT JOIN productos_mai ON peticiones_mai.producto_mai=productos_mai.id_producto RIGHT JOIN estado ON peticiones_mai.estado_peticion=estado.id_estado where peticiones_mai.producto_mai=:productomai AND peticiones_mai.tipo_soportemai=:tiposoporte AND peticiones_mai.estado_peticion != :resuelto');
+        $totales->bindvalue('tiposoporte',2);
         $totales->bindvalue('productomai',5);
         $totales->bindvalue('resuelto', 2);
         $totales->execute();
@@ -643,7 +648,8 @@ class CrudPeticionesMai
     public function clientesCentroSoporte(){
         $db=conectar::acceso();
         $conteo=[];
-        $totales=$db->prepare('SELECT COUNT(producto_mai) AS centroSoporte FROM peticiones_mai LEFT JOIN productos_mai ON peticiones_mai.producto_mai=productos_mai.id_producto RIGHT JOIN estado ON peticiones_mai.estado_peticion=estado.id_estado where peticiones_mai.producto_mai=:productomai AND peticiones_mai.estado_peticion != :resuelto');
+        $totales=$db->prepare('SELECT COUNT(producto_mai) AS centroSoporte FROM peticiones_mai LEFT JOIN productos_mai ON peticiones_mai.producto_mai=productos_mai.id_producto RIGHT JOIN estado ON peticiones_mai.estado_peticion=estado.id_estado where peticiones_mai.producto_mai=:productomai AND peticiones_mai.tipo_soportemai=:tiposoporte AND peticiones_mai.estado_peticion != :resuelto');
+        $totales->bindvalue('tiposoporte',2);
         $totales->bindvalue('productomai',6);
         $totales->bindvalue('resuelto', 2);
         $totales->execute();
@@ -658,7 +664,8 @@ class CrudPeticionesMai
     public function CRMRegistro(){
         $db=conectar::acceso();
         $conteo=[];
-        $totales=$db->prepare('SELECT COUNT(producto_mai) AS registroCRM FROM peticiones_mai LEFT JOIN productos_mai ON peticiones_mai.producto_mai=productos_mai.id_producto RIGHT JOIN estado ON peticiones_mai.estado_peticion=estado.id_estado where peticiones_mai.producto_mai=:productomai AND peticiones_mai.estado_peticion != :resuelto');
+        $totales=$db->prepare('SELECT COUNT(producto_mai) AS registroCRM FROM peticiones_mai LEFT JOIN productos_mai ON peticiones_mai.producto_mai=productos_mai.id_producto RIGHT JOIN estado ON peticiones_mai.estado_peticion=estado.id_estado where peticiones_mai.producto_mai=:productomai AND peticiones_mai.tipo_soportemai=:tiposoporte AND peticiones_mai.estado_peticion != :resuelto');
+        $totales->bindvalue('tiposoporte',2);
         $totales->bindvalue('productomai',7);
         $totales->bindvalue('resuelto', 2);
         $totales->execute();
@@ -673,7 +680,8 @@ class CrudPeticionesMai
     public function clientesHelisaTalento(){
         $db=conectar::acceso();
         $conteo=[];
-        $totales=$db->prepare('SELECT COUNT(producto_mai) AS helisaTalento FROM peticiones_mai LEFT JOIN productos_mai ON peticiones_mai.producto_mai=productos_mai.id_producto RIGHT JOIN estado ON peticiones_mai.estado_peticion=estado.id_estado where peticiones_mai.producto_mai=:productomai AND peticiones_mai.estado_peticion != :resuelto');
+        $totales=$db->prepare('SELECT COUNT(producto_mai) AS helisaTalento FROM peticiones_mai LEFT JOIN productos_mai ON peticiones_mai.producto_mai=productos_mai.id_producto RIGHT JOIN estado ON peticiones_mai.estado_peticion=estado.id_estado where peticiones_mai.producto_mai=:productomai AND peticiones_mai.tipo_soportemai=:tiposoporte AND peticiones_mai.estado_peticion != :resuelto');
+        $totales->bindvalue('tiposoporte',2);
         $totales->bindvalue('productomai',8);
         $totales->bindvalue('resuelto', 2);
         $totales->execute();
@@ -688,7 +696,8 @@ class CrudPeticionesMai
     public function clientesHelisaConekta(){
         $db=conectar::acceso();
         $conteo=[];
-        $totales=$db->prepare('SELECT COUNT(producto_mai) AS helisaConekta FROM peticiones_mai LEFT JOIN productos_mai ON peticiones_mai.producto_mai=productos_mai.id_producto RIGHT JOIN estado ON peticiones_mai.estado_peticion=estado.id_estado where peticiones_mai.producto_mai=:productomai AND peticiones_mai.estado_peticion != :resuelto');
+        $totales=$db->prepare('SELECT COUNT(producto_mai) AS helisaConekta FROM peticiones_mai LEFT JOIN productos_mai ON peticiones_mai.producto_mai=productos_mai.id_producto RIGHT JOIN estado ON peticiones_mai.estado_peticion=estado.id_estado where peticiones_mai.producto_mai=:productomai AND peticiones_mai.tipo_soportemai=:tiposoporte AND peticiones_mai.estado_peticion != :resuelto');
+        $totales->bindvalue('tiposoporte',2);
         $totales->bindvalue('productomai',9);
         $totales->bindvalue('resuelto', 2);
         $totales->execute();
@@ -703,7 +712,8 @@ class CrudPeticionesMai
     public function helisaComplementos(){
         $db=conectar::acceso();
         $conteo=[];
-        $totales=$db->prepare('SELECT COUNT(producto_mai) AS instComplementos FROM peticiones_mai LEFT JOIN productos_mai ON peticiones_mai.producto_mai=productos_mai.id_producto RIGHT JOIN estado ON peticiones_mai.estado_peticion=estado.id_estado where peticiones_mai.producto_mai=:productomai AND peticiones_mai.estado_peticion != :resuelto');
+        $totales=$db->prepare('SELECT COUNT(producto_mai) AS instComplementos FROM peticiones_mai LEFT JOIN productos_mai ON peticiones_mai.producto_mai=productos_mai.id_producto RIGHT JOIN estado ON peticiones_mai.estado_peticion=estado.id_estado where peticiones_mai.producto_mai=:productomai AND peticiones_mai.tipo_soportemai=:tiposoporte AND peticiones_mai.estado_peticion != :resuelto');
+        $totales->bindvalue('tiposoporte',2);
         $totales->bindvalue('productomai',10);
         $totales->bindvalue('resuelto', 2);
         $totales->execute();
@@ -718,7 +728,8 @@ class CrudPeticionesMai
     public function helisaAtento(){
         $db=conectar::acceso();
         $conteo=[];
-        $totales=$db->prepare('SELECT COUNT(producto_mai) AS helisaAtento FROM peticiones_mai LEFT JOIN productos_mai ON peticiones_mai.producto_mai=productos_mai.id_producto RIGHT JOIN estado ON peticiones_mai.estado_peticion=estado.id_estado where peticiones_mai.producto_mai=:productomai AND peticiones_mai.estado_peticion != :resuelto');
+        $totales=$db->prepare('SELECT COUNT(producto_mai) AS helisaAtento FROM peticiones_mai LEFT JOIN productos_mai ON peticiones_mai.producto_mai=productos_mai.id_producto RIGHT JOIN estado ON peticiones_mai.estado_peticion=estado.id_estado where peticiones_mai.producto_mai=:productomai AND peticiones_mai.tipo_soportemai=:tiposoporte AND peticiones_mai.estado_peticion != :resuelto');
+        $totales->bindvalue('tiposoporte',2);
         $totales->bindvalue('productomai',11);
         $totales->bindvalue('resuelto', 2);
         $totales->execute();
@@ -733,7 +744,8 @@ class CrudPeticionesMai
     public function aivoChatbot(){
         $db=conectar::acceso();
         $conteo=[];
-        $totales=$db->prepare('SELECT COUNT(producto_mai) AS chatBot FROM peticiones_mai LEFT JOIN productos_mai ON peticiones_mai.producto_mai=productos_mai.id_producto RIGHT JOIN estado ON peticiones_mai.estado_peticion=estado.id_estado where peticiones_mai.producto_mai=:productomai AND peticiones_mai.estado_peticion != :resuelto');
+        $totales=$db->prepare('SELECT COUNT(producto_mai) AS chatBot FROM peticiones_mai LEFT JOIN productos_mai ON peticiones_mai.producto_mai=productos_mai.id_producto RIGHT JOIN estado ON peticiones_mai.estado_peticion=estado.id_estado where peticiones_mai.producto_mai=:productomai AND peticiones_mai.tipo_soportemai=:tiposoporte AND peticiones_mai.estado_peticion != :resuelto');
+        $totales->bindvalue('tiposoporte',2);
         $totales->bindvalue('productomai',12);
         $totales->bindvalue('resuelto', 2);
         $totales->execute();
@@ -748,7 +760,8 @@ class CrudPeticionesMai
     public function Cemex(){
         $db=conectar::acceso();
         $conteo=[];
-        $totales=$db->prepare('SELECT COUNT(producto_mai) AS cemex FROM peticiones_mai LEFT JOIN productos_mai ON peticiones_mai.producto_mai=productos_mai.id_producto RIGHT JOIN estado ON peticiones_mai.estado_peticion=estado.id_estado where peticiones_mai.producto_mai=:productomai AND peticiones_mai.estado_peticion != :resuelto');
+        $totales=$db->prepare('SELECT COUNT(producto_mai) AS cemex FROM peticiones_mai LEFT JOIN productos_mai ON peticiones_mai.producto_mai=productos_mai.id_producto RIGHT JOIN estado ON peticiones_mai.estado_peticion=estado.id_estado where peticiones_mai.producto_mai=:productomai AND peticiones_mai.tipo_soportemai=:tiposoporte AND peticiones_mai.tipo_soportemai=:tiposoporte AND peticiones_mai.estado_peticion != :resuelto');
+        $totales->bindvalue('tiposoporte',2);
         $totales->bindvalue('productomai',13);
         $totales->bindvalue('resuelto', 2);
         $totales->execute();
@@ -763,7 +776,8 @@ class CrudPeticionesMai
     public function helisaTablero(){
         $db=conectar::acceso();
         $conteo=[];
-        $totales=$db->prepare('SELECT COUNT(producto_mai) AS helisaTablero FROM peticiones_mai LEFT JOIN productos_mai ON peticiones_mai.producto_mai=productos_mai.id_producto RIGHT JOIN estado ON peticiones_mai.estado_peticion=estado.id_estado where peticiones_mai.producto_mai=:productomai AND peticiones_mai.estado_peticion != :resuelto');
+        $totales=$db->prepare('SELECT COUNT(producto_mai) AS helisaTablero FROM peticiones_mai LEFT JOIN productos_mai ON peticiones_mai.producto_mai=productos_mai.id_producto RIGHT JOIN estado ON peticiones_mai.estado_peticion=estado.id_estado where peticiones_mai.producto_mai=:productomai AND peticiones_mai.tipo_soportemai=:tiposoporte AND peticiones_mai.estado_peticion != :resuelto');
+        $totales->bindvalue('tiposoporte',2);
         $totales->bindvalue('productomai',14);
         $totales->bindvalue('resuelto', 2);
         $totales->execute();
@@ -778,7 +792,8 @@ class CrudPeticionesMai
     public function reInfraestructura(){
         $db=conectar::acceso();
         $conteo=[];
-        $totales=$db->prepare('SELECT COUNT(producto_mai) AS redireccionadoInfraestructura FROM peticiones_mai LEFT JOIN productos_mai ON peticiones_mai.producto_mai=productos_mai.id_producto RIGHT JOIN estado ON peticiones_mai.estado_peticion=estado.id_estado where peticiones_mai.producto_mai=:productomai AND peticiones_mai.estado_peticion != :resuelto');
+        $totales=$db->prepare('SELECT COUNT(producto_mai) AS redireccionadoInfraestructura FROM peticiones_mai LEFT JOIN productos_mai ON peticiones_mai.producto_mai=productos_mai.id_producto RIGHT JOIN estado ON peticiones_mai.estado_peticion=estado.id_estado where peticiones_mai.producto_mai=:productomai AND peticiones_mai.tipo_soportemai=:tiposoporte AND peticiones_mai.estado_peticion != :resuelto');
+        $totales->bindvalue('tiposoporte',2);
         $totales->bindvalue('productomai',15);
         $totales->bindvalue('resuelto', 2);
         $totales->execute();
