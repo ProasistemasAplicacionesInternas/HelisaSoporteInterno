@@ -1,0 +1,19 @@
+.imagen {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    top: auto; 
+    right: 30px; 
+}
+
+.boton-imagen {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+}
+
+.boton-imagen img {
+    width: 30px;
+    height: auto; 
+}

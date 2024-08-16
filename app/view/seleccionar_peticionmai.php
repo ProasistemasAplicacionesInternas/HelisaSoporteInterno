@@ -136,11 +136,18 @@
                             <label id="label">Estado</label>
                             <select name="p_estado" id="p_estado" class="selectView" required>
                                 <option value=""></option>
-                                <option value="2">Resuelto</option>
-                                <option value="3">Pendiente</option>
-                                <option value="4">Redireccionado</option>
                                 <?php if ($name == "Requerimientos") : ?>
+                                    <option value="3">Pendiente</option>
+                                    <option value="19">Gestión de Cambios</option>
                                     <option value="18">En Desarrollo</option>
+                                    <option value="20">En Pruebas</option>
+                                    <option value="21">Cargue de Versión</option>
+                                    <option value="2">Resuelto</option>
+                                    <option value="4">Redireccionado</option>
+                                <?php elseif (true) : ?>
+                                    <option value= "2">Resuelto</option>
+                                    <option value= "3">Pendiente</option>
+                                    <option value= "4">Redireccionado</option>
                                 <?php endif; ?>
                             </select>
                         </div>
@@ -247,12 +254,12 @@
                                     <input type="text" id="obsData" name="obsData" class="form-control" value="<?php echo $observacion['fecha_observacion']; ?>  " readonly>
                                 </div>
 
-                                <div class="littleMedium">
+                                <div class="little">
                                     <label>Usuario </label>
                                     <input type="text" id="obsUser" name="obsUser" class="form-control" value="<?php echo $observacion['usuario_creacion']; ?>  " readonly>
                                 </div>
 
-                                <div class="little">
+                                <div class="littleMedium">
                                     <label>Estado </label>
                                     <input type="text" id="obsStatus" name="obsStatus" class="form-control" value="<?php echo $observacion['estado']; ?>  " readonly>
                                 </div>

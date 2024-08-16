@@ -63,7 +63,7 @@ if (!isset($_SESSION['failed'])) {
                             <form method="POST" action="../controller/controlador_valida_token.php">
                                 <div class="qr">
                                     <input type="text" class="form-control" id="token" name="token" placeholder="Token Correo" required style="width: 200px;border-radius: 10px;text-align: center;display: inline;color:black;background: white; border-color: #458B99; border-radius:10px;"><br> <br>
-                                    &nbsp&nbsp&nbsp
+                                    &nbsp&nbsp&nbspZ
                                     <button type="submit" name="btnValToken" id="btnValToken" class="btn btn-outline-primary" style="width: 200px;border-radius: 10px; color: black; border-color: #0275d8;"><strong>Validar con Token</strong></button>
                                     <br></br>
                                     <br></br>
