@@ -58,12 +58,13 @@
                 LEFT JOIN tipo_soportemai on tipo_soportemai.id = peticiones_mai.tipo_soportemai
                 WHERE fecha_peticion BETWEEN :fechaInicial AND :fechaFinal  
                 AND (estado_peticion=:estadoN OR estado_peticion=:estadoD 
-                OR estado_peticion=:estadoP OR estado_peticion=:estadoC OR estado_peticion=:estadoS)');
+                OR estado_peticion=:estadoP OR estado_peticion=:estadoC OR estado_peticion=:estadoS) AND tipo_soportemai != :estadoRq');
                 $seleccion->bindValue('estadoN','1');
                 $seleccion->bindValue('estadoD','2');
                 $seleccion->bindValue('estadoP','3');
                 $seleccion->bindValue('estadoC','4');
                 $seleccion->bindValue('estadoS','8');
+                $seleccion->bindValue('estadoRq','2');
                 $seleccion->bindValue('fechaInicial',$inicio);
                 $seleccion->bindValue('fechaFinal',$final);
                 $seleccion->execute();
@@ -139,12 +140,13 @@
             LEFT JOIN productos_mai ON id_producto = producto_mai 
             LEFT JOIN estado ON estado.id_estado=peticiones_mai.estado_peticion
             LEFT JOIN tipo_soportemai on tipo_soportemai.id = peticiones_mai.tipo_soportemai
-            WHERE  id_peticionmai=:numero_peticion  AND (estado_peticion=:estadoN OR estado_peticion=:estadoD OR estado_peticion=:estadoP OR estado_peticion=:estadoC OR estado_peticion=:estadoN OR estado_peticion=:estadoS)');
+            WHERE  id_peticionmai=:numero_peticion  AND (estado_peticion=:estadoN OR estado_peticion=:estadoD OR estado_peticion=:estadoP OR estado_peticion=:estadoC OR estado_peticion=:estadoN OR estado_peticion=:estadoS) AND tipo_soportemai != :estadoRq');
             $seleccion->bindValue('estadoN','1');
             $seleccion->bindValue('estadoD','2');
             $seleccion->bindValue('estadoP','3');
             $seleccion->bindValue('estadoC','4');
             $seleccion->bindValue('estadoS','8');
+            $seleccion->bindValue('estadoRq','2');
             $seleccion->bindValue('numero_peticion',$_POST['peticionFiltro']);
             $seleccion->execute();
         
@@ -185,12 +187,13 @@
             FROM peticiones_mai LEFT JOIN productos_mai ON id_producto = producto_mai 
             LEFT JOIN estado ON estado.id_estado=peticiones_mai.estado_peticion
             LEFT JOIN tipo_soportemai on tipo_soportemai.id = peticiones_mai.tipo_soportemai
-            WHERE  usuario_atencion=:usuario AND (estado_peticion=:estadoN OR estado_peticion=:estadoD OR estado_peticion=:estadoP OR estado_peticion=:estadoC OR estado_peticion=:estadoS)');
+            WHERE  usuario_atencion=:usuario AND (estado_peticion=:estadoN OR estado_peticion=:estadoD OR estado_peticion=:estadoP OR estado_peticion=:estadoC OR estado_peticion=:estadoS) AND tipo_soportemai != :estadoRq');
             $seleccion->bindValue('estadoN','1');
             $seleccion->bindValue('estadoD','2');
             $seleccion->bindValue('estadoP','3');
             $seleccion->bindValue('estadoC','4');
             $seleccion->bindValue('estadoS','8');
+            $seleccion->bindValue('estadoRq','2');
             $seleccion->bindValue('usuario',$_POST['programadorFiltro']);
             $seleccion->execute();
         
