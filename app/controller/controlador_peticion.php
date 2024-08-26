@@ -53,8 +53,6 @@ if (isset($_POST['aceptar'])) {
             $extension_archivo = pathinfo($_FILES['imagen']['name'][$x], PATHINFO_EXTENSION);
             if ($tamano_imagen != 0) {
                 $nombre_imagen[$x] = 'Documento' . $random . time() . "." .  $extension_archivo;
-            } else {
-                $nombre_imagen[$x] = 'Archivo vacio';
             }
             if (
                 $tipo_imagen == "image/jpeg" || $tipo_imagen == "image/jpg" || $tipo_imagen == "image/png" || $tipo_imagen == "image/gif"
