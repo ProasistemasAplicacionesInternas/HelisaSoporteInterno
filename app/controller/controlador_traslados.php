@@ -35,7 +35,7 @@ $traslado = new traslados();
 	}
 	if (isset($_POST['aceptaActivo']) &&($_POST['aceptaActivo']) == 1 ) {
 		$traslado->setId_traslado($_POST['activo']);
-		$traslado->setFecha_traslado($_POST['nombre']);
+		$traslado->setFecha_traslado($_POST['fecha_traslado']);
 		$crud->aceptaTraslado($traslado);
 	}
 	if (isset($_POST['consulta']) &&($_POST['consulta']) == 1 ) {
