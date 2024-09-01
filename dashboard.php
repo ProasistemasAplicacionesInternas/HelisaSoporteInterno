@@ -179,7 +179,7 @@ if (!isset($_SESSION['status_connect'])) {
                             ) {
                                 echo '<a href="#" id="comentariosPeticiones" class="dropdown-item">
                                         <img src="public/img/Comentarios.png" alt="" class="ml-3">
-                                        Comentarios
+                                        Comentarios-ISO
                                     </a>';
                             }
                             ?>
