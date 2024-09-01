@@ -78,20 +78,20 @@
         public function modificarRevisado($datos){
             $db = Conectar::acceso();
             $consulta = $db->prepare("UPDATE peticiones_accesos SET revisado = :revisado WHERE id_peticionAcceso = :id_peticionAcceso");
-            $consulta->bindValue('id_peticionAcceso',$datos->getNombre());
+            $consulta->bindValue('id_peticionAcceso',$datos->getId_peticion());
             $consulta->bindValue('revisado',$datos->getRevisado());
             $consulta->execute();
 
-            if($consulta){
+            if($consulta) {
                 $consultaB = $db->prepare('SELECT aprobacion FROM peticiones_accesos WHERE id_peticionAcceso = :id_peticionAcceso');
-                $consultaB->bindValue('id_peticionAcceso',$datos->getNombre());
+                $consultaB->bindValue('id_peticionAcceso',$datos->getId_peticion());
                 $consultaB->execute();
                 $resultado = $consultaB->fetch(PDO::FETCH_ASSOC);
-                if($resultado['aprobacion'] == 12){
-                    $this->correoDeFinalizacion($datos->getNombre());
+                if($resultado['aprobacion'] == 12) {
+                    $this->correoDeFinalizacion($datos->getId_peticion());
                 }
                 $resultado = 1;
-            }else{
+            }else {
                 $resultado = 0;
             }
             $db = null;
@@ -132,7 +132,7 @@
         public function modificarEstado($datos){
             $db = Conectar::acceso();
             $consulta = $db->prepare("UPDATE peticiones_accesos SET estado = :estado, fecha_atendido = :fecha_atendido, usuario_atiende = :usuario_atiende WHERE id_peticionAcceso = :id_peticionAcceso");
-            $consulta->bindValue('id_peticionAcceso',$datos->getNombre());
+            $consulta->bindValue('id_peticionAcceso',$datos->getId_peticion());
             $consulta->bindValue('fecha_atendido',$datos->getFecha_atendido());
             $consulta->bindValue('usuario_atiende',$datos->getUsuario_atendio());
             $consulta->bindValue('estado',8);
@@ -171,7 +171,7 @@
             $consulta->bindValue('aprobacion',$datos->getAprobado());
             $consulta->bindValue('fecha_atendido', $datos->getFecha_atendido());
             $consulta->bindValue('usuario_atiende',$datos->getUsuario_atendio());
-            $consulta->bindValue('id_peticion',$datos->getNombre());
+            $consulta->bindValue('id_peticion',$datos->getId_peticion());
             $consulta->bindValue('plataformas',$datos->getPlataformas());
             $consulta->execute();
 
@@ -191,7 +191,7 @@
             $consulta->bindValue('aprobacion',$datos->getAprobado());
             $consulta->bindValue('fecha_atendido', $datos->getFecha_atendido());
             $consulta->bindValue('usuario_atiende',$datos->getUsuario_atendio());
-            $consulta->bindValue('id_peticion',$datos->getNombre());
+            $consulta->bindValue('id_peticion',$datos->getId_peticion());
             $consulta->bindValue('plataformas',$datos->getPlataformas());
             $consulta->bindValue('revisado',1);
             $consulta->execute();
@@ -469,7 +469,7 @@
             $insertarSubRegistro->bindValue('usuario', $acceso->getNombre());
             $insertarSubRegistro->bindValue('clave', $acceso->getClave());
             $insertarSubRegistro->bindValue('estado', $acceso->getEstado());
-            $insertarSubRegistro->bindValue('id_peticionAcceso',$acceso->getNombre());
+            $insertarSubRegistro->bindValue('id_peticionAcceso',$acceso->getId_peticion());
             $insertarSubRegistro->execute(); 
         }
 
@@ -489,7 +489,7 @@
             $insertarSubRegistro->bindValue('usuario', $acceso->getNombre());
             $insertarSubRegistro->bindValue('clave','No Use');
             $insertarSubRegistro->bindValue('estado', $acceso->getEstado());
-            $insertarSubRegistro->bindValue('id_peticionAcceso',$acceso->getNombre());
+            $insertarSubRegistro->bindValue('id_peticionAcceso',$acceso->getId_peticion());
             $insertarSubRegistro->execute();
 
         }
@@ -508,7 +508,7 @@
             $insertarSubRegistro->bindValue('usuario', $acceso->getNombre());
             $insertarSubRegistro->bindValue('clave','No se afecta');
             $insertarSubRegistro->bindValue('estado', $acceso->getEstado());
-            $insertarSubRegistro->bindValue('id_peticionAcceso',$acceso->getNombre());
+            $insertarSubRegistro->bindValue('id_peticionAcceso',$acceso->getId_peticion());
             $insertarSubRegistro->execute();
 
         }
@@ -527,30 +527,25 @@
             $insertarSubRegistro->bindValue('usuario', $acceso->getNombre());
             $insertarSubRegistro->bindValue('clave','No se afecta');
             $insertarSubRegistro->bindValue('estado', $acceso->getEstado());
-            $insertarSubRegistro->bindValue('id_peticionAcceso',$acceso->getNombre());
+            $insertarSubRegistro->bindValue('id_peticionAcceso',$acceso->getId_peticion());
             $insertarSubRegistro->execute();
 
         }
 
 
-        public function modificarPlataformas($plataformas,$peticion,$conclusiones){
+        public function modificarPlataformas($plataformas,$peticion,$conclusiones) {
             $db = Conectar::acceso();
-            if($plataformas == ''){
+            if ($plataformas == '') {
                 $estado = 2;
-            }else{
+            } else {
                 $estado = 3;
             }
             $modificarPeticion = $db->prepare("UPDATE peticiones_accesos SET plataformas = :plataformas, estado = :estado, conclusiones = :conclusiones WHERE id_peticionAcceso = :id_peticion");
-            $modificarPeticion->bindValue('plataformas',$plataformas);
+            $modificarPeticion->bindValue('plataformas', $plataformas);
             $modificarPeticion->bindValue('id_peticion', $peticion);
             $modificarPeticion->bindValue('estado', $estado);
-            $modificarPeticion->bindValue('conclusiones',$conclusiones);
+            $modificarPeticion->bindValue('conclusiones', $conclusiones);
             $modificarPeticion->execute();
-
-            if($estado == 2){
-                $this->correoDeFinalizacion($peticion);
-            }
-
         }
         public function negacionDePlataformas($plataformas,$peticion,$conclusiones){
             $db = Conectar::acceso();
@@ -625,7 +620,7 @@
                 LEFT JOIN estado ON AP.estado = estado.id_estado
                 WHERE F.usuario = :usuario && AP.estado = :estado");
             $consulta->bindValue('usuario', $usuario);
-            $consulta->bindValue('estado', 17);
+            $consulta->bindValue('estado', 6);
             $consulta->execute();
             $listadoAccesosPlataformas = array();
 
@@ -660,7 +655,7 @@
                 LEFT JOIN estado ON AP.estado = estado.id_estado
                 WHERE F.usuario = :usuario && AP.estado = :estado");
             $consulta->bindValue('usuario', $usuario);
-            $consulta->bindValue('estado', 17);
+            $consulta->bindValue('estado', 6);
             $consulta->execute();
             $listadoAccesosPlataformas = array();
 
@@ -980,7 +975,7 @@
             $mail->Host = 'smtp.office365.com'; // Specify main and backup SMTP servers
             $mail->SMTPAuth = true; // Enable SMTP authentication
             $mail->Username = 'no-responder@helisa.com'; // SMTP username
-            $mail->Password = 'jkO5w6NqsJf7jRCop1X*#*'; // SMTP password
+            $mail->Password = 'pdqMG3@5FYV2PRP@Teh@Y@aoKEufrV'; // SMTP password
             $mail->SMTPSecure = 'tls'; // Enable TLS encryption, `ssl` also accepted
             $mail->Port = 587; // TCP port to connect to
             $mail->setFrom('no-responder@helisa.com');
@@ -989,9 +984,9 @@
             $mail->isHTML(true); // Set email format to HTML
             switch ($tipo) {
                 case 1:$subjects ="Aceptación entrega de accesos a plataformas PROASISTEMAS S.A.";break;
-                case 2:$subjects ="Inactivacion entrega de accesos a plataformas PROASISTEMAS S.A.";break;
+                case 2:$subjects ="Inactivación entrega de accesos a plataformas PROASISTEMAS S.A.";break;
                 case 3:$subjects ="Novedades entrega de accesos a plataformas PROASISTEMAS S.A.";break;
-                case 4:$subjects ="Reactivacion entrega de accesos a plataformas PROASISTEMAS S.A.";break;
+                case 4:$subjects ="Reactivación entrega de accesos a plataformas PROASISTEMAS S.A.";break;
                                
             }
             $cuerpo="<style type='text/css'> 
@@ -1013,9 +1008,9 @@
             }
             </style>";
             $cuerpo.= "<h5><b>Colaborador: " . $nombre . "</b></h5>";
-            $cuerpo.= "<h5><b>identificacion: " . $identificacion . "</b></h5>";
+            $cuerpo.= "<h5><b>identificación: " . $identificacion . "</b></h5>";
             $cuerpo.= "<h5><b>Cargo: " . $cargo . "</b></h5>";
-	    $cuerpo.= "<h5><b>Nro. Peticion Acceso: " . $id_peticion . "</b></h5>";
+	    $cuerpo.= "<h5><b>Nro. Petición Acceso: " . $id_peticion . "</b></h5>";
             $cuerpo.= " <p>Cordial saludo.<br>
                         De acuerdo a la aceptación realizada en la plataforma de Soporte Interno
                         El presente correo tiene como fin reconfirmar la aceptación que usted a realizado para los accesos de las siguientes aplicaciones, que permitirá el desarrollo de sus funciones en la compañía:</p>";
@@ -1135,7 +1130,7 @@
             $resultado = $consultaIdent->fetch(PDO::FETCH_ASSOC);
             $identificacion = $resultado['identificacion'];
 
-            $consulta = $db->prepare("SELECT id_accesoPlataforma FROM accesos_plataformas WHERE plataforma = :plataforma && estado = 17 && id_usuario = :id_user");
+            $consulta = $db->prepare("SELECT id_accesoPlataforma FROM accesos_plataformas WHERE plataforma = :plataforma && estado = 6 && id_usuario = :id_user");
             $consulta->bindValue('plataforma', $plataforma);
             $consulta->bindValue('id_user',$identificacion);
             $consulta->execute();

@@ -13,6 +13,12 @@ $(document).ready(function () {
   $("#liberarAdmin").click(function () {
     $("#contenido").load("app/view/liberar_soportes.php");
   });
+  $("#uvts").click(function () {
+    $("#contenido").load("app/view/viewUvts.php");
+  });
+  $("#categories").click(function () {
+    $("#contenido").load("app/view/viewCategories.php");
+  });
   /**************************************/
 
   $("#solicitudes_internas").click(function () {

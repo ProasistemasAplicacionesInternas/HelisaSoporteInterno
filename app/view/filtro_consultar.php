@@ -8,7 +8,7 @@
        
                  header('location:../../login.php');
             }
-        
+            date_default_timezone_set('America/Bogota');
      require ('../controller/control_traerProgramadores.php');
     ?>
 <!DOCTYPE html>
@@ -53,7 +53,7 @@
                 <option value="" selected>Seleccione una opción</option>
                 <option value="1">Consultar por fecha</option>
                 <option value="3">Consultar por Peticion</option>
-                <?php if($_SESSION['id_roles']==5){
+                <?php if($_SESSION['id_roles']==1 OR $_SESSION['id_roles']==5){
                     echo '<option value="4">Consultar por Programador</option>';
                 }
                 ?>
@@ -69,8 +69,8 @@
                         <input type="text" id="fechaFiltro" name="fechaFiltro" class="form-control" placeholder="Seleccione la fecha" required autocomplete="off">
                     </div>
                     <input type="hidden" id="areaF1" name="areaF1">
-                    <input type="hidden" id="fechaInicial" name="fechaInicial">
-                    <input type="hidden" id="fechaFinal" name="fechaFinal">
+                    <input type="hidden" id="fechaInicial" name="fechaInicial" value="<?php echo date('Y-m-d 00:00:00'); ?>">
+                    <input type="hidden" id="fechaFinal" name="fechaFinal" value="<?php echo date('Y-m-d 23:59:59'); ?>">
                     <input type="submit" id="btn-consultarFecha" name="btn-consultarFecha" class="btn btn-info" value="Consultar">
                 </form>
             </div>

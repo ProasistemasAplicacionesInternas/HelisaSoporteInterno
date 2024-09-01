@@ -8,7 +8,9 @@ if (!isset($_SESSION['usuario']) || empty($_SESSION['usuario'])) {
 
     header('location:../../login.php');
 }
-require ('../controller/controlador_usuariofuncionario.php');
+date_default_timezone_set('America/Bogota');
+
+require('../controller/controlador_usuariofuncionario.php');
 ?>
 
 <!DOCTYPE html>
@@ -45,8 +47,8 @@ require ('../controller/controlador_usuariofuncionario.php');
                     <div class="form-group">
                         <input type="text" id="fechaFiltro" name="fechaFiltro" class="form-control" placeholder="Seleccione la fecha" required autocomplete="off">
                     </div>
-                    <input type="hidden" id="fechaInicial" name="fechaInicial">
-                    <input type="hidden" id="fechaFinal" name="fechaFinal">
+                    <input type="hidden" id="fechaInicial" name="fechaInicial" value="<?php echo date('Y-m-d 00:00:00'); ?>">
+                    <input type="hidden" id="fechaFinal" name="fechaFinal" value="<?php echo date('Y-m-d 23:59:59'); ?>">
                     <input type="submit" id="btn-consultarFechaI" name="btn-consultarFechaI" class="btn btn-info" value="Consultar">
                 </form>
             </div>
@@ -66,49 +68,52 @@ require ('../controller/controlador_usuariofuncionario.php');
             </div>
         </div>
         <form action="app/view/requerimiento_finalizado.php" method="POST">
-        <div class="row mt-3" id="selectorEstado">
-    <div class="col-12">
-        <h6>Seleccione el estado para generar la consulta</h6>
-    </div>
-    <div class="col-3">
-        <select class="custom-select" name="estadoFiltro" id="estadoFiltro">
-            <option value="" selected>Seleccione un estado</option>
-            <option value="3">Pendiente</option>
-            <option value="2">Resuelto</option>
-            <option value="4">Redireccionado</option>
-            <option value="18">En Desarrollo</option>
-        </select>
-    </div>
-    <div class="col-3 mt-2">
-        <input type="submit" id="btn-consultarEstado" name="btn-consultarEstado" class="btn btn-info" value="Consultar">
-    </div>
-</div>
-<div class="row" id="selectorUsuario">
-            <div class="col-12">
-                <h6>Seleccionar por solicitante</h6>
+            <div class="row mt-3" id="selectorEstado">
+                <div class="col-12">
+                    <h6>Seleccione el estado para generar la consulta</h6>
+                </div>
+                <div class="col-3">
+                    <select class="custom-select" name="estadoFiltro" id="estadoFiltro">
+                        <option value="" selected>Seleccione un estado</option>
+                        <option value="3">Pendiente</option>
+                        <option value="19">Gestión de cambios</option>
+                        <option value="18">En Desarrollo</option>
+                        <option value="20">En Pruebas</option>
+                        <option value="21">Cargue de Versión</option>
+                        <option value="2">Resuelto</option>
+                        <option value="4">Redireccionado</option>
+                    </select>
+                </div>
+                <div class="col-3 mt-2">
+                    <input type="submit" id="btn-consultarEstado" name="btn-consultarEstado" class="btn btn-info" value="Consultar">
+                </div>
             </div>
-            <div class="col-3">
-                <form action="app/view/requerimientos_finalizados.php" target="_blank" method="post" onsubmit="rango()">
-                    <div class="form-group">
-                        <select class="custom-select"  name="usuarioFiltro" id="usuarioFiltro">
-                            <option value="" selected>Seleccione el usuario</option>
-                            <?php
-                                foreach($funcionarios as $lista){
+            <div class="row" id="selectorUsuario">
+                <div class="col-12">
+                    <h6>Seleccionar por solicitante</h6>
+                </div>
+                <div class="col-3">
+                    <form action="app/view/requerimientos_finalizados.php" target="_blank" method="post" onsubmit="rango()">
+                        <div class="form-group">
+                            <select class="custom-select" name="usuarioFiltro" id="usuarioFiltro">
+                                <option value="" selected>Seleccione el usuario</option>
+                                <?php
+                                foreach ($funcionarios as $lista) {
                                     echo "<option value=" . $lista["usuario"] . ">" . $lista["usuario"] . "</option>";
                                 }
-                            ?>
-                        </select>
-                    </div>
+                                ?>
+                            </select>
+                        </div>
                         <input type="submit" id="btn-consultarusuarioI" name="btn-consultarusuarioI" class="btn btn-info" value="Consultar">
-                </form>
+                    </form>
+                </div>
             </div>
-        </div>
 
-</form>
+        </form>
 
 
     </div>
-</div>
+    </div>
     </div>
     <script src="public/js/requerimiento.js"></script>
     <script src="public/js/bloqueoTeclas.js"></script>

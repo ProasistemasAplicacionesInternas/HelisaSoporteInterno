@@ -126,13 +126,14 @@
             }else{
               $password = $modifica->getClave();
             } */
-            $modificar_usuario=$db->prepare('UPDATE hinfraestructura.usuarios SET correo=:correo, tipo_validacion=:tipo_validacion WHERE id_usuario=:id_usuario');
+            $modificar_usuario=$db->prepare('UPDATE hinfraestructura.usuarios SET correo=:correo, tipo_validacion=:tipo_validacion, id_roles=:id_roles WHERE id_usuario=:id_usuario');
 
             /* $password=password_hash($modifica->getClave(), PASSWORD_DEFAULT, ["cost" => 15]); */
 
             $modificar_usuario->bindValue('id_usuario',$modifica->getIDusuario());
             $modificar_usuario->bindValue('correo',$modifica->getCorreo());
-            $modificar_usuario->bindValue('tipo_validacion',$modifica->getTipoValidacion());          
+            $modificar_usuario->bindValue('tipo_validacion',$modifica->getTipoValidacion());   
+            $modificar_usuario->bindValue('id_roles',$modifica->getRoles());       
             $modificar_usuario->execute();
             $row = $modificar_usuario->rowCount();
             if($row !=0){
@@ -309,7 +310,7 @@
           $mail->Host = 'smtp.office365.com';  // Specify main and backup SMTP servers
           $mail->SMTPAuth = true;                               // Enable SMTP authentication
           $mail->Username = 'no-responder@helisa.com';                 // SMTP username
-          $mail->Password = 'jkO5w6NqsJf7jRCop1X*#*';                           // SMTP password
+          $mail->Password = 'pdqMG3@5FYV2PRP@Teh@Y@aoKEufrV';                           // SMTP password
           $mail->SMTPSecure = 'tls';                            // Enable TLS encryption, `ssl` also accepted
           $mail->Port = 587;                                    // TCP port to connect to
     

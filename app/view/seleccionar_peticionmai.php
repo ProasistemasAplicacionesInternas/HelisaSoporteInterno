@@ -136,11 +136,18 @@
                             <label id="label">Estado</label>
                             <select name="p_estado" id="p_estado" class="selectView" required>
                                 <option value=""></option>
-                                <option value="2">Resuelto</option>
-                                <option value="3">Pendiente</option>
-                                <option value="4">Redireccionado</option>
                                 <?php if ($name == "Requerimientos") : ?>
+                                    <option value="3">Pendiente</option>
+                                    <option value="19">Gestión de Cambios</option>
                                     <option value="18">En Desarrollo</option>
+                                    <option value="20">En Pruebas</option>
+                                    <option value="21">Cargue de Versión</option>
+                                    <option value="2">Resuelto</option>
+                                    <option value="4">Redireccionado</option>
+                                <?php elseif (true) : ?>
+                                    <option value= "2">Resuelto</option>
+                                    <option value= "3">Pendiente</option>
+                                    <option value= "4">Redireccionado</option>
                                 <?php endif; ?>
                             </select>
                         </div>
@@ -179,9 +186,12 @@
                     <div class="mt-3">
                         <?php if ($imagen != '2') { ?>
                             <input type="hidden" id="imagenCa" name="imagenCa" value="<?php echo $imagen; ?>">
-                            <a class="text" href="../../cartas/<?= $imagen ?>" target="_blanck" id="imagen" name="imagen" style="text-decoration: underline; font-size: 15px;color: #bf1d1d; ">
-                                Imagen
-                            </a>
+                            <div class="contenedorImagenes">
+                                <label for="">Imagen</label><br><br>
+                                <a href="../../cartas/<?= $imagen ?>" target="_blanck">
+                                    <img src="../../cartas/<?php echo ($imagen) ?>" alt="" width="413" height="250">
+                                </a>
+                            </div>
                         <?php } else { ?>
                             <input type="hidden" id="imagenCa" name="imagenCa" value="2">
                         <?php } ?>
@@ -189,22 +199,28 @@
                         <?php if ($imagen2 != '2') {
                             echo ' '; ?>
                             <input type="hidden" id="imagen2" name="imagen2" value="<?php echo $imagen2; ?>">
-                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="text" href="../../cartas/<?= $imagen2 ?>" target="_blanck" id="imagen2x" name="imagen2x" style="text-decoration: underline; font-size: 15px;color: #bf1d1d; ">
-                                Imagen 2
-                            </a>
+                            <div class="contenedorImagenes2">
+                                <label for="">Imagen 2</label><br><br>
+                                <a href="../../cartas/<?= $imagen2 ?>" target="_blanck">
+                                    <img src="../../cartas/<?php echo ($imagen2) ?>" alt="" width="413" height="250">
+                                </a>
+                            </div>
                         <?php } else { ?>
                             <input type="hidden" id="imagen2" name="imagen2" value="2">
                         <?php } ?>
                         <?php if ($imagen3 != '2') {
                             echo ' '; ?>
                             <input type="hidden" id="imagen3" name="imagen3" value="<?php echo $imagen3; ?>">
-                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="text" href="../../cartas/<?= $imagen3 ?>" target="_blanck" id="imagen3x" name="imagen3x" style="text-decoration: underline; font-size: 15px;color: #bf1d1d; ">
-                                Imagen 3
-                            </a>
+                            <div class="contenedorImagenes3">
+                                <label for="">Imagen 3</label><br>
+                                <a href="../../cartas/<?= $imagen3 ?>" target="_blanck">
+                                    <img src="../../cartas/<?php echo ($imagen3) ?>" alt="" width="313" height="150">
+                                </a>
+                            </div>
                         <?php } else { ?>
                             <input type="hidden" id="imagen3" name="imagen3" value="2">
                         <?php } ?>
-                    </div>
+                    </div><br>
                     <div class="row">
                         <div class="giant">
                             <label for="">Observaciones</label>
@@ -238,12 +254,12 @@
                                     <input type="text" id="obsData" name="obsData" class="form-control" value="<?php echo $observacion['fecha_observacion']; ?>  " readonly>
                                 </div>
 
-                                <div class="littleMedium">
+                                <div class="little">
                                     <label>Usuario </label>
                                     <input type="text" id="obsUser" name="obsUser" class="form-control" value="<?php echo $observacion['usuario_creacion']; ?>  " readonly>
                                 </div>
 
-                                <div class="little">
+                                <div class="littleMedium">
                                     <label>Estado </label>
                                     <input type="text" id="obsStatus" name="obsStatus" class="form-control" value="<?php echo $observacion['estado']; ?>  " readonly>
                                 </div>

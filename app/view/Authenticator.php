@@ -67,16 +67,27 @@ class Authenticator
 
     public function getQR($name, $secret, $title = null, $params = array())
     {
+        require_once '../phpqrcode/qrlib.php';
+
         $width = !empty($params['width']) && (int) $params['width'] > 0 ? (int) $params['width'] : 200;
         $height = !empty($params['height']) && (int) $params['height'] > 0 ? (int) $params['height'] : 200;
-        $level = !empty($params['level']) && array_search($params['level'], array('L', 'M', 'Q', 'H')) !== false ? $params['level'] : 'M';
 
-        $urlencoded = urlencode('otpauth://totp/'.$name.'?secret='.$secret.'');
-        if (isset($title)) {
-            $urlencoded .= urlencode('&issuer='.urlencode($title));
+
+        $url = 'otpauth://totp/' . rawurlencode($name) . '?secret=' . rawurlencode($secret);
+        if ($title !== null) {
+            $url .= '&issuer=' . rawurlencode($title);
         }
 
-        return 'https://chart.googleapis.com/chart?chs='.$width.'x'.$height.'&chld='.$level.'|0&cht=qr&chl='.$urlencoded.'';
+        $tempDir = sys_get_temp_dir();
+        $fileName = $tempDir . '/' . uniqid() . '.png';
+        QRcode::png($url, $fileName, QR_ECLEVEL_L, 5.8);
+
+        $imageData = file_get_contents($fileName);
+        $base64Image = 'data:image/png;base64,' . base64_encode($imageData);
+
+        unlink($fileName);
+
+        return $base64Image;
     }
 
     public function verifyCode($secret, $code, $discrepancy = 1, $currentTimeSlice = null)

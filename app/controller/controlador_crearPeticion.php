@@ -48,9 +48,7 @@ define('DOCROOT', $_SERVER['DOCUMENT_ROOT'].'/infraestructura'); /* MODIFCAR AL 
         echo $tipo_imagen;
         if($tamano_imagen<=10000000000){
             if($tipo_imagen=="image/jpeg" ||$tipo_imagen=="image/jpg" ||$tipo_imagen=="image/png" ||$tipo_imagen=="image/gif" ||$tipo_imagen=="image/jpg" || $tipo_imagen=="application/pdf"  ){
-    
-            move_uploaded_file($_FILES['imagen']['tmp_name'][$x],DOCROOT .'/cartas/' .$nombre_imagen[$x]);        
-                
+            move_uploaded_file($_FILES['imagen']['tmp_name'][$x],DOCROOT .'/cartas/' .$nombre_imagen[$x]); 
                 }
         }
     }
@@ -62,9 +60,9 @@ echo "<br>",$nombre_imagen[0],"<br>",$nombre_imagen[1],"<br>",$nombre_imagen[2],
 if (isset($_POST['btn-enviar_peticion'])) {
     date_default_timezone_set('America/Bogota');
     $area_peticion=$_POST['area_peticion'];
-        if($area_peticion==1){
+        if ($area_peticion==1) {
             $equipos = $_POST['p_categoria'];
-            if($equipos==16){
+            if ($equipos==16) {
                 $peticion->setP_categoria($_POST['p_categoria']);
                 $peticion->setP_descripcion(htmlspecialchars($_POST['p_descripcion']));
                 $peticion->setP_cargarimagen($nombre_imagen[0]);
@@ -76,7 +74,7 @@ if (isset($_POST['btn-enviar_peticion'])) {
                 $peticion->setP_estado(1);
                 $peticion->setP_fechapeticion(date('Y-m-d H:i:s'));
                 $crud->crearPeticiones($peticion); 
-            }else{
+            }else {
                 $peticion->setP_categoria($_POST['p_categoria']);
                 $peticion->setP_descripcion(htmlspecialchars($_POST['p_descripcion']));
                 $peticion->setP_cargarimagen($nombre_imagen[0]);
@@ -89,7 +87,7 @@ if (isset($_POST['btn-enviar_peticion'])) {
                 $peticion->setP_fechapeticion(date('Y-m-d H:i:s'));
                 $crud->crearPeticiones($peticion);
             }
-        }elseif($area_peticion==2){
+        }elseif ($area_peticion==2) {
             $peticionMai->setProducto_peticionMai($_POST['productoMai']);
             $peticionMai->setReq_Justification($_POST['req_Justification']);
             $peticionMai->setReq_Name($_POST['req_Name']);
@@ -104,9 +102,9 @@ if (isset($_POST['btn-enviar_peticion'])) {
             
             $crudMai->crearPeticionesMai($peticionMai);
         }
-        if(isset($_SESSION['id_roles']) && $_SESSION['id_roles']==5){
+        if (isset($_SESSION['id_roles']) && $_SESSION['id_roles']==5) {
             header('Location:../../dashboard.php');
-        }else if(isset($_SESSION['rol']) && $_SESSION['rol']==4 || $_SESSION['rol']==2 ){
+        }else if (isset($_SESSION['rol']) && $_SESSION['rol']==4 || $_SESSION['rol']==2 ) {
             header('Location:../../dashboard_funcionarios.php');        
         }
 }

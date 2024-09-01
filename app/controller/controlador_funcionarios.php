@@ -8,17 +8,18 @@ require_once('../model/crud_funcionarios.php');
 require_once('../model/datos_funcionarios.php');
 require_once('../../public/lib/password.php');
 
-
-
 $crud= new CrudFuncionarios();
 $funcionario= new Funcionario();
 $listado_funcionarios=$crud->mostrarFuncionarios();
 
-
 //********************************************************************************************//
 //*******************************CONTROLADOR PARA CREAR fUNCIONARIO***************************//
 //********************************************************************************************//
-    
+ 
+if (isset($_POST['consultarsolicitudesPendientes']) && ($_POST['consultarsolicitudesPendientes']==1)) {
+    $crud->consultarsolicitudesPendientes($_POST['identificacion']);
+}
+
 if (isset($_POST['crear']) && ($_POST['crear']==1)) {
    
     $funcionario->setF_identificacion($_POST['f_identificacion']);
@@ -36,10 +37,8 @@ if (isset($_POST['crear']) && ($_POST['crear']==1)) {
     $funcionario->setDepartamentoInterno($_POST['f_departamentoInterno']);
     $funcionario->setF_validacion('1');
     
-
     $crud->crearFuncionario($funcionario);
-    
-    
+       
 }
 //********************************************************************************************//
 //*******************************TRAER TIPO DE VALIDACIÓN fUNCIONARIO***************************//
@@ -73,8 +72,6 @@ if (isset($_POST['enviarClaveF']) || (isset($_POST['enviarClaveF'] ) == 1 )){
 //**********************************CONTROLADOR PARA MODIFICAR ACCESOS*****************************//
 //*****************************************************************************************************//
 
-
-
 if(isset($_POST['modificaAcceso']) ){
 
     $funcionario->setIdAcceso($_POST['codigos']);
@@ -88,8 +85,6 @@ if(isset($_POST['modificaAcceso']) ){
     $crud->actualizarAcceso($funcionario);
 
 }
-
-
 
 //*****************************************************************************************************//
 //**********************************CONTROLADOR PARA MODIFICAR FUNCIONARIO*****************************//

@@ -1,0 +1,28 @@
+.contenedor {
+  display: flex;
+}
+
+.seccionFirst {
+  flex: 1;
+  background-color: #e0e0e0;
+  padding: 20px;
+}
+
+.seccionSecond {
+  flex: 1;
+  background-color: #f0f0f0;
+  padding: 20px;
+}
+
+@media (max-width: 600px) {
+  .contenedor {
+    flex-direction: column;
+  }
+}
+
+.section {
+  margin: 2px;
+  border: solid;
+  border-radius: 4px;
+  border-color: #7ac56d;
+}

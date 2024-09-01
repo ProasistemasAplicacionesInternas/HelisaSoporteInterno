@@ -23,6 +23,7 @@ if (isset($_POST['guardar'])) {
     $modifica->setCorreo($_POST['correo']); 
     $modifica->setIDusuarios($_SESSION['usuario']); 
     $modifica->setTipoValidacion($_POST['tipoValidacion']);
+    $modifica->setRoles($_POST['id_roles']);
     $resultado = $actualiza->actualizar($modifica);
     if ($resultado == 1){
         echo'<script type="text/javascript" charset="utf-8">

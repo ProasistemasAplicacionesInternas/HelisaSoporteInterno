@@ -1,0 +1,53 @@
+.modal {
+    display: none;
+    position: fixed;
+    margin: 0 auto;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.5);
+
+}
+
+.modal-content {
+    position: absolute;
+    margin: 0 auto;
+    top: 50%;
+    left: 50%;
+    width: 80%;
+    height: 70%;
+    transform: translate(-50%, -50%);
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 5px;
+}
+
+.Subtitulo {
+    margin: 0 auto;
+}
+.checkboxGroup {
+    text-align: center;
+}
+
+.checkboxGroup label {
+    display: inline-block;
+    margin-right: 40px; /* para ajustar el espacio entre los checkboxes */
+}
+
+#modificarC {
+   margin-left: 800px;
+   width: 100px;
+   margin-top: -118px;
+}
+
+ #guardarM {
+    width: 100px;
+    margin-left: 916px;
+    margin-top: 50px;
+} 
+
+.tituloBoton{
+    margin-left: 764px;
+    margin-top: -24px;
+}

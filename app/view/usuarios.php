@@ -80,7 +80,7 @@ $consultaUsuario = $cartilla->consultaUsuario();
 
 
                                 <td>
-                                    <button type="button" class="btn btn-primary btn-sm modifica-usuario" data-toggle="modal" data-target="#modifica-usuario" id="btn-modificarUsuario" name="btn-modificarUsuario" value="<?php echo $info->getIDusuario(); ?>"><span>Modificar</span></button>
+                                <button type="button" class="btn btn-primary btn-sm modifica-usuario" data-toggle="modal" data-target="#modifica-usuario" data-rol="<?php echo $info->getRoles(); ?>" id="btn-modificarUsuario" name="btn-modificarUsuario" value="<?php echo $info->getIDusuario(); ?>"><span>Modificar</span></button>
                                 </td>
                                 <td>
                                     <button type="button" class="btn btn-warning btn-sm borrar-qr" data-toggle="modal" data-target="#borrar-qr" id="btn-borrarQr" name="btn-borrarQr" value="<?php echo $info->getIDusuario(); ?>"><span>Borrar QR</span></button>
@@ -131,6 +131,21 @@ $consultaUsuario = $cartilla->consultaUsuario();
                                                         <select name="tipoValidacion" id="tipoValidacion" class="form-control">
                                                             <option value="1">Google Authenticator</option>
                                                             <option value="2">Token por Correo</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-12 mt-1">
+                                                        <label for="">Rol</label>
+                                                    </div>
+                                                    <div class="col-12">
+                                                        <select class="crea_data form-control info" name="id_roles" id="id_roles" required>
+                                                            <option value=""></option>
+                                                            <?php
+                                                            foreach ($matriz_roles as $rol) {
+                                                                echo "<option value='" . $rol["id_roles"] . "'>" . $rol["descripcion"] . "</option>";
+                                                            }
+                                                            ?>
                                                         </select>
                                                     </div>
                                                 </div>
@@ -230,7 +245,7 @@ $consultaUsuario = $cartilla->consultaUsuario();
                                                     <input type="password" id="pass_u" name="pass_u" class="form-control" placeholder="Contraseña" required>
                                                 </div>
                                                 <div class="modal-footer">
-                                                    <input type=button value="Verificar" id="validarUsuario" name="validarUsuario" class="col-3 mt-4 btn btn-outline-success btn btn-guardar" style= "font-size:11px;" data-dismiss="modal">
+                                                    <input type=button value="Verificar" id="validarUsuario" name="validarUsuario" class="col-3 mt-4 btn btn-outline-success btn btn-guardar" style="font-size:11px;" data-dismiss="modal">
                                                     <button type="button" class="btn btn-outline-secondary col-3 mt-4 " data-dismiss="modal">Cerrar</button>
                                                 </div>
                                             </form>
@@ -271,7 +286,7 @@ $consultaUsuario = $cartilla->consultaUsuario();
                                                     <label id="mensaje"></label>
                                                 </div>
                                                 <div class="modal-footer">
-                                                    <input type=button value="Guardar" id="passUsuario" name="passUsuario" class="col-3 mt-4 btn btn-outline-primary btn btn-guardar" style= "font-size:11px;">
+                                                    <input type=button value="Guardar" id="passUsuario" name="passUsuario" class="col-3 mt-4 btn btn-outline-primary btn btn-guardar" style="font-size:11px;">
                                                     <button type="button" class="btn btn-outline-secondary col-3 mt-4" data-dismiss="modal">Cerrar</button>
                                                 </div>
                                             </form>

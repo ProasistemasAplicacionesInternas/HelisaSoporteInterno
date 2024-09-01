@@ -74,8 +74,10 @@ header {
     background-color: #D9007F;
 }
 
-
-/*----checkbox-----*/
+#traCategoria{
+    color: #000; 
+    background-color: #e7dfdf; 
+}
 
 .programa {
     position: relative;

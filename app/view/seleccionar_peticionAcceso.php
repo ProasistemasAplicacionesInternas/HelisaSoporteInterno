@@ -100,7 +100,7 @@ error_reporting(E_ALL);
                             
                             <div class="row">
                                 <div class="col-12">
-                                    <label for="">Descripcion</label> 
+                                    <label for="">Descripción</label> 
                                     <textarea id="descripcion" name="descripcion" class="form-control col-6 data" readonly><?php echo $descripcion;?></textarea>
                                 </div>
                             </div>
@@ -109,12 +109,12 @@ error_reporting(E_ALL);
                                 <div class="col-12">
                                     <label>Tipo</label>
                                     <input type="text" class="form-control data" value="<?php switch($tipo){
-                                        case 0:echo "Modificacion";break;
+                                        case 0:echo "Modificación";break;
                                         case 1:echo "Activación";break;
-                                        case 2: echo "Inactivacion";
-                                        case 3: echo "Novedades";
-                                        case 4: echo "Reactivacion";
-                                        break;Default:echo "Modificacion";}?>" readonly>
+                                        case 2: echo "Inactivación";break;
+                                        case 3: echo "Novedades";break;
+                                        case 4: echo "Reactivación";break;
+                                        Default:echo "Modificación";}?>" readonly>
                                 </div>
                             </div>
 

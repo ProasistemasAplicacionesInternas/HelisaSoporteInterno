@@ -31,7 +31,6 @@ $('#criterio').trigger('change');
 
 
 $(function() {
-
     $('#fechaFiltro').daterangepicker({
         "locale": {
             "format": "DD/MM/YYYY",
@@ -67,10 +66,7 @@ $(function() {
             ],
             "firstDay": 1
         },
-
-        "startDate": "01/04/2022",
-        "endDate": "30/04/2022",
-        "opens": "rigth"
+        "opens": "right"
     }, function rango(start, end) {
         var inicio = start.format('DD-MM-YYYY');
         var final = end.format('DD-MM-YYYY');
@@ -78,6 +74,4 @@ $(function() {
         document.getElementById('fechaFinal').value = final;
         console.log(document.getElementById('fechaInicial').value = inicio);
     });
-
-
 });

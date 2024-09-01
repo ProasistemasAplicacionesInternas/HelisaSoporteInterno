@@ -40,10 +40,25 @@ if (isset($_SESSION['init'])) {
             <div class="col-md-2 col d-flex justify-content-end">
                 <span id='usuario'><?= $_SESSION['usuario']; ?></span>
                 <a href="../model/datos_funcionarios.php" data-toggle="modal" data-target="#datos-funcionario" data-backdrop="static"><img src="public/img/configura.png" alt=""></a>
+                <a href="#" onclick="showBox(); closeBoxOnOutsideClick();"><img class="icon" src="public/img/iconoVersiones.png"></a>
                 <a href="app/controller/cerrar_loginF.php"><img src="public/img/salir.png" alt=""></a>
             </div>
         </div>
     </header>
+    <div id="caja" style="display:none;">
+        <div class="fila">
+            <img class="icons" id="datoPlataforma" src="public/img/datoPlataforma.png"><span id="plataforma"></span>
+        </div>
+        <div class="fila">
+            <img class="icons" id="datoAdmin" src="public/img/datoAdmin.png"><span id="administrador"></span>
+        </div>
+        <div class="fila">
+            <img class="icons" id="datoVersion" src="public/img/datoVersion.png" alt=""><span id="version"></span>
+        </div>
+        <div class="fila">
+            <img class="icons" id="datoFecha" src="public/img/datoFecha.png" alt=""><span id="fechaVersion"></span>
+        </div>
+    </div>
     <main class="container-fluid">
         <div class="row">
 
@@ -153,7 +168,7 @@ if (isset($_SESSION['init'])) {
     <script src="public/js/cambioContrasena_funcionarios.js?hh"></script>
     <script src="public/js/bloqueoTeclas.js"></script>
     <script src="public/js/contenidoBoardFuncionarios.js"></script>
-
+    <script src="public/js/version.js"></script>
 
 </body>
 <script type="text/javascript">

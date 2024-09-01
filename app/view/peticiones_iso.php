@@ -60,6 +60,7 @@
                         <th>Descripción</th>
                         <th>Fecha Atendido</th>
                         <th>Usuario Atendio</th>
+                        <th>Estado</th>
                         <th>Conclusiones</th>
                         <?php if ($_SESSION['id_roles'] == 8 || $_SESSION['id_roles'] == 1 || $_SESSION['id_roles'] == 7 || $_SESSION['id_roles'] == 5) { ?>
                             <th>Imagen</th>
@@ -93,6 +94,9 @@
                                 </td>
                                 <td>
                                     <?php echo $datos->getP_usuarioatiende(); ?>
+                                </td>
+                                <td>
+                                    <?php echo $datos->getP_estado(); ?>
                                 </td>
                                 <td>
                                     <?php echo $datos->getP_conclusiones(); ?>

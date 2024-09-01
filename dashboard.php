@@ -2,6 +2,7 @@
 ini_set("session.cookie_lifetime", 180000);
 ini_set("session.gc_maxlifetime", 180000);
 
+
 session_start();
 if (!isset($_SESSION['usuario']) || empty($_SESSION['usuario'])) {
     header('location:login.php');
@@ -28,23 +29,40 @@ if (!isset($_SESSION['status_connect'])) {
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/all.css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/v4-shims.css">
     <link rel="icon" type="image/png" href="public/img/ico.png" />
+    <script src="https://kit.fontawesome.com/af5bdaf378.js" crossorigin="anonymous"></script>
 </head>
 
 <body>
     <header class="container-fluid">
         <div class="row">
             <div class="col-md-10 align-self-center">
-                <img src="public/img/logo.png" alt="">
+                <img src="public/img/logoHelisa.png" alt="">
             </div>
             <div class="col-md-2 col d-flex justify-content-end">
-                <span><?= $_SESSION['usuario']; ?></span>
+                <span>
+                    <?= $_SESSION['usuario']; ?>
+                </span>
                 <a href="../model/datos_usuario.php" data-toggle="modal" data-target="#datos-usuario" data-backdrop="static"><img src="public/img/configura.png" alt=""></a>
+                <a href="#" onclick="showBox(); closeBoxOnOutsideClick();"><img class="icon" src="public/img/iconoVersiones.png"></a>
                 <a href="app/controller/cerrar.php"><img src="public/img/salir.png" alt=""></a>
             </div>
 
         </div>
     </header>
-
+    <div id="caja" style="display:none;">
+        <div class="fila">
+            <img class="icons" id="datoPlataforma" src="public/img/datoPlataforma.png"><span id="plataforma"></span>
+        </div>
+        <div class="fila">
+            <img class="icons" id="datoAdmin" src="public/img/datoAdmin.png"><span id="administrador"></span>
+        </div>
+        <div class="fila">
+            <img class="icons" id="datoVersion" src="public/img/datoVersion.png" alt=""><span id="version"></span>
+        </div>
+        <div class="fila">
+            <img class="icons" id="datoFecha" src="public/img/datoFecha.png" alt=""><span id="fechaVersion"></span>
+        </div>
+    </div>
     <main class="container-fluid">
         <div class="row">
             <div class="col-2 mt-3 navega">
@@ -58,7 +76,7 @@ if (!isset($_SESSION['status_connect'])) {
 
                             <a href="#" id="solicitudes_internasAdmin"><img src="public/img/soporte.png" alt="" class="ml-3" onclick:>Aplicaciones</a>
 
-                            <a href="#" id="solicitudes_infraestructuraAdmin""><img src="public/img/soporte.png" alt="" class="ml-3" onclick:>Infraestructura</a>
+                            <a href="#" id="solicitudes_infraestructuraAdmin""><img src=" public/img/soporte.png" alt="" class="ml-3" onclick:>Infraestructura</a>
                         </div>
                     </div>
                     <div class="dropdown">
@@ -68,7 +86,7 @@ if (!isset($_SESSION['status_connect'])) {
 
                         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                             <a href="#" id="liberar_maiAdmin"><img src="public/img/atendiendo.png" alt="" class="ml-3" onclick:>Aplicaciones</a>
-                            <a href="#" id="liberarAdmin"><img src="public/img/atendiendo.png" alt="" class="ml-3" onclick:>HelisaSoporteInterno</a>
+                            <a href="#" id="liberarAdmin"><img src="public/img/atendiendo.png" alt="" class="ml-3" onclick:>Infraestructura</a>
                         </div>
                     </div>
                     <?php if ($_SESSION['id_roles'] == 3 || $_SESSION['id_roles'] == 5) {
@@ -161,7 +179,7 @@ if (!isset($_SESSION['status_connect'])) {
                             ) {
                                 echo '<a href="#" id="comentariosPeticiones" class="dropdown-item">
                                         <img src="public/img/Comentarios.png" alt="" class="ml-3">
-                                        Comentarios
+                                        Comentarios-ISO
                                     </a>';
                             }
                             ?>
@@ -293,6 +311,14 @@ if (!isset($_SESSION['status_connect'])) {
                             <a href="#" id="plataformasInactivas"><i alt="" class="fa fa-circle-o ml-3 " onclick:></i><span class="ml-2" s>Plataformas Inactivas</span></a>
                         </div>
                     </div>
+                    <div class="dropdown">
+                        <?php if ($_SESSION['id_roles'] == 1) {
+                            echo '<a href=#"" id="uvts"><img class="ml-3" style="padding-left:5px; padding-right:5px;"><i class="fa-solid fa-stamp"  class="ml-3" style="font-size: 18px;margin: 0% 2%;color: #6b6b6b;"></i><span>Uvts</span></a>';
+                        } ?>
+                        <?php if ($_SESSION['id_roles'] == 1) {
+                            echo '<a href=#"" id="categories"><img class="ml-3" style="padding-left:5px; padding-right:5px;"><i class="fa-solid fa-chalkboard-user"  class="ml-3" style="font-size: 18px;margin: 0% 2%;color: #6b6b6b;"></i><span> Categorías</span></a>';
+                        } ?>
+                    </div>
                 </nav>
             </div>
 
@@ -325,13 +351,21 @@ if (!isset($_SESSION['status_connect'])) {
                 $('#infos2').load('app/view/liberar_soportes.php'); //actualizacion constante de la pestaña liberar
                 $('#infos3').load('app/view/consultar_peticiones.php'); //actualizacion constante de la pestaña soportes
                 $('#infoServicios').load('app/view/contenido_board.php'); //actualizacion constante de la pantalla principal informativa
-                $('#infoRequerimientos').load('app/view/requerimientos.php');
                 $('#infosSolicitudesInternas').load('app/view/solicitudes_internas.php');
                 $('#infosMai').load('app/view/liberar_solicitudesmai.php');
             }, 1000);
         });
     </script>
+    <script>
+    $(document).ready(function(){
+        $('#actualizar').click(function(){
+            $('#tabla-body').load('app/view/requerimientos.php #tabla-body');
+        });
+    });
+</script>
+
     <script src="public/js/valida_usuario.js?jk"></script>
+    <script src="public/js/version.js"></script>
 </body>
 
 </html>

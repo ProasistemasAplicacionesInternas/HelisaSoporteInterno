@@ -9,8 +9,9 @@ class crudActivos{
 //**********************************************************************************************//
 	
 	public function crearActivos($create){
+		try {
 		$db=conectar::acceso();
-		$validacion_activo=$db->prepare('SELECT codigo_activo,serial_activo FROM activos_internos WHERE codigo_activo=:codigo');
+		$validacion_activo=$db->prepare('SELECT codigo_activo, serial_activo FROM activos_internos WHERE codigo_activo=:codigo');
 		// OR serial_activo=:seriales
 		$validacion_activo->bindValue('codigo',$create->getAf_codigo());
 		//$validacion_activo->bindValue('seriales',$create->getAf_serial());
@@ -21,7 +22,7 @@ class crudActivos{
 		}else if ($resultadoVal==0){
 
 				$db=conectar::acceso();
-				$crear_activo=$db->prepare("INSERT INTO activos_internos(codigo_activo,serial_activo,nombre_activo,estado_activo, marca_activo, modelo_activo, fecha_compra, grupo_activo, area_activo, ubicacion_activo, responsable_activo, fecha_asignacion, observaciones_activo, ram_activo, disco_activo, procesador_activo, licencia_office, licencia_antivirus, aplicaciones_activo, licencia_sistema, dominio, sistema_operativo, imagen ) VALUES(:codigo_activo, :serial_activo, :nombre_activo, :estado_activo, :marca_activo, :modelo_activo, :fecha_compra, :grupo_activo, :area_activo, :ubicacion_activo,:responsable_activo, :fecha_asignacion, :observaciones_activo, :ram_activo, :disco_activo, :procesador_activo, :licencia_office, :licencia_antivirus, :aplicaciones_activo, :licencia_sistema, :dominio, :sistema_operativo, :imagen)");
+				$crear_activo=$db->prepare("INSERT INTO activos_internos(codigo_activo,serial_activo,nombre_activo,estado_activo, marca_activo, modelo_activo, fecha_compra, grupo_activo, ubicacion_activo, responsable_activo, fecha_asignacion, observaciones_activo, ram_activo, disco_activo, procesador_activo, licencia_office, licencia_antivirus, hostName, aplicaciones_activo, licencia_sistema, dominio, sistema_operativo, imagen, valor, tipo_activo, vida_util, condicion, id_categoria, sede, centro_de_costos) VALUES(:codigo_activo, :serial_activo, :nombre_activo, :estado_activo, :marca_activo, :modelo_activo, :fecha_compra, :grupo_activo, :ubicacion_activo,:responsable_activo, :fecha_asignacion, :observaciones_activo, :ram_activo, :disco_activo, :procesador_activo, :licencia_office, :licencia_antivirus, :hostName, :aplicaciones_activo, :licencia_sistema, :dominio, :sistema_operativo, :imagen, :valor, :tipo_activo, :vida_util, :condicion, :id_categoria, :sede, :centro_de_costos)");
 						$crear_activo->bindValue('codigo_activo',$create->getAf_codigo());
 						$crear_activo->bindValue('serial_activo',$create->getAf_serial());
 						$crear_activo->bindValue('nombre_activo',$create->getAf_nombre());
@@ -30,7 +31,7 @@ class crudActivos{
 						$crear_activo->bindValue('modelo_activo',$create->getAf_modelo());
 						$crear_activo->bindValue('fecha_compra',$create->getAf_fechaCompra());
 						$crear_activo->bindValue('grupo_activo',$create->getAf_grupo());
-						$crear_activo->bindValue('area_activo',$create->getAf_area());
+						// $crear_activo->bindValue('area_activo',$create->getAf_area());
 						$crear_activo->bindValue('ubicacion_activo',$create->getAf_ubicacion());
 						$crear_activo->bindValue('responsable_activo',$create->getAf_funcionario());
 						$crear_activo->bindValue('fecha_asignacion',$create->getAf_fechaAsignacion()); 
@@ -38,6 +39,7 @@ class crudActivos{
 						$crear_activo->bindValue('ram_activo',$create->getAf_ram());
 						$crear_activo->bindValue('disco_activo',$create->getAf_disco());
 						$crear_activo->bindValue('procesador_activo',$create->getAf_procesador());
+						$crear_activo->bindValue('hostName',$create->gethostName());
 						$crear_activo->bindValue('licencia_office',$create->getAf_licenciaOffice());
 						$crear_activo->bindValue('licencia_antivirus',$create->getAf_licenciaAntivirus());
 						$crear_activo->bindValue('aplicaciones_activo',$create->getAf_aplicaciones());
@@ -45,6 +47,13 @@ class crudActivos{
 						$crear_activo->bindValue('dominio',$create->getAf_dominio());
 						$crear_activo->bindValue('sistema_operativo',$create->getAf_sistemaOperativo());
 						$crear_activo->bindValue('imagen',$create->getImagenactivo());
+						$crear_activo->bindValue('valor',$create->getcostoCompra());
+						$crear_activo->bindValue('tipo_activo',$create->gettipoAct());
+						$crear_activo->bindValue('vida_util',$create->getvidaUtil());
+						$crear_activo->bindValue('condicion',$create->getestadoAct());
+						$crear_activo->bindValue('id_categoria',$create->gettraCategoria());
+						$crear_activo->bindValue('sede',$create->getsede());
+						$crear_activo->bindValue('centro_de_costos',$create->getCentroCostos());
 						$crear_activo->execute();
 						$ultimo_id = $db->lastInsertId();
 
@@ -71,10 +80,15 @@ class crudActivos{
 							$crea_traslado->bindValue('t_descripcion',$descripcion);            
 							$crea_traslado->bindValue('estado',3);            
 							$crea_traslado->execute();
-				}else{
-					echo 0;
-				}
-			}
+			 } else {
+                echo 0; // Fallo en la inserción
+            }
+        }
+	} catch (Exception $e) {
+		// Manejo de excepciones, puedes registrar el error o mostrar un mensaje al usuario
+		echo "Error en consultaCompleta: " . $e->getMessage();
+		return []; // Retorna un arreglo vacío en caso de error
+	}
 			
 	}
 
@@ -85,8 +99,7 @@ class crudActivos{
 	public function modificarActivos($update){
 
 					$db=conectar::acceso();
-					$modificar_activo=$db->prepare("UPDATE activos_internos SET serial_activo=:serial_activo, nombre_activo=:nombre_activo, estado_activo=:estado_activo, marca_activo=:marca_activo, modelo_activo=:modelo_activo, fecha_compra=:fecha_compra, grupo_activo=:grupo_activo, area_activo=:area_activo, ubicacion_activo=:ubicacion_activo, observaciones_activo=:observaciones_activo, ram_activo=:ram_activo, disco_activo=:disco_activo, procesador_activo=:procesador_activo, licencia_office=:licencia_office, licencia_antivirus=:licencia_antivirus, aplicaciones_activo=:aplicaciones_activo, licencia_sistema=:licencia_sistema, dominio=:dominio, sistema_operativo=:sistema_operativo, imagen=:imagen WHERE codigo_activo=:codigo_activo");
-
+					$modificar_activo=$db->prepare("UPDATE activos_internos SET serial_activo=:serial_activo, nombre_activo=:nombre_activo, estado_activo=:estado_activo, marca_activo=:marca_activo, modelo_activo=:modelo_activo, fecha_compra=:fecha_compra, grupo_activo=:grupo_activo, ubicacion_activo=:ubicacion_activo, observaciones_activo=:observaciones_activo, ram_activo=:ram_activo, disco_activo=:disco_activo, procesador_activo=:procesador_activo, licencia_office=:licencia_office, licencia_antivirus=:licencia_antivirus, hostName=:hostName, aplicaciones_activo=:aplicaciones_activo, licencia_sistema=:licencia_sistema, dominio=:dominio, sistema_operativo=:sistema_operativo, imagen=:imagen, valor=:valor, tipo_activo=:tipo_activo, vida_util=:vida_util, condicion=:condicion, id_categoria=:id_categoria, sede=:sede, centro_de_costos=:centro_de_costos WHERE codigo_activo=:codigo_activo");
 					$modificar_activo->bindValue('codigo_activo',$update->getAf_codigo());
 					$modificar_activo->bindValue('serial_activo',$update->getAf_serial());
 					$modificar_activo->bindValue('nombre_activo',$update->getAf_nombre());
@@ -95,14 +108,13 @@ class crudActivos{
 					$modificar_activo->bindValue('modelo_activo',$update->getAf_modelo());
 					$modificar_activo->bindValue('fecha_compra',$update->getAf_fechaCompra());
 					$modificar_activo->bindValue('grupo_activo',$update->getAf_grupo());
-					$modificar_activo->bindValue('area_activo',$update->getAf_area());
+					// $modificar_activo->bindValue('area_activo',$update->getAf_area());
 					$modificar_activo->bindValue('ubicacion_activo',$update->getAf_ubicacion());
-					//$modificar_activo->bindValue('responsable_activo',$update->getAf_funcionario());
-					//$modificar_activo->bindValue('fecha_asignacion',$update->getAf_fechaAsignacion());
 					$modificar_activo->bindValue('observaciones_activo',$update->getAf_observaciones());
 					$modificar_activo->bindValue('ram_activo',$update->getAf_ram());
 					$modificar_activo->bindValue('disco_activo',$update->getAf_disco());
 					$modificar_activo->bindValue('procesador_activo',$update->getAf_procesador());
+					$modificar_activo->bindValue('hostName',$update->gethostName());
 					$modificar_activo->bindValue('licencia_office',$update->getAf_licenciaOffice());
 					$modificar_activo->bindValue('licencia_antivirus',$update->getAf_licenciaAntivirus());
 					$modificar_activo->bindValue('aplicaciones_activo',$update->getAf_aplicaciones());
@@ -110,6 +122,13 @@ class crudActivos{
 					$modificar_activo->bindValue('dominio',$update->getAf_dominio());
 					$modificar_activo->bindValue('sistema_operativo',$update->getAf_sistemaOperativo());
 					$modificar_activo->bindValue('imagen',$update->getImagenactivo());
+					$modificar_activo->bindValue('valor',$update->getcostoCompra());
+					$modificar_activo->bindValue('tipo_activo',$update->gettipoAct());
+					$modificar_activo->bindValue('vida_util',$update->getvidaUtil());
+					$modificar_activo->bindValue('condicion',$update->getestadoAct());
+					$modificar_activo->bindValue('id_categoria',$update->gettraCategoria());
+					$modificar_activo->bindValue('sede',$update->getsede());
+					$modificar_activo->bindValue('centro_de_costos',$update->getCentroCostos());
 					$modificar_activo->execute();
 					//historial de movimientos 
 					if ($modificar_activo) {
@@ -138,7 +157,7 @@ class crudActivos{
 	public function consultarActivos(){
 					$db=conectar::acceso();
 					$lista_activos=[];
-					$consultar_activo=$db->query("SELECT id_activo, codigo_activo, serial_activo, nombre_activo, estado_activo, marca_activo, modelo_activo, fecha_compra, grupo_activo, area_activo, ubicacion_activo, responsable_activo, fecha_asignacion, observaciones_activo, ram_activo, disco_activo, procesador_activo, licencia_office, licencia_antivirus, aplicaciones_activo, licencia_sistema, dominio, sistema_operativo, estado.descripcion AS estado, funcionarios.nombre AS responsable, imagen  FROM activos_internos LEFT JOIN estado on id_estado=estado_activo LEFT JOIN funcionarios ON identificacion=responsable_activo");
+					$consultar_activo=$db->query("SELECT id_activo, codigo_activo, serial_activo, nombre_activo, estado_activo, marca_activo, modelo_activo, fecha_compra, grupo_activo, ubicacion_activo, responsable_activo, fecha_asignacion, observaciones_activo, ram_activo, disco_activo, procesador_activo, licencia_office, licencia_antivirus, hostName, aplicaciones_activo, licencia_sistema, dominio, sistema_operativo, estado.descripcion AS estado, funcionarios.nombre AS responsable, imagen, valor, tipo_activo, vida_util, condicion, id_categoria, sede FROM activos_internos LEFT JOIN estado on id_estado=estado_activo LEFT JOIN funcionarios ON identificacion=responsable_activo");
 					//$i = 0;
 					foreach ($consultar_activo->fetchALL() as $listado) {
 						
@@ -153,7 +172,7 @@ class crudActivos{
 						$consulta->setAf_modelo($listado['modelo_activo']);
 						$consulta->setAf_fechaCompra($listado['fecha_compra']);
 						$consulta->setAf_grupo($listado['grupo_activo']);
-						$consulta->setAf_area($listado['area_activo']);
+						// $consulta->setAf_area($listado['area_activo']);
 						$consulta->setAf_ubicacion($listado['ubicacion_activo']);
 						$consulta->setAf_funcionario($listado['responsable']);
 						$consulta->setIdentidad_funcionario($listado['responsable_activo']);
@@ -162,6 +181,7 @@ class crudActivos{
 						$consulta->setAf_ram($listado['ram_activo']);
 						$consulta->setAf_disco($listado['disco_activo']);
 						$consulta->setAf_procesador($listado['procesador_activo']);
+						$consulta->sethostName($listado['hostName']);
 						$consulta->setAf_licenciaOffice($listado['licencia_office']);
 						$consulta->setAf_licenciaAntivirus($listado['licencia_antivirus']);
 						$consulta->setAf_dominio($listado['dominio']);
@@ -169,7 +189,12 @@ class crudActivos{
 						$consulta->setAf_licenciaSO($listado['licencia_sistema']);
 						$consulta->setAf_sistemaOperativo($listado['sistema_operativo']);
 						$consulta->setImagenactivo($listado['imagen']);
-						//$i++;
+						$consulta->setcostoCompra($listado['valor']);
+						$consulta->settipoAct($listado['tipo_activo']);
+						$consulta->setvidaUtil($listado['vida_util']);
+						$consulta->setestadoAct($listado['condicion']);
+						$consulta->settraCategoria($listado['id_categoria']);
+						$consulta->setsede($listado['sede']);
 						$lista_activos[]=$consulta;
 					}
 					return $lista_activos;
