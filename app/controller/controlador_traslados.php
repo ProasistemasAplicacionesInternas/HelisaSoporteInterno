@@ -33,6 +33,7 @@ $traslado = new traslados();
 
 		header('Location: ../../dashboard.php');
 	}
+	try{
 	if (isset($_POST['aceptaActivo']) &&($_POST['aceptaActivo']) == 1 ) {
 		$traslado->setId_traslado($_POST['activo']);
 		$traslado->setFecha_traslado($_POST['fecha']);
@@ -44,5 +45,8 @@ $traslado = new traslados();
 	}
 	if(isset($_POST['consultarPendientes']) && ($_POST['consultarPendientes']) == 1){
 		$crud->existenTrasladosPorEstado($_POST['af_idB']);
+	}
+	} catch (Exception $e) {
+		echo 'Message could not be sent. Mailer Error: ', $e->getMessage();
 	}
 ?>

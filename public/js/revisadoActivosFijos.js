@@ -31,9 +31,9 @@ $(document).ready(function(){
     let row = checkbox.closest('tr');
     if (row) { // Agrega esta verificación para evitar errores
       let codigo = row.querySelector('td:first-child').innerText;
-      let nombre = row.querySelector('td:nth-child(3)').innerText;
+      // let nombre = row.querySelector('td:nth-child(3)').innerText;
       let fecha = row.querySelector('td:nth-child(4)').innerText;
-      let infoActivo = 'activo=' + codigo + '&nombre=' + nombre + '&fecha=' + fecha + '&aceptaActivo=1';
+      let infoActivo = 'activo=' + codigo + '&fecha=' + fecha + '&aceptaActivo=1';
       $.ajax({
         type: 'POST',
         url: 'app/controller/controlador_traslados.php',
