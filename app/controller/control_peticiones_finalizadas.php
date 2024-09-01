@@ -220,6 +220,8 @@
     }
 
     if(isset($_POST['btn-consultarFechaI'])){
+    try {
+        //code...
     
         $inicio = date('Y-m-d 00:00:00', strtotime($_POST['fechaInicial']));
         $final = date('Y-m-d 23:59:59', strtotime($_POST['fechaFinal']));
@@ -227,8 +229,8 @@
         $db=conectar::acceso();
         $listaConsulta=[];
 
-        $seleccion=$db->prepare('SELECT  numero_peticion,  DATE_FORMAT(fecha_peticion,"%d-%m-%Y %H:%i"),DATE_FORMAT(fecha_atendido,"%d-%m-%Y %H:%i"), usuario,categorias.nombre_categoria, descripcion, usuario_atiende, conclusiones,nivel_encuesta,imagen, imagen2 FROM peticiones 
-        LEFT JOIN categorias ON id_categoria=categoria 
+        $seleccion=$db->prepare('SELECT  numero_peticion, estado.descripcion AS estado, DATE_FORMAT(fecha_peticion,"%d-%m-%Y %H:%i"),DATE_FORMAT(fecha_atendido,"%d-%m-%Y %H:%i"), usuario,categorias.nombre_categoria, peticiones.descripcion, usuario_atiende, conclusiones,nivel_encuesta,imagen, imagen2 FROM peticiones 
+        LEFT JOIN estado ON estado.id_estado=peticiones.estado LEFT JOIN categorias ON id_categoria=categoria 
         WHERE fecha_peticion BETWEEN :fechaInicial AND :fechaFinal AND (estado=:estadoD OR estado=:estadoC) AND id_categoria=:categorias');
         $seleccion->bindValue('estadoC','4');
         $seleccion->bindValue('estadoD','2');
@@ -239,6 +241,7 @@
         
         foreach($seleccion->fetchAll() as $listado){
             $consulta= new Peticion();
+            $consulta->setP_estado($listado['estado']);
             $consulta->setP_nropeticion($listado['numero_peticion']);       
             $consulta->setP_fechapeticion($listado['DATE_FORMAT(fecha_peticion,"%d-%m-%Y %H:%i")']);
             $consulta->setP_usuario($listado['usuario']);
@@ -254,6 +257,9 @@
             $listaConsulta[]=$consulta;
                 
         }
+    } catch (Exception $e) {
+        echo " Error : ". $e->getMessage();
+    }
         
     }else if(isset($_POST['btn-consultarTicketI'])){
         $db=conectar::acceso();
