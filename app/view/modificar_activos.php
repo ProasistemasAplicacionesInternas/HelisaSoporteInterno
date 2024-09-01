@@ -55,12 +55,13 @@ $vidaUtil = $_POST['vidaUtil'];
 $estadoAct = $_POST['estadoAct'];
 $traCategoria = $_POST['traCategoria'];
 $sede = $_POST['sede'];
-
+$centroCostosValue=$_POST['centroCostos'];
 
 require_once('../controller/controlador_activosFijos.php');
 require('../controller/controlador_areas.php');
 require('../controller/controlador_funcionarios.php');
 require('../controller/controlador_gruposActivos.php');
+require_once('../controller/controlador_centroCostos.php');
 
 ?>
 <!DOCTYPE html>
@@ -169,22 +170,48 @@ require('../controller/controlador_gruposActivos.php');
                                 </select>
                             </div>
                         </div>
-
-                        <div class="col-3">
+                        <div class="col-4">
+                            <div class="form-group">
+                                <label>Centro de Costos</label>
+                                <select class="form-control info" id="f_centroCostosModificar" name="f_centroCostosModificar" required>
+                                    <?php if ($datosListados['id_centroCostos'] == 0) {
+                                        echo "<option value='' selected>Seleccione Centro de Costos</option>";
+                                    } else {
+                                        echo "<option value='" . $datosListados['id_centroCostos'] . "' selected>" . $datosListados['descripcion_centroCostos'] . "</option>";
+                                    }
+                                    ?>
+                                    <?php foreach ($centroDeCostos as $centros): ?>
+                                        <option value='<?php echo $centros['id_centroCostos']; ?>'><?php echo $centros['descripcion']; ?></option>
+                                    <?php endforeach ?>
+                                </select> 
+                            </div>
+                        </div>
+                        <div class="col-2">
+                            <div class="form-group">
+                                <label>Código</label>
+                                <input type="text" id="centroCostosCodigo" name="centroCostosCodigo" class="form-control info" value="<?php echo $centroCostosValue; ?>" readonly>
+                                <input type="hidden" id="centroCostosid" name="centroCostosid" class="form-control info" value="<?php echo $centroCostosValue; ?>" readonly>
+                            </div>
+                        </div>
+                        <!-- <div class="col-3">
                             <div class="form-group">
                                 <label>Ubicación/Area</label>
-                                <select class="form-control info" id="af_area" name="af_area" value="<?php echo $codigoArea ?>" readonly>
+                                <select class="form-control info" id="af_area" name="af_area" value="<?php //echo $codigoArea 
+                                                                                                        ?>" readonly>
 
-                                    <?php if ($codigoArea == 0) {
-                                        echo
-                                        "<option value='" . $codigoArea = "27" . "'>" . $nombreArea = "Infraestructura" . "</option>";
-                                    } else {
-                                        echo "<option value='" . $codigoArea . "'>" . $nombreArea . "    </option>";
-                                    } ?>
+                                    <?php //if ($codigoArea == 0) {
+                                    //echo
+                                    //"<option value='" . $codigoArea = "27" . "'>" . $nombreArea = "Infraestructura" . "</option>";
+                                    //} else {
+                                    //echo "<option value='" . $codigoArea . "'>" . $nombreArea . "    </option>";
+                                    //} 
+                                    ?>
 
                                 </select>
                             </div>
-                        </div>
+                        </div> -->
+                    </div>
+                    <div class="row">
                         <div class="col-3">
                             <div class="form-group">
                                 <label>Ubicacion Activo</label>
@@ -205,8 +232,6 @@ require('../controller/controlador_gruposActivos.php');
                                 </select>
                             </div>
                         </div>
-                    </div>
-                    <div class="row">
                         <div class="col-4">
                             <div class="form-group">
                                 <label>Area de Creacion</label>
@@ -231,6 +256,8 @@ require('../controller/controlador_gruposActivos.php');
                                 </select>
                             </div>
                         </div>
+                    </div>
+                    <div class="row">
                         <div class="col-3">
                             <div class="form-group">
                                 <label>Categoría</label>
@@ -252,8 +279,6 @@ require('../controller/controlador_gruposActivos.php');
                                 </select>
                             </div>
                         </div>
-                    </div>
-                    <div class="row">
                         <div class="col-3">
                             <div class="form-group">
                                 <label>Costo de compra</label>
@@ -270,6 +295,14 @@ require('../controller/controlador_gruposActivos.php');
                         </div>
                         <div class="col-3">
                             <div class="form-group">
+                                <label>Sede del activo</label>
+                                <input type="text" id="sede" name="sede" class="form-control info" maxlength="100" autocomplete="off" value="<?php echo $sede ?>" required>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-3">
+                            <div class="form-group">
                                 <label>Vida útil</label>
                                 <div class="input-group">
                                     <input type="text" id="vidaUtil" name="vidaUtil" class="form-control info" autocomplete="off" value="<?php echo $vidaUtil ?>" required>
@@ -279,15 +312,7 @@ require('../controller/controlador_gruposActivos.php');
                                 </div>
                             </div>
                         </div>
-                        <div class="col-3">
-                            <div class="form-group">
-                                <label>Sede del activo</label>
-                                <input type="text" id="sede" name="sede" class="form-control info" maxlength="100" autocomplete="off" value="<?php echo $sede ?>" required>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-12">
+                        <div class="col-9">
                             <div class="form-group">
                                 <label>Condición actual</label>
                                 <select class="form-control info" id="estadoAct" name="estadoAct">
@@ -460,6 +485,7 @@ require('../controller/controlador_gruposActivos.php');
     <script src="../../public/js/bloqueoTeclas.js"></script>
     <script src="../../public/js/modificarActivo.js"></script>
     <script src="../../public/js/valida_imgenModifica.js"></script>
+    <script src="../../public/js/centro_de_costos.js"></script>
     <script src="../../public/js/buscarCategoria.js"></script>
 
 </body>

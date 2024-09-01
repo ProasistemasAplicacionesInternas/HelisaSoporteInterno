@@ -90,6 +90,27 @@ $('#f_cargo').on('change', function(){
     }
 
 })
+$('#f_centroCostosModificar').on('change', function(){
+
+    if($('#f_centroCostosModificar').val() != 0 && $('#f_centroCostosModificar').val() != null && $('#f_centroCostosModificar').val() != undefined && $('#f_centroCostosModificar').val() != ''){
+        var params = {
+            consultarCentroCostosModifica: + $('#f_centroCostosModificar').val(),
+            consultarcodigo: 1
+        };
+
+        $.ajax({
+            type: 'POST',
+            url: '../controller/controlador_centroCostos.php',
+            data: params,
+        }).done(function(data){
+            var response = JSON.parse(data); 
+            console.log(response);
+            $('#centroCostosCodigo').val(response.codigo);  
+            $('#centroCostosid').val(response.otroValor);
+        })
+        
+    }
+})
 
 
 

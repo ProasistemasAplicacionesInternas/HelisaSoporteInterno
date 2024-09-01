@@ -53,6 +53,7 @@ $("#crear_activoFijo").click(function () {
     formData.append("estadoAct", $.trim($("#estadoAct").val()));
     formData.append("traCategoria", $.trim($("#traCategoria").val()));
     formData.append("sede", $.trim($("#sede").val()));
+    formData.append("centroCostos", $.trim($("#f_centroCostos").val()));
 
     $.ajax({
       type: "POST",
@@ -61,6 +62,7 @@ $("#crear_activoFijo").click(function () {
       processData: false,
       contentType: false,
       success: function (data) {
+        console.log(data);
         if (data == 1) {
           $.smkAlert({
             text: "Activo Creado Con Éxito",

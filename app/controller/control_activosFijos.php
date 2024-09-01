@@ -19,15 +19,27 @@
     }
 
     function consultaCompleta() {
+        try {
         if (isset($_POST['btn-consultarCodigo'])) {
             $code= $_POST['codigoActivo'];
-            $sql = "SELECT id_activo, codigo_activo, serial_activo, nombre_activo, estado_activo, marca_activo, modelo_activo, fecha_compra, grupo_activo, area_activo, ubicacion_activo, responsable_activo, fecha_asignacion, observaciones_activo, ram_activo, disco_activo, procesador_activo, licencia_office, licencia_antivirus, hostName, aplicaciones_activo, licencia_sistema, dominio, sistema_operativo, estado.descripcion AS estado, funcionarios.nombre AS responsable, grupos_activos.area_grupo, areas.descripcion AS descripcion_areaCreacion, imagen, valor, tipo_activo, vida_util, condicion, Sede FROM activos_internos LEFT JOIN estado on id_estado=estado_activo LEFT JOIN funcionarios ON identificacion=responsable_activo LEFT JOIN grupos_activos ON grupo_activo = id_grupo LEFT JOIN areas ON grupos_activos.area_grupo = areas.id_area  WHERE codigo_activo LIKE '%".$code."%'";
+            $sql = "SELECT id_activo, codigo_activo, serial_activo, nombre_activo, estado_activo, marca_activo, modelo_activo, fecha_compra, 
+grupo_activo, area_activo, ubicacion_activo, responsable_activo, fecha_asignacion, observaciones_activo, ram_activo, disco_activo, 
+procesador_activo, licencia_office, licencia_antivirus, hostName, aplicaciones_activo, licencia_sistema, dominio, sistema_operativo, 
+estado.descripcion AS estado, funcionarios.nombre AS responsable, grupos_activos.area_grupo, areas.descripcion AS descripcion_areaCreacion, 
+imagen, valor, tipo_activo, vida_util, condicion, sede, centro_de_costos.codigo AS centro_de_costos
+FROM activos_internos 
+LEFT JOIN estado on id_estado=estado_activo 
+LEFT JOIN funcionarios ON identificacion=responsable_activo 
+LEFT JOIN grupos_activos ON grupo_activo = id_grupo 
+LEFT JOIN areas ON grupos_activos.area_grupo = areas.id_area 
+LEFT JOIN centro_de_costos ON centro_de_costos.id_centroCostos = activos_internos.centro_de_costos
+WHERE codigo_activo LIKE '%".$code."%'";
         } else if (isset($_POST['btn-consultarNombre'])) {
             $names= $_POST['nombreActivo']; 
-            $sql = "SELECT id_activo, codigo_activo, serial_activo, nombre_activo, estado_activo, marca_activo, modelo_activo, fecha_compra, grupo_activo, area_activo, ubicacion_activo, responsable_activo, fecha_asignacion, observaciones_activo, ram_activo, disco_activo, procesador_activo, licencia_office, licencia_antivirus, hostName, aplicaciones_activo, licencia_sistema, dominio, sistema_operativo, estado.descripcion AS estado, funcionarios.nombre AS responsable, grupos_activos.area_grupo, areas.descripcion AS descripcion_areaCreacion, imagen, valor, tipo_activo, vida_util, condicion, Sede FROM activos_internos LEFT JOIN estado on id_estado=estado_activo LEFT JOIN funcionarios ON identificacion=responsable_activo LEFT JOIN grupos_activos ON grupo_activo = id_grupo LEFT JOIN areas ON grupos_activos.area_grupo = areas.id_area  WHERE nombre_activo LIKE '%".$names."%'";
+            $sql = "SELECT id_activo, codigo_activo, serial_activo, nombre_activo, estado_activo, marca_activo, modelo_activo, fecha_compra, grupo_activo, area_activo, ubicacion_activo, responsable_activo, fecha_asignacion, observaciones_activo, ram_activo, disco_activo, procesador_activo, licencia_office, licencia_antivirus, hostName, aplicaciones_activo, licencia_sistema, dominio, sistema_operativo, estado.descripcion AS estado, funcionarios.nombre AS responsable, grupos_activos.area_grupo, areas.descripcion AS descripcion_areaCreacion, imagen, valor, tipo_activo, vida_util, condicion, sede FROM activos_internos LEFT JOIN estado on id_estado=estado_activo LEFT JOIN funcionarios ON identificacion=responsable_activo LEFT JOIN grupos_activos ON grupo_activo = id_grupo LEFT JOIN areas ON grupos_activos.area_grupo = areas.id_area  WHERE nombre_activo LIKE '%".$names."%'";
         } else if (isset($_POST['btn-consultarResponsable'])) {
             $responsable = $_POST['responsable']; 
-            $sql = "SELECT id_activo, codigo_activo, serial_activo, nombre_activo, estado_activo, marca_activo, modelo_activo, fecha_compra, grupo_activo, area_activo, ubicacion_activo, responsable_activo, fecha_asignacion, observaciones_activo, ram_activo, disco_activo, procesador_activo, licencia_office, licencia_antivirus, hostName, aplicaciones_activo, licencia_sistema, dominio, sistema_operativo, estado.descripcion AS estado, funcionarios.nombre AS responsable, grupos_activos.area_grupo, areas.descripcion AS descripcion_areaCreacion, imagen, valor, tipo_activo, vida_util, condicion, Sede FROM activos_internos LEFT JOIN estado on id_estado=estado_activo LEFT JOIN funcionarios ON identificacion=responsable_activo LEFT JOIN grupos_activos ON grupo_activo = id_grupo LEFT JOIN areas ON grupos_activos.area_grupo = areas.id_area  WHERE funcionarios.nombre LIKE '%".$responsable."%'";
+            $sql = "SELECT id_activo, codigo_activo, serial_activo, nombre_activo, estado_activo, marca_activo, modelo_activo, fecha_compra, grupo_activo, area_activo, ubicacion_activo, responsable_activo, fecha_asignacion, observaciones_activo, ram_activo, disco_activo, procesador_activo, licencia_office, licencia_antivirus, hostName, aplicaciones_activo, licencia_sistema, dominio, sistema_operativo, estado.descripcion AS estado, funcionarios.nombre AS responsable, grupos_activos.area_grupo, areas.descripcion AS descripcion_areaCreacion, imagen, valor, tipo_activo, vida_util, condicion, sede FROM activos_internos LEFT JOIN estado on id_estado=estado_activo LEFT JOIN funcionarios ON identificacion=responsable_activo LEFT JOIN grupos_activos ON grupo_activo = id_grupo LEFT JOIN areas ON grupos_activos.area_grupo = areas.id_area  WHERE funcionarios.nombre LIKE '%".$responsable."%'";
         }
      
             $db=conectar::acceso();
@@ -72,24 +84,32 @@
                 $consulta->setvidaUtil($listado['vidaUtil']);
                 $consulta->setestadoAct($listado['estadoAct']);
                 $consulta->settraCategoria($listado['traCategoria']);
-                $consulta->setsede($listado['Sede']);
+                $consulta->setsede($listado['sede']);
+                $consulta->setCentroCostos($listado['centro_de_costos']);
                 $consultarActivo[]=$consulta;
             }
             $db =null;
             return $consultarActivo;
-
+            //code...
+        } catch (Exception $e) {
+            // Manejo de excepciones, puedes registrar el error o mostrar un mensaje al usuario
+            echo "Error en consultaCompleta: " . $e->getMessage();
+            
+        }
     }
+    
 
     function consultaCompletaPr() {
+        try {
         if (isset($_POST['btn-consultarCodigo'])) {
             $code= $_POST['codigoActivo'];
-            $sql = "SELECT id_activo, codigo_activo, serial_activo, nombre_activo, estado_activo, marca_activo, modelo_activo, fecha_compra, grupo_activo, area_activo, ubicacion_activo, responsable_activo, fecha_asignacion, observaciones_activo, ram_activo, disco_activo, procesador_activo, licencia_office, licencia_antivirus, hostName, aplicaciones_activo, licencia_sistema, dominio, sistema_operativo, estado.descripcion AS estado, funcionarios.nombre AS responsable, grupos_activos.area_grupo, areas.descripcion AS descripcion_areaCreacion, imagen, valor, tipo_activo, vida_util, condicion, Id_categoria, Sede FROM activos_internos LEFT JOIN estado on id_estado=estado_activo LEFT JOIN funcionarios ON identificacion=responsable_activo LEFT JOIN grupos_activos ON grupo_activo = id_grupo LEFT JOIN areas ON grupos_activos.area_grupo = areas.id_area  WHERE codigo_activo LIKE '%".$code."%'";
+            $sql = "SELECT id_activo, codigo_activo, serial_activo, nombre_activo, estado_activo, marca_activo, modelo_activo, fecha_compra, grupo_activo, area_activo, ubicacion_activo, responsable_activo, fecha_asignacion, observaciones_activo, ram_activo, disco_activo, procesador_activo, licencia_office, licencia_antivirus, hostName, aplicaciones_activo, licencia_sistema, dominio, sistema_operativo, estado.descripcion AS estado, funcionarios.nombre AS responsable, grupos_activos.area_grupo, areas.descripcion AS descripcion_areaCreacion, imagen, valor, tipo_activo, vida_util, condicion, id_categoria, sede, centro_de_costos.codigo AS centro_de_costos FROM activos_internos LEFT JOIN estado on id_estado=estado_activo LEFT JOIN funcionarios ON identificacion=responsable_activo LEFT JOIN grupos_activos ON grupo_activo = id_grupo LEFT JOIN areas ON grupos_activos.area_grupo = areas.id_area LEFT JOIN centro_de_costos ON centro_de_costos.id_centroCostos = activos_internos.centro_de_costos  WHERE codigo_activo LIKE '%".$code."%'";
         } else if (isset($_POST['btn-consultarNombre'])) {
             $names= $_POST['nombreActivo']; 
-            $sql = "SELECT id_activo, codigo_activo, serial_activo, nombre_activo, estado_activo, marca_activo, modelo_activo, fecha_compra, grupo_activo, area_activo, ubicacion_activo, responsable_activo, fecha_asignacion, observaciones_activo, ram_activo, disco_activo, procesador_activo, licencia_office, licencia_antivirus, hostName, aplicaciones_activo, licencia_sistema, dominio, sistema_operativo, estado.descripcion AS estado, funcionarios.nombre AS responsable, grupos_activos.area_grupo, areas.descripcion AS descripcion_areaCreacion, imagen, valor, tipo_activo, vida_util, condicion, Id_categoria, Sede FROM activos_internos LEFT JOIN estado on id_estado=estado_activo LEFT JOIN funcionarios ON identificacion=responsable_activo LEFT JOIN grupos_activos ON grupo_activo = id_grupo LEFT JOIN areas ON grupos_activos.area_grupo = areas.id_area  WHERE nombre_activo LIKE '%".$names."%'";
+            $sql = "SELECT id_activo, codigo_activo, serial_activo, nombre_activo, estado_activo, marca_activo, modelo_activo, fecha_compra, grupo_activo, area_activo, ubicacion_activo, responsable_activo, fecha_asignacion, observaciones_activo, ram_activo, disco_activo, procesador_activo, licencia_office, licencia_antivirus, hostName, aplicaciones_activo, licencia_sistema, dominio, sistema_operativo, estado.descripcion AS estado, funcionarios.nombre AS responsable, grupos_activos.area_grupo, areas.descripcion AS descripcion_areaCreacion, imagen, valor, tipo_activo, vida_util, condicion, id_categoria, sede FROM activos_internos LEFT JOIN estado on id_estado=estado_activo LEFT JOIN funcionarios ON identificacion=responsable_activo LEFT JOIN grupos_activos ON grupo_activo = id_grupo LEFT JOIN areas ON grupos_activos.area_grupo = areas.id_area  WHERE nombre_activo LIKE '%".$names."%'";
         } else if (isset($_POST['btn-consultarResponsable'])) {
             $responsable = $_POST['responsable']; 
-            $sql = "SELECT id_activo, codigo_activo, serial_activo, nombre_activo, estado_activo, marca_activo, modelo_activo, fecha_compra, grupo_activo, area_activo, ubicacion_activo, responsable_activo, fecha_asignacion, observaciones_activo, ram_activo, disco_activo, procesador_activo, licencia_office, licencia_antivirus, hostName, aplicaciones_activo, licencia_sistema, dominio, sistema_operativo, estado.descripcion AS estado, funcionarios.nombre AS responsable, grupos_activos.area_grupo, areas.descripcion AS descripcion_areaCreacion, imagen, valor, tipo_activo, vida_util, condicion, Id_categoria, Sede FROM activos_internos LEFT JOIN estado on id_estado=estado_activo LEFT JOIN funcionarios ON identificacion=responsable_activo LEFT JOIN grupos_activos ON grupo_activo = id_grupo LEFT JOIN areas ON grupos_activos.area_grupo = areas.id_area  WHERE funcionarios.nombre LIKE '%".$responsable."%'";
+            $sql = "SELECT id_activo, codigo_activo, serial_activo, nombre_activo, estado_activo, marca_activo, modelo_activo, fecha_compra, grupo_activo, area_activo, ubicacion_activo, responsable_activo, fecha_asignacion, observaciones_activo, ram_activo, disco_activo, procesador_activo, licencia_office, licencia_antivirus, hostName, aplicaciones_activo, licencia_sistema, dominio, sistema_operativo, estado.descripcion AS estado, funcionarios.nombre AS responsable, grupos_activos.area_grupo, areas.descripcion AS descripcion_areaCreacion, imagen, valor, tipo_activo, vida_util, condicion, id_categoria, sede FROM activos_internos LEFT JOIN estado on id_estado=estado_activo LEFT JOIN funcionarios ON identificacion=responsable_activo LEFT JOIN grupos_activos ON grupo_activo = id_grupo LEFT JOIN areas ON grupos_activos.area_grupo = areas.id_area  WHERE funcionarios.nombre LIKE '%".$responsable."%'";
         }
      
             $db=conectar::acceso();
@@ -133,13 +153,19 @@
                 $consulta->settipoAct($listado['tipo_activo']);
                 $consulta->setvidaUtil($listado['vida_util']);
                 $consulta->setestadoAct($listado['condicion']);
-                $consulta->settraCategoria($listado['Id_categoria']);
-                $consulta->setsede($listado['Sede']);
+                $consulta->settraCategoria($listado['id_categoria']);
+                $consulta->setsede($listado['sede']);
+                $consulta->setCentroCostos($listado['centro_de_costos']);
                 $consultarActivo[]=$consulta;
             }
             $db =null;
             return $consultarActivo;
-
+            //code...
+        } catch (Exception $e) {
+            // Manejo de excepciones, puedes registrar el error o mostrar un mensaje al usuario
+            echo "Error en consultaCompleta: " . $e->getMessage();
+            return []; // Retorna un arreglo vacío en caso de error
+        }
     }
 
 

@@ -4,7 +4,7 @@ class crudVersion {
 
     public function consultaVersion(){
         $db=conectar::acceso();
-        $consultaV=$db->query("SELECT proyecto, administrador, version, fechaSubida FROM versionproyecto");
+        $consultaV=$db->query("SELECT proyecto, administrador, version, fechaSubida FROM version_proyecto");
         $consultaV->execute();
         $listaV = [];
         while($dataLine=$consultaV->fetch(PDO::FETCH_ASSOC)){

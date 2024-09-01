@@ -32,6 +32,29 @@
             return $this->centroCostos;
         }
 
+        public function getCodigoCentroCosto($id_centro) {
+            try {
+                $db = Conectar::acceso();
+
+                $this->centroCostos = [];
+                            
+                $consulta_centroCostos = $db->prepare("SELECT id_centroCostos, codigo, descripcion FROM centro_de_costos WHERE codigo = :codigo");
+                $consulta_centroCostos->bindParam(':codigo', $id_centro, PDO::PARAM_STR);
+                $consulta_centroCostos->execute();
+            
+                while ($listado_centroCostos = $consulta_centroCostos->fetch(PDO::FETCH_ASSOC)) {
+                    $this->centroCostos[] = $listado_centroCostos;
+                }
+            
+                $db = null;
+                return $this->centroCostos;
+            } catch (Exception $e) {
+                
+                echo "Error en consultaCompleta: " . $e->getMessage();
+                return []; 
+            }
+        }
+
         public function crearCentroCostos($descripcion,$codigo){
             $db=Conectar::acceso();
             $consulta_codigo=$db->prepare('SELECT codigo FROM centro_de_costos WHERE codigo = :codigo');

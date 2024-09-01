@@ -81,6 +81,7 @@ $activos_Asignados = $consult->matrizActivosFuncionario();*/
                 $activoFijo->setestadoAct($_POST['estadoAct']);
                 $activoFijo->settraCategoria($_POST['traCategoria']);
                 $activoFijo->setsede($_POST['sede']);
+                $activoFijo->setCentroCostos($_POST['centroCostos']);
                 $crud->crearActivos($activoFijo);    
         }
 
@@ -112,7 +113,7 @@ $activos_Asignados = $consult->matrizActivosFuncionario();*/
 
 
         if (isset($_POST['guardar_modificaciones'])&& ($_POST['guardar_modificaciones']==1)) {
-
+            try {
             if (isset($_FILES['af_imagen1'])) {
                 $imagen = $_FILES['af_imagen1'];
                 $deleteImg = $_POST['deleteImg'];
@@ -138,7 +139,7 @@ $activos_Asignados = $consult->matrizActivosFuncionario();*/
             $activoFijo->setAf_modelo($_POST['af_modelo']);
             $activoFijo->setAf_fechaCompra($_POST['af_fechaCompra']);
             $activoFijo->setAf_grupo($_POST['af_categoria']);
-            $activoFijo->setAf_area($_POST['af_area']);
+            // $activoFijo->setAf_area($_POST['af_area']);
             $activoFijo->setAf_ubicacion($_POST['af_ubicacion']);
             $activoFijo->setAf_observaciones($_POST['af_observaciones']);
             $activoFijo->setAf_ram($_POST['af_ram']);
@@ -159,7 +160,14 @@ $activos_Asignados = $consult->matrizActivosFuncionario();*/
             $activoFijo->setestadoAct($_POST['estadoAct']);
             $activoFijo->settraCategoria($_POST['traCategoria']);
             $activoFijo->setsede($_POST['sede']);
+            $activoFijo->setCentroCostos($_POST['centroCostos']);
             $crud->modificarActivos($activoFijo);            
+                //code...
+        } catch (Exception $e) {
+            // Manejo de excepciones, puedes registrar el error o mostrar un mensaje al usuario
+            echo "Error en consultaCompleta: " . $e->getMessage();
+            return []; // Retorna un arreglo vacío en caso de error
+        }
         }
         if (isset($_POST['creacion'])) {
             echo "Llega al controlador";

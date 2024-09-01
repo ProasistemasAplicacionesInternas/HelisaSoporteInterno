@@ -112,6 +112,7 @@
                                     <input type="hidden" name="estadoAct" id="estadoAct" value="<?php echo $datos->getestadoAct(); ?>">
                                     <input type="hidden" name="traCategoria" id="traCategoria" value="<?php echo $datos->gettraCategoria(); ?>">
                                     <input type="hidden" name="sede" id="sede" value="<?php echo $datos->getsede(); ?>">
+                                    <input type="hidden" name="centroCostos" id="centroCostos" value="<?php echo $datos->getCentroCostos(); ?>">
                                     <input type="submit" value="Modificar Activo" name="modificar_activo" class="btn btn-info">
                                 </form>
                             </td>

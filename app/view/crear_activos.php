@@ -3,6 +3,8 @@
 require('../controller/controlador_areas.php');
 require('../controller/controlador_funcionarios.php');
 require('../controller/controlador_gruposActivos.php'); 
+require_once('../controller/controlador_centroCostos.php');
+
 //*****************************************************************************************************//
 //******************************* FORMULARIO PARA LA CREACION DE FUNCIONARIOS *************************//
 //*****************************************************************************************************//
@@ -121,15 +123,32 @@ require('../controller/controlador_gruposActivos.php');
                                 </select>
                             </div>
                         </div>
-                        <div class="col-3">
+                        <!-- <div class="col-3">
                             <div class="form-group">
                                 <label>Ubicación/Área</label>
                                 <select class="form-control info" id="af_area" name="af_area" required>
                                     <option value='' selected>Seleccione Area</option>
-                                    <?php foreach($listado_areas as $area) {
-                                        echo "<option value='".$area["id_area"]."'>".$area["descripcion"]."</option>";
-                                    } ?>
+                                    <?php //foreach($listado_areas as $area) {
+                                        //echo "<option value='".$area["id_area"]."'>".$area["descripcion"]."</option>";
+                                    //} ?>
                                 </select>
+                            </div>
+                        </div> -->
+                        <div class="col-4">
+                            <div class="form-group">
+                                <label>Centro de Costos</label>
+                                <select class="form-control info" id="f_centroCostos" name="f_centroCostos" required>
+                                    <option value='' selected>Seleccione Centro de Costos</option> 
+                                    <?php foreach($centroDeCostos as $centros):?>
+                                        <option value='<?php echo $centros['id_centroCostos'];?>'><?php echo $centros['descripcion'];?></option>
+                                    <?php endforeach ?>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-2">
+                            <div class="form-group">
+                                <label>Codigo</label>
+                                    <input type="text" id="centroCostosCodigo" name="centroCostosCodigo" class="form-control info" value="" readonly>                     
                             </div>
                         </div>
                         <div class="col-3">
@@ -186,8 +205,6 @@ require('../controller/controlador_gruposActivos.php');
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="row">
                         <div class="col-3">
                             <div class="form-group">
                                 <label>Sede del activo</label>
@@ -355,6 +372,7 @@ require('../controller/controlador_gruposActivos.php');
     <script src="../../public/js/filtroActivos.js"></script>
     <script src="../../public/js/funcionario_oculto.js"></script>
     <script src="../../public/js/validacion_activo.js"></script>
+    <script src="../../public/js/centro_de_costos.js"></script> 
     <script src="../../public/js/bloqueoTeclas.js"></script>
     <script src="../../public/js/searhCategoryforGroup.js"></script>
 </body>

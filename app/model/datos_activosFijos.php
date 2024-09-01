@@ -38,6 +38,7 @@ class activosFijos
 	private $traCategoria;
 	private $hostName;
 	private $sede;
+	private $centroCostos;
 
 	public function getAf_id()
 	{
@@ -357,5 +358,14 @@ class activosFijos
 	public function setsede($sede)
 	{
 		$this->sede = $sede;
+	}
+
+	public function getCentroCostos()
+	{
+		return $this->centroCostos;
+	}
+	public function setCentroCostos($centroCostos)
+	{
+		$this->centroCostos = $centroCostos;
 	}
 }

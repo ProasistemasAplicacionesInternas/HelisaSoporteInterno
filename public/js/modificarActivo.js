@@ -1,3 +1,28 @@
+$(document).ready(function () {
+  var params = {
+    consultarCentroCostosMod: $("#centroCostosCodigo").val(),
+    consultarcodigo: 1,
+};
+
+  $.ajax({
+    type: "POST",
+    url: "../controller/controlador_centroCostos.php",
+    data: params,
+  }).done(function (data) {
+    var response = JSON.parse(data); 
+   // Selecciona la opción del <select> basado en el id_centroCostos recibido
+   if (response.otroValor) {
+    $('#f_centroCostosModificar').val(response.otroValor);
+}
+
+$('#centroCostosCodigo').val(response.codigo);
+$('#centroCostosid').val(response.otroValor);
+
+// Asegúrate de que la opción seleccionada sea visible en el <select>
+$('#f_centroCostosModificar').trigger('change');
+  });
+});
+
 $("#guardar_modificaciones").click(function () {
   if ($("#formularioModifica").smkValidate()) {
     var imagen = document.getElementById("imagenCa");
@@ -54,6 +79,7 @@ $("#guardar_modificaciones").click(function () {
     formData.append("estadoAct", $.trim($("#estadoAct").val()));
     formData.append("traCategoria", traCategoria);
     formData.append("sede", $.trim($("#sede").val()));
+    formData.append("centroCostos", $.trim($("#centroCostosid").val()));
     formData.append("guardar_modificaciones", "1");
 
     if (newImagenes.value === "") {
@@ -70,6 +96,7 @@ $("#guardar_modificaciones").click(function () {
       processData: false,
       contentType: false,
       success: function (data) {
+        console.log(data);
         if (data == 1) {
           $.smkAlert({
             text: "Activo modificado con Éxito",
