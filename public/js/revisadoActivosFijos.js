@@ -32,7 +32,7 @@ $(document).ready(function(){
     if (row) { // Agrega esta verificación para evitar errores
       let codigo = row.querySelector('td:first-child').innerText;
       let nombre = row.querySelector('td:nth-child(3)').innerText;
-      let fecha = row.querySelector('td:nth-child(2)').innerText;
+      let fecha = row.querySelector('td:nth-child(4)').innerText;
       let infoActivo = 'activo=' + codigo + '&nombre=' + nombre + '&fecha=' + fecha + '&aceptaActivo=1';
       $.ajax({
         type: 'POST',
