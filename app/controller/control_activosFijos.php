@@ -176,7 +176,7 @@ WHERE codigo_activo LIKE '%".$code."%'";
             $db=conectar::acceso();
             $consultarActivo=[];
     
-            $seleccion=$db->prepare("SELECT id_activo, codigo_activo, serial_activo, nombre_activo, estado_activo, marca_activo, modelo_activo, fecha_compra, grupo_activo, area_activo, ubicacion_activo, responsable_activo, fecha_asignacion, observaciones_activo, ram_activo, disco_activo, procesador_activo, licencia_office, licencia_antivirus, aplicaciones_activo, licencia_sistema, dominio, sistema_operativo, estado.descripcion AS estado, funcionarios.nombre AS responsable, grupos_activos.area_grupo, areas.descripcion AS descripcion_areaCreacion, imagen FROM activos_internos LEFT JOIN estado on id_estado=estado_activo LEFT JOIN funcionarios ON identificacion=responsable_activo LEFT JOIN grupos_activos ON grupo_activo = id_grupo LEFT JOIN areas ON grupos_activos.area_grupo = areas.id_area  WHERE codigo_activo LIKE '%".$code."%' && grupos_activos.area_grupo = :area_grupo");   
+            $seleccion=$db->prepare("SELECT id_activo, codigo_activo, serial_activo, nombre_activo, estado_activo, marca_activo, modelo_activo, fecha_compra, grupo_activo, area_activo, ubicacion_activo, responsable_activo, fecha_asignacion, observaciones_activo, ram_activo, disco_activo, procesador_activo, licencia_office, licencia_antivirus, aplicaciones_activo, licencia_sistema, dominio, sistema_operativo, estado.descripcion AS estado, funcionarios.nombre AS responsable, grupos_activos.area_grupo, areas.descripcion AS descripcion_areaCreacion, imagen, valor, tipo_activo, vida_util, condicion, id_categoria, sede, centro_de_costos.codigo AS centro_de_costos FROM activos_internos LEFT JOIN estado on id_estado=estado_activo LEFT JOIN funcionarios ON identificacion=responsable_activo LEFT JOIN grupos_activos ON grupo_activo = id_grupo LEFT JOIN areas ON grupos_activos.area_grupo = areas.id_area LEFT JOIN centro_de_costos ON centro_de_costos.id_centroCostos = activos_internos.centro_de_costos WHERE codigo_activo LIKE '%".$code."%' && grupos_activos.area_grupo = :area_grupo");   
             $seleccion->bindValue('area_grupo',$area_grupo);
             $seleccion->execute();
         
@@ -210,6 +210,13 @@ WHERE codigo_activo LIKE '%".$code."%'";
                 $consulta->setAf_sistemaOperativo($listado['sistema_operativo']);
                 $consulta->setAf_areaCreacion($listado['descripcion_areaCreacion']);
                 $consulta->setImagenactivo($listado['imagen']);
+                $consulta->setcostoCompra($listado['valor']);
+                $consulta->settipoAct($listado['tipo_activo']);
+                $consulta->setvidaUtil($listado['vida_util']);
+                $consulta->setestadoAct($listado['condicion']);
+                $consulta->settraCategoria($listado['id_categoria']);
+                $consulta->setsede($listado['sede']);
+                $consulta->setCentroCostos($listado['centro_de_costos']);
                 $consultarActivo[]=$consulta;
             }
             return $consultarActivo;
@@ -220,7 +227,7 @@ WHERE codigo_activo LIKE '%".$code."%'";
             $db=conectar::acceso();
             $consultarActivo=[];
     
-            $seleccion=$db->prepare("SELECT id_activo, codigo_activo, serial_activo, nombre_activo, estado_activo, marca_activo, modelo_activo, fecha_compra, grupo_activo, area_activo, ubicacion_activo, responsable_activo, fecha_asignacion, observaciones_activo, ram_activo, disco_activo, procesador_activo, licencia_office, licencia_antivirus, aplicaciones_activo, licencia_sistema, dominio, sistema_operativo, estado.descripcion AS estado, funcionarios.nombre AS responsable ,estado.descripcion AS estado, grupos_activos.area_grupo, areas.descripcion AS descripcion_areaCreacion, imagen FROM activos_internos LEFT JOIN estado on id_estado=estado_activo LEFT JOIN funcionarios ON identificacion=responsable_activo LEFT JOIN grupos_activos ON grupo_activo = id_grupo LEFT JOIN areas ON grupos_activos.area_grupo = areas.id_area  WHERE nombre_activo LIKE '%".$names."%' && grupos_activos.area_grupo = :area_grupo");   
+            $seleccion=$db->prepare("SELECT id_activo, codigo_activo, serial_activo, nombre_activo, estado_activo, marca_activo, modelo_activo, fecha_compra, grupo_activo, area_activo, ubicacion_activo, responsable_activo, fecha_asignacion, observaciones_activo, ram_activo, disco_activo, procesador_activo, licencia_office, licencia_antivirus, aplicaciones_activo, licencia_sistema, dominio, sistema_operativo, estado.descripcion AS estado, funcionarios.nombre AS responsable ,estado.descripcion AS estado, grupos_activos.area_grupo, areas.descripcion AS descripcion_areaCreacion, imagen, valor, tipo_activo, vida_util, condicion, id_categoria, sede, centro_de_costos.codigo AS centro_de_costos FROM activos_internos LEFT JOIN estado on id_estado=estado_activo LEFT JOIN funcionarios ON identificacion=responsable_activo LEFT JOIN grupos_activos ON grupo_activo = id_grupo LEFT JOIN areas ON grupos_activos.area_grupo = areas.id_area LEFT JOIN centro_de_costos ON centro_de_costos.id_centroCostos = activos_internos.centro_de_costos WHERE nombre_activo LIKE '%".$names."%' && grupos_activos.area_grupo = :area_grupo");   
             $seleccion->bindValue('area_grupo',$area_grupo);
             $seleccion->execute();
         
@@ -254,6 +261,13 @@ WHERE codigo_activo LIKE '%".$code."%'";
                 $consulta->setAf_sistemaOperativo($listado['sistema_operativo']);
                 $consulta->setAf_areaCreacion($listado['descripcion_areaCreacion']);
                 $consulta->setImagenactivo($listado['imagen']);
+                $consulta->setcostoCompra($listado['valor']);
+                $consulta->settipoAct($listado['tipo_activo']);
+                $consulta->setvidaUtil($listado['vida_util']);
+                $consulta->setestadoAct($listado['condicion']);
+                $consulta->settraCategoria($listado['id_categoria']);
+                $consulta->setsede($listado['sede']);
+                $consulta->setCentroCostos($listado['centro_de_costos']);
                 $consultarActivo[]=$consulta;
             }
             return $consultarActivo;                
@@ -264,7 +278,7 @@ WHERE codigo_activo LIKE '%".$code."%'";
             $db=conectar::acceso();
             $consultarActivo=[];
     
-            $seleccion=$db->prepare("SELECT id_activo, codigo_activo, serial_activo, nombre_activo, estado_activo, marca_activo, modelo_activo, fecha_compra, grupo_activo, area_activo, ubicacion_activo, responsable_activo, fecha_asignacion, observaciones_activo, ram_activo, disco_activo, procesador_activo, licencia_office, licencia_antivirus, aplicaciones_activo, licencia_sistema, dominio, sistema_operativo, estado.descripcion AS estado, funcionarios.nombre AS responsable,estado.descripcion AS estado, grupos_activos.area_grupo, areas.descripcion AS descripcion_areaCreacion, imagen FROM activos_internos LEFT JOIN estado on id_estado=estado_activo LEFT JOIN funcionarios ON identificacion=responsable_activo LEFT JOIN grupos_activos ON grupo_activo = id_grupo LEFT JOIN areas ON grupos_activos.area_grupo = areas.id_area  WHERE funcionarios.nombre LIKE '%".$responsable."%' && grupos_activos.area_grupo = :area_grupo");   
+            $seleccion=$db->prepare("SELECT id_activo, codigo_activo, serial_activo, nombre_activo, estado_activo, marca_activo, modelo_activo, fecha_compra, grupo_activo, area_activo, ubicacion_activo, responsable_activo, fecha_asignacion, observaciones_activo, ram_activo, disco_activo, procesador_activo, licencia_office, licencia_antivirus, aplicaciones_activo, licencia_sistema, dominio, sistema_operativo, estado.descripcion AS estado, funcionarios.nombre AS responsable,estado.descripcion AS estado, grupos_activos.area_grupo, areas.descripcion AS descripcion_areaCreacion, imagen, valor, tipo_activo, vida_util, condicion, id_categoria, sede, centro_de_costos.codigo AS centro_de_costos FROM activos_internos LEFT JOIN estado on id_estado=estado_activo LEFT JOIN funcionarios ON identificacion=responsable_activo LEFT JOIN grupos_activos ON grupo_activo = id_grupo LEFT JOIN areas ON grupos_activos.area_grupo = areas.id_area LEFT JOIN centro_de_costos ON centro_de_costos.id_centroCostos = activos_internos.centro_de_costos WHERE funcionarios.nombre LIKE '%".$responsable."%' && grupos_activos.area_grupo = :area_grupo");   
             $seleccion->bindValue('area_grupo',$area_grupo);
             $seleccion->execute();
         
@@ -298,6 +312,13 @@ WHERE codigo_activo LIKE '%".$code."%'";
                 $consulta->setAf_sistemaOperativo($listado['sistema_operativo']);
                 $consulta->setAf_areaCreacion($listado['descripcion_areaCreacion']);
                 $consulta->setImagenactivo($listado['imagen']);
+                $consulta->setcostoCompra($listado['valor']);
+                $consulta->settipoAct($listado['tipo_activo']);
+                $consulta->setvidaUtil($listado['vida_util']);
+                $consulta->setestadoAct($listado['condicion']);
+                $consulta->settraCategoria($listado['id_categoria']);
+                $consulta->setsede($listado['sede']);
+                $consulta->setCentroCostos($listado['centro_de_costos']);
                 $consultarActivo[]=$consulta;
             }
             return $consultarActivo;      

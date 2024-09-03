@@ -3,7 +3,7 @@ session_start();
 
 
 echo $_SESSION['start'] = time();
-require "Authenticator.php";
+require "authenticator.php";
 
 $Authenticator = new Authenticator();
 

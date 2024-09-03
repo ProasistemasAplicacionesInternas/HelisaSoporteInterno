@@ -45,7 +45,7 @@ if (isset($_SESSION['init'])) {
             </div>
         </div>
     </header>
-    <div id="caja" style="display:none;">
+    <!-- <div id="caja" style="display:none;">
         <div class="fila">
             <img class="icons" id="datoPlataforma" src="public/img/datoPlataforma.png"><span id="plataforma"></span>
         </div>
@@ -58,7 +58,7 @@ if (isset($_SESSION['init'])) {
         <div class="fila">
             <img class="icons" id="datoFecha" src="public/img/datoFecha.png" alt=""><span id="fechaVersion"></span>
         </div>
-    </div>
+    </div> -->
     <main class="container-fluid">
         <div class="row">
 
