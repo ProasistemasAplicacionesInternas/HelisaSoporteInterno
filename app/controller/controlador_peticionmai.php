@@ -5,7 +5,7 @@ require_once('../model/datos_peticionesmai.php');
 
 
 require_once('../model/datos_soportemai.php');
-require_once('../model/crud_soportemai.php');
+require_once('../model/crudSoportemai.php');
 
 $crudSop = new CrudSoporte();
 $soporte = new Datostiposoporte();

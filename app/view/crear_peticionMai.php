@@ -165,12 +165,12 @@ require('../controller/controlador_peticionmai.php');
             </div>
         </div>
     </div>
-    <script src="../../public/js/cambio_area.js"></script>
+    <script src="../../public/js/cambioArea.js"></script>
     <script src="../../public/js/jquery-3.3.1.min.js"></script>
     <script src="../../public/js/popper.js"></script>
     <script src="../../public/js/bootstrap.min.js"></script>
     <script src="../../public/js/smoke.min.js"></script>
-    <script src="../../public/js/valida_imagen.js?ty6"></script>
+    <script src="../../public/js/validaImagen.js?ty6"></script>
     <script src="../../public/js/es.min.js"></script>
     <script src="../../public/js/bloqueoTeclas.js"></script>
 

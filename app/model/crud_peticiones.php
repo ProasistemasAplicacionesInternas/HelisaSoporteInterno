@@ -13,23 +13,23 @@ class CrudPeticiones
 	public function crearPeticiones($create)
 	{
 		$db = Conectar::acceso();
-		$crea_peticion = $db->prepare('INSERT INTO peticiones(fecha_peticion, usuario, estado, categoria, descripcion, imagen, imagen2, imagen3, activo,nivel_encuesta)
+		$creaPeticion = $db->prepare('INSERT INTO peticiones(fecha_peticion, usuario, estado, categoria, descripcion, imagen, imagen2, imagen3, activo,nivel_encuesta)
         VALUES(:fecha_peticion, :usuario, :estado, :categoria, :descripcion, :imagen, :imagen2, :imagen3, :activo, :x)');
 
-		$crea_peticion->bindValue('fecha_peticion', $create->getP_fechapeticion());
-		$crea_peticion->bindValue('usuario', $create->getP_usuario());
-		$crea_peticion->bindValue('estado', $create->getP_estado());
-		$crea_peticion->bindValue('categoria', $create->getP_categoria());
-		$crea_peticion->bindValue('descripcion', $create->getP_descripcion());
-		$crea_peticion->bindValue('imagen', $create->getP_cargarimagen());
-		$crea_peticion->bindValue('imagen2', $create->getP_cargarimagen2());
-		$crea_peticion->bindValue('imagen3', $create->getP_cargarimagen3());
-		$crea_peticion->bindValue('activo', $create->getP_activo());
-		$crea_peticion->bindValue('x', 0);
-		$crea_peticion->execute();
+		$creaPeticion->bindValue('fecha_peticion', $create->getFechapeticion());
+		$creaPeticion->bindValue('usuario', $create->getUsuario());
+		$creaPeticion->bindValue('estado', $create->getEstado());
+		$creaPeticion->bindValue('categoria', $create->getCategoria());
+		$creaPeticion->bindValue('descripcion', $create->getDescripcion());
+		$creaPeticion->bindValue('imagen', $create->getCargarimagen());
+		$creaPeticion->bindValue('imagen2', $create->getCargarimagen2());
+		$creaPeticion->bindValue('imagen3', $create->getCargarimagen3());
+		$creaPeticion->bindValue('activo', $create->getActivo());
+		$creaPeticion->bindValue('x', 0);
+		$creaPeticion->execute();
 
 		$colsultar_usuario = $db->prepare('SELECT identificacion from funcionarios where usuario =:usuario');
-		$colsultar_usuario->bindValue('usuario', $create->getP_usuario());
+		$colsultar_usuario->bindValue('usuario', $create->getUsuario());
 		$colsultar_usuario->execute();
 		$filtro = $colsultar_usuario->fetch(PDO::FETCH_ASSOC);
 		$id_funcionario = $filtro['identificacion'];
@@ -63,14 +63,14 @@ class CrudPeticiones
 		$consultar_peticion->execute();
 		foreach ($consultar_peticion->fetchAll() as $listado) {
 			$consulta = new Peticion();
-			$consulta->setP_nropeticion($listado['numero_peticion']);
-			$consulta->setP_fechapeticion($listado['fecha_peticion']);
-			$consulta->setP_descripcion($listado['descripcion']);
-			$consulta->setP_fechaatendido($listado['fecha_atendido']);
-			$consulta->setP_estado($listado['nombreestado']);
-			$consulta->setP_categoria($listado['nombre_categoria']);
-			$consulta->setP_conclusiones($listado['conclusiones']);
-			$consulta->setP_usuarioatiende($listado['usuario_atiende']);
+			$consulta->setNropeticion($listado['numero_peticion']);
+			$consulta->setFechapeticion($listado['fecha_peticion']);
+			$consulta->setDescripcion($listado['descripcion']);
+			$consulta->setFechaatendido($listado['fecha_atendido']);
+			$consulta->setEstado($listado['nombreestado']);
+			$consulta->setCategoria($listado['nombre_categoria']);
+			$consulta->setConclusiones($listado['conclusiones']);
+			$consulta->setUsuarioatiende($listado['usuario_atiende']);
 			$consulta->setRevisado($listado['revisado']);
 			$lista_peticiones[] = $consulta;
 		}

@@ -4,14 +4,15 @@ function productoCategoria() {
     var categoria = document.getElementById('divCategoria');
     var categoriaSg = document.getElementById('divCategoriaSg');
     var consultar_soporte = document.getElementById('divPeticion');
-    var p_categoria = document.getElementById('p_categoria');
+    /* var p_categoria = document.getElementById('p_categoria'); */
+    var Pcategoria = document.getElementById('Categoria');
     var pCategoriaSg = document.getElementById('pCategoriaSg');
     var productoMai = document.getElementById('productoMai');
     var soporteMai = document.getElementById('soporteMai');
     var campoOculto = document.getElementById('activoSoporte');
-    var area = document.getElementById('area_peticion').value;
+    var area = document.getElementById('areaPeticion').value;
 
-    const selectElement = document.getElementById('area_peticion');
+    const selectElement = document.getElementById('areaPeticion');
     const selectedValue = selectElement.value;
     console.log('Valor seleccionado al cargar la página:', selectedValue);
 
@@ -19,7 +20,7 @@ function productoCategoria() {
 
     if (area == 1) {
         categoria.style.display = "inline";
-        p_categoria.required = true;
+        Pcategoria.required = true;
         consultar_soporte.style.display = "none";
         soporteMai.required = false;
 

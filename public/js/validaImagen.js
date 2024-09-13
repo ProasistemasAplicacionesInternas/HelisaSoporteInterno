@@ -43,7 +43,7 @@ function validacion(fileName, fileSize) {
                 document.getElementById("btn-enviar_peticionMai").disabled = true;
 
                 $('#alert').fadeIn('slow');
-                document.getElementById("btn-enviar_peticionInfra").disabled = true;
+                document.getElementById("btn-enviarPeticionInfra").disabled = true;
 
                 $('#alert').fadeIn('slow');
                 document.getElementById("btn-enviar_peticionSg").disabled = true;
@@ -54,7 +54,7 @@ function validacion(fileName, fileSize) {
                     $("#alerta").load(" #alerta");
                     $("#ruta").load(" #ruta");
 
-                    document.getElementById("btn-enviar_peticionInfra").disabled = false;
+                    document.getElementById("btn-enviarPeticionInfra").disabled = false;
                     $("#alerta").load(" #alerta");
                     $("#ruta").load(" #ruta");
 

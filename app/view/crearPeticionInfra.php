@@ -12,11 +12,11 @@ if (!isset($_SESSION['usuario'])) {
     header('location:../../login_peticiones.php');
 }
 
-require('../controller/controlador_categorias.php');
-require('../controller/controlador_productosmai.php'); //1
-require('../controller/controlador_consultaActivosFuncionario.php');
-require('../controller/controlador_soportemai.php');
-require('../controller/controlador_peticionmai.php');
+require('../controller/controladorCategorias.php');
+require('../controller/controladorProductosmai.php'); //1
+require('../controller/controladorConsultaActivosFuncionario.php');
+require('../controller/controladorSoportemai.php');
+require('../controller/controlador_peticionmai.php'); 
 
 ?>
 <!DOCTYPE html>
@@ -46,12 +46,12 @@ require('../controller/controlador_peticionmai.php');
             <h6 class="mt-3">Generar Solicitud</h6>
             <div class="col-12 ml-5">
 
-                <form action="../controller/controlador_crearPeticion.php" method="post" class="form-group" enctype="multipart/form-data">
+                <form action="../controller/controladorCrearPeticion.php" method="post" class="form-group" enctype="multipart/form-data">
                     <div class="row">
                         <div class="col-3">
                             <div class="form-group">
                                 <label>Área</label>
-                                <select class="form-control info" id="area_peticion" name="area_peticion" required disabled>
+                                <select class="form-control info" id="areaPeticion" name="areaPeticion" required disabled>
                                     <option value="1" selected>Infraestructura</option>
                                 </select>
                             </div>
@@ -61,11 +61,11 @@ require('../controller/controlador_peticionmai.php');
                         <div class="col-5">
                             <div class="form-group" id="divCategoria" style="display:none">
                                 <label>Categoría</label>
-                                <select class="form-control info" id="p_categoria" name="p_categoria">
+                                <select class="form-control info" id="Categoria" name="Categoria">
                                     <option value="" selected>Seleccione Una Categoría</option>
                                     <?php
 
-                                    foreach ($listado_categorias as $categoria) {
+                                    foreach ($listadoCategorias as $categoria) {
                                         echo "<option value='" . $categoria["id_categoria"] . "'>" . $categoria["nombre_categoria"] . "</option>";
                                     }
                                     ?>
@@ -79,7 +79,7 @@ require('../controller/controlador_peticionmai.php');
                             <div class="col-6">
                                 <div class="form-group">
                                     <label>Activos Asignados</label>
-                                    <select class="form-control info" id="p_activo" name="p_activo">
+                                    <select class="form-control info" id="pActivo" name="pActivo">
                                         <option value="" selected>Seleccione un activo</option>
                                         <?php
 
@@ -97,7 +97,7 @@ require('../controller/controlador_peticionmai.php');
                         <div class="col-3">
                             <div class="form-group">
                                 <label>Descripción</label>
-                                <textarea name="p_descripcion" id="p_descripcion" cols="86" rows="5" maxlength="6000" required></textarea>
+                                <textarea name="pDescripcion" id="pDescripcion" cols="86" rows="5" maxlength="6000" required></textarea>
                             </div>
                         </div>
                     </div>
@@ -119,7 +119,7 @@ require('../controller/controlador_peticionmai.php');
 
                     <div class="row my-3">
                         <div class="col-3">
-                            <button type="submit" class="btn btn-success" id="btn-enviar_peticionInfra" name="btn-enviar_peticionInfra">Enviar Solicitud</button>
+                            <button type="submit" class="btn btn-success" id="btn-enviarPeticionInfra" name="btn-enviarPeticionInfra">Enviar Solicitud</button>
                         </div>
                         <div class="col-3">
                             <a class="btn btn-danger" onclick="retrocesoPagina()">Cancelar</a>
@@ -129,16 +129,16 @@ require('../controller/controlador_peticionmai.php');
             </div>
         </div>
     </div>
-    <script src="../../public/js/cambio_area.js"></script>
+    <script src="../../public/js/cambioArea.js"></script>
     <script src="../../public/js/jquery-3.3.1.min.js"></script>
     <script src="../../public/js/popper.js"></script>
     <script src="../../public/js/bootstrap.min.js"></script>
     <script src="../../public/js/smoke.min.js"></script>
-    <script src="../../public/js/valida_imagen.js?ty6"></script>
+    <script src="../../public/js/validaImagen.js?ty6"></script>
     <script src="../../public/js/es.min.js"></script>
-    <script src="../../public/js/activo_oculto.js"></script>
+    <script src="../../public/js/activoOculto.js"></script>
     <script src="../../public/js/bloqueoTeclas.js"></script>
-    <script src="../../public/js/navega_funcionarios.js"></script>
+    <script src="../../public/js/navegaFuncionarios.js"></script>
 
 </body>
 

@@ -35,7 +35,7 @@ if (isset($_SESSION['init'])) {
     <header class="container-fluid">
         <div class="row">
             <div class="col-md-10 align-self-center">
-                <img src="public/img/logo.png" alt="">
+                <img src="public/img/Logo.png" alt="">
             </div>
             <div class="col-md-2 col d-flex justify-content-end">
                 <span id='usuario'><?= $_SESSION['usuario']; ?></span>
@@ -164,7 +164,7 @@ if (isset($_SESSION['init'])) {
     <script src="public/js/daterangepicker.js"></script>
     <script src="public/js/popper.js"></script>
     <script src="public/js/bootstrap.min.js"></script>
-    <script src="public/js/navega_funcionarios.js"></script>
+    <script src="public/js/navegaFuncionarios.js"></script>
     <?php require('app/view/cambioContrasena_funcionarios.php'); ?>
     <script src="public/js/cambioContrasena_funcionarios.js?hh"></script>
     <script src="public/js/bloqueoTeclas.js"></script>

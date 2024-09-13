@@ -1,6 +1,28 @@
 <?php
 class Peticion
 {
+// new Variables CamelCase
+
+private $nroPeticion;
+private $categoria;
+private $fechaPeticion;
+private $descripcion;
+private $estado;
+private $fechaAtendido;
+private $usuarioAtiende;
+private $conclusiones;
+private $cargarImagen;
+private $cargarImagen2;
+private $cargarImagen3;
+private $activo;
+private $codigoactivo;
+private $usuario;
+
+
+
+
+
+// Old Variables
 
 	private $p_nropeticion;
 	private $p_fechapeticion;
@@ -31,6 +53,127 @@ class Peticion
 	private $sprint;
 	private $gestion;
 	private $archivos;
+
+
+	// Camel Case
+
+	public function getNroPeticion(){
+		return $this->nroPeticion;
+	}
+	public function setNroPeticion($nroPeticion){
+		$this->nroPeticion = $nroPeticion;
+	}
+
+	public function getCategoria(){
+		return $this->categoria;
+	}
+	public function setCategoria($categoria){
+		$this->categoria = $categoria;
+	}
+
+	public function getFechaPeticion(){
+		return $this->fechaPeticion;
+	}
+	public function setFechaPeticion($fechaPeticion){
+		$this->fechaPeticion = $fechaPeticion;
+	}
+
+	public function getDescripcion(){
+		return $this->descripcion;
+	}
+	public function setDescripcion($descripcion){
+		$this->descripcion = $descripcion;
+	}
+
+	public function getEstado(){
+		return $this->estado;
+	}
+	public function setEstado($estado){
+		$this->estado = $estado;
+	}
+
+	public function getFechaAtendido(){
+		return $this->fechaAtendido;
+	}
+	public function setFechaAtendido($fechaAtendido){
+		$this->fechaAtendido = $fechaAtendido;
+	}
+
+	public function getUsuarioAtiende(){
+		return $this->usuarioAtiende;
+	}
+	public function setUsuarioAtiende($usuarioAtiende){
+		$this->usuarioAtiende = $usuarioAtiende;
+	}
+
+	public function getConclusiones(){
+		return $this->conclusiones;
+	}
+	public function setConclusiones($conclusiones){
+		$this->conclusiones = $conclusiones;
+	}
+
+	public function getCargarImagen(){
+		return $this->cargarImagen;
+	}
+	public function setCargarImagen($cargarImagen){
+		$this->cargarImagen = $cargarImagen;
+	}
+
+	public function getCargarImagen2(){
+		return $this->cargarImagen2;
+	}
+	public function setCargarImagen2($cargarImagen2){
+		$this->cargarImagen2 = $cargarImagen2;
+	}
+
+	public function getCargarImagen3(){
+		return $this->cargarImagen3;
+	}
+	public function setCargarImagen3($cargarImagen3){
+		$this->cargarImagen3 = $cargarImagen3;
+	}
+
+	public function getActivo(){
+		return $this->activo;
+	}
+	public function setActivo($activo){
+		$this->activo = $activo;
+	}
+
+	public function getCodigoActivo(){
+		return $this->codigoactivo;
+	}
+	public function setCodigoActivo($codigoactivo){
+		$this->codigoactivo = $codigoactivo;
+	}
+
+	public function getUsuario(){
+		return $this->usuario;
+	}
+	public function setUsuario($usuario){
+		$this->usuario = $usuario;
+	}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 	//************************************************
 	public function getP_nropeticion()
