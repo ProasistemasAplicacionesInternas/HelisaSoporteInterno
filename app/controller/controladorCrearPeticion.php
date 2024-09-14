@@ -65,7 +65,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     if (isset($_POST['btn-enviarPeticionInfra'])) {
         $equipos = $_POST['Categoria'];
-        $area_peticion = 1;
+        $areaPeticion = 1;
 
         if ($equipos == 16) {
 
@@ -95,7 +95,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $crud->crearPeticiones($peticion);
             
         }    } elseif (isset($_POST['btn-enviar_peticionMai'])) {
-            $area_peticion = 2;
+            $areaPeticion = 2;
             $peticionMai->setProducto_peticionMai($_POST['productoMai']);
             $peticionMai->setReq_Justification($_POST['req_Justification']);
             $peticionMai->setReq_Name($_POST['req_Name']);
