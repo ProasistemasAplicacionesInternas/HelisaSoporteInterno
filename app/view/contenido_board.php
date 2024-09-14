@@ -123,7 +123,7 @@ $dataSolicitudProcesoSeguridad = $info->soportesProcesoSeguridad();
                     </h4>
                 </div>
 
-            <?php } else if ($_SESSION['id_roles'] != 2) { ?>
+            <?php } else if ($_SESSION['id_roles'] == 6 || $_SESSION['id_roles'] == 9) { ?>
                 <div class="col-6">
                     <h5 style="color:#5BB94B"><u>Estado Soporte Infraestructura</u></h5>
                     <h5>Soportes Nuevos
