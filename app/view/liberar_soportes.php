@@ -23,7 +23,7 @@
        header('location:../../login.php');
        }
         
-       require_once('../model/crud_peticiones.php');
+       require_once('../model/crudPeticionesFuncionarios.php');
        require_once('../model/datosPeticion.php');
     
         $consultar= new CrudPeticiones();

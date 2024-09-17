@@ -12,36 +12,36 @@ class CrudPeticionesMai
     public function crearPeticionesMai($create)
     {
         $db = Conectar::acceso();
-        $crea_peticionMai = $db->prepare('INSERT INTO peticiones_mai(descripcion_peticion, usuario_creacion, fecha_peticion, estado_peticion, producto_mai, imagen, imagen2, imagen3, tipo_soportemai, req_nombre, req_justificacion)VALUES(:descripcion_peticion, :usuario_creacion, :fecha_peticion, :estado_peticion, :producto_mai, :imagen, :imagen2, :imagen3, :tipo, :req_name, :req_justification)');
+        $creaPeticionMai = $db->prepare('INSERT INTO peticiones_mai(descripcion_peticion, usuario_creacion, fecha_peticion, estado_peticion, producto_mai, imagen, imagen2, imagen3, tipo_soportemai, req_nombre, req_justificacion)VALUES(:descripcionPeticion, :usuarioCreacion, :fechaPeticion, :estadoPeticion, :productoMai, :imagen, :imagen2, :imagen3, :tipo, :reqName, :reqJustification)');
 
-        $crea_peticionMai->bindValue('descripcion_peticion', $create->getDescripcion_peticionMai());
-        $crea_peticionMai->bindValue('usuario_creacion', $create->getUsuario_creacionMai());
-        $crea_peticionMai->bindValue('fecha_peticion', $create->getFecha_peticionMai());
-        $crea_peticionMai->bindValue('estado_peticion', $create->getEstado_peticionMai());
-        $crea_peticionMai->bindValue('producto_mai', $create->getProducto_peticionMai());
-        $crea_peticionMai->bindValue('imagen', $create->getImagen_peticionMai());
-        $crea_peticionMai->bindValue('imagen2', $create->getImagen_peticionMai2());
-        $crea_peticionMai->bindValue('imagen3', $create->getImagen_peticionMai3());
-        $crea_peticionMai->bindValue('tipo', $create->getName());
-        $crea_peticionMai->bindValue('req_name', $create->getReq_Name());
-        $crea_peticionMai->bindValue('req_justification', $create->getReq_justification());
-        $crea_peticionMai->execute();
+        $creaPeticionMai->bindValue('descripcionPeticion', $create->getDescripcionPeticionMai());
+        $creaPeticionMai->bindValue('usuarioCreacion', $create->getUsuarioCreacionMai());
+        $creaPeticionMai->bindValue('fechaPeticion', $create->getFechaPeticionMai());
+        $creaPeticionMai->bindValue('estadoPeticion', $create->getEstadoPeticionMai());
+        $creaPeticionMai->bindValue('productoMai', $create->getProductoPeticionMai());
+        $creaPeticionMai->bindValue('imagen', $create->getImagenPeticionMai());
+        $creaPeticionMai->bindValue('imagen2', $create->getImagenPeticionMai2());
+        $creaPeticionMai->bindValue('imagen3', $create->getImagenPeticionMai3());
+        $creaPeticionMai->bindValue('tipo', $create->getName());
+        $creaPeticionMai->bindValue('reqName', $create->getReqName());
+        $creaPeticionMai->bindValue('reqJustification', $create->getReqJustification());
+        $creaPeticionMai->execute();
         $id = $db->lastInsertId();
 
-        $colsultar_usuario = $db->prepare('SELECT identificacion from funcionarios where usuario =:usuario');
-        $colsultar_usuario->bindValue('usuario', $create->getUsuario_creacionMai());
-        $colsultar_usuario->execute();
-        $filtro = $colsultar_usuario->fetch(PDO::FETCH_ASSOC);
-        $id_funcionario = $filtro['identificacion'];
-        $funcion_realizada = "El funcionario Realizo una peticion al area de Mantenimiento de aplicaciones internas para el Producto " . $create->getProducto_peticionMai();
+        $colsultarUsuario = $db->prepare('SELECT identificacion from funcionarios where usuario =:usuario');
+        $colsultarUsuario->bindValue('usuario', $create->getUsuarioCreacionMai());
+        $colsultarUsuario->execute();
+        $filtro = $colsultarUsuario->fetch(PDO::FETCH_ASSOC);
+        $idFuncionario = $filtro['identificacion'];
+        $funcionRealizada = "El funcionario Realizo una peticion al area de Mantenimiento de aplicaciones internas para el Producto " . $create->getProducto_peticionMai();
         $inserta_funcion = $db->prepare("INSERT INTO funciones_funcionarios (codigo, id_funcionario, fecha_registro, funcion_realizada,IP) VALUES (0, :id_funcionario , curdate() , :funcion_realizada ,:ip )");
-        $inserta_funcion->bindValue('id_funcionario', $id_funcionario);
-        $inserta_funcion->bindValue('funcion_realizada', $funcion_realizada);
+        $inserta_funcion->bindValue('id_funcionario', $idFuncionario);
+        $inserta_funcion->bindValue('funcion_realizada', $funcionRealizada);
         $inserta_funcion->bindValue('ip', $_SERVER['REMOTE_ADDR']);
         $inserta_funcion->execute();
 
         $clase = new CrudPeticionesMai();
-        $insertaObservacion =  $clase->insertaObservacion($id, $create->getDescripcion_peticionMai(), $create->getUsuario_creacionMai(), $create->getFecha_peticionMai(), $create->getEstado_peticionMai());
+        $insertaObservacion =  $clase->insertaObservacion($id, $create->getDescripcionPeticionMai(), $create->getUsuarioCreacionMai(), $create->getFechaPeticionMai(), $create->getEstadoPeticionMai());
     }
 
 
@@ -256,7 +256,7 @@ class CrudPeticionesMai
                             $mail->Host = 'smtp.office365.com';  // Specify main and backup SMTP servers
                             $mail->SMTPAuth = true;                               // Enable SMTP authentication
                             $mail->Username = 'no-responder@helisa.com';                 // SMTP username
-                            $mail->Password = 'jkO5w6NqsJf7jRCop1X*#*';                           // SMTP password C3cwrsl6k1DN8am*2021Ftwv2*
+                            $mail->Password = 'pdqMG3@5FYV2PRP@Teh@Y@aoKEufrV';                           // SMTP password C3cwrsl6k1DN8am*2021Ftwv2*
                             $mail->SMTPSecure = 'tls';                            // Enable TLS encryption, `ssl` also accepted
                             $mail->Port = 587;                                    // TCP port to connect to
                             $mail->setFrom('no-responder@helisa.com');
@@ -472,15 +472,15 @@ class CrudPeticionesMai
         $consultar_peticion->execute();
         foreach ($consultar_peticion->fetchAll() as $listado) {
             $consulta = new PeticionMai();
-            $consulta->setId_peticionMai($listado['id_peticionmai']);
-            $consulta->setProducto_peticionMai($listado['producto_mai']);
-            $consulta->setFecha_peticionMai($listado['fecha_peticion']);
-            $consulta->setDescripcion_peticionMai($listado['descripcion_peticion']);
-            $consulta->setEstado_peticionMai($listado['estado_peticion']);
-            $consulta->setFecha_atendidoMai($listado['fecha_atencion']);
-            $consulta->setUsuario_atencionMai($listado['usuario_atencion']);
-            $consulta->setConclusiones_peticionMai($listado['conclusiones']);
-            $consulta->setMarca_revisado($listado['revisado']);
+            $consulta->setIdPeticionMai($listado['id_peticionmai']);
+            $consulta->setProductoPeticionMai($listado['producto_mai']);
+            $consulta->setFechaPeticionMai($listado['fecha_peticion']);	
+            $consulta->setDescripcionPeticionMai($listado['descripcion_peticion']);
+            $consulta->setEstadoPeticionMai($listado['estado_peticion']);	
+            $consulta->setFechaAtendidoMai($listado['fecha_atencion']);
+            $consulta->setUsuarioAtencionMai($listado['usuario_atencion']);	
+            $consulta->setConclusionesPeticionMai($listado['conclusiones']);	
+            $consulta->setMarcaRevisado($listado['revisado']);
             $consulta->setName($listado['nombre']);
             $lista_peticiones[] = $consulta;
         }

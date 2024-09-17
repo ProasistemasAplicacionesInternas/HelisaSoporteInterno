@@ -1,6 +1,6 @@
 <?php
-    //require('../model/crud_peticiones.php');
-    require_once('../model/datos_peticionesmai.php');
+    //require('../model/crudPeticionesFuncionarios.php');
+    require_once('../model/datosPeticionesmai.php');
     require_once('../model/datosPeticion.php');
     require_once("../model/vinculo.php");
     

@@ -23,7 +23,7 @@
        header('location:../../login_peticiones.php');
        }
         
-        require_once('../model/crud_peticiones.php');
+        require_once('../model/crudPeticionesFuncionarios.php');
         require_once('../model/datosPeticion.php');
         $consultar= new CrudPeticiones();
         $datos= new Peticion();
@@ -42,15 +42,15 @@
             <div class="col">
                     <table class="table table-striped tablesorter" id="tabla">
                     <thead>
-                            <th style="width:10px;">#</th>
-                            <th style="width:30px;">Categoria</th>
-                            <th style="width:30px;">Fecha Solicitud</th>
-                            <th style="width:30px;">Descripci&oacute;n</th>
-                            <th style="width:30px;">Estado Solicitud</th>
-                            <th style="width:30px;">Fecha Atendido</th>
-                            <th style="width:30px;">Usuario Atiende</th>
-                            <th style="width:30px;">Conclusiones</th>
-                            <th style="width:30px;">Revisado</th>
+                            <th style="width:10px; text-align: center;">#</th>
+                            <th style="width:30px; text-align: center;">Categoria</th>
+                            <th style="width:30px; text-align: center;">Fecha Solicitud</th>
+                            <th style="width:30px; text-align: center;">Descripci&oacute;n</th>
+                            <th style="width:30px; text-align: center;">Estado Solicitud</th>
+                            <th style="width:30px; text-align: center;">Fecha Atendido</th>
+                            <th style="width:30px; text-align: center;">Usuario Atiende</th>
+                            <th style="width:30px; text-align: center;">Conclusiones</th>
+                            <th style="width:30px; text-align: center;">Revisado</th>
                     </thead>
                     <?php foreach($consultaPeticiones as $datos): ?>
                     <tr>
@@ -70,13 +70,13 @@
                             <?php echo $datos->getUsuarioAtiende() ?></td>
                         <td>
                             <?php echo $datos->getConclusiones() ?></td>
-                        <td style="text-align:center">
+                        <td style="text-align:center;">
                             <?php 
                                 $estado = $datos->getEstado();
                                 $revisado = $datos->getRevisado();
                                 if(($estado=="Resuelto"||$estado=="Redireccionado") && $revisado==1){
                             ?>
-                                <input type="checkbox" class="btn btn-danger btn-sm" onChange="marcarevisado(<?php echo $datos->getP_nropeticion(); ?>)" id="revisar<?php echo $datos->getP_nropeticion(); ?>" name="revisado" value="<?php echo $datos->getP_nropeticion(); ?>">
+                                <input type="checkbox" class="btn btn-danger btn-sm" onChange="marcarevisado(<?php echo $datos->getNropeticion(); ?>)" id="revisar<?php echo $datos->getNropeticion(); ?>" name="revisado" value="<?php echo $datos->getNropeticion(); ?>">
                             <?php } ?>
                         </td>
                     </tr>

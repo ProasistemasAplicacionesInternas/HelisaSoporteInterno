@@ -23,8 +23,8 @@
        header('location:../../login.php');
        }
         
-       require_once('../model/crud_peticionesmai.php');
-       require_once('../model/datos_peticionesmai.php');
+       require_once('../model/crudPeticionesMai.php');
+       require_once('../model/datosPeticionesmai.php');
     
         $consultar= new CrudPeticionesMai();
         $datos= new PeticionMai();

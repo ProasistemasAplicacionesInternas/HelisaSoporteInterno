@@ -12,11 +12,11 @@ if (!isset($_SESSION['usuario'])) {
     header('location:../../login_peticiones.php');
 }
 
-require('../controller/controlador_categorias.php');
-require('../controller/controlador_productosmai.php'); //1
-require('../controller/controlador_consultaActivosFuncionario.php');
-require('../controller/controlador_soportemai.php');
-require('../controller/controlador_peticionmai.php');
+require('../controller/controladorCategorias.php');
+require('../controller/controladorProductosmai.php'); //1
+require('../controller/controladorConsultaActivosFuncionario.php');
+require('../controller/controladorSoportemai.php');
+require('../controller/controladorPeticionmai.php');
 
 ?>
 <!DOCTYPE html>
@@ -46,12 +46,12 @@ require('../controller/controlador_peticionmai.php');
             <h6 class="mt-3">Generar Solicitud</h6>
             <div class="col-12 ml-5">
 
-                <form action="../controller/controlador_crearPeticion.php" method="post" class="form-group" enctype="multipart/form-data">
+                <form action="../controller/controladorCrearPeticion.php" method="post" class="form-group" enctype="multipart/form-data">
                     <div class="row">
                         <div class="col-3">
                             <div class="form-group">
                                 <label>Área</label>
-                                <select class="form-control info" id="area_peticion" name="area_peticion" required disabled>
+                                <select class="form-control info" id="areaPeticion" name="areaPeticion" required disabled>
                                     <option value="2" selected>Mantenimiento De Aplicaciones</option>
                                 </select>
                             </div>
@@ -64,7 +64,7 @@ require('../controller/controlador_peticionmai.php');
                                 <select class="form-control info" id="productoMai" name="productoMai">
                                     <option value="" selected>Seleccione Un Programa</option>
                                     <?php
-                                    foreach ($listado_productos as $producto) {
+                                    foreach ($listadoProductos as $producto) {
                                         echo "<option value='" . $producto["id_producto"] . "'>" . $producto["nombre_producto"] . "</option>";
                                     }
                                     ?>
@@ -79,7 +79,7 @@ require('../controller/controlador_peticionmai.php');
                                 <select class="form-control info" id="soporteMai" name="soporteMai" onchange="imagenRequerida(), reqData()">
                                     <option value="" selected>Seleccione el tipo de petición</option>
                                     <?php
-                                    foreach ($listado_soporte as $tipoSoporte) {
+                                    foreach ($listadoSoporte as $tipoSoporte) {
                                         if ($tipoSoporte['id'] == 4 && isset($_SESSION['id_roles']) && $_SESSION['id_roles'] == 5) {
                                             echo "<option value='" . $tipoSoporte["id"] . "'>" . $tipoSoporte["nombre"] . "</option>";
                                         } else if ($tipoSoporte['id'] != 4) {
@@ -96,7 +96,7 @@ require('../controller/controlador_peticionmai.php');
                         <div class="col-5">
                             <div class="form-group" id="divNombre" style="display:none;">
                                 <label>Nombre del requerimiento</label>
-                                <input class="form-control info" id="req_Name" name="req_Name" />
+                                <input class="form-control info" id="reqName" name="reqName" />
                             </div>
                         </div>
                     </div>
@@ -106,7 +106,7 @@ require('../controller/controlador_peticionmai.php');
                             <div class="col-6">
                                 <div class="form-group">
                                     <label>Activos Asignados</label>
-                                    <select class="form-control info" id="p_activo" name="p_activo">
+                                    <select class="form-control info" id="pActivo" name="pActivo">
                                         <option value="" selected>Seleccione un activo</option>
                                         <?php
 
@@ -124,7 +124,7 @@ require('../controller/controlador_peticionmai.php');
                         <div class="col-3">
                             <div class="form-group" id="reqJustification" style="display: none;">
                                 <label>Justificación</label>
-                                <textarea name="req_Justification" id="req_Justification" cols="86" rows="5" maxlength="6000"></textarea>
+                                <textarea name="reqJustification" id="reqJustification" cols="86" rows="5" maxlength="6000"></textarea>
                             </div>
                         </div>
                     </div>
@@ -133,7 +133,7 @@ require('../controller/controlador_peticionmai.php');
                         <div class="col-3">
                             <div class="form-group">
                                 <label>Descripción</label>
-                                <textarea name="p_descripcion" id="p_descripcion" cols="86" rows="5" maxlength="6000" required></textarea>
+                                <textarea name="pDescripcion" id="pDescripcion" cols="86" rows="5" maxlength="6000" required></textarea>
                             </div>
                         </div>
                     </div>
@@ -155,7 +155,7 @@ require('../controller/controlador_peticionmai.php');
 
                     <div class="row my-3">
                         <div class="col-3">
-                            <button type="submit" class="btn btn-success" id="btn-enviar_peticionMai" name="btn-enviar_peticionMai">Enviar Solicitud</button>
+                            <button type="submit" class="btn btn-success" id="btn-enviarPeticionMai" name="btn-enviarPeticionMai">Enviar Solicitud</button>
                         </div>
                         <div class="col-3">
                             <a class="btn btn-danger" onclick="retrocesoPagina()">Cancelar</a>

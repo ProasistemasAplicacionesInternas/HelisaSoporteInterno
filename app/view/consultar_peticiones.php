@@ -26,8 +26,8 @@ error_reporting(E_ALL);
        header('location:../../login.php');
    }
 
-        require('../model/crud_peticiones.php');
-        require('../model/datos_peticion.php');
+        require('../model//crudPeticionesFuncionarios.php');
+        require('../model/datosPeticion.php');
 
         $crud = new CrudPeticiones();
         $datos1 = new Peticion();
@@ -81,7 +81,7 @@ error_reporting(E_ALL);
                                     <?php echo $datos1->getP_estado(); ?>
                                 </td>
                                 <td>
-                                    <?= html_entity_decode($datos1->getP_conclusiones()); ?>
+                                    <?php echo $datos1->getP_conclusiones(); ?>
                                 </td>
                                
                                 <td>

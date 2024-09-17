@@ -24,8 +24,8 @@
         header('location:../../login.php');
     }
 
-    require('../model/crud_peticionesmai.php');
-    require('../model/datos_peticionesmai.php');
+    require('../model/crudPeticionesMai.php');
+    require('../model/datosPeticionesmai.php');
 
 
 

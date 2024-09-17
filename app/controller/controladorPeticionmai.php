@@ -1,7 +1,7 @@
 <?php
 
-require_once('../model/crud_peticionesmai.php');
-require_once('../model/datos_peticionesmai.php');
+require_once('../model/crudPeticionesMai.php');
+require_once('../model/datosPeticionesmai.php');
 
 
 require_once('../model/datos_soportemai.php');

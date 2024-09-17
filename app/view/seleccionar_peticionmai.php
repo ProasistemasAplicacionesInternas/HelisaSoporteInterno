@@ -28,7 +28,7 @@
         $user = $_SESSION['usuario'];
     }
 
-    include('../controller/controlador_soportemai.php');
+    include('../controller/controladorSoportemai.php');
     include('../controller/controlador_seleccionPeticion.php');
     $codigo = $_POST['p_nropeticion'];
     $fechapeticion = $_POST['p_fechapeticion'];
@@ -65,7 +65,7 @@
     <div class="container">
         <div>
             <div class='box1'>
-                <form action="../controller/controlador_peticionmai.php" method="post" enctype="multipart/form-data">
+                <form action="../controller/controladorPeticionmai.php" method="post" enctype="multipart/form-data">
                     <div style="display:none">
                         <input type="text" id="user" name="user" class="form-control" value="<?php echo $user; ?>" readonly>
                     </div>
@@ -122,7 +122,7 @@
                             <label id="label">Tipo de petición</label>
                             <select id="soporteMai" name="soporteMai" class="selectView">
                                 <?php
-                                foreach ($listado_soporte as $tipoSoporte) {
+                                foreach ($listadoSoporte as $tipoSoporte) {
                                     echo "<option value='" . $tipoSoporte['id'] . "'";
                                     if ($name == $tipoSoporte['nombre']) {
                                         echo 'selected';

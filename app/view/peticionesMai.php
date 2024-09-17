@@ -16,8 +16,8 @@
     if(!isset($_SESSION['usuario'])){
     header('location:../../login_peticiones.php');
     }
-        require('../model/crud_peticionesmai.php');
-        require('../model/datos_peticionesmai.php');
+        require('../model/crudPeticionesMai.php');
+        require('../model/datosPeticionesmai.php');
         $crud = new CrudPeticionesMai();
         $datos = new PeticionMai();
         $consultaPeticionesMai=$crud->consultarPeticionesMaixFuncionario();//**********
@@ -28,7 +28,7 @@
                 <h6>Consulta Solicitudes Apps Internas</h6>
             </div>
             <div class="col-1 mt-4 mb-2">
-                <a id="cacheData" href="app/view/crear_peticionMai.php"><h8>Generar Solicitud</h8><img src="public/img/nuevo.png" alt=""></a>
+                <a id="cacheData" href="app/view/crearPeticionMai.php"><h8>Generar Solicitud</h8><img src="public/img/nuevo.png" alt=""></a>
             </div>
             <div class="col">
                     <table class="table table-striped tablesorter" id="tabla">
@@ -47,30 +47,30 @@
                     <?php foreach($consultaPeticionesMai as $datos): ?>
                         <tr>
                             <td>                                
-                                <?php echo $datos->getId_peticionMai() ?></td>
+                                <?php echo $datos->getIdPeticionMai() ?></td>
                             <td>
-                                <?php echo $datos->getProducto_peticionMai() ?></td>
+                                <?php echo $datos->getProductoPeticionMai() ?></td>
                             <td>
-                                <?php echo $datos->getFecha_peticionMai() ?></td>
+                                <?php echo $datos->getFechaPeticionMai() ?></td>
                             <td>
-                                <?php $descripcion = $datos->getDescripcion_peticionMai(); echo htmlspecialchars_decode($descripcion, ENT_NOQUOTES); ?></td> 
+                                <?php $descripcion = $datos->getDescripcionPeticionMai(); echo htmlspecialchars_decode($descripcion, ENT_NOQUOTES); ?></td> 
                             <td>
                                 <?php echo $datos->getName() ?>
                             <td>
-                                <?php echo $datos->getEstado_peticionMai() ?></td> 
+                                <?php echo $datos->getEstadoPeticionMai() ?></td> 
                             <td>
-                                <?php echo $datos->getFecha_atendidoMai() ?></td>
+                                <?php echo $datos->getFechaAtendidoMai() ?></td>
                             <td>
-                                <?php echo $datos->getUsuario_atencionMai() ?></td>
+                                <?php echo $datos->getUsuarioAtencionMai() ?></td>
                             <td>
-                                <?php echo $datos->getConclusiones_peticionMai() ?></td>
+                                <?php echo $datos->getConclusionesPeticionMai() ?></td>
                             <td style="text-align:center">
                                 <?php 
-                                    $estado = $datos->getEstado_peticionMai();
-                                    $revisado = $datos->getMarca_revisado();
+                                    $estado = $datos->getEstadoPeticionMai();
+                                    $revisado = $datos->getMarcaRevisado();
                                     if(($estado=="Resuelto"||$estado=="Redireccionado") && $revisado==1){
                                 ?>
-                                    <input type="checkbox" class="btn btn-danger btn-sm" onChange="marcarevisado(<?php echo $datos->getId_peticionMai(); ?>)" id="revisar<?php echo $datos->getId_peticionMai(); ?>" name="revisado" value="<?php echo $datos->getId_peticionMai(); ?>">
+                                    <input type="checkbox" class="btn btn-danger btn-sm" onChange="marcarevisado(<?php echo $datos->getIdPeticionMai(); ?>)" id="revisar<?php echo $datos->getIdPeticionMai(); ?>" name="revisado" value="<?php echo $datos->getIdPeticionMai(); ?>">
                                 <?php } ?>
                             </td>
                         </tr>
@@ -81,7 +81,7 @@
             </div>
         </div>
     </div>
-    <script src="public/js/revisar_peticionmai.js"></script>
+    <script src="public/js/revisarPeticionmai.js"></script>
     <script src="public/js/smoke.min.js"></script>
     <script src="public/js/datatables.min.js"></script>
     <script src="public/js/tablas.js"></script>

@@ -9,7 +9,7 @@ ini_set("session.cookie_lifetime", "18000");
 ini_set("session.gc_maxlifetime", "18000");
 session_start();
 
-require_once('../model/crud_peticiones.php');
+require_once('../model/crudPeticionesFuncionarios.php');
 require_once('../model/datosPeticion.php');
 
 $crud = new CrudPeticiones();

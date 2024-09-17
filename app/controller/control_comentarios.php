@@ -1,5 +1,5 @@
 <?php
-//require('../model/crud_peticiones.php');
+//require('../model/crudPeticionesFuncionarios.php');
 require_once('../model/datosPeticion.php');
 require_once("../model/vinculo.php");
 

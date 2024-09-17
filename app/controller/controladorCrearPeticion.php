@@ -6,14 +6,14 @@ ini_set("session.cookie_lifetime", "18000");
 ini_set("session.gc_maxlifetime", "18000");
 session_start();
 
-require_once('../model/crud_peticiones.php');
+require_once('../model/crudPeticionesFuncionarios.php');
 require_once('../model/datosPeticion.php');
 
 
 require_once('../model/datos_soportemai.php');
 
-require_once('../model/crud_peticionesmai.php');
-require_once('../model/datos_peticionesmai.php');
+require_once('../model/crudPeticionesMai.php');
+require_once('../model/datosPeticionesmai.php');
 
 $crud = new CrudPeticiones();
 $peticion = new Peticion();
@@ -94,18 +94,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $peticion->setFechapeticion(date('Y-m-d H:i:s'));
             $crud->crearPeticiones($peticion);
             
-        }    } elseif (isset($_POST['btn-enviar_peticionMai'])) {
+        }    } elseif (isset($_POST['btn-enviarPeticionMai'])) {
             $areaPeticion = 2;
-            $peticionMai->setProducto_peticionMai($_POST['productoMai']);
-            $peticionMai->setReq_Justification($_POST['req_Justification']);
-            $peticionMai->setReq_Name($_POST['req_Name']);
-            $peticionMai->setUsuario_creacionMai($_SESSION['usuario']);
-            $peticionMai->setDescripcion_peticionMai(htmlspecialchars($_POST['p_descripcion']));
-            $peticionMai->setFecha_peticionMai(date('Y-m-d H:i:s'));
-            $peticionMai->setEstado_peticionMai(1);
-            $peticionMai->setImagen_peticionMai($nombreImagen[0]);
-            $peticionMai->setImagen_peticionMai2($nombreImagen[1]);
-            $peticionMai->setImagen_peticionMai3($nombreImagen[2]);
+            $peticionMai->setProductoPeticionMai($_POST['productoMai']);
+            $peticionMai->setReqJustification($_POST['reqJustification']);
+            $peticionMai->setReqName($_POST['reqName']);
+            $peticionMai->setUsuarioCreacionMai($_SESSION['usuario']);
+            $peticionMai->setDescripcionPeticionMai(htmlspecialchars($_POST['pDescripcion']));
+            $peticionMai->setFechaPeticionMai(date('Y-m-d H:i:s'));
+            $peticionMai->setEstadoPeticionMai(1);
+            $peticionMai->setImagenPeticionMai($nombreImagen[0]);
+            $peticionMai->setImagenPeticionMai2($nombreImagen[1]);
+            $peticionMai->setImagenPeticionMai3($nombreImagen[2]);
             $peticionMai->setName($_POST['soporteMai']);
             $crudMai->crearPeticionesMai($peticionMai);
     

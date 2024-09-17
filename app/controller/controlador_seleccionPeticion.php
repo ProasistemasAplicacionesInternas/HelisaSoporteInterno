@@ -1,13 +1,13 @@
 <?php 
 
-require_once('../model/crud_peticiones.php');
+require_once('../model/crudPeticionesFuncionarios.php');
 require_once('../model/datosPeticion.php');
 
-require_once('../model/crud_peticionesmai.php');
-require_once('../model/datos_peticionesmai.php');
+require_once('../model/crudPeticionesMai.php');
+require_once('../model/datosPeticionesmai.php');
 
 require_once('../model/datos_soportemai.php');
-require_once('../model/crud_soportemai.php');
+require_once('../model/crudSoportemai.php');
 
 require_once('../model/crud_peticionesSg.php');
 require_once('../model/datosPeticionesSeguridad.php');

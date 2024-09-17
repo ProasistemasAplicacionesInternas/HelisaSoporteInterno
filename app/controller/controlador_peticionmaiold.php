@@ -7,8 +7,8 @@ ini_set("session.gc_maxlifetime","18000");
 session_start();
 
 
-require_once('../model/crud_peticionesmai.php');
-require_once('../model/datos_peticionesmai.php');
+require_once('../model/crudPeticionesMai.php');
+require_once('../model/datosPeticionesmai.php');
 
 $crudMai= new CrudPeticionesMai();
 $peticionMai= new PeticionMai();

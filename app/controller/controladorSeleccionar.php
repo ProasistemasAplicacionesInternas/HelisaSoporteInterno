@@ -1,5 +1,5 @@
 <?php
-    require_once('../../app/model/crud_peticionesmai.php');
+    require_once('../../app/model/crudPeticionesMai.php');
 
     $crud = new CrudPeticionesMai();
     

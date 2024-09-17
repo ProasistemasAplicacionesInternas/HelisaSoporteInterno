@@ -10,7 +10,7 @@
         require('../controller/controlador_areas.php');
         require('../controller/controlador_funcionarios.php');
         
-        require_once('../model/crud_peticiones.php');
+        require_once('../model/crudPeticionesFuncionarios.php');
         require_once('../model/crud_mantenimientos.php');
         require_once('../model/crud_traslados.php');
         

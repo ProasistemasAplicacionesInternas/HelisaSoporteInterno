@@ -35,8 +35,11 @@ error_reporting(E_ALL);
     }
 
 
-    require('../model/crud_peticiones.php');
-    require('../model/datos_peticion.php');
+/*     require('../model/crud_peticiones.php');
+    require('../model/datos_peticion.php'); */
+
+    require('../model/crudPeticionesFuncionarios.php');
+    require('../model/datosPeticion.php');
 
     $crud = new CrudPeticiones();
     $datos1 = new Peticion();

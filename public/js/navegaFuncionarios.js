@@ -4,7 +4,7 @@ $(document).ready(function() {
     });
     
     $('#vista_solicitudesmai').click(function() {
-        $("#contenido").load("app/view/peticiones_mai.php");
+        $("#contenido").load("app/view/peticionesMai.php");
     });
     
     $('#vista_solicitudsg').click(function() {
