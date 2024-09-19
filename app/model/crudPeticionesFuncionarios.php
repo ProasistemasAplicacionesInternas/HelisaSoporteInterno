@@ -28,17 +28,17 @@ class CrudPeticiones
 		$creaPeticion->bindValue('x', 0);
 		$creaPeticion->execute();
 
-		$colsultar_usuario = $db->prepare('SELECT identificacion from funcionarios where usuario =:usuario');
-		$colsultar_usuario->bindValue('usuario', $create->getUsuario());
-		$colsultar_usuario->execute();
-		$filtro = $colsultar_usuario->fetch(PDO::FETCH_ASSOC);
-		$id_funcionario = $filtro['identificacion'];
-		$funcion_realizada = "El funcionario Realizo una peticion de categoria: " . $create->getP_categoria();
-		$inserta_funcion = $db->prepare("INSERT INTO funciones_funcionarios (codigo, id_funcionario, fecha_registro, funcion_realizada,IP) VALUES (0, :id_funcionario , curdate() , :funcion_realizada ,:ip )");
-		$inserta_funcion->bindValue('id_funcionario', $id_funcionario);
-		$inserta_funcion->bindValue('funcion_realizada', $funcion_realizada);
-		$inserta_funcion->bindValue('ip', $_SERVER['REMOTE_ADDR']);
-		$inserta_funcion->execute();
+		$colsultarUsuario = $db->prepare('SELECT identificacion from funcionarios where usuario =:usuario');
+		$colsultarUsuario->bindValue('usuario', $create->getUsuario());
+		$colsultarUsuario->execute();
+		$filtro = $colsultarUsuario->fetch(PDO::FETCH_ASSOC);
+		$idFuncionario = $filtro['identificacion'];
+		$funcionRealizada = "El funcionario Realizo una peticion de categoria: " . $create->getP_categoria();
+		$insertaFuncion = $db->prepare("INSERT INTO funciones_funcionarios (codigo, id_funcionario, fecha_registro, funcion_realizada,IP) VALUES (0, :id_funcionario , curdate() , :funcion_realizada ,:ip )");
+		$insertaFuncion->bindValue('id_funcionario', $idFuncionario);
+		$insertaFuncion->bindValue('funcion_realizada', $funcionRealizada);
+		$insertaFuncion->bindValue('ip', $_SERVER['REMOTE_ADDR']);
+		$insertaFuncion->execute();
 
 		echo 1;
 	}
@@ -51,17 +51,17 @@ class CrudPeticiones
 	public function consultarPeticionesFuncionario()
 	{
 		$db = conectar::acceso();
-		$lista_peticiones = [];
-		$consultar_peticion = $db->prepare('SELECT  numero_peticion, fecha_peticion,peticiones.descripcion, categoria, fecha_atendido, estado, usuario_atiende, conclusiones, categorias.nombre_categoria, estado.descripcion AS nombreestado,revisado FROM peticiones LEFT JOIN categorias ON categorias.id_categoria=peticiones.categoria LEFT JOIN estado ON estado.id_estado=peticiones.estado WHERE usuario=:funcionario AND (estado=:estadoN OR estado=:estadoR OR estado=:estadoP OR estado=:estadoS OR estado=:estadoT) AND revisado=:noRevisado ORDER BY nombreestado DESC');
-		$consultar_peticion->bindValue('funcionario', $_SESSION['usuario']);
-		$consultar_peticion->bindValue('estadoN', '1');
-		$consultar_peticion->bindValue('estadoR', '2');
-		$consultar_peticion->bindValue('estadoP', '3');
-		$consultar_peticion->bindValue('estadoT', '4');
-		$consultar_peticion->bindValue('estadoS', '8');
-		$consultar_peticion->bindValue('noRevisado', 1);
-		$consultar_peticion->execute();
-		foreach ($consultar_peticion->fetchAll() as $listado) {
+		$listaPeticiones = [];
+		$consultarPeticion = $db->prepare('SELECT  numero_peticion, fecha_peticion,peticiones.descripcion, categoria, fecha_atendido, estado, usuario_atiende, conclusiones, categorias.nombre_categoria, estado.descripcion AS nombreestado,revisado FROM peticiones LEFT JOIN categorias ON categorias.id_categoria=peticiones.categoria LEFT JOIN estado ON estado.id_estado=peticiones.estado WHERE usuario=:funcionario AND (estado=:estadoN OR estado=:estadoR OR estado=:estadoP OR estado=:estadoS OR estado=:estadoT) AND revisado=:noRevisado ORDER BY nombreestado DESC');
+		$consultarPeticion->bindValue('funcionario', $_SESSION['usuario']);
+		$consultarPeticion->bindValue('estadoN', '1');
+		$consultarPeticion->bindValue('estadoR', '2');
+		$consultarPeticion->bindValue('estadoP', '3');
+		$consultarPeticion->bindValue('estadoT', '4');
+		$consultarPeticion->bindValue('estadoS', '8');
+		$consultarPeticion->bindValue('noRevisado', 1);
+		$consultarPeticion->execute();
+		foreach ($consultarPeticion->fetchAll() as $listado) {
 			$consulta = new Peticion();
 			$consulta->setNropeticion($listado['numero_peticion']);
 			$consulta->setFechapeticion($listado['fecha_peticion']);
@@ -72,9 +72,9 @@ class CrudPeticiones
 			$consulta->setConclusiones($listado['conclusiones']);
 			$consulta->setUsuarioatiende($listado['usuario_atiende']);
 			$consulta->setRevisado($listado['revisado']);
-			$lista_peticiones[] = $consulta;
+			$listaPeticiones[] = $consulta;
 		}
-		return $lista_peticiones;
+		return $listaPeticiones;
 	}
 
 	//***********************************************************************************//
@@ -266,14 +266,14 @@ class CrudPeticiones
 				$cuerpo .= "</div></div>";
 				$cuerpo .= "<div class='row' id='segundo'><div>
 
-				<a href='https://soporteinfraestructura.helisa.com/infraestructura/app/controller/controlador_peticion.php?encuesta=encuesta&nro=1&peticion=" . $peticion . "'><input type='submit' id='uno' value='1'></a>
+				<a href='https://soporteinfraestructura.helisa.com/infraestructura/app/controller/controladorPeticion.php?encuesta=encuesta&nro=1&peticion=" . $peticion . "'><input type='submit' id='uno' value='1'></a>
 
-				<a href='https://soporteinfraestructura.helisa.com/infraestructura/app/controller/controlador_peticion.php?encuesta=encuesta&nro=2&peticion=" . $peticion . "'><input type=submit id=dos value=2></a>
+				<a href='https://soporteinfraestructura.helisa.com/infraestructura/app/controller/controladorPeticion.php?encuesta=encuesta&nro=2&peticion=" . $peticion . "'><input type=submit id=dos value=2></a>
 
-				<a href='https://soporteinfraestructura.helisa.com/infraestructura/app/controller/controlador_peticion.php?encuesta=encuesta&nro=3&peticion=" . $peticion . "'><input type=submit id=tres value=3></a>
-				<a href='https://soporteinfraestructura.helisa.com/infraestructura/app/controller/controlador_peticion.php?encuesta=encuesta&nro=4&peticion=" . $peticion . "'><input type=submit id=cuatro value=4></a>
+				<a href='https://soporteinfraestructura.helisa.com/infraestructura/app/controller/controladorPeticion.php?encuesta=encuesta&nro=3&peticion=" . $peticion . "'><input type=submit id=tres value=3></a>
+				<a href='https://soporteinfraestructura.helisa.com/infraestructura/app/controller/controladorPeticion.php?encuesta=encuesta&nro=4&peticion=" . $peticion . "'><input type=submit id=cuatro value=4></a>
 
-				<a href='https://soporteinfraestructura.helisa.com/infraestructura/app/controller/controlador_peticion.php?encuesta=encuesta&nro=5&peticion=" . $peticion . "'><input type=submit id=cinco value=5></a>
+				<a href='https://soporteinfraestructura.helisa.com/infraestructura/app/controller/controladorPeticion.php?encuesta=encuesta&nro=5&peticion=" . $peticion . "'><input type=submit id=cinco value=5></a>
 							</div>
 							</div>";
 				$body = utf8_decode($cuerpo);

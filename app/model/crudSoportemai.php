@@ -21,9 +21,4 @@ public function mostrarTipoSoporte(){
        
 		}
 
-
-
-
-
-
 ?>

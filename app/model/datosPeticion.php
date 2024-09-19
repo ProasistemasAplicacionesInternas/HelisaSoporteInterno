@@ -19,9 +19,6 @@ private $codigoactivo;
 private $usuario;
 
 
-
-
-
 // Old Variables
 
 	private $p_nropeticion;
@@ -155,25 +152,7 @@ private $usuario;
 		$this->usuario = $usuario;
 	}
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+	//old Variables
 
 	//************************************************
 	public function getP_nropeticion()

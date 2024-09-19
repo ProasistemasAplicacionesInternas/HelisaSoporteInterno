@@ -1,11 +1,11 @@
 function marcarevisado(value){
 		data =  value;
         
-        var nro_solicitud = '&nro_solicitud='+(value) + '&marcarRevisado=1';
+        var nroSolicitud = '&nro_solicitud='+(value) + '&marcarRevisado=1';
         $.ajax({
 	    		type: 'post',
 	            url: 'app/controller/controlador_peticion.php',
-	            data: nro_solicitud
+	            data: nroSolicitud
 	    	}).done(function(data){
                 if(data==1){
                   $('#infoPeticionFuncionario').load('app/view/peticionFuncionario.php');

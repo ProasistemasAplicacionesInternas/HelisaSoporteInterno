@@ -40,7 +40,7 @@ function validacion(fileName, fileSize) {
                 })
 
                 $('#alert').fadeIn('slow');
-                document.getElementById("btn-enviar_peticionMai").disabled = true;
+                document.getElementById("btn-enviarPeticionMai").disabled = true;
 
                 $('#alert').fadeIn('slow');
                 document.getElementById("btn-enviarPeticionInfra").disabled = true;
@@ -50,7 +50,7 @@ function validacion(fileName, fileSize) {
 
                 setTimeout(function () {
 
-                    document.getElementById("btn-enviar_peticionMai").disabled = false;
+                    document.getElementById("btn-enviarPeticionMai").disabled = false;
                     $("#alerta").load(" #alerta");
                     $("#ruta").load(" #ruta");
 

@@ -13,10 +13,11 @@ if (!isset($_SESSION['usuario'])) {
 }
 
 require('../controller/controladorCategorias.php');
-require('../controller/controladorProductosmai.php'); //1
+require('../controller/controladorProductosMai.php'); //1
 require('../controller/controladorConsultaActivosFuncionario.php');
 require('../controller/controladorSoportemai.php');
 require('../controller/controladorPeticionmai.php'); 
+
 
 ?>
 <!DOCTYPE html>

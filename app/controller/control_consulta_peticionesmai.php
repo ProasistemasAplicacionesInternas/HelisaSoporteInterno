@@ -1,5 +1,5 @@
 <?php
-    require_once('../model/datosPeticionesmai.php');
+    require_once('../model/datosPeticionesMai.php');
     require_once("../model/vinculo.php");
     
     $datos= new PeticionMai();

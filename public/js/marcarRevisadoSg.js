@@ -1,9 +1,9 @@
 function marcarevisado(value) {
-    var nro_solicitud = '&nro_solicitud=' + value + '&marcarRevisado=1';
+    var nroSolicitud = '&nroSolicitud=' + value + '&marcarRevisado=1';
     $.ajax({
         type: 'post',
         url: 'app/controller/controladorPeticionSeguridad.php',
-        data: nro_solicitud
+        data: nroSolicitud
     }).done(function(data) {
         console.log('Dato recibido del servidor: ' + data);
 

@@ -10,7 +10,7 @@ require_once('../model/crudPeticionesFuncionarios.php');
 require_once('../model/datosPeticion.php');
 
 
-require_once('../model/datos_soportemai.php');
+require_once('../model/datosSoporteMai.php');
 
 require_once('../model/crudPeticionesMai.php');
 require_once('../model/datosPeticionesmai.php');
@@ -27,7 +27,7 @@ $peticionMai = new PeticionMai();
 //************************** PARA EL CARGUE DE LA IMAGEN ************************//
 //*******************************************************************************//
 
-define('DOCROOT', $_SERVER['DOCUMENT_ROOT'] . '/HelisaSoporteInterno'); /* MODIFCAR AL CAMBIAR A PRODUCCION */ /* /carpeta_principal_proyecto */
+define('DOCROOT', $_SERVER['DOCUMENT_ROOT'] . '/infraestructura'); /* MODIFCAR AL CAMBIAR A PRODUCCION */ /* /carpeta_principal_proyecto */
 
 $nombreImagen = array(0 => 2, 1 => 2, 2 => 2);
 $numImagenes = count($_FILES['imagen']['name']);/* cuenta el numero de elemntos en el array(sino hay ninguno el resultado sera 1) */

@@ -4,10 +4,10 @@ require_once('../model/crudPeticionesFuncionarios.php');
 require_once('../model/datosPeticion.php');
 
 require_once('../model/crudPeticionesMai.php');
-require_once('../model/datosPeticionesmai.php');
+require_once('../model/datosPeticionesMai.php');
 
-require_once('../model/datos_soportemai.php');
-require_once('../model/crudSoportemai.php');
+require_once('../model/datosSoporteMai.php');
+require_once('../model/crudSoporteMai.php');
 
 require_once('../model/crud_peticionesSg.php');
 require_once('../model/datosPeticionesSeguridad.php');

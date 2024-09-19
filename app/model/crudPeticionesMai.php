@@ -167,88 +167,88 @@ class CrudPeticionesMai
     public function redireccionarPeticionesMai($redirect)
     {
         $db = conectar::acceso();
-        $redirecciona_solicitud = $db->prepare('INSERT INTO peticiones(fecha_peticion, usuario, estado, categoria, descripcion, 
+        $redireccionaSolicitud = $db->prepare('INSERT INTO peticiones(fecha_peticion, usuario, estado, categoria, descripcion, 
         imagen, conclusiones, imagen2, imagen3)VALUES(:fecha_peticion, :usuario, :estado, :categoria, :descripcion, 
         :imagen, :conclusiones, :imagen2, :imagen3)');
         date_default_timezone_set('America/Bogota');
 
-        $redirecciona_solicitud->bindValue('fecha_peticion', $redirect->getFecha_peticionMai());
-        $redirecciona_solicitud->bindValue('usuario', $redirect->getUsuario_creacionMai());
-        $redirecciona_solicitud->bindValue('estado', 1);
-        $redirecciona_solicitud->bindValue('categoria', 22);
-        $redirecciona_solicitud->bindValue('descripcion', $redirect->getDescripcion_peticionMai());
-        $redirecciona_solicitud->bindValue('imagen', $redirect->getImagen_peticionMai());
-        $redirecciona_solicitud->bindValue('imagen2', $redirect->getImagen_peticionMai2());
-        $redirecciona_solicitud->bindValue('imagen3', $redirect->getImagen_peticionMai3());
-        $redirecciona_solicitud->bindValue('conclusiones', $redirect->getConclusiones_peticionMai());
-        $redirecciona_solicitud->execute();
-        if ($redirecciona_solicitud) {
+        $redireccionaSolicitud->bindValue('fecha_peticion', $redirect->getFechaPeticionMai());
+        $redireccionaSolicitud->bindValue('usuario', $redirect->getUsuarioCreacionMai());
+        $redireccionaSolicitud->bindValue('estado', 1);
+        $redireccionaSolicitud->bindValue('categoria', 22);
+        $redireccionaSolicitud->bindValue('descripcion', $redirect->getDescripcionPeticionMai());
+        $redireccionaSolicitud->bindValue('imagen', $redirect->getImagenPeticionMai());
+        $redireccionaSolicitud->bindValue('imagen2', $redirect->getImagenPeticionMai2());
+        $redireccionaSolicitud->bindValue('imagen3', $redirect->getImagenPeticionMai3());
+        $redireccionaSolicitud->bindValue('conclusiones', $redirect->getConclusionesPeticionMai());
+        $redireccionaSolicitud->execute();
+        if ($redireccionaSolicitud) {
             $registro = $db->lastInsertId();
             echo $registro;
             $db = conectar::acceso();
-            $finaliza_solicitudmai = $db->prepare('UPDATE peticiones_mai SET fecha_atencion=:fecha_atencion, usuario_atencion=:usuario_atencion, conclusiones=:conclusiones, cod_redireccionado=:cod_redireccionado, estado_peticion=:estado_peticion WHERE id_peticionmai=:cod_peticion');
-            $finaliza_solicitudmai->bindValue('cod_peticion', $redirect->getId_peticionMai());
-            $finaliza_solicitudmai->bindValue('fecha_atencion', $redirect->getFecha_atendidoMai());
-            $finaliza_solicitudmai->bindValue('usuario_atencion', $redirect->getUsuario_atencionMai());
-            $finaliza_solicitudmai->bindValue('conclusiones', $redirect->getConclusiones_peticionMai());
-            $finaliza_solicitudmai->bindValue('cod_redireccionado', $registro);
-            $finaliza_solicitudmai->bindValue('estado_peticion', $redirect->getEstado_peticionMai());
-            $finaliza_solicitudmai->execute();
+            $finalizaSolicitudmai = $db->prepare('UPDATE peticiones_mai SET fecha_atencion=:fecha_atencion, usuario_atencion=:usuario_atencion, conclusiones=:conclusiones, cod_redireccionado=:cod_redireccionado, estado_peticion=:estado_peticion WHERE id_peticionmai=:cod_peticion');
+            $finalizaSolicitudmai->bindValue('cod_peticion', $redirect->getIdPeticionMai());
+            $finalizaSolicitudmai->bindValue('fecha_atencion', $redirect->getFechaAtendidoMai());
+            $finalizaSolicitudmai->bindValue('usuario_atencion', $redirect->getUsuarioAtencionMai());
+            $finalizaSolicitudmai->bindValue('conclusiones', $redirect->getConclusionesPeticionMai());
+            $finalizaSolicitudmai->bindValue('cod_redireccionado', $registro);
+            $finalizaSolicitudmai->bindValue('estado_peticion', $redirect->getEstadoPeticionMai());
+            $finalizaSolicitudmai->execute();
         }
     }
 
     public function modificarPeticionesMai($update)
     {
         $db = conectar::acceso();
-        $estado = $update->getEstado_peticionMai();
-        $codigoMai = $update->getId_peticionMai();
-        $fechaAtendido = $update->getFecha_atendidoMai();
-        $usuarioCreacion = $update->getUsuario_creacionMai();
-        $usuarioAtendido = $update->getUsuario_atencionMai();
-        $conclusiones = $update->getConclusiones_peticionMai();
+        $estado = $update->getEstadoPeticionMai();
+        $codigoMai = $update->getIdPeticionMai();
+        $fechaAtendido = $update->getFechaAtendidoMai();
+        $usuarioCreacion = $update->getUsuarioCreacionMai();
+        $usuarioAtendido = $update->getUsuarioAtencionMai();
+        $conclusiones = $update->getConclusionesPeticionMai();
         $version = $update->getVersion();
-        $numero_version = $update->getNumero_version();
+        $numero_version = $update->getNumeroVersion();
         $sprint = $update->getSprint();
         $gestion = $update->getGestion();
         $archivo = $update->getArchivos();
 
 
-        $correo = $update->getEmail_funcionario();
+        $correo = $update->getEmailFuncionario();
         if ($estado == 2) {
 
             $clase = new CrudPeticionesMai();
-            $insertaObservacion =  $clase->insertaObservacion($update->getId_peticionMai(), $update->getConclusiones_peticionMai(), $update->getUsuario_atencionMai(), $update->getFecha_atendidoMai(), $update->getEstado_peticionMai());
+            $insertaObservacion =  $clase->insertaObservacion($update->getIdPeticionMai(), $update->getConclusionesPeticionMai(), $update->getUsuarioAtencionMai(), $update->getFechaAtendidoMai(), $update->getEstadoPeticionMai());
 
-            $finaliza_solicitudmai = $db->prepare('UPDATE peticiones_mai SET fecha_atencion=:fecha_atencion, imagen2=:archivo, usuario_atencion=:usuario_atencion, conclusiones=:conclusiones, estado_peticion=:estado_peticion, tipo_soportemai=:tipo_soportemai, numero_version=:numero_version, version=:version, sprint=:sprint, gestion=:gestion WHERE id_peticionmai=:cod_peticion');
-            $finaliza_solicitudmai->bindValue('cod_peticion', $update->getId_peticionMai());
-            $finaliza_solicitudmai->bindValue('fecha_atencion', $update->getFecha_atendidoMai());
-            $finaliza_solicitudmai->bindValue('usuario_atencion', $update->getUsuario_atencionMai());
-            $finaliza_solicitudmai->bindValue('conclusiones', $update->getConclusiones_peticionMai());
-            $finaliza_solicitudmai->bindValue('estado_peticion', $update->getEstado_peticionMai());
-            $finaliza_solicitudmai->bindValue('tipo_soportemai', $update->getName());
-            $finaliza_solicitudmai->bindValue('version', $update->getVersion());
-            $finaliza_solicitudmai->bindValue('numero_version', $update->getNumero_version());
-            $finaliza_solicitudmai->bindValue('sprint', $update->getSprint());
-            $finaliza_solicitudmai->bindValue('gestion', $update->getGestion());
-            $finaliza_solicitudmai->bindValue('archivo', $update->getArchivos());
-            $finaliza_solicitudmai->execute();
-            if ($finaliza_solicitudmai) {
-                $colsultar_usuario = $db->prepare('SELECT id_usuario from usuarios where usuario =:usuario');
-                $colsultar_usuario->bindValue('usuario', $usuarioAtendido);
-                $colsultar_usuario->execute();
-                $filtro = $colsultar_usuario->fetch(PDO::FETCH_ASSOC);
-                $id_usuario = $filtro['id_usuario'];
-                $funcion_realizada = "El usuario atiendio con exito el siguiente ticket: " . $codigoMai . "del area de Mantenimiento de Aplicaciones internas";
+            $finalizaSolicitudmai = $db->prepare('UPDATE peticiones_mai SET fecha_atencion=:fecha_atencion, imagen2=:archivo, usuario_atencion=:usuario_atencion, conclusiones=:conclusiones, estado_peticion=:estado_peticion, tipo_soportemai=:tipo_soportemai, numero_version=:numero_version, version=:version, sprint=:sprint, gestion=:gestion WHERE id_peticionmai=:cod_peticion');
+            $finalizaSolicitudmai->bindValue('cod_peticion', $update->getIdPeticionMai());
+            $finalizaSolicitudmai->bindValue('fecha_atencion', $update->getFechaAtendidoMai());
+            $finalizaSolicitudmai->bindValue('usuario_atencion', $update->getUsuarioAtencionMai());
+            $finalizaSolicitudmai->bindValue('conclusiones', $update->getConclusionesPeticionMai());
+            $finalizaSolicitudmai->bindValue('estado_peticion', $update->getEstadoPeticionMai());
+            $finalizaSolicitudmai->bindValue('tipo_soportemai', $update->getName());
+            $finalizaSolicitudmai->bindValue('version', $update->getVersion());
+            $finalizaSolicitudmai->bindValue('numero_version', $update->getNumeroVersion());
+            $finalizaSolicitudmai->bindValue('sprint', $update->getSprint());
+            $finalizaSolicitudmai->bindValue('gestion', $update->getGestion());
+            $finalizaSolicitudmai->bindValue('archivo', $update->getArchivos());
+            $finalizaSolicitudmai->execute();
+            if ($finalizaSolicitudmai) {
+                $colsultarUsuario = $db->prepare('SELECT id_usuario from usuarios where usuario =:usuario');
+                $colsultarUsuario->bindValue('usuario', $usuarioAtendido);
+                $colsultarUsuario->execute();
+                $filtro = $colsultarUsuario->fetch(PDO::FETCH_ASSOC);
+                $idUsuario = $filtro['id_usuario'];
+                $funcionRealizada = "El usuario atiendio con exito el siguiente ticket: " . $codigoMai . "del area de Mantenimiento de Aplicaciones internas";
 
-                if ($colsultar_usuario) {
-                    $inserta_funcion = $db->prepare("INSERT INTO funciones (codigo, id_usuario, fecha_registro, funcion_realizada,IP) VALUES (0, :id_usuario , curdate() , :funcion_realizada ,:ip )");
-                    $inserta_funcion->bindValue('id_usuario', $id_usuario);
-                    $inserta_funcion->bindValue('funcion_realizada', $funcion_realizada);
-                    $inserta_funcion->bindValue('ip', $_SERVER['REMOTE_ADDR']);
-                    $inserta_funcion->execute();
+                if ($colsultarUsuario) {
+                    $insertaFuncion = $db->prepare("INSERT INTO funciones (codigo, id_usuario, fecha_registro, funcion_realizada,IP) VALUES (0, :id_usuario , curdate() , :funcion_realizada ,:ip )");
+                    $insertaFuncion->bindValue('id_usuario', $idUsuario);
+                    $insertaFuncion->bindValue('funcion_realizada', $funcionRealizada);
+                    $insertaFuncion->bindValue('ip', $_SERVER['REMOTE_ADDR']);
+                    $insertaFuncion->execute();
                     /*************************ESTO ES ENVIO MEDIANTE EL BOTON DE SELECCIONAR*******************************************************************************/
 
-                    if ($inserta_funcion) {
+                    if ($insertaFuncion ) {
                         $mail = new PHPMailer(true); // Passing `true` enables exceptions
                         try {
                             $mail->SMTPDebug = 0;                                 // Enable verbose debug output
@@ -312,22 +312,22 @@ class CrudPeticionesMai
                             $cuerpo .= "</div><div id='div_tres'>";
                             $cuerpo .= "<h5><b>Fecha en la cual el soporte fue creado : </b></h5><h5 id='fecha_solicitud'>" . $fechaAtendido . "</h5>";
                             $cuerpo .= "</div><div id='div_cuatro'>";
-                            $cuerpo .= "<h5><b>Resumen del problema : </b></h5><h5 id='solicitud'>" . $update->getDescripcion_peticionMai() . "</h5>";
+                            $cuerpo .= "<h5><b>Resumen del problema : </b></h5><h5 id='solicitud'>" . $update->getDescripcionPeticionMai() . "</h5>";
                             $cuerpo .= "</div><div id='div_cinco'>";
-                            $cuerpo .= "<h5><b>La conclusion que ha dado el asesor : </b></h5><h5 id='conclusion'>" . html_entity_decode($update->getConclusiones_peticionMai()) . "</h5>";
+                            $cuerpo .= "<h5><b>La conclusion que ha dado el asesor : </b></h5><h5 id='conclusion'>" . html_entity_decode($update->getConclusionesPeticionMai()) . "</h5>";
                             $cuerpo .= "</div><div id='div_seis'>";
                             $cuerpo .= "<p><i><b>Por favor, califica el servicio prestado de 1 a 5, donde 1 es poco satisfactorio y 5 es muy satisfactorio.</b>Recuerde que al dar click en cualquiera de los botones, el valor se guardara automaticamente y solo guardara un resultado.</i></p>";
                             $cuerpo .= "</div></div>";
                             $cuerpo .= "<div class='row' id='segundo'><div>
 
-                                <a href='https://soporteinfraestructura.helisa.com/infraestructura/app/controller/controlador_peticionmai.php?encuesta=encuesta&nro=1&peticion=" . $codigoMai . "'><input type='submit' id='uno' value='1'></a>
+                                <a href='https://soporteinfraestructura.helisa.com/infraestructura/app/controller/controladorPeticionmai.php?encuesta=encuesta&nro=1&peticion=" . $codigoMai . "'><input type='submit' id='uno' value='1'></a>
 
-                                <a href='https://soporteinfraestructura.helisa.com/infraestructura/app/controller/controlador_peticionmai.php?encuesta=encuesta&nro=2&peticion=" . $codigoMai . "'><input type=submit id=dos value=2></a>
+                                <a href='https://soporteinfraestructura.helisa.com/infraestructura/app/controller/controladorPeticionmai.php?encuesta=encuesta&nro=2&peticion=" . $codigoMai . "'><input type=submit id=dos value=2></a>
 
-                                <a href='https://soporteinfraestructura.helisa.com/infraestructura/app/controller/controlador_peticionmai.php?encuesta=encuesta&nro=3&peticion=" . $codigoMai . "'><input type=submit id=tres value=3></a>
-                                <a href='https://soporteinfraestructura.helisa.com/infraestructura/app/controller/controlador_peticionmai.php?encuesta=encuesta&nro=4&peticion=" . $codigoMai . "'><input type=submit id=cuatro value=4></a>
+                                <a href='https://soporteinfraestructura.helisa.com/infraestructura/app/controller/controladorPeticionmai.php?encuesta=encuesta&nro=3&peticion=" . $codigoMai . "'><input type=submit id=tres value=3></a>
+                                <a href='https://soporteinfraestructura.helisa.com/infraestructura/app/controller/controladorPeticionmai.php?encuesta=encuesta&nro=4&peticion=" . $codigoMai . "'><input type=submit id=cuatro value=4></a>
 
-                                <a href='https://soporteinfraestructura.helisa.com/infraestructura/app/controller/controlador_peticionmai.php?encuesta=encuesta&nro=5&peticion=" . $codigoMai . "'><input type=submit id=cinco value=5></a>
+                                <a href='https://soporteinfraestructura.helisa.com/infraestructura/app/controller/controladorPeticionmai.php?encuesta=encuesta&nro=5&peticion=" . $codigoMai . "'><input type=submit id=cinco value=5></a>
                             </div>
                             </div>";
                             $body = utf8_decode($cuerpo);
@@ -355,19 +355,19 @@ class CrudPeticionesMai
                 echo "No se pudo modificar la peticion Mai";
             }
         } else {
-            $finaliza_solicitudmai = $db->prepare('UPDATE peticiones_mai SET fecha_atencion=:fecha_atencion, usuario_atencion=:usuario_atencion, conclusiones=:conclusiones, estado_peticion=:estado_peticion, tipo_soportemai=:tipo_soportemai, sprint=:sprint, gestion=:gestion WHERE id_peticionmai=:cod_peticion');
-            $finaliza_solicitudmai->bindValue('cod_peticion', $update->getId_peticionMai());
-            $finaliza_solicitudmai->bindValue('fecha_atencion', $update->getFecha_atendidoMai());
-            $finaliza_solicitudmai->bindValue('usuario_atencion', $update->getUsuario_atencionMai());
-            $finaliza_solicitudmai->bindValue('conclusiones', $update->getConclusiones_peticionMai());
-            $finaliza_solicitudmai->bindValue('estado_peticion', $update->getEstado_peticionMai());
-            $finaliza_solicitudmai->bindValue('tipo_soportemai', $update->getName());
-            $finaliza_solicitudmai->bindValue('sprint', $update->getSprint());
-            $finaliza_solicitudmai->bindValue('gestion', $update->getGestion());
-            $finaliza_solicitudmai->execute();
+            $finalizaSolicitudmai = $db->prepare('UPDATE peticiones_mai SET fecha_atencion=:fecha_atencion, usuario_atencion=:usuario_atencion, conclusiones=:conclusiones, estado_peticion=:estado_peticion, tipo_soportemai=:tipo_soportemai, sprint=:sprint, gestion=:gestion WHERE id_peticionmai=:cod_peticion');
+            $finalizaSolicitudmai->bindValue('cod_peticion', $update->getIdPeticionMai());
+            $finalizaSolicitudmai->bindValue('fecha_atencion', $update->getFechaAtendidoMai());
+            $finalizaSolicitudmai->bindValue('usuario_atencion', $update->getUsuarioAtencionMai());
+            $finalizaSolicitudmai->bindValue('conclusiones', $update->getConclusionesPeticionMai());
+            $finalizaSolicitudmai->bindValue('estado_peticion', $update->getEstadoPeticionMai());
+            $finalizaSolicitudmai->bindValue('tipo_soportemai', $update->getName());
+            $finalizaSolicitudmai->bindValue('sprint', $update->getSprint());
+            $finalizaSolicitudmai->bindValue('gestion', $update->getGestion());
+            $finalizaSolicitudmai->execute();
 
             $clase = new CrudPeticionesMai();
-            $insertaObservacion =  $clase->insertaObservacion($update->getId_peticionMai(), $update->getConclusiones_peticionMai(), $update->getUsuario_atencionMai(), $update->getFecha_atendidoMai(), $update->getEstado_peticionMai());
+            $insertaObservacion =  $clase->insertaObservacion($update->getIdPeticionMai(), $update->getConclusionesPeticionMai(), $update->getUsuarioAtencionMai(), $update->getFechaAtendidoMai(), $update->getEstadoPeticionMai());
         }
     }
 
@@ -387,18 +387,18 @@ class CrudPeticionesMai
     {
 
         $db = conectar::acceso();
-        $consulta_encuesta = $db->prepare('SELECT nivel_encuesta FROM peticiones_mai WHERE id_peticionmai =:numero_peticion');
-        $consulta_encuesta->bindValue('numero_peticion', $peticion->getId_peticionMai());
-        $consulta_encuesta->execute();
-        $filter = $consulta_encuesta->fetch(PDO::FETCH_ASSOC);
-        $nivel_encuesta = $filter['nivel_encuesta'];
-        if ($nivel_encuesta != 0) {
+        $consultaEncuesta = $db->prepare('SELECT nivel_encuesta FROM peticiones_mai WHERE id_peticionmai =:numero_peticion');
+        $consultaEncuesta->bindValue('numero_peticion', $peticion->getIdPeticionMai());
+        $consultaEncuesta->execute();
+        $filter = $consultaEncuesta->fetch(PDO::FETCH_ASSOC);
+        $nivelEncuesta = $filter['nivel_encuesta'];
+        if ($nivelEncuesta != 0) {
             echo 'No se realiza el cambio';
         } else {
-            $insertar_encuesta = $db->prepare('UPDATE peticiones_mai SET nivel_encuesta=:nivel WHERE id_peticionmai=:numero_peticion');
-            $insertar_encuesta->bindValue('numero_peticion', $peticion->getId_peticionMai());
-            $insertar_encuesta->bindValue('nivel', $peticion->getEstado_peticionMai());
-            $insertar_encuesta->execute();
+            $insertarEncuesta = $db->prepare('UPDATE peticiones_mai SET nivel_encuesta=:nivel WHERE id_peticionmai=:numero_peticion');
+            $insertarEncuesta->bindValue('numero_peticion', $peticion->getIdPeticionMai());
+            $insertarEncuesta->bindValue('nivel', $peticion->getEstadoPeticionMai());
+            $insertarEncuesta->execute();
         }
     }
 
@@ -439,7 +439,7 @@ class CrudPeticionesMai
         $liberando->bindValue('fecha_atencion', date("Y-m-d H:i:s"));
         $liberando->bindValue('usuario_atencion', $_SESSION['usuario']);
         $liberando->bindValue('estado_peticion', 3);
-        $liberando->bindValue('cod_peticion', $liberty->getId_peticionMai());
+        $liberando->bindValue('cod_peticion', $liberty->getIdPeticionMai());
         $liberando->execute();
         if ($liberando) {
             echo 1;
@@ -492,7 +492,7 @@ class CrudPeticionesMai
         $db = conectar::acceso();
         $liberando = $db->prepare('UPDATE peticiones_mai SET revisado=:revisado WHERE id_peticionmai=:cod_peticion');
         $liberando->bindValue('revisado', 2);
-        $liberando->bindValue('cod_peticion', $marcar->getId_peticionMai());
+        $liberando->bindValue('cod_peticion', $marcar->getIdPeticionMai());
         $liberando->execute();
         if ($liberando) {
             echo 1;

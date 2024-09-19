@@ -70,7 +70,7 @@
                             <?php echo $datos->getUsuarioAtiende() ?></td>
                         <td>
                             <?php echo $datos->getConclusiones() ?></td>
-                        <td style="text-align:center;">
+                        <td style="text-align:center">
                             <?php 
                                 $estado = $datos->getEstado();
                                 $revisado = $datos->getRevisado();

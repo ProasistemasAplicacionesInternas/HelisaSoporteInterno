@@ -1,7 +1,7 @@
 <?php
     
-    require_once("../model/crudSoportemai.php");
-    require_once("../model/datos_soportemai.php");
+    require_once("../model/crudSoporteMai.php");
+    require_once("../model/datosSoporteMai.php");
 
     $Crudsoporte = new Crudsoporte();
     $datos = new Datostiposoporte();

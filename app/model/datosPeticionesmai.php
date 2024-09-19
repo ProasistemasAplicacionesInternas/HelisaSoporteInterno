@@ -19,6 +19,9 @@ class PeticionMai
 	private $imagenPeticionMai;
 	private $imagenPeticionMai2;
 	private $imagenPeticionMai3;
+	private $emailFuncionario;
+	private $numeroVersion;
+	
 
 	// Old Variables
 
@@ -187,23 +190,25 @@ class PeticionMai
 		$this->imagenPeticionMai3 = $imagenPeticionMai3;
 	}
 
+	public function getEmailFuncionario()
+	{
+		return $this->emailFuncionario;
+	}
+	public function setEmailFuncionario($emailFuncionario)
+	{
+		$this->emailFuncionario = $emailFuncionario;
+	}
 
+	public function getNumeroVersion()
+	{
+		return $this->numeroVersion;
+	}
+	public function setNumeroVersion($numeroVersion)
+	{
+		$this->numeroVersion = $numeroVersion;
+	}
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+	//old variables
 
 	//************************************************
 	public function getId_peticionMai()

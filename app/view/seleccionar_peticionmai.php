@@ -65,7 +65,7 @@
     <div class="container">
         <div>
             <div class='box1'>
-                <form action="../controller/controladorPeticionmai.php" method="post" enctype="multipart/form-data">
+            <form action="../controller/controladorPeticionmai.php" method="post" enctype="multipart/form-data">
                     <div style="display:none">
                         <input type="text" id="user" name="user" class="form-control" value="<?php echo $user; ?>" readonly>
                     </div>
