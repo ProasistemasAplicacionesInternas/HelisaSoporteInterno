@@ -1,14 +1,15 @@
 $('input[type="password"]').not('#contrasena' && '#contrasenaActualU').keyup(function () {
     var clave = $('#clave').val();
     var confirma = $('#confirma').val();
-    var regExPattern = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*?&]{8,10}/
+    var regExPattern = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*?&]{10,20}/
     var restringir = /^\s+|\s+$/
 
    if (!regExPattern.test(clave)) {
 
         document.getElementById("valida-div").style.display = "block";
-        $('#valida2').removeClass('text-success').addClass('text-info').text('La contraseña debe incluir mayúsculas,minúsculas,caracteres y números.Debe tener como mínimo 10 caracteres.');
+        $('#valida2').removeClass('text-success').addClass('text-info').text("La contraseña debe tener un mínimo de 12 caracteres e incluir mayúsculas, minúsculas, números y al menos uno de los siguientes caracteres especiales: $ @ ! % * ? & ");
         document.getElementById("enviar").disabled = true;
+
 
     }else if (restringir.test(clave) || !confirma || !clave) {
         document.getElementById("valida-div").style.display = "none";

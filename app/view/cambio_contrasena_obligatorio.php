@@ -87,7 +87,7 @@
     <script src="../../public/js/bootstrap.min.js"></script>
     <script src="../../public/js/live.js"></script>
 </body>
-     <script src="../../public/js/valida_usuario.js?ff"></script>
+     <script src="../../public/js/valida_usuario.js"></script>
      <script src="../../public/js/cambio_contrasena_obligatorio.js"></script>
      <script src="../../public/js/smoke.min.js"></script>
      <script src="../../public/js/bloqueoTeclas.js"></script>
