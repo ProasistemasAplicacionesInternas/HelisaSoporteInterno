@@ -5,6 +5,6 @@
 require_once('../model/crud_peticionesSg.php');
 
 $consult = new CrudPeticionesSg(); 
-$observaciones = $consult->traeObservaciones($_POST['p_nropeticion']);
+$observaciones = $consult->traeObservaciones($_POST['pNropeticion']);
 
 ?>

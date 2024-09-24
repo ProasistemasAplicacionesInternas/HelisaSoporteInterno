@@ -56,7 +56,7 @@ $(document).ready(function () {
   });
 
   $("#ConsultarSeguridad").click(function () {
-    $("#contenido").load("app/view/filtro_seguridad.php");
+    $("#contenido").load("app/view/filtroSeguridad.php");
   });
 
   $("#comentariosPeticiones").click(function () {

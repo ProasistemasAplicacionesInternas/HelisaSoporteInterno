@@ -46,7 +46,7 @@ function validacion(fileName, fileSize) {
                 document.getElementById("btn-enviarPeticionInfra").disabled = true;
 
                 $('#alert').fadeIn('slow');
-                document.getElementById("btn-enviar_peticionSg").disabled = true;
+                document.getElementById("btn-enviarPeticionSg").disabled = true;
 
                 setTimeout(function () {
 
@@ -58,7 +58,7 @@ function validacion(fileName, fileSize) {
                     $("#alerta").load(" #alerta");
                     $("#ruta").load(" #ruta");
 
-                    document.getElementById("btn-enviar_peticionSg").disabled = false;
+                    document.getElementById("btn-enviarPeticionSg").disabled = false;
                     $("#alerta").load(" #alerta");
                     $("#ruta").load(" #ruta");
 

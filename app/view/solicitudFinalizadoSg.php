@@ -76,50 +76,50 @@
                             <?php foreach ($listaConsulta as $datos) : ?>
                                 <tr>
                                     <td>
-                                        <span id="id_peticion<?php echo $datos->getid_peticionSg(); ?>">
-                                            <?php echo $datos->getid_peticionSg(); ?>
+                                        <span id="id_peticion<?php echo $datos->getIdPeticionSg(); ?>">
+                                            <?php echo $datos->getIdPeticionSg(); ?>
                                         </span>
                                     </td>
                                     <td>
-                                        <?php echo $datos->getUsuario_creacionSg(); ?>
+                                        <?php echo $datos->getUsuarioCreacionSg(); ?>
                                     </td>
                                     <td>
-                                        <?php echo $datos->getfecha_peticionSg(); ?>
+                                        <?php echo $datos->getFechaPeticionSg(); ?>
                                     </td>
                                     <td>
-                                        <?php echo $datos->getArea_funcionario(); ?>
+                                        <?php echo $datos->getAreaFuncionario(); ?>
                                     </td>
                                     <td>
-                                        <?php echo $datos->getcategoriaSg(); ?>
+                                        <?php echo $datos->getCategoriaSg(); ?>
                                     </td>
                                     <td>
-                                        <?php echo $datos->getEstado_peticionSg(); ?>
+                                        <?php echo $datos->getEstadoPeticionSg(); ?>
                                     </td>
                                     <td>
-                                        <?php echo $datos->getUsuario_atencionSg(); ?>
+                                        <?php echo $datos->getUsuarioAtencionSg(); ?>
                                     </td>
                                     <td>
-                                        <?php echo $datos->getFecha_atendidoSg(); ?>
+                                        <?php echo $datos->getFechaAtendidoSg(); ?>
                                     </td>
                                     <td>
-                                        <?php echo $datos->getdescripcion_peticionSg(); ?>
+                                        <?php echo $datos->getDescripcionPeticionSg(); ?>
                                     </td>
 
 
                                     <?php if ($_SESSION['id_roles'] == 11 || $_SESSION['id_roles'] == 7) { ?>
                                         <td>
-                                            <button class="btn btn-outline-primary verConclusion" data-toggle="modal" data-target="#verConclusionSg" data-backdrop="static" data-keyboard="false" id="btn-verConclusion" name="btn-verConclusion" onclick="verConclusionesSg(<?= $datos->getid_peticionSg() ?>)"><span>Ver Conclusión</span></button>
+                                            <button class="btn btn-outline-primary verConclusion" data-toggle="modal" data-target="#verConclusionSg" data-backdrop="static" data-keyboard="false" id="btn-verConclusion" name="btn-verConclusion" onclick="verConclusionesSg(<?= $datos->getIdPeticionSg() ?>)"><span>Ver Conclusión</span></button>
                                         </td>
                                     <?php } ?>
 
                                     <td>
                                         <?php if ($_SESSION['id_roles'] == 11 || $_SESSION['id_roles'] == 7) {
-                                            echo $datos->getconclusiones_PeticionSg();
+                                            echo $datos->getConclusionesPeticionSg();
                                         } ?>
                                     </td>
                                     <td>
                                     <td>
-                                        <button class="btn btn-outline-primary Documentos" data-toggle="modal" data-target="#documentModal" data-backdrop="static" id="btn-traerImagenes" name="btn-traerImagenes" onclick="mostrarDocumentos(<?= $datos->getid_peticionSg() ?>)">Documentos</button>
+                                        <button class="btn btn-outline-primary Documentos" data-toggle="modal" data-target="#documentModal" data-backdrop="static" id="btn-traerImagenes" name="btn-traerImagenes" onclick="mostrarDocumentos(<?= $datos->getIdPeticionSg() ?>)">Documentos</button>
                                     </td>
 
                                     </td>

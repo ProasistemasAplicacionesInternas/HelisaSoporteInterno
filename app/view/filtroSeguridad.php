@@ -44,15 +44,15 @@ if (!isset($_SESSION['usuario']) || empty($_SESSION['usuario'])) {
                 <div class="col-3 ml-3">
                     <select class="custom-select" name="estadoFiltroCategoria" id="estadoFiltroCategoria">
                         <option value="" selected>Seleccione un estado</option>
-                        <option value="23">Cambios sustanciales (cambio de finalidad en las BD)</option>
-                        <option value="24">Encargado del tratamientos de las BD</option>
-                        <option value="25">Clasificación o tipos de datos personales</option>
-                        <option value="26">Incidentes de seguridad con las BD o información personal</option>
-                        <option value="27">Eliminacion de BD reportadas</option>
-                        <option value="28">Formato TI-F045 cronograma de revisión de roles y usuarios activos en plataforma</option>
-                        <option value="29">Formato TI-F023 Formato de informe de incidente</option>
-                        <option value="30">Formato SGSI-F045 Formato pruebas del plan de contingencia</option>
-                        <option value="31">Formato HD-F003 Registro de eliminación de base de datos</option>
+                        <option value="1">Cambios sustanciales (cambio de finalidad en las BD)</option>
+                        <option value="2">Encargado del tratamientos de las BD</option>
+                        <option value="3">Clasificación o tipos de datos personales</option>
+                        <option value="4">Incidentes de seguridad con las BD o información personal</option>
+                        <option value="5">Eliminacion de BD reportadas</option>
+                        <option value="6">Formato TI-F045 cronograma de revisión de roles y usuarios activos en plataforma</option>
+                        <option value="7">Formato TI-F023 Formato de informe de incidente</option>
+                        <option value="8">Formato SGSI-F045 Formato pruebas del plan de contingencia</option>
+                        <option value="9">Formato HD-F003 Registro de eliminación de base de datos</option>
                     </select>
                 </div>
                 <div class="col-3 mt-2 ml-3">

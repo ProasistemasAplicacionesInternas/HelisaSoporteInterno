@@ -15,15 +15,15 @@ require_once('../model/datosPeticionesSeguridad.php');
 $crudSg = new CrudPeticionesSg();
 $peticionesSg = new PeticionSg();
 
-if (isset($_POST['btn-enviar_peticionSg'])) {
+if (isset($_POST['btn-enviarPeticionSsg'])) {
 
-    $peticionesSg->setcategoriaSg($_POST['caSeguridad']);
-    $peticionesSg->setdescripcion_peticionSg(htmlspecialchars($_POST['p_descripcion']));
-    $peticionesSg->setimagenPeticionSeguridad1($nombre_imagen[0]);
-    $peticionesSg->setimagenPeticionSeguridad2($nombre_imagen[1]);
-    $peticionesSg->setimagenPeticionSeguridad3($nombre_imagen[2]);
-    $peticionesSg->setimagenPeticionSeguridad4($nombre_imagen[3]);
-    $peticionesSg->setimagenPeticionSeguridad5($nombre_imagen[4]);
+    $peticionesSg->setCategoriaSg($_POST['caSeguridad']);
+    $peticionesSg->setDescripcionPeticionSg(htmlspecialchars($_POST['p_descripcion']));
+    $peticionesSg->setImagenPeticionSeguridad1($nombreImagen[0]);
+    $peticionesSg->setImagenPeticionSeguridad2($nombreImagen[1]);
+    $peticionesSg->setImagenPeticionSeguridad3($nombreImagen[2]);
+    $peticionesSg->setImagenPeticionSeguridad4($nombreImagen[3]);
+    $peticionesSg->setImagenPeticionSeguridad5($nombreImagen[4]);
     $crudSg->crearPeticionesSg($peticionesSg);
 }
 

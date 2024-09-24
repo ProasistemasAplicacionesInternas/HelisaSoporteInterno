@@ -29,7 +29,7 @@
     }
 
     include('../controller/controladorSoportemai.php');
-    include('../controller/controlador_seleccionPeticion.php');
+    include('../controller/controladorSeleccionPeticion.php');
     $codigo = $_POST['p_nropeticion'];
     $fechapeticion = $_POST['p_fechapeticion'];
     $usuario = $_POST['p_usuario'];

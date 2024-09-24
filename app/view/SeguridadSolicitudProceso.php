@@ -31,19 +31,19 @@
     require_once('../model/crud_peticionesSg.php');
     require_once('../model/datosPeticionesSeguridad.php');
 
-    $codigo = $_POST['p_nropeticion'];
-    $fechapeticion = $_POST['p_fechapeticion'];
-    $usuario = $_POST['p_usuario'];
-    $correo = $_POST['p_correo'];
-    $categoria = $_POST['p_categoria'];
-    $descripcion = $_POST['p_descripcion'];
-    $imagen = $_POST['p_cargarimagen'];
-    $imagen2 = $_POST['p_cargarimagen2'];
-    $imagen3 = $_POST['p_cargarimagen3'];
-    $imagen4 = $_POST['p_cargarimagen4'];
-    $imagen5 = $_POST['p_cargarimagen5'];
-    $estado = $_POST['p_estado'];
-    $conclusiones = $_POST['p_conclusiones'];
+    $codigo = $_POST['pNropeticion'];
+    $fechapeticion = $_POST['pFechapeticion'];
+    $usuario = $_POST['pUsuario'];
+    $correo = $_POST['pCorreo'];
+    $categoria = $_POST['pCategoria'];
+    $descripcion = $_POST['pDescripcion'];
+    $imagen = $_POST['pCargarimagen'];
+    $imagen2 = $_POST['pCargarimagen2'];
+    $imagen3 = $_POST['pCargarimagen3'];
+    $imagen4 = $_POST['pCargarimagen4'];
+    $imagen5 = $_POST['pCargarimagen5'];
+    $estado = $_POST['pEstado'];
+    $conclusiones = $_POST['pConclusiones'];
     $i = 0
 
     ?>
@@ -65,42 +65,42 @@
                     <div class="row">
                         <div class="peq">
                             <label>Cod</label>
-                            <input type="text" id="p_nropeticion" name="p_nropeticion" class="form-control" value="<?php echo $codigo; ?>" readonly>
+                            <input type="text" id="pNropeticion" name="pNropeticion" class="form-control" value="<?php echo $codigo; ?>" readonly>
                         </div>
                         <div class="medium">
                             <label>Fecha Solicitud</label>
-                            <input type="text" id="p_fechapeticion" name="p_fechapeticion" class="form-control" value="<?php echo  $fechapeticion; ?>" readonly>
+                            <input type="text" id="pFechapeticion" name="pFechapeticion" class="form-control" value="<?php echo  $fechapeticion; ?>" readonly>
                         </div>
                         <div class="medium">
                             <label>Usuario</label>
-                            <input type="text" id="p_usuario" name="p_usuario" class="form-control" value="<?php echo  $usuario; ?>" readonly>
+                            <input type="text" id="pUsuario" name="pUsuario" class="form-control" value="<?php echo  $usuario; ?>" readonly>
                         </div>
                     </div>
                     <div class="row">
                         <div class="giant">
                             <label>Correo</label>
-                            <input type="text" id="p_correo" name="p_correo" class="form-control" value="<?php echo $correo; ?>" readonly>
+                            <input type="text" id="pCorreo" name="pCorreo" class="form-control" value="<?php echo $correo; ?>" readonly>
                         </div>
                     </div>
                     <div class="row">
                         <div class="giant">
                             <label>Categoria</label>
-                            <input type="text" id="p_categoria" name="p_categoria" class="form-control" value="<?php echo $categoria; ?>  " readonly>
+                            <input type="text" id="pCategoria" name="pCategoria" class="form-control" value="<?php echo $categoria; ?>  " readonly>
                         </div>
                     </div>
                     <div class="row">
                         <div class="giant">
                             <label for="">Conclusiones</label>
-                            <textarea id="p_descripcion" name="p_descripcion" class="form-control col-12" rows="4" readonly><?php echo $conclusiones; ?></textarea>
+                            <textarea id="pDescripcion" name="pDescripcion" class="form-control col-12" rows="4" readonly><?php echo $conclusiones; ?></textarea>
                         </div>
                     </div>
                     <div class="row">
                         <div class="ml-3 d-flex flex-column align-items-start">
                             <label id="label">Estado</label>
-                            <select name="p_estado" id="p_estado" class="selectView mb-2" required disabled>
+                            <select name="pEstado" id="pEstado" class="selectView mb-2" required disabled>
                                 <option value="22" selected>En Proceso</option>
                             </select>
-                            <input type="hidden" name="p_estado" value="22">
+                            <input type="hidden" name="pEstado" value="22">
                         </div>
                         <div class="ml-3 d-flex flex-column align-items-start">
                             <label id="label">Documentos Adjuntos</label>
@@ -162,13 +162,13 @@
                     <div class="row">
                         <div class="giant">
                             <label for="">Observaciones</label>
-                            <textarea id="p_conclusiones" name="p_conclusiones" class="form-control col-12" rows="8" required><?= strip_tags('<br/>') ?></textarea>
+                            <textarea id="pConclusiones" name="pConclusiones" class="form-control col-12" rows="8" required><?= strip_tags('<br/>') ?></textarea>
                         </div>
                         <br></br>
                     </div>
                     <div class="row">
                         <div class="giant">
-                            <input type="submit" value="Enviar" id="btn-reenviar_peticionsg" name="btn-reenviar_peticionsg" class="btn btn-primary">
+                            <input type="submit" value="Enviar" id="btn-reenviarPeticionsg" name="btn-reenviarPeticionsg" class="btn btn-primary">
                         </div>
                     </div>
                 </form>

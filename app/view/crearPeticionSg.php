@@ -12,7 +12,6 @@ if (!isset($_SESSION['usuario'])) {
     header('location:../../login_peticiones.php');
 }
 
-require('../controller/controlador_categorias.php');
 require('../controller/controladorCategoriasSg.php');
 
 ?>
@@ -50,9 +49,9 @@ require('../controller/controladorCategoriasSg.php');
                         <div class="col-3">
                             <div class="form-group">
                                 <label>Área</label>
-                                <select class="form-control info" id="area_peticion" name="area_peticion" required disabled>
+                                <select class="form-control info" id="areaPeticion" name="areaPeticion" required disabled>
                                     <option value="3" selected>Seguridad</option>
-                                    <input type="hidden" name="area_peticion" value="3">
+                                    <input type="hidden" name="areaPeticion" value="3">
                                 </select>
                             </div>
                         </div>
@@ -78,7 +77,7 @@ require('../controller/controladorCategoriasSg.php');
                         <div class="col-3">
                             <div class="form-group">
                                 <label>Descripción</label>
-                                <textarea name="p_descripcion" id="p_descripcion" cols="86" rows="5" maxlength="6000" required></textarea>
+                                <textarea name="pDescripcion" id="pDescripcion" cols="86" rows="5" maxlength="6000" required></textarea>
                             </div>
                         </div>
                     </div>
@@ -97,7 +96,7 @@ require('../controller/controladorCategoriasSg.php');
 
                     <div class="row my-3">
                         <div class="col-3">
-                            <button type="submit" class="btn btn-success" id="btn-enviar_peticionSg" name="btn-enviar_peticionSg">Enviar Solicitud</button>
+                            <button type="submit" class="btn btn-success" id="btn-enviarPeticionSg" name="btn-enviarPeticionSg">Enviar Solicitud</button>
                         </div>
                         <div class="col-3">
                             <a class="btn btn-danger" onclick="retrocesoPagina()">Cancelar</a>
@@ -107,12 +106,12 @@ require('../controller/controladorCategoriasSg.php');
             </div>
         </div>
     </div>
-    <script src="../../public/js/cambio_area.js"></script>
+    <script src="../../public/js/cambioArea.js"></script>
     <script src="../../public/js/jquery-3.3.1.min.js"></script>
     <script src="../../public/js/popper.js"></script>
     <script src="../../public/js/bootstrap.min.js"></script>
     <script src="../../public/js/smoke.min.js"></script>
-    <script src="../../public/js/valida_imagen.js?ty6"></script>
+    <script src="../../public/js/validaImagen.js?ty6"></script>
     <script src="../../public/js/es.min.js"></script>
     <script src="../../public/js/bloqueoTeclas.js"></script>
     <script src="../../public/js/btnSubirArchivos.js"></script>

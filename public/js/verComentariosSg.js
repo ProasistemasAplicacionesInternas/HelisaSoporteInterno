@@ -17,18 +17,17 @@ function verConclusionesSg(id_peticion) {
       arrPrin.forEach((element) => {
         arrSec = element.split("/-/");
 
-        var id_observacion = arrSec[0];
-        var id_ticket = arrSec[1];
-        var fecha = arrSec[2];
-        var usuario_creacion = arrSec[3];
-        var descripcion_observacion = arrSec[4];
+        var idTicket = arrSec[0];
+        var fecha = arrSec[1];
+        var usuarioCreacion = arrSec[2];
+        var descripcionObservacion = arrSec[3];
 
         var htmlCadena = `<tr style="width:100%"> 
-                  <td>${id_observacion}</td>
-                  <td>${id_ticket}</td>
+                  
+                  <td>${idTicket}</td>
                   <td>${fecha}</td>
-                  <td>${usuario_creacion}</td>
-                  <td style="max-width:200px; padding:20px; height:20px;">${descripcion_observacion}</td>
+                  <td>${usuarioCreacion}</td>
+                  <td style="max-width:200px; padding:20px; height:20px;">${descripcionObservacion}</td>
               </tr>`;
 
         $("#js").append(htmlCadena);

@@ -31,16 +31,16 @@ if (isset($_POST['btn-consultarCategoria'])) {
 
     foreach ($seleccion->fetchAll() as $listado) {
         $consulta = new PeticionSg();
-        $consulta->setid_peticionSg($listado['id_peticionessg']);
-        $consulta->setfecha_peticionSg($listado['fecha_peticion']);
-        $consulta->setdescripcion_peticionSg($listado['descripcion_peticionsg']);
-        $consulta->setfecha_atendidoSg($listado['fecha_atencion']);
-        $consulta->setestado_peticionSg($listado['estado_peticion']);
-        $consulta->setcategoriaSg($listado['categoria']);
-        $consulta->setconclusiones_PeticionSg($listado['conclusiones']);
-        $consulta->setusuario_atencionSg($listado['usuario_atencion']);
-        $consulta->setArea_funcionario($listado['area']);
-        $consulta->setUsuario_creacionSg($listado['usuario_creacionsg']);
+        $consulta->setIdPeticionSg($listado['id_peticionessg']);
+        $consulta->setFechaPeticionSg($listado['fecha_peticion']);
+        $consulta->setDescripcionPeticionSg($listado['descripcion_peticionsg']);
+        $consulta->setFechaAtendidoSg($listado['fecha_atencion']);
+        $consulta->setEstadoPeticionSg($listado['estado_peticion']);
+        $consulta->setCategoriaSg($listado['categoria']);
+        $consulta->setConclusionesPeticionSg($listado['conclusiones']);
+        $consulta->setUsuarioAtencionSg($listado['usuario_atencion']);
+        $consulta->setAreaFuncionario($listado['area']);
+        $consulta->setUsuarioCreacionSg($listado['usuario_creacionsg']);
         $listaConsulta[] = $consulta;
     }
 } elseif (isset($_POST['btn-consultarEstado'])) {
@@ -64,16 +64,16 @@ if (isset($_POST['btn-consultarCategoria'])) {
 
     foreach ($seleccion->fetchAll() as $listado) {
         $consulta = new PeticionSg();
-        $consulta->setid_peticionSg($listado['id_peticionessg']);
-        $consulta->setfecha_peticionSg($listado['fecha_peticion']);
-        $consulta->setdescripcion_peticionSg($listado['descripcion_peticionsg']);
-        $consulta->setfecha_atendidoSg($listado['fecha_atencion']);
-        $consulta->setestado_peticionSg($listado['estado_peticion']);
+        $consulta->setIdPeticionSg($listado['id_peticionessg']);
+        $consulta->setFechaPeticionSg($listado['fecha_peticion']);
+        $consulta->setDescripcionPeticionSg($listado['descripcion_peticionsg']);
+        $consulta->setFechaAtendidoSg($listado['fecha_atencion']);
+        $consulta->setEstadoPeticionSg($listado['estado_peticion']);
         $consulta->setcategoriaSg($listado['categoria']);
-        $consulta->setconclusiones_PeticionSg($listado['conclusiones']);
-        $consulta->setusuario_atencionSg($listado['usuario_atencion']);
-        $consulta->setArea_funcionario($listado['area']);
-        $consulta->setUsuario_creacionSg($listado['usuario_creacionsg']);
+        $consulta->setConclusionesPeticionSg($listado['conclusiones']);
+        $consulta->setUsuarioAtencionSg($listado['usuario_atencion']);
+        $consulta->setAreaFuncionario($listado['area']);
+        $consulta->setUsuarioCreacionSg($listado['usuario_creacionsg']);
         $listaConsulta[] = $consulta;
     }
 } elseif (isset($_POST['btn-consultarTicketI'])) {
@@ -96,16 +96,16 @@ if (isset($_POST['btn-consultarCategoria'])) {
 
     foreach ($seleccion->fetchAll() as $listado) {
         $consulta = new PeticionSg();
-        $consulta->setid_peticionSg($listado['id_peticionessg']);
-        $consulta->setfecha_peticionSg($listado['fecha_peticion']);
-        $consulta->setdescripcion_peticionSg($listado['descripcion_peticionsg']);
-        $consulta->setfecha_atendidoSg($listado['fecha_atencion']);
-        $consulta->setestado_peticionSg($listado['estado_peticion']);
-        $consulta->setcategoriaSg($listado['categoria']);
-        $consulta->setconclusiones_PeticionSg($listado['conclusiones']);
-        $consulta->setusuario_atencionSg($listado['usuario_atencion']);
-        $consulta->setArea_funcionario($listado['area']);
-        $consulta->setUsuario_creacionSg($listado['usuario_creacionsg']);
+        $consulta->setIdPeticionSg($listado['id_peticionessg']);
+        $consulta->setFechaPeticionSg($listado['fecha_peticion']);
+        $consulta->setDescripcionPeticionSg($listado['descripcion_peticionsg']);
+        $consulta->setFechaAtendidoSg($listado['fecha_atencion']);
+        $consulta->setEstadoPeticionSg($listado['estado_peticion']);
+        $consulta->setCategoriaSg($listado['categoria']);
+        $consulta->setConclusionesPeticionSg($listado['conclusiones']);
+        $consulta->setUsuarioAtencionSg($listado['usuario_atencion']);
+        $consulta->setAreaFuncionario($listado['area']);
+        $consulta->setUsuarioCreacionSg($listado['usuario_creacionsg']);
         $listaConsulta[] = $consulta;
     }
 }

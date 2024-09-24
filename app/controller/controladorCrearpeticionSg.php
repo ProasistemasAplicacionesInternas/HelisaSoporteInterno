@@ -27,7 +27,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         mkdir($uploadDir, 0755, true);
     }
 
-    $nombre_imagen = [];
+    $nombreImagen = [];
 
     $maxFiles = 5;
 
@@ -53,7 +53,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         if (in_array($fileType, $allowedTypes)) {
             $destination = $uploadDir . $uniqueFileName;
             if (move_uploaded_file($fileTmpName, $destination)) {
-                $nombre_imagen[] = $uniqueFileName;
+                $nombreImagen[] = $uniqueFileName;
             } else {
                 echo "Error al subir el archivo $fileName.<br>";
             }
@@ -62,11 +62,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         }
     }
 
-    while (count($nombre_imagen) < 5) {
-        $nombre_imagen[] = '2';
+    while (count($nombreImagen) < 5) {
+        $nombreImagen[] = '2';
     }
 
-    $_SESSION['nombre_imagen'] = $nombre_imagen;
+    $_SESSION['nombre_imagen'] = $nombreImagen;
 }
 
 
@@ -79,18 +79,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     date_default_timezone_set('America/Bogota');
 
 
-    if (isset($_POST['btn-enviar_peticionSg'])) {
+    if (isset($_POST['btn-enviarPeticionSg'])) {
 
         $peticionesSg->setcategoriaSg($_POST['caSeguridad']);
-        $peticionesSg->setdescripcion_peticionSg(htmlspecialchars($_POST['p_descripcion']));
-        $peticionesSg->setimagenPeticionSeguridad1($nombre_imagen[0]);
-        $peticionesSg->setimagenPeticionSeguridad2($nombre_imagen[1]);
-        $peticionesSg->setimagenPeticionSeguridad3($nombre_imagen[2]);
-        $peticionesSg->setimagenPeticionSeguridad4($nombre_imagen[3]);
-        $peticionesSg->setimagenPeticionSeguridad5($nombre_imagen[4]);
-        $peticionesSg->setusuario_creacionSg($_SESSION['usuario']);
-        $peticionesSg->setestado_peticionSg(1);
-        $peticionesSg->setfecha_peticionSg(date('Y-m-d H:i:s'));
+        $peticionesSg->setDescripcionPeticionSg(htmlspecialchars($_POST['pDescripcion']));
+        $peticionesSg->setImagenPeticionSeguridad1($nombreImagen[0]);
+        $peticionesSg->setImagenPeticionSeguridad2($nombreImagen[1]);
+        $peticionesSg->setImagenPeticionSeguridad3($nombreImagen[2]);
+        $peticionesSg->setImagenPeticionSeguridad4($nombreImagen[3]);
+        $peticionesSg->setImagenPeticionSeguridad5($nombreImagen[4]);
+        $peticionesSg->setUsuarioCreacionSg($_SESSION['usuario']);
+        $peticionesSg->setEstadoPeticionSg(1);
+        $peticionesSg->setFechaPeticionSg(date('Y-m-d H:i:s'));
         $crudSg->crearPeticionesSg($peticionesSg);
         $_SESSION['ticket_codigo'] = $codigo;
     }

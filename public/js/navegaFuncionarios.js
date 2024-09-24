@@ -7,8 +7,8 @@ $(document).ready(function() {
         $("#contenido").load("app/view/peticionesMai.php");
     });
     
-    $('#vista_solicitudsg').click(function() {
-        $("#contenido").load("app/view/peticiones_sg.php");
+    $('#vistaSolicitudsg').click(function() {
+        $("#contenido").load("app/view/peticionesSg.php");
     });
 
     $('#activos_asignados').click(function() {

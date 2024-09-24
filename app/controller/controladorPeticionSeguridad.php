@@ -15,7 +15,7 @@ require_once('../model/datosPeticionesSeguridad.php');
 $crudSg = new CrudPeticionesSg();
 $peticionesSg = new PeticionSg();
 
-if (isset($_POST['marcarRevisado']) && ($_POST['marcarRevisado'] == 1)) {
-    $peticionesSg->setId_peticionSg($_POST['nro_solicitud']);
+if (isset($_POST['marcaRevisado']) && ($_POST['marcaRevisado'] == 1)) {
+    $peticionesSg->setIdPeticionSg($_POST['nroSolicitud']);
     print($crudSg->marcarRevisado($peticionesSg));
 }

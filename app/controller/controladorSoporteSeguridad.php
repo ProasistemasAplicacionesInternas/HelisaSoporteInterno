@@ -20,34 +20,48 @@ $peticionesSg = new PeticionSg();
 //*******************************************************************************//
 if (isset($_POST['aceptar'])) {
 
-    $estado = $_POST['p_estado'];
+    $estado = $_POST['pEstado'];
     if ($estado == 2) {
 
-        $peticionesSg->setId_peticionSg($_POST['p_nropeticion']);
-        $peticionesSg->setestado_peticionSg($_POST['p_estado']);
-        $peticionesSg->setconclusiones_PeticionSg($_POST['p_conclusiones']);
+        $peticionesSg->setIdPeticionSg($_POST['pNropeticion']);
+        $peticionesSg->setEstadoPeticionSg($_POST['pEstado']);
+        $peticionesSg->setConclusionesPeticionSg($_POST['pConclusiones']);
         date_default_timezone_set('America/Bogota');
-        $peticionesSg->setfecha_atendidoSg(date("Y-m-d H:i:s"));
-        $peticionesSg->setusuario_atencionSg($_SESSION['usuario']);
-        $peticionesSg->setemail_funcionario($_POST['p_correo']);
-        $peticionesSg->setusuario_creacionSg($_POST['p_usuario']);
-        $peticionesSg->setcategoriaSg($_POST['p_categoria']);
-        $peticionesSg->setdescripcion_peticionSg($_POST['p_descripcion']);
-        $crudSg->modificarPeticionesSg($peticionesSg);
+        $peticionesSg->setFechaAtendidoSg(date("Y-m-d H:i:s"));
+        $peticionesSg->setUsuarioAtencionSg($_SESSION['usuario']);
+        $peticionesSg->setEmailFuncionario($_POST['pCorreo']);
+        $peticionesSg->setUsuarioCreacionSg($_POST['pUsuario']);
+        $peticionesSg->setCategoriaSg($_POST['pCategoria']);
+        $peticionesSg->setDescripcionPeticionSg($_POST['pDescripcion']);
+        $crudSg->modificarPeticionesSgResuelto($peticionesSg);
 
         header("location: ../../dashboard.php");
-    } else {
-        $peticionesSg->setId_peticionSg($_POST['p_nropeticion']);
-        $peticionesSg->setestado_peticionSg($_POST['p_estado']);
-        $peticionesSg->setconclusiones_PeticionSg($_POST['p_conclusiones']);
+    } elseif ($estado == 3) {
+        $peticionesSg->setIdPeticionSg($_POST['pNropeticion']);
+        $peticionesSg->setEstadoPeticionSg($_POST['pEstado']);
+        $peticionesSg->setConclusionesPeticionSg($_POST['pConclusiones']);
         date_default_timezone_set('America/Bogota');
-        $peticionesSg->setfecha_atendidoSg(date("Y-m-d H:i:s"));
-        $peticionesSg->setusuario_atencionSg($_SESSION['usuario']);
-        $peticionesSg->setemail_funcionario($_POST['p_correo']);
-        $peticionesSg->setusuario_creacionSg($_POST['p_usuario']);
-        $peticionesSg->setcategoriaSg($_POST['p_categoria']);
-        $peticionesSg->setdescripcion_peticionSg($_POST['p_descripcion']);
-        $crudSg->modificarPeticionesSg($peticionesSg);
+        $peticionesSg->setFechaAtendidoSg(date("Y-m-d H:i:s"));
+        $peticionesSg->setUsuarioAtencionSg($_SESSION['usuario']);
+        $peticionesSg->setEmailFuncionario($_POST['pCorreo']);
+        $peticionesSg->setUsuarioCreacionSg($_POST['pUsuario']);
+        $peticionesSg->setCategoriaSg($_POST['pCategoria']);
+        $peticionesSg->setDescripcionPeticionSg($_POST['pDescripcion']);
+        $crudSg->modificarPeticionesSgPendiente($peticionesSg);
+
+        header("location: ../../dashboard.php");
+    }elseif ($estado == 22) {
+        $peticionesSg->setIdPeticionSg($_POST['pNropeticion']);
+        $peticionesSg->setEstadoPeticionSg($_POST['pEstado']);
+        $peticionesSg->setConclusionesPeticionSg($_POST['pConclusiones']);
+        date_default_timezone_set('America/Bogota');
+        $peticionesSg->setFechaAtendidoSg(date("Y-m-d H:i:s"));
+        $peticionesSg->setUsuarioAtencionSg($_SESSION['usuario']);
+        $peticionesSg->setEmailFuncionario($_POST['pCorreo']);
+        $peticionesSg->setUsuarioCreacionSg($_POST['pUsuario']);
+        $peticionesSg->setCategoriaSg($_POST['pCategoria']);
+        $peticionesSg->setDescripcionPeticionSg($_POST['pDescripcion']);
+        $crudSg->modificarPeticionesSgEnProceso($peticionesSg);
 
         header("location: ../../dashboard.php");
     }

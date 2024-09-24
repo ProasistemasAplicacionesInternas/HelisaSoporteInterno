@@ -15,25 +15,25 @@ require_once('../model/datosPeticionesSeguridad.php');
 $crudSg = new CrudPeticionesSg();
 $peticionesSg = new PeticionSg();
 
-$codigo = $_POST['p_nropeticion'];
-$fechapeticion = $_POST['p_fechapeticion'];
-$usuario = $_POST['p_usuario'];
-$correo = $_POST['p_correo'];
-$categoria = $_POST['p_categoria'];
-$descripcion = $_POST['p_descripcion'];
-$estado = $_POST['p_estado'];
-$conclusiones = $_POST['p_conclusiones'];
+$codigo = $_POST['pNropeticion'];
+$fechapeticion = $_POST['pFechapeticion'];
+$usuario = $_POST['pUsuario'];
+$correo = $_POST['pCorreo'];
+$categoria = $_POST['pCategoria'];
+$descripcion = $_POST['pDescripcion'];
+$estado = $_POST['pEstado'];
+$conclusiones = $_POST['pConclusiones'];
 
 
 
-if (isset($_POST['btn-reenviar_peticionsg'])) {
+if (isset($_POST['btn-reenviarPeticionsg'])) {
     if ($estado == 22) {
-        $peticionesSg->setId_peticionSg($_POST['p_nropeticion']);
-        $peticionesSg->setestado_peticionSg(3);
-        $peticionesSg->setconclusiones_PeticionSg($_POST['p_conclusiones']);
+        $peticionesSg->setIdPeticionSg($_POST['pNropeticion']);
+        $peticionesSg->setEstadoPeticionSg(3);
+        $peticionesSg->setConclusionesPeticionSg($_POST['pConclusiones']);
         date_default_timezone_set('America/Bogota');
-        $peticionesSg->setusuario_creacionSg($_SESSION['usuario']);
-        $peticionesSg->setfecha_atendidoSg(date("Y-m-d H:i:s"));
+        $peticionesSg->setUsuarioCreacionSg($_SESSION['usuario']);
+        $peticionesSg->setFechaAtendidoSg(date("Y-m-d H:i:s"));
         $crudSg->redireccionaSeguridad($peticionesSg);
     }
 

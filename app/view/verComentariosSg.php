@@ -17,8 +17,7 @@
                 <table class="table" class="table-responsive">
                     <thead>
                         <tr>
-                            <th scope="col" style="text-align: center;">ID Conclusión</th>
-                            <th scope="col" style="text-align: center;"># Petición</th>
+                            <th scope="col" style="text-align: center;">Numero Petición</th>
                             <th scope="col" style="text-align: center;">Fecha</th>
                             <th scope="col" style="text-align: center;">Responsable</th>
                             <th scope="col" style="text-align: center;">Comentario</th>

@@ -65,7 +65,7 @@
                             <tr style="text-align:center;">
                                 <?php
                                 date_default_timezone_set('America/Bogota');
-                                $fecha1 = new DateTime($datos1->getFecha_peticionSg());
+                                $fecha1 = new DateTime($datos1->getFechaPeticionSg());
                                 $fecha2 = new DateTime('now');
 
                                 $intervalo = $fecha2->diff($fecha1);
@@ -77,65 +77,53 @@
                                 $color = $crud->coloresR($varD, $varH, $varM);
                                 ?>
                                 <td style="background-color:<?= $color ?>;">
-                                    <?php echo $datos1->getId_peticionSg(); ?>
+                                    <?php echo $datos1->getIdPeticionSg(); ?>
                                 </td>
                                 <td style="background-color:<?= $color ?>;">
-                                    <?php echo $datos1->getUsuario_creacionSg(); ?>
+                                    <?php echo $datos1->getUsuarioCreacionSg(); ?>
                                 </td>
                                 <td style="background-color:<?= $color ?>;">
-                                    <?php echo $datos1->getFecha_peticionSg(); ?>
+                                    <?php echo $datos1->getFechaPeticionSg(); ?>
                                 </td>
                                 <td style="background-color:<?= $color ?>;">
-                                    <?php echo $datos1->getArea_funcionario(); ?>
+                                    <?php echo $datos1->getAreaFuncionario(); ?>
                                 </td>
                                 <td style="background-color:<?= $color ?>;">
-                                    <?php echo $datos1->getcategoriaSg() ?>
+                                    <?php echo $datos1->getCategoriaSg() ?>
                                 </td>
                                 <td style="background-color:<?= $color ?>;">
-                                    <?php echo $datos1->getEstado_peticionSg(); ?>
+                                    <?php echo $datos1->getEstadoPeticionSg(); ?>
 
                                 </td>
                                 <td style="background-color:<?= $color ?>;">
-                                    <?php echo $datos1->getUsuario_atencionSg(); ?>
+                                    <?php echo $datos1->getUsuarioAtencionSg(); ?>
                                 </td>
 
-                                <td style="background-color:<?= $color ?>;">
-                                    <form action="app/view/seleccionarPeticionSeguridad.php" method="post">
-                                        <input type="hidden" name="p_nropeticion" id="p_nropeticion" value="<?php echo $datos1->getId_peticionSg(); ?>">
-
-                                        <input type="hidden" name="p_fechapeticion" id="p_fechapeticion" value="<?php echo $datos1->getFecha_peticionSg(); ?>">
-
-                                        <input type="hidden" name="p_usuario" id="p_usuario" value="<?php echo $datos1->getUsuario_creacionSg(); ?>">
-
-                                        <input type="hidden" name="areaSg" id="areaSg" value="<?php echo $datos1->getarea_funcionario(); ?>">
-
-                                        <input type="hidden" name="p_correo" id="p_correo" value="<?php echo $datos1->getEmail_funcionario(); ?>">
-
-                                        <input type="hidden" name="p_categoria" id="p_categoria" value="<?php echo $datos1->getcategoriaSg(); ?>">
-
-                                        <input type="hidden" name="p_descripcion" id="p_descripcion" value="<?php echo $datos1->getDescripcion_peticionSg(); ?>">
-
-                                        <input type="hidden" name="p_cargarimagen" id="p_cargarimagen" value="<?php echo $datos1->getimagenPeticionSeguridad1(); ?>">
-
-                                        <input type="hidden" name="p_cargarimagen2" id="p_cargarimagen2" value="<?php echo $datos1->getimagenPeticionSeguridad2(); ?>">
-
-                                        <input type="hidden" name="p_cargarimagen3" id="p_cargarimagen3" value="<?php echo $datos1->getimagenPeticionSeguridad3(); ?>">
-
-                                        <input type="hidden" name="p_cargarimagen4" id="p_cargarimagen4" value="<?php echo $datos1->getimagenPeticionSeguridad4(); ?>">
-
-                                        <input type="hidden" name="p_cargarimagen5" id="p_cargarimagen5" value="<?php echo $datos1->getimagenPeticionSeguridad5(); ?>">
-
-                                        <input type="hidden" name="p_estado" id="p_estado" value="<?php echo $datos1->getEstado_peticionSg(); ?>">
-
-                                        <input type="hidden" name="p_conclusiones" id="p_conclusiones" value="<?php echo $datos1->getConclusiones_peticionSg(); ?>">
-
-                                        <input type="submit" value="Seleccionar" name="seleccionar" id="seleccionar" class="btn btn-info">
-                                    </form>
-                                </td>
-                            <?php
-                        endforeach;
-                            ?>
+                                <?php if ($datos1->getEstadoPeticionSg() != 'En Proceso') : ?>
+                                    <td style="background-color:<?= $color ?>;">
+                                        <form action="app/view/seleccionarPeticionSeguridad.php" method="post">
+                                            <input type="hidden" name="pNropeticion" id="pNropeticion" value="<?php echo $datos1->getIdPeticionSg(); ?>">
+                                            <input type="hidden" name="pFechapeticion" id="pFechapeticion" value="<?php echo $datos1->getFechaPeticionSg(); ?>">
+                                            <input type="hidden" name="pUsuario" id="pUsuario" value="<?php echo $datos1->getUsuarioCreacionSg(); ?>">
+                                            <input type="hidden" name="areaSg" id="areaSg" value="<?php echo $datos1->getAreaFuncionario(); ?>">
+                                            <input type="hidden" name="pCorreo" id="pCorreo" value="<?php echo $datos1->getEmailFuncionario(); ?>">
+                                            <input type="hidden" name="pCategoria" id="pCategoria" value="<?php echo $datos1->getCategoriaSg(); ?>">
+                                            <input type="hidden" name="pDescripcion" id="pDescripcion" value="<?php echo $datos1->getDescripcionPeticionSg(); ?>">
+                                            <input type="hidden" name="pCargarimagen" id="pCargarimagen" value="<?php echo $datos1->getImagenPeticionSeguridad1(); ?>">
+                                            <input type="hidden" name="pCargarimagen2" id="pCargarimagen2" value="<?php echo $datos1->getImagenPeticionSeguridad2(); ?>">
+                                            <input type="hidden" name="pCargarimagen3" id="pCargarimagen3" value="<?php echo $datos1->getImagenPeticionSeguridad3(); ?>">
+                                            <input type="hidden" name="pCargarimagen4" id="pCargarimagen4" value="<?php echo $datos1->getImagenPeticionSeguridad4(); ?>">
+                                            <input type="hidden" name="pCargarimagen5" id="pCargarimagen5" value="<?php echo $datos1->getImagenPeticionSeguridad5(); ?>">
+                                            <input type="hidden" name="pEstado" id="pEstado" value="<?php echo $datos1->getEstadoPeticionSg(); ?>">
+                                            <input type="hidden" name="pConclusiones" id="pConclusiones" value="<?php echo $datos1->getConclusionesPeticionSg(); ?>">
+                                            <input type="submit" value="seleccionar" name="seleccionarPeticionSeguridad" id="seleccionarPeticionSeguridad" class="btn btn-info">
+                                        </form>
+                                    </td>
+                                <?php else : ?>
+                                    <td style="background-color:<?= $color ?>;">Validacion por usuario</td>
+                                <?php endif; ?>
                             </tr>
+                        <?php endforeach; ?>
                     </tbody>
                 </table>
             </div>

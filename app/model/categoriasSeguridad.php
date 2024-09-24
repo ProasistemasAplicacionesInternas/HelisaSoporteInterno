@@ -14,7 +14,7 @@ public function __construct(){
 
 public function getcategoriaSg(){
 
-    $consultaCategorias = $this->db->query("SELECT id_categoria, nombre_categoria FROM categorias WHERE id_categoria IN (23, 24, 25, 26, 27, 28, 29, 30, 31) AND uso=1 ORDER BY nombre_categoria");
+    $consultaCategorias = $this->db->query("SELECT id_categoria, nombre_categoria FROM categorias_sg WHERE id_categoria IN (1, 2, 3, 4, 5, 6, 7, 8, 9) AND uso=1 ORDER BY nombre_categoria");
     
     while ($listadoCategorias = $consultaCategorias -> fetch(PDO::FETCH_ASSOC)){
     

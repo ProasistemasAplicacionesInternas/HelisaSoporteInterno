@@ -51,10 +51,11 @@ if (isset($_POST['seleccionar_peticionmai'])){
 
 if (isset($_POST['seleccionarPeticionSeguridad'])){
 
-    $peticionSg->setId_peticionSg($_POST['p_nropeticion']);
+    $peticionSg->setIdPeticionSg($_POST['pNropeticion']);
     date_default_timezone_set('America/Bogota');
-    $peticionSg->setFecha_atendidoSg(date('Y-m-d H:i:s'));
-    $peticionSg->setUsuario_atencionSg($_SESSION['usuario']);     
+    $peticionSg->setEstadoPeticionSg('3');
+    $peticionSg->setFechaAtendidoSg(date('Y-m-d H:i:s'));
+    $peticionSg->setUsuarioAtencionSg($_SESSION['usuario']);     
     $crudSeg->cambiaEstadoSg($peticionSg);
 
 }

@@ -73,10 +73,11 @@ if (!isset($_SESSION['status_connect'])) {
                         } ?>
 
                         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                        <?php if ($_SESSION['id_roles'] == 1 || $_SESSION['id_roles'] == 7){
+                            echo '<a href="#" id="solicitudes_internasAdmin"><img src="public/img/soporte.png" alt="" class="ml-3" onclick:>Aplicaciones</a>';
 
-                            <a href="#" id="solicitudes_internasAdmin"><img src="public/img/soporte.png" alt="" class="ml-3" onclick:>Aplicaciones</a>
-
-                            <a href="#" id="solicitudes_infraestructuraAdmin"><img src=" public/img/soporte.png" alt="" class="ml-3" onclick:>Infraestructura</a>
+                            echo '<a href="#" id="solicitudes_infraestructuraAdmin"><img src=" public/img/soporte.png" alt="" class="ml-3" onclick:>Infraestructura</a>';
+                        }?>
 
                             <?php if ($_SESSION['id_roles'] == 11) {
                                 echo '<a href="#" id="solicitudesSeguridad"><img src=" public/img/soporte.png" alt="" class="ml-3" onclick:>Seguridad</a>';

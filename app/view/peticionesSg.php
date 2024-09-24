@@ -37,7 +37,7 @@
                 <h6>Consulta Solicitudes Seguridad</h6>
             </div>
             <div class="col-1 mt-4 mb-2">
-                <a href="app/view/crear_peticionSg.php">
+                <a href="app/view/crearPeticionSg.php">
                     <h8> Generar Solicitud</h8><img src="public/img/nuevo.png" alt="">
                 </a>
 
@@ -58,46 +58,47 @@
                     <?php foreach ($consultaPeticionesSg as $datos) : ?>
                         <tr>
                             <td style="text-align:center">
-                                <?php echo $datos->getid_peticionSg() ?></td>
+                                <?php echo $datos->getIdPeticionSg() ?></td>
                             <td>
-                                <?php echo $datos->getcategoriaSg() ?></td>
+                                <?php echo $datos->getCategoriaSg() ?></td>
                             <td style="text-align:center">
-                                <?php echo $datos->getfecha_peticionSg() ?></td>
+                                <?php echo $datos->getFechaPeticionSg() ?></td>
                             <td>
-                                <?php echo $datos->getdescripcion_peticionSg() ?></td>
+                                <?php echo $datos->getDescripcionPeticionSg() ?></td>
                             <td style="text-align:center">
-                                <?php echo $datos->getestado_peticionSg() ?></td>
+                                <?php echo $datos->getEstadoPeticionSg() ?></td>
                             <td style="text-align:center">
-                                <?php echo $datos->getfecha_atendidoSg() ?></td>
+                                <?php echo $datos->getFechaAtendidoSg() ?></td>
                             <td style="text-align:center">
-                                <?php echo $datos->getusuario_atencionSg() ?></td>
+                                <?php echo $datos->getUsuarioAtencionSg() ?></td>
                             <td style="text-align:center">
-                                <?php echo $datos->getconclusiones_PeticionSg() ?></td>
+                                <?php echo $datos->getConclusionesPeticionSg() ?></td>
                             <td style="text-align:center">
+                                
                                 <?php
-                                $estado = $datos->getestado_peticionSg();
-                                $revisado = $datos->getmarcaRevisadoSg();
+                                $estado = $datos->getEstadoPeticionSg();
+                                $revisado = $datos->getMarcaRevisadoSg();
 
                                 if (($estado == "Resuelto") && $revisado == 1) {
                                 ?>
-                                    <input type="checkbox" class="btn btn-danger btn-sm" onChange="marcarevisado(<?php echo $datos->getid_peticionSg(); ?>)" id="revisar<?php echo $datos->getid_peticionSg(); ?>" name="revisado" value="<?php echo $datos->getid_peticionSg(); ?>">
+                                    <input type="checkbox" class="btn btn-danger btn-sm" onChange="marcaRevisado(<?php echo $datos->getIdPeticionSg(); ?>)" id="revisar<?php echo $datos->getIdPeticionSg(); ?>" name="revisado" value="<?php echo $datos->getIdPeticionSg(); ?>">
                                 <?php
                                 } elseif ($estado == "En Proceso") {
                                 ?>
                                     <form action="app/view/SeguridadSolicitudProceso.php" method="post">
-                                        <input type="hidden" name="p_nropeticion" id="p_nropeticion" value="<?php echo $datos->getId_peticionSg(); ?>">
-                                        <input type="hidden" name="p_fechapeticion" id="p_fechapeticion" value="<?php echo $datos->getFecha_peticionSg(); ?>">
-                                        <input type="hidden" name="p_usuario" id="p_usuario" value="<?php echo $datos->getUsuario_creacionSg(); ?>">
-                                        <input type="hidden" name="p_correo" id="p_correo" value="<?php echo $datos->getEmail_funcionario(); ?>">
-                                        <input type="hidden" name="p_categoria" id="p_categoria" value="<?php echo $datos->getcategoriaSg(); ?>">
-                                        <input type="hidden" name="p_descripcion" id="p_descripcion" value="<?php echo $datos->getDescripcion_peticionSg(); ?>">
-                                        <input type="hidden" name="p_cargarimagen" id="p_cargarimagen" value="<?php echo $datos->getimagenPeticionSeguridad1(); ?>">
-                                        <input type="hidden" name="p_cargarimagen2" id="p_cargarimagen2" value="<?php echo $datos->getimagenPeticionSeguridad2(); ?>">
-                                        <input type="hidden" name="p_cargarimagen3" id="p_cargarimagen3" value="<?php echo $datos->getimagenPeticionSeguridad3(); ?>">
-                                        <input type="hidden" name="p_cargarimagen4" id="p_cargarimagen4" value="<?php echo $datos->getimagenPeticionSeguridad4(); ?>">
-                                        <input type="hidden" name="p_cargarimagen5" id="p_cargarimagen5" value="<?php echo $datos->getimagenPeticionSeguridad5(); ?>">
-                                        <input type="hidden" name="p_estado" id="p_estado" value="<?php echo $datos->getEstado_peticionSg(); ?>">
-                                        <input type="hidden" name="p_conclusiones" id="p_conclusiones" value="<?php echo $datos->getConclusiones_peticionSg(); ?>">
+                                        <input type="hidden" name="pNropeticion" id="pNropeticion" value="<?php echo $datos->getIdPeticionSg(); ?>">
+                                        <input type="hidden" name="pFechapeticion" id="pFechapeticion" value="<?php echo $datos->getFechaPeticionSg(); ?>">
+                                        <input type="hidden" name="pUsuario" id="pUsuario" value="<?php echo $datos->getUsuarioCreacionSg(); ?>">
+                                        <input type="hidden" name="pCorreo" id="pCorreo" value="<?php echo $datos->getEmailFuncionario(); ?>">
+                                        <input type="hidden" name="pCategoria" id="pCategoria" value="<?php echo $datos->getCategoriaSg(); ?>">
+                                        <input type="hidden" name="pDescripcion" id="pDescripcion" value="<?php echo $datos->getDescripcionPeticionSg(); ?>">
+                                        <input type="hidden" name="pCargarimagen" id="pCargarimagen" value="<?php echo $datos->getimagenPeticionSeguridad1(); ?>">
+                                        <input type="hidden" name="pCargarimagen2" id="pCargarimagen2" value="<?php echo $datos->getimagenPeticionSeguridad2(); ?>">
+                                        <input type="hidden" name="pCargarimagen3" id="pCargarimagen3" value="<?php echo $datos->getimagenPeticionSeguridad3(); ?>">
+                                        <input type="hidden" name="pCargarimagen4" id="pCargarimagen4" value="<?php echo $datos->getimagenPeticionSeguridad4(); ?>">
+                                        <input type="hidden" name="pCargarimagen5" id="pCargarimagen5" value="<?php echo $datos->getimagenPeticionSeguridad5(); ?>">
+                                        <input type="hidden" name="pEstado" id="pEstado" value="<?php echo $datos->getEstadoPeticionSg(); ?>">
+                                        <input type="hidden" name="pConclusiones" id="pConclusiones" value="<?php echo $datos->getConclusionesPeticionSg(); ?>">
                                         <button type="submit" class="btn btn-primary">Seleccionar</button>
                                     </form>
                                 <?php
