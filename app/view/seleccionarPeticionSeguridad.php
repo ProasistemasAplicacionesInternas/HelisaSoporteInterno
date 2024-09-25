@@ -29,7 +29,7 @@
         $user = $_SESSION['usuario'];
     }
 
-    include('../controller/controladorSeleccionPeticion.php');
+    include('../controller/controladorSeleccionPeticionSeguridad.php');
     $codigo = $_POST['pNropeticion'];
     $fechapeticion = $_POST['pFechapeticion'];
     $usuario = $_POST['pUsuario'];

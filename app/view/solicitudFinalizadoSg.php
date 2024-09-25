@@ -29,7 +29,7 @@
         header('location:../../login.php');
     }
 
-    require_once("../model/crud_peticionesSg.php");
+    require_once("../model/crudPeticionesSg.php");
     require('../controller/controllerFinalizadaSg.php');
 
     $datos3 = new PeticionSg();
@@ -65,7 +65,7 @@
                             echo "<th style='width:80px;'>Ver Conclusiones</th>";
                         }
                         ?>
-                        <?php if ($_SESSION['id_roles'] == 11) {
+                        <?php if ($_SESSION['id_roles'] == 11 || $_SESSION['id_roles'] == 7) {
                             echo "<th style='width:35px;'>Conclusiones</th>";
                         } ?>
                         <th style="width:10px;" colspan="2">Documentos</th>

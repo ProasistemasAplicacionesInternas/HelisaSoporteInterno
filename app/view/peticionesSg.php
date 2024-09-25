@@ -23,7 +23,7 @@
         header('location:../../login_peticiones.php');
     }
 
-    require_once('../model/crud_peticionesSg.php');
+    require_once('../model/crudPeticionesSg.php');
     require_once('../model/datosPeticionesSeguridad.php');
 
     $consultar = new CrudPeticionesSg();

@@ -29,7 +29,7 @@
     }
 
     include('../controller/controladorSoportemai.php');
-    include('../controller/controladorSeleccionPeticion.php');
+    include('../controller/controlador_seleccionPeticion.php');
     $codigo = $_POST['p_nropeticion'];
     $fechapeticion = $_POST['p_fechapeticion'];
     $usuario = $_POST['p_usuario'];
@@ -65,7 +65,7 @@
     <div class="container">
         <div>
             <div class='box1'>
-            <form action="../controller/controladorPeticionmai.php" method="post" enctype="multipart/form-data">
+            <form action="../controller/controlador_peticionmai.php" method="post" enctype="multipart/form-data">
                     <div style="display:none">
                         <input type="text" id="user" name="user" class="form-control" value="<?php echo $user; ?>" readonly>
                     </div>

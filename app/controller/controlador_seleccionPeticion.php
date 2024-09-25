@@ -9,8 +9,6 @@ require_once('../model/datosPeticionesMai.php');
 require_once('../model/datosSoporteMai.php');
 require_once('../model/crudSoporteMai.php');
 
-require_once('../model/crud_peticionesSg.php');
-require_once('../model/datosPeticionesSeguridad.php');
 
 $crud= new CrudPeticiones();
 $peticion= new Peticion();
@@ -22,8 +20,6 @@ $soporte = new Datostiposoporte();
 $crudMai= new CrudPeticionesMai();
 $peticionMai= new PeticionMai();
 
-$crudSeg = new CrudpeticionesSg();
-$peticionSg= new peticionSg();
 //*******************************************************************************//
 //**** CONTROLADOR PARA CAMBIAR EL ESTADO CUANDO LO SELECCIONA EL ASESOR ********//
 //*******************************************************************************//
@@ -46,17 +42,6 @@ if (isset($_POST['seleccionar_peticionmai'])){
     $peticionMai->setFecha_atendidoMai(date('Y-m-d H:i:s'));
     $peticionMai->setUsuario_atencionMai($_SESSION['usuario']);     
     $crudMai->cambiaEstadoMai($peticionMai);
-
-}
-
-if (isset($_POST['seleccionarPeticionSeguridad'])){
-
-    $peticionSg->setIdPeticionSg($_POST['pNropeticion']);
-    date_default_timezone_set('America/Bogota');
-    $peticionSg->setEstadoPeticionSg('3');
-    $peticionSg->setFechaAtendidoSg(date('Y-m-d H:i:s'));
-    $peticionSg->setUsuarioAtencionSg($_SESSION['usuario']);     
-    $crudSeg->cambiaEstadoSg($peticionSg);
 
 }
 ?>

@@ -6,7 +6,7 @@ ini_set("session.cookie_lifetime", "18000");
 ini_set("session.gc_maxlifetime", "18000");
 session_start();
 
-require_once('../model/crud_peticionesSg.php');
+require_once('../model/crudPeticionesSg.php');
 require_once('../model/datosPeticionesSeguridad.php');
 
 

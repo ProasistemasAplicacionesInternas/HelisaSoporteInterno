@@ -4,7 +4,7 @@ function check(value){
         var nro_solicitud = '&nro_solicitud='+(value) + '&solicitudLiberada=1';
         $.ajax({
 	    		type: 'post',
-	            url: 'app/controller/controladorPeticionmai.php',
+	            url: 'app/controller/controlador_peticionmai.php',
 	            data: nro_solicitud
 	    	}).done(function(data){
 	    		

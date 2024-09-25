@@ -24,7 +24,7 @@
         header('location:../../login.php');
     }
 
-    require('../model/crud_peticionesSg.php');
+    require('../model/crudPeticionesSg.php');
     require('../model/datosPeticionesSeguridad.php');
 
 
