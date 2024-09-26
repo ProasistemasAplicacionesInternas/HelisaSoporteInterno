@@ -97,30 +97,30 @@ class DatosBoard
     public function soporteNuevoSeguridad()
     {
         $db = conectar::acceso();
-        $soportes_nuevos = $db->prepare('SELECT COUNT(id_peticionessg) AS soportes FROM peticiones_sg WHERE estado_peticion=:estadoN');
-        $soportes_nuevos->bindvalue('estadoN', 1);
-        $soportes_nuevos->execute();
-        $data_soportes = $soportes_nuevos->fetch(PDO::FETCH_ASSOC);
-        return $data_soportes;
+        $soportesNuevos = $db->prepare('SELECT COUNT(id_peticionessg) AS soportes FROM peticiones_sg WHERE estado_peticion=:estadoN');
+        $soportesNuevos->bindvalue('estadoN', 1);
+        $soportesNuevos->execute();
+        $dataSoportes = $soportesNuevos->fetch(PDO::FETCH_ASSOC);
+        return $dataSoportes;
     }
 
     public function soportesPendienteSeguridad()
     {
         $db = conectar::acceso();
-        $soportes_nuevos = $db->prepare('SELECT COUNT(id_peticionessg) AS soportes FROM peticiones_sg WHERE estado_peticion=:estadoP');
-        $soportes_nuevos->bindvalue('estadoP', 2);
-        $soportes_nuevos->execute();
-        $data_soportes = $soportes_nuevos->fetch(PDO::FETCH_ASSOC);
-        return $data_soportes;
+        $soportesNuevos = $db->prepare('SELECT COUNT(id_peticionessg) AS soportes FROM peticiones_sg WHERE estado_peticion=:estadoP');
+        $soportesNuevos->bindvalue('estadoP', 3);
+        $soportesNuevos->execute();
+        $dataSoportes = $soportesNuevos->fetch(PDO::FETCH_ASSOC);
+        return $dataSoportes;
     }
 
     public function soportesProcesoSeguridad()
     {
         $db = conectar::acceso();
-        $soportes_nuevos = $db->prepare('SELECT COUNT(id_peticionessg) AS soportes FROM peticiones_sg WHERE estado_peticion=:estadoPrc');
-        $soportes_nuevos->bindvalue('estadoPrc', 22);
-        $soportes_nuevos->execute();
-        $data_soportes = $soportes_nuevos->fetch(PDO::FETCH_ASSOC);
-        return $data_soportes;
+        $soportesNuevos = $db->prepare('SELECT COUNT(id_peticionessg) AS soportes FROM peticiones_sg WHERE estado_peticion=:estadoPrc');
+        $soportesNuevos->bindvalue('estadoPrc', 22);
+        $soportesNuevos->execute();
+        $dataSoportes = $soportesNuevos->fetch(PDO::FETCH_ASSOC);
+        return $dataSoportes;
     }
 }
