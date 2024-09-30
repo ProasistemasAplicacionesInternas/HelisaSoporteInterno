@@ -16,12 +16,12 @@ if (isset($_POST['btn-consultarCategoria'])) {
     $seleccion = $db->prepare('SELECT id_peticionessg, estado.descripcion AS estado_peticion, 
             DATE_FORMAT(fecha_peticion,"%d-%m-%Y %H:%i") AS fecha_peticion, 
             DATE_FORMAT(fecha_atencion,"%d-%m-%Y %H:%i") AS fecha_atencion, usuario_creacionsg, 
-            categorias.nombre_categoria AS categoria, descripcion_peticionsg, usuario_atencion, 
+            categorias_sg.nombre_categoria AS categoria, descripcion_peticionsg, usuario_atencion, 
             conclusiones, imagen, imagen2, imagen3, imagen4, imagen5, funcionarios.area, 
             peticiones_sg.descripcion_peticionsg
             FROM peticiones_sg 
             LEFT JOIN estado ON estado.id_estado = peticiones_sg.estado_peticion
-            LEFT JOIN categorias ON categorias.id_categoria=peticiones_sg.categoria
+            LEFT JOIN categorias_sg ON categorias_sg.id_categoria=peticiones_sg.categoria
             LEFT JOIN funcionarios ON funcionarios.usuario=peticiones_sg.usuario_creacionsg 
             LEFT JOIN areas ON areas.id_area=funcionarios.area 
             WHERE peticiones_sg.categoria = :categoriaSg');
@@ -50,11 +50,11 @@ if (isset($_POST['btn-consultarCategoria'])) {
 
     $db = conectar::acceso();
     $seleccion = $db->prepare('SELECT id_peticionessg, estado.descripcion AS estado_peticion, DATE_FORMAT(fecha_peticion,"%d-%m-%Y %H:%i") AS fecha_peticion, 
-            DATE_FORMAT(fecha_atencion,"%d-%m-%Y %H:%i") AS fecha_atencion, usuario_creacionsg, categorias.nombre_categoria AS categoria,descripcion_peticionsg, usuario_atencion, 
+            DATE_FORMAT(fecha_atencion,"%d-%m-%Y %H:%i") AS fecha_atencion, usuario_creacionsg, categorias_sg.nombre_categoria AS categoria,descripcion_peticionsg, usuario_atencion, 
             conclusiones, imagen, imagen2, imagen3, imagen4, imagen5, funcionarios.area, peticiones_sg.descripcion_peticionsg
             FROM peticiones_sg 
             LEFT JOIN estado ON estado.id_estado = peticiones_sg.estado_peticion
-            LEFT JOIN categorias ON categorias.id_categoria=peticiones_sg.categoria
+            LEFT JOIN categorias_sg ON categorias_sg.id_categoria=peticiones_sg.categoria
             LEFT JOIN funcionarios ON funcionarios.usuario=peticiones_sg.usuario_creacionsg 
             LEFT JOIN areas ON areas.id_area=funcionarios.area
             WHERE estado_peticion = :estado');
@@ -82,11 +82,11 @@ if (isset($_POST['btn-consultarCategoria'])) {
     $listaConsulta = [];
 
     $seleccion = $db->prepare('SELECT id_peticionessg, estado.descripcion AS estado_peticion, DATE_FORMAT(fecha_peticion,"%d-%m-%Y %H:%i") AS fecha_peticion, 
-    DATE_FORMAT(fecha_atencion,"%d-%m-%Y %H:%i") AS fecha_atencion, usuario_creacionsg, categorias.nombre_categoria AS categoria,descripcion_peticionsg, usuario_atencion, 
+    DATE_FORMAT(fecha_atencion,"%d-%m-%Y %H:%i") AS fecha_atencion, usuario_creacionsg, categorias_sg.nombre_categoria AS categoria,descripcion_peticionsg, usuario_atencion, 
     conclusiones, imagen, imagen2, imagen3, imagen4, imagen5, funcionarios.area, peticiones_sg.descripcion_peticionsg
     FROM peticiones_sg 
     LEFT JOIN estado ON estado.id_estado = peticiones_sg.estado_peticion
-    LEFT JOIN categorias ON categorias.id_categoria=peticiones_sg.categoria
+    LEFT JOIN categorias_sg ON categorias_sg.id_categoria=peticiones_sg.categoria
     LEFT JOIN funcionarios ON funcionarios.usuario=peticiones_sg.usuario_creacionsg 
     LEFT JOIN areas ON areas.id_area=funcionarios.area
         WHERE id_peticionessg = :numero_peticion');
