@@ -1,16 +1,19 @@
 <?php
-            ini_set("session.cookie_lifetime","18000");
-            ini_set("session.gc_maxlifetime","18000");
+ini_set("session.cookie_lifetime", "18000");
+ini_set("session.gc_maxlifetime", "18000");
 
-            session_start();
-   
-            if(!isset($_SESSION['usuario'])||empty($_SESSION['usuario'])){
-       
-                 header('location:../../login.php');
-            }
-            date_default_timezone_set('America/Bogota');
-     require ('../controller/control_traerProgramadores.php');
-    ?>
+session_start();
+
+if (!isset($_SESSION['usuario']) || empty($_SESSION['usuario'])) {
+
+    header('location:../../login.php');
+}
+
+date_default_timezone_set('America/Bogota');
+require('../controller/control_traerProgramadores.php');
+
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -28,35 +31,29 @@
             </div>
         </div>
         <div class="col-3">
-            <select class="custom-select" name="area" id="area">
+            <select class="custom-select" name="area" id="area" data-role="<?= $_SESSION['id_roles']; ?>">
                 <option value="" selected>Seleccione una opción</option>
-                <?php 
-                if($_SESSION['id_roles']==9){
+                <?php
+                if ($_SESSION['id_roles'] == 9) {
                     echo '<option value="1">Infraestructura</option>';
-                }else if($_SESSION['id_roles']==5){
+                } else if ($_SESSION['id_roles'] == 5) {
                     echo '<option value="2">Aplicaciones Internas</option>';
-                }else{
+                } else {
                     echo '<option value="1">Infraestructura</option>';
                     echo '<option value="2">Aplicaciones Internas</option>';
                 }
                 ?>
             </select>
         </div>
-    
+
         <div class="row mt-5" id="criterio-div">
             <div class="col-12">
                 <h6>Elija el criterio para la consulta</h6>
             </div>
         </div>
         <div class="col-3">
-            <select class="custom-select"  name="criterio" id="criterio">
+            <select class="custom-select" name="criterio" id="criterio">
                 <option value="" selected>Seleccione una opción</option>
-                <option value="1">Consultar por fecha</option>
-                <option value="3">Consultar por Peticion</option>
-                <?php if($_SESSION['id_roles']==5){
-                    echo '<option value="4">Consultar por Programador</option>';
-                }
-                ?>
             </select>
         </div>
         <div class="row mt-3" id="selectorFecha">
@@ -96,23 +93,25 @@
             <div class="col-3">
                 <form action="app/view/peticiones_finalizadas.php" target="_blank" method="post" onsubmit="rango()">
                     <div class="form-group">
-                        <select class="custom-select"  name="programadorFiltro" id="programadorFiltro">
+                        <select class="custom-select" name="programadorFiltro" id="programadorFiltro">
                             <option value="" selected>Seleccione el programador</option>
                             <?php
-                                foreach($programadores as $lista){
-                                    echo "<option value=" . $lista["usuario"] . ">" . $lista["usuario"] . "</option>";
-                                }
+                            foreach ($programadores as $lista) {
+                                echo "<option value=" . $lista["usuario"] . ">" . $lista["usuario"] . "</option>";
+                            }
                             ?>
                         </select>
                     </div>
-                        <input type="hidden" id="areaF3" name="areaF3" value="2">
-                        <input type="submit" id="btn-consultarProgramador" name="btn-consultarProgramador" class="btn btn-info" value="Consultar">
+                    <input type="hidden" id="areaF3" name="areaF3" value="2">
+                    <input type="submit" id="btn-consultarProgramador" name="btn-consultarProgramador" class="btn btn-info" value="Consultar">
                 </form>
             </div>
         </div>
     </div>
     <script src="public/js/filtro.js?v2"></script>
     <script src="public/js/bloqueoTeclas.js"></script>
+    <script src="public/js/selectArea.js"></script>
+
 </body>
 
 </html>
