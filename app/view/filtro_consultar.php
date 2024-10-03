@@ -17,7 +17,7 @@ require('../controller/control_traerProgramadores.php');
 <!DOCTYPE html>
 <html lang="en">
 
-<head>
+<head>  
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <title>Document</title>
@@ -56,6 +56,7 @@ require('../controller/control_traerProgramadores.php');
                 <option value="" selected>Seleccione una opción</option>
             </select>
         </div>
+        
         <div class="row mt-3" id="selectorFecha">
             <div class="col-12">
                 <h6>Seleccione el rango de fechas para generar la consulta</h6>
