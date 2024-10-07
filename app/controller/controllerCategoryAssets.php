@@ -7,15 +7,22 @@ $crudCategoryAssets = new CrudCategoryAssets();
 if (isset($_POST['actionsCategoryAssets'])) {
     switch ($_POST['actionsCategoryAssets']) {
         case 'create':
-            $data = convertClassCategoryAssets(null, $_POST['nameCategory'], $_POST['areaCategory'], 5);
-            $crudCategoryAssets->createCategory($data);
+            if ($crudCategoryAssets->categoryExists($_POST['nameCategory'])) {
+                echo json_encode(['error' => 'Ya existe una categoría con este nombre']);
+            } else {
+                $data = convertClassCategoryAssets(null, $_POST['nameCategory'], $_POST['areaCategory'], 5);
+                $crudCategoryAssets->createCategory($data);
+            }
             break;
 
         case 'update':
+            if ($crudCategoryAssets->categoryExists($_POST['nameCategory'])) {
+                echo json_encode(['error' => 'Ya existe una categoría con este nombre']);
+            } else {
             $data = convertClassCategoryAssets($_POST['idCategory'], $_POST['nameCategory'], $_POST['areaCategory'], null);
             $crudCategoryAssets->editCategory($data);
+            }
             break;
-
         case 'consultAll':
 
             $resultados = $crudCategoryAssets->consultAllCategory();

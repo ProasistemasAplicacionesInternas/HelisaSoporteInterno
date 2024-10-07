@@ -64,17 +64,23 @@ function saveStatusRequestCategory(id, new_status) {
       status: new_status,
     },
     success: function (response) {
+      console.log("Respuesta del servidor:", response);
       if (response == 200) {
         $.smkAlert({
-          text: "¡Modificación de categoría Exitosa!",
+          text: "¡Modificación de categoría exitosa!",
           type: "success",
         });
         clearTable();
         consultAllCategories();
+      } else if (response == 403) {
+        $.smkAlert({
+          text: "¡No se puede inactivar la categoría porque tiene grupos activos!",
+          type: "danger",
+        });
       } else {
         $.smkAlert({
-          text: "¡Error en la Modificación!",
-          type: "Danger",
+          text: "¡Error en la modificación!",
+          type: "danger",
         });
       }
     },
@@ -177,13 +183,25 @@ function saveEditCategory() {
       areaCategory: newArea,
     },
     success: function (response) {
-      clearTable();
-      consultAllCategories();
-      $("#updateCategory").modal("hide");
-    },
-    error: function (error) {
-      console.log("Error en la solicitud AJAX de actualización:", error);
-    },
+      console.log("Respuesta del servidor:", response);
+
+      if (response == 300) {
+        clearTable();
+        consultAllCategories();
+        console.log(response);
+        $("#updateCategory").modal("hide");
+        $.smkAlert({
+          text: "¡Categoría Modificada exitosamente!",
+          type: "success",
+        });
+      }else{
+        $.smkAlert({
+          text: "¡Ya existe una categoría con este nombre!",
+          type: "danger",
+        });
+      }
+  
+      },
   });
 }
 
@@ -222,9 +240,22 @@ function saveCategory(name, area) {
       areaCategory: area,
     },
     success: function (response) {
+      if (response == 200) {
       clearTable();
       consultAllCategories();
+      console.log(response);
       $("#createCategory").modal("hide");
+      $.smkAlert({
+        text: "¡Categoría creada exitosamente!",
+        type: "success",
+      });
+    }else{
+      $.smkAlert({
+        text: "¡Ya existe una categoría con este nombre!",
+        type: "danger",
+      });
+    }
+
     },
     error: function (error) {
       console.log("Error en la solicitud AJAX de actualización:", error);
