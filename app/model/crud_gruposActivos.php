@@ -31,7 +31,17 @@ class crudGrupos
 		$grupos->bindValue("area_grupo", $group->getAreaGrupo());
 		$grupos->bindValue("categoria", $group->getCategoria());
 		$grupos->execute();
+		echo 200;
 		return $grupos->rowCount();
+	}
+
+	public function groupExists($nameGroup) {
+		$db = conectar::acceso();
+		$consult = $db->prepare('SELECT COUNT(*) FROM grupos_activos WHERE nombre_grupo = :nombre_grupo');
+		$consult->bindValue('nombre_grupo', $nameGroup);
+		$consult->execute();
+		$count = $consult->fetchColumn();
+		return $count > 0;
 	}
 
 	public function updateGroup($group)
@@ -43,7 +53,16 @@ class crudGrupos
 		$grupos->bindValue("area_grupo", $group->getAreaGrupo());
 		$grupos->bindValue("id", $group->getId_grupo());
 		$grupos->execute();
+		echo 300;
 		return $grupos->rowCount();
+	}
+
+	public function checkGroupExists($new_name, $idGroup) {
+		$db = conectar::acceso();
+		$sql = "SELECT * FROM grupos_activos WHERE nombre_grupo = ? AND id_grupo != ?";
+		$stmt = $db->prepare($sql);
+		$stmt->execute([$new_name, $idGroup]);
+		return $stmt->fetch();
 	}
 
 	public function consultAllGroup()
@@ -75,14 +94,20 @@ class crudGrupos
 		$resultado = $consult->fetch(PDO::FETCH_ASSOC);
 		return $resultado;
 	}
-
-
 	public function updateStatus($group)
 	{
 		$db = conectar::acceso();
+		$checkAssets = $db->prepare('SELECT COUNT(*) as total FROM activos_internos WHERE grupo_activo = :id AND estado_activo NOT IN (11, 15)');
+		$checkAssets->bindValue("id", $group->getId_grupo());
+		$checkAssets->execute();
+		$result = $checkAssets->fetch(PDO::FETCH_ASSOC);
+		if ($result['total'] > 0) {
+			echo 403; 
+			return;
+		}
 		$edit = $db->prepare('UPDATE grupos_activos 
-		SET estado=:new_status
-        WHERE id_grupo=:id');
+			SET estado = :new_status
+			WHERE id_grupo = :id');
 		$edit->bindValue("new_status", $group->getStatus());
 		$edit->bindValue("id", $group->getId_grupo());
 		$edit->execute();

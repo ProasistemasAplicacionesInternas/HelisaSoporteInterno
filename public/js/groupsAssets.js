@@ -50,7 +50,6 @@ function activateGroup(id) {
 function inactivateGroup(id) {
   saveStatusRequestGroup(id, 6);
 }
-
 function saveStatusRequestGroup(id, new_status) {
   $.ajax({
     url: "app/controller/controlador_gruposActivos.php",
@@ -61,17 +60,23 @@ function saveStatusRequestGroup(id, new_status) {
       statusGroup: new_status,
     },
     success: function (response) {
+      console.log("Respuesta del servidor:", response);
       if (response == 200) {
         $.smkAlert({
-          text: "¡Modificación de grupo Exitosa!",
+          text: "¡Modificación de grupo exitosa!",
           type: "success",
         });
         clearTableGroups();
         consultAllGroups();
-      }else{
+      } else if (response == 403) {
         $.smkAlert({
-          text: "¡Error en la Modificación!",
-          type: "Danger",
+          text: "¡No se puede inactivar el grupo porque tiene activos relacionados que no permiten la inactivación!",
+          type: "danger",
+        });
+      } else {
+        $.smkAlert({
+          text: "¡Error en la modificación!",
+          type: "danger",
         });
       }
     },
@@ -80,6 +85,7 @@ function saveStatusRequestGroup(id, new_status) {
     },
   });
 }
+
 
 /* ************* Edición de información ************* */
 function modalUpdateGroup(id, areaGroup) {
@@ -165,21 +171,22 @@ $("#newCategoryGroup").on("change", function () {
   var areaGroup = selectedCategory.data("area");
   $("#areaGroup").val(areaGroup);
 });
-
 function saveEditGroup() {
   var id = $("#groupId").val();
   var name = $("#nameGroup").val().trim();
   var category = $("#newCategoryGroup").val();
   var areaGroup = $("#areaGroup").val();
 
+  // Validar que el campo 'Nuevo nombre' no esté vacío o solo tenga espacios
   if (!name) {
     $.smkAlert({
-      text: "¡El campo 'Nuevo nombre' no puede estar vacío!",
+      text: "¡El campo 'Nuevo nombre' no puede estar vacío ni contener solo espacios!",
       type: "danger",
     });
     return false;
   }
 
+  // Validar que el campo 'Nueva categoría' no esté vacío
   if (!category) {
     $.smkAlert({
       text: "¡El campo 'Nueva categoría' no puede estar vacío!",
@@ -188,6 +195,7 @@ function saveEditGroup() {
     return false;
   }
 
+  // Realizar la solicitud AJAX
   $.ajax({
     url: "app/controller/controlador_gruposActivos.php",
     type: "POST",
@@ -199,15 +207,29 @@ function saveEditGroup() {
       areaGroup: areaGroup,
     },
     success: function (response) {
-      clearTableGroups();
-      consultAllGroups();
-      $("#updateGroup").modal("hide");
+      console.log("Respuesta del servidor:", response);
+
+      if (response == 300) {
+        clearTableGroups();  // Limpiar la tabla
+        consultAllGroups();  // Consultar y actualizar todos los grupos
+        $("#updateGroup").modal("hide");  // Cerrar el modal
+        $.smkAlert({
+          text: "¡Grupo Modificado exitosamente!",
+          type: "success",
+        });
+      } else {
+        $.smkAlert({
+          text: "¡Ya existe un grupo con este nombre!",
+          type: "danger",
+        });
+      }
     },
     error: function (error) {
       console.log("Error en la solicitud AJAX de actualización:", error);
     },
   });
 }
+
 
 /* ************* Crear Grupo ************* */
 function modalCreateGroups() {
@@ -243,9 +265,21 @@ function saveGroup(name, areaGroup, category) {
       categoryGroup: category,
     },
     success: function (response) {
+      console.log("Respuesta del servidor:", response);
+      if (response == 200) {
       clearTableGroups();
       consultAllGroups();
       $("#createGroup").modal("hide");
+      $.smkAlert({
+        text: "¡Grupo creado Exitosamente!",
+        type: "success",
+      });
+    }else{
+      $.smkAlert({
+        text: "¡Ya existe una Grupo con este nombre!",
+        type: "danger",
+      });
+    }
     },
     error: function (error) {
       console.log("Error en la solicitud AJAX de actualización:", error);

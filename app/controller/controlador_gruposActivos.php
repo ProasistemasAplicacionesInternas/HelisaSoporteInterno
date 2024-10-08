@@ -11,14 +11,28 @@ if (isset($_POST["actionsGroups"])) {
     try {
         switch ($_POST["actionsGroups"]) {
             case 'create':
-                $data = convertClassGroups(null, $_POST['nameGroup'], $_POST['areaGroup'], $_POST['categoryGroup'], 5);
-                $crudGroup->createGroup($data);
+                if ($crudGroup->groupExists($_POST['nameGroup'])) {
+                    echo json_encode(['error' => 'Ya existe un grupo con este nombre']);
+                } else {
+                    $data = convertClassGroups(null, $_POST['nameGroup'], $_POST['areaGroup'], $_POST['categoryGroup'], 5);
+                    $crudGroup->createGroup($data);
+                }
                 break;
+                case 'update':
+                    if ($crudGroup->checkGroupExists($_POST['nameGroup'], $_POST['idGroup'])) {
+                        echo json_encode(['error' => 'Ya existe un grupo con este nombre']);
+                    } else {
+                        $data = convertClassGroups(
+                            $_POST['idGroup'], 
+                            $_POST['nameGroup'], 
+                            $_POST['areaGroup'], 
+                            $_POST['categoryGroup'], 
+                            null
+                        );
 
-            case 'update':
-                $data = convertClassGroups($_POST['idGroup'], $_POST['nameGroup'], $_POST['areaGroup'], $_POST['categoryGroup'], null);
-                $crudGroup->updateGroup($data);
-                break;
+                        $crudGroup->updateGroup($data);
+                    }
+                    break;
 
             case 'consultAll':
                 $resultados = $crudGroup->consultAllGroup();
