@@ -37,8 +37,8 @@ class crudGrupos
 
 	public function groupExists($nameGroup) {
 		$db = conectar::acceso();
-		$consult = $db->prepare('SELECT COUNT(*) FROM grupos_activos WHERE nombre_grupo = :nombre_grupo');
-		$consult->bindValue('nombre_grupo', $nameGroup);
+		$consult = $db->prepare('SELECT COUNT(*) FROM grupos_activos WHERE nombre_grupo = :nombreGrupo');
+		$consult->bindValue('nombreGrupo', $nameGroup);
 		$consult->execute();
 		$count = $consult->fetchColumn();
 		return $count > 0;
@@ -57,11 +57,11 @@ class crudGrupos
 		return $grupos->rowCount();
 	}
 
-	public function checkGroupExists($new_name, $idGroup) {
+	public function checkGroupExists($newName, $idGroup) {
 		$db = conectar::acceso();
 		$sql = "SELECT * FROM grupos_activos WHERE nombre_grupo = ? AND id_grupo != ?";
 		$stmt = $db->prepare($sql);
-		$stmt->execute([$new_name, $idGroup]);
+		$stmt->execute([$newName, $idGroup]);
 		return $stmt->fetch();
 	}
 
