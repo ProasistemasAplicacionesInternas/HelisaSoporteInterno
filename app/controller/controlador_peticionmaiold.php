@@ -8,7 +8,7 @@ session_start();
 
 
 require_once('../model/crudPeticionesMai.php');
-require_once('../model/datosPeticionesmai.php');
+require_once('../model/datosPeticionesMai.php');
 
 $crudMai= new CrudPeticionesMai();
 $peticionMai= new PeticionMai();

@@ -25,7 +25,7 @@
     }
 
     require('../model/crudPeticionesMai.php');
-    require('../model/datosPeticionesmai.php');
+    require('../model/datosPeticionesMai.php');
 
 
 

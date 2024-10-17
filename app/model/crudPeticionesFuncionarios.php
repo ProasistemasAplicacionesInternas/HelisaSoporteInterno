@@ -33,7 +33,7 @@ class CrudPeticiones
 		$colsultarUsuario->execute();
 		$filtro = $colsultarUsuario->fetch(PDO::FETCH_ASSOC);
 		$idFuncionario = $filtro['identificacion'];
-		$funcionRealizada = "El funcionario Realizo una peticion de categoria: " . $create->getP_categoria();
+		$funcionRealizada = "El funcionario Realizo una peticion de categoria: " . $create->getCategoria();
 		$insertaFuncion = $db->prepare("INSERT INTO funciones_funcionarios (codigo, id_funcionario, fecha_registro, funcion_realizada,IP) VALUES (0, :id_funcionario , curdate() , :funcion_realizada ,:ip )");
 		$insertaFuncion->bindValue('id_funcionario', $idFuncionario);
 		$insertaFuncion->bindValue('funcion_realizada', $funcionRealizada);

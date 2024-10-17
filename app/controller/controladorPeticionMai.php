@@ -1,11 +1,11 @@
 <?php
 
 require_once('../model/crudPeticionesMai.php');
-require_once('../model/datosPeticionesmai.php');
+require_once('../model/datosPeticionesMai.php');
 
 
 require_once('../model/datosSoporteMai.php');
-require_once('../model/crudSoportemai.php');
+require_once('../model/crudSoporteMai.php');
 
 $crudSop = new CrudSoporte();
 $soporte = new Datostiposoporte();

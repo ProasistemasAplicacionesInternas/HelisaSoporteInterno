@@ -22,7 +22,7 @@
    }
 
         require('../model/crudPeticionesMai.php');
-        require('../model/datosPeticionesmai.php');
+        require('../model/datosPeticionesMai.php');
 
         $crud = new CrudPeticionesMai();
         $datos1 = new PeticionMai();

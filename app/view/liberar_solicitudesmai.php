@@ -24,7 +24,7 @@
        }
         
        require_once('../model/crudPeticionesMai.php');
-       require_once('../model/datosPeticionesmai.php');
+       require_once('../model/datosPeticionesMai.php');
     
         $consultar= new CrudPeticionesMai();
         $datos= new PeticionMai();

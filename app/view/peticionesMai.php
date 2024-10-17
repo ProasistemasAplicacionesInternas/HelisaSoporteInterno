@@ -17,7 +17,7 @@
     header('location:../../login_peticiones.php');
     }
         require('../model/crudPeticionesMai.php');
-        require('../model/datosPeticionesmai.php');
+        require('../model/datosPeticionesMai.php');
         $crud = new CrudPeticionesMai();
         $datos = new PeticionMai();
         $consultaPeticionesMai=$crud->consultarPeticionesMaixFuncionario();//**********
@@ -81,7 +81,7 @@
             </div>
         </div>
     </div>
-    <script src="public/js/revisarPeticionmai.js"></script>
+    <script src="public/js/revisarPeticionMai.js"></script>
     <script src="public/js/smoke.min.js"></script>
     <script src="public/js/datatables.min.js"></script>
     <script src="public/js/tablas.js"></script>

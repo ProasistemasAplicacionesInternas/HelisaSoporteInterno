@@ -12,11 +12,14 @@ if (!isset($_SESSION['usuario'])) {
     header('location:../../login_peticiones.php');
 }
 
-require('../controller/controladorCategorias.php');
-require('../controller/controladorProductosMai.php'); //1
-require('../controller/controladorConsultaActivosFuncionario.php');
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
+
+
+require('../controller/controladorProductosMai.php'); 
 require('../controller/controladorSoporteMai.php');
-require('../controller/controladorPeticionmai.php'); 
+require('../controller/controladorPeticionMai.php'); 
 
 ?>
 <!DOCTYPE html>

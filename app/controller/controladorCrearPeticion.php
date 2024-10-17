@@ -13,7 +13,7 @@ require_once('../model/datosPeticion.php');
 require_once('../model/datosSoporteMai.php');
 
 require_once('../model/crudPeticionesMai.php');
-require_once('../model/datosPeticionesmai.php');
+require_once('../model/datosPeticionesMai.php');
 
 $crud = new CrudPeticiones();
 $peticion = new Peticion();

@@ -28,7 +28,7 @@
         $user = $_SESSION['usuario'];
     }
 
-    include('../controller/controladorSoportemai.php');
+    include('../controller/controladorSoporteMai.php');
     include('../controller/controlador_seleccionPeticion.php');
     $codigo = $_POST['p_nropeticion'];
     $fechapeticion = $_POST['p_fechapeticion'];
