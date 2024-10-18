@@ -165,17 +165,18 @@
 
         public function modificarPeticion($datos){
             $db = Conectar::acceso();
-            $consulta = $db->prepare("UPDATE peticiones_accesos SET estado = :estado, conclusiones = :conclusiones , aprobacion = :aprobacion, fecha_atendido = :fecha_atendido, usuario_atiende = :usuario_atiende, plataformas =:plataformas WHERE id_peticionAcceso = :id_peticion");
-            $consulta->bindValue('estado',$datos->getEstado_peticion());
+            $consulta = $db->prepare("UPDATE peticiones_accesos SET estado = :estado, conclusiones = :conclusiones , aprobacion = :aprobacion, fecha_atendido = :fechaAtendido, usuario_atiende = :usuarioAtiende, plataformas =:plataformas WHERE id_peticionAcceso = :idPeticion");
+            $consulta->bindValue('estado',$datos->getEstadoPeticion());
             $consulta->bindValue('conclusiones',$datos->getConclusiones());
             $consulta->bindValue('aprobacion',$datos->getAprobado());
-            $consulta->bindValue('fecha_atendido', $datos->getFecha_atendido());
-            $consulta->bindValue('usuario_atiende',$datos->getUsuario_atendio());
-            $consulta->bindValue('id_peticion',$datos->getId_peticion());
+            $consulta->bindValue('fechaAtendido', $datos->getFechaAtendido());
+            $consulta->bindValue('usuarioAtiende',$datos->getUsuarioAtendio());
+            $consulta->bindValue('idPeticion',$datos->getIdPeticion());
             $consulta->bindValue('plataformas',$datos->getPlataformas());
             $consulta->execute();
 
             if($consulta){
+                $this->correoAsignacion($datos, $db);
                 $resultado = 1;
             }else{
                 $resultado = 0;
@@ -183,15 +184,105 @@
             $db = null;
             return $resultado;
         } 
+
+        public function correoAsignacion($datos, $db) {
+            $idPeticion = $datos->getIdPeticion();
+            
+            $queryPeticion = "SELECT `id_peticionAcceso`, `descripcion`, `fecha_creacion`, `usuario_creacion`, `aprobacion`, `plataformas`, `tipo` FROM `peticiones_accesos` WHERE `id_peticionAcceso` = :idPeticion";
+            
+            $stmtPeticion = $db->prepare($queryPeticion);
+            $stmtPeticion->bindParam(':idPeticion', $idPeticion);
+            $stmtPeticion->execute();
+            $resultPeticion = $stmtPeticion->fetch(PDO::FETCH_ASSOC);
+        
+            if ($resultPeticion) {
+                $descripcion = $resultPeticion['descripcion'];
+                $fechaCreacion = $resultPeticion['fecha_creacion'];
+                $usuarioCreacion = $resultPeticion['usuario_creacion'];
+                $plataformasIds = $resultPeticion['plataformas'];
+                $tipoSolicitud = $resultPeticion['tipo'];
+        
+                switch ($tipoSolicitud) {
+                    case 1: $tipoSolicitudTexto = 'Activación'; break;
+                    case 2: $tipoSolicitudTexto = 'Inactivación'; break;
+                    case 3: $tipoSolicitudTexto = 'Novedades'; break;
+                    case 4: $tipoSolicitudTexto = 'Reactivación'; break;
+                    default: $tipoSolicitudTexto = 'Desconocido'; 
+                }
+                
+                $plataformasArray = explode(',', $plataformasIds);
+                
+                $queryPlataformas = "SELECT `descripcion`, `administrador` FROM `plataformas` WHERE `id_plataforma` IN (" . implode(',', array_map('intval', $plataformasArray)) . ")";
+                $stmtPlataformas = $db->prepare($queryPlataformas);
+                $stmtPlataformas->execute();
+                $plataformasResult = $stmtPlataformas->fetchAll(PDO::FETCH_ASSOC);
+                
+                $plataformasDescripcion = implode(', ', array_column($plataformasResult, 'descripcion'));
+        
+                $idAdministrador = $plataformasResult[0]['administrador'];
+        
+                $queryAdmin = "SELECT `nombre`, `mail`, `mail2` FROM `funcionarios` WHERE `identificacion` = :idAdministrador";
+                $stmtAdmin = $db->prepare($queryAdmin);
+                $stmtAdmin->bindParam(':idAdministrador', $idAdministrador, PDO::PARAM_INT);
+                $stmtAdmin->execute();
+                $administrador = $stmtAdmin->fetch(PDO::FETCH_ASSOC);
+        
+                $administradorPlataforma = $administrador['nombre'];
+                $correoAdmin = $administrador['mail'] ?: $administrador['mail2'];
+        
+                if ($correoAdmin) {
+                    $mail = new PHPMailer(true);
+                    try {
+                        $mail->SMTPDebug = 0;
+                        $mail->isSMTP();
+                        $mail->Host = 'smtp.office365.com';
+                        $mail->SMTPAuth = true;
+                        $mail->Username = 'no-responder@helisa.com';
+                        $mail->Password = 'pdqMG3@5FYV2PRP@Teh@Y@aoKEufrV';
+                        $mail->SMTPSecure = 'TLS';
+                        $mail->Port = 587;
+        
+                        $mail->setFrom('no-responder@helisa.com');
+                        $mail->addAddress($correoAdmin);
+                        $mail->isHTML(true);
+        
+                        $subject = "Soporte Interno - Notificación de Solicitud de Accesos";
+                        $body = "
+                            <style type='text/css'> *{ font-size: 15px;} /* Estilos adicionales aquí */ </style>
+                            <p>Señor(a) $administradorPlataforma,</p>
+                            <p>Se le informa que se ha aprobado la solicitud de accesos <strong>$idPeticion</strong>, se requiere su intervención para proceder con la validación final. A continuación, se presentan los detalles de la solicitud:</p>
+                            <p><strong>Solicitado por:</strong> $usuarioCreacion</p>
+                            <p><strong>Tipo de solicitud:</strong> $tipoSolicitudTexto</p>
+                            <p><strong>Descripción:</strong> $descripcion</p>
+                            <p><strong>Fecha en la cual el soporte fue creado:</strong> $fechaCreacion</p>
+                            <p><strong>Plataformas solicitadas:</strong> $plataformasDescripcion</p>
+                            <p>   </p>
+                            <p>Para atender esta solicitud, por favor acceda al siguiente enlace: https://soporteinfraestructura.helisa.com/infraestructura/login_peticiones.php</p>
+                        ";
+        
+                        $mail->Subject = utf8_decode($subject);
+                        $mail->Body = utf8_decode($body);
+                        $mail->send();
+                    } catch (Exception $e) {
+                        echo 'El mensaje no pudo ser enviado. Error: ', $mail->ErrorInfo;
+                    }
+                } else {
+                    echo "No se pudo encontrar el correo electrónico del administrador.";
+                }
+            } else {
+                echo "No se encontró la solicitud con ID $idPeticion.";
+            }
+        }            
+        
         public function cancelaPeticion($datos){
             $db = Conectar::acceso();
-            $consulta = $db->prepare("UPDATE peticiones_accesos SET estado = :estado, conclusiones = :conclusiones , aprobacion = :aprobacion, fecha_atendido = :fecha_atendido, usuario_atiende = :usuario_atiende, plataformas =:plataformas, revisado =:revisado WHERE id_peticionAcceso = :id_peticion");
-            $consulta->bindValue('estado',$datos->getEstado_peticion());
+            $consulta = $db->prepare("UPDATE peticiones_accesos SET estado = :estado, conclusiones = :conclusiones , aprobacion = :aprobacion, fecha_atendido = :fechaAtendido, usuario_atiende = :usuarioAtiende, plataformas =:plataformas, revisado =:revisado WHERE id_peticionAcceso = :idPeticion");
+            $consulta->bindValue('estado',$datos->getEstadoPeticion());
             $consulta->bindValue('conclusiones',$datos->getConclusiones());
             $consulta->bindValue('aprobacion',$datos->getAprobado());
-            $consulta->bindValue('fecha_atendido', $datos->getFecha_atendido());
-            $consulta->bindValue('usuario_atiende',$datos->getUsuario_atendio());
-            $consulta->bindValue('id_peticion',$datos->getId_peticion());
+            $consulta->bindValue('fechaAtendido', $datos->getFechaAtendido());
+            $consulta->bindValue('usuarioAtiende',$datos->getUsuarioAtendio());
+            $consulta->bindValue('idPeticion',$datos->getIdPeticion());
             $consulta->bindValue('plataformas',$datos->getPlataformas());
             $consulta->bindValue('revisado',1);
             $consulta->execute();

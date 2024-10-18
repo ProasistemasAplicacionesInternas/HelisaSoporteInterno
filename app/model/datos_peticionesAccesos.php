@@ -1,6 +1,11 @@
 <?php 
 class datosPeticionAccesos{
 
+	private $idPeticion;
+	private $fechaAtendido;
+	private $estadoPeticion;
+	private $usuarioAtendio;
+	//****************camelCase******************
 	private $id_peticion;
     private $fecha_creacion;
     private $usuario_creacion;
@@ -158,5 +163,35 @@ class datosPeticionAccesos{
 		$this->id_acceso = $id_acceso;
 	}
 
+//********************camelCase***********************
+	public function getIdPeticion(){
+		return $this->idPeticion;
+	}
+	public function setIdPeticion($idPeticion){
+		$this->idPeticion = $idPeticion;
+	}
+
+	//*************************************************
+    public function getFechaAtendido(){
+	    return $this->fechaAtendido;
+	}
+	public function setFechaAtendido($fechaAtendido){
+	    $this->fechaAtendido = $fechaAtendido;
+	}
+
+	//*************************************************
+    public function getEstadoPeticion(){
+	    return $this->estadoPeticion;
+	}
+	public function setEstadoPeticion($estadoPeticion){
+	    $this->estadoPeticion = $estadoPeticion ;
+	}
+	//*************************************************
+    public function getUsuarioAtendio(){
+	    return $this->usuarioAtendio;
+	}
+	public function setUsuarioAtendio($usuarioAtendio){
+	    $this->usuarioAtendio= $usuarioAtendio;
+	}
 }
 ?>

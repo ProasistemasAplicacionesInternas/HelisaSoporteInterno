@@ -230,12 +230,12 @@
             $datos->setPlataformas(substr($plataformas, 0, -1));
         }
         $conclusiones = date("Y-m-d H:i:s") . ' / ' . $_SESSION['usuario'] . ' ' . $conclusionAprobado . ' la solicitud' . "\n". $_POST['conclusiones']; 
-        $datos->setId_peticion($_POST['id_peticion']);
+        $datos->setIdPeticion($_POST['id_peticion']);
         $datos->setConclusiones($conclusiones);
-        $datos->setEstado_peticion($estado);
+        $datos->setEstadoPeticion($estado);
         $datos->setAprobado($_POST['aprobado']);
-        $datos->setFecha_atendido(date("Y-m-d H:i:s"));
-        $datos->setUsuario_atendio($_POST['usuarioAtiende']);
+        $datos->setFechaAtendido(date("Y-m-d H:i:s"));
+        $datos->setUsuarioAtendio($_POST['usuarioAtiende']);
         
         if($permitido == 1){
             
