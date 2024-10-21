@@ -148,6 +148,7 @@ if (!isset($_SESSION['status_connect'])) {
                                 $_SESSION['id_roles'] == 1 ||
                                 $_SESSION['id_roles'] == 7 ||
                                 $_SESSION['id_roles'] == 8 ||
+                                $_SESSION['id_roles'] == 9 ||
                                 $_SESSION['id_roles'] == 5
                             ) {
                                 echo '<a href="#" id="consultarIso" class="dropdown-item">
@@ -201,7 +202,7 @@ if (!isset($_SESSION['status_connect'])) {
                                 echo '<a href="#" id="funcionarios_Inactivos"><img src="public/img/inactivos.png" alt="" style="width: 27px; margin: 0px 9px" class="ml-4">Inactivos por Intentos</a>';
                             } ?>
 
-                            <?php if ($_SESSION['id_roles'] == 1 || $_SESSION['id_roles'] == 7) {
+                            <?php if ($_SESSION['id_roles'] == 1 || $_SESSION['id_roles'] == 7 || $_SESSION['id_roles'] == 9) {
                                 echo '<a href="#" id="funcionarios_Retirados"><img src="public/img/inactivos.png" alt="" style="width: 27px; margin: 0px 9px" class="ml-4">Inactivos por Retiro</a>';
                             } ?>
 
@@ -243,13 +244,13 @@ if (!isset($_SESSION['status_connect'])) {
                     </div>
 
                     <div class="dropdown">
-                        <?php if ($_SESSION['id_roles'] == 1 || $_SESSION['id_roles'] == 7) {
+                        <?php if ($_SESSION['id_roles'] == 1 || $_SESSION['id_roles'] == 7 || $_SESSION['id_roles'] == 9) {
                             echo '<a class=" dropdown-toggle" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="margin: 0% 10%;"> <i class="fab fa-readme" class="ml-3" style="font-size: 18px;margin: 0% 2%;color: #6b6b6b;"></i><span style="margin: 0% 0% 0% 4%;">Registros</span></a>';
                         } ?>
 
                         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton" style="max-width:15rem !important; width: 100%">
 
-                            <?php if ($_SESSION['id_roles'] == 1 || $_SESSION['id_roles'] == 7) {
+                            <?php if ($_SESSION['id_roles'] == 1 || $_SESSION['id_roles'] == 7 || $_SESSION['id_roles'] == 9) {
                                 echo '<a href="#" id="ingresos"><i class="fas fa-user-clock" class="ml-3" style="font-size: 15px;margin: 2%;"></i><spam style="font-size: 14px;margin-left: 4%;">Ingresos-Usuarios</spam></a>';
 
                                 echo '<a href="#" id="ingresos-funcionarios"><i class="fas fa-user-clock" class="ml-3" style="font-size: 15px;margin: 2%;"></i><spam style="font-size: 14px;margin-left: 4%;">Ingresos-Funcionarios</spam></a>';
@@ -262,25 +263,25 @@ if (!isset($_SESSION['status_connect'])) {
                     </div>
 
                     <div class="dropdown">
-                        <?php if ($_SESSION['id_roles'] == 1 || $_SESSION['id_roles'] == 7 || $_SESSION['id_roles'] == 9 || $_SESSION['id_roles'] == 10) {
+                        <?php if ($_SESSION['id_roles'] == 1 || $_SESSION['id_roles'] == 7 || $_SESSION['id_roles'] == 10) {
                             echo '<a class=" dropdown-toggle" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="margin: 0% 10%;"> <i class="fa fa-code-fork" class="ml-3" style="font-size: 18px;margin: 0% 2%;color: #6b6b6b;"></i><span style="margin: 0% 0% 0% 4%;">Organigrama</span></a>';
                         } ?>
 
                         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton" style="max-width:15rem !important; width: 100%">
 
-                            <?php if ($_SESSION['id_roles'] == 1 || $_SESSION['id_roles'] == 7 || $_SESSION['id_roles'] == 9 || $_SESSION['id_roles'] == 10) {
+                            <?php if ($_SESSION['id_roles'] == 1 || $_SESSION['id_roles'] == 7 || $_SESSION['id_roles'] == 10) {
                                 echo '<a href="#" id="departamentos"><i class="fa fa-code-fork" class="ml-3" style="font-size: 15px;margin: 2%;"></i><spam style="font-size: 14px;margin-left: 4%;">Departamentos</spam></a>';
                             } ?>
 
-                            <?php if ($_SESSION['id_roles'] == 1 || $_SESSION['id_roles'] == 7 || $_SESSION['id_roles'] == 9 || $_SESSION['id_roles'] == 10) {
+                            <?php if ($_SESSION['id_roles'] == 1 || $_SESSION['id_roles'] == 7 || $_SESSION['id_roles'] == 10) {
                                 echo '<a href="#" id="areas"><i class="fa fa-code-fork" class="ml-3" style="font-size: 15px;margin: 2%;"></i><spam style="font-size: 14px;margin-left: 4%;">Áreas</spam></a>';
                             } ?>
 
-                            <?php if ($_SESSION['id_roles'] == 1 || $_SESSION['id_roles'] == 7 || $_SESSION['id_roles'] == 9 || $_SESSION['id_roles'] == 10) {
+                            <?php if ($_SESSION['id_roles'] == 1 || $_SESSION['id_roles'] == 7 || $_SESSION['id_roles'] == 10) {
                                 echo '<a href="#" id="cargos"><i class="fa fa-code-fork" class="ml-3" style="font-size: 15px;margin: 2%;"></i><spam style="font-size: 14px;margin-left: 4%;">Cargos</spam></a>';
                             } ?>
 
-                            <?php if ($_SESSION['id_roles'] == 1 || $_SESSION['id_roles'] == 7 || $_SESSION['id_roles'] == 9) {
+                            <?php if ($_SESSION['id_roles'] == 1 || $_SESSION['id_roles'] == 7) {
                                 echo '<a href="#" id="centroCostos"><i class="fa fa-code-fork" class="ml-3" style="font-size: 15px;margin: 2%;"></i><spam style="font-size: 14px;margin-left: 4%;">Centros de Costos</spam></a>';
                             } ?>
                         </div>
