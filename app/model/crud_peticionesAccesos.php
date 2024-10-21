@@ -22,17 +22,23 @@
             $crearPeticion->execute();
 
             if($crearPeticion){
+                $idPeticion = $db->lastInsertId();
+                $datos->setIdPeticion($idPeticion); 
+
                 $colsultar_identificacion =$db->prepare('SELECT identificacion from funcionarios where usuario =:usuario');
                 $colsultar_identificacion->bindValue('usuario', $datos->getUsuario_creacion());
                 $colsultar_identificacion->execute();
                 $filtro=$colsultar_identificacion->fetch(PDO::FETCH_ASSOC);
-                $id_funcionario=$filtro['identificacion'];
-                $inserta_funcion=$db->prepare("INSERT INTO funciones_funcionarios (id_funcionario, fecha_registro, funcion_realizada,IP) VALUES (:id_funcionario , curdate() , :funcion_realizada ,:ip )");
-                $inserta_funcion->bindValue('id_funcionario',$id_funcionario);
-                $inserta_funcion->bindValue('funcion_realizada',"El funcionario Realizo una peticion de Accesos a Plataformas.");
-                $inserta_funcion->bindValue('ip', $_SERVER['REMOTE_ADDR']);                 
-                $inserta_funcion->execute();
-                if($inserta_funcion){
+                $idFuncionario=$filtro['identificacion'];
+                $insertaFuncion=$db->prepare("INSERT INTO funciones_funcionarios (id_funcionario, fecha_registro, funcion_realizada,IP) VALUES (:idFuncionario , curdate() , :funcionRealizada ,:ip )");
+                $insertaFuncion->bindValue('idFuncionario',$idFuncionario);
+                $insertaFuncion->bindValue('funcionRealizada',"El funcionario Realizo una peticion de Accesos a Plataformas.");
+                $insertaFuncion->bindValue('ip', $_SERVER['REMOTE_ADDR']);                 
+                $insertaFuncion->execute();
+                if($insertaFuncion){
+                    if (isset($_POST['funcionarioAlterno']) && $_POST['funcionarioAlterno'] != '0') {
+                        $this->correoAsignacion($datos);
+                    }
                     return 1;
                 }else{
                     return 2;
@@ -176,7 +182,7 @@
             $consulta->execute();
 
             if($consulta){
-                $this->correoAsignacion($datos, $db);
+                $this->correoAsignacion($datos);
                 $resultado = 1;
             }else{
                 $resultado = 0;
@@ -185,7 +191,8 @@
             return $resultado;
         } 
 
-        public function correoAsignacion($datos, $db) {
+        public function correoAsignacion($datos) {
+            $db = Conectar::acceso();
             $idPeticion = $datos->getIdPeticion();
             
             $queryPeticion = "SELECT `id_peticionAcceso`, `descripcion`, `fecha_creacion`, `usuario_creacion`, `aprobacion`, `plataformas`, `tipo` FROM `peticiones_accesos` WHERE `id_peticionAcceso` = :idPeticion";
