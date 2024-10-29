@@ -82,6 +82,10 @@ require('../controller/controlador_usuariofuncionario.php');
                         <option value="21">Cargue de Versión</option>
                         <option value="2">Resuelto</option>
                         <option value="4">Redireccionado</option>
+                        <option value="23">Backlog</option>
+                        <option value="25">En Producción</option>
+                        <option value="26">Descartado</option>
+                        <option value="24">En Pruebas Test</option>
                     </select>
                 </div>
                 <div class="col-3 mt-2">

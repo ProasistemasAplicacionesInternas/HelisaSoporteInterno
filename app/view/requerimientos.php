@@ -58,7 +58,7 @@
             <div class="col-11 mt-4 pl-5">
                 <h6>Requerimientos</h6>
             </div>
- 
+
             <div class="fixed-top-right" id="total">
                 <button class="boton-imagen" type="button" data-toggle="modal" data-target="#infoModal">
                     <img src="public/img/Grafico-64px.png" alt="total">
@@ -222,6 +222,12 @@
                                 case 'Cargue de Versión':
                                     $estadoColor = '#6495ED';
                                     break;
+                                case 'Backlog':  // Nuevo estado "Backlog"
+                                    $estadoColor = '#808080';
+                                    break;
+                                case 'En Pruebas Test':  // Nuevo estado "En Pruebas Test"
+                                    $estadoColor = '#ADD8E6';
+                                    break;
                                 default:
                                     $estadoColor = 'white';
                                     break;
@@ -270,7 +276,7 @@
                                     $intervalo = $fecha2->diff($fecha1);
                                     echo $intervalo->format('%m:%D:%H:%I:%S');
                                     ?>
-                                <td style="background-color:<?php echo $datos1->getEstado_peticionMai() === 'Pendiente' . 'Gestión de Cambios' . 'En Desarrollo' . 'En pruebas' . 'Cargue de Versión' ? 'white' : 'white' ?>;">
+                                <td style="background-color:<?php echo $datos1->getEstado_peticionMai() === 'Pendiente' . 'Gestión de Cambios' . 'En Desarrollo' . 'En pruebas' . 'Cargue de Versión' . 'Backlog' ? 'white' : 'white' ?>;">
 
                                     <form action="app/view/seleccionar_peticionmai.php" method="post">
                                         <input type="hidden" name="p_nropeticion" id="p_nropeticion" value="<?php echo $datos1->getId_peticionMai(); ?>">

@@ -104,10 +104,14 @@ class CrudPeticionesMai
             LEFT JOIN productos_mai ON productos_mai.id_producto=peticiones_mai.producto_mai 
             LEFT JOIN estado ON estado.id_estado=peticiones_mai.estado_peticion 
             LEFT JOIN tipo_soportemai ON tipo_soportemai.id=peticiones_mai.tipo_soportemai
-            WHERE (estado_peticion=:estadoU OR estado_peticion=:estadoT OR estado_peticion=:estadoE OR estado_peticion=:gestioncambios OR estado_peticion=:pruebas OR estado_peticion=:Cversion ) AND (tipo_soportemai=:requerimientos) ORDER BY id_peticionmai ASC');
+            WHERE (estado_peticion=:estadoU OR estado_peticion=:estadoT OR estado_peticion=:estadoE OR estado_peticion=:gestioncambios OR estado_peticion=:pruebas OR estado_peticion=:Cversion OR estado_peticion = :estadoB OR estado_peticion = :estadoPT /*OR estado_peticion = :estadoEP*/ /*OR estado_peticion = :estadoDE*/ ) AND (tipo_soportemai=:requerimientos) ORDER BY id_peticionmai ASC');
         $consultar_peticion->bindValue('estadoU', '1');
         $consultar_peticion->bindValue('estadoT', '3');
         $consultar_peticion->bindValue('estadoE', '18');
+        $consultar_peticion->bindValue('estadoB', '23');
+        $consultar_peticion->bindValue('estadoPT', '24');
+        /*$consultar_peticion->bindValue('estadoEP', '25');*/
+        /*$consultar_peticion->bindValue('estadoDE', '26');*/
         $consultar_peticion->bindValue('requerimientos', '2');
         $consultar_peticion->bindValue('gestioncambios', '19');
         $consultar_peticion->bindvalue('pruebas', '20');
@@ -554,7 +558,7 @@ class CrudPeticionesMai
         $db = conectar::acceso();
         $activosResponsable = [];
         $consultar_obs = $db->prepare('SELECT descripcion_observacion, usuario_creacion, fecha_observacion, estado.descripcion AS estado FROM observaciones_mai 
-        LEFT JOIN estado ON estado.id_estado=observaciones_mai.estado_observacion WHERE id_ticket=:id_ticket AND (estado_observacion=2 OR estado_observacion=3 OR estado_observacion=18 OR estado_observacion=19 OR estado_observacion=20 OR estado_observacion=21) ORDER BY id_observacion DESC');
+        LEFT JOIN estado ON estado.id_estado=observaciones_mai.estado_observacion WHERE id_ticket=:id_ticket AND (estado_observacion=2 OR estado_observacion=3 OR estado_observacion=18 OR estado_observacion=19 OR estado_observacion=20 OR estado_observacion=21 OR estado_observacion=23 OR estado_observacion=24 OR estado_observacion=25 OR estado_observacion=26) ORDER BY id_observacion DESC');
         $consultar_obs->bindValue('id_ticket', $ticket);
         $consultar_obs->execute();
         $observaciones = [];

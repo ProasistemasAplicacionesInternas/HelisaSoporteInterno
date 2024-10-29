@@ -24,12 +24,16 @@
             left join tipo_soportemai on tipo_soportemai.id = peticiones_mai.tipo_soportemai
             WHERE tipo_soportemai=:tipo_soportemai AND fecha_peticion BETWEEN :fechaInicial AND :fechaFinal 
             AND (estado_peticion=:estadoN OR estado_peticion=:estadoD OR estado_peticion=:estadoP OR estado_peticion=:estadoC 
-            OR estado_peticion=:estadoS OR estado_peticion=:estadoE)');
+            OR estado_peticion=:estadoS OR estado_peticion=:estadoE OR estado_peticion=:estadoB OR estado_peticion=:estadoPT OR estado_peticion=:estadoEP OR estado_peticion=:estadoDE)');
             $seleccion->bindValue('estadoN','1');
             $seleccion->bindValue('estadoD','2');
             $seleccion->bindValue('estadoP','3');
             $seleccion->bindValue('estadoC','4');
             $seleccion->bindValue('estadoE','18');
+            $seleccion->bindValue('estadoB', '23');
+            $seleccion->bindValue('estadoPT', '24');
+            $seleccion->bindValue('estadoEP', '25');
+            $seleccion->bindValue('estadoDE', '26');
             $seleccion->bindValue('tipo_soportemai','2');
             $seleccion->bindValue('estadoS','8');
             $seleccion->bindValue('fechaInicial',$inicio);

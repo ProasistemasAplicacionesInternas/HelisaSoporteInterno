@@ -140,10 +140,14 @@
                                     <option value="3">Pendiente</option>
                                     <option value="19">Gestión de Cambios</option>
                                     <option value="18">En Desarrollo</option>
-                                    <option value="20">En Pruebas</option>
+                                    <option value="20">En Pruebas Solicitante</option>
+                                    <option value="24">En Pruebas Test</option>
                                     <option value="21">Cargue de Versión</option>
                                     <option value="2">Resuelto</option>
                                     <option value="4">Redireccionado</option>
+                                    <option value="23">Backlog</option>
+                                    <option value="25">En Producción</option>
+                                    <option value="26">Descartado</option>
                                 <?php elseif (true) : ?>
                                     <option value= "2">Resuelto</option>
                                     <option value= "3">Pendiente</option>
