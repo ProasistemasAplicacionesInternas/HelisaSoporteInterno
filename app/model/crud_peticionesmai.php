@@ -95,7 +95,7 @@ class CrudPeticionesMai
     {
         $db = conectar::acceso();
         $lista_peticiones = [];
-        $consultar_peticion = $db->prepare('SELECT  id_peticionmai, descripcion_peticion, usuario_creacion, fecha_peticion, 
+        $consultarPeticion = $db->prepare('SELECT  id_peticionmai, descripcion_peticion, usuario_creacion, fecha_peticion, 
             estado.descripcion AS estado_peticion, productos_mai.nombre_producto AS producto_mai, imagen,  fecha_atencion, 
             usuario_atencion, conclusiones, funcionarios.extension, funcionarios.area,funcionarios.mail, imagen2, imagen3, tipo_soportemai, tipo_soportemai.nombre, tipo_soportemai.id, req_nombre, req_justificacion, sprint, gestion
             FROM peticiones_mai 
@@ -105,19 +105,19 @@ class CrudPeticionesMai
             LEFT JOIN estado ON estado.id_estado=peticiones_mai.estado_peticion 
             LEFT JOIN tipo_soportemai ON tipo_soportemai.id=peticiones_mai.tipo_soportemai
             WHERE (estado_peticion=:estadoU OR estado_peticion=:estadoT OR estado_peticion=:estadoE OR estado_peticion=:gestioncambios OR estado_peticion=:pruebas OR estado_peticion=:Cversion OR estado_peticion = :estadoB OR estado_peticion = :estadoPT /*OR estado_peticion = :estadoEP*/ /*OR estado_peticion = :estadoDE*/ ) AND (tipo_soportemai=:requerimientos) ORDER BY id_peticionmai ASC');
-        $consultar_peticion->bindValue('estadoU', '1');
-        $consultar_peticion->bindValue('estadoT', '3');
-        $consultar_peticion->bindValue('estadoE', '18');
-        $consultar_peticion->bindValue('estadoB', '23');
-        $consultar_peticion->bindValue('estadoPT', '24');
-        /*$consultar_peticion->bindValue('estadoEP', '25');*/
-        /*$consultar_peticion->bindValue('estadoDE', '26');*/
-        $consultar_peticion->bindValue('requerimientos', '2');
-        $consultar_peticion->bindValue('gestioncambios', '19');
-        $consultar_peticion->bindvalue('pruebas', '20');
-        $consultar_peticion->bindvalue('Cversion', '21');
-        $consultar_peticion->execute();
-        foreach ($consultar_peticion->fetchAll() as $listado) {
+        $consultarPeticion->bindValue('estadoU', '1');
+        $consultarPeticion->bindValue('estadoT', '3');
+        $consultarPeticion->bindValue('estadoE', '18');
+        $consultarPeticion->bindValue('estadoB', '23');
+        $consultarPeticion->bindValue('estadoPT', '24');
+        /*$consultarPeticion->bindValue('estadoEP', '25');*/
+        /*$consultarPeticion->bindValue('estadoDE', '26');*/
+        $consultarPeticion->bindValue('requerimientos', '2');
+        $consultarPeticion->bindValue('gestioncambios', '19');
+        $consultarPeticion->bindvalue('pruebas', '20');
+        $consultarPeticion->bindvalue('Cversion', '21');
+        $consultarPeticion->execute();
+        foreach ($consultarPeticion->fetchAll() as $listado) {
             $consulta = new PeticionMai();
             $consulta->setId_peticionMai($listado['id_peticionmai']);
             $consulta->setDescripcion_peticionMai($listado['descripcion_peticion']);
@@ -557,14 +557,14 @@ class CrudPeticionesMai
     {
         $db = conectar::acceso();
         $activosResponsable = [];
-        $consultar_obs = $db->prepare('SELECT descripcion_observacion, usuario_creacion, fecha_observacion, estado.descripcion AS estado FROM observaciones_mai 
+        $consultarObs = $db->prepare('SELECT descripcion_observacion, usuario_creacion, fecha_observacion, estado.descripcion AS estado FROM observaciones_mai 
         LEFT JOIN estado ON estado.id_estado=observaciones_mai.estado_observacion WHERE id_ticket=:id_ticket AND (estado_observacion=2 OR estado_observacion=3 OR estado_observacion=18 OR estado_observacion=19 OR estado_observacion=20 OR estado_observacion=21 OR estado_observacion=23 OR estado_observacion=24 OR estado_observacion=25 OR estado_observacion=26) ORDER BY id_observacion DESC');
-        $consultar_obs->bindValue('id_ticket', $ticket);
-        $consultar_obs->execute();
+        $consultarObs->bindValue('id_ticket', $ticket);
+        $consultarObs->execute();
         $observaciones = [];
 
-        while ($listado_obs = $consultar_obs->fetch(PDO::FETCH_ASSOC)) {
-            $observaciones[] = $listado_obs;
+        while ($listadoObs = $consultarObs->fetch(PDO::FETCH_ASSOC)) {
+            $observaciones[] = $listadoObs;
         }
         return $observaciones;
     }
