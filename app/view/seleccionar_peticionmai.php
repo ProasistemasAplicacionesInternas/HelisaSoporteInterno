@@ -149,9 +149,9 @@
                                     <option value="25">En Producción</option>
                                     <option value="26">Descartado</option>
                                 <?php elseif (true) : ?>
-                                    <option value= "2">Resuelto</option>
-                                    <option value= "3">Pendiente</option>
-                                    <option value= "4">Redireccionado</option>
+                                    <option value="2">Resuelto</option>
+                                    <option value="3">Pendiente</option>
+                                    <option value="4">Redireccionado</option>
                                 <?php endif; ?>
                             </select>
                         </div>
@@ -192,37 +192,60 @@
                             <input type="hidden" id="imagenCa" name="imagenCa" value="<?php echo $imagen; ?>">
                             <div class="contenedorImagenes">
                                 <label for="">Imagen</label><br><br>
-                                <a href="../../cartas/<?= $imagen ?>" target="_blanck">
-                                    <img src="../../cartas/<?php echo ($imagen) ?>" alt="" width="413" height="250">
-                                </a>
+                                <?php if (in_array(pathinfo($imagen, PATHINFO_EXTENSION), ['pdf', 'doc', 'docx'])) : ?>
+                                    <a href="../../cartas/<?= $imagen ?>" target="_blank">
+                                        <div class="preview">
+                                            <embed src="../../cartas/<?php echo ($imagen) ?>" type="application/pdf" width="413" height="250">
+                                        </div>
+                                    </a>
+                                <?php else : ?>
+                                    <a href="../../cartas/<?= $imagen ?>" target="_blank">
+                                        <img src="../../cartas/<?php echo ($imagen) ?>" alt="" width="413" height="250">
+                                    </a>
+                                <?php endif; ?>
                             </div>
                         <?php } else { ?>
                             <input type="hidden" id="imagenCa" name="imagenCa" value="2">
                         <?php } ?>
 
-                        <?php if ($imagen2 != '2') {
-                            echo ' '; ?>
+                        <?php if ($imagen2 != '2') { ?>
                             <input type="hidden" id="imagen2" name="imagen2" value="<?php echo $imagen2; ?>">
                             <div class="contenedorImagenes2">
                                 <label for="">Imagen 2</label><br><br>
-                                <a href="../../cartas/<?= $imagen2 ?>" target="_blanck">
-                                    <img src="../../cartas/<?php echo ($imagen2) ?>" alt="" width="413" height="250">
-                                </a>
+                                <?php if (pathinfo($imagen2, PATHINFO_EXTENSION) == 'pdf') : ?>
+                                    <a href="../../cartas/<?= $imagen2 ?>" target="_blank">
+                                        <div class="preview">
+                                            <embed src="../../cartas/<?php echo ($imagen2) ?>" type="application/pdf" width="413" height="250">
+                                        </div>
+                                    </a>
+                                <?php else : ?>
+                                    <a href="../../cartas/<?= $imagen2 ?>" target="_blank">
+                                        <img src="../../cartas/<?php echo ($imagen2) ?>" alt="" width="413" height="250">
+                                    </a>
+                                <?php endif; ?>
                             </div>
                         <?php } else { ?>
                             <input type="hidden" id="imagen2" name="imagen2" value="2">
                         <?php } ?>
-                        <?php if ($imagen3 != '2') {
-                            echo ' '; ?>
+
+                        <?php if ($imagen3 != '2') { ?>
                             <input type="hidden" id="imagen3" name="imagen3" value="<?php echo $imagen3; ?>">
                             <div class="contenedorImagenes3">
                                 <label for="">Imagen 3</label><br>
-                                <a href="../../cartas/<?= $imagen3 ?>" target="_blanck">
-                                    <img src="../../cartas/<?php echo ($imagen3) ?>" alt="" width="313" height="150">
-                                </a>
+                                <?php if (pathinfo($imagen3, PATHINFO_EXTENSION) == 'pdf') : ?>
+                                    <a href="../../cartas/<?= $imagen3 ?>" target="_blank">
+                                        <div class="preview">
+                                            <embed src="../../cartas/<?php echo ($imagen3) ?>" type="application/pdf" width="313" height="150">
+                                        </div>
+                                    </a>
+                                <?php else : ?>
+                                    <a href="../../cartas/<?= $imagen3 ?>" target="_blank">
+                                        <img src="../../cartas/<?php echo ($imagen3) ?>" alt="" width="313" height="150">
+                                    </a>
+                                <?php endif; ?>
                             </div>
                         <?php } else { ?>
-                            <input type="hidden" id="imagen3" name="imagen3" value="2">
+                            <input type="hidden" id="imagen2" name="imagen2" value="2">
                         <?php } ?>
                     </div><br>
                     <div class="row">
